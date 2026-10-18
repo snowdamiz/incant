@@ -2,9 +2,10 @@
 
 The pinned QuickJS C interpreter successfully trained and consumed an execution
 profile on this Mac while preserving the tested behavior. This establishes a
-usable compiler path for a later Core Sample experiment. It does not establish
-a speedup, the 2 ms script budget, full SDK conformance or engine adoption.
-Ordinary builds and the exporter are unchanged.
+usable compiler path. The later [Core experiment](quickjs-core-pgo.md) now also
+passes whole-game gameplay/PCM parity, but its matched win-route timing is mixed
+and remains above 2 ms. Neither result establishes engine adoption or full SDK
+conformance. Ordinary builds remain the default; the public exporter is unchanged.
 
 The private harness compiles the same four QuickJS 0.16.2 translation units used
 by the maintained native dependency. Apple Clang and llvm-profdata both report
@@ -64,9 +65,12 @@ python3 -B docs/spikes/evidence/quickjs-c-pgo-feasibility/test_verify.py
 python3 -B docs/spikes/evidence/quickjs-c-pgo-feasibility/verify.py --originals --artifacts --git-source b3da3b6d9bbb6a8870480ae54d97a2884d20edde --repo .
 ```
 
-The next experiment must train on representative Core Sample execution and
-compare matched shipping builds with exact gameplay and audio parity. It must
-also preserve profile identity across Cargo's differing generated-source paths,
-bind profile/tool identity to script and checkpoint compatibility, and keep
-training instrumentation out of the measured baseline and candidate. No such
-engine experiment or performance result is claimed here.
+The separate [Core result](quickjs-core-pgo.md) preserves distinct real host/runtime
+C recipes and static profile names, binds tool/profile identity to bytecode and
+checkpoint compatibility, and keeps training nonshipping. It now records one
+coherent ordinary/generation/use producer, exact win/loss/restart gameplay and
+whole PCM, followed by eight same-player matched CPU arms. The two win comparisons
+have opposite signs and all win ScriptTick p95 intervals exceed 2 ms; held-out loss
+improves modestly with both modes already below 2 ms. The diagnostic remains
+default off and is not adopted. Its failures and portable raw replay are separate
+from this original standalone corpus.

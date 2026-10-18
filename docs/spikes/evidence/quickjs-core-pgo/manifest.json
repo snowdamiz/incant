@@ -1,0 +1,2884 @@
+{
+  "format": "incant-Core-C-PGO-portable-evidence",
+  "version": 1,
+  "scope": "default-off-Core-functional-feasibility-and-mixed-matched-CPU-timing",
+  "producer_source": "af775fd1c43318ddaa38ce61628e5f4e7b8b4275",
+  "native_qualified_source": "4ed9ae187c94c5c9e195d9c73a0726e0940afce9",
+  "source_base": "5866170f6fb78a1f90030172251b09f9f990e451",
+  "source_files": [
+    {
+      "path": "Cargo.lock",
+      "bytes": 253557,
+      "sha256": "74af63b159807527394fbd1770515683b776e05fe59702335a7ba6873846e629"
+    },
+    {
+      "path": "crates/incant_cook/Cargo.toml",
+      "bytes": 2838,
+      "sha256": "62fc1a4c73ab1d5d42f983366f9d995fd362c9358c0bd3f2a4bcec400fb9ff06"
+    },
+    {
+      "path": "crates/incant_game_player/Cargo.toml",
+      "bytes": 6923,
+      "sha256": "59e85de7ca784f13cd86def944f383aa8757b43b7b225c3f37790f4c6e8182e2"
+    },
+    {
+      "path": "crates/incant_script/Cargo.toml",
+      "bytes": 3712,
+      "sha256": "1ed32a78aa8cce190af58febe44b8eb4126c4bacc32bfd01f251520a007ff1da"
+    },
+    {
+      "path": "crates/incant_script/build.rs",
+      "bytes": 12954,
+      "sha256": "dc1ff8ffae820d88edaf0c3eeb5a6b6e8c9d360796e1acd1491f90e819484ad5"
+    },
+    {
+      "path": "crates/incant_script/src/checkpoint/tests.rs",
+      "bytes": 20772,
+      "sha256": "d9c2ac269c197b86f0708adffc99a177dc63e98b4e4e1478a285754491aa765b"
+    },
+    {
+      "path": "crates/incant_script/tests/pgo_build.rs",
+      "bytes": 13495,
+      "sha256": "58b8b7d4690fe535459b6912109a79671694b18281390cc2dc4a77c439c78b08"
+    },
+    {
+      "path": "docs/spikes/quickjs-core-pgo.md",
+      "bytes": 4347,
+      "sha256": "f0fc329e83011791630b6eee4cc05fc2065dfd6c009a1f52e0c126dbf8f7020d"
+    },
+    {
+      "path": "third_party/rquickjs-sys/Cargo.toml",
+      "bytes": 1949,
+      "sha256": "bcb1450551df4f7874d3d50eab776b3a25fd06a94fa8a9eaac6608ed23bab929"
+    },
+    {
+      "path": "third_party/rquickjs-sys/Cargo.toml.orig",
+      "bytes": 1388,
+      "sha256": "885e046cdb35e1581d83e8e316875d7772136065bd7ba7bf8036cc07da810009"
+    },
+    {
+      "path": "third_party/rquickjs-sys/build.rs",
+      "bytes": 17877,
+      "sha256": "d65ff5eb1c92493df041f70bf710fda49b9c63317084aa991dde375f18ecaeec"
+    },
+    {
+      "path": "third_party/rquickjs-sys/build_support/diagnostic_pgo.rs",
+      "bytes": 25435,
+      "sha256": "b5d09985e3a8becb8f62fa57a53a5d03ac43360116e4285139b1eaae3c56583e"
+    },
+    {
+      "path": "tools/probes/quickjs-core-pgo.py",
+      "bytes": 701,
+      "sha256": "f279ba68aee176cbe3609f0d912ea15e01afdbc39db16fe0157def089f4088e2"
+    },
+    {
+      "path": "tools/quickjs_pgo.py",
+      "bytes": 18805,
+      "sha256": "0bbeb417ce625f4f12eb4b7d515aa3a653be44c85cbee8a7494ce3934bfc0535"
+    },
+    {
+      "path": "tools/quickjs_pgo_archive.py",
+      "bytes": 6530,
+      "sha256": "6e32028d3bff93e071f3f297c06d49afa80067c8f13f0d03c33735b2a591a676"
+    },
+    {
+      "path": "tools/quickjs_pgo_build.py",
+      "bytes": 23149,
+      "sha256": "efab41441234208891c207683e172afccee53abd53dab210982cb05f6b676c6f"
+    },
+    {
+      "path": "tools/quickjs_pgo_image.py",
+      "bytes": 6451,
+      "sha256": "473cb2fd579b6925cea70634040880b27da715affd961b6d01b968a9cfe140de"
+    },
+    {
+      "path": "tools/tests/test_quickjs_pgo.py",
+      "bytes": 35691,
+      "sha256": "896c1bdacae8a3aaee9be1a2d2c8e821fefac241af4e4eda71c25ff793b79f3d"
+    },
+    {
+      "path": "tools/tests/test_quickjs_pgo_archive.py",
+      "bytes": 5759,
+      "sha256": "5ed44fe9b38e2959420f96614e6435c3cbc63fda86758af3ece0bf5e1e0ae90d"
+    },
+    {
+      "path": "tools/tests/test_quickjs_pgo_instrumentation.py",
+      "bytes": 7213,
+      "sha256": "49135ee10686c6303634024e63d0548992f26632e038b5891cf5ace17b73dfc4"
+    }
+  ],
+  "archive": {
+    "bytes": 1347898,
+    "sha256": "32784e48ad04768883224812942ce2f5b0b3be54338a39a0a249db130554a4e9"
+  },
+  "expanded": {
+    "bytes": 17059278,
+    "sha256": "02c9d2e7742b8e47a673b617a5366281e883a20adbfc97f1b58ddac71f522239"
+  },
+  "records": [
+    {
+      "name": "core-cpu-001/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-001/closeout.json",
+      "bytes": 1451,
+      "sha256": "28287d02bf0c4e53be855c105ccb0a4f1f0cf69f30c8da7358db7716b502a835"
+    },
+    {
+      "name": "core-cpu-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-001/result.json",
+      "bytes": 14653,
+      "sha256": "90227961457369748db3a6a93e8af5639dc3b1d8a387f98b6c824badff7e98ee"
+    },
+    {
+      "name": "core-cpu-002/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-002/closeout.json",
+      "bytes": 10090,
+      "sha256": "106fe6ca820d532cb384dc61b93f607f4e6f3ee0357c6416ea8e9ec8b93ff707"
+    },
+    {
+      "name": "core-cpu-002/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-002/result.json",
+      "bytes": 24931,
+      "sha256": "31030b446582a78bb6bc7b7f3a77da7694a7dc31c1c7f5909d3833f566d998b9"
+    },
+    {
+      "name": "core-cpu-003/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-003/closeout.json",
+      "bytes": 3683,
+      "sha256": "f4f7ddb7aeae3fc466be3a401cae16e28ea5fd5a558ea97106c7f7504d5a189e"
+    },
+    {
+      "name": "core-cpu-003/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-003/result.json",
+      "bytes": 20775,
+      "sha256": "59f7f8c92b041da5ce6782ad84d3048b443925b71bc6cc2c7b778bb123507163"
+    },
+    {
+      "name": "core-cpu-004/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-004/closeout.json",
+      "bytes": 5762,
+      "sha256": "0207e2728a37b2a7419766e038e569e4f9203a390a489ae009d38560d5180ac7"
+    },
+    {
+      "name": "core-cpu-004/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-004/result.json",
+      "bytes": 25181,
+      "sha256": "14d8993f010a42f0ccdadc3264e22610a038fb367f7c9d42746caef35dbfcf14"
+    },
+    {
+      "name": "core-cpu-005/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-005/0.stderr.log",
+      "bytes": 80911,
+      "sha256": "7ea0bbfa3190b8124252ec364616abe2b90f89c58fa8bfc0247738a063bf4d10"
+    },
+    {
+      "name": "core-cpu-005/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-005/1.stderr.log",
+      "bytes": 21713,
+      "sha256": "463e25e847ee92577126dc6cbbf69434ea39c1ee906b80b3e4f9b868f7c4e5d2"
+    },
+    {
+      "name": "core-cpu-005/2.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-005/2.stderr.log",
+      "bytes": 72523,
+      "sha256": "7eca42fee95a976b3547cdc66d73cde7639ccbb8208bba18f60047b948b2dd0b"
+    },
+    {
+      "name": "core-cpu-005/2.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-005/2.stdout.log",
+      "bytes": 1587044,
+      "sha256": "dbee8bab71a24d37091743c09cd5f50ff8cfed6ea89921283118766e9734cc7d"
+    },
+    {
+      "name": "core-cpu-005/3.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-005/3.stderr.log",
+      "bytes": 1797,
+      "sha256": "1dc15176b2a06281f11e61efc9d46d82305e5306c0155b78baeffe4d22da56b2"
+    },
+    {
+      "name": "core-cpu-005/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-005/closeout.json",
+      "bytes": 3689,
+      "sha256": "8611eb7764c3b54cf37be73f56e1a8a65eb7aa1e9d72d0eee7425485e334e2f3"
+    },
+    {
+      "name": "core-cpu-005/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-005/result.json",
+      "bytes": 35239,
+      "sha256": "3d5793ad4a6cf0070e1591f4bd74d6a384f6b561420a0f0f792ab768a4dc8567"
+    },
+    {
+      "name": "core-cpu-006/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-006/0.stderr.log",
+      "bytes": 2534,
+      "sha256": "ad0eeae2a9c6fe3faf75d4fa3fe0685aba6acefc53302fa7bd3e3064df19c9a5"
+    },
+    {
+      "name": "core-cpu-006/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-006/0.stdout.log",
+      "bytes": 215283,
+      "sha256": "a16078432972c3d3151213b74dbd49318e56e3eadc8cc2d6b58cf81d430ee04c"
+    },
+    {
+      "name": "core-cpu-006/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-006/1.stderr.log",
+      "bytes": 100409,
+      "sha256": "9195c9329a911f7f0eb1c15da1a77a4517cd2caca42b736859858f8a56075d05"
+    },
+    {
+      "name": "core-cpu-006/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-006/closeout.json",
+      "bytes": 6135,
+      "sha256": "5d53035d054f8bd1a24c3bfceb90fd09068834ce6dd3e208b6a41b81625e7faa"
+    },
+    {
+      "name": "core-cpu-006/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-006/result.json",
+      "bytes": 5627,
+      "sha256": "d03a2e6b23bb7b314fec76653751d46d5d9b03d79e007d3352cafdbd4afccbb8"
+    },
+    {
+      "name": "core-cpu-007/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-007/0.stderr.log",
+      "bytes": 18859,
+      "sha256": "bba34fffc3dc61ec5135682121b937e7f57e39f3bb3025ae3c0d0bb93ffa2201"
+    },
+    {
+      "name": "core-cpu-007/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-007/0.stdout.log",
+      "bytes": 112041,
+      "sha256": "6f725008d1a833652173318c861f1ca52fda0924d3787e3e58e541ed17b07ed7"
+    },
+    {
+      "name": "core-cpu-007/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-007/1.stderr.log",
+      "bytes": 2412,
+      "sha256": "27a8ea20e91678b4c5308d4f8378c3b811d81c05b41d7f22f2cb1e2d146f44f0"
+    },
+    {
+      "name": "core-cpu-007/actual-c-roles.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-007/actual-c-roles.json",
+      "bytes": 6795,
+      "sha256": "888bab7a682a6200eba3b52d4e9655f7c88789db5e672d6acd57388d975d4682"
+    },
+    {
+      "name": "core-cpu-007/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-007/closeout.json",
+      "bytes": 5306,
+      "sha256": "d3255705b525cf5323a2827c6e14b722da4e1ef22a2dac8872b2db695b2f717e"
+    },
+    {
+      "name": "core-cpu-007/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-007/result.json",
+      "bytes": 6130,
+      "sha256": "5313f912937c547cdfd1dffde306f1fdc53754510cc6460ac447f0f78410b22b"
+    },
+    {
+      "name": "core-cpu-007/role-receipts.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-007/role-receipts.json",
+      "bytes": 3661,
+      "sha256": "b46023d3b8ff66f4ed2e0f043898d6b8c9b19d01dae48c7d028771164c87d449"
+    },
+    {
+      "name": "core-cpu-008/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-008/closeout.json",
+      "bytes": 2685,
+      "sha256": "aedf4939f1504557e884b100b409666ce3b0369e5dfb378b34acc234cc898a03"
+    },
+    {
+      "name": "core-cpu-008/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-008/result.json",
+      "bytes": 6043,
+      "sha256": "25ce44a2d5692bf43be993e6d9f4c61937a7ba5eb7e166eab66833e9fec259bb"
+    },
+    {
+      "name": "core-cpu-009-launch-001/refusal.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-009-launch-001/refusal.json",
+      "bytes": 874,
+      "sha256": "05406c31549e7219b2cf76d7f8e706a41a329ac75aafe5d532bf78202c4b0be3"
+    },
+    {
+      "name": "core-cpu-010/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-010/closeout.json",
+      "bytes": 3466,
+      "sha256": "21172230e056ea90ee964ebb9c7fa3f993f2313c56c66557438579c852d06d26"
+    },
+    {
+      "name": "core-cpu-010/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-010/result.json",
+      "bytes": 6150,
+      "sha256": "7cb362c23f6e178d8fea532372c304c088cdb68e162a5bd67f9d4dc078444cf1"
+    },
+    {
+      "name": "core-cpu-011/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-011/closeout.json",
+      "bytes": 10000,
+      "sha256": "9b92aec7b26689ef8d65a10e5e2f2268e6bdb8f476e706bd6f2f45b22e9f3716"
+    },
+    {
+      "name": "core-cpu-011/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-011/result.json",
+      "bytes": 8654,
+      "sha256": "63e892fce5d2cba7dee3bed9f8c59d74e87f1964b9faffdc37b363d52aca4aa5"
+    },
+    {
+      "name": "core-cpu-012/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-012/0.stderr.log",
+      "bytes": 38806,
+      "sha256": "d2ecd230e1924fe1d374b8c1ebdeb66c7dd165c7dcac37a4af174ae7658915f7"
+    },
+    {
+      "name": "core-cpu-012/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-012/1.stderr.log",
+      "bytes": 1152,
+      "sha256": "779656cd04c55ff7de3cdf9c24d79e4d6138ed77579427c8600c6a6a1cf4e28c"
+    },
+    {
+      "name": "core-cpu-012/actual-host-script-metadata.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-012/actual-host-script-metadata.json",
+      "bytes": 165,
+      "sha256": "b4c6a29f3e15397239e8c81bcdf8b404e334871c5e581252d3e71bd1a5603428"
+    },
+    {
+      "name": "core-cpu-012/actual-script-owners.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-012/actual-script-owners.json",
+      "bytes": 548,
+      "sha256": "0d4158fe52675b0c903008fc140989aaa4234c9c2f6d1fce36921d2a4a1af96c"
+    },
+    {
+      "name": "core-cpu-012/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-012/closeout.json",
+      "bytes": 6690,
+      "sha256": "061d9bda73b738ddb66bed3e4a87b5aeeb75dca68d35534c92cebb790cb47854"
+    },
+    {
+      "name": "core-cpu-012/descriptor.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-012/descriptor.json",
+      "bytes": 5665,
+      "sha256": "be7a34e840937e6e16abb2a59561d2526d1b7d87972780697a3d4f7272d0e925"
+    },
+    {
+      "name": "core-cpu-012/fresh-owned-absence.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-012/fresh-owned-absence.json",
+      "bytes": 621,
+      "sha256": "ca31849223c0a1cd19a29fca16222a6412a464277aff122a5f5c552a15a84753"
+    },
+    {
+      "name": "core-cpu-012/incant_script-cooker.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-012/incant_script-cooker.json",
+      "bytes": 1361,
+      "sha256": "834bb74cfc0e51470331c807708c8d6ba6ff2e42696f6711125740bdcbf6f142"
+    },
+    {
+      "name": "core-cpu-012/incant_script-runtime.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-012/incant_script-runtime.json",
+      "bytes": 1383,
+      "sha256": "8103729515b24422232f4383df0c9c454e2d6000d868b31700831bbc7a8ace5a"
+    },
+    {
+      "name": "core-cpu-012/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-012/result.json",
+      "bytes": 8504,
+      "sha256": "8d5649cb20959319ebe5c16fdae4d2900b520d02534a317af5d3151aed2e2381"
+    },
+    {
+      "name": "core-cpu-012/rquickjs-sys-cooker.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-012/rquickjs-sys-cooker.json",
+      "bytes": 1678,
+      "sha256": "5d12ab1bb901357e884c00a10c2c332103473b2e574f7f85bd74b2158c6cb7c6"
+    },
+    {
+      "name": "core-cpu-012/rquickjs-sys-runtime.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-cpu-012/rquickjs-sys-runtime.json",
+      "bytes": 1878,
+      "sha256": "01b39d3048d3ec689fc168b6be0100f3c116b98d77f0e78fc0c130e8e2048e98"
+    },
+    {
+      "name": "core-integration-001/integration-summary.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-integration-001/integration-summary.json",
+      "bytes": 38160,
+      "sha256": "c5f23fce85ea036507c638aca2e6c1beb103fd2dae5a4d4b3124a1f6510ce2bc"
+    },
+    {
+      "name": "core-integration-001/source-controls.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-integration-001/source-controls.stderr",
+      "bytes": 141,
+      "sha256": "2301b45bb9e51c389ef1b30c2655bb78086084419daadd25ca6467fc537d8869"
+    },
+    {
+      "name": "core-integration-001/source-controls.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-integration-001/source-controls.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-link-qualification-001/closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-link-qualification-001/closeout-001.json",
+      "bytes": 3738,
+      "sha256": "4d5f8304cb35bec9e0099ac74ad7a595daa4afefb260e61fb72f18a1b789c936"
+    },
+    {
+      "name": "core-link-qualification-001/closeout-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-link-qualification-001/closeout-002.json",
+      "bytes": 3306,
+      "sha256": "e36dec72f400e8b8c199701fa90d84d5f6ee466394367dc3849f43f5625ec229"
+    },
+    {
+      "name": "core-link-qualification-001/closeout-003.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-link-qualification-001/closeout-003.json",
+      "bytes": 6427,
+      "sha256": "899e7de253bac693c5593d96e81cf32870037fee4a5dec199bbd0177bc8fe1fc"
+    },
+    {
+      "name": "core-link-qualification-001/launch-001-refusal.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-link-qualification-001/launch-001-refusal.json",
+      "bytes": 1087,
+      "sha256": "a41e4fe5fffe31d0a35d39dafb7dbc54ad2a8de9c2c89d3245592a3ec1cd0012"
+    },
+    {
+      "name": "core-link-qualification-001/outcome-003.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-link-qualification-001/outcome-003.md",
+      "bytes": 2662,
+      "sha256": "a6f651cf09e40b86d2ed369d7bd79c95b262493da05f2585f0bc6b734d4477b4"
+    },
+    {
+      "name": "core-link-qualification-001/run-001/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-link-qualification-001/run-001/managed-calls.json",
+      "bytes": 32843,
+      "sha256": "9bddbfef1f27178f0034eed62c64772e310bdeead083a8871a1a68ae47d4cfbb"
+    },
+    {
+      "name": "core-link-qualification-001/run-001/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-link-qualification-001/run-001/result.json",
+      "bytes": 3030,
+      "sha256": "1b05eab85c178b623a5fe41c99f3cd905cfa0beaf61c7dbb550a6e69b33148ab"
+    },
+    {
+      "name": "core-link-qualification-001/run-002/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-link-qualification-001/run-002/managed-calls.json",
+      "bytes": 28007,
+      "sha256": "b899249c17457f973babff78df5b36a1f99d6deec1dd3707a2fe2cbf6fd1bbb5"
+    },
+    {
+      "name": "core-link-qualification-001/run-002/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-link-qualification-001/run-002/result.json",
+      "bytes": 2752,
+      "sha256": "97bec70872d5fef70f3008e31b9a613f32fd14e7dc9e7ddbeff58f81c3b5292c"
+    },
+    {
+      "name": "core-link-qualification-001/run-003/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-link-qualification-001/run-003/managed-calls.json",
+      "bytes": 66494,
+      "sha256": "bbe8d2e6899b137c53dda2bfad7be8f4647c511a3cda730ea780f57ba347212f"
+    },
+    {
+      "name": "core-link-qualification-001/run-003/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-link-qualification-001/run-003/result.json",
+      "bytes": 31667,
+      "sha256": "c82e336ee27ee94d68b1aa2aa5041bf91edd956f34c957340964105a5c692227"
+    },
+    {
+      "name": "core-shipping-001/closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-001/closeout-001.json",
+      "bytes": 19858,
+      "sha256": "225ce3cf9816730956bee877358ae97105545f34933698c789dead7d1ab4e786"
+    },
+    {
+      "name": "core-shipping-001/metadata/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-001/metadata/managed-calls.json",
+      "bytes": 49880,
+      "sha256": "5f2f5624672e249925ec3e216ef825833af8cba03b8a5ea9dcb8958200c64606"
+    },
+    {
+      "name": "core-shipping-001/metadata/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-001/metadata/result.json",
+      "bytes": 9098,
+      "sha256": "80aac65d4705fa12a2a49a741987fe2a75b87a394140930962327c0fe340235f"
+    },
+    {
+      "name": "core-shipping-002/closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-002/closeout-001.json",
+      "bytes": 25245,
+      "sha256": "354b9e305c74b3e74c1ddf0bca3cf29c8aa65904b0da532c00dd3e6a3c62f042"
+    },
+    {
+      "name": "core-shipping-002/metadata/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-002/metadata/managed-calls.json",
+      "bytes": 69484,
+      "sha256": "b1abd507b0b3d72bc70099df0d841c4f821a2018b39ada440b64ebdfbf3f25c0"
+    },
+    {
+      "name": "core-shipping-002/metadata/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-002/metadata/result.json",
+      "bytes": 11869,
+      "sha256": "9cc47964aa54a872bdd475b3dcb87a4721ca3c440ddaabd043056d48a79cdb44"
+    },
+    {
+      "name": "core-shipping-003/closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-003/closeout-001.json",
+      "bytes": 55576,
+      "sha256": "f20e8f6227b40ada1dbcfa2bcd6656fee07763cd862a8bbd9a6395d9e4f4294e"
+    },
+    {
+      "name": "core-shipping-003/metadata/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-003/metadata/managed-calls.json",
+      "bytes": 69403,
+      "sha256": "ef62788682f8711c8481f0fbfd81c9644b9b565f80fe1ed392f584c52c1e4ba4"
+    },
+    {
+      "name": "core-shipping-003/metadata/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-003/metadata/result.json",
+      "bytes": 29387,
+      "sha256": "c58fc0d5f67c51903acf25b7fc8641d7d93ee34143bfc92ef94935e6e56eba1c"
+    },
+    {
+      "name": "core-shipping-004/closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-004/closeout-001.json",
+      "bytes": 66204,
+      "sha256": "e434f1f50659177c10acf0b129a56162c5f67620f78762cbbb0b31d5985debaf"
+    },
+    {
+      "name": "core-shipping-004/fresh-owned-absence.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-004/fresh-owned-absence.json",
+      "bytes": 6273,
+      "sha256": "7ac3df9a944067e671d8af4d06537b7281f212b7d54db23d813977faf6462155"
+    },
+    {
+      "name": "core-shipping-004/metadata/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-004/metadata/managed-calls.json",
+      "bytes": 69493,
+      "sha256": "e58ab18a527d6a4cd18674235b4a500d7efb38ad9b638ed04b12650bc8e6c060"
+    },
+    {
+      "name": "core-shipping-004/metadata/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-004/metadata/result.json",
+      "bytes": 32006,
+      "sha256": "9061ffa463686dda1ee807bc86787479a98de1418a27fb7284b2a7acc43ae69c"
+    },
+    {
+      "name": "core-shipping-005/closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-005/closeout-001.json",
+      "bytes": 3040,
+      "sha256": "92a2cf2c3c1a130a2f59bb26f8c44fc93a5d566ec0f468620f87ad19dcbae507"
+    },
+    {
+      "name": "core-shipping-005/fresh-owned-absence.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-005/fresh-owned-absence.json",
+      "bytes": 10690,
+      "sha256": "1275f52fc8a62da612aad32b2fe68b3ec304ffc0c2703839bc8283482fb3b0ea"
+    },
+    {
+      "name": "core-shipping-005/metadata/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-005/metadata/managed-calls.json",
+      "bytes": 78413,
+      "sha256": "70eb01ee4058ef4ef0b949f7b6b02447b295879bd5545b8a9b60c56ebf65ed33"
+    },
+    {
+      "name": "core-shipping-005/metadata/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-005/metadata/result.json",
+      "bytes": 14717,
+      "sha256": "f27783a5969a143085d92f62df9c12a30d44580c31d97dc41482000f91c829f2"
+    },
+    {
+      "name": "core-shipping-006/closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-006/closeout-001.json",
+      "bytes": 2837,
+      "sha256": "38237614dc856a0cd7592f9ccc5ca6060fc432924139826972763ce6ae8ccd1a"
+    },
+    {
+      "name": "core-shipping-006/fresh-owned-absence.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-006/fresh-owned-absence.json",
+      "bytes": 11775,
+      "sha256": "d9f2df6547602032989171ed35c334a575b686a39f42ca66d9127cc2bd343d52"
+    },
+    {
+      "name": "core-shipping-006/metadata/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-006/metadata/managed-calls.json",
+      "bytes": 81130,
+      "sha256": "b6d02f0fd55a66423af4d2c18a245ef20d2d3ac57b5ef7a66e575c3efb42d04d"
+    },
+    {
+      "name": "core-shipping-006/metadata/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-006/metadata/result.json",
+      "bytes": 15465,
+      "sha256": "f9d43b337d186f5fc1b07b5094e8794c695cec222d6dd7e5de6cfffba24a037b"
+    },
+    {
+      "name": "core-shipping-007/closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/closeout-001.json",
+      "bytes": 3888,
+      "sha256": "b6491a86b1db6786a25c65a9e670dc9226d79368ef7e06ad8c81afaf4e6038ca"
+    },
+    {
+      "name": "core-shipping-007/fresh-owned-absence.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/fresh-owned-absence.json",
+      "bytes": 32627,
+      "sha256": "0576841bfcfa0989c9e0c5f6092701d4d15d7f9527c540d7828aad43df287666"
+    },
+    {
+      "name": "core-shipping-007/metadata/call-035.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/metadata/call-035.stdout.raw.log",
+      "bytes": 1848492,
+      "sha256": "c6cd109873beea042890a496d1418d40a3402582f1c7a94d7439c1205492be44"
+    },
+    {
+      "name": "core-shipping-007/metadata/call-059.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/metadata/call-059.stdout.raw.log",
+      "bytes": 1811026,
+      "sha256": "601458748f5015c4ce9dfedd89021ff693aab5bcb421b013260fef69246ff869"
+    },
+    {
+      "name": "core-shipping-007/metadata/call-086.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/metadata/call-086.stdout.raw.log",
+      "bytes": 1906357,
+      "sha256": "2139f1d73dd759487c2f356af7cd4753e39d288717d6146dbddc9918ecab302a"
+    },
+    {
+      "name": "core-shipping-007/metadata/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/metadata/managed-calls.json",
+      "bytes": 175309,
+      "sha256": "03d466c2bdfa29985addc8001ca46426abf343db4cb29fdd1085537cf9a746ba"
+    },
+    {
+      "name": "core-shipping-007/metadata/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/metadata/result.json",
+      "bytes": 62584,
+      "sha256": "45e2d3b6d43b8e3587d212b4e937b07cd96546bb84a6b87d5364663bdc19e70a"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/actual-c-roles.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/actual-c-roles.json",
+      "bytes": 7615,
+      "sha256": "677c36d1ca39f7e87861461c62bf4015997e932bb4b6185b2f36356a7f80edfd"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/actual-sections.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/actual-sections.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/actual-sections.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/actual-sections.stdout",
+      "bytes": 11264,
+      "sha256": "b4948ea24968d4b023011fc22c39fbf9828faf5fdb8d68df41dc0a21a7153ea7"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/actual-symbols.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/actual-symbols.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/actual-symbols.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/actual-symbols.stdout",
+      "bytes": 12840,
+      "sha256": "b0829f6f3971123387def747ed4d0b34cd7d59bfc6246a00986a1c8615f0c08d"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/build-receipt.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/build-receipt.json",
+      "bytes": 69698,
+      "sha256": "8505d47b016e3a9cca71c580885de0ab523b6636a41741300a58aef7215eb4ef"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/build.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/build.log",
+      "bytes": 90879,
+      "sha256": "a8d05bf40ba928d03a303a6cfd01ebbce445619f649e2b0cc238e21c3e324e1f"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/descriptor.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/descriptor.json",
+      "bytes": 5665,
+      "sha256": "d7a44af14e111ca12798d41894d431f02a2171ab1521b8d3c4f9b3e2e6574df0"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/incant_script-cooker.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/incant_script-cooker.json",
+      "bytes": 1361,
+      "sha256": "abd01fa1a62c3a92ecf43ac5dc115646fe952e6796a175b9794e47ebf134cb05"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/incant_script-runtime.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/incant_script-runtime.json",
+      "bytes": 1383,
+      "sha256": "277a029bda60b5b8d7e2ed4b4f6a615857a03182205163b3ef2c785406a4399f"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/link-args.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/link-args.txt",
+      "bytes": 2702,
+      "sha256": "12a6174c81d871cd137a7caf0d4fa971a58d85b7c90e23e9bcfa1b009105f2c5"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/normal-dependencies.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/normal-dependencies.txt",
+      "bytes": 31049,
+      "sha256": "f9a36307010d7ce8bc76a84f590695fefede6c8c7bbd78725372b88536f50413"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/project-build.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/project-build.json",
+      "bytes": 5293,
+      "sha256": "cb5e1bea1d6d2457de55bf67fa2c23ad0ce6b2d2bd15fb32f5cfa4f5c07ecbc9"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/rquickjs-sys-cooker.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/rquickjs-sys-cooker.json",
+      "bytes": 1678,
+      "sha256": "2b01d52701a8858ffb66e8a0170bbfda2d53879e607b78899e807ecee449d3aa"
+    },
+    {
+      "name": "core-shipping-007/packages/generate/rquickjs-sys-runtime.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/rquickjs-sys-runtime.json",
+      "bytes": 1878,
+      "sha256": "9e89b52cd477514dd7697e5e3be1f135372f5c4d5f20d692dc2bf8db6d6b803d"
+    },
+    {
+      "name": "core-shipping-007/packages/manifest.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/manifest.json",
+      "bytes": 5980,
+      "sha256": "2f78bb4a13ef4b33c14d2d641a93ab7f93e1ffc4f980fd72184624616d89143c"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary-loss/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary-loss/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary-loss/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary-loss/stdout.json",
+      "bytes": 9046,
+      "sha256": "6b5d3827d4899462c27b068600b4907020690f1c9818ae53042ac046ad32666f"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary-restart/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary-restart/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary-restart/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary-restart/stdout.json",
+      "bytes": 10660,
+      "sha256": "2610a730b08bc6fea551ddb24521e79033c7df72498c1e30bc42d4e2b7ac2f57"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary-win/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary-win/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary-win/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary-win/stdout.json",
+      "bytes": 8455,
+      "sha256": "37ccafc52a22a341c7776961e5171f48c988638224445395fe94db55da2f4279"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary/actual-c-roles.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/actual-c-roles.json",
+      "bytes": 7579,
+      "sha256": "16925c11be09e53983d4600a904d2f7b6248f9f17581a9b6c973150a0b0c951a"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary/actual-sections.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/actual-sections.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary/actual-sections.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/actual-sections.stdout",
+      "bytes": 7549,
+      "sha256": "eeba9c29e26c824fdbee4a86c51d92b7907885a19b76326d7b32790d4a90ad46"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary/actual-symbols.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/actual-symbols.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary/actual-symbols.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/actual-symbols.stdout",
+      "bytes": 6569,
+      "sha256": "3179caff6c8461033afb37dfb69e1c17dd91e83039cbe69a0b98c94fcce8b76c"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary/build-receipt.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/build-receipt.json",
+      "bytes": 61217,
+      "sha256": "32a2d1babffe60bc0fa9d068202b82936cf839496c45e542544cf5c5d7084d2e"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary/build.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/build.log",
+      "bytes": 1457514,
+      "sha256": "ed853d73891b9abf10e486e00581cbd008573c7c5b28ec5ea416e4c9334e621d"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary/link-args.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/link-args.txt",
+      "bytes": 2397,
+      "sha256": "ef1b21754696de99d39b678d79669bd1dc92a545a81d9e42ad57bd57a4a80d16"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary/normal-dependencies.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/normal-dependencies.txt",
+      "bytes": 30791,
+      "sha256": "50e1b778a5ab09669e3529a53a304846ebc37a2aa33df2386eb7d0362646aff3"
+    },
+    {
+      "name": "core-shipping-007/packages/ordinary/project-build.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/project-build.json",
+      "bytes": 5292,
+      "sha256": "cfd0777f62549c4b8de29e325814fda3b13c22379b1dd12646517229d5a96a19"
+    },
+    {
+      "name": "core-shipping-007/packages/profile-covered.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/profile-covered.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/profile-covered.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/profile-covered.stdout",
+      "bytes": 11045,
+      "sha256": "6deb230c851855ff0bbca75531b5f7bcf7540b34f51d0a0c7c9cf3af4b4a8605"
+    },
+    {
+      "name": "core-shipping-007/packages/profile-inventory.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/profile-inventory.json",
+      "bytes": 14158,
+      "sha256": "4e0d61ead11a5c8675979778bb4aadf5ad28ff12d39a6bfcc27db3580893df90"
+    },
+    {
+      "name": "core-shipping-007/packages/profile-merge.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/profile-merge.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/profile-merge.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/profile-merge.stdout",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/training/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/training/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/training/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/training/stdout.json",
+      "bytes": 8455,
+      "sha256": "37ccafc52a22a341c7776961e5171f48c988638224445395fe94db55da2f4279"
+    },
+    {
+      "name": "core-shipping-007/packages/use-loss/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use-loss/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/use-loss/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use-loss/stdout.json",
+      "bytes": 9046,
+      "sha256": "6b5d3827d4899462c27b068600b4907020690f1c9818ae53042ac046ad32666f"
+    },
+    {
+      "name": "core-shipping-007/packages/use-restart/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use-restart/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/use-restart/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use-restart/stdout.json",
+      "bytes": 10660,
+      "sha256": "2610a730b08bc6fea551ddb24521e79033c7df72498c1e30bc42d4e2b7ac2f57"
+    },
+    {
+      "name": "core-shipping-007/packages/use-win/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use-win/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/use-win/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use-win/stdout.json",
+      "bytes": 8455,
+      "sha256": "37ccafc52a22a341c7776961e5171f48c988638224445395fe94db55da2f4279"
+    },
+    {
+      "name": "core-shipping-007/packages/use/actual-c-roles.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/actual-c-roles.json",
+      "bytes": 8439,
+      "sha256": "e1dedb251cfd79d93140b1bf02215c2317174e403a576c56fc01205d8abf5f84"
+    },
+    {
+      "name": "core-shipping-007/packages/use/actual-sections.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/actual-sections.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/use/actual-sections.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/actual-sections.stdout",
+      "bytes": 7544,
+      "sha256": "8fbe19310dee7abaeca2b8cfe50a2c48ffa89212be47c2ff08c89e1f2f19c6c7"
+    },
+    {
+      "name": "core-shipping-007/packages/use/actual-symbols.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/actual-symbols.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-shipping-007/packages/use/actual-symbols.stdout",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/actual-symbols.stdout",
+      "bytes": 6623,
+      "sha256": "6631b94d1750e612ea208a10a807360ad1830065200dffbfd793dcd7ab43ecb4"
+    },
+    {
+      "name": "core-shipping-007/packages/use/build-receipt.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/build-receipt.json",
+      "bytes": 62172,
+      "sha256": "e0579e8fa1ba2b24a28206b8b876b692c514776f35e3e00f59f149adf8d35648"
+    },
+    {
+      "name": "core-shipping-007/packages/use/build.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/build.log",
+      "bytes": 89763,
+      "sha256": "de17353930f230ee9551f3792f110a66c322d6e0ce3499123051ce3d990677c7"
+    },
+    {
+      "name": "core-shipping-007/packages/use/descriptor.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/descriptor.json",
+      "bytes": 5784,
+      "sha256": "44439d142fb6ba31524a08fd3de09bbb80187bec0d89f02774b7444cb864affa"
+    },
+    {
+      "name": "core-shipping-007/packages/use/incant_script-cooker.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/incant_script-cooker.json",
+      "bytes": 1356,
+      "sha256": "cfb611efc3fa933b80b954ef27608ec0d9773acb7e999733711324c46b3e34a5"
+    },
+    {
+      "name": "core-shipping-007/packages/use/incant_script-runtime.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/incant_script-runtime.json",
+      "bytes": 1614,
+      "sha256": "afb0f93587bba7e4e01dc1b933cc02e9417c1aa824dd07a2b47a3f19ea9a8da3"
+    },
+    {
+      "name": "core-shipping-007/packages/use/link-args.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/link-args.txt",
+      "bytes": 2397,
+      "sha256": "437b23fd491fa19f5f0e7e7e5155fd70c128b16ab1a1332ad7b246da04091b53"
+    },
+    {
+      "name": "core-shipping-007/packages/use/normal-dependencies.txt",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/normal-dependencies.txt",
+      "bytes": 31024,
+      "sha256": "355d16d13ef7bb8c139adb310f0596324ded1dc085206ccf768399addd3a58ca"
+    },
+    {
+      "name": "core-shipping-007/packages/use/project-build.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/project-build.json",
+      "bytes": 5293,
+      "sha256": "0413d63c27fb7d3071418e8c6401e673597baf3d9d63893fdc4ed43fdefff372"
+    },
+    {
+      "name": "core-shipping-007/packages/use/rquickjs-sys-cooker.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/rquickjs-sys-cooker.json",
+      "bytes": 1673,
+      "sha256": "2fa05265e472dfa2d4d65d765e1e76ecce5b7ddb552e7ad8314a0b5935db6cb7"
+    },
+    {
+      "name": "core-shipping-007/packages/use/rquickjs-sys-runtime.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/rquickjs-sys-runtime.json",
+      "bytes": 2303,
+      "sha256": "d15dc1fb5805cb32dd6ae839257210b578d10f9bbacc40baf03bddfd26f0491b"
+    },
+    {
+      "name": "core-shipping-007/postterminal-input-check.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/postterminal-input-check.json",
+      "bytes": 239,
+      "sha256": "e1d95bc76a8f1a8306ae59d59e149e35bec0a0894e7e0f9679e67f42ded1ac12"
+    },
+    {
+      "name": "core-shipping-inputs-001/routes/loss-input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-inputs-001/routes/loss-input.json",
+      "bytes": 117,
+      "sha256": "e4707335c2d5116ef604c1976dbd864eeafab305cecd583a20795dd0d2976227"
+    },
+    {
+      "name": "core-shipping-inputs-001/routes/loss-observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-inputs-001/routes/loss-observe.json",
+      "bytes": 2884,
+      "sha256": "1f54ab90ca3a778aee2f2c652a387d250effdcb3425f3c3ec5c1d0895c02972a"
+    },
+    {
+      "name": "core-shipping-inputs-001/routes/restart-input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-inputs-001/routes/restart-input.json",
+      "bytes": 28046,
+      "sha256": "97f048f0fdc59b1182884cb3028d4caa6528d834bc8d8256dc91caa63bc6c777"
+    },
+    {
+      "name": "core-shipping-inputs-001/routes/restart-observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-inputs-001/routes/restart-observe.json",
+      "bytes": 5577,
+      "sha256": "496510e27b362fb7ff2315bf4fc6fad8f426e25a03bdf2e7d85c63710e48be72"
+    },
+    {
+      "name": "core-shipping-inputs-001/routes/win-input.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-inputs-001/routes/win-input.json",
+      "bytes": 27753,
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf"
+    },
+    {
+      "name": "core-shipping-inputs-001/routes/win-observe.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-inputs-001/routes/win-observe.json",
+      "bytes": 2893,
+      "sha256": "3f3ec9e334103f934467d4a37b60eb2cbfc3ae8a228dd96240f025646832382d"
+    },
+    {
+      "name": "core-shipping-packet-001/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-001/plan.json",
+      "bytes": 14293,
+      "sha256": "920e3b91a09f183a198d318b16029c8b0c9cc8a17581d50329dbb0f4aef9409f"
+    },
+    {
+      "name": "core-shipping-packet-001/preparation-refusal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-001/preparation-refusal-001.json",
+      "bytes": 395,
+      "sha256": "b07f6d74681507c67d887fa4bc596151733d803c93ce204751f8b9c00a0b76c2"
+    },
+    {
+      "name": "core-shipping-packet-001/preparation-refusal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-001/preparation-refusal-002.json",
+      "bytes": 265,
+      "sha256": "dd6f2882cda0500f228633248d4ea5c637cb9dcbd7bdce7628b3f57c4a0bbed7"
+    },
+    {
+      "name": "core-shipping-packet-002/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-002/plan.json",
+      "bytes": 18227,
+      "sha256": "4e91d00c6cccd4b82b831225e3d21c6beb0feb67b68f5a8e2d62467092a9e573"
+    },
+    {
+      "name": "core-shipping-packet-002/preparation-refusal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-002/preparation-refusal-001.json",
+      "bytes": 395,
+      "sha256": "b07f6d74681507c67d887fa4bc596151733d803c93ce204751f8b9c00a0b76c2"
+    },
+    {
+      "name": "core-shipping-packet-002/preparation-refusal-002.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-002/preparation-refusal-002.json",
+      "bytes": 265,
+      "sha256": "dd6f2882cda0500f228633248d4ea5c637cb9dcbd7bdce7628b3f57c4a0bbed7"
+    },
+    {
+      "name": "core-shipping-packet-002/root-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-002/root-grant.json",
+      "bytes": 597,
+      "sha256": "2bd4c3322ac18ccc87178d2f8633faea4bdd8c5b2c3c971b06e153620e64be95"
+    },
+    {
+      "name": "core-shipping-packet-003/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-003/plan.json",
+      "bytes": 26566,
+      "sha256": "5adcd3a6402adce4b7f7bc26a2721e71b041ed63803073260a119aec908fb253"
+    },
+    {
+      "name": "core-shipping-packet-003/root-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-003/root-grant.json",
+      "bytes": 663,
+      "sha256": "aaf193483e64628a3415bdb7933c07a70965d59df7ae9b7b4f748b6357c497a7"
+    },
+    {
+      "name": "core-shipping-packet-004/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-004/freeze.json",
+      "bytes": 2885,
+      "sha256": "ed305460e5ca75af45daeafde0a3ee3c2a846a5dc7d46ea1e1892f0c0e13c91f"
+    },
+    {
+      "name": "core-shipping-packet-004/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-004/plan.json",
+      "bytes": 38477,
+      "sha256": "a3c258a9757d1ea1061b6866057c0614dca7fd52581c1320d7902416074b72f5"
+    },
+    {
+      "name": "core-shipping-packet-004/preparation-refusal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-004/preparation-refusal-001.json",
+      "bytes": 448,
+      "sha256": "856b83063340b810ad3b1598933e9681e5ad9349042212e2467b826c7e58f326"
+    },
+    {
+      "name": "core-shipping-packet-004/root-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-004/root-grant.json",
+      "bytes": 841,
+      "sha256": "2542fb794b4335389c185610ccd7f2c040ad637e2339b3293d0499aa9a8dc407"
+    },
+    {
+      "name": "core-shipping-packet-005/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-005/freeze.json",
+      "bytes": 727,
+      "sha256": "d7fe3cba8ee259ee8ad6f6169de13a0d23a1f0f5a55a105acb3c74edd883b461"
+    },
+    {
+      "name": "core-shipping-packet-005/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-005/plan.json",
+      "bytes": 50169,
+      "sha256": "88c129f70fc4892f12922d2b400057a83c915be7676f833e378ee66db2076cbc"
+    },
+    {
+      "name": "core-shipping-packet-005/root-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-005/root-grant.json",
+      "bytes": 604,
+      "sha256": "ac30c0fba51526c977cdf8de0f2dd6e5d7393ac2d4916f5e782e46d0993bd257"
+    },
+    {
+      "name": "core-shipping-packet-006/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-006/freeze.json",
+      "bytes": 863,
+      "sha256": "e3d966880b7b693d244a5489de0faa9a7420fc94ee5d26e2c200ce682cfa8864"
+    },
+    {
+      "name": "core-shipping-packet-006/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-006/plan.json",
+      "bytes": 63603,
+      "sha256": "aaa2303c9b4016d623e0835b2ea5b410389444e480cdb77a6247f28f18457721"
+    },
+    {
+      "name": "core-shipping-packet-006/root-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-006/root-grant.json",
+      "bytes": 873,
+      "sha256": "c461014d8e10d5a05133acc717c3f0ada16936bb98d069536afcfd9aaa507b3f"
+    },
+    {
+      "name": "core-shipping-packet-007/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-007/freeze.json",
+      "bytes": 1035,
+      "sha256": "7d86b2f48c50b48390874519c08dc4297f2193467892056b1d2b3cd72973ed6b"
+    },
+    {
+      "name": "core-shipping-packet-007/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-007/plan.json",
+      "bytes": 80157,
+      "sha256": "30a4d14b72445b2b06d6f7ff9a3072d053539de84ae6d1c62fdbc110306b11ae"
+    },
+    {
+      "name": "core-shipping-packet-007/preparation-refusal-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-007/preparation-refusal-001.json",
+      "bytes": 359,
+      "sha256": "8164e280b47083c46f4fca93fa5ebe00514681d3ef867ff2d863f3d049c99b91"
+    },
+    {
+      "name": "core-shipping-packet-007/root-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-007/root-grant.json",
+      "bytes": 904,
+      "sha256": "e9e595c74732393afdb635300b06c1b62864544f5b8f2ccb41ceced393f730a9"
+    },
+    {
+      "name": "core-shipping-packet-008/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-008/freeze.json",
+      "bytes": 1091,
+      "sha256": "c421540fcb6b4b2bc6f30fcb1eea57fa04d086b641c9dd12d2c66f326e6cbb25"
+    },
+    {
+      "name": "core-shipping-packet-008/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-008/plan.json",
+      "bytes": 93692,
+      "sha256": "5e0f6426db757d35a95f830d9e634d31433e7959458648f028334849d0b30b4f"
+    },
+    {
+      "name": "core-shipping-packet-008/root-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-packet-008/root-grant.json",
+      "bytes": 640,
+      "sha256": "281cfb37e1c805f194e2d7fbb576a208bf483966284063ce40cdd49687c00e8c"
+    },
+    {
+      "name": "core-timing-001/metadata/observer-live-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-001/metadata/observer-live-001.json",
+      "bytes": 96,
+      "sha256": "e952bdd59371cd50faa18788417c109ca31e118df340b51fc7f62736e30a667e"
+    },
+    {
+      "name": "core-timing-001/prelaunch-closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-001/prelaunch-closeout.json",
+      "bytes": 929,
+      "sha256": "4122ff9ed9ada7724266958a108c505e8b62821ce18662a9dfe676f129c2079a"
+    },
+    {
+      "name": "core-timing-002/analysis-closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/analysis-closeout-001.json",
+      "bytes": 1923,
+      "sha256": "2558b5d632a79ab38548ad8c4d29fd95d4d2deac68e6c11df83b96af85e67ae5"
+    },
+    {
+      "name": "core-timing-002/analysis-summary-001.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/analysis-summary-001.md",
+      "bytes": 3906,
+      "sha256": "106404bc0c00e5dfbe9e83f6a69cd948ae99415aa1bb039258b48757b9e56e97"
+    },
+    {
+      "name": "core-timing-002/cases/O0/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O0/measurement.json",
+      "bytes": 1392,
+      "sha256": "75b82bd228613bf0d57d4f22b5ffe28c36a709fc06adc61d266951630c314257"
+    },
+    {
+      "name": "core-timing-002/cases/O0/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O0/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/cases/O0/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O0/stdout.json",
+      "bytes": 537780,
+      "sha256": "c5edba9f3f4fa351d5dce2e90a490b6b15562899bcd991d3e73cf0935940af5c"
+    },
+    {
+      "name": "core-timing-002/cases/O1/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O1/measurement.json",
+      "bytes": 1387,
+      "sha256": "af28fbe90d445f2777d6cd635621289dea83e50a5a39b4c8a2f0aaed300eb64f"
+    },
+    {
+      "name": "core-timing-002/cases/O1/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O1/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/cases/O1/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O1/stdout.json",
+      "bytes": 538202,
+      "sha256": "82bb6df41c00042b767432036bae27bcf1845c71a6e855f39124907a0c80a22a"
+    },
+    {
+      "name": "core-timing-002/cases/O2/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O2/measurement.json",
+      "bytes": 1392,
+      "sha256": "51ce9fc1c009e16f8aac5a48475680d1adaffa684b9d25b4e5c1b9d9f28395cb"
+    },
+    {
+      "name": "core-timing-002/cases/O2/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O2/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/cases/O2/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O2/stdout.json",
+      "bytes": 537766,
+      "sha256": "903754016463a6f9085a619f7513aba3c54a8be402e7bee3c894b10686d946c4"
+    },
+    {
+      "name": "core-timing-002/cases/O3/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O3/measurement.json",
+      "bytes": 1387,
+      "sha256": "84e543f3b04b2a6942a1dafba33174f9f24cbe0240c11db23b94bf686e90a108"
+    },
+    {
+      "name": "core-timing-002/cases/O3/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O3/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/cases/O3/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O3/stdout.json",
+      "bytes": 538203,
+      "sha256": "b073aba702ab380d4c5c0fbeef2450905df8220c63ac62d2d9db3bf66a7b60cb"
+    },
+    {
+      "name": "core-timing-002/cases/U0/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U0/measurement.json",
+      "bytes": 1387,
+      "sha256": "37c4afe8970b47ab0f9f972c99454b891673f5930b213d674992889c366be345"
+    },
+    {
+      "name": "core-timing-002/cases/U0/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U0/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/cases/U0/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U0/stdout.json",
+      "bytes": 537728,
+      "sha256": "39e225f0c6157273b7ab4be018f74e58d57c2bc9e8275c80833f04b5b3a7655a"
+    },
+    {
+      "name": "core-timing-002/cases/U1/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U1/measurement.json",
+      "bytes": 1382,
+      "sha256": "c00e7fdc6cc8877a6b1a171388f3160493c1a73278029fc7a043ddb3ceb092d1"
+    },
+    {
+      "name": "core-timing-002/cases/U1/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U1/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/cases/U1/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U1/stdout.json",
+      "bytes": 538198,
+      "sha256": "6146071ede69d8c400dc539a5501b73e8539fe08aa2cc860916224255822bd0f"
+    },
+    {
+      "name": "core-timing-002/cases/U2/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U2/measurement.json",
+      "bytes": 1387,
+      "sha256": "63ca32e1e6f0e7c0afb32233ccaac2e70861969d7da8ac02f21969855030527b"
+    },
+    {
+      "name": "core-timing-002/cases/U2/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U2/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/cases/U2/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U2/stdout.json",
+      "bytes": 537819,
+      "sha256": "7bbf85482918b08115cd8277fd94b467934e01dd783890a3b0cd6baa61aedbc5"
+    },
+    {
+      "name": "core-timing-002/cases/U3/measurement.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U3/measurement.json",
+      "bytes": 1382,
+      "sha256": "fe382979111c8eda95109470342896adbe414a13f4707ec9be2c074460852875"
+    },
+    {
+      "name": "core-timing-002/cases/U3/stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U3/stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/cases/U3/stdout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U3/stdout.json",
+      "bytes": 538188,
+      "sha256": "299d0767f398d7b8a68681863f7f6ca766c364d95320729e78f88f520a270e51"
+    },
+    {
+      "name": "core-timing-002/closeout-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/closeout-001.json",
+      "bytes": 1600,
+      "sha256": "d53d5c435525e4f3fdb9b11e7c15a030f4e5f250c1bf03294f1fe68fd3349606"
+    },
+    {
+      "name": "core-timing-002/fresh-owned-absence-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/fresh-owned-absence-001.json",
+      "bytes": 9496,
+      "sha256": "0d1928bf5331b96ff4e8ce5760958ab250fc5811dc38133cd1f37e5401a94d0d"
+    },
+    {
+      "name": "core-timing-002/independent-replay-001.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/independent-replay-001.json",
+      "bytes": 79152,
+      "sha256": "a52819813d2cb0b681c2bd6511d0f2a340299da7aca7849718fb9efb3278a733"
+    },
+    {
+      "name": "core-timing-002/metadata/call-000.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-000.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-000.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-000.stdout.raw.log",
+      "bytes": 8,
+      "sha256": "c41647b1db8417e52c33d3385e3feb9eda7bc8b1398729f583e74c8046db9fd1"
+    },
+    {
+      "name": "core-timing-002/metadata/call-001.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-001.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-001.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-001.stdout.raw.log",
+      "bytes": 13,
+      "sha256": "4413154dc1451ff5d95fd0ece30dbc943d4de7af109369e88a780124c6ed4875"
+    },
+    {
+      "name": "core-timing-002/metadata/call-002.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-002.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-002.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-002.stdout.raw.log",
+      "bytes": 12,
+      "sha256": "1a4675111e2b0f970616c374fc0a90aad997171ca22da371c998275950af4481"
+    },
+    {
+      "name": "core-timing-002/metadata/call-003.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-003.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-003.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-003.stdout.raw.log",
+      "bytes": 3,
+      "sha256": "238903180cc104ec2c5d8b3f20c5bc61b389ec0a967df8cc208cdc7cd454174f"
+    },
+    {
+      "name": "core-timing-002/metadata/call-004.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-004.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-004.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-004.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "83a02de12a419e9bd40d0b7c8c3bf118f4e379310a1e11ff7b481ac6b32f3a20"
+    },
+    {
+      "name": "core-timing-002/metadata/call-005.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-005.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-005.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-005.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "2035e21f9b58eea2c669f2bab5c2c90d87c1cdcb4dc8ccf96d8f25e64870ce9d"
+    },
+    {
+      "name": "core-timing-002/metadata/call-006.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-006.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-006.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-006.stdout.raw.log",
+      "bytes": 106,
+      "sha256": "731941c833db183ec4812c30e44aec6d8fb19b2ebf81a5307bdcc53adb35293b"
+    },
+    {
+      "name": "core-timing-002/metadata/call-007.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-007.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-007.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-007.stdout.raw.log",
+      "bytes": 494,
+      "sha256": "81464f845aeb6bdd3dc45cd5e216c59a2e0511d72093371651086bf30efca8ce"
+    },
+    {
+      "name": "core-timing-002/metadata/call-009.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-009.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-009.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-009.stdout.raw.log",
+      "bytes": 8,
+      "sha256": "c41647b1db8417e52c33d3385e3feb9eda7bc8b1398729f583e74c8046db9fd1"
+    },
+    {
+      "name": "core-timing-002/metadata/call-010.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-010.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-010.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-010.stdout.raw.log",
+      "bytes": 13,
+      "sha256": "4413154dc1451ff5d95fd0ece30dbc943d4de7af109369e88a780124c6ed4875"
+    },
+    {
+      "name": "core-timing-002/metadata/call-011.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-011.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-011.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-011.stdout.raw.log",
+      "bytes": 12,
+      "sha256": "1a4675111e2b0f970616c374fc0a90aad997171ca22da371c998275950af4481"
+    },
+    {
+      "name": "core-timing-002/metadata/call-012.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-012.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-012.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-012.stdout.raw.log",
+      "bytes": 3,
+      "sha256": "238903180cc104ec2c5d8b3f20c5bc61b389ec0a967df8cc208cdc7cd454174f"
+    },
+    {
+      "name": "core-timing-002/metadata/call-013.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-013.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-013.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-013.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "83a02de12a419e9bd40d0b7c8c3bf118f4e379310a1e11ff7b481ac6b32f3a20"
+    },
+    {
+      "name": "core-timing-002/metadata/call-014.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-014.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-014.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-014.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "2035e21f9b58eea2c669f2bab5c2c90d87c1cdcb4dc8ccf96d8f25e64870ce9d"
+    },
+    {
+      "name": "core-timing-002/metadata/call-015.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-015.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-015.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-015.stdout.raw.log",
+      "bytes": 106,
+      "sha256": "731941c833db183ec4812c30e44aec6d8fb19b2ebf81a5307bdcc53adb35293b"
+    },
+    {
+      "name": "core-timing-002/metadata/call-016.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-016.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-016.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-016.stdout.raw.log",
+      "bytes": 494,
+      "sha256": "81464f845aeb6bdd3dc45cd5e216c59a2e0511d72093371651086bf30efca8ce"
+    },
+    {
+      "name": "core-timing-002/metadata/call-018.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-018.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-018.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-018.stdout.raw.log",
+      "bytes": 8,
+      "sha256": "c41647b1db8417e52c33d3385e3feb9eda7bc8b1398729f583e74c8046db9fd1"
+    },
+    {
+      "name": "core-timing-002/metadata/call-019.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-019.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-019.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-019.stdout.raw.log",
+      "bytes": 13,
+      "sha256": "4413154dc1451ff5d95fd0ece30dbc943d4de7af109369e88a780124c6ed4875"
+    },
+    {
+      "name": "core-timing-002/metadata/call-020.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-020.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-020.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-020.stdout.raw.log",
+      "bytes": 12,
+      "sha256": "1a4675111e2b0f970616c374fc0a90aad997171ca22da371c998275950af4481"
+    },
+    {
+      "name": "core-timing-002/metadata/call-021.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-021.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-021.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-021.stdout.raw.log",
+      "bytes": 3,
+      "sha256": "238903180cc104ec2c5d8b3f20c5bc61b389ec0a967df8cc208cdc7cd454174f"
+    },
+    {
+      "name": "core-timing-002/metadata/call-022.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-022.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-022.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-022.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "83a02de12a419e9bd40d0b7c8c3bf118f4e379310a1e11ff7b481ac6b32f3a20"
+    },
+    {
+      "name": "core-timing-002/metadata/call-023.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-023.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-023.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-023.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "2035e21f9b58eea2c669f2bab5c2c90d87c1cdcb4dc8ccf96d8f25e64870ce9d"
+    },
+    {
+      "name": "core-timing-002/metadata/call-024.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-024.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-024.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-024.stdout.raw.log",
+      "bytes": 106,
+      "sha256": "731941c833db183ec4812c30e44aec6d8fb19b2ebf81a5307bdcc53adb35293b"
+    },
+    {
+      "name": "core-timing-002/metadata/call-025.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-025.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-025.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-025.stdout.raw.log",
+      "bytes": 494,
+      "sha256": "81464f845aeb6bdd3dc45cd5e216c59a2e0511d72093371651086bf30efca8ce"
+    },
+    {
+      "name": "core-timing-002/metadata/call-027.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-027.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-027.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-027.stdout.raw.log",
+      "bytes": 8,
+      "sha256": "c41647b1db8417e52c33d3385e3feb9eda7bc8b1398729f583e74c8046db9fd1"
+    },
+    {
+      "name": "core-timing-002/metadata/call-028.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-028.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-028.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-028.stdout.raw.log",
+      "bytes": 13,
+      "sha256": "4413154dc1451ff5d95fd0ece30dbc943d4de7af109369e88a780124c6ed4875"
+    },
+    {
+      "name": "core-timing-002/metadata/call-029.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-029.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-029.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-029.stdout.raw.log",
+      "bytes": 12,
+      "sha256": "1a4675111e2b0f970616c374fc0a90aad997171ca22da371c998275950af4481"
+    },
+    {
+      "name": "core-timing-002/metadata/call-030.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-030.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-030.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-030.stdout.raw.log",
+      "bytes": 3,
+      "sha256": "238903180cc104ec2c5d8b3f20c5bc61b389ec0a967df8cc208cdc7cd454174f"
+    },
+    {
+      "name": "core-timing-002/metadata/call-031.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-031.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-031.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-031.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "83a02de12a419e9bd40d0b7c8c3bf118f4e379310a1e11ff7b481ac6b32f3a20"
+    },
+    {
+      "name": "core-timing-002/metadata/call-032.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-032.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-032.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-032.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "2035e21f9b58eea2c669f2bab5c2c90d87c1cdcb4dc8ccf96d8f25e64870ce9d"
+    },
+    {
+      "name": "core-timing-002/metadata/call-033.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-033.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-033.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-033.stdout.raw.log",
+      "bytes": 106,
+      "sha256": "731941c833db183ec4812c30e44aec6d8fb19b2ebf81a5307bdcc53adb35293b"
+    },
+    {
+      "name": "core-timing-002/metadata/call-034.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-034.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-034.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-034.stdout.raw.log",
+      "bytes": 509,
+      "sha256": "5a65ddb82ecaf8acd9d747fc5b9825f5bfe1cd0118e36a62633dc2c02505e428"
+    },
+    {
+      "name": "core-timing-002/metadata/call-036.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-036.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-036.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-036.stdout.raw.log",
+      "bytes": 8,
+      "sha256": "c41647b1db8417e52c33d3385e3feb9eda7bc8b1398729f583e74c8046db9fd1"
+    },
+    {
+      "name": "core-timing-002/metadata/call-037.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-037.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-037.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-037.stdout.raw.log",
+      "bytes": 13,
+      "sha256": "4413154dc1451ff5d95fd0ece30dbc943d4de7af109369e88a780124c6ed4875"
+    },
+    {
+      "name": "core-timing-002/metadata/call-038.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-038.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-038.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-038.stdout.raw.log",
+      "bytes": 12,
+      "sha256": "1a4675111e2b0f970616c374fc0a90aad997171ca22da371c998275950af4481"
+    },
+    {
+      "name": "core-timing-002/metadata/call-039.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-039.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-039.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-039.stdout.raw.log",
+      "bytes": 3,
+      "sha256": "238903180cc104ec2c5d8b3f20c5bc61b389ec0a967df8cc208cdc7cd454174f"
+    },
+    {
+      "name": "core-timing-002/metadata/call-040.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-040.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-040.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-040.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "83a02de12a419e9bd40d0b7c8c3bf118f4e379310a1e11ff7b481ac6b32f3a20"
+    },
+    {
+      "name": "core-timing-002/metadata/call-041.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-041.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-041.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-041.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "2035e21f9b58eea2c669f2bab5c2c90d87c1cdcb4dc8ccf96d8f25e64870ce9d"
+    },
+    {
+      "name": "core-timing-002/metadata/call-042.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-042.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-042.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-042.stdout.raw.log",
+      "bytes": 106,
+      "sha256": "731941c833db183ec4812c30e44aec6d8fb19b2ebf81a5307bdcc53adb35293b"
+    },
+    {
+      "name": "core-timing-002/metadata/call-043.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-043.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-043.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-043.stdout.raw.log",
+      "bytes": 494,
+      "sha256": "81464f845aeb6bdd3dc45cd5e216c59a2e0511d72093371651086bf30efca8ce"
+    },
+    {
+      "name": "core-timing-002/metadata/call-045.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-045.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-045.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-045.stdout.raw.log",
+      "bytes": 8,
+      "sha256": "c41647b1db8417e52c33d3385e3feb9eda7bc8b1398729f583e74c8046db9fd1"
+    },
+    {
+      "name": "core-timing-002/metadata/call-046.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-046.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-046.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-046.stdout.raw.log",
+      "bytes": 13,
+      "sha256": "4413154dc1451ff5d95fd0ece30dbc943d4de7af109369e88a780124c6ed4875"
+    },
+    {
+      "name": "core-timing-002/metadata/call-047.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-047.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-047.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-047.stdout.raw.log",
+      "bytes": 12,
+      "sha256": "1a4675111e2b0f970616c374fc0a90aad997171ca22da371c998275950af4481"
+    },
+    {
+      "name": "core-timing-002/metadata/call-048.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-048.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-048.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-048.stdout.raw.log",
+      "bytes": 3,
+      "sha256": "238903180cc104ec2c5d8b3f20c5bc61b389ec0a967df8cc208cdc7cd454174f"
+    },
+    {
+      "name": "core-timing-002/metadata/call-049.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-049.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-049.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-049.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "83a02de12a419e9bd40d0b7c8c3bf118f4e379310a1e11ff7b481ac6b32f3a20"
+    },
+    {
+      "name": "core-timing-002/metadata/call-050.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-050.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-050.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-050.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "2035e21f9b58eea2c669f2bab5c2c90d87c1cdcb4dc8ccf96d8f25e64870ce9d"
+    },
+    {
+      "name": "core-timing-002/metadata/call-051.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-051.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-051.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-051.stdout.raw.log",
+      "bytes": 106,
+      "sha256": "731941c833db183ec4812c30e44aec6d8fb19b2ebf81a5307bdcc53adb35293b"
+    },
+    {
+      "name": "core-timing-002/metadata/call-052.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-052.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-052.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-052.stdout.raw.log",
+      "bytes": 506,
+      "sha256": "d2c5fbe754fd04535e2ee78b19282ef4f1e266af6707f7c1ab359beeca0f0e97"
+    },
+    {
+      "name": "core-timing-002/metadata/call-054.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-054.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-054.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-054.stdout.raw.log",
+      "bytes": 8,
+      "sha256": "c41647b1db8417e52c33d3385e3feb9eda7bc8b1398729f583e74c8046db9fd1"
+    },
+    {
+      "name": "core-timing-002/metadata/call-055.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-055.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-055.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-055.stdout.raw.log",
+      "bytes": 13,
+      "sha256": "4413154dc1451ff5d95fd0ece30dbc943d4de7af109369e88a780124c6ed4875"
+    },
+    {
+      "name": "core-timing-002/metadata/call-056.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-056.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-056.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-056.stdout.raw.log",
+      "bytes": 12,
+      "sha256": "1a4675111e2b0f970616c374fc0a90aad997171ca22da371c998275950af4481"
+    },
+    {
+      "name": "core-timing-002/metadata/call-057.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-057.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-057.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-057.stdout.raw.log",
+      "bytes": 3,
+      "sha256": "238903180cc104ec2c5d8b3f20c5bc61b389ec0a967df8cc208cdc7cd454174f"
+    },
+    {
+      "name": "core-timing-002/metadata/call-058.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-058.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-058.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-058.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "83a02de12a419e9bd40d0b7c8c3bf118f4e379310a1e11ff7b481ac6b32f3a20"
+    },
+    {
+      "name": "core-timing-002/metadata/call-059.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-059.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-059.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-059.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "2035e21f9b58eea2c669f2bab5c2c90d87c1cdcb4dc8ccf96d8f25e64870ce9d"
+    },
+    {
+      "name": "core-timing-002/metadata/call-060.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-060.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-060.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-060.stdout.raw.log",
+      "bytes": 106,
+      "sha256": "731941c833db183ec4812c30e44aec6d8fb19b2ebf81a5307bdcc53adb35293b"
+    },
+    {
+      "name": "core-timing-002/metadata/call-061.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-061.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-061.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-061.stdout.raw.log",
+      "bytes": 494,
+      "sha256": "81464f845aeb6bdd3dc45cd5e216c59a2e0511d72093371651086bf30efca8ce"
+    },
+    {
+      "name": "core-timing-002/metadata/call-063.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-063.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-063.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-063.stdout.raw.log",
+      "bytes": 8,
+      "sha256": "c41647b1db8417e52c33d3385e3feb9eda7bc8b1398729f583e74c8046db9fd1"
+    },
+    {
+      "name": "core-timing-002/metadata/call-064.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-064.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-064.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-064.stdout.raw.log",
+      "bytes": 13,
+      "sha256": "4413154dc1451ff5d95fd0ece30dbc943d4de7af109369e88a780124c6ed4875"
+    },
+    {
+      "name": "core-timing-002/metadata/call-065.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-065.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-065.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-065.stdout.raw.log",
+      "bytes": 12,
+      "sha256": "1a4675111e2b0f970616c374fc0a90aad997171ca22da371c998275950af4481"
+    },
+    {
+      "name": "core-timing-002/metadata/call-066.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-066.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-066.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-066.stdout.raw.log",
+      "bytes": 3,
+      "sha256": "238903180cc104ec2c5d8b3f20c5bc61b389ec0a967df8cc208cdc7cd454174f"
+    },
+    {
+      "name": "core-timing-002/metadata/call-067.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-067.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-067.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-067.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "83a02de12a419e9bd40d0b7c8c3bf118f4e379310a1e11ff7b481ac6b32f3a20"
+    },
+    {
+      "name": "core-timing-002/metadata/call-068.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-068.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-068.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-068.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "2035e21f9b58eea2c669f2bab5c2c90d87c1cdcb4dc8ccf96d8f25e64870ce9d"
+    },
+    {
+      "name": "core-timing-002/metadata/call-069.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-069.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-069.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-069.stdout.raw.log",
+      "bytes": 106,
+      "sha256": "731941c833db183ec4812c30e44aec6d8fb19b2ebf81a5307bdcc53adb35293b"
+    },
+    {
+      "name": "core-timing-002/metadata/call-070.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-070.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-070.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-070.stdout.raw.log",
+      "bytes": 494,
+      "sha256": "81464f845aeb6bdd3dc45cd5e216c59a2e0511d72093371651086bf30efca8ce"
+    },
+    {
+      "name": "core-timing-002/metadata/call-072.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-072.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-072.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-072.stdout.raw.log",
+      "bytes": 8,
+      "sha256": "c41647b1db8417e52c33d3385e3feb9eda7bc8b1398729f583e74c8046db9fd1"
+    },
+    {
+      "name": "core-timing-002/metadata/call-073.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-073.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-073.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-073.stdout.raw.log",
+      "bytes": 13,
+      "sha256": "4413154dc1451ff5d95fd0ece30dbc943d4de7af109369e88a780124c6ed4875"
+    },
+    {
+      "name": "core-timing-002/metadata/call-074.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-074.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-074.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-074.stdout.raw.log",
+      "bytes": 12,
+      "sha256": "1a4675111e2b0f970616c374fc0a90aad997171ca22da371c998275950af4481"
+    },
+    {
+      "name": "core-timing-002/metadata/call-075.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-075.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-075.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-075.stdout.raw.log",
+      "bytes": 3,
+      "sha256": "238903180cc104ec2c5d8b3f20c5bc61b389ec0a967df8cc208cdc7cd454174f"
+    },
+    {
+      "name": "core-timing-002/metadata/call-076.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-076.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-076.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-076.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "83a02de12a419e9bd40d0b7c8c3bf118f4e379310a1e11ff7b481ac6b32f3a20"
+    },
+    {
+      "name": "core-timing-002/metadata/call-077.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-077.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-077.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-077.stdout.raw.log",
+      "bytes": 7,
+      "sha256": "2035e21f9b58eea2c669f2bab5c2c90d87c1cdcb4dc8ccf96d8f25e64870ce9d"
+    },
+    {
+      "name": "core-timing-002/metadata/call-078.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-078.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-078.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-078.stdout.raw.log",
+      "bytes": 106,
+      "sha256": "731941c833db183ec4812c30e44aec6d8fb19b2ebf81a5307bdcc53adb35293b"
+    },
+    {
+      "name": "core-timing-002/metadata/call-079.stderr.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-079.stderr.raw.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "core-timing-002/metadata/call-079.stdout.raw.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/call-079.stdout.raw.log",
+      "bytes": 494,
+      "sha256": "81464f845aeb6bdd3dc45cd5e216c59a2e0511d72093371651086bf30efca8ce"
+    },
+    {
+      "name": "core-timing-002/metadata/managed-calls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/managed-calls.json",
+      "bytes": 93906,
+      "sha256": "c3cf6d2264d48612f34692a1c05c3d4def619b4323a27a17de82ff0188ac0912"
+    },
+    {
+      "name": "core-timing-002/metadata/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/metadata/result.json",
+      "bytes": 32713,
+      "sha256": "81f9d0b85d83d09611255142932b0e0530276f533f8814575b7b4b3798c53878"
+    },
+    {
+      "name": "core-timing-packet-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-001/freeze.json",
+      "bytes": 483,
+      "sha256": "1657abac6793622743c74afac4377bbdf0bc30c4a85635763bed120bff0f8345"
+    },
+    {
+      "name": "core-timing-packet-001/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-001/plan.json",
+      "bytes": 51837,
+      "sha256": "f6f296fa7a3a1392c903ea422701950d3067c1d07b98fbc5b577b12ff15d11a2"
+    },
+    {
+      "name": "core-timing-packet-001/readiness.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-001/readiness.json",
+      "bytes": 1098,
+      "sha256": "7055d42788ea8510fc129a0025bd853b120a2bd8cc642bb804fa090079eacf3e"
+    },
+    {
+      "name": "core-timing-packet-001/root-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-001/root-grant.json",
+      "bytes": 682,
+      "sha256": "fdb7c20d26bac220538e51ce3f035f7adc06b5db49ca69bfa992f97017ad028d"
+    },
+    {
+      "name": "core-timing-packet-001/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-001/run.py",
+      "bytes": 10984,
+      "sha256": "ca4c66a25450372329da782d41e44d0ed3219d38751ebb7b640800e38f3d2c85"
+    },
+    {
+      "name": "core-timing-packet-001/tests.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-001/tests.stderr",
+      "bytes": 1123,
+      "sha256": "efc9208d2396d78665b0dfcb2116a71fbe28a9b4c4b807fca1528c59a06ca1bf"
+    },
+    {
+      "name": "core-timing-packet-002/delta.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-002/delta.json",
+      "bytes": 2352,
+      "sha256": "b01d58dad0406d51bf99b28423ee8ebf9618385ac704badd79361ab228e38910"
+    },
+    {
+      "name": "core-timing-packet-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-002/freeze.json",
+      "bytes": 583,
+      "sha256": "a9917781b2dcfc4ef797cc076b89463c15d34dff5d8208e04f88d10bf46782eb"
+    },
+    {
+      "name": "core-timing-packet-002/launch-identity.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-002/launch-identity.json",
+      "bytes": 285,
+      "sha256": "f909071f76b6098a56bdc220d45315aab895b2e7734a4322eda8b9512bbb5a51"
+    },
+    {
+      "name": "core-timing-packet-002/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-002/plan.json",
+      "bytes": 56935,
+      "sha256": "42c35b1f1e331570ba5bab63bc7e6f6cc432cf4e14170259ca71e7b583f7ec76"
+    },
+    {
+      "name": "core-timing-packet-002/readiness.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-002/readiness.json",
+      "bytes": 1444,
+      "sha256": "167e5aeb75635160dd5bf925e7c998e2aeb403414bf163edf059c8d0b450610b"
+    },
+    {
+      "name": "core-timing-packet-002/root-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-002/root-grant.json",
+      "bytes": 739,
+      "sha256": "3dd366a03d6191453bb8913c22c1e3ba42ab450ec272d8ff33b707ea10f06642"
+    },
+    {
+      "name": "core-timing-packet-002/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-002/run.py",
+      "bytes": 12154,
+      "sha256": "321ae74331e2978f12c74934175d836fce5547c2ad08d072317221bf5fc296aa"
+    },
+    {
+      "name": "core-timing-packet-002/source.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-002/source.diff",
+      "bytes": 4291,
+      "sha256": "724f2b0da817752b6f33d6085891b541d3db1634c5d0d6dfac986d6668432a3e"
+    },
+    {
+      "name": "core-timing-packet-002/tests.stderr",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-packet-002/tests.stderr",
+      "bytes": 1447,
+      "sha256": "f17191c843cf556d0aff7e5ea3e8e5493c51519d49371f407abe94b9234f911a"
+    }
+  ],
+  "external_artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/incant_game_player",
+      "bytes": 12985296,
+      "sha256": "56bb322e5498a37829130a64f44aae50e443d02ad91e673cf55cd7c32872ca1d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/incant_game_player",
+      "bytes": 13988912,
+      "sha256": "429135495714d800524dc1fae831e0a970d6b6e044637a03a3ab2e9e8914d6ed"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/incant_game_player",
+      "bytes": 12788512,
+      "sha256": "fedec0a1f3200e9edf87c8cc1477df0af847bfff7b4f020b96584d75bb596460"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/training.profdata",
+      "bytes": 319928,
+      "sha256": "9a6439175ee910f075c14f534322b31aac13b49a6ab5688cbacbad61ac80000b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/training/raw/training-96378.profraw",
+      "bytes": 277808,
+      "sha256": "a35760a2ccf5f144b377a476e2740103cd3420296fb448f14b6d5488db6c75bd"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/world.scene",
+      "bytes": 1058647,
+      "sha256": "2d1ec2682e03748ce06adc9a048e6c81f82cb2358c4b979a0133849bab6a16f4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/input-actions.json",
+      "bytes": 859,
+      "sha256": "aa13d11e49bbd03a2bfb59cc64b60701f83e5b1b4985f4272c12b4640dd12bdf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/empty-input.json",
+      "bytes": 103,
+      "sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "bytes": 18726133,
+      "sha256": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "bytes": 25810,
+      "sha256": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "bytes": 207725,
+      "sha256": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "bytes": 181633,
+      "sha256": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "bytes": 2832033,
+      "sha256": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "bytes": 413,
+      "sha256": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "bytes": 699516,
+      "sha256": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "bytes": 317,
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "bytes": 310300,
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "bytes": 318,
+      "sha256": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "bytes": 765788,
+      "sha256": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "bytes": 323,
+      "sha256": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "bytes": 13812,
+      "sha256": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "bytes": 9341,
+      "sha256": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "bytes": 8777144,
+      "sha256": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "bytes": 764,
+      "sha256": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "bytes": 345600,
+      "sha256": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "bytes": 561,
+      "sha256": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "bytes": 138240,
+      "sha256": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "bytes": 1096,
+      "sha256": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "bytes": 691200,
+      "sha256": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "bytes": 963,
+      "sha256": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "bytes": 576000,
+      "sha256": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/clips.bin",
+      "bytes": 252,
+      "sha256": "1047a8c04273bb4b8157d4c933e93de4aab1128b7891d0e195431722f369d865"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary/player/data/package.json",
+      "bytes": 479,
+      "sha256": "aa59400b3bd2059bf6a34251c1f3096fba45ecfcf6b90a7835bb00a8b37d6060"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/world.scene",
+      "bytes": 1058647,
+      "sha256": "2d1ec2682e03748ce06adc9a048e6c81f82cb2358c4b979a0133849bab6a16f4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/input-actions.json",
+      "bytes": 859,
+      "sha256": "aa13d11e49bbd03a2bfb59cc64b60701f83e5b1b4985f4272c12b4640dd12bdf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/empty-input.json",
+      "bytes": 103,
+      "sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "bytes": 18726133,
+      "sha256": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "bytes": 25810,
+      "sha256": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "bytes": 207725,
+      "sha256": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "bytes": 181633,
+      "sha256": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "bytes": 2832033,
+      "sha256": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "bytes": 413,
+      "sha256": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "bytes": 699516,
+      "sha256": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "bytes": 317,
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "bytes": 310300,
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "bytes": 318,
+      "sha256": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "bytes": 765788,
+      "sha256": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "bytes": 323,
+      "sha256": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "bytes": 13812,
+      "sha256": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "bytes": 9341,
+      "sha256": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "bytes": 8777144,
+      "sha256": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "bytes": 764,
+      "sha256": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "bytes": 345600,
+      "sha256": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "bytes": 561,
+      "sha256": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "bytes": 138240,
+      "sha256": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "bytes": 1096,
+      "sha256": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "bytes": 691200,
+      "sha256": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "bytes": 963,
+      "sha256": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "bytes": 576000,
+      "sha256": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/clips.bin",
+      "bytes": 252,
+      "sha256": "1047a8c04273bb4b8157d4c933e93de4aab1128b7891d0e195431722f369d865"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/generate/player/data/package.json",
+      "bytes": 479,
+      "sha256": "aa59400b3bd2059bf6a34251c1f3096fba45ecfcf6b90a7835bb00a8b37d6060"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/world.scene",
+      "bytes": 1058647,
+      "sha256": "2d1ec2682e03748ce06adc9a048e6c81f82cb2358c4b979a0133849bab6a16f4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/input-actions.json",
+      "bytes": 859,
+      "sha256": "aa13d11e49bbd03a2bfb59cc64b60701f83e5b1b4985f4272c12b4640dd12bdf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/empty-input.json",
+      "bytes": 103,
+      "sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "bytes": 18726133,
+      "sha256": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "bytes": 25810,
+      "sha256": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "bytes": 207725,
+      "sha256": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "bytes": 181633,
+      "sha256": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "bytes": 2832033,
+      "sha256": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "bytes": 413,
+      "sha256": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "bytes": 699516,
+      "sha256": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "bytes": 317,
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "bytes": 310300,
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "bytes": 318,
+      "sha256": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "bytes": 765788,
+      "sha256": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "bytes": 323,
+      "sha256": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "bytes": 13812,
+      "sha256": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "bytes": 9341,
+      "sha256": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "bytes": 8777144,
+      "sha256": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "bytes": 764,
+      "sha256": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "bytes": 345600,
+      "sha256": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "bytes": 561,
+      "sha256": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "bytes": 138240,
+      "sha256": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "bytes": 1096,
+      "sha256": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "bytes": 691200,
+      "sha256": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "bytes": 963,
+      "sha256": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "bytes": 576000,
+      "sha256": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/clips.bin",
+      "bytes": 252,
+      "sha256": "1047a8c04273bb4b8157d4c933e93de4aab1128b7891d0e195431722f369d865"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use/player/data/package.json",
+      "bytes": 479,
+      "sha256": "aa59400b3bd2059bf6a34251c1f3096fba45ecfcf6b90a7835bb00a8b37d6060"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary-loss/audio.pcm",
+      "bytes": 5760000,
+      "sha256": "4653986002c8dfdda1b32d386f1660a90976d9c0094e6469d88d52c825bfc7a3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary-restart/audio.pcm",
+      "bytes": 19558400,
+      "sha256": "e4758521810082d479e1262e04d12f02dd0b28b03e4b91342471eaf845fc5442"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/ordinary-win/audio.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/training/audio.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use-loss/audio.pcm",
+      "bytes": 5760000,
+      "sha256": "4653986002c8dfdda1b32d386f1660a90976d9c0094e6469d88d52c825bfc7a3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use-restart/audio.pcm",
+      "bytes": 19558400,
+      "sha256": "e4758521810082d479e1262e04d12f02dd0b28b03e4b91342471eaf845fc5442"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-shipping-007/packages/use-win/audio.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O0/audio.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O1/audio.pcm",
+      "bytes": 5760000,
+      "sha256": "4653986002c8dfdda1b32d386f1660a90976d9c0094e6469d88d52c825bfc7a3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O2/audio.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O3/audio.pcm",
+      "bytes": 5760000,
+      "sha256": "4653986002c8dfdda1b32d386f1660a90976d9c0094e6469d88d52c825bfc7a3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U0/audio.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U1/audio.pcm",
+      "bytes": 5760000,
+      "sha256": "4653986002c8dfdda1b32d386f1660a90976d9c0094e6469d88d52c825bfc7a3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U2/audio.pcm",
+      "bytes": 13798400,
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U3/audio.pcm",
+      "bytes": 5760000,
+      "sha256": "4653986002c8dfdda1b32d386f1660a90976d9c0094e6469d88d52c825bfc7a3"
+    }
+  ],
+  "ordinary_is_default": true,
+  "adopted": false,
+  "script_2ms_gate_passed": false,
+  "limits": "Inert text records only. Profiles, packages, executables and PCM remain external; no compiler/player/archive source executed by replay."
+}
