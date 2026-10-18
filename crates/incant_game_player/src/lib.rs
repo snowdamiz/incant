@@ -11,6 +11,8 @@ extern crate alloc;
 mod batching;
 mod capture;
 mod checkpoint;
+#[cfg(all(test, feature = "diagnostic-core-pose"))]
+mod core_pose;
 #[cfg(feature = "render-gpu")]
 mod gpu;
 mod materials;

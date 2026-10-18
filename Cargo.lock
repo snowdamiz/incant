@@ -4001,6 +4001,7 @@ dependencies = [
  "tempfile",
  "thiserror 2.0.21",
  "ulid",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]

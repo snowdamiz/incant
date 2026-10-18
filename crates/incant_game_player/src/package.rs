@@ -76,6 +76,7 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
                 | "--presentation-output"
                 | "--presentation-capacity"
                 | "--window-state-log"
+                | "--pose-interpolation"
         ) || options.contains_key(key)
         {
             return Err("unknown or duplicate native package option".into());
@@ -104,6 +105,7 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
                     | "--presentation-output"
                     | "--presentation-capacity"
                     | "--window-state-log"
+                    | "--pose-interpolation"
             )
         }) {
             return Err("window package options conflict with offline options".into());
@@ -115,6 +117,13 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
         }
         if options.contains_key("--window-state-log") && !options.contains_key("--stop-after") {
             return Err("window state log requires --stop-after".into());
+        }
+        if let Some(mode) = options.get("--pose-interpolation")
+            && (!cfg!(feature = "native-pose-interpolation")
+                || mode != "previous-current"
+                || !options.contains_key("--stop-after"))
+        {
+            return Err("pose interpolation requires its build feature, previous-current and bounded --stop-after".into());
         }
         let mut result = vec![
             "--window".into(),
@@ -137,6 +146,7 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
             "--presentation-output",
             "--presentation-capacity",
             "--window-state-log",
+            "--pose-interpolation",
         ] {
             if let Some(value) = options.remove(key) {
                 result.extend([key.into(), value]);
@@ -146,6 +156,9 @@ pub fn expand(args: Vec<String>) -> Result<Vec<String>> {
     }
     if options.contains_key("--window-state-log") {
         return Err("window state log requires --window".into());
+    }
+    if options.contains_key("--pose-interpolation") {
+        return Err("pose interpolation requires --window".into());
     }
     if options.contains_key("--compilation-output")
         || options.contains_key("--compilation-capacity")
@@ -280,6 +293,65 @@ mod tests {
             tail.iter().map(|s| (*s).into()).collect(),
         ]
         .concat()
+    }
+    #[test]
+    fn pose_diagnostic_is_explicit_bounded_and_not_package_authority() {
+        let dir = fixture();
+        let selected = expand(args(
+            dir.path(),
+            &[
+                "--window",
+                "--stop-after",
+                "2156",
+                "--pose-interpolation",
+                "previous-current",
+            ],
+        ));
+        assert_eq!(
+            selected.is_ok(),
+            cfg!(feature = "native-pose-interpolation")
+        );
+        if let Ok(selected) = selected {
+            assert_eq!(
+                &selected[10..],
+                [
+                    "--stop-after",
+                    "2156",
+                    "--pose-interpolation",
+                    "previous-current"
+                ]
+            );
+        }
+        for tail in [
+            vec!["--window", "--pose-interpolation", "previous-current"],
+            vec![
+                "--window",
+                "--stop-after",
+                "1",
+                "--pose-interpolation",
+                "extrapolate",
+            ],
+            vec![
+                "--ticks",
+                "1",
+                "--output",
+                "sound.pcm",
+                "--pose-interpolation",
+                "previous-current",
+            ],
+        ] {
+            assert!(expand(args(dir.path(), &tail)).is_err());
+        }
+        let mut manifest: serde_json::Value =
+            serde_json::from_slice(&std::fs::read(dir.path().join("package.json")).unwrap())
+                .unwrap();
+        manifest["pose_interpolation"] = "previous-current".into();
+        std::fs::write(
+            dir.path().join("package.json"),
+            serde_json::to_vec(&manifest).unwrap(),
+        )
+        .unwrap();
+        assert!(expand(args(dir.path(), &["--window", "--stop-after", "1"])).is_err());
     }
     #[test]
     fn presentation_destination_is_only_an_explicit_window_argument() {

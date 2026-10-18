@@ -411,34 +411,39 @@ impl Player {
         }
         #[cfg(feature = "render-input")]
         if let Self::Spatial(game) = self {
-            let host = game.host()?;
-            let mut report = input_report(host.render_input())?;
-            if let Some(ui) = host.ui() {
-                let paint = host.ui_paint().ok_or("UI paint invariant")?;
-                let values: std::collections::BTreeMap<_, _> = ui
-                    .widgets()
-                    .iter()
-                    .filter_map(|w| {
-                        ui.text(w.id)
-                            .map(|b| (ulid::Ulid::from_bytes(w.id.0).to_string(), b.text()))
-                    })
-                    .collect();
-                let sources: std::collections::BTreeMap<_, _> = paint
-                    .texts
-                    .iter()
-                    .map(|t| {
-                        (
-                            ulid::Ulid::from_bytes(t.id.0).to_string(),
-                            t.layout.source(),
-                        )
-                    })
-                    .collect();
-                report["ui"] = serde_json::json!({"widgets":ui.widgets().len(),"viewport":ui.layout().ok_or("UI layout invariant")?.viewport,"focus":ui.focus().map(|f|ulid::Ulid::from_bytes(f.widget().0).to_string()),"values":values,"sources":sources,"glyphs":paint.texts.iter().map(|t|t.glyphs.len()).sum::<usize>(),"atlas_sha256":incant_assets_runtime::sha256(paint.atlas.pixels())});
-            }
-            return Ok(Some(report));
+            return Ok(Some(host_report(game.host()?)?));
         }
         Ok(None)
     }
+}
+#[cfg(feature = "render-input")]
+pub(crate) fn host_report(
+    host: &incant_render_game::NativeRenderHost,
+) -> Result<serde_json::Value> {
+    let mut report = input_report(host.render_input())?;
+    if let Some(ui) = host.ui() {
+        let paint = host.ui_paint().ok_or("UI paint invariant")?;
+        let values: std::collections::BTreeMap<_, _> = ui
+            .widgets()
+            .iter()
+            .filter_map(|w| {
+                ui.text(w.id)
+                    .map(|b| (ulid::Ulid::from_bytes(w.id.0).to_string(), b.text()))
+            })
+            .collect();
+        let sources: std::collections::BTreeMap<_, _> = paint
+            .texts
+            .iter()
+            .map(|t| {
+                (
+                    ulid::Ulid::from_bytes(t.id.0).to_string(),
+                    t.layout.source(),
+                )
+            })
+            .collect();
+        report["ui"] = serde_json::json!({"widgets":ui.widgets().len(),"viewport":ui.layout().ok_or("UI layout invariant")?.viewport,"focus":ui.focus().map(|f|ulid::Ulid::from_bytes(f.widget().0).to_string()),"values":values,"sources":sources,"glyphs":paint.texts.iter().map(|t|t.glyphs.len()).sum::<usize>(),"atlas_sha256":incant_assets_runtime::sha256(paint.atlas.pixels())});
+    }
+    Ok(report)
 }
 #[cfg(feature = "render-input")]
 pub(crate) fn input_report(

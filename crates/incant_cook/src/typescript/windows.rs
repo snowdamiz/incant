@@ -1,4 +1,5 @@
 //! Node launch spelling only. Canonical paths remain the authority for checks.
+pub(super) mod cache;
 use super::{Result, invalid};
 use std::{
     ffi::OsString,

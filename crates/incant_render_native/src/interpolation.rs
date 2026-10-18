@@ -61,8 +61,9 @@ pub struct PoseReceipt {
 /// pose overlay; the exact committed matrices are restored on success, refusal
 /// and unwind. Resource identities and screen-space UI are never interpolated.
 ///
-/// This adapter currently supports static meshes, ordinary cameras and lights.
-/// Animation, sprites, tilemaps, world text and pixel-perfect cameras refuse.
+/// Supports meshes with simple clip animation, ordinary cameras and lights.
+/// Clip graphs/crossfades, IK/root motion, sprites, tilemaps, world text and
+/// pixel-perfect cameras refuse. Screen UI font catalogs use the text loader.
 /// Its caller must separately qualify any temporal/motion-vector GPU consumer.
 pub struct PoseRenderInput {
     input: NativeRenderInput,
@@ -79,6 +80,20 @@ impl PoseRenderInput {
         // Bounds and unsupported declarations are checked before loading assets.
         let history = History::load(view, continuity_epoch)?;
         let input = NativeRenderInput::load(view, caches, camera)?;
+        Ok(Self { input, history })
+    }
+
+    /// Admit a font catalog for screen UI; world-space text remains unsupported.
+    pub fn load_with_text(
+        view: &SpatialView<'_>,
+        text: &incant_runtime::TextView<'_>,
+        caches: VisualCaches<'_>,
+        camera: StableId,
+        continuity_epoch: u64,
+        settings: crate::TextSettings,
+    ) -> Result<Self, PoseError> {
+        let history = History::load(view, continuity_epoch)?;
+        let input = NativeRenderInput::load_with_text(view, text, caches, camera, settings)?;
         Ok(Self { input, history })
     }
 
@@ -112,6 +127,24 @@ impl PoseRenderInput {
         continuity_epoch: u64,
         accept: impl FnOnce(&SceneInput, &str, UpdateKind) -> Result<T, E>,
     ) -> Result<T, PoseSyncError<E>> {
+        self.sync_inner(view, None, continuity_epoch, accept)
+    }
+    pub fn try_sync_with_text<T, E>(
+        &mut self,
+        view: &SpatialView<'_>,
+        text: &incant_runtime::TextView<'_>,
+        continuity_epoch: u64,
+        accept: impl FnOnce(&SceneInput, &str, UpdateKind) -> Result<T, E>,
+    ) -> Result<T, PoseSyncError<E>> {
+        self.sync_inner(view, Some(text), continuity_epoch, accept)
+    }
+    fn sync_inner<T, E>(
+        &mut self,
+        view: &SpatialView<'_>,
+        text: Option<&incant_runtime::TextView<'_>>,
+        continuity_epoch: u64,
+        accept: impl FnOnce(&SceneInput, &str, UpdateKind) -> Result<T, E>,
+    ) -> Result<T, PoseSyncError<E>> {
         if view.identity() != &self.input.identity {
             return Err(PoseError::Native(NativeRenderError::DifferentWorld).into());
         }
@@ -124,13 +157,15 @@ impl PoseRenderInput {
             self.history.validate(view, continuity_epoch)?;
             None
         };
-        let result = self
-            .input
-            .try_sync(view, accept)
-            .map_err(|error| match error {
-                SyncError::Native(error) => PoseSyncError::Pose(PoseError::Native(error)),
-                SyncError::Consumer(error) => PoseSyncError::Consumer(error),
-            })?;
+        let accepted = if let Some(text) = text {
+            self.input.try_sync_with_text(view, text, accept)
+        } else {
+            self.input.try_sync(view, accept)
+        };
+        let result = accepted.map_err(|error| match error {
+            SyncError::Native(error) => PoseSyncError::Pose(PoseError::Native(error)),
+            SyncError::Consumer(error) => PoseSyncError::Consumer(error),
+        })?;
         if let Some(next) = replacement {
             self.history = next;
         } else {
@@ -157,7 +192,12 @@ impl PoseRenderInput {
         };
         for (index, slot) in guard.input.slots.iter().enumerate() {
             if let Some(slot) = slot {
-                guard.input.input.nodes[*slot].world = guard.history.global(index);
+                let node = &mut guard.input.input.nodes[*slot];
+                node.world = guard.history.global(index);
+                if let Some(mesh) = &mut node.mesh {
+                    (mesh.animation, mesh.animation_blend) =
+                        guard.history.animation(index, fraction);
+                }
             }
         }
         accept(guard.input.input(), guard.input.camera_label(), receipt)
@@ -173,7 +213,12 @@ impl Drop for Overlay<'_> {
     fn drop(&mut self) {
         for (index, slot) in self.input.slots.iter().enumerate() {
             if let Some(slot) = slot {
-                self.input.input.nodes[*slot].world = self.history.committed_global(index);
+                let node = &mut self.input.input.nodes[*slot];
+                node.world = self.history.committed_global(index);
+                if let Some(mesh) = &mut node.mesh {
+                    mesh.animation = self.history.committed_animation(index);
+                    mesh.animation_blend = None;
+                }
             }
         }
     }
