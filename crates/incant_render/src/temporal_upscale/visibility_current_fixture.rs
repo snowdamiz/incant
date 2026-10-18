@@ -77,17 +77,22 @@ pub(super) fn scene_material(layers: &[bool], alternate: bool) -> SceneInput {
     } else {
         panic!("typed key")
     }
-    let mut point = input.nodes[3].clone();
-    point.id = "fallback-point".into();
-    point.world = glam::DMat4::from_translation(glam::DVec3::new(0., 0., 3.));
-    point.light = Some(incant_render_data::SceneLight::Point(
-        incant_types::PointLight {
-            color: [0.8, 0.9, 1.],
-            intensity: 12.,
-            range: 10.,
-        },
-    ));
-    input.nodes.push(point);
+    input.nodes.push(incant_render_data::SceneNode {
+        id: "fallback-point".into(),
+        world: glam::DMat4::from_translation(glam::DVec3::new(0., 0., 3.)),
+        light: Some(incant_render_data::SceneLight::Point(
+            incant_types::PointLight {
+                color: [0.8, 0.9, 1.],
+                intensity: 12.,
+                range: 10.,
+            },
+        )),
+        camera: None,
+        mesh: None,
+        sprite: None,
+        tilemap: None,
+        diagnostic: false,
+    });
     dir.close().unwrap();
     input
 }
@@ -102,7 +107,7 @@ fn cooked_current_pbr_fixture_preserves_textures_and_light_variation() {
     assert!(model.meshes[0].vertices.iter().any(|v| v[6] != 0.));
     assert_ne!(model.materials[0].base_color, [0., 0., 0., 1.]);
     assert!(model.materials[0].maps.iter().all(Option::is_some));
-    assert_eq!(model.textures.len(), 5);
+    assert_eq!(model.metadata.textures.len(), 5);
     assert_eq!(
         model.materials[0].alpha_mode,
         incant_assets_runtime::AlphaMode::Opaque
