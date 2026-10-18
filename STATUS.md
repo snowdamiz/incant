@@ -87,6 +87,15 @@ Skeleton and structural changes remain outside this admission rule.
 
 ## Current parallel qualification — 2026-10-18
 
+The [process-cleanup correction](docs/spikes/native-process-cleanup.md) preserves
+both the original operation error and any cleanup failure. It also waits for
+asynchronous descendant retirement without signalling reused identities. On this
+Mac, 52 process executions and four owner controls pass; four Windows-only tests
+remain skipped. All ten development checks pass, including 1,040 UI tests. The
+original memory-limited query build remains failed; the correction does not
+establish a package or performance result. Capture and native-window checks stay
+paused.
+
 Computer use and screen capture are paused for every agent by the director's
 latest instruction. Owned capture helpers and test windows have been stopped;
 native window checks remain held. Terminal implementation, review and data-only
