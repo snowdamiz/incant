@@ -109,6 +109,28 @@ impl Fixture {
         )
         .unwrap()
     }
+    pub fn journal_bytes(&mut self) -> Vec<u8> {
+        let project = self.bus.project().clone();
+        let revision = self.bus.revision();
+        let history = self.bus.history().to_vec();
+        let redo = self.bus.redo_history().cloned().collect::<Vec<_>>();
+        // Windows enforces the journal lock against independent readers. Drop
+        // its owner before inspecting exact bytes, then recover every state that
+        // the no-op/refusal assertions rely on. No save or new transaction occurs.
+        drop(std::mem::replace(
+            &mut self.bus,
+            CommandBus::new(Project::empty("Release")).unwrap(),
+        ));
+        let path = self.root.path().join("game.incant");
+        let journal = path.with_extension("journal.jsonl");
+        let bytes = fs::read(&journal).unwrap();
+        self.bus = CommandBus::open_project_file_with_journal(&path, journal).unwrap();
+        assert_eq!(self.bus.project(), &project);
+        assert_eq!(self.bus.revision(), revision);
+        assert_eq!(self.bus.history(), history);
+        assert_eq!(self.bus.redo_history().cloned().collect::<Vec<_>>(), redo);
+        bytes
+    }
     pub fn reopen(&mut self) {
         let old = std::mem::replace(
             &mut self.bus,

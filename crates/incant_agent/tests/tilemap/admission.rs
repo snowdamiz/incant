@@ -12,7 +12,7 @@ fn strict_shared_schema_and_invalid_strokes_refuse_before_any_publication() {
     let before = f.bus.project().clone();
     let history = f.bus.history().to_vec();
     let revision = f.bus.revision();
-    let journal = fs::read(f.root.path().join("game.journal.jsonl")).unwrap();
+    let journal = f.journal_bytes();
     let valid = f.args();
     let mut candidates = vec![Value::Null, json!({})];
     for key in [
@@ -79,10 +79,7 @@ fn strict_shared_schema_and_invalid_strokes_refuse_before_any_publication() {
         assert_eq!(f.bus.project(), &before);
         assert_eq!(f.bus.history(), history);
         assert_eq!(f.bus.revision(), revision);
-        assert_eq!(
-            fs::read(f.root.path().join("game.journal.jsonl")).unwrap(),
-            journal
-        );
+        assert_eq!(f.journal_bytes(), journal);
     }
     let definition = tools().into_iter().find(|v| v["name"] == TOOL).unwrap();
     assert_eq!(
