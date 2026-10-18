@@ -748,6 +748,13 @@
           },
           "type": "object"
         },
+        "module_sources": {
+          "additionalProperties": {
+            "$ref": "#/$defs/RustModuleSource"
+          },
+          "description": "Registered authored Rust entries, separate from compiled Wasm assets.",
+          "type": "object"
+        },
         "name": {
           "type": "string"
         },
@@ -858,6 +865,30 @@
         "origin",
         "actor",
         "transaction"
+      ],
+      "type": "object"
+    },
+    "RustModuleSource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "path"
       ],
       "type": "object"
     },
