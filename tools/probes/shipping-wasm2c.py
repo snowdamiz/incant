@@ -414,6 +414,19 @@ def coroutine_guests(rustc, inputs, guests, environment):
     return modules
 
 
+def instance_guests(rustc, inputs, guests, environment):
+    source = inputs / 'sdk-instances.rs'
+    shutil.copy2(ROOT / 'sdk/rust/samples/instances.rs', source)
+    modules = []
+    for kind in (None, 'retire', 'scratch', 'callback', 'trap', 'stale'):
+        name = 'rust-instances' + ('-' + kind if kind else '')
+        module = guests / (name + '.wasm')
+        rust_guest.compile(rustc, source, module, env=environment,
+                           cfg=['instance_' + kind] if kind else ())
+        modules.append((name, module))
+    return modules
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
@@ -492,6 +505,7 @@ def main():
             modules.extend(haptic_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(timer_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(coroutine_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(instance_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(navigation_path_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(physics_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(formatting_guests(rustc, inputs, sdk_guests, environment))

@@ -1,0 +1,658 @@
+{
+  "format": "incant-native-wasm-instances-evidence",
+  "version": 1,
+  "scope": "CPU functional qualification; no window, GPU, audio device, shipping export, performance, or full SDK-parity claim",
+  "source_commits": {
+    "initial": "9ee0f8ea27ea2536ab398902cb5b2ea5f92aecdb",
+    "membership_lint_and_retirement": "f42c8beefa5014cdbdec2caa3224162a94e61778",
+    "generated_registry_bytes_only": "00425f756e8562f22239af1993ca68f6063f8cf2",
+    "actual_two_host_reload": "b03dda126e8f8d498de6e947165b8d0242810838"
+  },
+  "base": "dec42101f2bb8468dd287e38ef022ec1248eb4dc",
+  "toolchain": "Rust 1.99.0; locked/offline; CI; jobs 2; Rayon 2; incant_render opt2; sha2 opt3",
+  "portable_controls": {
+    "passed": 43,
+    "review_sha256": "3e0d871f2913ebe848722001654b0ef19c7ec5f2715bfd23c440dde171a41725",
+    "early_fixture_refusal": "The first 41-control invocation had one failure and one error due to /var tempfile alias; the test fixture root was resolved and the strict package-path reader was unchanged. The original raw stream was not separately archived."
+  },
+  "episodes": [
+    {
+      "name": "cpu-001",
+      "source": "9ee0f8ea27ea2536ab398902cb5b2ea5f92aecdb",
+      "passed": false,
+      "failure": "AssertionError: Stage 5 returned 101",
+      "elapsed_seconds": 429.9244554170291,
+      "completed_stages": [
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--message-format=json-render-diagnostics",
+            "--config",
+            "profile.ci.package.incant_render.opt-level=2",
+            "--config",
+            "profile.ci.package.sha2.opt-level=3",
+            "-p",
+            "incant_cmd",
+            "--test",
+            "wasm_instances"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 131.6425047920202
+        },
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--message-format=json-render-diagnostics",
+            "--config",
+            "profile.ci.package.incant_render.opt-level=2",
+            "--config",
+            "profile.ci.package.sha2.opt-level=3",
+            "-p",
+            "incant_cook",
+            "--features",
+            "typescript",
+            "--test",
+            "wasm_instances"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 160.51151350000873
+        },
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--message-format=json-render-diagnostics",
+            "--config",
+            "profile.ci.package.incant_render.opt-level=2",
+            "--config",
+            "profile.ci.package.sha2.opt-level=3",
+            "-p",
+            "incant_script",
+            "--test",
+            "bindings_fingerprint",
+            "--test",
+            "bindings_static"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 60.25257579196477
+        },
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--message-format=json-render-diagnostics",
+            "--config",
+            "profile.ci.package.incant_render.opt-level=2",
+            "--config",
+            "profile.ci.package.sha2.opt-level=3",
+            "-p",
+            "incant_wasm_runtime",
+            "--test",
+            "instances",
+            "--test",
+            "persistent_state",
+            "--test",
+            "timers",
+            "--test",
+            "coroutines"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 49.93454762501642
+        },
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "clippy",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--message-format=json-render-diagnostics",
+            "--config",
+            "profile.ci.package.incant_render.opt-level=2",
+            "--config",
+            "profile.ci.package.sha2.opt-level=3",
+            "-p",
+            "incant_cmd",
+            "-p",
+            "incant_cook",
+            "-p",
+            "incant_script",
+            "-p",
+            "incant_wasm_abi",
+            "-p",
+            "incant_wasm_runtime",
+            "-p",
+            "incant_play",
+            "-p",
+            "incant_game_player",
+            "--features",
+            "incant_cook/typescript,incant_play/wasmtime-host,incant_script/static-module",
+            "--all-targets",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exit": 101,
+          "elapsed_seconds": 27.18700600002194
+        }
+      ],
+      "summaries": [
+        "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+        "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+        "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ],
+      "passed_test_lines": [
+        "test invalid_owners_properties_and_stale_revisions_preserve_the_entire_transaction ... ok",
+        "test legacy_module_selector_round_trips_without_new_fields ... ok",
+        "test authored_parameters_share_set_scene_program_provenance_and_undo_redo ... ok",
+        "test ordinary_authoring_cooks_bound_nested_initial_data_without_sources_or_runtime_json ... ok",
+        "test original_canonical_ts_fingerprint_is_unchanged_for_all_property_tags ... ok",
+        "test original_owned_property_byte_node_and_depth_boundaries_are_preserved ... ok",
+        "test borrowed_shape_and_identity_refusals_do_not_collapse_invalid_data ... ok",
+        "test all_property_kinds_preserve_owned_catalog_and_exact_float_bits ... ok",
+        "test borrowed_nested_arrays_and_objects_obey_the_owned_depth_boundary ... ok",
+        "test borrowed_counts_and_aggregate_property_limits_match_existing_limits ... ok",
+        "test borrowed_initial_props_reach_the_real_host_as_frozen_data ... ok",
+        "test ten_thousand_rows_match_original_constructor_after_canonical_ordering ... ok",
+        "test explicit_schedule_survives_reload_and_canonical_snapshot_but_schema_changes_refuse ... ok",
+        "test stale_epoch_does_not_poison_and_pending_owner_despawn_cannot_resurrect ... ok",
+        "test update_precedes_sorted_resumes_and_wait_is_from_current_tick ... ok",
+        "test cancellation_and_same_id_replacement_supersede_a_running_result ... ok",
+        "test skipped_due_work_incomplete_resume_and_ignored_invalid_calls_reject ... ok",
+        "test catalog_admission_checks_shared_value_bounds_scene_owner_and_wire_identity ... ok",
+        "test module_only_persistent_bytes_keep_the_original_v2_framing ... ok",
+        "test caught_short_copy_refuses_numeric_writes_but_stale_epoch_cannot_poison_new_tick ... ok",
+        "test copied_properties_retire_owner_identity_and_survive_fresh_checkpoint_restore ... ok",
+        "test empty_legacy_host_and_catalog_quotas_remain_explicit ... ok",
+        "test snapshot_corruption_and_extreme_watermark_refuse_without_partial_restore ... ok",
+        "test late_world_refusal_discards_staged_bytes_and_checkpoint_authority ... ok",
+        "test pending_restart_capture_refuses_without_consuming_and_reload_is_atomic ... ok",
+        "test committed_state_stages_reads_and_roundtrips_without_guest_callbacks ... ok",
+        "test restore_revokes_saved_and_receiver_epochs_and_keeps_restart_owner_only ... ok",
+        "test undeclared_state_and_quota_overflow_poison_even_if_error_is_ignored ... ok",
+        "test ignored_current_error_is_terminal_but_stale_calls_cannot_poison_current_tick ... ok",
+        "test empty_buffers_validate_both_guest_and_persistent_endpoints ... ok",
+        "test malformed_timer_checkpoint_never_replaces_committed_state_and_legacy_decodes ... ok",
+        "test fixed_tick_order_replace_and_cancel_match_the_typescript_contract ... ok",
+        "test pending_capacity_and_action_capacity_are_separate_and_replacements_fit ... ok",
+        "test fresh_restore_and_reload_continue_timer_deadlines_and_elapsed_time ... ok",
+        "test active_bad_calls_roll_back_numeric_and_persistent_writes_but_stale_calls_do_not ... ok"
+      ],
+      "closeout_sha256": "6f080abb1c94bc82ae644b8189249cddb136ad6d9acb182f542c46c4cae8a73f",
+      "all_observed_processes_absent": true,
+      "retained_files": {
+        "stage-04.log": {
+          "bytes": 203431,
+          "sha256": "2e36469a14175e8cb1e714a30955f4f7b462151d31c0002665bd9852b581dcd7"
+        },
+        "stage-05.log": {
+          "bytes": 260023,
+          "sha256": "f11dae3c90d69f43c105da74829b702d2a5c37feffd9bcb49d0729a56cfddb95"
+        },
+        "stage-02.log": {
+          "bytes": 380354,
+          "sha256": "ab8feb30b2e682f8c41c0af46267dc5fc3a8e7d4b9d46d6a2ba38051653f3aaf"
+        },
+        "stage-03.log": {
+          "bytes": 212446,
+          "sha256": "70b948645e0dfc70ec446267fbae262a09d0977488449f0d84c3abef8b87ad1d"
+        },
+        "stage-01.log": {
+          "bytes": 279764,
+          "sha256": "60e9b1442f75fca1c1aa40a4b92580b6d8484bb2def1a87dbdb282eb31fb4123"
+        }
+      }
+    },
+    {
+      "name": "cpu-002",
+      "source": "f42c8beefa5014cdbdec2caa3224162a94e61778",
+      "passed": false,
+      "failure": "TimeoutExpired: Command '['/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo', 'build', '--profile', 'ci', '--locked', '--offline', '-j2', '--message-format=json-render-diagnostics', '--config', 'profile.ci.package.incant_render.opt-level=2', '--config', 'profile.ci.package.sha2.opt-level=3', '-p', 'incant_headless']' timed out after 150 seconds",
+      "elapsed_seconds": 306.0949270410347,
+      "completed_stages": [
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--message-format=json-render-diagnostics",
+            "--config",
+            "profile.ci.package.incant_render.opt-level=2",
+            "--config",
+            "profile.ci.package.sha2.opt-level=3",
+            "-p",
+            "incant_wasm_runtime",
+            "--test",
+            "instances"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 4.431754958990496
+        },
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "clippy",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--message-format=json-render-diagnostics",
+            "--config",
+            "profile.ci.package.incant_render.opt-level=2",
+            "--config",
+            "profile.ci.package.sha2.opt-level=3",
+            "-p",
+            "incant_cmd",
+            "-p",
+            "incant_cook",
+            "-p",
+            "incant_script",
+            "-p",
+            "incant_wasm_abi",
+            "-p",
+            "incant_wasm_runtime",
+            "-p",
+            "incant_play",
+            "-p",
+            "incant_game_player",
+            "--features",
+            "incant_cook/typescript,incant_play/wasmtime-host,incant_script/static-module",
+            "--all-targets",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 101.10597766702995
+        },
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "clippy",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--message-format=json-render-diagnostics",
+            "--config",
+            "profile.ci.package.incant_render.opt-level=2",
+            "--config",
+            "profile.ci.package.sha2.opt-level=3",
+            "-p",
+            "incant_script",
+            "-p",
+            "incant_game_player",
+            "--all-targets",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 50.164719375025015
+        }
+      ],
+      "summaries": [
+        "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+      ],
+      "passed_test_lines": [
+        "test module_only_persistent_bytes_keep_the_original_v2_framing ... ok",
+        "test catalog_admission_checks_shared_value_bounds_scene_owner_and_wire_identity ... ok",
+        "test catalog_reload_retains_retirement_and_refuses_changed_props_atomically ... ok",
+        "test caught_short_copy_refuses_numeric_writes_but_stale_epoch_cannot_poison_new_tick ... ok",
+        "test removal_tick_checkpoint_excludes_the_owner_before_any_respawn_or_next_tick ... ok",
+        "test copied_properties_retire_owner_identity_and_survive_fresh_checkpoint_restore ... ok",
+        "test empty_legacy_host_and_catalog_quotas_remain_explicit ... ok"
+      ],
+      "closeout_sha256": "b0c8348ab31ac87ab8a31a065e7e83e08f4b6a72354ea9855f616bf913cf5c43",
+      "all_observed_processes_absent": true,
+      "retained_files": {
+        "stage-04.log": {
+          "bytes": 511736,
+          "sha256": "124c37998d2435eaa1a70860aff2b2d5214df56632c6118a2330a7254bd5f40f"
+        },
+        "stage-02.log": {
+          "bytes": 724791,
+          "sha256": "47937179c3cf235b96d3516f8ea87a02be60164f81bf14674bcc7ae57b4cbce4"
+        },
+        "stage-03.log": {
+          "bytes": 428017,
+          "sha256": "b8cc9969855e34fae4729decf415b2e394456d1fa9d75c6d4d3d2b41eae1b3c5"
+        },
+        "stage-01.log": {
+          "bytes": 196283,
+          "sha256": "858d2316175af03dbfcc29a26d917d140cabcbb1b768332c1484e77dbf4f75ed"
+        }
+      }
+    },
+    {
+      "name": "cpu-003",
+      "source": "f42c8beefa5014cdbdec2caa3224162a94e61778",
+      "passed": false,
+      "failure": "AssertionError: Stage 2 returned 1",
+      "elapsed_seconds": 84.97628016595263,
+      "completed_stages": [
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "build",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--message-format=json-render-diagnostics",
+            "--config",
+            "profile.ci.package.incant_render.opt-level=2",
+            "--config",
+            "profile.ci.package.sha2.opt-level=3",
+            "-p",
+            "incant_headless"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 83.7087966669933
+        },
+        {
+          "argv": [
+            "/opt/homebrew/opt/python@3.14/bin/python3.14",
+            "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/tools/check_schemas.py",
+            "--binary",
+            "/private/tmp/incant-wasm-instances-20261018-target/ci/incant_headless"
+          ],
+          "exit": 1,
+          "elapsed_seconds": 1.0144443329772912
+        }
+      ],
+      "summaries": [],
+      "passed_test_lines": [],
+      "closeout_sha256": "f02d794ee68cb6a7e09b6ec8f52109eb16f8b6e8e46d6057b130acf00263369a",
+      "all_observed_processes_absent": true,
+      "retained_files": {
+        "stage-02.log": {
+          "bytes": 134,
+          "sha256": "2fc9a1b0e469eb9082bbee448f45317599701626880abffad7b53ea977c04b38"
+        },
+        "stage-01.log": {
+          "bytes": 658387,
+          "sha256": "62deb9bb5431a4dc9c954337a8cc649aebafac6908d257350267b960b75a2f27"
+        }
+      }
+    },
+    {
+      "name": "cpu-004",
+      "source": "f42c8beefa5014cdbdec2caa3224162a94e61778",
+      "passed": true,
+      "failure": null,
+      "elapsed_seconds": 0.7323813749826513,
+      "completed_stages": [
+        {
+          "argv": [
+            "/private/tmp/incant-wasm-instances-20261018-target/ci/incant_headless",
+            "schema",
+            "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-instances-001/cpu-004/generated"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 0.43205295799998567
+        }
+      ],
+      "summaries": [],
+      "passed_test_lines": [],
+      "closeout_sha256": "fbdd6d878171f558d076f084832ae8c83cbe09114d5cdd5d711595a817a724e1",
+      "all_observed_processes_absent": true,
+      "retained_files": {
+        "stage-01.log": {
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      }
+    },
+    {
+      "name": "cpu-005",
+      "source": "00425f756e8562f22239af1993ca68f6063f8cf2",
+      "passed": true,
+      "failure": null,
+      "elapsed_seconds": 0.8496464170166291,
+      "completed_stages": [
+        {
+          "argv": [
+            "/opt/homebrew/opt/python@3.14/bin/python3.14",
+            "/Users/andreyyurlov/.codex/worktrees/responsive-project-loading/incant/tools/check_schemas.py",
+            "--binary",
+            "/private/tmp/incant-wasm-instances-20261018-target/ci/incant_headless"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 0.4970115839969367
+        }
+      ],
+      "summaries": [],
+      "passed_test_lines": [],
+      "closeout_sha256": "6bc4e2bed376f2e15d9d4f3204a11b72ea501f9e4a5c872b552de05b5e4994c3",
+      "all_observed_processes_absent": true,
+      "retained_files": {
+        "stage-01.log": {
+          "bytes": 65,
+          "sha256": "332b26342e60d63143955e44d2312c8d9307638675faed0b5f256925cfe1093e"
+        }
+      }
+    },
+    {
+      "name": "guest-001",
+      "source": "b03dda126e8f8d498de6e947165b8d0242810838",
+      "passed": true,
+      "failure": null,
+      "elapsed_seconds": 208.93172366701765,
+      "completed_stages": [
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "build",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--message-format=json-render-diagnostics",
+            "--config",
+            "profile.ci.package.incant_render.opt-level=2",
+            "--config",
+            "profile.ci.package.sha2.opt-level=3",
+            "-p",
+            "incant_wasm_cook"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 11.986576291033998
+        },
+        {
+          "argv": [
+            "/opt/homebrew/opt/python@3.14/bin/python3.14",
+            "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-instances-001/prepare-guests.py"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 2.4205077920341864
+        },
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "test",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--message-format=json-render-diagnostics",
+            "--config",
+            "profile.ci.package.incant_render.opt-level=2",
+            "--config",
+            "profile.ci.package.sha2.opt-level=3",
+            "-p",
+            "incant_wasm_dev",
+            "--test",
+            "instances_parity",
+            "--features",
+            "persistent-conformance"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 166.01284775004024
+        },
+        {
+          "argv": [
+            "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+            "clippy",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--message-format=json-render-diagnostics",
+            "--config",
+            "profile.ci.package.incant_render.opt-level=2",
+            "--config",
+            "profile.ci.package.sha2.opt-level=3",
+            "-p",
+            "incant_wasm_dev",
+            "--test",
+            "instances_parity",
+            "--features",
+            "persistent-conformance",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exit": 0,
+          "elapsed_seconds": 27.851604917028453
+        }
+      ],
+      "summaries": [
+        "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s"
+      ],
+      "passed_test_lines": [
+        "test actual_both_hosts_reload_retains_removal_before_same_id_respawn ... ok",
+        "test actual_rust_guests_match_typed_authored_owners_and_do_not_reattach_reused_ids ... ok",
+        "test actual_both_hosts_preserve_membership_on_restore_and_refuse_changed_catalog ... ok",
+        "test actual_both_hosts_refuse_ignored_bounds_stale_tokens_and_callback_failure ... ok"
+      ],
+      "closeout_sha256": "6ce4b02a02dfce34b40d91ba66de7caaede41fe4d6fdf50b2d1913c37cb1b5ba",
+      "all_observed_processes_absent": true,
+      "retained_files": {
+        "stage-04.log": {
+          "bytes": 335559,
+          "sha256": "497df186f8e69891bc314dd5c2e878dd758ad7068cd50809e37c62383d970328"
+        },
+        "stage-02.log": {
+          "bytes": 48,
+          "sha256": "e26971aaccd7802bcfa871b446e2c81e7899c7169f1f639b5c78194e2ee900fe"
+        },
+        "stage-03.log": {
+          "bytes": 364264,
+          "sha256": "92e4b8b1e04ec2d037a8123cef3ca145dbabb73c1a2117da230e97741faf0420"
+        },
+        "stage-01.log": {
+          "bytes": 43594,
+          "sha256": "0e197de0c5bdb6f3d934cd4cf02e1a18521c5fb42f4c09c501f20b25d2dce065"
+        }
+      }
+    }
+  ],
+  "qualification_totals": {
+    "original_cpu_seconds": 822.5776904160157,
+    "guest_seconds": 208.93172366701765,
+    "cumulative_seconds": 1031.5094140830333,
+    "last_owned_target_allocation_and_peak_bytes": 6785257472,
+    "private_target_cap_bytes": 12884901888,
+    "target_released_to_root_after_closeout": true
+  },
+  "retained_current_artifact_copies": {
+    "bytes": 117670872,
+    "cap": 134217728,
+    "files": [
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-instances-001/artifacts/incant_headless-f42",
+        "original": "/private/tmp/incant-wasm-instances-20261018-target/ci/incant_headless",
+        "producer_source": "f42c8beefa5014cdbdec2caa3224162a94e61778",
+        "bytes": 63190128,
+        "sha256": "31fac9b9ba1209287377e6fd6aee58f34d2c0121780288a42002a3546438b27e"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-instances-001/artifacts/incant_wasm_cook-b03",
+        "original": "/private/tmp/incant-wasm-instances-20261018-target/ci/incant_wasm_cook",
+        "producer_source": "b03dda126e8f8d498de6e947165b8d0242810838",
+        "bytes": 3490816,
+        "sha256": "0bb4f7ccfb81dcb7a05a0e814f6b9655cf52b39ae7f46153522f975e8ae5bb15"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-instances-001/artifacts/instances_parity-b03",
+        "original": "/private/tmp/incant-wasm-instances-20261018-target/ci/deps/instances_parity-8ae9231200a37b82",
+        "producer_source": "b03dda126e8f8d498de6e947165b8d0242810838",
+        "bytes": 34916368,
+        "sha256": "f73319dc646f019b01e7877beabfd6449fec5876bfc96806dfba0952973d9281"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-instances-001/artifacts/instances-f42",
+        "original": "/private/tmp/incant-wasm-instances-20261018-target/ci/deps/instances-cf295570f6e114fa",
+        "producer_source": "f42c8beefa5014cdbdec2caa3224162a94e61778",
+        "bytes": 16073560,
+        "sha256": "b19282197a79f6d784409d7c62c475342552e9e6b782a4086d8377e51197f11e"
+      }
+    ]
+  },
+  "historical_binary_limit": "CPU001 five-test instances executable was overwritten at its Cargo path by the approved seven-test rebuild. Its producing source, output and original hash cff4b8090fc94c2779634d1f513132f893914fbeb2d69752229ef0e1c7b62ea0 remain recorded; those old binary bytes are unavailable. The other seven CPU001 test executables matched their recorded hashes at guest closeout. Current seven-test and four-test guest artifacts have independent copies.",
+  "schema_correction": "The f42 exporter matched all schema values. agent-tools.json initially differed only in UTF-8 versus escaped en-dash and exponent 1e-6 versus 1e-06 spelling. Exact generated bytes were restored and the full fresh headless byte comparison passed. Combined alpha/tilemap generation is recorded separately.",
+  "pending": [
+    "Ordinary authored source-free export/package startup proof",
+    "No dynamic attach or mixed TypeScript/Wasm module scheduling implemented"
+  ],
+  "local_originals": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-instances-001",
+  "separate_combined_integration": {
+    "source": "9d44372ae379c6d0372ff48854828e837f1fb747",
+    "actual_exec": 67361,
+    "actual_exit": 0,
+    "all_schemas_match": true,
+    "elapsed_seconds": 101.54700320900884,
+    "cumulative_native_seconds": 1133.056417209009,
+    "target_peak": 6786748416,
+    "target_final": 6786748416,
+    "binary": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-instances-integration-001/incant_headless-9d44372a",
+      "bytes": 63423424,
+      "sha256": "f0fb0cf5c654dd03e4ad77e57901586cb6abb426a923dd77f86af169f272641f"
+    },
+    "closeout_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-instances-integration-001/closeout.json",
+    "closeout_sha256": "1386e5830f602bf47fbbcb8577e44248ebffc69091b0d041ab54c341cc4ceb24",
+    "result_sha256": "4f6f054c39a86d77ffcdc3ae63070bb794cdd1924b16fc882b218a1be6e5fad0",
+    "scope": "Fresh combined alpha/tilemap headless build and schema comparison; not a repeat of the original guest suite"
+  }
+}

@@ -49,7 +49,7 @@ def generate(data, digest):
         shared.append('pub mod steering;\npub mod navigation_paths;\n')
     if 'incant_physics_v1' in data['namespaces']:
         shared.append('pub mod physics;\n')
-    shared.append('pub mod hud;\npub mod persistent;\n')
+    shared.append('pub mod hud;\npub mod persistent;\npub mod instances;\n')
     if 'incant_coroutines_v1' in data['namespaces']:
         shared += ['pub mod coroutines;\n', 'pub const COROUTINE_MAX_BYTES: usize = CoroutineHeader::SIZE + COROUTINE_FRAME_BYTES;\n']
     if 'incant_audio_v1' in data['namespaces']:

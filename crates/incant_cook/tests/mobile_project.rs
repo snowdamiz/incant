@@ -269,7 +269,10 @@ fn mobile_wasm_producer_refuses_missing_capability_bundle_and_rebound_captured_i
     let mut project = Project::empty("Captured-only mobile module");
     let mut scene = Scene::new("Main");
     let id = new_id();
-    scene.program = Some(incant_doc::SceneProgram::Wasm { module: id.clone() });
+    scene.program = Some(incant_doc::SceneProgram::Wasm {
+        module: id.clone(),
+        instances: Default::default(),
+    });
     project.assets.insert(
         id.clone(),
         incant_doc::Asset {

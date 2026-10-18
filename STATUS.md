@@ -85,7 +85,7 @@ processes and wrapper are reaped and independently absent. The scoped feature is
 merged through PR390 after independent review and exact-head development checks.
 Skeleton and structural changes remain outside this admission rule.
 
-## Current parallel qualification — 2026-10-17
+## Current parallel qualification — 2026-10-18
 
 Computer use and screen capture are paused for every agent by the director's
 latest instruction. Owned capture helpers and test windows have been stopped;
@@ -131,7 +131,8 @@ actual CLI also passes saved-file, journal, reopen and refusal checks. Both pack
 pass strict all-target lint, independent source/native-result review and all ten
 local development checks. [Qualified source and exact evidence](docs/spikes/tilemap-paint-authoring.md)
 retain the backend/CLI boundary: editor painting and the Phase 2 platformer gate
-remain open. The change is locally qualified and awaiting its required PR check.
+remain open. The scoped source is merged through PR411 after independent review
+and exact-head development-checks success; main `634958cc` has the tested tree.
 
 Compatible HUD text updates now reuse existing checked font-shaping engines;
 a new ordered fallback chain still prepares and atomically publishes a separate
@@ -140,6 +141,18 @@ lints and independent source review. It is merged through PR406 after all local
 development checks and the required exact-head fast check. There is no measured
 shipping frame-time claim. [Scope and evidence](docs/spikes/ui-font-reuse.md).
 
+
+Native Wasm modules now accept immutable initial properties for explicitly
+authored entity owners through normal scene-program commands and cold cooking.
+A bounded Rust SDK view shares the TypeScript property limits. Runtime incarnation
+checks retire removed owners; same-ID respawn cannot inherit old tuning. Checkpoint
+and reload preserve the accepted membership and reject changed catalogs.
+[Local qualification](docs/spikes/native-wasm-instances.md) passes authoring/cook,
+ABI and runtime controls, four actual Wasmtime/wasm2c tests, strict lints and all
+ten local development checks. A fresh combined headless build matches all 80
+schemas while preserving the merged alpha and tilemap additions. Initial lint,
+compile-timeout and lexical-schema refusals remain recorded. Independent reviews
+pass; the PR check and ordinary authored source-free shipping proof remain open.
 
 Rust/Wasm gameplay now has a bounded prepared localization coverage report,
 matching the existing TypeScript committed-snapshot behavior. Pages include

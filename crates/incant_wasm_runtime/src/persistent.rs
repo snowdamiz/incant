@@ -20,6 +20,7 @@ pub struct PersistentSnapshot {
     watermark: i64,
     timers: Box<[u8]>,
     coroutines: Option<Box<[u8]>>,
+    instances: Option<Box<[u8]>>,
 }
 impl PersistentSnapshot {
     pub const MAX_ENCODED_BYTES: usize = 8
@@ -29,12 +30,17 @@ impl PersistentSnapshot {
         + incant_wasm_abi::TimerHeader::SIZE
         + incant_wasm_abi::TIMER_MAX_TIMERS * incant_wasm_abi::TimerStateRow::SIZE
         + 4
-        + crate::coroutines::checkpoint::MAX_BYTES;
+        + crate::coroutines::checkpoint::MAX_BYTES
+        + 12
+        + incant_wasm_abi::instances::MAX_CHECKPOINT;
     pub(crate) fn timer_state(&self) -> Result<crate::timers::State, Error> {
         crate::timers::State::restore(&self.timers, self.tick)
     }
     pub(crate) fn coroutine_bytes(&self) -> Option<&[u8]> {
         self.coroutines.as_deref()
+    }
+    pub(crate) fn instance_bytes(&self) -> Option<&[u8]> {
+        self.instances.as_deref()
     }
     pub fn declaration(&self) -> Declaration {
         self.declaration
@@ -67,9 +73,45 @@ impl PersistentSnapshot {
         if let Some(tasks) = &self.coroutines {
             bytes.extend_from_slice(tasks);
         }
-        bytes
+        if let Some(instances) = &self.instances {
+            let mut framed = b"INCWPS04".to_vec();
+            framed.extend((bytes.len() as u32).to_le_bytes());
+            framed.extend(bytes);
+            framed.extend(instances);
+            framed
+        } else {
+            bytes
+        }
     }
     pub fn decode(bytes: &[u8], declaration: Declaration) -> Result<Self, Error> {
+        if let Some(rest) = bytes.strip_prefix(b"INCWPS04") {
+            if bytes.len() > Self::MAX_ENCODED_BYTES {
+                return Err(Error::Abi("instance snapshot size"));
+            }
+            let len = u32::from_le_bytes(
+                rest.get(..4)
+                    .ok_or(Error::Abi("instance snapshot header"))?
+                    .try_into()
+                    .unwrap(),
+            ) as usize;
+            let old = rest
+                .get(
+                    4..4usize
+                        .checked_add(len)
+                        .ok_or(Error::Abi("instance snapshot length"))?,
+                )
+                .ok_or(Error::Abi("instance snapshot framing"))?;
+            if !old.starts_with(b"INCWPS02") && !old.starts_with(b"INCWPS03") {
+                return Err(Error::Abi("instance snapshot nested format"));
+            }
+            let membership = &rest[4 + len..];
+            // Validation is eager; the receiving host consumes the owner view.
+            let _ = incant_wasm_abi::instances::checkpoint(membership)
+                .map_err(|_| Error::Abi("instance snapshot membership"))?;
+            let mut snapshot = Self::decode(old, declaration)?;
+            snapshot.instances = Some(membership.into());
+            return Ok(snapshot);
+        }
         const HEADER: usize = Declaration::SIZE + 16;
         let (bytes, version) = if let Some(rest) = bytes.strip_prefix(b"INCWPS03") {
             (rest, 3)
@@ -132,6 +174,7 @@ impl PersistentSnapshot {
             bytes: bytes[HEADER..payload_end].into(),
             timers: timers.into(),
             coroutines,
+            instances: None,
             tick,
             watermark,
         })
@@ -217,6 +260,7 @@ impl PersistentState {
         watermark: i64,
         timers: Vec<u8>,
         coroutines: Option<Vec<u8>>,
+        instances: Option<Vec<u8>>,
     ) -> Result<PersistentSnapshot, Error> {
         if self.dirty || watermark == i64::MAX {
             return Err(Error::Abi("persistent state not quiescent"));
@@ -228,6 +272,7 @@ impl PersistentState {
             watermark,
             timers: timers.into(),
             coroutines: coroutines.map(Vec::into_boxed_slice),
+            instances: instances.map(Vec::into_boxed_slice),
         })
     }
     pub(crate) fn restore(&mut self, snapshot: &PersistentSnapshot) -> Result<(), Error> {
