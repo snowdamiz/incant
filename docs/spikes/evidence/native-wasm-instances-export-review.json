@@ -1,0 +1,17 @@
+{
+  "reviewed_at": "2026-10-18T05:19:03.444341+00:00",
+  "source": "28806e21b8ff8959ff01dcce3097892a9335937b",
+  "packet_sha256": "aee8253d7aa9560ab9d59611414b9461067121a938f2f5dd66b5107608e4e280",
+  "passed": true,
+  "raw_runs": 4,
+  "all_observations": 63,
+  "full_pcm_join_and_repeat": true,
+  "exact_final_checkpoints": true,
+  "specific_changed_catalog_refusal": true,
+  "rehashed_streams": 49,
+  "protected_and_player_rehashed": 6,
+  "owned_calls": 27,
+  "findings": [],
+  "prior_review_error": "First read-only replay used groups instead of group_checks field and raised KeyError; corrected field replay passed. No native reexecution.",
+  "scope": "Raw evidence rederived using independently reviewed oracle; authoring and native producer identities remain separate; no native execution/window/capture/performance inference."
+}

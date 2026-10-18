@@ -1,5 +1,10 @@
 # Implementation status
 
+[Checkpoint55 (PR408)](docs/spikes/release-checkpoint-55.md) is promoted after all
+23 required contexts and eight frozen-head workflows succeeded. Release `2d96f461`
+has exactly the tested main407 (`c504668e`) tree. Main409 and later changes remain
+outside this baseline; no distribution or phase gate is approved.
+
 [Release checkpoint54](docs/spikes/release-checkpoint-54.md) is promoted: all
 23 required contexts and eight exact-head workflows passed on the main401 tree,
 and release `503b90af` has the identical tested tree. Later main changes
@@ -11,11 +16,6 @@ checks in CI's directory layout. Checkpoint54 reused PR399, frozen at candidate
 `5dbac494` with exactly main401's tree throughout the successful comprehensive run.
 Retained failed experiments remain failed. No distribution or phase gate is approved.
 
-[Checkpoint55 (PR408)](docs/spikes/release-checkpoint-55.md) is promoted after all
-23 required contexts and eight frozen-head workflows succeeded. Release `2d96f461`
-has exactly the tested main407 (`c504668e`) tree. Main409 and later changes remain
-outside this baseline; no distribution or phase gate is approved.
-
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
 its recorded evidence and remaining qualification. The actual native texture,
@@ -25,8 +25,8 @@ now also verifies winning HUD pixels, Arabic health direction, CJK glyphs and
 normal/narrow pseudo layouts in retained offscreen Metal frames. Earlier
 incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
-[Release checkpoint54](docs/spikes/release-checkpoint-54.md) contains the tested
-main401 tree after all 23 required contexts and eight candidate workflows passed.
+[Release checkpoint55](docs/spikes/release-checkpoint-55.md) contains the tested
+main407 tree after all 23 required contexts and eight candidate workflows passed.
 Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
@@ -143,8 +143,11 @@ export preserves all 79 other schemas and every existing tool, adding only
 from a different worktree; its failure is retained. Rebuilding unchanged local
 source inputs succeeds. Independent source and result review and all ten local development checks pass.
 An existing process-test race was corrected to wait for the first actual
-heartbeat byte, preserving the cleanup assertions and failed run. Publication
-is in progress. Editor painting remains open.
+heartbeat byte, preserving the cleanup assertions and failed run. PR413 is
+merged after exact-head development-checks success; main `d10bf4d6` has the
+tested tree. The [composed-source review](docs/spikes/evidence/agent-tilemap-composed-source-review.json)
+records the merged lockfile separately from the original producer. Editor painting
+remains open.
 
 Compatible HUD text updates now reuse existing checked font-shaping engines;
 a new ordered fallback chain still prepares and atomically publishes a separate
@@ -165,8 +168,14 @@ ten local development checks. A fresh combined headless build matches all 80
 schemas while preserving the merged alpha and tilemap additions. Initial lint,
 compile-timeout and lexical-schema refusals remain recorded. Independent reviews
 pass. The scoped feature is merged through PR412 after exact-head development
-checks; main `b9e1a587` has the tested tree. The ordinary authored source-free
-shipping proof remains open.
+checks; main `b9e1a587` has the tested tree. A subsequent
+[ordinary authored export](docs/spikes/native-wasm-instances.md#ordinary-authored-export)
+now passes fresh cooker/player builds, public authoring and four source-free
+standalone runs. Immediate-removal checkpoints, retired same-ID respawn, preserved
+owner tuning, exact final checkpoints and complete offline PCM continuation pass.
+A changed catalog digest refuses without outputs. Independent saved-byte review
+passes; this functional Mac proof does not establish full SDK parity or runtime
+performance. Its producing player remains identified as `28806e21`.
 
 Rust/Wasm gameplay now has a bounded prepared localization coverage report,
 matching the existing TypeScript committed-snapshot behavior. Pages include

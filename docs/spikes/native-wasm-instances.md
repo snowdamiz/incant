@@ -1,8 +1,8 @@
 # Authored native Wasm initial instances
 
 Implementation based on main409 (`dec42101f`). Scoped native CPU tests, actual
-Wasmtime/wasm2c guest comparisons, strict lints and fresh headless schema
-comparison passed. Ordinary authored source-free export remains pending. No
+Wasmtime/wasm2c guest comparisons, strict lints, fresh headless schema comparison
+and one ordinary authored source-free export passed. No
 hardware input, window, GPU, performance or complete SDK-parity claim follows.
 
 `SetSceneProgram` accepts the existing scene-wide Wasm module plus an optional
@@ -108,6 +108,56 @@ headless producer and matched all 80 schemas, preserving both additions without
 another snapshot change. That producer is SHA-256
 `f0fb0cf5c654dd03e4ad77e57901586cb6abb426a923dd77f86af169f272641f`;
 its separate build does not rerun or replace the original guest results.
+
+## Ordinary authored export
+
+The [export proof record](evidence/native-wasm-instances-export.json) retains the
+raw authoring/RPC receipts, four gameplay reports, PCM/checkpoint bytes, exact
+export/deletion identities and independent process closeout. Its fresh shipping
+source is `28806e21`, whose native code equals the combined `9d44372a` producer.
+The copied `9d44372a` headless is used only for public authoring; the unchanged
+exporter builds its own cooker and shipping player in fresh owned storage.
+
+Ordinary `init`, Wasm/WAV import, idempotent reimport and `command.execute`
+configured two typed owners, an unrelated entity and a looping audio source.
+Invalid-owner and stale-revision edits preserved the project/revision. Undo/Redo,
+save and journal reopen preserved the exact authored catalog. The cold instance
+hash matched the independent canonical frame, including nested properties.
+
+The packaged retire guest removes owner one on tick 1, then respawns the same ID
+on tick 2. A checkpoint taken immediately on removal excludes that owner; fresh
+resumes keep the replacement retired at position zero. Owner two advances by 20
+per tick and the unrelated entity stays at zero. This fixture removes owner one
+before its position can be observed; the earlier normal-guest comparison supplies
+the separate observed 10-versus-20 tuning result.
+
+All four standalone runs passed: six ticks uninterrupted, one tick to the removal
+checkpoint, and two fresh five-tick continuations. The final checkpoints match
+byte-for-byte. Full offline PCM equals prefix plus resumed PCM, both resumes
+match, and every sample is finite with non-silent output. This does not prove
+physical audio playback. A checkpoint with the canonical speed-11 catalog digest
+and valid outer integrity was refused by the original speed-10 package with the
+specific `instance catalog mismatch` error and no new PCM/save files. It changes
+saved data, not the receiving program; the earlier two-host test separately
+checks a changed receiving catalog.
+
+Normal dependency, codegen, bytecode-symbol and source-deletion guards passed.
+Build storage was removed before the exporter's startup check; owned authoring,
+cache and WABT copies were removed before the four replays. The repository and
+qualified guest remain retained, and a restricted child environment is not a
+filesystem sandbox. Runtime package files remained unchanged after every run.
+
+Actual execution `41617` ended with exit 0 in 320.926801 seconds. Independent
+post-terminal checks found all 236 observed PIDs and 30 owned groups absent,
+including the wrapper, and all five protected binary copies still matched.
+Export-owned scratch peaked at 3,767,926,784 bytes and ended empty; sampled RSS
+peaked at 7,254,212,608 bytes, within the 8 GiB limits. Existing CI targets were
+not written. The retained player is 9,966,224 bytes, SHA-256
+`94cb06ebd7681a18ddb9e4147fd0c99ce58df3b14106e9746cc2ca52b7294a60`.
+These are bounded functional results, not performance or complete SDK-parity
+acceptance. An [independent saved-data review](evidence/native-wasm-instances-export-review.json)
+rechecks all 63 observations, exact PCM/checkpoint joins, specific refusal,
+49 retained streams and the protected/player binary identities.
 
 ## Integration review
 

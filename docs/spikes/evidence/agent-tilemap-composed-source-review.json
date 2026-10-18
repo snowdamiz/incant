@@ -1,0 +1,14 @@
+{
+  "checked_at": "2026-10-18T05:11:14.780757+00:00",
+  "producer": "8bcfa195573e6a695433096222add01a21deb849",
+  "integration": "4246b4f98ec69d96cebddf54ba3384c058d2559e",
+  "code_inputs_equal": 24,
+  "declared_composition": [
+    {
+      "path": "Cargo.lock",
+      "producer": "1278eb66615deac92119e9c613e414b4c654f81a231b814972b5f0cbd2adcdce",
+      "integration": "3a0da08bb4a413272be88b0b58a9caaf8e3490eabe186c36d9917517bdd95e4b"
+    }
+  ],
+  "explanation": "Portable optional --source-root deliberately verifies exact original producer including lockfile; cannot pass on composed Wasm main. All24remaining listed implementation/test/support inputs match. Full agent/import production source unchanged; import wasm test only changed by merged PR412. Root combined headless build and all80schemas qualified current integrated source. Data-only/binary replay passes."
+}
