@@ -1,9 +1,57 @@
+#[cfg(any(
+    feature = "diagnostic-quickjs-generate",
+    feature = "diagnostic-quickjs-use"
+))]
+use serde as serde_support;
+#[cfg(any(
+    feature = "diagnostic-quickjs-generate",
+    feature = "diagnostic-quickjs-use"
+))]
+use serde_json as json;
 use sha2::{Digest, Sha256};
 use std::{env, fs, path::Path};
+#[cfg(any(
+    feature = "diagnostic-quickjs-generate",
+    feature = "diagnostic-quickjs-use"
+))]
+#[path = "../../third_party/rquickjs-sys/build_support/diagnostic_pgo.rs"]
+mod diagnostic_pgo;
 
 fn main() {
     let root = Path::new("../..");
     let mut identity = Sha256::new();
+    println!("cargo:rerun-if-env-changed=INCANT_QUICKJS_PGO_DESCRIPTOR");
+    #[cfg(not(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    )))]
+    assert!(
+        env::var_os("INCANT_QUICKJS_PGO_DESCRIPTOR").is_none(),
+        "QuickJS PGO descriptor requires an explicit diagnostic feature"
+    );
+    #[cfg(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    ))]
+    let (pgo, pgo_vendor) = {
+        // Preserve lexical/link admission: remove known crate parents without
+        // canonicalizing an arbitrary path before the descriptor verifies it.
+        let workspace = Path::new(env!("CARGO_MANIFEST_DIR"))
+            .parent()
+            .and_then(Path::parent)
+            .expect("script crate workspace parents");
+        let vendor = workspace.join("third_party/rquickjs-sys");
+        let selected =
+            diagnostic_pgo::Selection::load(&vendor).expect("trusted script PGO admission");
+        identity.update(b"incant-quickjs-c-pgo-v2");
+        identity.update(
+            selected
+                .descriptor
+                .identity()
+                .expect("PGO compatibility identity"),
+        );
+        (selected, vendor)
+    };
     // The temporary probe admission is part of executable compatibility. Both
     // the trusted host producer and target consumer must explicitly opt in.
     identity.update(b"probe-android-bytecode");
@@ -55,7 +103,10 @@ fn main() {
         format!("CFLAGS_{target}"),
         format!("CFLAGS_{}", target.replace('-', "_")),
     ];
-    let mut default_flags = true;
+    let mut default_flags = !cfg!(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    ));
     for key in flags {
         println!("cargo:rerun-if-env-changed={key}");
         default_flags &= env::var_os(key).is_none_or(|v| v.is_empty());
@@ -223,6 +274,19 @@ fn main() {
         "cargo:rustc-env=INCANT_SCRIPT_TARGET={}",
         env::var("TARGET").unwrap()
     );
+    #[cfg(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    ))]
+    {
+        pgo.recheck(&pgo_vendor).expect("PGO script input check");
+        pgo.receipt(
+            Path::new(&env::var("OUT_DIR").unwrap()),
+            "incant_script",
+            None,
+        )
+        .expect("PGO identity receipt");
+    }
 }
 
 fn hash_file(path: &Path, hash: &mut Sha256) {

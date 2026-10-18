@@ -1,9 +1,25 @@
 #![allow(clippy::uninlined_format_args)]
+#[cfg(any(
+    feature = "diagnostic-quickjs-generate",
+    feature = "diagnostic-quickjs-use"
+))]
+use pgo_json as json;
+#[cfg(any(
+    feature = "diagnostic-quickjs-generate",
+    feature = "diagnostic-quickjs-use"
+))]
+use pgo_serde as serde_support;
 use std::{
     env, fs,
     path::{Path, PathBuf},
     process::{self},
 };
+#[cfg(any(
+    feature = "diagnostic-quickjs-generate",
+    feature = "diagnostic-quickjs-use"
+))]
+#[path = "build_support/diagnostic_pgo.rs"]
+mod diagnostic_pgo;
 
 // WASI logic lifted from https://github.com/bytecodealliance/javy/blob/61616e1507d2bf896f46dc8d72687273438b58b2/crates/quickjs-wasm-sys/build.rs#L18
 
@@ -36,7 +52,9 @@ fn download_wasi_sdk() -> PathBuf {
             other => panic!("Unsupported platform tuple {:?}", other),
         };
 
-        let uri = format!("https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-{major_version}/wasi-sdk-{major_version}.{minor_version}-{file_suffix}.tar.gz");
+        let uri = format!(
+            "https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-{major_version}/wasi-sdk-{major_version}.{minor_version}-{file_suffix}.tar.gz"
+        );
 
         println!("Downloading WASI SDK archive from {uri} to {archive_path:?}");
 
@@ -92,6 +110,21 @@ fn get_wasi_sdk_path() -> PathBuf {
 }
 
 fn main() {
+    println!("cargo:rerun-if-env-changed=INCANT_QUICKJS_PGO_DESCRIPTOR");
+    #[cfg(not(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    )))]
+    assert!(
+        env::var_os("INCANT_QUICKJS_PGO_DESCRIPTOR").is_none(),
+        "QuickJS PGO descriptor requires an explicit diagnostic feature"
+    );
+    #[cfg(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    ))]
+    let pgo = diagnostic_pgo::Selection::load(Path::new(&env::var("CARGO_MANIFEST_DIR").unwrap()))
+        .expect("trusted QuickJS PGO admission");
     #[cfg(feature = "logging")]
     pretty_env_logger::init();
 
@@ -255,6 +288,59 @@ fn main() {
         builder.define(name, *value);
     }
 
+    #[cfg(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    ))]
+    let pgo_args = {
+        let vendor = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap());
+        assert_eq!(
+            env::current_dir().unwrap(),
+            vendor,
+            "relative QuickJS source CWD"
+        );
+        assert_eq!(source_files, diagnostic_pgo::UNITS);
+        // Preserve cc's natural invocation spelling and Cargo role profile.
+        // Canonicalizing the spelling inside Build changes cc's Apple SDK args.
+        let compiler = builder.get_compiler();
+        pgo.descriptor
+            .check_compiler(
+                compiler.path(),
+                &env::var_os("PATH").expect("admitted compiler PATH"),
+            )
+            .expect("natural compiler executable");
+        assert_eq!(compiler.path(), Path::new("cc"), "natural Mac C invocation");
+        let args = |tool: &cc::Tool| {
+            tool.args()
+                .iter()
+                .map(|s| s.to_str().expect("UTF-8 C argument").to_owned())
+                .collect::<Vec<_>>()
+        };
+        pgo.descriptor
+            .check_args(pgo.role, &args(&compiler), false)
+            .expect("ordinary shipping C vector");
+        for flag in pgo.descriptor.additions(pgo.role) {
+            builder.flag(flag);
+        }
+        let actual = args(&builder.get_compiler());
+        pgo.descriptor
+            .check_args(pgo.role, &actual, true)
+            .expect("exact PGO insertion");
+        for src in &source_files {
+            // Only target runtime participates in profile generation/use. Host
+            // cooking keeps ordinary OUT_DIR source names and its O0 recipe.
+            builder.file(if pgo.role == diagnostic_pgo::Role::Runtime {
+                src_dir.join(src)
+            } else {
+                out_dir.join(src)
+            });
+        }
+        actual
+    };
+    #[cfg(not(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    )))]
     for src in &source_files {
         builder.file(out_dir.join(src));
     }
@@ -270,6 +356,31 @@ fn main() {
     }
 
     builder.compile("libquickjs.a");
+
+    #[cfg(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    ))]
+    {
+        pgo.recheck(Path::new(&env::var("CARGO_MANIFEST_DIR").unwrap()))
+            .expect("PGO post-compile input check");
+        if pgo.descriptor.mode == diagnostic_pgo::Mode::Generate
+            && pgo.role == diagnostic_pgo::Role::Runtime
+        {
+            println!(
+                "cargo:rustc-link-search=native={}",
+                pgo.descriptor
+                    .profile_runtime
+                    .path
+                    .parent()
+                    .unwrap()
+                    .display()
+            );
+            println!("cargo:rustc-link-lib=static:+whole-archive=clang_rt.profile_osx");
+        }
+        pgo.receipt(out_dir, "rquickjs-sys", Some(&pgo_args))
+            .expect("PGO compiler receipt");
+    }
 
     // Emitted after `compile` so `-lquickjs` precedes `-lc` on the link line.
     if is_wasm_unknown {

@@ -6,6 +6,8 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+diagnostic-quickjs-generate = ["script", "incant_script/diagnostic-quickjs-generate"]
+diagnostic-quickjs-use = ["script", "incant_script/diagnostic-quickjs-use"]
 default = ["scene", "script", "physics-deterministic"]
 scene = ["dep:incant_types", "dep:incant_assets_runtime", "dep:incant_anim", "dep:incant_nav", "dep:incant_doc", "dep:incant_runtime", "dep:ulid"]
 script = ["dep:incant_script", "dep:sha2"]

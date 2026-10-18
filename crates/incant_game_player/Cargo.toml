@@ -6,6 +6,8 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+diagnostic-quickjs-generate = ["incant_script/diagnostic-quickjs-generate", "incant_cook/diagnostic-quickjs-generate"]
+diagnostic-quickjs-use = ["incant_script/diagnostic-quickjs-use", "incant_cook/diagnostic-quickjs-use"]
 # Explicit bounded host observation, never implied by profiling or normal exports.
 native-compilation = ["native-window", "incant_render/native-compilation"]
 profile = ["incant_profile/summary", "incant_game_runtime/profile", "incant_script/profile", "incant_runtime/profile"]

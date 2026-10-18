@@ -94,6 +94,29 @@ fn checkpoint_continues_data_timers_and_clock_but_reinitializes_ephemeral_global
     );
 }
 #[test]
+fn changed_cooked_build_identity_refuses_checkpoint_before_world_replacement() {
+    let code = code();
+    let mut live = session(code.clone());
+    live.tick(&[]).unwrap();
+    let saved = live.checkpoint_bytes().unwrap();
+    let incarnation = live.world().unwrap().incarnation();
+    let world = live.world().unwrap().save_bytes().unwrap();
+    // A PGO mode/tool/profile digest enters this existing field. Even identical
+    // bytecode cannot reuse a save from a different admitted native build.
+    let mut changed = code;
+    changed
+        .metadata
+        .build_id
+        .push_str("-different-profile-digest");
+    assert!(matches!(
+        NativeSession::from_checkpoint_bytes(&saved, &scene(), changed, InputActions::default()),
+        Err(CheckpointError::ProgramMismatch)
+    ));
+    assert_eq!(live.world().unwrap().incarnation(), incarnation);
+    assert_eq!(live.world().unwrap().save_bytes().unwrap(), world);
+    assert_eq!(live.checkpoint_bytes().unwrap(), saved);
+}
+#[test]
 fn corrupt_or_mismatched_restore_is_atomic_and_opt_in_is_required() {
     let code = code();
     let mut live = session(code.clone());
