@@ -2,7 +2,7 @@
 
 This is trusted test infrastructure, not an engine-agent command capability.
 The canary's extra executable is admitted only in its separately recorded policy.
-No source is executed natively; project compilation always uses fixed wasm32.
+No project source is executed natively; its compilation always uses fixed wasm32.
 """
 import argparse
 from dataclasses import replace
@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import signal
+import socket
 import shutil
 import sys
 import threading
@@ -33,6 +34,108 @@ extern crate proc_macro;
 #[proc_macro]
 pub fn forbidden(tokens: proc_macro::TokenStream) -> proc_macro::TokenStream { tokens }
 '''
+
+
+def validate_control(controls):
+    """Exact untrusted canary protocol; ordinary connection failures are not denial evidence."""
+    require(isinstance(controls, dict) and set(controls) == {
+        'criterion', 'read_denied', 'write_denied', 'exec_denied', 'clean_environment',
+        'sockets_created', 'socket_creation_denied', 'network'}, 'Exact canary protocol fields')
+    require(controls['criterion'] == 'network-io-v2', 'Explicit network criterion revision')
+    require(all(controls[name] is True for name in (
+        'read_denied', 'write_denied', 'exec_denied', 'clean_environment')), 'Actual OS isolation controls')
+    require(type(controls['sockets_created']) is int and controls['sockets_created'] == 4
+            and controls['socket_creation_denied'] is False, 'Four created sockets; no creation-denial claim')
+    network = controls['network']
+    require(isinstance(network, dict) and set(network) == {
+        'tcp_connect', 'tcp_bind', 'udp_bind', 'udp_send_to'}, 'Exact network operation inventory')
+    for name, row in network.items():
+        require(isinstance(row, dict) and set(row) == {'return', 'errno'}
+                and type(row['return']) is int and row['return'] == -1
+                and type(row['errno']) is int and row['errno'] in (1, 13),
+                'Network operation must fail EPERM/EACCES: ' + name)
+    return controls
+
+
+def run_control(owner, tools, valid_work, output, plan):
+    """Trusted canary only; no project native execution or inherited network descriptors."""
+    secret = output / 'private-sentinel'
+    control = output / 'sandbox-control'
+    env_run = output / 'control-run'
+    env_run.mkdir(mode=0o700)
+    for name in ('home', 'tmp'):
+        (env_run / name).mkdir(mode=0o700)
+    environment = clean_environment(env_run, tools.rustc)
+    compiled = owner.run([str(tools.rustc), str(ROOT / 'tools/probes/rust-guest-sandbox-control.rs'),
+                          '--edition=2024', '--crate-name=incant_sandbox_control', '-C', 'opt-level=0',
+                          '-C', 'debuginfo=0', '-C', 'linker=' + plan['native_linker'],
+                          '-C', 'link-arg=-isysroot', '-C', 'link-arg=' + plan['macos_sdk'],
+                          '-o', str(control)], cwd=env_run, env=environment, label='trusted-control-build')
+    require(compiled.returncode == 0, 'Trusted native control did not compile')
+    initial = service.read_file(valid_work / 'result.json', service.MIB)
+    initial = json.loads(initial)
+    rustc, linker, validator = (Path(row['path']) for row in initial['tools'])
+    policy = MacPolicy(control, linker, validator, rustc.parent.parent,
+                       valid_work / 'sdk', valid_work / 'source', env_run)
+    policy_path = output / 'control-policy.sb'
+    policy_path.write_text(policy.text())
+    endpoints = []
+    receipt = {'criterion': 'network-io-v2', 'network_policy_changed': False,
+               'external_addresses_or_dns': False, 'tcp_listen_called': False,
+               'sink_wait_seconds': 0.05, 'endpoint_count_bound': 2}
+    try:
+        tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        endpoints.append(tcp)
+        udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        endpoints.append(udp)
+        for endpoint in endpoints:
+            endpoint.set_inheritable(False)
+            require(not endpoint.get_inheritable(), 'Network descriptors must not be inherited')
+            endpoint.bind(('127.0.0.1', 0))
+            address, port = endpoint.getsockname()
+            require(address == '127.0.0.1' and 0 < port <= 65535, 'Owned loopback endpoint required')
+        require(tcp.getsockopt(socket.SOL_SOCKET, socket.SO_ACCEPTCONN) == 0,
+                'TCP reservation must not listen')
+        receipt['tcp_reservation'] = tcp.getsockname()
+        receipt['udp_sink'] = udp.getsockname()
+        udp.settimeout(receipt['sink_wait_seconds'])
+        executed = owner.run([str(MacPolicy.backend()), '-f', str(policy_path), str(control), str(secret),
+                              str(output / 'must-not-write'), str(env_run / 'actual-write'),
+                              str(tcp.getsockname()[1]), str(udp.getsockname()[1])],
+                             cwd=env_run, env=environment, label='trusted-control-run')
+        try:
+            payload, address = udp.recvfrom(256)
+            receipt.update(sink_datagrams=1, sink_payload_bytes=len(payload),
+                           sink_payload_sha256=service.digest(payload), sink_peer=address)
+        except (TimeoutError, BlockingIOError):
+            receipt.update(sink_datagrams=0, sink_payload_bytes=0)
+        require(receipt['sink_datagrams'] == 0, 'Loopback sink received a datagram')
+        require(executed.returncode == 0, 'Actual sandbox escape control failed')
+        controls = validate_control(json.loads(executed.stdout))
+        require((env_run / 'actual-write').read_bytes() == b'control executed'
+                and not (output / 'must-not-write').exists(), 'Actual canary write boundary')
+        receipt['status'] = 'complete'
+        return controls
+    except BaseException as error:
+        receipt.update(status='failed', error_type=type(error).__name__, error=str(error))
+        raise
+    finally:
+        def close_and_record():
+            errors = []
+            for endpoint in endpoints:
+                try:
+                    endpoint.close()
+                    require(endpoint.fileno() == -1, 'Owned loopback endpoint remains open')
+                except BaseException as error:
+                    errors.append(error)
+            receipt['endpoints_closed'] = all(endpoint.fileno() == -1 for endpoint in endpoints)
+            try:
+                service.write_json(output / 'control-network.json', receipt)
+            except BaseException as error:
+                errors.append(error)
+            if errors:
+                raise BaseExceptionGroup('Loopback endpoint cleanup/receipt failures', errors)
+        service.native_process._cleanup(close_and_record, sys.exception())
 
 
 def check(plan_path, grant=None):
@@ -129,38 +232,7 @@ def run(plan, cancelled, *, started=None):
         case('normal-validator-refused', unknown, 'Normal Wasm cook validator refused')
         case('cancelled-compiler', VALID, 'Build cancelled', cancel=True)
 
-        # The trusted OS canary uses the production policy with precisely one
-        # executable substitution. No source-controlled program gains this rule.
-        control = output / 'sandbox-control'
-        env_run = output / 'control-run'
-        env_run.mkdir(mode=0o700)
-        for name in ('home', 'tmp'):
-            (env_run / name).mkdir(mode=0o700)
-        environment = clean_environment(env_run, tools.rustc)
-        compiled = owner.run([str(tools.rustc), str(ROOT / 'tools/probes/rust-guest-sandbox-control.rs'),
-                              '--edition=2024', '--crate-name=incant_sandbox_control', '-C', 'opt-level=0',
-                              '-C', 'debuginfo=0', '-C', 'linker=' + plan['native_linker'],
-                              '-C', 'link-arg=-isysroot', '-C', 'link-arg=' + plan['macos_sdk'],
-                              '-o', str(control)], cwd=env_run, env=environment, label='trusted-control-build')
-        require(compiled.returncode == 0, 'Trusted native control did not compile')
-        valid_work = output / 'valid-relative-sdk/work'
-        initial = service.read_file(valid_work / 'result.json', service.MIB)
-        initial = json.loads(initial)
-        rustc, linker, validator = (Path(row['path']) for row in initial['tools'])
-        policy = MacPolicy(control, linker, validator, rustc.parent.parent,
-                           valid_work / 'sdk', valid_work / 'source', env_run)
-        policy_path = output / 'control-policy.sb'
-        policy_path.write_text(policy.text())
-        executed = owner.run([str(MacPolicy.backend()), '-f', str(policy_path), str(control), str(secret),
-                              str(output / 'must-not-write'), str(env_run / 'actual-write')],
-                             cwd=env_run, env=environment, label='trusted-control-run')
-        require(executed.returncode == 0, 'Actual sandbox escape control failed')
-        controls = json.loads(executed.stdout)
-        require(controls == dict.fromkeys(('read_denied', 'write_denied', 'exec_denied',
-                                          'socket_denied', 'clean_environment'), True), 'Exact actual control outputs')
-        require((env_run / 'actual-write').read_bytes() == b'control executed'
-                and not (output / 'must-not-write').exists(), 'Actual canary write boundary')
-        result['os_control'] = controls
+        result['os_control'] = run_control(owner, tools, output / 'valid-relative-sdk/work', output, plan)
         # Postflight input/tool bindings; output no longer absent, so compare
         # immutable rows directly rather than invoking launch-only check().
         for row in plan['bindings']:
