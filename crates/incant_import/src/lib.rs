@@ -1,6 +1,8 @@
 //! Editor/tooling import coordination. Runtime cooked-asset loading stays in
 //! incant_assets, without a dependency on the authoring command bus.
 mod alpha_colliders;
+mod compiled_wasm;
+pub use compiled_wasm::{CompiledWasmRequest, PreparedCompiledWasm};
 mod sprites;
 mod tilemap_paint;
 mod tilemaps;
@@ -293,30 +295,15 @@ fn cook(
 ) -> incant_assets::Result<ImportOutcome> {
     let source = Path::new(&request.source);
     let (kind, fingerprint, cache_hit, import_settings, details) = if kind == ImportKind::Wasm {
-        let cache = cache_directory(root, cache_override, "wasm")?;
-        std::fs::create_dir_all(&cache)?;
         let bytes = incant_assets::SourceSet::new(root)?
             .read_limited(source, incant_wasm_cook::MAX_MODULE_BYTES)?;
-        let captured = incant_wasm_cook::CapturedModule::capture(&bytes)
-            .map_err(|e| AssetError::Invalid(e.to_string()))?;
-        let hit = captured
-            .store(&cache)
-            .map_err(|e| AssetError::Invalid(e.to_string()))?;
+        let (captured, hit) = capture_wasm(root, cache_override, &bytes)?;
         (
             "wasm",
             captured.fingerprint(),
             hit,
             None,
-            ImportDetails::Wasm {
-                bytes: bytes.len(),
-                input_sha256: captured.input_sha256().into(),
-                prepared_sha256: captured.prepared_sha256().into(),
-                registry_sha256: captured.registry_sha256().into(),
-                dependencies: vec![Dependency {
-                    path: request.source.clone(),
-                    sha256: captured.input_sha256().into(),
-                }],
-            },
+            wasm_details(&request.source, &captured),
         )
     } else if kind == ImportKind::Model {
         let cache = cache_directory(root, cache_override, "models")?;
@@ -446,4 +433,34 @@ fn cache_directory(
         }
     }
     Ok(path)
+}
+
+fn capture_wasm(
+    root: &Path,
+    cache_override: Option<&Path>,
+    bytes: &[u8],
+) -> incant_assets::Result<(incant_wasm_cook::CapturedModule, bool)> {
+    if bytes.len() > incant_wasm_cook::MAX_MODULE_BYTES {
+        return Err(AssetError::Invalid("compiled Wasm exceeds 1 MiB".into()));
+    }
+    let captured = incant_wasm_cook::CapturedModule::capture(bytes)
+        .map_err(|error| AssetError::Invalid(error.to_string()))?;
+    let cache = cache_directory(root, cache_override, "wasm")?;
+    std::fs::create_dir_all(&cache)?;
+    let hit = captured
+        .store(&cache)
+        .map_err(|error| AssetError::Invalid(error.to_string()))?;
+    Ok((captured, hit))
+}
+fn wasm_details(path: &str, captured: &incant_wasm_cook::CapturedModule) -> ImportDetails {
+    ImportDetails::Wasm {
+        bytes: captured.original().len(),
+        input_sha256: captured.input_sha256().into(),
+        prepared_sha256: captured.prepared_sha256().into(),
+        registry_sha256: captured.registry_sha256().into(),
+        dependencies: vec![Dependency {
+            path: path.into(),
+            sha256: captured.input_sha256().into(),
+        }],
+    }
 }
