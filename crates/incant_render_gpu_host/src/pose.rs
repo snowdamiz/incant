@@ -56,9 +56,12 @@ impl<P: TargetProvider> PoseConsumer for GpuRenderConsumer<PoseTargets<P>> {
         camera: &str,
         _: PoseReceipt,
     ) -> Result<(), Self::Error> {
-        crate::presentation::validate_policy(
+        if let Err(error) = crate::presentation::validate_policy(
             self.live.as_ref().ok_or(crate::GpuHostError::Failed)?,
-        )?;
+        ) {
+            self.live = None;
+            return Err(error);
+        }
         // Canonical admission has already retained any replacement resources.
         // Present updates their numeric camera/model/light poses consistently.
         if let Some(live) = &mut self.live {
