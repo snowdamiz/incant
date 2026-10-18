@@ -285,3 +285,90 @@ fn module_only_persistent_bytes_keep_the_original_v2_framing() {
         expected
     );
 }
+
+#[test]
+fn removal_tick_checkpoint_excludes_the_owner_before_any_respawn_or_next_tick() {
+    let initial = scene();
+    let mut world = NativeWorld::new(initial.clone());
+    let catalog = catalog(&world, 10.);
+    let mut live = configured(&world, catalog.clone());
+    world.step().unwrap();
+    let epoch = live.begin(&mut world, 1. / 60.).unwrap();
+    let mut owner = id(1).0;
+    live.invoke(&mut owner, epoch, Call::Despawn(0)).unwrap();
+    live.finish(&mut world).unwrap();
+    assert!(world.inspect(id(1)).is_none());
+    assert_eq!(world.tick(), 1);
+    let snapshot = live.persistent_checkpoint(&world).unwrap();
+    let encoded = snapshot.encode();
+    let old_len = u32::from_le_bytes(encoded[8..12].try_into().unwrap()) as usize;
+    let membership = &encoded[12 + old_len..];
+    assert_eq!(membership.len(), abi::InstanceMembershipHeader::SIZE + 16);
+    let (digest, members) = abi::instances::checkpoint(membership).unwrap();
+    assert_eq!(digest, catalog.digest());
+    assert_eq!(members.collect::<Vec<_>>(), vec![id(2).0]);
+    let mut restored =
+        NativeWorld::from_save_bytes_for_scene(&world.save_bytes().unwrap(), &initial).unwrap();
+    let mut candidate = Capability::with_persistence(Some(Declaration::new(8, [7; 32]).unwrap()));
+    candidate.configure_instances(catalog).unwrap();
+    let decoded = PersistentSnapshot::decode(&encoded, snapshot.declaration()).unwrap();
+    candidate
+        .restore_persistent(&restored, &decoded, 0, false)
+        .unwrap();
+    restored.step().unwrap();
+    let epoch = candidate.begin(&mut restored, 1. / 60.).unwrap();
+    let copied = read(&mut candidate, epoch);
+    assert_eq!(
+        abi::instances::Snapshot::parse(&copied)
+            .unwrap()
+            .iter()
+            .map(|r| r.entity)
+            .collect::<Vec<_>>(),
+        vec![id(2).0]
+    );
+    candidate.finish(&mut restored).unwrap();
+}
+
+#[test]
+fn catalog_reload_retains_retirement_and_refuses_changed_props_atomically() {
+    let mut world = NativeWorld::new(scene());
+    let original = catalog(&world, 10.);
+    let mut live = configured(&world, original.clone());
+    world.step().unwrap();
+    let epoch = live.begin(&mut world, 1. / 60.).unwrap();
+    live.invoke(&mut id(1).0, epoch, Call::Despawn(0)).unwrap();
+    live.finish(&mut world).unwrap();
+    let before = live.persistent_checkpoint(&world).unwrap().encode();
+    // This is the common admission/replacement path used by both VM reloads.
+    let mut wrong = Capability::with_persistence(Some(Declaration::new(8, [7; 32]).unwrap()));
+    wrong.configure_instances(catalog(&world, 11.)).unwrap();
+    assert!(live.prepare_reload(&wrong).is_err());
+    assert_eq!(live.persistent_checkpoint(&world).unwrap().encode(), before);
+    let mut fresh = Capability::with_persistence(Some(Declaration::new(8, [7; 32]).unwrap()));
+    fresh.configure_instances(original).unwrap();
+    live.prepare_reload(&fresh).unwrap();
+    live = live.replacement();
+    assert_eq!(live.persistent_checkpoint(&world).unwrap().encode(), before);
+    let mut respawn = FrameCommands::default();
+    respawn
+        .push(StructuralCommand::Spawn(CookedEntity {
+            id: id(1),
+            parent: None,
+            transform: Default::default(),
+            velocity: None,
+        }))
+        .unwrap();
+    world.apply(&mut respawn).unwrap();
+    world.step().unwrap();
+    let epoch = live.begin(&mut world, 1. / 60.).unwrap();
+    let copied = read(&mut live, epoch);
+    assert_eq!(
+        abi::instances::Snapshot::parse(&copied)
+            .unwrap()
+            .iter()
+            .map(|r| r.entity)
+            .collect::<Vec<_>>(),
+        vec![id(2).0]
+    );
+    live.finish(&mut world).unwrap();
+}
