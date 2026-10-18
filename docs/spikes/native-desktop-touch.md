@@ -43,6 +43,19 @@ gate pass.
 Source controls cover all four native phases, wide/reused IDs, bounded contacts,
 same-contact UI/gameplay ownership, mouse/touch capture, focus/surface/layout/
 session cancellation, late events, queue rollback, exact gesture/action replay,
-and rejected-tick VM/world/input/PCM preservation. CPU execution and strict lint
-are pending a separately granted native target lease; no window/GPU/capture was
-used for this source preparation.
+and rejected-tick VM/world/input/PCM preservation.
+
+On macOS arm64 with Rust 1.99.0, source `d0b7c88e` passed all 81 selected window
+tests, including 14 new touch controls, and both native-window and ordinary
+all-target strict Clippy. The native-window test executable was retained by
+hash. This is synthetic Tao-event delivery through the actual adapter, input,
+replay, UI and VM/session paths; no OS touch device, window, GPU or capture ran.
+
+Two failed attempts remain part of the [CPU evidence](evidence/native-desktop-touch.json).
+The first stopped before tests because an existing gamepad test still called the
+old surface-deferral signature. The second passed 80 tests, including all 14 new
+touch tests, but failed an old assertion that gesture bindings were unsupported.
+That assertion now accepts the three supported gestures while preserving bounded
+gamepad-ID and unsupported-mouse-button refusals. A retained-router fixture was
+also corrected before its first execution. Production bytes remain those of
+`18aa6f43`; only test fixtures/expectations changed through the successful producer.

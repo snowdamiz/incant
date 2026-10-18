@@ -1,0 +1,376 @@
+{
+  "format": "incant-native-desktop-touch-cpu-evidence",
+  "version": 1,
+  "scope": "CPU-only desktop Tao touch delivery and existing runtime/UI/replay/session behavior; no physical-device or presentation gate",
+  "source_base": {
+    "commit": "c7ff96f8bc0098f1a4f36293eb81281b7a1c7935",
+    "main": "406"
+  },
+  "production_commit": "18aa6f43c20ebbdc4644ff2a2b4b303bf9db3928",
+  "successful_test_producer": "d0b7c88e3bf111e3fac723ab787ba1e4894638d6",
+  "test_corrections": [
+    "585d7f879192f3df598971112209e61a9f14fef7",
+    "d0b7c88e3bf111e3fac723ab787ba1e4894638d6"
+  ],
+  "production_files": {
+    "crates/incant_game_player/src/window/input.rs": "d2345e2bb355c64c910cdf3040000e032909a63052559d93e5c809c2ced2c754",
+    "crates/incant_game_player/src/window/mod.rs": "8ba7437f7d600445a9815b8a89079f223f149caa556487c3dfead552ad5f56a8",
+    "crates/incant_game_player/src/window/ui_input.rs": "93d446db4f9a12177d4cc20d13d3777a414e0ea921f6c75522d66f4b050aedfd",
+    "crates/incant_game_player/src/window/ui_input/touch.rs": "573ab80e7b3146eb3da8086f2566913bf7c5c55680366746bfb6876f38b12651"
+  },
+  "production_unchanged_after_first_commit": true,
+  "host": {
+    "os": "macOS",
+    "arch": "arm64",
+    "toolchain": "1.99.0-aarch64-apple-darwin",
+    "cargo_profile": "ci",
+    "pinned_tools": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-packet-001/tools.json",
+      "bytes": 4395,
+      "sha256": "abaaa0c72359c7d7e0bd22a133606661cf220eb7bf85742692ce41716c54db10"
+    }
+  },
+  "commands": [
+    {
+      "name": "window-input-behavior",
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "--config",
+        "profile.ci.package.incant_render.opt-level=2",
+        "--config",
+        "profile.ci.package.sha2.opt-level=3",
+        "test",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window",
+        "--lib",
+        "--message-format=json",
+        "window::",
+        "--",
+        "--test-threads=2"
+      ],
+      "exit": 0,
+      "seconds": 11.76524304097984
+    },
+    {
+      "name": "native-window-all-target-strict-lint",
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "--config",
+        "profile.ci.package.incant_render.opt-level=2",
+        "--config",
+        "profile.ci.package.sha2.opt-level=3",
+        "clippy",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--features",
+        "native-window",
+        "--all-targets",
+        "--message-format=json",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 19.46331258304417
+    },
+    {
+      "name": "ordinary-all-target-strict-lint",
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "--config",
+        "profile.ci.package.incant_render.opt-level=2",
+        "--config",
+        "profile.ci.package.sha2.opt-level=3",
+        "clippy",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_game_player",
+        "--all-targets",
+        "--message-format=json",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0,
+      "seconds": 22.353456999990158
+    }
+  ],
+  "actual_tests": {
+    "selected_window": 81,
+    "new_touch": 14,
+    "failed": 0,
+    "ignored": 0,
+    "raw_summary": "test result: ok. 81 passed; 0 failed; 0 ignored; 0 measured; 48 filtered out; finished in 0.01s",
+    "touch_test_names": [
+      "window::ui_input::touch::tests::contacts::logical_contacts_keep_full_native_identity_and_reuse_only_after_end",
+      "window::ui_input::touch::tests::contacts::contacts_and_identity_exhaustion_refuse_without_mutating_pending_packet",
+      "window::ui_input::touch::tests::gestures::gesture_actions_and_all_four_gestures_replay_exactly",
+      "window::ui_input::touch::tests::gestures::unsupported_bindings_still_refuse_before_devices",
+      "window::ui_input::touch::tests::lifecycle::presses_during_surface_wait_cannot_start_when_a_frame_eventually_presents",
+      "window::ui_input::touch::tests::lifecycle::lifecycle_boundaries_cancel_contacts_and_ignore_late_native_continuations",
+      "window::ui_input::touch::tests::ownership::ui_primary_and_secondary_contacts_never_leak_or_retarget",
+      "window::ui_input::touch::tests::ownership::mouse_and_touch_cannot_release_each_others_ui_capture",
+      "window::ui_input::touch::tests::ownership::gameplay_contact_crossing_ui_cancels_without_tap_or_ui_activation",
+      "window::ui_input::touch::tests::transactions::surface_cancellation_refusal_preserves_all_captures_for_retry",
+      "window::ui_input::touch::tests::transactions::invalid_touch_and_full_queue_roll_back_contact_allocator_and_discrete_order",
+      "window::ui_input::touch::tests::transactions::ui_capacity_refusal_rolls_back_simultaneous_owner_fence_cancellations",
+      "window::ui_input::touch::tests::transactions::refused_ui_candidate_retains_exact_touch_receipts_until_acceptance",
+      "window::ui_input::touch::tests::transactions::rejected_tick_preserves_touch_vm_world_and_pcm_then_same_packet_retries"
+    ]
+  },
+  "actual_cargo_test_features": [
+    "default",
+    "frame-capture",
+    "native-window",
+    "physics-deterministic",
+    "render-gpu",
+    "render-input"
+  ],
+  "copied_test_executables": [
+    {
+      "source": "/private/tmp/incant-wasm-persistent-20261017-target/ci/deps/incant_game_player-c002f0ce9397dd62",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-002/artifacts/incant_game_player-window",
+      "resolved": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-002/artifacts/incant_game_player-window",
+      "bytes": 37058896,
+      "sha256": "dcb59d692d25e490654a1d633d72080d523aafae676438f04b6f1b7f4a9dd729"
+    },
+    {
+      "source": "/private/tmp/incant-wasm-persistent-20261017-target/ci/deps/incant_game_player-c002f0ce9397dd62",
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-003/artifacts/incant_game_player-window",
+      "resolved": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-003/artifacts/incant_game_player-window",
+      "bytes": 37076928,
+      "sha256": "9d2103e76ed8e8b26cacd5f7275c8f1d971e1606d3b0b4ee6dc6a6db3e4d1d8f"
+    }
+  ],
+  "retained_failures": [
+    {
+      "attempt": 1,
+      "source": "18aa6f43c20ebbdc4644ff2a2b4b303bf9db3928",
+      "status": "failed",
+      "actual_tool_session": 76343,
+      "actual_tool_terminal_exit": 1,
+      "seconds": 126.7996547910152,
+      "plan": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-packet-001/plan.json",
+        "bytes": 36256,
+        "sha256": "0ee7ba37866fcad92c47072681c69587bd3d12f4d3814de6130343d8228a5d08"
+      },
+      "supervisor": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-packet-001/run.py",
+        "bytes": 13604,
+        "sha256": "12cb141f09f92048ad5bb31eb83fe8efc4e576bfa6cfe9a8b3134d0558ae42e4"
+      },
+      "result": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-001/result.json",
+        "bytes": 13590,
+        "sha256": "06cb5e119f3449d825dd6bbe634eb1c4ec539296d13ac3954625bae04e51b27c"
+      },
+      "closeout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-001/closeout.json",
+        "bytes": 8440,
+        "sha256": "b224b1ac63d0ef2d6d7fcbc08b7a30a465a703d3615573259bcf51a855aa9200"
+      },
+      "logs": [
+        {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-001/0.stderr.log",
+          "bytes": 5023,
+          "sha256": "db6460573f7f251ae4d59b08bcfcfff0eafeefb93b76a65bb9c2f44f92fdce14"
+        },
+        {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-001/0.stdout.log",
+          "bytes": 541135,
+          "sha256": "c37d42d3d518e3ffb90f5a9225ec65f95cc4d88e956c0ca63fd6c6dd25d2cbdd"
+        }
+      ],
+      "fresh_owned_absence_count": 47,
+      "limits": {
+        "target_bytes": 10737418240,
+        "RSS_bytes_sampled": 8589934592,
+        "jobs": 2,
+        "rayon_threads": 2
+      },
+      "outcome": "Compile refusal E0061: existing gamepad test used obsolete defer_surface signature; no behavioral tests or lints executed."
+    },
+    {
+      "attempt": 2,
+      "source": "585d7f879192f3df598971112209e61a9f14fef7",
+      "status": "failed",
+      "actual_tool_session": 9536,
+      "actual_tool_terminal_exit": 1,
+      "seconds": 15.439297000004444,
+      "plan": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-packet-002/plan.json",
+        "bytes": 38309,
+        "sha256": "c4726a0fb87ecf80c9260e3f1c141f2328448c1637d90e4762dff395cab70532"
+      },
+      "supervisor": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-packet-002/run.py",
+        "bytes": 14750,
+        "sha256": "46d84d498ec42928ccf85417e86f59d406a9082ed2572850836adccb91dd44fe"
+      },
+      "result": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-002/result.json",
+        "bytes": 4807,
+        "sha256": "fb3058786b2065e70f654fbb4a9f0c370f492280a092c5cdd7d0c245a4e7cb7f"
+      },
+      "closeout": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-002/closeout.json",
+        "bytes": 13065,
+        "sha256": "7a5e7e2a561ae0b412851f1b1219ba32efe34cfbd2dbd4ee188337c9e114b4f6"
+      },
+      "logs": [
+        {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-002/0.stderr.log",
+          "bytes": 392,
+          "sha256": "6fc00030192707522b8e158dc5ed57b9c63a92395993390882ed058307328e32"
+        },
+        {
+          "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-002/0.stdout.log",
+          "bytes": 546108,
+          "sha256": "81dcf2bfb4874d05f37a0b9e91304f00e17b4929a9de1da8d8dff2171b20382c"
+        }
+      ],
+      "fresh_owned_absence_count": 3,
+      "limits": {
+        "target_bytes": 10737418240,
+        "RSS_bytes_sampled": 8589934592,
+        "jobs": 2,
+        "rayon_threads": 2
+      },
+      "outcome": "80passed/1failed: old gesture-unsupported capability assertion; all14newtouch tests passed; lints unrun. The failed test executable is retained."
+    }
+  ],
+  "successful_qualification": {
+    "attempt": 3,
+    "source": "d0b7c88e3bf111e3fac723ab787ba1e4894638d6",
+    "status": "complete",
+    "actual_tool_session": 29220,
+    "actual_tool_terminal_exit": 0,
+    "seconds": 64.87124312500237,
+    "plan": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-packet-003/plan.json",
+      "bytes": 42027,
+      "sha256": "c316a9069d4a9e9dffdd3b3586b50ba197d4ce631950d305f15c58a1d907f02b"
+    },
+    "supervisor": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-packet-003/run.py",
+      "bytes": 14774,
+      "sha256": "135c79c849fd78d28e4028b58100df0da4d590561035c8bb468bb630b842089f"
+    },
+    "result": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-003/result.json",
+      "bytes": 130836,
+      "sha256": "34468ae1f60c5f018a1167f77af1ccdbf406605ef7f49599d4b404dfe808aa08"
+    },
+    "closeout": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-003/closeout.json",
+      "bytes": 11188,
+      "sha256": "a515f7182d50af42fca09121d08d75049dd8fd316bc58a80b88306ec84eecd37"
+    },
+    "logs": [
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-003/0.stderr.log",
+        "bytes": 328,
+        "sha256": "482a54fa72e986740a19fa57731b6586a269f575c80d03eb518637eaa770de87"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-003/0.stdout.log",
+        "bytes": 545344,
+        "sha256": "ce084778e83efd60a4e3bf331fa0d1b4ae03c3ecf94c6a3b966747b44994ecd7"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-003/1.stderr.log",
+        "bytes": 5000,
+        "sha256": "a264b52265e703abdcd247c157c75c5d46bb50e5561bd6cc8fbd120f6b06e025"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-003/1.stdout.log",
+        "bytes": 516303,
+        "sha256": "c82d8f19e639accb7100b044168448f442e7878b862b195c40b60fb158bb1b59"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-003/2.stderr.log",
+        "bytes": 3593,
+        "sha256": "867938a8cd1034d3f28c97681680f219864cb37df4fa389f6b6812660d8fedef"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-003/2.stdout.log",
+        "bytes": 412844,
+        "sha256": "f9cdb68621a4ef443f76623a525396ee98d50396a19bf8bd90d136309384c73e"
+      }
+    ],
+    "fresh_owned_absence_count": 43,
+    "limits": {
+      "target_bytes": 10737418240,
+      "RSS_bytes_sampled": 8589934592,
+      "jobs": 2,
+      "rayon_threads": 2
+    },
+    "outcome": "81selected window tests pass, all14touch controls; native-window and ordinary all-target strict Clippy both pass."
+  },
+  "source_freshness": {
+    "initial_source_files": 23400,
+    "initial_local_path_fingerprint_directories_retired": 79,
+    "deletion": false,
+    "retirement": "create-only target-local quarantine rename; no deps/binaries removed",
+    "continuations": "Unchanged CPU001 units reused only by exact Cargo message recipe and actual output hashes; corrected test owner rebuilt.",
+    "raw_initial_artifact_log": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-001/0.stdout.log",
+      "bytes": 541135,
+      "sha256": "c37d42d3d518e3ffb90f5a9225ec65f95cc4d88e956c0ca63fd6c6dd25d2cbdd"
+    },
+    "successful_local_unit_count": 66,
+    "prior_protected_artifact_identities": 67,
+    "retained_final_protected_artifact_identities": 69,
+    "final_protected_manifest": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-003/protected-release.json",
+      "bytes": 16821,
+      "sha256": "1a9764d8856e55a2c0bad22ac3b1ccfc3e32393053e43e45265aabb4d1b32360"
+    }
+  },
+  "cleanup": {
+    "actual_wrapper_terminal": 0,
+    "wrapper_pid": 48375,
+    "observed_identities_and_groups_freshly_absent": 43,
+    "all_recorded_absences_true": true,
+    "receipt": {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-desktop-touch-001/cpu-003/closeout.json",
+      "bytes": 11188,
+      "sha256": "a515f7182d50af42fca09121d08d75049dd8fd316bc58a80b88306ec84eecd37"
+    }
+  },
+  "cumulative_resources": {
+    "touch_seconds_including_failures": 207.110194916022,
+    "original_touch_seconds_cap": 600,
+    "copied_artifact_bytes": 74135824,
+    "log_bytes": 2576070,
+    "sampled_and_final_target_peak_bytes": 7801028608,
+    "target_ceiling_bytes": 10737418240,
+    "new_allowance_retains_prior_target_history": true,
+    "global_target_postcleanup_seconds": 2528.7686573762076,
+    "global_target_including_deleted_history_seconds": 2987.7733009592075
+  },
+  "limitations": [
+    "No native window, GPU, CUA, screenshot or capture helper was launched.",
+    "Synthetic native events do not prove OS/hardware touch delivery or physical gestures.",
+    "No Windows/Linux execution, mobile-adapter change, appearance acceptance, shipping/source-free proof, performance result or Phase1gate pass.",
+    "Platform-promoted mouse events retain existing platform semantics; pressure/stylus input is not exposed.",
+    "Logs, source manifests and binaries remain external at the exact retained local paths/hashes; this compact evidence does not embed or execute them."
+  ]
+}
