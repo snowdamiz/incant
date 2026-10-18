@@ -137,7 +137,9 @@ pub(super) fn pipeline(
             "vertex_buffers":format!("{:?}",desc.vertex.buffers),"primitive":format!("{:?}",desc.primitive),
             "targets":format!("{:?}",desc.fragment.as_ref().unwrap().targets),
             "depth":format!("{:?}",desc.depth_stencil),"multisample":format!("{:?}",desc.multisample),
-            "layout_groups":["frame uniform vertex+fragment","existing material"],"cache":desc.cache.is_some()}),
+                "layout_handle":format!("{:?}",desc.layout),
+                "layout_groups":if kind=="scene" {vec!["frame uniform vertex+fragment","existing material"]} else {vec![]},
+                "cache":desc.cache.is_some()}),
         );
         assert_eq!(
             msl["complete"], true,
