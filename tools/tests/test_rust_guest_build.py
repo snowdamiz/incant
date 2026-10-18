@@ -11,6 +11,7 @@ import importlib.util
 import json
 import os
 from pathlib import Path
+import re
 import sys
 import tempfile
 from types import SimpleNamespace
@@ -536,6 +537,25 @@ class OwnerTests(Fixture):
 
 
 class ProbeContractTests(Fixture):
+    def test_actual_probe_callback_does_not_shadow_sdk_macro_exports(self):
+        tools = Path(__file__).resolve().parents[1]
+        spec = importlib.util.spec_from_file_location('rust_sandbox_fixture', tools / 'probes/rust-guest-sandbox.py')
+        probe = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(probe)
+        sdk = (tools.parent / 'sdk/rust/src/lib.rs').read_text()
+        macro = sdk.split('macro_rules! module {', 1)[1].split('#[doc(hidden)]', 1)[0]
+        exports = set(re.findall(r'pub extern "C" fn (\w+)\(', macro))
+        self.assertEqual(exports, {'incant_abi', 'update'})
+
+        def callback_is_distinct(text):
+            callback = re.search(r'incant_module::module!\((\w+)\);', text).group(1)
+            self.assertRegex(text, rf'fn {callback}\(')
+            return callback not in exports
+
+        self.assertTrue(callback_is_distinct(probe.VALID))
+        # Retained native003's exact E0428 fixture must fail this control.
+        self.assertFalse(callback_is_distinct(probe.VALID.replace('on_update', 'update')))
+
     def test_complete_frozen_plan_checks_bindings_and_exact_grant_without_child(self):
         path = Path(__file__).resolve().parents[1] / 'probes/rust-guest-sandbox.py'
         spec = importlib.util.spec_from_file_location('rust_sandbox_probe', path)
