@@ -2,7 +2,7 @@
 
 [Release checkpoint54](docs/spikes/release-checkpoint-54.md) is promoted: all
 23 required contexts and eight exact-head workflows passed on the main401 tree,
-and release `503b90af` has the identical tested tree. Main402–403 changes
+and release `503b90af` has the identical tested tree. Main402–404 changes
 remain outside that release baseline. Checkpoint53 failed the Wasm timer-fixture
 lookup on all three desktop platforms; its other seven workflows passed.
 The [narrow correction](docs/spikes/ci-timer-fixture-layout.md) is merged through
@@ -22,7 +22,7 @@ incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
 [Release checkpoint54](docs/spikes/release-checkpoint-54.md) contains the tested
 main401 tree after all 23 required contexts and eight candidate workflows passed.
-Main402–403 changes remain outside that release baseline. Rendering quality and full rendered-game
+Main402–404 changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -94,7 +94,8 @@ also passes normal import/authoring/export and ten fresh-player cases, with exac
 checkpoint and complete PCM continuation. The original producer failed its old
 save-framing assumption after a successful build and first player. Its failure
 remains explicit; a separate reviewed checker correction and follow-up verify
-the same unchanged package. This new proof is locally qualified pending integration;
+the same unchanged package. This proof is merged through PR404 after independent
+review and exact-head development checks;
 complete SDK parity remains open.
 
 Native Wasm cooperative coroutines now pass local ABI/runtime, actual Wasmtime
@@ -193,7 +194,7 @@ animated/UI support and shipping display/latency measurements remain open.
 Native Wasm haptics is merged through PR393 after review and successful fast
 checks. Physical vibration and an authored shipping haptics proof remain open.
 Release checkpoint54 (PR399) is promoted after all 23 requirements and eight
-workflows passed; later main402–403 is outside that baseline. No distribution or
+workflows passed; later main402–404 is outside that baseline. No distribution or
 phase gate is approved.
 
 Native Wasm timers are merged through PR395 after independent review and fast
