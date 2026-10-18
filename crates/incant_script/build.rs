@@ -103,17 +103,13 @@ fn main() {
         format!("CFLAGS_{target}"),
         format!("CFLAGS_{}", target.replace('-', "_")),
     ];
-    let mut default_flags = true;
+    let mut default_flags = !cfg!(any(
+        feature = "diagnostic-quickjs-generate",
+        feature = "diagnostic-quickjs-use"
+    ));
     for key in flags {
         println!("cargo:rerun-if-env-changed={key}");
         default_flags &= env::var_os(key).is_none_or(|v| v.is_empty());
-    }
-    #[cfg(any(
-        feature = "diagnostic-quickjs-generate",
-        feature = "diagnostic-quickjs-use"
-    ))]
-    {
-        default_flags = false;
     }
     println!(
         "cargo:rustc-env=INCANT_SCRIPT_DEFAULT_C_FLAGS={}",
