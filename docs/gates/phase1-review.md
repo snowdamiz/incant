@@ -64,6 +64,11 @@ problems without changing any exit requirement.
 
 ## Current implementation priorities
 
+The real [Rust input guest qualification](../spikes/native-wasm-input-conformance.md)
+also passes typed collection/gesture/focus parity and transactional refusals on
+both native module hosts. This extends CPU conformance; physical input hardware,
+complete SDK parity and the separate shipping/frame-time gates remain open.
+
 - Finish portable temporal reconstruction and the Apple MetalFX path, then review
   the rendered result and measure the complete shipping game. Finite visibility
   remains a private experiment. The default-off MetalFX foundation is merged,

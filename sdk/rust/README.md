@@ -49,6 +49,25 @@ it beside the actual Wasmtime development host. Shipped applications receive
 only trusted compiled native descriptors; they never compile or load guest Rust
 source, raw Wasm or cached native modules at runtime.
 
+## Copied input
+
+`tick.input(&mut scratch)` returns one accepted, borrowed `InputSnapshot`; use
+`INPUT_MAX_BYTES` initialized bytes for complete snapshots. It exposes named
+actions, keyboard/mouse edges, gamepad connections/values/sticks, active touches,
+ordered touch changes and tap/long-press/swipe/pinch gestures. Coordinates are
+logical pixels and device/contact IDs are `u32`, including their full range.
+`Gamepad::value` distinguishes an absent value from an explicitly reported zero.
+Focus loss releases held buttons and cancels contacts; a reused contact or
+reconnected gamepad starts without the old contact deltas or device values.
+
+[samples/input.rs](samples/input.rs) observes typed values using bounded,
+committed diagnostic lines. Its small conformance event sequence stays within
+normal log quotas; it is not a template for logging every device on every tick.
+The [input conformance scope](../../docs/spikes/native-wasm-input-conformance.md)
+separates the existing raw-frame evidence from the new actual Rust guest tests
+and their qualification status. Synthesized events do not prove hardware or
+native-window delivery.
+
 ## Simulation timers
 
 `tick.timers(&mut scratch)` returns the accepted-update clock and a borrowed,
