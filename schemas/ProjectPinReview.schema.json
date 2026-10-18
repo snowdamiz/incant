@@ -614,6 +614,68 @@
         },
         {
           "additionalProperties": false,
+          "description": "Register an authored Rust entry, not a compiled Wasm asset or scene program.",
+          "properties": {
+            "module": {
+              "$ref": "#/$defs/RustModuleSource"
+            },
+            "op": {
+              "const": "upsert_module_source",
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "module"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "Remove metadata only; source bytes are retained.",
+          "properties": {
+            "module_id": {
+              "type": "string"
+            },
+            "op": {
+              "const": "remove_module_source",
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "module_id"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "description": "One checked Rust source write through the existing durable source journal.",
+          "properties": {
+            "expected_source": {
+              "$ref": "#/$defs/SourceVersion"
+            },
+            "module_id": {
+              "type": "string"
+            },
+            "op": {
+              "const": "write_module_source",
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "op",
+            "module_id",
+            "expected_source",
+            "source"
+          ],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
           "properties": {
             "op": {
               "const": "set_memory",
@@ -1410,6 +1472,30 @@
         "origin",
         "actor",
         "transaction"
+      ],
+      "type": "object"
+    },
+    "RustModuleSource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "path"
       ],
       "type": "object"
     },
