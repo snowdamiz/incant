@@ -253,3 +253,11 @@ Default replay proves **recorded PCM identity**, not possession of omitted PCM
 bytes. Executables, debug bundles, large Cargo streams, actual compiler packages
 and PCM remain external; their identities are retained. This is data replay, not
 shipping reproduction or a fresh measurement. The earlier CPU packet is unchanged.
+
+Root independently reviewed the query adapter and replay verifier, rechecked all
+74 portable records and optional external binaries/PCM/compiler/source/build-log
+identities, and passed all 27 adapter controls on integration source `fa98d825`.
+All ten local development checks passed at that source, including 1,040 UI tests.
+The [integration receipt](evidence/script-query-integration-review-20261018.json)
+binds retained raw logs and fresh absence of the wrapper and ten owned processes.
+These checks do not rerun a player or change the qualified producer identity.
