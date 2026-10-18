@@ -72,9 +72,11 @@ cooks or cache phase observations executed. The non-Windows branch used
 `&PathBuf`, which explains why the earlier local checks did not catch this.
 The correction borrows `launch_engine.as_path()` on both branches, preserving
 the path lifetime, cache policy, fresh compilation and eight-second deadline.
-Formatting and diff checks passed; the correction still requires native
-compilation and hosted Windows execution. This failure neither reproduces nor
-repairs the original timeout. [The scoped receipt and inert raw records](evidence/windows-typescript-dependency-cache-hosted-001.json)
+The corrected common code now passes five native cook controls and strict
+all-target Clippy on this Mac, as well as all ten development checks. The
+[local records](evidence/windows-launch-path-local.json) identify exact source
+`d8c7db25` and retain the raw command results. Hosted Windows execution remains
+pending. This compile failure neither reproduces nor repairs the original timeout. [The scoped receipt and inert raw records](evidence/windows-typescript-dependency-cache-hosted-001.json)
 retain all four compiler failures and the exact hosted source identity.
 
 Source basis: pinned SWC 1.16.13, commit
