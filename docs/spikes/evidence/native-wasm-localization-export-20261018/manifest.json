@@ -1,0 +1,1546 @@
+{
+  "format": "incant-compressed-evidence-v1",
+  "source": "b79fb1b97ad99951e1579ebda5ea2c5c1d48a529",
+  "checker_source": "486303d5e10c7a56596efa8b5b058c5e2176c79d",
+  "original_producer_failed": true,
+  "followup": "Same immutable package,10 actual native calls, no build",
+  "omitted": "Native executables, symbols and runtime package contents remain external; hashes and actual build/dependency/source-free checks retained.",
+  "records": [
+    {
+      "path": "packet-001/run.py.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/run.py",
+      "decoded_bytes": 422,
+      "decoded_sha256": "e53e7815ac9e77d3a8cf825d6f017ebc25f9cb8a20675f03ed4a7cc5fa6b30a0",
+      "gzip_bytes": 298,
+      "gzip_sha256": "8411554ce1a3d1f1e28de7aa111d9c56be3f8094859ed0eb9c1193a8cf83d790"
+    },
+    {
+      "path": "packet-001/python-tests-001.py.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/python-tests-001.py",
+      "decoded_bytes": 8508,
+      "decoded_sha256": "bffce7e797552b55800b0963739e0e7ef79f3c00314bfe20463edbd9a1ba70d7",
+      "gzip_bytes": 3024,
+      "gzip_sha256": "d74ea51b1f11eb3dcca155429653c504667fd1284a4faeccc77c8ad5b94a985d"
+    },
+    {
+      "path": "packet-001/plan.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/plan.json",
+      "decoded_bytes": 5048,
+      "decoded_sha256": "98eff13a59a91b0932e9b853f3c2e7f6ed7d9305b7d2f175d0b278173aa505f6",
+      "gzip_bytes": 2068,
+      "gzip_sha256": "9835b5402b16c785c516e6b4caaa57f9df0f68c06ae3aee1e949ca41c268b9ad"
+    },
+    {
+      "path": "packet-001/provenance.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/provenance.json",
+      "decoded_bytes": 408,
+      "decoded_sha256": "6cdbeb0d37334c5542410057e6b3520bf6ee500dffd63e992978e6eb991ec5c3",
+      "gzip_bytes": 265,
+      "gzip_sha256": "69847f9b152ebc28bbe9176206c3c3f0041ab1e92f82d54773935392893ad2d1"
+    },
+    {
+      "path": "packet-001/result.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/result.json",
+      "decoded_bytes": 35189,
+      "decoded_sha256": "4775826f76a8893a4997bf449f13d899a7fd7e6c606743cf7b1d68160ccdb99f",
+      "gzip_bytes": 2183,
+      "gzip_sha256": "8bfb0164548497de48f71ab1b8cda33f633c8f5fb6d6e3b735d7748c8546f038"
+    },
+    {
+      "path": "packet-001/source.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/source.json",
+      "decoded_bytes": 5066094,
+      "decoded_sha256": "0b30433d6da3678d13562b67c5a40c53a304ad829ad0b7f66f15851f987a9846",
+      "gzip_bytes": 1070312,
+      "gzip_sha256": "4fb32fef372bfad05c316f32ec1935009beb2540e524dd968dd81663e2aa6bc6"
+    },
+    {
+      "path": "packet-001/portable-checks.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/portable-checks.json",
+      "decoded_bytes": 701,
+      "decoded_sha256": "e3bcd22c377b27b16258b04b0c68ecaa4f82302c0dc5b0b6db45f04f2a1c99c1",
+      "gzip_bytes": 370,
+      "gzip_sha256": "7a5df125f4bdd03132f4b8822bfab47dff0900cc0ec9e3472e20f6bc3db39855"
+    },
+    {
+      "path": "packet-001/tools.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/tools.json",
+      "decoded_bytes": 21177,
+      "decoded_sha256": "cfc513dea2ad6410bfcaeb2c55a0d20f0c72b8ba64ce4987fbe5e7d6dfee6dbb",
+      "gzip_bytes": 4978,
+      "gzip_sha256": "f77816c4af08b4fbfd4a087cf745a537c72a38ba60f78e58ba558cd4316cd36f"
+    },
+    {
+      "path": "packet-001/packet.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/packet.json",
+      "decoded_bytes": 2678,
+      "decoded_sha256": "011cb5167b304ff1c020fd5094ada3bac6a58c329e6ec067c7dee117c82a4ada",
+      "gzip_bytes": 1004,
+      "gzip_sha256": "2abce863a4a28c884811e8da58f46527ecd68450353ceea507c0941c95a56ad9"
+    },
+    {
+      "path": "packet-001/terminal-closeout.stdout.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/terminal-closeout.stdout.json",
+      "decoded_bytes": 24059,
+      "decoded_sha256": "30a9d7ff8a66d086bcdb0d0613f9a775538a2dbf95755f3d4878b73f003ba4b8",
+      "gzip_bytes": 1970,
+      "gzip_sha256": "a58afbcdb1863e82207f7119e04a08120778ef0e4234609545093c807192ed70"
+    },
+    {
+      "path": "packet-001/README.md.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/README.md",
+      "decoded_bytes": 2907,
+      "decoded_sha256": "7ba0ff5f7a21d219de3a165bb2926fd149663eff17d56c9caddd4ee488e3fadd",
+      "gzip_bytes": 1596,
+      "gzip_sha256": "8734ef156dfbef22a005d40194e1a4bb0044637b5e20e28bfaeac13301647d61"
+    },
+    {
+      "path": "packet-001/node-dependencies.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/node-dependencies.json",
+      "decoded_bytes": 33752,
+      "decoded_sha256": "e1d43e0f0bbdcd0673806171b30ef3055220d980d61098d7922d2cb0c60aceff",
+      "gzip_bytes": 9462,
+      "gzip_sha256": "0db24ce298eb3626d705cd2e919a58b1a6ff8ca31e455417a06e4d6c9a3d916c"
+    },
+    {
+      "path": "packet-001/root-grant.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/root-grant.json",
+      "decoded_bytes": 528,
+      "decoded_sha256": "dea587d20e2b79b3f13a708aa5a9573c0b1f32bff088b2ee23ab23b9ad7969d9",
+      "gzip_bytes": 375,
+      "gzip_sha256": "b869d15a53f91d2eb34e659c6b7045657c3443db6da8db7463ae13aec0246033"
+    },
+    {
+      "path": "packet-001/closeout.py.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/closeout.py",
+      "decoded_bytes": 2650,
+      "decoded_sha256": "f82a1bd5d2045247817c605fea4c727512acabaf72235dcff7e918f94da4ec5d",
+      "gzip_bytes": 1220,
+      "gzip_sha256": "01f0811cff0fdaf2672bb5c2d3959aa771d6a84b504dc1b0eceb59f3fab36a95"
+    },
+    {
+      "path": "packet-001/wrapper-started.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/wrapper-started.json",
+      "decoded_bytes": 140,
+      "decoded_sha256": "4fd565f672fa4032385b0270828d20c0da4a69bd1a2bafc51b18ba515a963ce1",
+      "gzip_bytes": 136,
+      "gzip_sha256": "b3c39dc99f056fb956987aa656390d288f893583bc944af758f5b0368745bf72"
+    },
+    {
+      "path": "packet-001/tsconfig.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/tsconfig.json",
+      "decoded_bytes": 513,
+      "decoded_sha256": "ef5fbfdeac5e1cf35d3d61fc95bce66cc024890a31aac20f8a604315d079b296",
+      "gzip_bytes": 273,
+      "gzip_sha256": "796e933511ba3fd25ba6f3149add076a210ef750724bfdc8426af91ec234ec05"
+    },
+    {
+      "path": "packet-001/python-controls-001.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/python-controls-001.json",
+      "decoded_bytes": 485,
+      "decoded_sha256": "00d5b4750ec53616e7b38d6332494e08b41e2019633eea0bc832ae9060e5946b",
+      "gzip_bytes": 331,
+      "gzip_sha256": "2c7c9447705fc053d9b918f7806a8173d587b8f2031ca8dee5ee165eaab54bc2"
+    },
+    {
+      "path": "packet-001/prepare.py.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/prepare.py",
+      "decoded_bytes": 7860,
+      "decoded_sha256": "f272b34e755611c3ace16587e68632206dda9143b8d2ab0a3b0b728e2eb19856",
+      "gzip_bytes": 3404,
+      "gzip_sha256": "e1565725245c03c68166d06024dd3d71ba43e770b7522f84706634ccea1ce149"
+    },
+    {
+      "path": "packet-001/terminal-closeout.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/terminal-closeout.json",
+      "decoded_bytes": 35311,
+      "decoded_sha256": "fbe86b2211a5d9b0c29f216b8340508f02138a0c49c3345eacfbaab3ae29b85e",
+      "gzip_bytes": 2153,
+      "gzip_sha256": "577d60c4b22fe36c3c6dffa4a23fd514a447693016b05ce479b0a4f0748d4ebd"
+    },
+    {
+      "path": "packet-001/output/rpc-10.stderr.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/rpc-10.stderr.json",
+      "decoded_bytes": 74926,
+      "decoded_sha256": "469fe17528be731403fdf028bb4144c576f989b1d067ea7c241e8b2d93f52414",
+      "gzip_bytes": 4067,
+      "gzip_sha256": "9e9f5877c24ed3ca98d9586410098a35e0484e686e0e1a4dce93fbed6742685b"
+    },
+    {
+      "path": "packet-001/output/000.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/000.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/004.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/004.stdout.log",
+      "decoded_bytes": 667500,
+      "decoded_sha256": "a8e7b137c7eabb6e095f0834454d650199880af1552f47b7a72e8a0e6b3aff1c",
+      "gzip_bytes": 45407,
+      "gzip_sha256": "6db3ee4c66eb7571a3affc0d9bfa8a1fc7b5b048f67d70cacf885989ef24a013"
+    },
+    {
+      "path": "packet-001/output/rpc-9.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/rpc-9.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/process-inventory.jsonl.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/process-inventory.jsonl",
+      "decoded_bytes": 31353,
+      "decoded_sha256": "f58a136fa9620a577250beefbac1e9a2adfff91cbb825f3770a28bbe5bc13bc2",
+      "gzip_bytes": 1703,
+      "gzip_sha256": "76ea09254c8210304373821c40c329562787422ced9f9c2aadc6b4bb28662cae"
+    },
+    {
+      "path": "packet-001/output/018.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/018.stdout.log",
+      "decoded_bytes": 33555039,
+      "decoded_sha256": "e4161a9f17bc499dfeced10b8eefebfc4513b6f88ec40654c3038f34bf42f506",
+      "gzip_bytes": 781785,
+      "gzip_sha256": "1f9d476f9de667dcfad933b2994035198bdb725d2d41ba4743a89fb85804b45d"
+    },
+    {
+      "path": "packet-001/output/009.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/009.stdout.log",
+      "decoded_bytes": 8238,
+      "decoded_sha256": "835139947bbfcbb5d02d5cd6b31d34bc7bc07c536cd7f8cc6a593e3cd8f208e0",
+      "gzip_bytes": 969,
+      "gzip_sha256": "46a7e10c679362b17480a7c9b05f1fe033152d618665040bf3976f6070700763"
+    },
+    {
+      "path": "packet-001/output/015.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/015.stdout.log",
+      "decoded_bytes": 7,
+      "decoded_sha256": "98997cf914f90eb865507680fb129df06410fe495ffc00793aa780e4b8f563ed",
+      "gzip_bytes": 27,
+      "gzip_sha256": "73a3a902b72c61cbe1fab5f805889e053be32485dd9863fc178689bebca1129e"
+    },
+    {
+      "path": "packet-001/output/rpc-12.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/rpc-12.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/022.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/022.stdout.log",
+      "decoded_bytes": 249,
+      "decoded_sha256": "d5a052e41cebb48170d8bda498a8d65552e3c96d1559ba5e1357ef60cc6f367e",
+      "gzip_bytes": 216,
+      "gzip_sha256": "6ba4593683cfbda263ee1f5ad4815b65619616d2274499257df49b2897c455ca"
+    },
+    {
+      "path": "packet-001/output/011.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/011.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/008.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/008.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/014.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/014.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/027.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/027.stdout.log",
+      "decoded_bytes": 286,
+      "decoded_sha256": "15cabc3bbc914ee629a9cd421c80c03dfe351fa5c7e67390b0c6b6bd0bfcb3a5",
+      "gzip_bytes": 212,
+      "gzip_sha256": "baae8d642392a75121c08edd55382ca99caf31960ae7e57eb82f30773e332b4a"
+    },
+    {
+      "path": "packet-001/output/010.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/010.stdout.log",
+      "decoded_bytes": 77,
+      "decoded_sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d",
+      "gzip_bytes": 93,
+      "gzip_sha256": "26e3860aaf450c399882013e8cc9678d00b947966a9f5a5f959d0d2270dbbf77"
+    },
+    {
+      "path": "packet-001/output/001.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/001.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/005.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/005.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/baseline-process.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/baseline-process.json",
+      "decoded_bytes": 6176,
+      "decoded_sha256": "de6b3b7dbe78cb38c23576ff09046c7562a5c45689d0009a66bb320b262e3175",
+      "gzip_bytes": 1023,
+      "gzip_sha256": "64737ec9d4c88d3ed9598b122af5f69e6e74110107f58e16125671759c9879f6"
+    },
+    {
+      "path": "packet-001/output/019.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/019.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/002.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/002.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/owner.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/owner.json",
+      "decoded_bytes": 42465,
+      "decoded_sha256": "376cd1d6463a05abbd54576cf952c0f4c57c5d77d283a604c501d09f04549d16",
+      "gzip_bytes": 4165,
+      "gzip_sha256": "14a0ad376ea863342976a20417315a87a1e340523019844a411300d640808dd9"
+    },
+    {
+      "path": "packet-001/output/deleted-1.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/deleted-1.json",
+      "decoded_bytes": 5399,
+      "decoded_sha256": "2a475d14bb36cd34d742b90b7bf949084705d3804acaf580d1613ddfc914fb8e",
+      "gzip_bytes": 1407,
+      "gzip_sha256": "8e7f5e5874321cf66b410c04251763168360a4cff833bd06ade8ff5e25c438a3"
+    },
+    {
+      "path": "packet-001/output/006.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/006.stdout.log",
+      "decoded_bytes": 734,
+      "decoded_sha256": "097b682f5539c6d173b58087fabebdc781a99430f236b2a66f1609255b6a0a31",
+      "gzip_bytes": 407,
+      "gzip_sha256": "41743659339df9cf3e0f5a4da6fa0c74e785f3e520e33225bfb8b496368419a3"
+    },
+    {
+      "path": "packet-001/output/020.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/020.stdout.log",
+      "decoded_bytes": 12127,
+      "decoded_sha256": "8b71519deae35667cc85b5e7bcfd1ef9730e52a098354404557045c01fff37d5",
+      "gzip_bytes": 1637,
+      "gzip_sha256": "29ed8e6ed3bc67bbcfe6a47576a1332f3fb0e3377f3f9b726dfea18c0d5ca052"
+    },
+    {
+      "path": "packet-001/output/rpc-10.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/rpc-10.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/017.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/017.stdout.log",
+      "decoded_bytes": 32520,
+      "decoded_sha256": "e4446349a0006cc6cbad8aca83a7d7249c5705ea093e61007f1c8ff59a8c623f",
+      "gzip_bytes": 4038,
+      "gzip_sha256": "7b9e4d1ac03080de7c3159a19bfdc58b544d040ca9e21b823257e0fabc801aca"
+    },
+    {
+      "path": "packet-001/output/013.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/013.stderr.log",
+      "decoded_bytes": 1364,
+      "decoded_sha256": "c4fa7c33df356eac8def356927e98e5b9b2d6bb220b3cc00eabea08685e140b7",
+      "gzip_bytes": 529,
+      "gzip_sha256": "83479347db2ab995c35dccb2ce95f9a59031fc6249fd397265b9475d38393915"
+    },
+    {
+      "path": "packet-001/output/package-files.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/package-files.json",
+      "decoded_bytes": 1507,
+      "decoded_sha256": "641e2146f32dbccb32769b2895a295100b5cecd7466e5c6ddeae9337a0a82f18",
+      "gzip_bytes": 584,
+      "gzip_sha256": "0ce0e102b831569f891adc531d60f0f724cca5db7a44d5cea97a3cac78409131"
+    },
+    {
+      "path": "packet-001/output/baseline-observe.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/baseline-observe.json",
+      "decoded_bytes": 3953,
+      "decoded_sha256": "6a1cafa4d82218f48d6de2c729dca6a657d9506887b0826a207636eb3ab09233",
+      "gzip_bytes": 386,
+      "gzip_sha256": "9d09e36e4930be5008a2ccd7f45662e4c18c5b2ebd596a2724cfb67f6a907ded"
+    },
+    {
+      "path": "packet-001/output/016.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/016.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/expected-coverage.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/expected-coverage.json",
+      "decoded_bytes": 57143,
+      "decoded_sha256": "b866855b3e752ee90308bb8898591e6ad8d8a5ea4e837686571482844572e17c",
+      "gzip_bytes": 1131,
+      "gzip_sha256": "41546eb7a39ff18188c2092fca6cc52991a922f6722d10c11be53e0fcd24a088"
+    },
+    {
+      "path": "packet-001/output/012.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/012.stdout.log",
+      "decoded_bytes": 67,
+      "decoded_sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1",
+      "gzip_bytes": 86,
+      "gzip_sha256": "4fa3c5a9212d8409cafb854a9147e39ff7fbe781b19748df6de4f50c6582fe15"
+    },
+    {
+      "path": "packet-001/output/025.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/025.stdout.log",
+      "decoded_bytes": 219,
+      "decoded_sha256": "34e3a756dc8d37aeca490a1db3eb87ac0dc9d9e002edb357800a7c7019001f80",
+      "gzip_bytes": 189,
+      "gzip_sha256": "6bedfa1cfb6439d925901ee1b8ebe2f0498ac38d9d6dd8b823c6bb7c2bb4ac40"
+    },
+    {
+      "path": "packet-001/output/reference-observe.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/reference-observe.json",
+      "decoded_bytes": 3953,
+      "decoded_sha256": "6a1cafa4d82218f48d6de2c729dca6a657d9506887b0826a207636eb3ab09233",
+      "gzip_bytes": 386,
+      "gzip_sha256": "9d09e36e4930be5008a2ccd7f45662e4c18c5b2ebd596a2724cfb67f6a907ded"
+    },
+    {
+      "path": "packet-001/output/028.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/028.stdout.log",
+      "decoded_bytes": 3900,
+      "decoded_sha256": "d4e570abc913c8f1f591d2368c64fc27d0023564d9e5f88a54720c416c8d8255",
+      "gzip_bytes": 680,
+      "gzip_sha256": "1ce5da3bacd7a978de0acd3eb85676b5b843fb231abe69ce158a6d761a66b9e3"
+    },
+    {
+      "path": "packet-001/output/deleted-0.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/deleted-0.json",
+      "decoded_bytes": 1397,
+      "decoded_sha256": "29d67686e8bb147d5e0b4bbe834f33dcc1f168795a5e6d1357d18efb4b1a946f",
+      "gzip_bytes": 512,
+      "gzip_sha256": "5b83dfb8bc83d634230dcc8ca9482676897825247f31b059a38352637e721ed4"
+    },
+    {
+      "path": "packet-001/output/003.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/003.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/007.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/007.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/rpc-13.stderr.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/rpc-13.stderr.json",
+      "decoded_bytes": 21348,
+      "decoded_sha256": "f2463323d00f23425934d0e1f38d4559e41bbc8668ee644e11e31e775a5535e2",
+      "gzip_bytes": 1370,
+      "gzip_sha256": "2043ca5c57f4f0e0b2138153c2b3f981904752069a800bf55a2c64d81572615b"
+    },
+    {
+      "path": "packet-001/output/reference.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/reference.json",
+      "decoded_bytes": 8238,
+      "decoded_sha256": "835139947bbfcbb5d02d5cd6b31d34bc7bc07c536cd7f8cc6a593e3cd8f208e0",
+      "gzip_bytes": 969,
+      "gzip_sha256": "46a7e10c679362b17480a7c9b05f1fe033152d618665040bf3976f6070700763"
+    },
+    {
+      "path": "packet-001/output/reference.pcm.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/reference.pcm",
+      "decoded_bytes": 76800,
+      "decoded_sha256": "e8b729a69b3a94de32a5aa3e91e3862023dcbb8ddebbba4908c7eae4bbf3a73a",
+      "gzip_bytes": 71108,
+      "gzip_sha256": "8eef8182ab846abced64387e18fa63ac4162a3f29f661a94b0b9d08362515d81"
+    },
+    {
+      "path": "packet-001/output/009.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/009.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/026.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/026.stdout.log",
+      "decoded_bytes": 7567,
+      "decoded_sha256": "62de01244a3fff3ffb3794812c433131961065a9bacda4dd083b3eea19a3b827",
+      "gzip_bytes": 1234,
+      "gzip_sha256": "67444605d0828f4d1a8d2557a6ba4040bbd66c51839c9d4c9d79556cf7f2de05"
+    },
+    {
+      "path": "packet-001/output/011.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/011.stdout.log",
+      "decoded_bytes": 192,
+      "decoded_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "gzip_bytes": 163,
+      "gzip_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "packet-001/output/015.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/015.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/004.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/004.stderr.log",
+      "decoded_bytes": 20439,
+      "decoded_sha256": "74cb7fc749f3d2b6bd2ff292232c1b3d49487df6274730a40dd4ff010f0713b7",
+      "gzip_bytes": 4486,
+      "gzip_sha256": "9451157b2e934dda4daf098de7f4a932c302132f6e01acdc47cc7017740a9f12"
+    },
+    {
+      "path": "packet-001/output/baseline.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/baseline.json",
+      "decoded_bytes": 8184,
+      "decoded_sha256": "9a6e57100b994bb1fcf05100a98750b726385e5c53b296ccad68dc9dc267ff10",
+      "gzip_bytes": 819,
+      "gzip_sha256": "13125fc7131d781c6a163e7bdd3b558b8021a27643d1559ade657ccaffb1db35"
+    },
+    {
+      "path": "packet-001/output/000.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/000.stdout.log",
+      "decoded_bytes": 192,
+      "decoded_sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909",
+      "gzip_bytes": 163,
+      "gzip_sha256": "eb789b0d1844e5601fa97025efd23df389f13f9ed434bee7773370b4e64dce7e"
+    },
+    {
+      "path": "packet-001/output/rpc-9.stderr.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/rpc-9.stderr.json",
+      "decoded_bytes": 174850,
+      "decoded_sha256": "9a35cd4c3e60993e6b00b02a6c7274092e18eb8165c4f9208446d83d33446a79",
+      "gzip_bytes": 4021,
+      "gzip_sha256": "60e1d57823588cd17cae7ad00d056db28566f99c6e1777f6e2d9931cffa32d3c"
+    },
+    {
+      "path": "packet-001/output/018.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/018.stderr.log",
+      "decoded_bytes": 1587761,
+      "decoded_sha256": "9d35ed624b00befb21b7c4be89e796d50f23f6c5bb1391c2b293a3aa38256b03",
+      "gzip_bytes": 140214,
+      "gzip_sha256": "9917a724559bcbf11e3a51f377b5e67bebb82f67ceede1f1155146b89c2f4fd8"
+    },
+    {
+      "path": "packet-001/output/005.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/005.stdout.log",
+      "decoded_bytes": 63,
+      "decoded_sha256": "a0954b36928dfe6bf15cb4516a1b0670d967fad1865603475b00a4a65f2afcea",
+      "gzip_bytes": 80,
+      "gzip_sha256": "1546a2cdfc2abb707f0d799311cce512df26a5baccb6cca52a664eb38c6b8b62"
+    },
+    {
+      "path": "packet-001/output/001.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/001.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/019.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/019.stdout.log",
+      "decoded_bytes": 1896205,
+      "decoded_sha256": "f63689df5ba61336cb2270ebb3f5e6eaddffe16cc76b97f35c31074505b281d6",
+      "gzip_bytes": 193228,
+      "gzip_sha256": "eba36ee82ca384abdd2be761e8da89be3e26768e781c97d578fff92dd32086da"
+    },
+    {
+      "path": "packet-001/output/authored-read.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/authored-read.json",
+      "decoded_bytes": 15524,
+      "decoded_sha256": "b16b5915afe493083fe31e91ab22ab95ac898449a438a907b2dd5afe8932fda2",
+      "gzip_bytes": 1214,
+      "gzip_sha256": "ee6aaacd3f11e0d2243ef9a46d724d4f6fcda896fe310ac8b60ac81a8517b303"
+    },
+    {
+      "path": "packet-001/output/baseline.pcm.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/baseline.pcm",
+      "decoded_bytes": 76800,
+      "decoded_sha256": "e8b729a69b3a94de32a5aa3e91e3862023dcbb8ddebbba4908c7eae4bbf3a73a",
+      "gzip_bytes": 71108,
+      "gzip_sha256": "8eef8182ab846abced64387e18fa63ac4162a3f29f661a94b0b9d08362515d81"
+    },
+    {
+      "path": "packet-001/output/guest.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/guest.json",
+      "decoded_bytes": 5673,
+      "decoded_sha256": "ffd7facd0c136ab93ee562fa6c6cbb931aefc106b5d87abd4d1eee52f2ff7f37",
+      "gzip_bytes": 2574,
+      "gzip_sha256": "c1d969d9a817ca4aad8b6a6ef76551b67658862a1abcca98d585b32b1138a546"
+    },
+    {
+      "path": "packet-001/output/008.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/008.stdout.log",
+      "decoded_bytes": 553,
+      "decoded_sha256": "6258fc4456335209c375f4317bb37bf03d8e27f620584119f1527ccc81ec1604",
+      "gzip_bytes": 344,
+      "gzip_sha256": "fc3c9be1e62f3ad70b425093d9b3dcddea425b7caf5feb3273a9fb13f4c7f670"
+    },
+    {
+      "path": "packet-001/output/010.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/010.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/027.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/027.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/rpc-13.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/rpc-13.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/014.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/014.stdout.log",
+      "decoded_bytes": 335,
+      "decoded_sha256": "d07cc2eaded0c694fc3c2cd7c38334add9da6b558231d9e25a9db1fea4ff39ea",
+      "gzip_bytes": 239,
+      "gzip_sha256": "b1912a10d09be9c731b4e8ca77ec69b28be9f196b00690366c1ee3006ab501c0"
+    },
+    {
+      "path": "packet-001/output/023.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/023.stdout.log",
+      "decoded_bytes": 286,
+      "decoded_sha256": "a043273e30de7a7b69cae04739b960af3ac69cd56da67e97ea78cd6608426cbb",
+      "gzip_bytes": 234,
+      "gzip_sha256": "0325f6f98d8d6cbc436241a7ab1cd6254a3a09a75f9731ccb1b5605353637a73"
+    },
+    {
+      "path": "packet-001/output/013.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/013.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/024.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/024.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/rpc-12.stderr.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/rpc-12.stderr.json",
+      "decoded_bytes": 86003,
+      "decoded_sha256": "c5e6824df74e62338c713f114157c9709a5504dead258bf5095dc13449009680",
+      "gzip_bytes": 2467,
+      "gzip_sha256": "7ed52f8bf74134f44efcca0ee2cee909d196a681287416002aea46123d663d06"
+    },
+    {
+      "path": "packet-001/output/017.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/017.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/imports.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/imports.json",
+      "decoded_bytes": 2201,
+      "decoded_sha256": "2b87194de326ac644d32a72c6b30f31d145a691e4404f55b990fed1306f5832c",
+      "gzip_bytes": 639,
+      "gzip_sha256": "9bfed1bda4b62fc030fc418cbd6aec088def8a0dd0f1ccbf6772805db12a547a"
+    },
+    {
+      "path": "packet-001/output/baseline-input.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/baseline-input.json",
+      "decoded_bytes": 116,
+      "decoded_sha256": "5ecad733a2b584a97b8891049409e860f7fe6ff927c61a78c74afb4faa8a343e",
+      "gzip_bytes": 107,
+      "gzip_sha256": "98512552c0c1a8d73b0c01f849abc33f5b40058129fedfbf553c25a048927ecf"
+    },
+    {
+      "path": "packet-001/output/headless.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/headless.json",
+      "decoded_bytes": 1346,
+      "decoded_sha256": "ab19c2df3accd805edbd26cbe7ec31f48341455d84e42437b58f898646758bd1",
+      "gzip_bytes": 552,
+      "gzip_sha256": "b1f3d0c63c4b007a5665f0fd4a1df5bcf4d24f33f53d0b5e9dff366d34953876"
+    },
+    {
+      "path": "packet-001/output/authored.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/authored.json",
+      "decoded_bytes": 772,
+      "decoded_sha256": "2f7af556ee142a1d63930b579938d472e26741e2a0e27ab08d4215ab1c385ff4",
+      "gzip_bytes": 514,
+      "gzip_sha256": "af5a9433f6ed1f2e15361d0171dde493a6fa106deecd78b2520124978bcc2963"
+    },
+    {
+      "path": "packet-001/output/006.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/006.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/baseline.save.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/baseline.save",
+      "decoded_bytes": 7799,
+      "decoded_sha256": "e5e8d52498ba2b63f06d8f9ead5262b37af3d410294c7ca5fd80db3bc7085443",
+      "gzip_bytes": 1007,
+      "gzip_sha256": "4d13904d5e175f97dab679cd31e8d534cf75fc30753b570f4381153367085b35"
+    },
+    {
+      "path": "packet-001/output/002.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/002.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/028.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/028.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/007.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/007.stdout.log",
+      "decoded_bytes": 734,
+      "decoded_sha256": "d367f0765989a2f0128b9af173e8a975dd3f21c6d02e0c1ae252e6974de2a740",
+      "gzip_bytes": 407,
+      "gzip_sha256": "2813141292f8b2ceddddd69c7e8e528e61849c61f897dd7c6fde579f4beca46c"
+    },
+    {
+      "path": "packet-001/output/003.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/003.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/012.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/012.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/021.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/021.stdout.log",
+      "decoded_bytes": 20255,
+      "decoded_sha256": "27ef2e70f508781028312e0612f38c92683a899896503807e9bb70c79ae656b7",
+      "gzip_bytes": 3773,
+      "gzip_sha256": "8998bcc2a7852b5864340521114442fcb97b132c5a67ada2c26c2b899b6f211a"
+    },
+    {
+      "path": "packet-001/output/016.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/016.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "packet-001/output/package/export.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/package/export.json",
+      "decoded_bytes": 9661,
+      "decoded_sha256": "6707074d1f3d105d3c8a11d256aa8fc1d5c632f94fceca99d1cb86a891a7d497",
+      "gzip_bytes": 3365,
+      "gzip_sha256": "24f38c6004db1d82168cb87afc01f5be6e1f511269895e6504e3ab1266303e38"
+    },
+    {
+      "path": "packet-001/output/package/project-build.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/package/project-build.json",
+      "decoded_bytes": 2587,
+      "decoded_sha256": "cebdc77a17d2113ec2dfafe35292b46723ca7e7e2ed4243085ea2c8db8bc43dc",
+      "gzip_bytes": 1328,
+      "gzip_sha256": "7502e94d76511dc6ef1cf6a85b3c099fd35fafdfb744c4977ba648056d92e464"
+    },
+    {
+      "path": "packet-001/output/package/normal-dependencies.txt.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/package/normal-dependencies.txt",
+      "decoded_bytes": 32520,
+      "decoded_sha256": "e4446349a0006cc6cbad8aca83a7d7249c5705ea093e61007f1c8ff59a8c623f",
+      "gzip_bytes": 4038,
+      "gzip_sha256": "7b9e4d1ac03080de7c3159a19bfdc58b544d040ca9e21b823257e0fabc801aca"
+    },
+    {
+      "path": "packet-001/output/package/build.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/packet-001/output/package/build.log",
+      "decoded_bytes": 1587761,
+      "decoded_sha256": "9d35ed624b00befb21b7c4be89e796d50f23f6c5bb1391c2b293a3aa38256b03",
+      "gzip_bytes": 140214,
+      "gzip_sha256": "9917a724559bcbf11e3a51f377b5e67bebb82f67ceede1f1155146b89c2f4fd8"
+    },
+    {
+      "path": "replay-packet-002/run.py.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/run.py",
+      "decoded_bytes": 7486,
+      "decoded_sha256": "c73c9a923b908be6828c469d958b59e55a841db64d6c0fb0be203b8569ee1ae5",
+      "gzip_bytes": 2818,
+      "gzip_sha256": "4e1498bae12ef1b30101a6c583239876b4e5f0d961b077f7b69296edbf30f103"
+    },
+    {
+      "path": "replay-packet-002/result.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/result.json",
+      "decoded_bytes": 11445,
+      "decoded_sha256": "49dc4f8c622b36c486ad0c8aa985c26cf8f98573bf5f737fbc358bc70e999dcf",
+      "gzip_bytes": 867,
+      "gzip_sha256": "ca5018651571f862efa6c1f295a550ee4f0744831236d9207efa0be9ff57ec6f"
+    },
+    {
+      "path": "replay-packet-002/inputs.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/inputs.json",
+      "decoded_bytes": 25088,
+      "decoded_sha256": "5a9e103eab8948c585118b8763abda86fd7236160f6fa67fe9dfe8e9d6126065",
+      "gzip_bytes": 4153,
+      "gzip_sha256": "f06c378a31e7004a4dbcf89c18404ae2fe2da3910274cde26f6443aecfec3d3f"
+    },
+    {
+      "path": "replay-packet-002/closeout.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/closeout.json",
+      "decoded_bytes": 844,
+      "decoded_sha256": "0471be718cbe05a8d4e3ca7229fce689df3e94164878873e042e3ed50b757a93",
+      "gzip_bytes": 262,
+      "gzip_sha256": "93c024ce72fc7491351e9035fc5aa0143c620013c7b5169b5577e391e5e76b51"
+    },
+    {
+      "path": "replay-packet-002/output/000.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/000.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "replay-packet-002/output/004.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/004.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "replay-packet-002/output/repeated.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/repeated.json",
+      "decoded_bytes": 5566,
+      "decoded_sha256": "1f7ffdeebfecd32e224f28ba1cee0017fb14d13dccf65b3a1d4d3955749ef0df",
+      "gzip_bytes": 743,
+      "gzip_sha256": "ac382933ef22cb6058f82b5975e5dcaf341dfe7863178f7127caaadb8a5f2b79"
+    },
+    {
+      "path": "replay-packet-002/output/repeated-observe.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/repeated-observe.json",
+      "decoded_bytes": 2493,
+      "decoded_sha256": "45e8dd83f90186fdfacc6aaa5fd4e96c7337db56456eb4d001d4698a6dad9576",
+      "gzip_bytes": 340,
+      "gzip_sha256": "d0e4b30452851321c1c175a57653e17d10d0158c34802832cd1c7e215a0f7136"
+    },
+    {
+      "path": "replay-packet-002/output/process-inventory.jsonl.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/process-inventory.jsonl",
+      "decoded_bytes": 631,
+      "decoded_sha256": "d732527ad4855bc6b54c28ce13aaea83cda384d5b583993621b81b8a113185e8",
+      "gzip_bytes": 146,
+      "gzip_sha256": "8fa6c26b3e2797d70fbb73e1d93afdb95a70264cae0cc2f725e645939dd058c6"
+    },
+    {
+      "path": "replay-packet-002/output/quota-input.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/quota-input.json",
+      "decoded_bytes": 269,
+      "decoded_sha256": "d39f41e4c5baca5ea4d6a02c4f0c07094efd1958b2ac514f2133699a3f33da33",
+      "gzip_bytes": 164,
+      "gzip_sha256": "ba002c3c27cd75dd0f64a6aa6fdf28e49620ba11ab435e9bc187ce7d096a25d4"
+    },
+    {
+      "path": "replay-packet-002/output/009.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/009.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "replay-packet-002/output/resumed.pcm.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/resumed.pcm",
+      "decoded_bytes": 44800,
+      "decoded_sha256": "5bed0f4b9205daa910dd856d48ba07ecacd43c92303c29aa4773f6a7e16c0dcb",
+      "gzip_bytes": 41493,
+      "gzip_sha256": "c97d6ee90e8f3553cceefb8396b1b846cbabad2de8034f6222f2467964c6f265"
+    },
+    {
+      "path": "replay-packet-002/output/callback-process.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/callback-process.json",
+      "decoded_bytes": 1829,
+      "decoded_sha256": "6d8ab8d856bd155c13f94a8ed510987ae8ae762cb20d289dc14006929330c7ef",
+      "gzip_bytes": 398,
+      "gzip_sha256": "a14b3debe7af22074eb2a7e25ec749fd6bfd087d7ea08b8a0377671c884622fb"
+    },
+    {
+      "path": "replay-packet-002/output/capacity-process.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/capacity-process.json",
+      "decoded_bytes": 1829,
+      "decoded_sha256": "128b8eeb4bda4905a8a7d717cf021bbc54bbd5c9a0b620ed061c06689e2cc50e",
+      "gzip_bytes": 397,
+      "gzip_sha256": "e935acfe48d7a0ff5940ff765607944d147f63cd4af8cef6e9f7dbd2ad2f2aa8"
+    },
+    {
+      "path": "replay-packet-002/output/008.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/008.stderr.log",
+      "decoded_bytes": 68,
+      "decoded_sha256": "729699e6072bf0a11f401d2912533b9c2fa70599087a924f442eda2c81ae2677",
+      "gzip_bytes": 84,
+      "gzip_sha256": "dcd2efa534257331a124255b030d24a023a21b73eae3bf2cc35472f46c7ce377"
+    },
+    {
+      "path": "replay-packet-002/output/offset-process.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/offset-process.json",
+      "decoded_bytes": 1823,
+      "decoded_sha256": "02a94c1320948adcd80dc2f1942a3f6fc2de5a8d79eb68fce88722601c89e545",
+      "gzip_bytes": 397,
+      "gzip_sha256": "5002b4d38e5205017f134f65b7eb6e122684e5a5a65d68c8f7350a98350c42bb"
+    },
+    {
+      "path": "replay-packet-002/output/prefix-input.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/prefix-input.json",
+      "decoded_bytes": 115,
+      "decoded_sha256": "2f88bc5a42f5d0d1cbb8c22aba7022302e8c2cfbf51e24ee248eae90f2defac8",
+      "gzip_bytes": 106,
+      "gzip_sha256": "ab2ebca29594988d0f94070520411e7c067224685b2747288fbe43f7b9262ad3"
+    },
+    {
+      "path": "replay-packet-002/output/repeated-input.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/repeated-input.json",
+      "decoded_bytes": 115,
+      "decoded_sha256": "b858c03469de8ca47c2efb3e51e8acfe2ae4fd54fc310741822a2b351f9ae7a7",
+      "gzip_bytes": 106,
+      "gzip_sha256": "2f4d15d2b0b717ee80972f65e2afe27e9aeed063740c2ef5c4f8ab977ee0b747"
+    },
+    {
+      "path": "replay-packet-002/output/001.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/001.stdout.log",
+      "decoded_bytes": 2062,
+      "decoded_sha256": "4e51a8f98f34183f3316c59b6bee36cc3fe1201d5d44d5b3d2a350ef0d930dd3",
+      "gzip_bytes": 554,
+      "gzip_sha256": "7f93f7f9f096ec570157393b6e6ec740064acd4bf45d460711abda44f9840d47"
+    },
+    {
+      "path": "replay-packet-002/output/005.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/005.stderr.log",
+      "decoded_bytes": 32,
+      "decoded_sha256": "c503f6ae0ef932ea9309837945d0ff26605c3dbf9daf4bbec9192ad0506c34b3",
+      "gzip_bytes": 52,
+      "gzip_sha256": "134785d2d3c4538f38a635e39aab31d680fb1fb9c65ffc6ff8f6d43d18aef45c"
+    },
+    {
+      "path": "replay-packet-002/output/resumed-observe.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/resumed-observe.json",
+      "decoded_bytes": 2493,
+      "decoded_sha256": "45e8dd83f90186fdfacc6aaa5fd4e96c7337db56456eb4d001d4698a6dad9576",
+      "gzip_bytes": 340,
+      "gzip_sha256": "d0e4b30452851321c1c175a57653e17d10d0158c34802832cd1c7e215a0f7136"
+    },
+    {
+      "path": "replay-packet-002/output/baseline-process.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/baseline-process.json",
+      "decoded_bytes": 6232,
+      "decoded_sha256": "d408f2bcccec9ecd961b69c72d0d6f48c0dc8bceaaeb5d1a4c956c2c12aa802a",
+      "gzip_bytes": 1037,
+      "gzip_sha256": "2e06d6686b5120d25b18230d5feff519f16e06e2f35584766a4e459147b67c09"
+    },
+    {
+      "path": "replay-packet-002/output/repeated.save.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/repeated.save",
+      "decoded_bytes": 7799,
+      "decoded_sha256": "e5e8d52498ba2b63f06d8f9ead5262b37af3d410294c7ca5fd80db3bc7085443",
+      "gzip_bytes": 1007,
+      "gzip_sha256": "4d13904d5e175f97dab679cd31e8d534cf75fc30753b570f4381153367085b35"
+    },
+    {
+      "path": "replay-packet-002/output/002.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/002.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "replay-packet-002/output/owner.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/owner.json",
+      "decoded_bytes": 25969,
+      "decoded_sha256": "387abcd2cc6ab5b884f24070ae595fb3531caaf1f8d183a6780f84df95d05a6a",
+      "gzip_bytes": 1502,
+      "gzip_sha256": "bc3a1ae52f7ce55007f1e5eeae1080798592e26c4afbaa5c69b46da27679e001"
+    },
+    {
+      "path": "replay-packet-002/output/large-limit-input.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/large-limit-input.json",
+      "decoded_bytes": 269,
+      "decoded_sha256": "03682d9798e7ac7b9e441d2762c2424ecf1b91474b4fceff23ed7e96316a90d4",
+      "gzip_bytes": 164,
+      "gzip_sha256": "cc29e69a4a0b1b09a5a5df26ca035cdf999a7555b82d7b5cc477a4ac740557e0"
+    },
+    {
+      "path": "replay-packet-002/output/006.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/006.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "replay-packet-002/output/zero-limit-process.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/zero-limit-process.json",
+      "decoded_bytes": 1835,
+      "decoded_sha256": "ca3a38c6b4b8867e2f26bf91b3051eff27786d1bebd617ce8607507500ba9406",
+      "gzip_bytes": 400,
+      "gzip_sha256": "96b8dec12b4069e08782f88742903260e8af35a177369a8d7a800c7ab5508c22"
+    },
+    {
+      "path": "replay-packet-002/output/repeated-process.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/repeated-process.json",
+      "decoded_bytes": 4916,
+      "decoded_sha256": "f759fc4879450be17623c34eccbb7c791026545c93a2b21877dea98656c2d125",
+      "gzip_bytes": 970,
+      "gzip_sha256": "c29a878d0272d03f6efc9d43733949b39f461e0c1743b3b67138d3dd3306bb45"
+    },
+    {
+      "path": "replay-packet-002/output/resumed-process.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/resumed-process.json",
+      "decoded_bytes": 4912,
+      "decoded_sha256": "9e1f62833eb122c8b49f83cf56b44f0be1ea54ca26f48cce908a13a7cba33a77",
+      "gzip_bytes": 969,
+      "gzip_sha256": "67f4b1dfcc46bc10b32c907e60653e5de1829bf04a68ad9cd4d5291db95dabd4"
+    },
+    {
+      "path": "replay-packet-002/output/baseline-observe.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/baseline-observe.json",
+      "decoded_bytes": 3953,
+      "decoded_sha256": "6a1cafa4d82218f48d6de2c729dca6a657d9506887b0826a207636eb3ab09233",
+      "gzip_bytes": 386,
+      "gzip_sha256": "9d09e36e4930be5008a2ccd7f45662e4c18c5b2ebd596a2724cfb67f6a907ded"
+    },
+    {
+      "path": "replay-packet-002/output/zero-limit-input.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/zero-limit-input.json",
+      "decoded_bytes": 269,
+      "decoded_sha256": "545af2238ede9f31583c845e00c7b5e176db4986d71d009676e4a11b57f0daaf",
+      "gzip_bytes": 164,
+      "gzip_sha256": "94f55343b3bc90324eb94db230485d32feec13ba9bcaff37c021682451b1b47e"
+    },
+    {
+      "path": "replay-packet-002/output/quota-process.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/quota-process.json",
+      "decoded_bytes": 1858,
+      "decoded_sha256": "a670c9877c1bde879aa0791c5dc0fb2f3fffbd7ff40474f4b494415ee2d3a1e3",
+      "gzip_bytes": 421,
+      "gzip_sha256": "a86e112a0bc0f4cbd62fe0ec2b9054930bb5ec55ee5fd952fa0ec159705ee70b"
+    },
+    {
+      "path": "replay-packet-002/output/003.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/003.stdout.log",
+      "decoded_bytes": 2627,
+      "decoded_sha256": "53808d4e0c7e69066712ab15bb0b3cb501b426794457f038290df6f29580691b",
+      "gzip_bytes": 606,
+      "gzip_sha256": "abaedfcceb768124b9e36fe541f67a0ce22773bf81ec718dd2128f90f8908635"
+    },
+    {
+      "path": "replay-packet-002/output/007.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/007.stderr.log",
+      "decoded_bytes": 32,
+      "decoded_sha256": "c503f6ae0ef932ea9309837945d0ff26605c3dbf9daf4bbec9192ad0506c34b3",
+      "gzip_bytes": 52,
+      "gzip_sha256": "134785d2d3c4538f38a635e39aab31d680fb1fb9c65ffc6ff8f6d43d18aef45c"
+    },
+    {
+      "path": "replay-packet-002/output/repeated.pcm.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/repeated.pcm",
+      "decoded_bytes": 44800,
+      "decoded_sha256": "5bed0f4b9205daa910dd856d48ba07ecacd43c92303c29aa4773f6a7e16c0dcb",
+      "gzip_bytes": 41493,
+      "gzip_sha256": "c97d6ee90e8f3553cceefb8396b1b846cbabad2de8034f6222f2467964c6f265"
+    },
+    {
+      "path": "replay-packet-002/output/009.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/009.stderr.log",
+      "decoded_bytes": 32,
+      "decoded_sha256": "c503f6ae0ef932ea9309837945d0ff26605c3dbf9daf4bbec9192ad0506c34b3",
+      "gzip_bytes": 52,
+      "gzip_sha256": "134785d2d3c4538f38a635e39aab31d680fb1fb9c65ffc6ff8f6d43d18aef45c"
+    },
+    {
+      "path": "replay-packet-002/output/004.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/004.stderr.log",
+      "decoded_bytes": 32,
+      "decoded_sha256": "c503f6ae0ef932ea9309837945d0ff26605c3dbf9daf4bbec9192ad0506c34b3",
+      "gzip_bytes": 52,
+      "gzip_sha256": "134785d2d3c4538f38a635e39aab31d680fb1fb9c65ffc6ff8f6d43d18aef45c"
+    },
+    {
+      "path": "replay-packet-002/output/resumed.save.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/resumed.save",
+      "decoded_bytes": 7799,
+      "decoded_sha256": "e5e8d52498ba2b63f06d8f9ead5262b37af3d410294c7ca5fd80db3bc7085443",
+      "gzip_bytes": 1007,
+      "gzip_sha256": "4d13904d5e175f97dab679cd31e8d534cf75fc30753b570f4381153367085b35"
+    },
+    {
+      "path": "replay-packet-002/output/baseline.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/baseline.json",
+      "decoded_bytes": 8184,
+      "decoded_sha256": "9a6e57100b994bb1fcf05100a98750b726385e5c53b296ccad68dc9dc267ff10",
+      "gzip_bytes": 819,
+      "gzip_sha256": "13125fc7131d781c6a163e7bdd3b558b8021a27643d1559ade657ccaffb1db35"
+    },
+    {
+      "path": "replay-packet-002/output/000.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/000.stdout.log",
+      "decoded_bytes": 3900,
+      "decoded_sha256": "d4e570abc913c8f1f591d2368c64fc27d0023564d9e5f88a54720c416c8d8255",
+      "gzip_bytes": 680,
+      "gzip_sha256": "1ce5da3bacd7a978de0acd3eb85676b5b843fb231abe69ce158a6d761a66b9e3"
+    },
+    {
+      "path": "replay-packet-002/output/prefix-process.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/prefix-process.json",
+      "decoded_bytes": 4119,
+      "decoded_sha256": "49c6f546e6eeecf92466eca3161a008073b74a994edf8d89154eeda888671dcf",
+      "gzip_bytes": 899,
+      "gzip_sha256": "ca0de06399d9aa097f0bffe2eb45bc8e91522fc0f4d8967e50bdc19fd1d206fa"
+    },
+    {
+      "path": "replay-packet-002/output/prefix.save.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/prefix.save",
+      "decoded_bytes": 7802,
+      "decoded_sha256": "fca2b710c3563a45f03281fc001ff748c81504dfa8da5c9e28f8fe18a30310b9",
+      "gzip_bytes": 1006,
+      "gzip_sha256": "c33f585208d7732e3f0f901bfe849931443dd033e02e7a39e63fad53a23c1b08"
+    },
+    {
+      "path": "replay-packet-002/output/resumed-input.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/resumed-input.json",
+      "decoded_bytes": 115,
+      "decoded_sha256": "b858c03469de8ca47c2efb3e51e8acfe2ae4fd54fc310741822a2b351f9ae7a7",
+      "gzip_bytes": 106,
+      "gzip_sha256": "2f4d15d2b0b717ee80972f65e2afe27e9aeed063740c2ef5c4f8ab977ee0b747"
+    },
+    {
+      "path": "replay-packet-002/output/005.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/005.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "replay-packet-002/output/001.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/001.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "replay-packet-002/output/callback-input.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/callback-input.json",
+      "decoded_bytes": 269,
+      "decoded_sha256": "411831ade1a898b2d04a6ca0ce27292ff9194c6818fa30864188f2838bde12d5",
+      "gzip_bytes": 163,
+      "gzip_sha256": "a54bd34c21e9f84cdb43d6fef0f9f41e61c542325b268b90ae1d76ebe5acbbee"
+    },
+    {
+      "path": "replay-packet-002/output/baseline.pcm.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/baseline.pcm",
+      "decoded_bytes": 76800,
+      "decoded_sha256": "e8b729a69b3a94de32a5aa3e91e3862023dcbb8ddebbba4908c7eae4bbf3a73a",
+      "gzip_bytes": 71108,
+      "gzip_sha256": "8eef8182ab846abced64387e18fa63ac4162a3f29f661a94b0b9d08362515d81"
+    },
+    {
+      "path": "replay-packet-002/output/008.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/008.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "replay-packet-002/output/prefix-observe.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/prefix-observe.json",
+      "decoded_bytes": 1885,
+      "decoded_sha256": "2af3a4721be3cb0d5bf2ff2f6eba633ea998ca1bf8d1adf94109dca120a08d9b",
+      "gzip_bytes": 315,
+      "gzip_sha256": "9cd81104ad1e8b8219918564821b923046d44a3cda72ccd974cb56789f27fcfd"
+    },
+    {
+      "path": "replay-packet-002/output/baseline-input.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/baseline-input.json",
+      "decoded_bytes": 116,
+      "decoded_sha256": "5ecad733a2b584a97b8891049409e860f7fe6ff927c61a78c74afb4faa8a343e",
+      "gzip_bytes": 107,
+      "gzip_sha256": "98512552c0c1a8d73b0c01f849abc33f5b40058129fedfbf553c25a048927ecf"
+    },
+    {
+      "path": "replay-packet-002/output/006.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/006.stderr.log",
+      "decoded_bytes": 32,
+      "decoded_sha256": "c503f6ae0ef932ea9309837945d0ff26605c3dbf9daf4bbec9192ad0506c34b3",
+      "gzip_bytes": 52,
+      "gzip_sha256": "134785d2d3c4538f38a635e39aab31d680fb1fb9c65ffc6ff8f6d43d18aef45c"
+    },
+    {
+      "path": "replay-packet-002/output/baseline.save.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/baseline.save",
+      "decoded_bytes": 7799,
+      "decoded_sha256": "e5e8d52498ba2b63f06d8f9ead5262b37af3d410294c7ca5fd80db3bc7085443",
+      "gzip_bytes": 1007,
+      "gzip_sha256": "4d13904d5e175f97dab679cd31e8d534cf75fc30753b570f4381153367085b35"
+    },
+    {
+      "path": "replay-packet-002/output/resumed.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/resumed.json",
+      "decoded_bytes": 5566,
+      "decoded_sha256": "1f7ffdeebfecd32e224f28ba1cee0017fb14d13dccf65b3a1d4d3955749ef0df",
+      "gzip_bytes": 743,
+      "gzip_sha256": "ac382933ef22cb6058f82b5975e5dcaf341dfe7863178f7127caaadb8a5f2b79"
+    },
+    {
+      "path": "replay-packet-002/output/002.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/002.stdout.log",
+      "decoded_bytes": 2627,
+      "decoded_sha256": "53808d4e0c7e69066712ab15bb0b3cb501b426794457f038290df6f29580691b",
+      "gzip_bytes": 606,
+      "gzip_sha256": "abaedfcceb768124b9e36fe541f67a0ce22773bf81ec718dd2128f90f8908635"
+    },
+    {
+      "path": "replay-packet-002/output/prefix.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/prefix.json",
+      "decoded_bytes": 4463,
+      "decoded_sha256": "ff94c8b2d92f379d9982502734af2a2ac256a8deca48e5f30fd01cee56750c00",
+      "gzip_bytes": 687,
+      "gzip_sha256": "86ccc794aa12b8cc58331f50adf951d8d04d94f8c48eb46526fd74f937560b08"
+    },
+    {
+      "path": "replay-packet-002/output/capacity-input.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/capacity-input.json",
+      "decoded_bytes": 269,
+      "decoded_sha256": "a14316f6e6e52def57e71a87a3493bf9781ea38fb640ce1c74b1cc0cbd4d684f",
+      "gzip_bytes": 164,
+      "gzip_sha256": "b5d3d0a307c274ae319a63f81159fcad5c0963d921f589e8bf64f9dbc4617e43"
+    },
+    {
+      "path": "replay-packet-002/output/007.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/007.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "replay-packet-002/output/003.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/003.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "replay-packet-002/output/offset-input.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/offset-input.json",
+      "decoded_bytes": 269,
+      "decoded_sha256": "81026f746669120cf28e2f4bbe491fda43cfa6695856ba42558e6888efdf9dd2",
+      "gzip_bytes": 163,
+      "gzip_sha256": "c0676b977398e795dfbc867cd20e6c77a2b471eb73a2ca78e0c5a5accf3ee174"
+    },
+    {
+      "path": "replay-packet-002/output/large-limit-process.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/large-limit-process.json",
+      "decoded_bytes": 1838,
+      "decoded_sha256": "6133671775325f15567d7d6c09d9217601a2d17aa19c54e87f6623958454a5c9",
+      "gzip_bytes": 400,
+      "gzip_sha256": "dac920b2fbb7901c0f88fee03c00bd638e5e8b652faa03d71f6dbada210ad5ed"
+    },
+    {
+      "path": "replay-packet-002/output/prefix.pcm.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-localization-export-001/replay-packet-002/output/prefix.pcm",
+      "decoded_bytes": 32000,
+      "decoded_sha256": "26ea3a7f36261499c186e157854c326e65c2559395f493c8c06d6e7e54863d4e",
+      "gzip_bytes": 29622,
+      "gzip_sha256": "5a7e70e3311716379e25724fc0df5b72598129bb4a36b5c211f16e2ae73dd406"
+    },
+    {
+      "path": "reviews/native-wasm-localization-b79-source-20261017.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-reviews/native-wasm-localization-b79-source-20261017.json",
+      "decoded_bytes": 3618,
+      "decoded_sha256": "cf479225c438eb7cc84b2855366fd793338e52faeaac52f8f738ec11d50213d1",
+      "gzip_bytes": 1905,
+      "gzip_sha256": "789db21634f4b49e2b3f0f9e5a6a356a15bacade6a8dabba55f26d53e186bb03"
+    },
+    {
+      "path": "reviews/localization-timer-framing-486303d5-source-20261017.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-reviews/localization-timer-framing-486303d5-source-20261017.json",
+      "decoded_bytes": 2192,
+      "decoded_sha256": "90ae4a691142e66d5f530496fe8a848caefca8c2156a56ef9453c033cd4fb6a5",
+      "gzip_bytes": 1018,
+      "gzip_sha256": "c860076c5dc77d69aea8e5fb49a25598a9a1397af37d634567c69e3ffe2699b3"
+    },
+    {
+      "path": "reviews/localization-followup002-data-20261017.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-reviews/localization-followup002-data-20261017.json",
+      "decoded_bytes": 21164,
+      "decoded_sha256": "72b7366955230029d00a47dcad535c072c31b90e3c4f035df37f6d3218f30c9d",
+      "gzip_bytes": 3385,
+      "gzip_sha256": "339802d7142684427ea906dfb181f976f6023ded4158672442aa7a03902856e0"
+    },
+    {
+      "path": "fast-checks/run.py.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/run.py",
+      "decoded_bytes": 1648,
+      "decoded_sha256": "9a302e88686a489f95a2a4c14bd4882b7d49f1ea4da68f320a288ff7ba50658a",
+      "gzip_bytes": 989,
+      "gzip_sha256": "5873539d0e7ed5a8e77431d07c022d99a98cddb9885ba161a727e505a6f2f835"
+    },
+    {
+      "path": "fast-checks/steps.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/steps.json",
+      "decoded_bytes": 666,
+      "decoded_sha256": "4cceb96579d07dbce6fead5ce78b23c6861656d7fed071ff386c9b2c08843746",
+      "gzip_bytes": 226,
+      "gzip_sha256": "a87b350e8081f226d57375888fef72c98a461fa86fa42c0e3eb5dcd14d468531"
+    },
+    {
+      "path": "fast-checks/result.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/result.json",
+      "decoded_bytes": 3720,
+      "decoded_sha256": "a2cb478dccacb3b687526163f3a969d744186e026c711e3701c33e403b28aa13",
+      "gzip_bytes": 674,
+      "gzip_sha256": "3f5bba300190911d9ddb2bd4f9b912db95817c79a52cda4ecc6a19112d931196"
+    },
+    {
+      "path": "fast-checks/closeout.json.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/closeout.json",
+      "decoded_bytes": 292,
+      "decoded_sha256": "4119e6f8fcd781b7869532bfe3f533523a34d499830052364d3eb36d4a047fcc",
+      "gzip_bytes": 193,
+      "gzip_sha256": "a65458ac575eae4163adda697638bcc5993518da782eeca0d598fed40019b07c"
+    },
+    {
+      "path": "fast-checks/output/000.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/000.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/004.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/004.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/009.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/009.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/008.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/008.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/001.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/001.stdout.log",
+      "decoded_bytes": 7754,
+      "decoded_sha256": "c9177f86ca2ce70e50a3174dd84ab0a7d5a896c6a6281b3a3292035dda19c1b4",
+      "gzip_bytes": 2167,
+      "gzip_sha256": "381ae55c8cd5b86177ef8656735ee1715c3d4321ec3fca8f5ad89683bef7a8c5"
+    },
+    {
+      "path": "fast-checks/output/005.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/005.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/002.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/002.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/006.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/006.stdout.log",
+      "decoded_bytes": 1551,
+      "decoded_sha256": "f0aa2c124b79e10e71fe4178dfbf423abb5af4c69c0372db8bd9b57250080ce4",
+      "gzip_bytes": 570,
+      "gzip_sha256": "ba7c374016072bacca8e1ceffc85359f3ddcab85bb65a43ff02158ea7e4e5160"
+    },
+    {
+      "path": "fast-checks/output/003.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/003.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/007.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/007.stderr.log",
+      "decoded_bytes": 3600,
+      "decoded_sha256": "b39acf51b68a8940ef8dac9f92e07443c04b70348e5950a735cea5972bde77ce",
+      "gzip_bytes": 135,
+      "gzip_sha256": "2793e08b0908b79cf496148dc56eb918be1d04e54a79209531ca88ca7ad442bc"
+    },
+    {
+      "path": "fast-checks/output/009.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/009.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/004.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/004.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/000.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/000.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/005.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/005.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/001.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/001.stderr.log",
+      "decoded_bytes": 113600,
+      "decoded_sha256": "206029d484ef3ddabe91d1ee48f685e346c725fa4cb3ed93f67c439645f76ad3",
+      "gzip_bytes": 18857,
+      "gzip_sha256": "a70b0ae9904dd6158a07d347bb1a871068f24f0b278b8134c44f35e3e8bec80e"
+    },
+    {
+      "path": "fast-checks/output/008.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/008.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/006.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/006.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/002.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/002.stdout.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/output/007.stdout.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/007.stdout.log",
+      "decoded_bytes": 608,
+      "decoded_sha256": "de3bff90702003c8bf4bcbfaf82eb11f0d2561315d2d6f073ca30c42b428ff18",
+      "gzip_bytes": 403,
+      "gzip_sha256": "33ef41b90ba095050d0fc6bd9e2a1d2606c897e5274854648cb80098b526cce4"
+    },
+    {
+      "path": "fast-checks/output/003.stderr.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/output/003.stderr.log",
+      "decoded_bytes": 0,
+      "decoded_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    {
+      "path": "fast-checks/corrected-tools-tests.log.gz",
+      "original_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/authored-localization-fast-checks/corrected-tools-tests.log",
+      "decoded_bytes": 121496,
+      "decoded_sha256": "6c37c911ce827026cb1352c4d5b823c57cdfbea6f2a71d28c89761c50412d2da",
+      "gzip_bytes": 21001,
+      "gzip_sha256": "d7f3b32478915ad0229d1c6892dbeda21672a6d6e286aa9c0324c945c9fda117"
+    }
+  ]
+}
