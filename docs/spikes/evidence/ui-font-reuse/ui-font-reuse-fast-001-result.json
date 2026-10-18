@@ -1,0 +1,216 @@
+{
+  "source": "0063b97c03045e285e128fed76d72f82bca4095d",
+  "passed": true,
+  "wrapper_pid": 17038,
+  "stages": [
+    {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.3655090000247583
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "seconds": 43.918621958000585
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 2.1421760839875787
+    },
+    {
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.34844533301657066
+    },
+    {
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.3487450000247918
+    },
+    {
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.5386237920029089
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build",
+        "--workspace",
+        "editor/ui"
+      ],
+      "exit": 0,
+      "seconds": 3.8762720419908874
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test",
+        "--workspace",
+        "editor/ui"
+      ],
+      "exit": 0,
+      "seconds": 9.75791391596431
+    },
+    {
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.6026159169850871
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.3724031249876134
+    }
+  ],
+  "seconds": 63.3062609169865,
+  "groups": [
+    {
+      "pid": 17052,
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 17056,
+      "argv": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 18394,
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 18411,
+      "argv": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 18414,
+      "argv": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 18417,
+      "argv": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 18420,
+      "argv": [
+        "npm",
+        "run",
+        "build",
+        "--workspace",
+        "editor/ui"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 18458,
+      "argv": [
+        "npm",
+        "run",
+        "test",
+        "--workspace",
+        "editor/ui"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 18553,
+      "argv": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 18563,
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    }
+  ],
+  "peaks": {
+    "target": 15323258880,
+    "scratch": 7127040,
+    "output": 33718272,
+    "rss": 4526194688
+  }
+}
