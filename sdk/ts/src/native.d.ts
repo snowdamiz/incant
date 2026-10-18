@@ -60,9 +60,10 @@ export interface NativeCommands {
   /** Finite [0,1_000_000], lux (directional) or candela (point/spot).
    * Uses the final SetSpatial declaration; missing/despawned/non-light refuses. */
   setLightIntensity(id: NativeId, intensity: number): void;
-  /** Current host capabilities. Empty on ordinary/headless/mobile hosts; Wasm
-   * parity is not yet implemented. Gamepad targets support rumble, device targets
-   * impact. Query again after topology/session changes; never assume support. */
+  /** Current host capabilities; empty when the host has no supported actuator.
+   * Native Wasmtime/wasm2c guests share this capability protocol. Gamepad targets
+   * support rumble, device targets impact. Query again after topology/session
+   * changes; never assume support. */
   hapticCapabilities(): ReadonlyArray<HapticTarget>;
   /** At most32 requests/tick within the shared command quota. Finite amplitudes
    * 0..1, integer rumble duration1..5000ms. Target generation and effect kind must
@@ -409,8 +410,8 @@ export interface NativePersistentState {
  * and <=1024 world-text rows, combined text <=1MiB. This is not editable input
  * buffer state: use input.ui events for accepted edits/submission. Queued writes
  * appear next tick. Immutable properties/array length; no borrowed native data.
- * Native Rust uses the same typed ControlUi/ControlText queue; Wasm parity for
- * these controls/snapshots remains unsupported. No runtime authoring mutation. */
+ * Native Rust and Wasmtime/wasm2c guests share the typed ControlUi/ControlText
+ * queue and bounded declaration snapshots. No runtime authoring mutation. */
 export interface NativeHud {
   readonly widgets: readonly { readonly id: NativeId; readonly role: 'root' | 'container' | 'label' | 'button' | 'text_input'; readonly text: string | undefined; readonly disabled: boolean }[];
   readonly texts: readonly { readonly id: NativeId; readonly text: string }[];
@@ -495,8 +496,9 @@ export interface NativeBehavior {
    * ephemeral: all gameplay state needed after load must be in context.state or
    * native world components. Native source-scoped timer data is restored; timer
    * events are still handled by update. Non-opted-in active behaviors prevent
-   * checkpoint creation. Static modules/physics/audio remain unsupported by the
-   * initial native-session checkpoint API. */
+   * checkpoint creation. Capture/load also requires checkpoint-capable host
+   * owners for every active physics, UI and audio system; missing or unsupported
+   * owners refuse. */
   readonly persistence?: { readonly version: 1 };
   /** Synchronous only; no promises, deferred work or non-undefined return. */
   update(context: NativeContext): undefined;
