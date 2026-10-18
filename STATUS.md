@@ -87,6 +87,31 @@ Skeleton and structural changes remain outside this admission rule.
 
 ## Current parallel qualification — 2026-10-18
 
+Checkpoint56 is frozen at candidate `41565147`, with exactly main416's tree.
+Its Windows credential job failed three tilemap tests that read the exclusively
+locked journal through an independent file handle. The
+[test-only correction](docs/spikes/tilemap-journal-portability.md) preserves exact
+journal assertions and verifies project/history/redo after release and reopen.
+All ten tilemap tests, scoped strict lint and all ten development checks pass on
+this Mac. The initial post-test audit failure is retained separately from the
+successful native tests and corrected data audit. Windows confirmation remains
+pending. The same checkpoint also found a constant out-of-bounds indexing lint
+in the empty embedded Wasm catalog on Linux, macOS and Windows. The
+[checked catalog split](docs/spikes/static-catalog-payload.md) passes both new
+local boundary controls and strict static-conformance lint, including the actual
+zero-byte generated catalog. Both original failure classes remain recorded;
+release is held until a corrected candidate passes every required check.
+
+
+The [process-cleanup correction](docs/spikes/native-process-cleanup.md) preserves
+both the original operation error and any cleanup failure. It also waits for
+asynchronous descendant retirement without signalling reused identities. On this
+Mac, 52 process executions and four owner controls pass; four Windows-only tests
+remain skipped. All ten development checks pass, including 1,040 UI tests. The
+original memory-limited query build remains failed; the correction does not
+establish a package or performance result. Capture and native-window checks stay
+paused.
+
 Computer use and screen capture are paused for every agent by the director's
 latest instruction. Owned capture helpers and test windows have been stopped;
 native window checks remain held. Terminal implementation, review and data-only
@@ -390,21 +415,23 @@ and all four win measurements above 2 ms do not justify enabling PGO. The
 the compiler changes remain on the retained experiment branch. These are
 CPU measurements, not rendered-game FPS. Independent saved-data review passes;
 all 81 observed identities are absent after terminal success.
-Last reassessment: 2026-10-18 at 05:03 UTC. A bounded
-[source/data review](docs/spikes/evidence/script-budget-source-reassessment-20261018.json)
-found no supported new optimization: typed-read fast paths, zero-copy loan views
-and reused physics queries already exist. Next useful trigger: finer attribution
-of callback parsing, native query execution and result materialization. The
-[default-off query diagnostic](docs/spikes/script-query-attribution.md) now passes
-36 selected CPU controls, the six real ScriptHost controls again after a narrow
-fixture-module lint repair, both strict all-target lint configurations and all
-ten local development checks on the integrated source. Independent source and
-retained-result review pass. PR415 is merged after exact-head development-checks
-success; main `7a9bad9f` has the tested tree. The original lint refusal remains recorded. Whole
-Core shipping-profile attribution and exact gameplay/audio parity are the next
-step; no new benchmark or optimization has been adopted. Do not repeat the
-unchanged PGO comparison; reassess after new attribution or relevant engine changes.
-The 2 ms ScriptTick target remains unmet; other work continues.
+Last reassessment: 2026-10-18 06:27 UTC. A fresh same-source ordinary/query
+shipping pair now completes all 2,156 Core steps with exact full gameplay and
+complete PCM parity. Ordinary ScriptTick p95 is 2.100001–2.110000 ms; instrumented
+p95 is 2.140001–2.150000 ms, with no gate or isolated-overhead claim. Query parsing
+plus result construction accounts for only 0.305% of the same 108 slow whole
+frames; all native queries belong to gameplay, while the stress callback has none.
+This does not support a query-marshaling optimization. Navigation execution still
+dominates query-tail cost; rejected cache/scan experiments remain rejected.
+[Raw attribution, retained build failure and portable replay](docs/spikes/script-query-attribution.md#completed-same-source-shipping-observation)
+are preserved. The next useful trigger is a specific callback, VM or typed-view
+validation change, or a distinct concrete residual-cost hypothesis. Periodic
+bounded reassessment remains allowed; do not repeat unchanged PGO/navigation/
+deadline-check experiments. The 2 ms target remains unmet; other work continues.
+The prior 05:03 UTC source review and default-off observer qualification remain
+recorded in the linked evidence. PR415 merged that observer after review and
+exact-head development checks; this later observation does not change its
+CPU qualification or relabel the original lint failure.
 
 ## Native presentation pacing — bounded intervention rejected
 

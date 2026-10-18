@@ -114,3 +114,47 @@ include observer work and never establish reclaimable CPU cost, saving or a gate
 Schema1/2 behavior remains separate; combined navigation/budget schema4 is not
 admitted by this private adapter. Public exporter and normal v3 reader admission
 are unchanged. Preparation/data-only controls do not execute a shipping workload.
+
+## Query-stage variant
+
+`project,render-input,profile,diagnostic-script-queries` selects schema5. The four
+phase receivers remain exact; only player, script and profile also gain queries.
+Runtime gains phase diagnostics, not query diagnostics. No combined navigation or
+budget mode is admitted. Existing modes retain their Node 24.21 and 74-file rules.
+
+For this mode, the qualified same-source ordinary/diagnostic pair uses the
+retained, hashed Node 22.23.3 executable and exactly 60 retained Core files whose
+bytes match the historical 74-file manifest. The missing 14 names must all be
+authoring transaction history or `source.journal.jsonl`; no script, project or
+asset input can be omitted. This is explicitly a history-free snapshot, not a
+claim that the complete old authoring directory still exists. Normal
+`incant_source::check_recovery` observes the empty epoch before and after cooking;
+it is not bypassed. Each build must produce equal fresh compiler/bytecode/asset
+metadata and runtime data (apart from the genuine build fingerprint).
+
+`query_analysis.py` validates all six categories and four regions, fixed matrices,
+u32/u64 counters, exact known source masks, callback containment and successful
+stage correspondence for every one of the 2,156 frames. Zero-query frames remain
+in the analysis; a wholly empty run, failed query, recursive observation, partial
+row, mismatched schema or overflow refuses interpretation. The `other` category
+is visible rather than discarded. Source masks do not invent per-source timings.
+Results retain totals/ratios and residuals for all frames and the same 108 slow
+whole ScriptTicks. Call spans omit their own initial token setup and final drop
+aggregation; those costs remain in callback residual. Neither residual is pure
+interpreter cost or predicted saving. No marginal quantile subtraction is used.
+
+The existing `collect.py` functional-then-diagnostic route remains same-package.
+A fresh ordinary/query pair requires its separately reviewed two-player owner
+and producer bindings; this source change does not launch or authorize it.
+Eight new pure-data controls cover precise totals/zero counts, nested/source
+containment, recursion/failure/invalid numerics, schema/refusal behavior, exact
+target feature recipients, retained-input subset and Node-mode admission.
+All 27 private adapter controls pass. No new Cargo, Core, audio device, window,
+GPU, capture or timing run is established by these preparation tests.
+
+The later same-source pair completed both full Core routes with exact gameplay
+and complete PCM parity. Its ordinary ScriptTick p95 remains above 2 ms; the
+instrumented query observations do not adopt an optimization. See the
+[full result and retained failures](../../../docs/spikes/script-query-attribution.md#completed-same-source-shipping-observation)
+and portable replay. Those recorded executions do not authorize an unbounded
+rerun or make the preparation-only controls native evidence.

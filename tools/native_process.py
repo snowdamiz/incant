@@ -18,6 +18,25 @@ import threading
 import time
 
 
+class CleanupError(RuntimeError):
+    """An operation and its mandatory cleanup both failed; neither is success."""
+    def __init__(self, operation_error, cleanup_error):
+        self.operation_error = operation_error
+        self.cleanup_error = cleanup_error
+        super().__init__(f'Operation failed: {operation_error!r}; cleanup also failed: {cleanup_error!r}')
+
+
+def _cleanup(close, operation_error=None):
+    try:
+        close()
+    except BaseException as cleanup_error:
+        if operation_error is None:
+            raise
+        # A secondary cleanup/observer refusal must not erase a resource guard,
+        # timeout or caller interruption, even for callers retaining only repr.
+        raise CleanupError(operation_error, cleanup_error) from operation_error
+
+
 class _Reader:
     def __init__(self, stream):
         self.stream = stream
@@ -323,15 +342,15 @@ class Interactive:
             self.tree.process.stdin, self.tree.process.stdout, self.tree.process.stderr)
         try:
             self.tree.release()
-        except BaseException:
-            self.close()
+        except BaseException as error:
+            _cleanup(self.close, error)
             raise
 
     def __enter__(self):
         return self
 
-    def __exit__(self, *_):
-        self.close()
+    def __exit__(self, kind, error, traceback):
+        _cleanup(self.close, error)
 
     @property
     def returncode(self):
@@ -342,7 +361,10 @@ class Interactive:
         if not self.closed:
             try:
                 _wait(self.tree, [], self.command, timeout, time.monotonic() + timeout)
-            finally:
+            except BaseException as error:
+                _cleanup(self.close, error)
+                raise
+            else:
                 self.close()
         return self.tree.process.returncode
 
@@ -398,7 +420,7 @@ def run(command, *, cwd=None, env=None, timeout=120, stdout=None, stderr=None,
         failure = error
     finally:
         try:
-            tree.stop()
+            _cleanup(tree.stop, failure)
         finally:
             for reader in readers:
                 if reader.thread.ident is not None:

@@ -1,7 +1,6 @@
 use super::support::{Fixture, Mock, TOOL, agent};
 use incant_agent::{AgentError, ApprovalMode, NoViewport};
 use incant_cmd::{Actor, Command};
-use std::fs;
 use std::sync::{
     Mutex,
     atomic::{AtomicBool, Ordering},
@@ -68,7 +67,7 @@ fn denied_or_cancelled_approval_preserves_document_and_journal() {
         let mut host = f.host();
         let before = f.bus.project().clone();
         let history = f.bus.history().to_vec();
-        let journal = fs::read(f.root.path().join("game.journal.jsonl")).unwrap();
+        let journal = f.journal_bytes();
         let mut provider = Mock::new(f.args());
         let cancel = AtomicBool::new(false);
         let mut approvals = 0;
@@ -105,10 +104,7 @@ fn denied_or_cancelled_approval_preserves_document_and_journal() {
         }
         assert_eq!(f.bus.project(), &before);
         assert_eq!(f.bus.history(), history);
-        assert_eq!(
-            fs::read(f.root.path().join("game.journal.jsonl")).unwrap(),
-            journal
-        );
+        assert_eq!(f.journal_bytes(), journal);
     }
 }
 
