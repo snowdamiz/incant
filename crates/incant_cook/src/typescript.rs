@@ -104,7 +104,7 @@ fn compile_sources<T>(
     let mut command = Command::new(&node);
     command::CompilerPaths {
         node: &node,
-        engine: launch_engine,
+        engine: launch_engine.as_path(),
         project: &root,
         output: &output,
         temporary: directory.path(),

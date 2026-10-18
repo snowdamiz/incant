@@ -1,0 +1,137 @@
+{
+  "source": "d8c7db25542561ff8aa1e4d9e7fa8b0718874e7a",
+  "scope": "Local macOS common compiler regression tests and strict lint; not Windows runtime or latency evidence.",
+  "native_session": 11557,
+  "native_exit": 0,
+  "native_seconds": 98.22658258298179,
+  "native_stages": [
+    {
+      "name": "cook",
+      "exit": 0,
+      "tests": [
+        "typescript::command::tests::compiler_environment_discards_ambient_node_and_cache_overrides",
+        "typescript::phases::tests::fixed_phase_prefix_survives_partial_write_without_exposing_tail",
+        "typescript::phases::tests::loader_deadlines_retain_the_last_completed_dependency",
+        "typescript::phases::tests::observations_reject_unknown_fields_names_order_times_and_excess_bytes",
+        "typescript::tests::timeout_before_first_child_phase_still_refuses_and_reaps"
+      ]
+    },
+    {
+      "name": "lint",
+      "exit": 0
+    }
+  ],
+  "fast_session": 60714,
+  "fast_exit": 0,
+  "fast_seconds": 61.70344162499532,
+  "fast_stages": [
+    {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.20872462500119582
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "seconds": 44.091125042003114
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.7454696249915287
+    },
+    {
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.1474814169923775
+    },
+    {
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.14923608297249302
+    },
+    {
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.32346383400727063
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build",
+        "--workspace",
+        "editor/ui"
+      ],
+      "exit": 0,
+      "seconds": 3.5404779170057736
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test",
+        "--workspace",
+        "editor/ui"
+      ],
+      "exit": 0,
+      "seconds": 9.374909584003035
+    },
+    {
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.2981627080007456
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.13472216698573902
+    }
+  ],
+  "artifact_copies": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/windows-launch-path-native-001/output/incant_cook-fcebaf39baa55686",
+      "bytes": 4288112,
+      "sha256": "33357ffc86c826bed20abc1c3a2ae312747d72be5a37c3ee1302c8bb62cd799b"
+    }
+  ],
+  "archive": {
+    "path": "windows-launch-path-local.json.gz",
+    "bytes": 55215,
+    "sha256": "fa47bd5c03c35b0d5c395c2ec4757ee588d541ef70f9bd26859478df390832f9",
+    "records": 8
+  }
+}
