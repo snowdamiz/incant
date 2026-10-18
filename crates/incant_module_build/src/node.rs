@@ -146,7 +146,10 @@ mod tests {
         std::fs::hard_link(&path, &alias).unwrap();
         assert!(regular(&held).is_err());
         assert!(crate::backend::bounded(&path, 1024).is_err());
+        // Windows no-DELETE-sharing applies to every name of the held file.
+        drop(held);
         std::fs::remove_file(alias).unwrap();
+        let held = read(&path).unwrap();
         regular(&held).unwrap();
         assert_eq!(
             crate::backend::bounded(&path, 1024).unwrap(),
