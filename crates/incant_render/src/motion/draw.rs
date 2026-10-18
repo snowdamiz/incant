@@ -17,6 +17,8 @@ pub(crate) struct MotionDraw {
     pub(super) overlay_frame: Option<wgpu::BindGroup>,
     pub(super) overlay_depth: Option<wgpu::TextureView>,
     pub(super) draws: Vec<Draw>,
+    #[cfg(all(test, feature = "experimental-taau"))]
+    pub(super) visibility_matrices: [glam::Mat4; 2],
 }
 impl MotionDraw {
     #[cfg(feature = "native-metalfx")]

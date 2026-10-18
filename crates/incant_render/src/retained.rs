@@ -48,6 +48,16 @@ pub struct RetainedScene {
 }
 #[cfg(all(test, feature = "experimental-taau"))]
 impl RetainedScene {
+    pub(crate) fn set_visibility_test_probe(
+        &mut self,
+        probe: Arc<crate::motion::visibility::Probe>,
+    ) {
+        assert!(self.motion_frame().is_none());
+        self.temporal_upscale.as_mut().unwrap().visibility = Some(probe);
+    }
+    pub(crate) fn visibility_test_owner(&self, node: usize) -> Option<u32> {
+        self.motion.as_ref().unwrap().owner_test_id(node)
+    }
     pub(crate) fn temporal_upscale_test_views(&self) -> [wgpu::TextureView; 3] {
         let motion = self.motion.as_ref().unwrap();
         [

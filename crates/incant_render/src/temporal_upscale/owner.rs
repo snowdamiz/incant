@@ -14,6 +14,8 @@ pub(crate) struct State {
     last: Option<MotionFrame>,
     slot: usize,
     continuity: super::continuity::Continuity,
+    #[cfg(test)]
+    pub(crate) visibility: Option<Arc<crate::motion::visibility::Probe>>,
 }
 pub(crate) struct Pending {
     pub(super) targets: Arc<Targets>,
@@ -21,6 +23,8 @@ pub(crate) struct Pending {
     pub(super) previous_jitter: [f32; 2],
     pub(super) stationary: bool,
     camera: super::continuity::Camera,
+    #[cfg(test)]
+    pub(crate) visibility: Option<Arc<crate::motion::visibility::Probe>>,
 }
 pub(super) fn bytes(size: [u32; 2], limit: u32) -> Result<u64> {
     let n = u64::from(size[0]) * u64::from(size[1]);
@@ -44,6 +48,8 @@ impl State {
             last: None,
             slot: 1,
             continuity: super::continuity::Continuity::new(light_capacity),
+            #[cfg(test)]
+            visibility: None,
         }
     }
     // Explicit cold allocation. Accepted and candidate history are bounded to
@@ -127,6 +133,8 @@ impl State {
             previous_jitter,
             stationary,
             camera,
+            #[cfg(test)]
+            visibility: self.visibility.clone(),
         })
     }
     pub fn accept(&mut self, pending: Pending, lights: &[crate::lighting::scene::Light]) {

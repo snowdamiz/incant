@@ -16,6 +16,10 @@ mod static_tests;
 pub(crate) mod system;
 #[cfg(test)]
 mod tests;
+#[cfg(test)]
+mod visibility_oracle;
+#[cfg(test)]
+mod visibility_tests;
 pub(crate) use owner::{Pending, State};
 pub(crate) use system::System;
 pub const MAX_HISTORY_BYTES: u64 = 64 * 1024 * 1024;

@@ -6,6 +6,7 @@ impl FrameGraph {
         device: &wgpu::Device,
         frame: PreparedFrame,
         draw: &crate::temporal_upscale::system::Draw,
+        #[cfg(test)] visibility: Option<&crate::motion::visibility::Probe>,
     ) -> Result<wgpu::CommandBuffer> {
         let state = self
             .0
@@ -62,6 +63,14 @@ impl FrameGraph {
         encoder.timed(crate::timing::GpuPass::Display, |e, q| {
             frame.output.encode(e, q.map(|q| q.render()))
         });
+        #[cfg(test)]
+        if let Some(probe) = visibility {
+            probe.encode(
+                device,
+                &mut encoder.0,
+                frame.motion.as_ref().expect("TAAU motion"),
+            );
+        }
         if let Some(c) = encoder.1.take() {
             c.finish(&mut encoder.0);
         }

@@ -11,6 +11,8 @@ pub(crate) mod system;
 mod targets;
 #[cfg(test)]
 mod tests;
+#[cfg(all(test, feature = "experimental-taau"))]
+pub(crate) mod visibility;
 
 pub(crate) use draw::MotionDraw;
 pub use owner::MotionFrame;

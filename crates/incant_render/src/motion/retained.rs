@@ -527,6 +527,22 @@ impl MotionState {
                 overlay_frame,
                 overlay_depth: None,
                 draws,
+                #[cfg(all(test, feature = "experimental-taau"))]
+                visibility_matrices: [
+                    current
+                        .camera
+                        .unjittered()
+                        .matrix(plan.rect[2] / plan.rect[3])?,
+                    super::visibility::remove_jitter(
+                        history.previous,
+                        if history.frame.has_previous() {
+                            self.history.frame().and_then(|f| f.jitter_phase())
+                        } else {
+                            history.frame.jitter_phase()
+                        },
+                        plan.rect,
+                    ),
+                ],
             }),
             Prepared {
                 history,

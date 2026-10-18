@@ -61,7 +61,13 @@ impl Renderer {
             bloom: None,
             output,
         };
-        self.graph.encode_upscale(&self.device, frame, &draw)
+        self.graph.encode_upscale(
+            &self.device,
+            frame,
+            &draw,
+            #[cfg(test)]
+            pending.visibility.as_deref(),
+        )
     }
 }
 pub(crate) fn admission(
