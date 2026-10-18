@@ -118,13 +118,14 @@ failure and subsequent editor lint failure remain retained. This is verified bui
 source writes, candidate installation and actual editor interaction remain separate.
 Registered Rust source editing now passes 72 scoped native behavioral controls,
 strict affected-package lints and fresh generated schema/SDK checks, with
-independent source and evidence review. The integrated development suite remains
-open after five process-lifecycle fixtures timed out before their expected
-readiness signals. Test startup synchronization is being repaired while preserving
-cleanup/output assertions and engine deadlines. First-package directory creation and registered-ID
-tool adapters are entering combined qualification. Candidate installation remains
-source-only: review identified and is correcting a final sibling-source check gap
-and a derived-output conflict that would prevent rebuilding after installation.
+independent source and evidence review. All ten integrated development checks now
+pass, including 1,041 UI tests. The first run's five process-lifecycle failures
+remain retained; the reviewed test-only startup synchronization passes 48 focused
+controls while preserving cleanup/output assertions and production deadlines.
+First-package directory creation and registered-ID tool adapters are entering
+combined qualification. Candidate installation has passed source review after
+fixing a final sibling-source check gap and the derived-output conflict that would
+prevent rebuilding after installation; its native execution remains pending.
 No compiler shell or arbitrary path authority is exposed to the agent.
 
 Checkpoint57 tested candidate `53ec74d2`, with exactly main421's tree

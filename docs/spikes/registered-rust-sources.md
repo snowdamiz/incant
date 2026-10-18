@@ -146,3 +146,17 @@ Windows execution result, a live model-provider test, compiler/candidate-install
 proof, shipping-runtime qualification, visual acceptance or performance gate.
 Transactional first-package creation, registered-ID adapters and checked candidate
 application remain separately qualified parts of the intended complete workflow.
+
+## Integrated development checks
+
+Integration producer `5256a8df` passes all ten ordinary development checks,
+including 1,041 UI tests, in 111.881 seconds (actual session `6240`, terminal exit
+zero). Source contents stayed unchanged; all 258 observed identities and their
+groups plus the wrapper were independently absent afterward. The first integrated
+run remains failed: five Python lifecycle fixtures expired before readiness. The
+[test-only synchronization repair](native-process-cleanup.md#separate-fixture-startup-from-execution-deadlines)
+preserves the production deadlines and passes 48 focused controls.
+The [integration record](evidence/registered-rust-integration.json) binds exact
+commands, source, terminal result and retained raw streams. Documentation added
+after this producer does not change its tested source identity. These development
+checks do not establish rendered performance or a phase gate.

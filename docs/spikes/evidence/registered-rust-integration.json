@@ -1,0 +1,225 @@
+{
+  "format": "registered-rust-integration-v1",
+  "result": {
+    "time": "2026-10-18T20:02:01.830207+00:00",
+    "actual_session": 6240,
+    "terminal_chunk": "33ef84",
+    "exit": 0,
+    "passed": true,
+    "source": "5256a8dfcb2c8d127ab046094b8cc56c6b7d6c5f",
+    "checks": 10,
+    "seconds": 111.88089774997206,
+    "prior_failed_seconds": 199.1031569999759,
+    "combined_seconds": 310.984054749948,
+    "fresh_pid_group_absence": true,
+    "observed_identities": 258,
+    "source_content_preserved": true
+  },
+  "stages": [
+    {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.2945467500248924
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "seconds": 65.9876580000273
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 4.078544083982706
+    },
+    {
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.35480295901652426
+    },
+    {
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.7533830410102382
+    },
+    {
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.6937115000328049
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build",
+        "--workspace",
+        "editor/ui"
+      ],
+      "exit": 0,
+      "seconds": 6.921950875024777
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test",
+        "--workspace",
+        "editor/ui"
+      ],
+      "exit": 0,
+      "seconds": 27.74179408303462
+    },
+    {
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.4811802910408005
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.3091956250136718
+    }
+  ],
+  "source_content_preserved": true,
+  "streams": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/000.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/000.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/001.stderr.log",
+      "bytes": 125655,
+      "sha256": "ba0bb4671fe1878d06d6ed6746ed8674f56c8c147df57bca06655f22ae3d230c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/001.stdout.log",
+      "bytes": 7760,
+      "sha256": "1096a8a334765038df07fd7395d36afbc0276829b9077b1709876d68f6732fa9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/002.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/002.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/003.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/003.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/004.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/004.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/005.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/005.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/006.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/006.stdout.log",
+      "bytes": 1551,
+      "sha256": "5eddcdaa7619705beb809f85904cabc26910086d7c92d0687e671b9a28e086a4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/007.stderr.log",
+      "bytes": 3600,
+      "sha256": "b39acf51b68a8940ef8dac9f92e07443c04b70348e5950a735cea5972bde77ce"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/007.stdout.log",
+      "bytes": 44688,
+      "sha256": "ff211d2ff7078a8bfb2ad0d91425fd5fa4a914fe2327a217c035c67a92e440ce"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/008.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/008.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/009.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-002/output/009.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "original_failure": {
+    "source": "938de3b5d732c8805af5602c3d95e51912df52af",
+    "session": 77244,
+    "exit": 1,
+    "record": "lifecycle-test-startup.json"
+  },
+  "scope": "Ten ordinary local development checks. No shared Cargo target, engine, GPU, native window, screen capture or physical audio execution. Native producer qualification remains separately identified."
+}
