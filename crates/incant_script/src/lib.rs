@@ -896,6 +896,8 @@ mod input_tests;
 mod navigation_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod query_2d_tests;
+#[cfg(all(test, feature = "compiler", feature = "diagnostic-script-queries"))]
+mod query_diagnostic_tests;
 #[cfg(all(test, feature = "compiler"))]
 mod query_tests;
 #[cfg(all(test, feature = "compiler"))]

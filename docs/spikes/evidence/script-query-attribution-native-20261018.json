@@ -1,0 +1,52 @@
+{
+  "reviewed_at": "2026-10-18T05:31:00.363596+00:00",
+  "reviewer": "root",
+  "source": "d6ef9bc4b8c6b723d4b583eaced73c829c8e84a9",
+  "source_review": "native-script-query-attribution-source-20261018.json",
+  "narrow_lint_repair_reviewed": [
+    "crates/incant_script/src/localization_tests.rs",
+    "crates/incant_script/src/query_diagnostic_tests.rs",
+    "docs/spikes/script-query-attribution.md"
+  ],
+  "test_runs": [
+    {
+      "producer": "555498e3d203990767dbb3bf795e9c72825ff660",
+      "stage": "all-diagnostic-collector",
+      "count": 20
+    },
+    {
+      "producer": "555498e3d203990767dbb3bf795e9c72825ff660",
+      "stage": "prior-schema-collector",
+      "count": 3
+    },
+    {
+      "producer": "555498e3d203990767dbb3bf795e9c72825ff660",
+      "stage": "real-script-query-observation",
+      "count": 6
+    },
+    {
+      "producer": "555498e3d203990767dbb3bf795e9c72825ff660",
+      "stage": "ordinary-script-query-behavior",
+      "count": 7
+    },
+    {
+      "producer": "d6ef9bc4b8c6b723d4b583eaced73c829c8e84a9",
+      "stage": "real-script-query-observation",
+      "count": 6
+    }
+  ],
+  "test_executions": 42,
+  "hashed_retained_files": 31,
+  "fresh_absent_pids": 43,
+  "retained_failure": "cpu-002 strict diagnostic fixture duplicate-module lint refusal",
+  "final_lints": [
+    "diagnostic all-targets",
+    "ordinary all-targets"
+  ],
+  "findings": [],
+  "not_claimed": [
+    "shipping performance",
+    "whole Core diagnostic",
+    "GPU or window testing"
+  ]
+}

@@ -66,11 +66,12 @@ fn exact_check_clock_and_refusal_counts_partition_callback_and_other_work() {
     assert!(report.complete && !report.eligible_for_performance_gate);
     assert_eq!(
         report.schema,
-        if cfg!(feature = "diagnostic-navigation") {
-            4
-        } else {
-            3
-        }
+        4 * u32::from(cfg!(feature = "diagnostic-script-queries"))
+            + if cfg!(feature = "diagnostic-navigation") {
+                4
+            } else {
+                3
+            }
     );
     assert_eq!(report.budget_check_regions, REGIONS);
     let row = &report.rows[0];
@@ -80,7 +81,11 @@ fn exact_check_clock_and_refusal_counts_partition_callback_and_other_work() {
     assert!(row.budget_checks.ns[..2].iter().sum::<u64>() <= row.source_ns.iter().sum::<u64>());
     assert!(row.budget_checks.ns.iter().sum::<u64>() <= row.trace_ns);
     assert_eq!(row.trace_ns, row.regions_ns.iter().sum::<u64>());
-    assert!(report.raw_row_bytes <= 1024 && report.raw_storage_bound_bytes <= 4 * 1024 * 1024);
+    assert!(
+        report.raw_row_bytes <= crate::diagnostic::MAX_RAW_ROW_BYTES
+            && report.raw_storage_bound_bytes
+                <= crate::diagnostic::MAX_RAW_ROW_BYTES * crate::diagnostic::MAX_FRAMES
+    );
     assert_eq!(
         serde_json::to_value(row).unwrap()["budget_checks"]["calls"],
         serde_json::json!([1, 2, 1, 1])

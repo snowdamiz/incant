@@ -57,11 +57,12 @@ fn nested_navigation_corresponds_to_the_same_tick_and_retains_failures() {
     assert!(report.complete && !report.eligible_for_performance_gate);
     assert_eq!(
         report.schema,
-        if cfg!(feature = "diagnostic-script-budget") {
-            4
-        } else {
-            2
-        }
+        4 * u32::from(cfg!(feature = "diagnostic-script-queries"))
+            + if cfg!(feature = "diagnostic-script-budget") {
+                4
+            } else {
+                2
+            }
     );
     assert_eq!(report.navigation_regions, REGIONS);
     let row = &report.rows[0];
@@ -71,7 +72,11 @@ fn nested_navigation_corresponds_to_the_same_tick_and_retains_failures() {
     assert!(row.navigation.ns[0] <= row.source_ns.iter().sum::<u64>());
     assert!(row.navigation.ns[0] <= row.regions_ns[Major::Callbacks as usize]);
     assert_eq!(row.trace_ns, row.regions_ns.iter().sum::<u64>());
-    assert!(report.raw_row_bytes <= 1024 && report.raw_storage_bound_bytes <= 4 * 1024 * 1024);
+    assert!(
+        report.raw_row_bytes <= crate::diagnostic::MAX_RAW_ROW_BYTES
+            && report.raw_storage_bound_bytes
+                <= crate::diagnostic::MAX_RAW_ROW_BYTES * crate::diagnostic::MAX_FRAMES
+    );
     let json = serde_json::to_value(row).unwrap();
     assert_eq!(json["navigation"]["calls"], serde_json::json!([2, 1, 2]));
 }

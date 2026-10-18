@@ -14,6 +14,7 @@ session = ["summary"]
 diagnostic-script-phases = ["summary"]
 diagnostic-navigation = ["diagnostic-script-phases"]
 diagnostic-script-budget = ["diagnostic-script-phases"]
+diagnostic-script-queries = ["diagnostic-script-phases"]
 tracy = ["summary", "dep:tracy-client", "dep:tracy-client-sys"]
 
 [dependencies]
