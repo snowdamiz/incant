@@ -1,10 +1,11 @@
 # Core pose integration diagnostic
 
-This is a source-prepared, default-off successor to the [qualified static pose
-adapter](native-pose-interpolation.md). Its new CPU tests, actual Core route,
-native window and rendered output have **not yet been executed or accepted**.
-The earlier static CPU/Metal receipts do not qualify this added UI, animation or
-window integration.
+This default-off successor to the [static pose adapter](native-pose-interpolation.md)
+has passed focused CPU qualification and the actual 2,156-step Core route on
+ordinary and interpolated composed CPU hosts. The final producer is
+`66dfbcbb4524efe2a93b4e626a2ae9459c26c799`, including main422. Native-window
+execution, GPU color, displayed motion and pacing remain **unqualified**. Earlier
+static Metal receipts do not qualify this added UI, animation or window path.
 
 `native-pose-interpolation` adds the trusted, bounded window selection
 `--pose-interpolation previous-current --stop-after N`. Ordinary exports do not
@@ -57,14 +58,14 @@ after admission and before display. Ordinary continuous interpolation adds up to
 one fixed tick of visual latency; endpoint flushes intentionally expose current
 state.
 
-## Prepared qualification
+## CPU qualification (2026-10-18)
 
 Focused CPU controls cover hierarchy/animation endpoints, loop wrap, source-free
 asset use, canonical restoration on success/refusal/unwind, UI generation
 admission, real glyph/input/audio behavior, checkpoint parity, read-only clock
 residuals, boundary resets, explicit selection and catch-up/terminal chronology.
-Existing ordinary controls and strict lints will run in feature-on and feature-off
-configurations. The GPU test source is adapted to the UI-bearing consumer
+Existing ordinary controls and strict lints passed in feature-on and feature-off
+configurations, with the source generations below kept distinct. The GPU test source is adapted to the UI-bearing consumer
 signature but no GPU test is authorized by the CPU packet.
 
 `diagnostic-core-pose` is a separate default-off manual test feature. Broad
@@ -74,18 +75,85 @@ bindings and a bounded `INCANT_CORE_POSE_FIXTURE` file. It adds no runtime scrip
 loader. The normal package loader supplies cooked data; no native window or
 physical audio backend is created.
 
-The manual test proposes the original 2,156-step physical-input win route on
+The manual test executed the original 2,156-step physical-input win route on
 ordinary and pose CPU composed hosts. It compares every stereo PCM sample,
 input and haptic request, all observation checks, final world/animation/audio
 state, logs, canonical render report, UI checkpoint and accepted draw input.
 After each tick it samples fractions 0, 0.5 and 1 from actual retained rigid actor
-models and requires shaped HUD glyphs. Each of the 6,468 displays must leave
+models and requires shaped HUD glyphs. Each of the 6,468 displays left
 canonical input, world tick and audio frame count unchanged. Both complete PCM
-files must match the frozen route hash. A create-only report and PCM outputs
+files matched the frozen route hash. A create-only report and PCM outputs
 publish only after complete success; failed or partial attempts remain failures.
 
-This CPU consumer establishes admission, input and pose sampling correctness if
-it passes. It cannot establish GPU color, displayed motion, cadence, input-to-
+This CPU consumer establishes the tested admission, input and pose sampling
+correctness. It cannot establish GPU color, displayed motion, cadence, input-to-
 display latency, device audio quality or shipping performance. Actual rendered
 Core, focus/resize and restart/Stop integration remain separate gates; current
 computer-use/window/capture restrictions prohibit those executions.
+
+### Results and retained failures
+
+- Source `8a875aee`: 461 behavior controls passed (20 adapter/animation, 42
+  composed host/UI, 202 feature-on player and 197 ordinary player). The supervisor
+  nevertheless failed when strict lint found two redundant `f64` conversions in
+  a test. No unaffected behavior suite was repeated.
+- Source `e1f6f181`: the two identity conversions were removed; both strict
+  all-target on/off lints passed. The first fresh Core cook and exact native test
+  also passed, but its aggregate analyzer failed: the fixture serialized spatial
+  input without the actual HUD summary that the historical report contains.
+  Current ordinary/pose HUD equality was tested internally; historical HUD
+  equality was not recoverable from that incomplete JSON. This failure remains
+  failed in the packet.
+- Source `66dfbcbb`: the ordinary final-report serializer was extracted without
+  changing its contents and shared with the fixture; main422 was merged without
+  conflicting feature paths. One incremental authored build, one exact copied
+  Core test and scoped strict player-library lint passed. The analyzer stayed
+  byte-identical and checked the full HUD report; no comparison was removed.
+
+The final route produced 6,468 accepted HUD/pose display calls and 49,460 rigid
+pose samples. All eight historical observation checks and all 17 observed entity
+records match exactly, as do gameplay logs and the canonical render report.
+Final HUD data contains 13 logical widgets, seven text sources and 95 glyphs,
+with atlas SHA-256
+`923038f23c7f3fbc406d472dd98273c3d848cd7024e1340c175faf17f05409e5`.
+Every stereo sample was compared during the route. Both complete PCM files are
+13,798,400 bytes with SHA-256
+`ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3`.
+The test additionally compares whole world snapshots, animation and audio state,
+input/haptic outputs, UI checkpoint/draw data, and restores canonical input after
+every display. These are CPU input/sampling observations, not rendered pixels.
+
+The manual producer uses Rust1.99, the `ci` test profile, implicit arm64 Mac host,
+the original fast4 physics selection, Node22.23.3 and the pinned TypeScript/SWC
+compiler closure. It freshly cooks the same 60 runtime inputs from the historical
+74-file workload; 14 authoring history files are deliberately absent, preserving
+the normal empty recovery epoch. The graph excludes GPU, native-window and
+device-audio dependencies. The compiler-bearing CPU test is **not a shipping
+build or performance measurement**. Supervisor wall durations are resource
+charges only. All costs, including the first aggregate failure, remain charged.
+
+The [portable packet](evidence/native-core-pose/manifest.json) retains source
+manifests/patches, exact plans and commands, raw test/lint streams, both aggregate
+outcomes and corrected reports, compiler/authoring identities, and cleanup
+receipts. Heavy executables, cooked assets and PCM remain external hash-bound
+originals. No archived code or executable is run by the verifier:
+
+```sh
+python3 docs/spikes/evidence/native-core-pose/verify.py
+python3 docs/spikes/evidence/native-core-pose/verify.py --originals --binaries --git-source .
+```
+
+Default replay verifies retained evidence, not a new native execution. Optional
+original/binary checks require the producing machine's external files;
+`--git-source` checks the changed feature bytes in each recorded commit.
+`--source-root` checks all compiler inputs for the final producing source and
+intentionally refuses a later checkout whose documentation or code differs.
+No renderer/window/pacing policy is adopted by these CPU results.
+
+Final terminal-only development checks passed after lockfile-pinned dependency
+installation with lifecycle scripts disabled: conventions, tools/Core tests,
+rustfmt, bridge/SDK freshness, TypeScript, UI build, 1,040 UI tests, Wasm SDK
+freshness and diff checks. The first offline dependency attempt refused an
+uncached npm tarball before checks began; its failed receipt is preserved.
+These are build/test checks, with no browser, window, capture helper or device
+execution. The evidence verifier was replayed again after adding these records.
