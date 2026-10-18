@@ -13,6 +13,7 @@ pub mod ledger;
 pub use conversation::Conversation;
 #[cfg(target_os = "macos")]
 mod local_credentials;
+mod module_jobs;
 pub mod play;
 pub mod provider;
 mod scripts;
@@ -123,6 +124,10 @@ struct ScreenshotArgs {
 /// Engine capabilities supplied by the trusted caller. The agent cannot select
 /// filesystem roots or gain access to a shell through tool arguments.
 pub trait EngineHost {
+    /// A host-owned shared build service; model arguments never grant process access.
+    fn module_jobs(&self) -> Option<std::sync::Arc<incant_module_build::Service>> {
+        None
+    }
     /// Expose gameplay tools only when a concrete native host is connected.
     fn native_play_available(&self) -> bool {
         false
@@ -218,6 +223,7 @@ pub fn tools() -> Vec<Value> {
     tools.extend(assets::tools());
     tools.extend(play::tools());
     tools.extend(scripts::tools());
+    tools.extend(module_jobs::tools());
     tools.extend(skills::tools());
     tools
 }
@@ -252,6 +258,9 @@ fn dispatch_cancellable(
         return Err(AgentError::Interrupted);
     }
     match name {
+        "module_source_read" | "module_build" | "module_build_status" | "module_build_cancel" => {
+            module_jobs::dispatch(access, perception, name, args, actor, cancel)
+        }
         "skill_list" | "skill_read" => skills::dispatch(name, args),
         "script_read" | "script_write" => access.with_bus(cancel, |bus| {
             scripts::dispatch(bus, name, args, actor, cancel)
@@ -421,6 +430,20 @@ impl Agent {
     ) -> Result<TurnReport, AgentError> {
         check_cancel(cancel)?;
         let mut tools = tools();
+        if perception.module_jobs().is_none() {
+            tools.retain(|tool| {
+                !tool["name"]
+                    .as_str()
+                    .is_some_and(|name| name.starts_with("module_"))
+            });
+        } else if perception
+            .module_jobs()
+            .is_some_and(|jobs| !jobs.available())
+        {
+            tools.retain(|tool| {
+                tool["name"] != "module_source_read" && tool["name"] != "module_build"
+            });
+        }
         if !access.with_bus(cancel, |bus| Ok(bus.has_source_store()))? {
             tools.retain(|tool| tool["name"] != "script_read" && tool["name"] != "script_write");
         }
@@ -544,6 +567,7 @@ impl Agent {
                                     | "collider_from_alpha"
                                     | "tilemap_paint"
                                     | "script_write"
+                                    | "module_build"
                             ));
                     if ask && !approve(name, &arguments) {
                         return Err(AgentError::Tool("user denied this operation".into()));

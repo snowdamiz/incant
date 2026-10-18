@@ -3823,6 +3823,7 @@ dependencies = [
  "incant_doc",
  "incant_import",
  "incant_input",
+ "incant_module_build",
  "incant_observe",
  "jsonwebtoken",
  "keyring",
@@ -4051,6 +4052,7 @@ dependencies = [
  "incant_doc",
  "incant_import",
  "incant_input",
+ "incant_module_build",
  "incant_play",
  "incant_render",
  "incant_render_authoring",
@@ -4214,6 +4216,22 @@ dependencies = [
  "thiserror 2.0.21",
  "ulid",
  "writeable",
+]
+
+[[package]]
+name = "incant_module_build"
+version = "0.0.1"
+dependencies = [
+ "incant_source",
+ "libc",
+ "schemars 1.2.2",
+ "serde",
+ "serde_json",
+ "sha2 0.10.9",
+ "tempfile",
+ "thiserror 2.0.21",
+ "ulid",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
