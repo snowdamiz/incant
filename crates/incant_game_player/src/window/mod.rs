@@ -70,7 +70,7 @@ pub enum Error {
     #[error("native surface reservation invariant failed")]
     Reservation,
     #[error(
-        "this native window host supports keyboard, three-button mouse and gamepad IDs0..15 only"
+        "this native window host supports keyboard, three-button mouse, gamepad IDs0..15 and touch gestures"
     )]
     InputCapability,
     #[error("native gamepad backend initialization failed")]
@@ -89,6 +89,12 @@ pub enum Error {
     InputScale,
     #[error("native input event capacity exceeded")]
     InputCapacity,
+    #[error("native touch contact capacity exceeded")]
+    TouchCapacity,
+    #[error("native touch started twice without ending or cancellation")]
+    TouchSequence,
+    #[error("native touch identity counter exhausted")]
+    TouchIdentity,
     #[error("native UI receipt count or text byte capacity exceeded")]
     UiCapacity,
     #[error("native IME session counter exhausted")]
@@ -429,7 +435,7 @@ pub fn run(
     let mut input = input::PendingInput::new();
     input.reset_focus(focused);
     let mut ui_input = ui_input::UiInput::new();
-    ui_input.defer_surface();
+    ui_input.defer_surface(game.host()?.ui(), &mut input)?;
     ui_input.synchronize(game.host()?.ui(), &mut input)?;
     if has_ui && let Some((serial, enabled)) = ui_input.text_session(game.host()?.ui(), false)? {
         window
@@ -524,6 +530,8 @@ pub fn run(
                         if has_ui {
                             ui_input.layout_pending(game.host()?.ui(), &mut input)?;
                             ui_resize = true;
+                        } else {
+                            ui_input.cancel_touches(None, &mut input)?;
                         }
                         surface.invalidate();
                         redraw_pending = true;
@@ -575,11 +583,9 @@ pub fn run(
                         cadence.interrupt();
                         gamepads.pause_haptics()?;
                         platform_suspended = true;
-                        if has_ui {
-                            input.reset_focus(false);
-                            ui_input.reset_focus();
-                            gamepads.discard_pending();
-                        }
+                        input.reset_focus(false);
+                        ui_input.reset_focus();
+                        gamepads.discard_pending();
                         surface.invalidate();
                         observe_state!(state_log::Reason::Suspended);
                     }
@@ -603,7 +609,7 @@ pub fn run(
                         if replay.is_none() && ui_input.accepts_delivery(focused, suspended) =>
                     {
                         // InputEvent uses logical pixels; query this window's current scale per event.
-                        if has_ui {
+                        if has_ui || matches!(event, WindowEvent::Touch(_)) {
                             ui_input.window(
                                 game.host()?.ui(),
                                 &mut input,
@@ -669,7 +675,7 @@ pub fn run(
                                 gamepads.pause_haptics()?;
                                 game.set_suspended(true)?;
                                 suspended = true;
-                                ui_input.defer_surface();
+                                ui_input.defer_surface(game.host()?.ui(), &mut input)?;
                             }
                             clock.reset(now);
                             retry = now + Duration::from_millis(50);
@@ -856,9 +862,10 @@ pub fn run(
                                 game.set_suspended(true)?;
                                 suspended = true;
                                 if has_ui {
-                                    ui_input.defer_surface();
+                                    ui_input.defer_surface(game.host()?.ui(), &mut input)?;
                                 } else {
                                     input.reset_focus(focused);
+                                    ui_input.reset_focus();
                                     gamepads.discard_pending();
                                 }
                                 clock.reset(now);
@@ -938,9 +945,10 @@ pub fn run(
                                     game.set_suspended(true)?;
                                     suspended = true;
                                     if has_ui {
-                                        ui_input.defer_surface();
+                                        ui_input.defer_surface(game.host()?.ui(), &mut input)?;
                                     } else {
                                         input.reset_focus(focused);
+                                        ui_input.reset_focus();
                                         gamepads.discard_pending();
                                     }
                                 }

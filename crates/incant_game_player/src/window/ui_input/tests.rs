@@ -1,10 +1,10 @@
 use super::*;
 use incant_ui::*;
 use std::sync::Arc;
-fn id(n: u128) -> StableId {
+pub(super) fn id(n: u128) -> StableId {
     StableId(n.to_be_bytes())
 }
-struct Measure;
+pub(super) struct Measure;
 impl TextMeasure for Measure {
     fn measure(
         &mut self,
@@ -60,13 +60,13 @@ fn widgets(interactive: bool) -> Vec<Widget> {
     })
     .collect()
 }
-fn runtime(interactive: bool) -> UiRuntime {
+pub(super) fn runtime(interactive: bool) -> UiRuntime {
     let mut ui = UiRuntime::new(widgets(interactive)).unwrap();
     let next = ui.prepare(&[], [400., 100.], &mut Measure).unwrap();
     ui.commit(next).unwrap();
     ui
 }
-fn accept(ui: &mut UiRuntime, input: &mut UiInput) {
+pub(super) fn accept(ui: &mut UiRuntime, input: &mut UiInput) {
     let viewport = ui.layout().unwrap().viewport;
     let next = ui
         .prepare(input.receipts(), viewport, &mut Measure)
@@ -389,7 +389,7 @@ fn resize_acquisition_retry_preserves_delivered_text_and_focus_but_blur_does_not
     let mut physical = PendingInput::new();
     input.commit(Some(focus.clone()), "x").unwrap();
     input.layout_pending(Some(&ui), &mut physical).unwrap();
-    input.defer_surface();
+    input.defer_surface(None, &mut physical).unwrap();
     assert!(input.awaiting_surface());
     input.commit(Some(focus.clone()), "中").unwrap();
     let next = ui.prepare_refresh([500., 100.], &mut Measure).unwrap();
@@ -403,7 +403,7 @@ fn resize_acquisition_retry_preserves_delivered_text_and_focus_but_blur_does_not
     assert_eq!(ui.text_focus(), Some(focus));
     assert_eq!(ui.text(id(3)).unwrap().text(), "Namex中");
     input.commit(ui.text_focus(), "discard").unwrap();
-    input.defer_surface();
+    input.defer_surface(None, &mut physical).unwrap();
     input.reset_focus(); // Actual blur/suspend/nonpresentable transition.
     physical.reset_focus(false);
     assert!(!input.awaiting_surface());
@@ -451,7 +451,7 @@ fn gamepad_release_during_preserved_surface_wait_cannot_leave_a_held_button() {
             .held
             .contains(&GamepadButton::South)
     );
-    input.defer_surface();
+    input.defer_surface(None, &mut physical).unwrap();
     let release = adapter
         .event(
             0u8,
@@ -479,7 +479,7 @@ fn gamepad_release_during_preserved_surface_wait_cannot_leave_a_held_button() {
             .released
             .contains(&GamepadButton::South)
     );
-    input.defer_surface();
+    input.defer_surface(None, &mut physical).unwrap();
     assert!(!input.accepts_delivery(false, true));
     input.reset_focus();
     assert!(!input.accepts_delivery(true, true));
@@ -610,7 +610,7 @@ fn managed_text_refusal_does_not_publish_partial_queue_and_surface_wait_keeps_se
         assert_eq!(ui.text(id(3)).unwrap().text(), "Name");
     }
     input.layout_pending(Some(&ui), &mut physical).unwrap();
-    input.defer_surface();
+    input.defer_surface(None, &mut physical).unwrap();
     assert_eq!(
         input
             .text_session(Some(&ui), input.accepts_delivery(true, true))
