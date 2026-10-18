@@ -48,6 +48,7 @@ incant_nav = { path = "crates/incant_nav" }
 incant_play_legacy = { path = "crates/incant_play_legacy", default-features = false }
 incant_script = { path = "crates/incant_script", default-features = false }
 incant_agent = { path = "crates/incant_agent", default-features = false }
+incant_module_build = { path = "crates/incant_module_build" }
 
 [profile.dev]
 debug = 1

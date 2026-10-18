@@ -107,8 +107,17 @@ independently absent. This experimental Mac
 backend fails closed elsewhere; no broader security, editor/agent integration,
 performance or cross-platform isolation acceptance follows.
 The scoped worker is merged through PR422 after review and successful exact-head
-development checks. A shared editor/agent job service is being implemented
-separately; it has not yet qualified actual compiler and cancellation behavior.
+development checks. The shared [editor/agent job service](docs/spikes/module-build-host-jobs.md)
+now passes thirteen service controls, two agent approval/refusal controls and five
+actual process/worker controls on this Mac, including compilation through the
+shared bridge and cancellation after a child begins. Strict service, agent and
+editor lints and a fresh headless schema export also pass. All ten integrated
+development checks pass. The original agent-fixture budget failure and subsequent
+editor lint failure remain retained. This is locally verified build-only behavior:
+source writes, candidate installation and actual editor interaction remain separate.
+Registered Rust source editing has independent source review and is entering native
+qualification; first-package directory creation remains source-only pending its
+parent. No compiler shell or arbitrary path authority is exposed to the agent.
 
 Checkpoint57 is frozen at candidate `53ec74d2`, with exactly main421's tree
 (`527d280a`). Its Windows desktop job failed the authored startup test at the
@@ -130,8 +139,13 @@ configuration required `&Path`. The scoped correction uses `as_path()` on both
 platform branches; actual Windows cache behavior and timeout repair remain
 unqualified. All checkpoint57 workflows have now finished; the Windows desktop
 failure prevents promotion, while the other seven workflows passed. The
-candidate remains frozen and release remains at the previously qualified
-checkpoint55. Checkpoint56 failed its Windows credential
+failed candidate remains historical. PR425 is merged after its local controls
+and exact-head development checks passed. Checkpoint58 now freezes candidate
+`53820888` with exactly main425 (`da7b7414`) tree `86013476`; all eight comprehensive
+workflows have started. Release remains at the previously qualified checkpoint55
+until every required exact-head context succeeds. The separate corrected Windows
+diagnostic is still running; no Windows runtime improvement is established.
+Checkpoint56 failed its Windows credential
 job on three tilemap tests that read the exclusively
 locked journal through an independent file handle. The
 [test-only correction](docs/spikes/tilemap-journal-portability.md) preserves exact
@@ -481,9 +495,18 @@ and all four win measurements above 2 ms do not justify enabling PGO. The
 the compiler changes remain on the retained experiment branch. These are
 CPU measurements, not rendered-game FPS. Independent saved-data review passes;
 all 81 observed identities are absent after terminal success.
-Last reassessment: 2026-10-18 06:27 UTC. A fresh same-source ordinary/query
-shipping pair now completes all 2,156 Core steps with exact full gameplay and
-complete PCM parity. Ordinary ScriptTick p95 is 2.100001–2.110000 ms; instrumented
+Last reassessment: 2026-10-18 18:51 UTC. The bounded source/data review found
+no distinct optimization supported by the retained profile. Query parse and
+materialization remain 0.305% of the same slow-frame tail. Publication exceeds
+100 microseconds in only seven of 2,156 rows; even an unrealizable data-only
+removal and reranking leaves instrumented p95 above 2 ms. This is neither a new
+benchmark nor a claim of reclaimable cost. [Review and bound inputs](docs/spikes/evidence/script-budget-post-query-reassessment-20261018.json)
+preserve the negative result. Reassess after a concrete callback, VM or typed-view
+validation operation changes or has new direct cost evidence; do not rerun unchanged
+experiments. No optimization was adopted.
+
+The earlier 06:27 UTC same-source ordinary/query shipping pair completes all
+2,156 Core steps with exact full gameplay and complete PCM parity. Ordinary ScriptTick p95 is 2.100001–2.110000 ms; instrumented
 p95 is 2.140001–2.150000 ms, with no gate or isolated-overhead claim. Query parsing
 plus result construction accounts for only 0.305% of the same 108 slow whole
 frames; all native queries belong to gameplay, while the stress callback has none.

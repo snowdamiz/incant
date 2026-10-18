@@ -26,6 +26,7 @@ serde_json = { workspace = true }
 thiserror = { workspace = true }
 incant_doc = { workspace = true }
 incant_input.workspace = true
+incant_module_build.workspace = true
 incant_observe = { path = "../incant_observe", default-features = false }
 incant_cmd = { workspace = true }
 incant_import = { path = "../incant_import", default-features = false }
