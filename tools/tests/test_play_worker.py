@@ -92,10 +92,11 @@ class WorkerOwner(unittest.TestCase):
             self.assertIsNotNone(process.returncode)
 
     def test_eof_and_startup_deadline_are_terminal(self):
-        for source, failure in [('pass', ValueError), ('import time;time.sleep(60)', TimeoutError)]:
+        for source, failure, timeout in [('pass', ValueError, 5),
+                                         ('import time;time.sleep(60)', TimeoutError, 0.2)]:
             with self.subTest(source=source), self.child(source) as process:
                 with self.assertRaises(failure):
-                    Worker(process, EXPECTED, 0.2)
+                    Worker(process, EXPECTED, timeout)
                 self.assertIsNotNone(process.returncode)
 
 
