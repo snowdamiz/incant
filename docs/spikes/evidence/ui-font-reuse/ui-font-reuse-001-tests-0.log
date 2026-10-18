@@ -1,0 +1,40 @@
+   Compiling serde_derive_internals v0.30.0
+   Compiling ref-cast-impl v1.0.27
+   Compiling serde_json v1.0.151
+   Compiling schemars_derive v1.2.2
+   Compiling ref-cast v1.0.27
+   Compiling serde v1.0.229
+   Compiling smallvec v1.16.2
+   Compiling log v0.4.34
+   Compiling rustybuzz v0.14.1
+   Compiling fontdb v0.16.2
+   Compiling schemars v1.2.2
+   Compiling cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/cosmic-text)
+   Compiling arrayvec v0.7.8
+   Compiling ulid v1.2.1
+   Compiling incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_text)
+   Compiling taffy v0.14.0
+   Compiling incant_input v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_input)
+   Compiling incant_types v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_types)
+   Compiling incant_ui v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_ui)
+error[E0308]: mismatched types
+  --> crates/incant_ui/tests/fonts/rebind.rs:13:39
+   |
+11 | fn text(widget: &mut Widget) -> &mut UiText {
+   |                                 ----------- expected `&mut incant_ui::UiText` because of return type
+12 |     match &mut Arc::make_mut(&mut widget.node).kind {
+13 |         UiKind::TextInput { text } => text,
+   |                                       ^^^^ expected `&mut UiText`, found `&mut UiText<StableId>`
+   |
+   = note: expected mutable reference `&mut UiText<std::string::String>`
+              found mutable reference `&mut UiText<incant_ui::StableId>`
+
+error[E0308]: mismatched types
+  --> crates/incant_ui/tests/fonts/rebind.rs:66:40
+   |
+66 |     text(&mut changed[1]).fonts = vec![id(999)];
+   |                                        ^^^^^^^ expected `String`, found `StableId`
+
+For more information about this error, try `rustc --explain E0308`.
+error: could not compile `incant_ui` (test "fonts") due to 2 previous errors
+warning: build failed, waiting for other jobs to finish...

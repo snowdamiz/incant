@@ -1,0 +1,53 @@
+   Compiling incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_2d)
+   Compiling cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/cosmic-text)
+   Compiling parry2d v0.31.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/parry2d)
+   Compiling parry3d v0.31.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/parry3d)
+   Compiling incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_nav)
+   Compiling rapier2d v0.36.0 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/rapier2d)
+   Compiling rapier3d v0.36.0 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/rapier3d)
+   Compiling incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_text)
+   Compiling incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_localization)
+   Compiling incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_assets_runtime)
+   Compiling incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_physics_runtime)
+   Compiling incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_physics_2d_runtime)
+   Compiling rquickjs-sys v0.14.0 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/rquickjs-sys)
+   Compiling incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_runtime)
+   Compiling kira v0.12.5 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/kira)
+   Compiling rquickjs-core v0.14.0 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/rquickjs-core)
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_script)
+   Compiling incant_ui v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_ui)
+   Compiling incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render_data)
+   Compiling rquickjs v0.14.0
+   Compiling incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_audio_runtime)
+   Compiling incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_doc)
+   Compiling incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render_native)
+   Compiling incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_game_runtime)
+   Compiling incant_assets v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_assets)
+   Compiling incant_render_game v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render_game)
+    Finished `ci` profile [optimized] target(s) in 1m 05s
+     Running tests/ui.rs (/private/tmp/incant-wasm-persistent-20261017-target/ci/deps/ui-bcad6ab93b991e9b)
+
+running 20 tests
+test actual_composed_ui_is_seen_once_by_guest_with_consumed_gameplay_keys_and_source_deleted_fonts ... ok
+test checkpoints::active_preedit_refuses_and_cancel_preserves_the_previous_save ... ok
+test checkpoints::actual_host_restores_text_selection_focus_timers_draw_input_and_fractional_clock ... ok
+test checkpoints::fresh_process_child ... ok
+test checkpoints::consumer_restore_failure_is_atomic_and_default_host_cannot_omit_ui ... ok
+test checkpoints::malformed_or_wrong_program_data_refuses_before_consumer_and_preserves_live_game ... ok
+test checkpoints::fresh_process_restore_matches_uninterrupted_hosted_state ... ok
+test checkpoints::restart_recreates_actual_ui_host_buffers_focus_router_and_canonical_paint ... ok
+test consumers_see_the_candidate_ui_and_a_refusal_publishes_nothing ... ok
+test failed_guest_is_terminal_and_malformed_input_or_resize_preserves_the_accepted_frame ... ok
+test guest_numeric_ui_motion_rejects_and_restores_all_rows_before_publication ... ok
+test hud::accepted_hud_text_rebuilds_actual_shaped_input_and_preserves_pending_typing ... ok
+test hud::disabled_subtree_retires_focus_and_changed_input_declaration_resets_buffer ... ok
+test hud::invalid_hud_batch_does_not_publish_pending_input_or_pcm ... ok
+test ordinary_despawn_of_complete_tree_clears_retained_owner_without_stale_parent_links ... ok
+test recorded::invalid_recorded_packet_does_not_resize_or_change_accepted_owner ... ok
+test recorded::recorded_guest_failure_has_no_prefix_and_never_exposes_old_world_as_live ... ok
+test recorded::replay_resolves_preedit_cancel_commit_and_pointer_after_resize ... ok
+test same_tick_reparent_preserves_typed_value_and_expires_old_focus_receipts ... ok
+test unsupported_consumers_refuse_before_prepare_vm_and_audio ... ok
+
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.25s
+
