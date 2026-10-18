@@ -15,6 +15,7 @@ mod play_assertions;
 mod play_audio;
 mod play_logs;
 mod play_saves;
+mod tilemap;
 mod watch;
 use incant_agent::{
     Agent, ApprovalMode, Budget, accounts::AccountStore, credentials::CredentialStore,
@@ -99,6 +100,13 @@ enum Cli {
         entity_id: String,
         #[arg(long, default_value_t = 128, value_parser = clap::value_parser!(u8).range(1..=255))]
         threshold: u8,
+        #[arg(long)]
+        cache: Option<PathBuf>,
+    },
+    /// Paint/erase an existing tilemap layer from a bounded strict JSON request.
+    TilemapPaint {
+        project: PathBuf,
+        request: PathBuf,
         #[arg(long)]
         cache: Option<PathBuf>,
     },
@@ -470,6 +478,11 @@ fn run() -> Result<()> {
                 cache.as_deref(),
             )?;
         }
+        Cli::TilemapPaint {
+            project,
+            request,
+            cache,
+        } => tilemap::paint(&project, &request, cache.as_deref())?,
         Cli::WatchAssets {
             project,
             interval_ms,

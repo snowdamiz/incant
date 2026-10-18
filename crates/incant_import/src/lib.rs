@@ -2,7 +2,12 @@
 //! incant_assets, without a dependency on the authoring command bus.
 mod alpha_colliders;
 mod sprites;
+mod tilemap_paint;
 mod tilemaps;
+pub use tilemap_paint::{
+    MAX_TILEMAP_PAINT_CELLS, PreparedTilemapPaint, TilemapBrush, TilemapCellChange,
+    TilemapPaintError, TilemapPaintRequest, TilemapPaintResult, TilemapTerrainAction,
+};
 mod watch;
 pub use alpha_colliders::{
     AlphaColliderDerivation, AlphaColliderError, AlphaColliderRequest, AlphaColliderResult,
