@@ -14,7 +14,7 @@ import tempfile
 import time
 
 from common import (ROOT, TARGET, NAV_FEATURES, authored, checked_file, compiler_features,
-                    graph_delta, graph_identity, load, plan, source_check)
+                    graph_delta, graph_identity, load, node_version, plan, source_check)
 import export_native as ordinary
 import native_process
 import native_profiling
@@ -44,7 +44,8 @@ def build(plan_path, output, scratch_parent):
     require(expected_features == features, 'Fast4 capability selection changed')
     native_profiling.environment('summary', os.environ)
     for name, value in os.environ.items():
-        if (name in ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'RUSTC', 'RUSTC_WRAPPER',
+        if (name in ('RUSTFLAGS', 'CARGO_ENCODED_RUSTFLAGS', 'RUSTC', 'RUSTDOC',
+                     'RUSTDOCFLAGS', 'CARGO_ENCODED_RUSTDOCFLAGS', 'RUSTC_WRAPPER',
                      'RUSTC_WORKSPACE_WRAPPER') or name.startswith('CARGO_PROFILE_')
                 or name.endswith('_RUSTFLAGS')):
             require(not value, 'Unexpected compiler override: ' + name)
@@ -55,8 +56,8 @@ def build(plan_path, output, scratch_parent):
             'Expected the reviewed real Node executable')
     require(not os.environ.get('NODE_OPTIONS') and not os.environ.get('NODE_PATH'),
             'Unexpected Node injection environment')
-    node_version = ordinary.execute([node, '--version'], timeout=10).stdout.strip()
-    require(node_version == data['node']['version'] == 'v24.21.0', 'Node version differs')
+    observed_node_version = ordinary.execute([node, '--version'], timeout=10).stdout.strip()
+    require(observed_node_version == data['node']['version'] == node_version(features), 'Node version differs')
     compiler = ordinary.execute([rustc, '-vV']).stdout
     require(compiler == base['compiler'] and re.search(r'^release: 1\.99\.0$', compiler, re.M)
             and re.search(r'^host: aarch64-apple-darwin$', compiler, re.M), 'Compiler differs')
@@ -166,7 +167,7 @@ def build(plan_path, output, scratch_parent):
                       'diagnostic_only': True, 'eligible_for_distribution': False,
                       'eligible_for_performance_gate': False, 'profile_version': 4,
                       'plan_sha256': plan_hash, 'source': source, 'compiler': compiler,
-                      'node': data['node'], 'node_version_observed': node_version,
+                      'node': data['node'], 'node_version_observed': observed_node_version,
                       'target': TARGET, 'features': actual_features, 'graph_delta': graph_change,
                       'codegen': flags, 'physics': physics, 'normal_dependencies': names,
                       'player_sha256': sha256(read(player, 256 * 1024**2)), 'data': packaged,
