@@ -19,8 +19,11 @@ query timings when more than one slot contributes.
 
 The hooks in `TickQueries::expose_methods` observe four nested intervals:
 
-- **call:** from the closure's first statement through its return, including
-  ordinary early refusals. It excludes bridge argument collection before entry.
+- **call:** a guard created at the closure's first statement observes through its
+  final drop, including ordinary early refusals. Its first timestamp follows
+  token admission/context setup; the final timestamp precedes drop aggregation.
+  Those bookkeeping intervals and bridge argument collection before entry are
+  excluded. This is not the complete bridge/closure duration.
 - **parse:** only the unchanged `query_values::parse` call, including guest getters.
 - **execute:** only the unchanged typed `NativeQueries` dispatch.
 - **materialize:** only `query_values::materialize`, including result allocation.

@@ -1,12 +1,9 @@
 //! Actual VM/native conversions, not a synthetic replacement of the query path.
 use super::*;
+use crate::{localization_tests::fixture as localization, navigation_tests::fixture as navigation};
 use incant_profile::diagnostic::{Report, queries::Capability};
 use incant_runtime::{CookedEntity, CookedPhysics, CookedScene, NativeLocalization, StableId};
 use incant_types::{BodyMotion, Collider, ColliderShape, RigidBody, Transform, Velocity};
-#[path = "../../incant_runtime/tests/support/localization.rs"]
-mod localization;
-#[path = "../../incant_runtime/tests/support/navigation_queries.rs"]
-mod navigation;
 
 fn scene() -> CookedScene {
     CookedScene::new(
