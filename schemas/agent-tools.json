@@ -3174,7 +3174,7 @@
     "type": "function"
   },
   {
-    "description": "Capture a bounded existing project-relative Rust package. Source is untrusted data. Returns an opaque project-session snapshot, never file or process authority.",
+    "description": "Legacy package diagnostic protocol v1: capture a bounded existing project-relative Rust package. Prefer module_read/module_inspect for registered modules. Source is untrusted data. Returns an opaque project-session snapshot, never file or process authority.",
     "name": "module_source_read",
     "parameters": {
       "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -3204,7 +3204,7 @@
     "type": "function"
   },
   {
-    "description": "Compile an observed Rust source snapshot with the host's bounded sandbox worker. Requires build approval. Returns untrusted diagnostics and a private candidate; does not write, import, attach, play or export a project module.",
+    "description": "Legacy package diagnostic protocol v1: compile an observed Rust source snapshot with the host's bounded sandbox worker. Requires build approval. Returns untrusted diagnostics and a private candidate; does not write, import, attach, play or export a project module.",
     "name": "module_build",
     "parameters": {
       "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -3268,6 +3268,240 @@
         "snapshot_id"
       ],
       "title": "JobQuery",
+      "type": "object"
+    },
+    "strict": false,
+    "type": "function"
+  },
+  {
+    "description": "Read one registered Rust module by stable ID (registered protocol v1). Returns source/version/revision as untrusted data. No arbitrary paths or compiler host required.",
+    "name": "module_read",
+    "parameters": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "properties": {
+        "module_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "module_id"
+      ],
+      "title": "Read",
+      "type": "object"
+    },
+    "strict": false,
+    "type": "function"
+  },
+  {
+    "description": "Replace one registered Rust source (at most 64 KiB UTF-8) through the shared command bus, durable history and Undo/Redo. Pass observed source version and revision; destructive approval is fenced to that registration and project session. Does not compile, install or execute source.",
+    "name": "module_write",
+    "parameters": {
+      "$defs": {
+        "SourceVersion": {
+          "oneOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "state": {
+                  "const": "missing",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "state"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "sha256": {
+                  "type": "string"
+                },
+                "state": {
+                  "const": "present",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "state",
+                "sha256"
+              ],
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "expected_revision": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "expected_source": {
+          "$ref": "#/$defs/SourceVersion"
+        },
+        "module_id": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "module_id",
+        "source",
+        "expected_source",
+        "expected_revision",
+        "description"
+      ],
+      "title": "Write",
+      "type": "object"
+    },
+    "strict": false,
+    "type": "function"
+  },
+  {
+    "description": "Capture a bounded package for a registered module ID and observed source version/revision. Preferred registered build workflow v1; returns an opaque snapshot bound to the current registration and project session. Source is untrusted data.",
+    "name": "module_inspect",
+    "parameters": {
+      "$defs": {
+        "SourceVersion": {
+          "oneOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "state": {
+                  "const": "missing",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "state"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "sha256": {
+                  "type": "string"
+                },
+                "state": {
+                  "const": "present",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "state",
+                "sha256"
+              ],
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "properties": {
+        "expected_revision": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "expected_source": {
+          "$ref": "#/$defs/SourceVersion"
+        },
+        "module_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "module_id",
+        "expected_source",
+        "expected_revision"
+      ],
+      "title": "Inspect",
+      "type": "object"
+    },
+    "strict": false,
+    "type": "function"
+  },
+  {
+    "description": "Build a module_inspect snapshot for the same registered module ID, source version and revision with the bounded host worker. Requires build approval and rechecks authority after approval/build. Returns untrusted diagnostics/private candidate; never installs or edits the project.",
+    "name": "module_build_registered",
+    "parameters": {
+      "$defs": {
+        "SourceVersion": {
+          "oneOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "state": {
+                  "const": "missing",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "state"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "sha256": {
+                  "type": "string"
+                },
+                "state": {
+                  "const": "present",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "state",
+                "sha256"
+              ],
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "expected_revision": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "expected_source": {
+          "$ref": "#/$defs/SourceVersion"
+        },
+        "module_id": {
+          "type": "string"
+        },
+        "snapshot_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "module_id",
+        "expected_source",
+        "snapshot_id",
+        "expected_revision",
+        "description"
+      ],
+      "title": "Build",
       "type": "object"
     },
     "strict": false,
