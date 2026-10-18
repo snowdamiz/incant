@@ -1,10 +1,20 @@
 {
   "archive": {
-    "bytes": 674920,
-    "expanded_bytes": 3600560,
-    "expanded_sha256": "76d7e3a11ad5d60adcca5e702e1582a2ccf09d0348d567178bd776e42c318420",
+    "bytes": 847119,
+    "expanded_bytes": 4508314,
+    "expanded_sha256": "45f97e787df64c5ecff9d9392f30213f20571cb7a54a5ab19421bea831ed2e31",
     "path": "records.json.gz",
-    "sha256": "57ab8796b1baa0e6327bd35bd85ec1e8bdc2a7dc35cfdd9e7d3212ac194f324c"
+    "sha256": "17b681fe8710e452d8fc69c2ec2998687cabad0bdba6a1437635afdf219f9b1e"
+  },
+  "authored": {
+    "actual_tool_exit": 0,
+    "actual_tool_session": 29405,
+    "closeout": "authored-001-closeout.json",
+    "elapsed_seconds": 2.6182683749939315,
+    "headless_producer": "9d44372ae379c6d0372ff48854828e837f1fb747",
+    "public_route_source_equal_files": 75,
+    "source": "8d6dffcc1aa55fa3612c17cf8a2225f8d250aab0",
+    "status": "complete"
   },
   "canary_producer": "7c18d1d8c752d7528537dc8aea75950e92e58873",
   "claims": {
@@ -12,7 +22,7 @@
     "blanket_security": false,
     "browser": false,
     "cross_platform": false,
-    "normal_project_import_history": false,
+    "normal_project_import_history": true,
     "original_native005_status": "failed",
     "original_socket_creation_denial_passed": false,
     "performance": false,
@@ -20,13 +30,14 @@
     "source_free_export_rerun": false,
     "windows_gpu_capture_audio": false
   },
-  "cumulative_native_seconds": 21.79315050196601,
+  "cumulative_native_seconds": 24.411418876959942,
   "format": "incant-untrusted-rust-build-evidence",
   "limits": [
     "Data-only archive; never execute source/code records",
     "Deprecated sandbox-exec on exact tested macOS27.0.1 arm64/Rust1.99; sampled resource caps, not kernel quotas",
     "Eight request observations from failed native005 plus separate revised network-I/O followup; failed creation criterion stays failed",
-    "No direct listen/IPv6/Unix-domain isolation test or normal importer/UndoRedo proof yet"
+    "No direct listen/IPv6/Unix-domain isolation test. Ordinary public import/SetSceneProgram/UndoRedo/save/reopen only; no module execution/export claim",
+    "Retained headless9d producer and selected75-file public-route equality at6e/8d/integration08cad; not a current-main binary rebuild"
   ],
   "original_native_account_seconds": 180,
   "primary_sources": [
@@ -34,8 +45,8 @@
     "https://github.com/apple-oss-distributions/xnu/blob/xnu-12377.1.9/bsd/kern/uipc_syscalls.c",
     "https://developer.apple.com/documentation/xcode/configuring-the-macos-app-sandbox"
   ],
-  "record_count": 496,
-  "remaining_seconds": 158.206849498034,
+  "record_count": 604,
+  "remaining_seconds": 155.58858112304006,
   "retained_external_artifacts": [
     {
       "bytes": 1220574,
@@ -202,6 +213,21 @@
       "path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-input-001/cpu-001/artifacts/0-incant_wasm_cook",
       "producer": "0d672757b8fb1c7108116097341d64470aee8b83",
       "sha256": "0bb4f7ccfb81dcb7a05a0e814f6b9655cf52b39ae7f46153522f975e8ae5bb15"
+    },
+    {
+      "bytes": 63423424,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-instances-integration-001/incant_headless-9d44372a",
+      "sha256": "f0fb0cf5c654dd03e4ad77e57901586cb6abb426a923dd77f86af169f272641f"
+    },
+    {
+      "bytes": 617335,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/authored-001/authoring/game.wasm",
+      "sha256": "8d86dbd4e85120728eb69f9792f854242c7036443277017571552314d01a65d9"
+    },
+    {
+      "bytes": 3938641,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/authored-001/authoring/.incant/cache/wasm/8947a315f409adb71a430478746a85284979864f0fc48e06881409b5052f7619.wasm.json",
+      "sha256": "7cf28d10f53545e2feb8154ece9e6877199964f7e58ee967485894eae3821870"
     }
   ],
   "runs": [

@@ -3,8 +3,9 @@
 Source implementation for PLAN 6.3's module-build isolation milestone. Selected
 Mac compiler/request and revised network-I/O controls passed in the scoped
 episodes below. The original socket-creation criterion remains failed; this is
-not a blanket security guarantee or cross-platform qualification. Ordinary
-project import/history integration is the separate next proof.
+not a blanket security guarantee or cross-platform qualification. A separate
+ordinary public import/selection/history follow-up also passed with the exact
+service-generated module and a retained, source-compatible headless producer.
 
 The existing `tools/rust_guest.py::compile` remains a trusted repository-guest
 helper. Its SDK cache keys, fixed library recipes and argv order are preserved.
@@ -189,10 +190,10 @@ No compiler or request case was rerun in this final follow-up.
 The combined observations qualify these selected controls for the tested Mac,
 pinned toolchain and exact policy. They do not turn failed native005 into a
 successful original episode or establish a blanket sandbox/security guarantee.
-Cumulative native time is 21.793150502 seconds, leaving 158.206849498 of the
-original 180. All earlier failures, raw diagnostics, terminal/group receipts,
+Cumulative native time at that network checkpoint was 21.793150502 seconds,
+leaving 158.206849498 of the original 180. All earlier failures, raw diagnostics, terminal/group receipts,
 criterion revision and independent root review are retained in the compact
-[data-only packet](evidence/untrusted-rust-module-build/manifest.json). Its 496
+[data-only packet](evidence/untrusted-rust-module-build/manifest.json). Its 604
 inert UTF-8 records include source snapshots; native binaries/SDK libraries/Wasm
 remain external hashed identities. The portable verifier executes none of them:
 
@@ -200,11 +201,50 @@ remain external hashed identities. The portable verifier executes none of them:
 python3 docs/spikes/evidence/untrusted-rust-module-build/verify.py --self-test
 ```
 
-Optional `--originals --artifacts` rehashes the retained local files. Bounded
-manifest/archive reads and gzip decompression use the already verified byte
-snapshot, including a path-replacement control. Seventeen corrupt/boundary
+Optional `--originals --artifacts` rehashes the retained local files. Artifact
+hashing streams at most 64 KiB per read; its explicit 64 MiB per-file and 128 MiB
+total ceilings accommodate the retained headless binary without embedding it.
+Bounded manifest/archive reads and gzip decompression use the already verified
+byte snapshot, including a path-replacement control. Thirty-one corrupt/boundary
 controls cover false pass/scope claims, missing cases, errno substitution,
-sink/cleanup failure, artifact substitution, caps and archive replacement.
-Normal public import/`SetSceneProgram`/Undo/Redo remains a separate next
-qualification; no new source-free export, browser, performance, window, device
-or cross-platform isolation result is claimed here.
+sink/cleanup failure, artifact substitution/size, caps, archive replacement and
+the public authoring protocol below. All original 496 records remain unchanged.
+
+## Ordinary public authoring follow-up
+
+Actual tool session `29405` exited 0 under controller/report source `8d6dffcc`.
+It reused the 63,423,424-byte headless binary produced by
+`9d44372ae379c6d0372ff48854828e837f1fb747`, SHA-256
+`f0fb0cf5c654dd03e4ad77e57901586cb6abb426a923dd77f86af169f272641f`.
+The retained source-equality receipt covers 75 selected public-route files at
+that producer, service source `6e265da1`, report source `8d6dffcc`, and integration
+snapshot `08cad264`; it does not relabel the binary as a current-main rebuild.
+The input was the exact 617,335-byte raw module from native005, SHA-256
+`8d86dbd4e85120728eb69f9792f854242c7036443277017571552314d01a65d9`.
+No compiler, SDK build, export or module/gameplay execution was repeated.
+
+Four ordinary headless CLI processes and two RPC processes used the same default
+`project.journal.jsonl`. Normal import succeeded; repeated import was a cache
+hit with no revision or asset change. The normal cache capture retained the
+exact service raw input and its prepared digest. Schema-validated
+`command.execute` selected that imported module through `SetSceneProgram` at the
+required revision, with the engine-supplied actor. Undo restored the exact
+preselection project; Redo restored the selected project. An exact stale-revision
+error left project, revision and history unchanged. Save and reopen preserved
+the project and journal history. A malformed import, run after closing the
+first RPC owner, exited nonzero with the normal Wasm-validator message and no
+success JSON; the driver checked project and journal bytes unchanged and the
+second RPC owner confirmed the same saved state/history. No direct document or
+cache mutation route was added.
+
+The 60-second/15-second-child episode finished in 2.618268375 seconds. The actual
+outer handle was polled to terminal 0; wrapper 70299 and all six headless
+PID/groups were independently absent. All 177 frozen input bindings and both
+protected input artifacts were rehashed; root independently reviewed raw CLI,
+19 RPC requests, saved state/history and cleanup. Sampled peak RSS was
+231,735,296 bytes and allocated output peak was 4,681,728 bytes. Cumulative native
+time is now 24.411418877 seconds, leaving 155.588581123 of the original 180;
+every earlier failed receipt remains failed. Six source-only driver controls and
+the full data-only replay with originals, external artifacts and 31 negative/
+boundary controls passed. No new source-free export, browser, performance,
+native window, physical device or cross-platform isolation result is claimed.
