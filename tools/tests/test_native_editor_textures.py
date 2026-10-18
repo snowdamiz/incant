@@ -12,7 +12,9 @@ import sys
 import tempfile
 import threading
 import time
+from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = importlib.util.spec_from_file_location('native_editor_textures', ROOT/'tools/probes/native-editor-textures.py')
@@ -266,9 +268,33 @@ class ManagedProtocolControls(unittest.TestCase):
 
     def test_protocol_timeout_cleans_child_and_retains_refusal(self):
         code = "import sys,time; sys.stdin.read(); print('before timeout',flush=True); print('diagnostic',file=sys.stderr,flush=True); time.sleep(60)"
-        with self.assertRaises(subprocess.TimeoutExpired) as caught:
+        prefixes = {'stdout': bytearray(), 'stderr': bytearray()}
+        expected = {'stdout': b'before timeout\n', 'stderr': b'diagnostic\n'}
+        origin, started = time.monotonic(), None
+        class ObservedQueue(probe.queue.Queue):
+            def get(self, *args, **kwargs):
+                nonlocal started
+                item = super().get(*args, **kwargs)
+                name, chunk = item
+                if name in prefixes and chunk is not None:
+                    prefixes[name].extend(chunk)
+                    if started is None and prefixes == expected:
+                        started = time.monotonic()
+                return item
+        def execution_time():
+            # Arm only when the owner consumes both actual prefixes. Child-side
+            # writes alone do not establish the captured-prefix assertion.
+            now = time.monotonic()
+            if started is None:
+                self.assertLess(now - origin, 5, 'RPC fixture readiness deadline exceeded')
+                return origin
+            return origin + now - started
+        with self.assertRaises(subprocess.TimeoutExpired) as caught, \
+                patch.object(probe, 'time', SimpleNamespace(monotonic=execution_time)), \
+                patch.object(probe, 'queue', SimpleNamespace(Queue=ObservedQueue, Empty=probe.queue.Empty)):
             probe.rpc_process([sys.executable,'-c',code],
                               'request\n', 0.5, lambda:None)
+        self.assertIsNotNone(started, 'Both actual output prefixes must be consumed')
         record = probe.failure_record(caught.exception)
         self.assertTrue(record['reaped'])
         self.assertEqual(record['timeout_capture_scope'], 'rpc-received-prefix-before-cleanup')

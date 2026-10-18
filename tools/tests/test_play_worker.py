@@ -69,7 +69,8 @@ class WorkerOwner(unittest.TestCase):
     def test_hung_reader_and_writer_have_deadlines_and_no_live_io_thread(self):
         for params in ({}, {'blocked': 'x' * (MAX_REQUEST - 200)}):
             with self.subTest(bytes=len(str(params))), self.child(PREFIX + 'time.sleep(60)') as process:
-                worker = Worker(process, EXPECTED, 0.15)
+                worker = Worker(process, EXPECTED, 5)
+                worker.timeout = 0.15  # The short bound tests hung requests, not interpreter startup.
                 with self.assertRaises(TimeoutError):
                     worker.step(params)
                 self.assertIsNotNone(process.returncode)
