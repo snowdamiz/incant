@@ -1,0 +1,706 @@
+{
+  "source": "b2f6c96ee654a0c6ef468b1c060266d2bb9dadc1",
+  "artifact": {
+    "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-cpu-003-9l4lwcsl/incant_render_taau",
+    "bytes": 33326624,
+    "sha256": "a9d0534c2abd8f6581de17d132b5299db61863c1230f0db331e48a7e6052b5b3"
+  },
+  "archive": {
+    "path": "records.json.gz",
+    "bytes": 256143,
+    "uncompressed_bytes": 8130165,
+    "sha256": "3a4f050d7aea9a4fc5a2bdc8a410da9ae117490d64cd7fe08437ec19f520c28e"
+  },
+  "records": [
+    {
+      "path": "capture/calibration-raw-visibility.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/calibration-raw-visibility.bin",
+      "bytes": 786432,
+      "sha256": "10f99f863af30983d1b43040bf79d6f7f28916163d49ce1daf9247d25f908852"
+    },
+    {
+      "path": "capture/capture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/capture.json",
+      "bytes": 609,
+      "sha256": "c816c071abbe5fe15888d61393862ac14b9425ec3b7d7ed4c43e9d21dd2f69c9"
+    },
+    {
+      "path": "capture/fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/fixture.json",
+      "bytes": 2116,
+      "sha256": "a73e90de93a4350927efbd321d781d758aef5ce95b9bbf9c591c8a85fb822a3c"
+    },
+    {
+      "path": "capture/rgba-forward/attachment-routing.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/attachment-routing.json",
+      "bytes": 2918,
+      "sha256": "1a01cca8f3dcc7008cb901fd34f1a7c753d770380d5248710d4886563b982bc0"
+    },
+    {
+      "path": "capture/rgba-forward/draw-0.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/draw-0.json",
+      "bytes": 4809,
+      "sha256": "217674b29418dd76a07c3d4d600ba465ce343996be01bd9a65c0352aeef24b5c"
+    },
+    {
+      "path": "capture/rgba-forward/draw-1.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/draw-1.json",
+      "bytes": 4808,
+      "sha256": "a0b036ccac4d127cae4e48bcbc22c5c811153fd4ec245eaa9ce2dc1c7bed59d0"
+    },
+    {
+      "path": "capture/rgba-forward/draw-10.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/draw-10.json",
+      "bytes": 4811,
+      "sha256": "f5d25ae4b420cad4437befad3c5a8551041bb60b536ebac0b0334e088f43ff63"
+    },
+    {
+      "path": "capture/rgba-forward/draw-2.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/draw-2.json",
+      "bytes": 4809,
+      "sha256": "f6042dd4ba9591df19fa29bbd12a99207782165b3e8809793060d59039279153"
+    },
+    {
+      "path": "capture/rgba-forward/draw-3.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/draw-3.json",
+      "bytes": 4808,
+      "sha256": "be6dcc4f49a0becdab1909fda77bc150a6ef175ad74931816b6d94861dba4649"
+    },
+    {
+      "path": "capture/rgba-forward/draw-4.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/draw-4.json",
+      "bytes": 4809,
+      "sha256": "d61f710aa5c2fe352df5062f7eb2400144bcc322cff5e05ddc2a2cc6cf64d3ac"
+    },
+    {
+      "path": "capture/rgba-forward/draw-5.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/draw-5.json",
+      "bytes": 4808,
+      "sha256": "c6d981bb6f4d053defe8c172b922e480e74d2744f1e9292ac53077d4965ed5a6"
+    },
+    {
+      "path": "capture/rgba-forward/draw-6.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/draw-6.json",
+      "bytes": 4809,
+      "sha256": "683a26055fa7d9d622a0f0ddf97b1a46572a40d2b534fb7cf7d2f2c5be5f8b30"
+    },
+    {
+      "path": "capture/rgba-forward/draw-7.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/draw-7.json",
+      "bytes": 4808,
+      "sha256": "6c32990e8fddfd3faf6227c4e7fad4565536fc4d28da19018bd7bfb562c6c610"
+    },
+    {
+      "path": "capture/rgba-forward/draw-8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/draw-8.json",
+      "bytes": 4809,
+      "sha256": "8f134147988fc0771b71866d59b0d72282ec0f0846f047c0bd92039f402d9c46"
+    },
+    {
+      "path": "capture/rgba-forward/draw-9.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/draw-9.json",
+      "bytes": 4805,
+      "sha256": "9d66d2c12ee6811952b2cec71a4fc910270c042cf55ef904a4fe2453c60f37cb"
+    },
+    {
+      "path": "capture/rgba-forward/frame-0.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/frame-0.json",
+      "bytes": 552,
+      "sha256": "4bd324c049a85cf7eafca35a4c5297c93876e8ac256b9c5881649f9221bd684b"
+    },
+    {
+      "path": "capture/rgba-forward/frame-1.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/frame-1.json",
+      "bytes": 533,
+      "sha256": "c79e8febf8e587cbb5d4cba364593b7e75810349a875a04df08962680b825232"
+    },
+    {
+      "path": "capture/rgba-forward/frame-10-low.f32le",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/frame-10-low.f32le",
+      "bytes": 262144,
+      "sha256": "311a822139e03b8f557c09840a7006b3b631331f25e7c80cdb03a8de83bc6d57"
+    },
+    {
+      "path": "capture/rgba-forward/frame-10-storage.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/frame-10-storage.bin",
+      "bytes": 1310720,
+      "sha256": "9f8dbafb8a1bdad9ad067899f3442efb838a704edc347340df91b8e193cf7bb1"
+    },
+    {
+      "path": "capture/rgba-forward/frame-10.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/frame-10.json",
+      "bytes": 5265,
+      "sha256": "a9694728d58a92c559d929637690abff41f15e3f22b4fb226609e7fb6ca38511"
+    },
+    {
+      "path": "capture/rgba-forward/frame-2.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/frame-2.json",
+      "bytes": 533,
+      "sha256": "da3bd7f14bd7c06b86e876b1d5f3ffc8c5be75e421694173c9967fa924f86229"
+    },
+    {
+      "path": "capture/rgba-forward/frame-3.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/frame-3.json",
+      "bytes": 533,
+      "sha256": "77f78e2d7c8ab2f0286368ea1deadabc9be3c20af1d4b6f3bbd6eb4339ae71d0"
+    },
+    {
+      "path": "capture/rgba-forward/frame-4.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/frame-4.json",
+      "bytes": 533,
+      "sha256": "9d83f375ee5c94d16e05d750c4a43ab3ab7f73d47944f6973ef92a4fe5e9eb9f"
+    },
+    {
+      "path": "capture/rgba-forward/frame-5.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/frame-5.json",
+      "bytes": 533,
+      "sha256": "559ef203838ebc0eb897d6b9509c8ceabe01c040faa0d7595b9b52d86c4a3da0"
+    },
+    {
+      "path": "capture/rgba-forward/frame-6.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/frame-6.json",
+      "bytes": 533,
+      "sha256": "53ff35d4564e9fb177b2bb18bda6b0989b88afee6893c1d3664cba36fac5c1c9"
+    },
+    {
+      "path": "capture/rgba-forward/frame-7.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/frame-7.json",
+      "bytes": 533,
+      "sha256": "8990f5a8def68cf654c4d7d77b1e488d003b829251625655630dc57ba4758604"
+    },
+    {
+      "path": "capture/rgba-forward/frame-8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/frame-8.json",
+      "bytes": 544,
+      "sha256": "26ee5edf2ccab7f6337a0b52b8d4af00c352ca53e409f3255400e56bb13d9c9a"
+    },
+    {
+      "path": "capture/rgba-forward/frame-9.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/frame-9.json",
+      "bytes": 541,
+      "sha256": "ac2c358704487cd51152fcf6181101b0ff6c34403209976f15a665ccfb94657d"
+    },
+    {
+      "path": "capture/rgba-forward/pipeline-calibration-2.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/pipeline-calibration-2.json",
+      "bytes": 4375,
+      "sha256": "9a4c449dd6f7aadac3289a7f5a2aa50885a815e2df526367628ebed9b885cda5"
+    },
+    {
+      "path": "capture/rgba-forward/pipeline-readback.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/pipeline-readback.json",
+      "bytes": 4476,
+      "sha256": "488b5105cd1e625d5956f301d3c67ea63577a67445ebd183a9ddf388bfc6a02c"
+    },
+    {
+      "path": "capture/rgba-forward/pipeline-scene-0.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/pipeline-scene-0.json",
+      "bytes": 19167,
+      "sha256": "61c290d84f98e865fd1e500500c0f9f382913ce4489a3aca1cdf860c10d9d1b5"
+    },
+    {
+      "path": "capture/rgba-forward/pipeline-scene-1.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/pipeline-scene-1.json",
+      "bytes": 19166,
+      "sha256": "5099f1cbc25377202462f596d0e4e646625fbce48ecc3bec6ce6c6f5db692b19"
+    },
+    {
+      "path": "capture/rgba-forward/pipeline-scene-2.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/pipeline-scene-2.json",
+      "bytes": 19161,
+      "sha256": "dc4b3c56910004d76363bb3235e2080ba77cda41c7d58670e1ab2babd6958e68"
+    },
+    {
+      "path": "capture/rgba-forward/pipeline-scene-3.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/pipeline-scene-3.json",
+      "bytes": 19160,
+      "sha256": "ecd03410e2ba200a10198b98aceb7d6ab4f591831c731ec5f296bc23b35f513f"
+    },
+    {
+      "path": "capture/rgba-forward/static-area.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/static-area.json",
+      "bytes": 4753,
+      "sha256": "8ead2fb765d947ffeb36848aa5c46d9c30cf55b7b645271391457da21a49867a"
+    },
+    {
+      "path": "capture/rgba-forward/upload-0.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/upload-0.json",
+      "bytes": 2831,
+      "sha256": "a0ec6d9c9c4a928ded1cb169db51d79f871afb0e601b3ec68c9f4899592e6daa"
+    },
+    {
+      "path": "capture/rgba-forward/upload-1.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/upload-1.json",
+      "bytes": 2839,
+      "sha256": "54141936726737bc1c4f203629147f9d683d77182df1d74d3689de2f500db722"
+    },
+    {
+      "path": "capture/rgba-forward/upload-10.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/upload-10.json",
+      "bytes": 2847,
+      "sha256": "866637a272f2a666bef27ad89962e8614ab3096feeb763f2739448930412bf1f"
+    },
+    {
+      "path": "capture/rgba-forward/upload-2.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/upload-2.json",
+      "bytes": 2839,
+      "sha256": "606ae18dc4b2f8c145937421fb746e76a2038e98e4905dadb5b6a1de6a75c009"
+    },
+    {
+      "path": "capture/rgba-forward/upload-3.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/upload-3.json",
+      "bytes": 2839,
+      "sha256": "7cd8e7cf409f5202caad0e2cda8323a4fbf236f43bc2caf0c896d2acc70e5fe3"
+    },
+    {
+      "path": "capture/rgba-forward/upload-4.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/upload-4.json",
+      "bytes": 2839,
+      "sha256": "006adc690c4bc386fab7cbf05baefd4e0488a2e789d34e344ecc5007aacf3c95"
+    },
+    {
+      "path": "capture/rgba-forward/upload-5.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/upload-5.json",
+      "bytes": 2839,
+      "sha256": "08d10fdd8e707284db817c4496dc1a45e6a820b62de358d4d4115a07a42898e2"
+    },
+    {
+      "path": "capture/rgba-forward/upload-6.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/upload-6.json",
+      "bytes": 2839,
+      "sha256": "b359d75ee9399a738c62ed1a2b6e828701661207d39bb7fb2e202e3ae9205b10"
+    },
+    {
+      "path": "capture/rgba-forward/upload-7.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/upload-7.json",
+      "bytes": 2839,
+      "sha256": "971bc8e30d9125e987b3a2ff4e184544e5781b50e8a517b367680066409b5d35"
+    },
+    {
+      "path": "capture/rgba-forward/upload-8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/upload-8.json",
+      "bytes": 2841,
+      "sha256": "c25ede8a719254abbe91e7de025e56798ae226934d75deab747a9a73ad3285ef"
+    },
+    {
+      "path": "capture/rgba-forward/upload-9.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-forward/upload-9.json",
+      "bytes": 2842,
+      "sha256": "5bfeb85dccbd91fdb61ff376c67912f76db528314e400d502401c278c0a81af6"
+    },
+    {
+      "path": "capture/rgba-sample-x/attachment-routing.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/attachment-routing.json",
+      "bytes": 2919,
+      "sha256": "0dc3ba2e10b3d4fb41f4631ba759e9d4198c31bcd1e99f3759b130838914e987"
+    },
+    {
+      "path": "capture/rgba-sample-x/draw-0.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/draw-0.json",
+      "bytes": 4810,
+      "sha256": "4b7145ee436edd7a7554ac0e0a5c410be9abc4eea1b23e7140693fba862de862"
+    },
+    {
+      "path": "capture/rgba-sample-x/draw-1.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/draw-1.json",
+      "bytes": 4808,
+      "sha256": "c6c54c2038c3729c484cc86edfc4fcf78b1011eeaa2ef1c8a6135e613517e2b8"
+    },
+    {
+      "path": "capture/rgba-sample-x/draw-10.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/draw-10.json",
+      "bytes": 4812,
+      "sha256": "e663930bf151d19d9bccf338030892c639ed26d4c67e0a378407ed1b3395abe1"
+    },
+    {
+      "path": "capture/rgba-sample-x/draw-2.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/draw-2.json",
+      "bytes": 4810,
+      "sha256": "c8afcd0b1308a38727aa7a88da0656562527607c6128300b3b7348b34bb392de"
+    },
+    {
+      "path": "capture/rgba-sample-x/draw-3.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/draw-3.json",
+      "bytes": 4808,
+      "sha256": "ca78ff9834ed618df7dcf75ba87ae64b8b06c4b0bf0c3ef9b8ce72048403934d"
+    },
+    {
+      "path": "capture/rgba-sample-x/draw-4.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/draw-4.json",
+      "bytes": 4810,
+      "sha256": "d8866695191751581d33a4102f02663f2d919222e90fcb8bc4904afe02f581d2"
+    },
+    {
+      "path": "capture/rgba-sample-x/draw-5.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/draw-5.json",
+      "bytes": 4808,
+      "sha256": "28b7815f214d2d51dba1c8bcfcc1411767e93855bf24c58076d9c83215ef7ad3"
+    },
+    {
+      "path": "capture/rgba-sample-x/draw-6.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/draw-6.json",
+      "bytes": 4810,
+      "sha256": "12452b348ddc12c2f4af2f4420bca6fdad372e9ad3eb490d9a190f9a8b01a549"
+    },
+    {
+      "path": "capture/rgba-sample-x/draw-7.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/draw-7.json",
+      "bytes": 4808,
+      "sha256": "18c59381e5c72110eb39b385813f89715c2deb018417135a010354d35c5881f8"
+    },
+    {
+      "path": "capture/rgba-sample-x/draw-8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/draw-8.json",
+      "bytes": 4810,
+      "sha256": "a0b4f63ac808f4253bd84a9489b953b7365d32e96b86859b83d606aead7fb1a3"
+    },
+    {
+      "path": "capture/rgba-sample-x/draw-9.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/draw-9.json",
+      "bytes": 4805,
+      "sha256": "366a20b11d125bdd57bdbe19d746943ecd47a93880ad034849c73c5900e2a0b1"
+    },
+    {
+      "path": "capture/rgba-sample-x/frame-0.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/frame-0.json",
+      "bytes": 553,
+      "sha256": "ef313a82149dfe1c4bfa15d07c498af7c5d41d2b539a74d550d09bb9aeaaf6c7"
+    },
+    {
+      "path": "capture/rgba-sample-x/frame-1.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/frame-1.json",
+      "bytes": 534,
+      "sha256": "b3216119ef110be32fee52d6129b5792d3d8bca6868e5313adb5b6bdea2e670a"
+    },
+    {
+      "path": "capture/rgba-sample-x/frame-10-low.f32le",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/frame-10-low.f32le",
+      "bytes": 262144,
+      "sha256": "311a822139e03b8f557c09840a7006b3b631331f25e7c80cdb03a8de83bc6d57"
+    },
+    {
+      "path": "capture/rgba-sample-x/frame-10-storage.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/frame-10-storage.bin",
+      "bytes": 1310720,
+      "sha256": "68b5cb2bea21cbc9356a35ad84df70f60dc861786bd4a696301bf54bfa557320"
+    },
+    {
+      "path": "capture/rgba-sample-x/frame-10.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/frame-10.json",
+      "bytes": 561,
+      "sha256": "581a13257fce54f6291588c026da6faefe09f4d1f44e30114a215b64f84f77c4"
+    },
+    {
+      "path": "capture/rgba-sample-x/frame-2.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/frame-2.json",
+      "bytes": 534,
+      "sha256": "1b673842862d381e9f779db63a6399acb56d1a03cef9827509d4a713d3d11a63"
+    },
+    {
+      "path": "capture/rgba-sample-x/frame-3.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/frame-3.json",
+      "bytes": 534,
+      "sha256": "938a1759db0f6938d6241978f1c8236faa83618ebeb60f380692c17093980390"
+    },
+    {
+      "path": "capture/rgba-sample-x/frame-4.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/frame-4.json",
+      "bytes": 534,
+      "sha256": "237c745c2979de9a3deca154faf48510a9490b4be7b7410a4186086241da2d78"
+    },
+    {
+      "path": "capture/rgba-sample-x/frame-5.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/frame-5.json",
+      "bytes": 534,
+      "sha256": "8892d6a67ca964efbfd1981e97cc7932d2bb6ef090a0e2c8c8ea2ed0f3c7a0ea"
+    },
+    {
+      "path": "capture/rgba-sample-x/frame-6.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/frame-6.json",
+      "bytes": 534,
+      "sha256": "bee42bf5a4a7b1299ca46a9a5694a8e99e1bb1208d70bdbbf5de824856a53c2f"
+    },
+    {
+      "path": "capture/rgba-sample-x/frame-7.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/frame-7.json",
+      "bytes": 534,
+      "sha256": "b6696daee25c1ff024009a8e5a4722c408d23f226b9631ea15ff5f8d07a00beb"
+    },
+    {
+      "path": "capture/rgba-sample-x/frame-8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/frame-8.json",
+      "bytes": 545,
+      "sha256": "93c1088c8b82b020fd408a1b3d67375cc5c3ca4aeb942095f316e6a5b9be3bdd"
+    },
+    {
+      "path": "capture/rgba-sample-x/frame-9.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/frame-9.json",
+      "bytes": 542,
+      "sha256": "1f7360bf544a5b7bf2ccbb78c503ed80052e655140c7ca2eae0a6d6262affa2d"
+    },
+    {
+      "path": "capture/rgba-sample-x/pipeline-calibration-2.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/pipeline-calibration-2.json",
+      "bytes": 4376,
+      "sha256": "51d1f0fe71daf885554ba1653174aa937d304d94715916444f6bc2e166602b4a"
+    },
+    {
+      "path": "capture/rgba-sample-x/pipeline-readback.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/pipeline-readback.json",
+      "bytes": 4477,
+      "sha256": "3c62977dccc89be57026f37d8077dfd43b80785e869c728871a74e5d6f9d8220"
+    },
+    {
+      "path": "capture/rgba-sample-x/pipeline-scene-0.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/pipeline-scene-0.json",
+      "bytes": 19241,
+      "sha256": "81526c6365217696fcd5a684522a14211d0f74c43686f51348311f750d7e95d9"
+    },
+    {
+      "path": "capture/rgba-sample-x/pipeline-scene-1.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/pipeline-scene-1.json",
+      "bytes": 19240,
+      "sha256": "b3893a7092d284092aa67e87c99e1d04653d95262455647410099e1ea51eb86e"
+    },
+    {
+      "path": "capture/rgba-sample-x/pipeline-scene-2.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/pipeline-scene-2.json",
+      "bytes": 19235,
+      "sha256": "191dbd21d8179a3774d203dee324ec7ab84160b6c9abcd7cf676ab9c9db265eb"
+    },
+    {
+      "path": "capture/rgba-sample-x/pipeline-scene-3.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/pipeline-scene-3.json",
+      "bytes": 19235,
+      "sha256": "bd9c76ac1668649aab63bf5aa6b3b128e36e8a70b34dd8f194b93000dbff6a65"
+    },
+    {
+      "path": "capture/rgba-sample-x/static-area.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/static-area.json",
+      "bytes": 4753,
+      "sha256": "8ead2fb765d947ffeb36848aa5c46d9c30cf55b7b645271391457da21a49867a"
+    },
+    {
+      "path": "capture/rgba-sample-x/upload-0.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/upload-0.json",
+      "bytes": 2831,
+      "sha256": "7b08ea9a108236b7abd5377ee971d8fd01a7ee1e91840b59c1257c169837c3b1"
+    },
+    {
+      "path": "capture/rgba-sample-x/upload-1.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/upload-1.json",
+      "bytes": 2839,
+      "sha256": "e9ffeded35b9c873a6c23da5f0bf822387c74cfaee3c6f801595bf113f0fc0c4"
+    },
+    {
+      "path": "capture/rgba-sample-x/upload-10.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/upload-10.json",
+      "bytes": 2847,
+      "sha256": "8ba6960a4a2aaf1d96040bd778d95abc5af564569378eb88a697cd617be6e5f2"
+    },
+    {
+      "path": "capture/rgba-sample-x/upload-2.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/upload-2.json",
+      "bytes": 2839,
+      "sha256": "5c943c937da23467ae0f3bd56fb13916d57a3f3edd678b068b41bc53820ad357"
+    },
+    {
+      "path": "capture/rgba-sample-x/upload-3.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/upload-3.json",
+      "bytes": 2839,
+      "sha256": "daf86e5efe60686910265f9aaf419bc3a5510358c6fd248f6374ad82e7614683"
+    },
+    {
+      "path": "capture/rgba-sample-x/upload-4.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/upload-4.json",
+      "bytes": 2839,
+      "sha256": "40843d22063496badeba1159f3531a5402dee1c51ff39360aa2c4a1c501de248"
+    },
+    {
+      "path": "capture/rgba-sample-x/upload-5.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/upload-5.json",
+      "bytes": 2839,
+      "sha256": "bea2dbac52a5ba03665e5fa56819098c8c7ff94d1457c94c2eef3dcba443e69e"
+    },
+    {
+      "path": "capture/rgba-sample-x/upload-6.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/upload-6.json",
+      "bytes": 2839,
+      "sha256": "b605395fbbc208de653f0d876b67cb7fc41b04378b268d650ee1512d1c64bc7a"
+    },
+    {
+      "path": "capture/rgba-sample-x/upload-7.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/upload-7.json",
+      "bytes": 2839,
+      "sha256": "7ec85a9875e2830c4aeafb5d9faf544e5200338f1bb1014d09985af6fbe48999"
+    },
+    {
+      "path": "capture/rgba-sample-x/upload-8.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/upload-8.json",
+      "bytes": 2841,
+      "sha256": "fc24cfd2e4c41ac057915558f7bf68303931305e720db975989b4ed0cab35672"
+    },
+    {
+      "path": "capture/rgba-sample-x/upload-9.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/capture/rgba-sample-x/upload-9.json",
+      "bytes": 2842,
+      "sha256": "28f088a931902b071f33db917a0463cdc324f6e293cfd3bb63320641cd62a910"
+    },
+    {
+      "path": "old/occluder-low.f32le",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-gpu-001-kryglarf/visibility/occluder-low.f32le",
+      "bytes": 262144,
+      "sha256": "311a822139e03b8f557c09840a7006b3b631331f25e7c80cdb03a8de83bc6d57"
+    },
+    {
+      "path": "old/static-area.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-gpu-001-kryglarf/visibility/static-area.json",
+      "bytes": 4753,
+      "sha256": "8ead2fb765d947ffeb36848aa5c46d9c30cf55b7b645271391457da21a49867a"
+    },
+    {
+      "path": "prior/fixture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-slot-gpu-001-1gsr0xb_/capture/fixture.json",
+      "bytes": 1941,
+      "sha256": "f08d465af84bc700ae0f4bd8fc1bc229a7aa0fa546c7aef825b99bd6627b7ed5"
+    },
+    {
+      "path": "prior/rgba-forward/frame-10-storage.bin",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-slot-gpu-001-1gsr0xb_/capture/rgba-forward/frame-10-storage.bin",
+      "bytes": 1310720,
+      "sha256": "9f8dbafb8a1bdad9ad067899f3442efb838a704edc347340df91b8e193cf7bb1"
+    },
+    {
+      "path": "prior/rgba-forward/pipeline-calibration-2.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-slot-gpu-001-1gsr0xb_/capture/rgba-forward/pipeline-calibration-2.json",
+      "bytes": 4375,
+      "sha256": "9a4c449dd6f7aadac3289a7f5a2aa50885a815e2df526367628ebed9b885cda5"
+    },
+    {
+      "path": "prior/rgba-forward/pipeline-readback.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-slot-gpu-001-1gsr0xb_/capture/rgba-forward/pipeline-readback.json",
+      "bytes": 4476,
+      "sha256": "488b5105cd1e625d5956f301d3c67ea63577a67445ebd183a9ddf388bfc6a02c"
+    },
+    {
+      "path": "prior/rgba-forward/pipeline-scene-0.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-slot-gpu-001-1gsr0xb_/capture/rgba-forward/pipeline-scene-0.json",
+      "bytes": 19167,
+      "sha256": "61c290d84f98e865fd1e500500c0f9f382913ce4489a3aca1cdf860c10d9d1b5"
+    },
+    {
+      "path": "prior/rgba-forward/pipeline-scene-1.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-slot-gpu-001-1gsr0xb_/capture/rgba-forward/pipeline-scene-1.json",
+      "bytes": 19166,
+      "sha256": "5099f1cbc25377202462f596d0e4e646625fbce48ecc3bec6ce6c6f5db692b19"
+    },
+    {
+      "path": "prior/rgba-forward/pipeline-scene-2.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-slot-gpu-001-1gsr0xb_/capture/rgba-forward/pipeline-scene-2.json",
+      "bytes": 19161,
+      "sha256": "dc4b3c56910004d76363bb3235e2080ba77cda41c7d58670e1ab2babd6958e68"
+    },
+    {
+      "path": "prior/rgba-forward/pipeline-scene-3.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-slot-gpu-001-1gsr0xb_/capture/rgba-forward/pipeline-scene-3.json",
+      "bytes": 19160,
+      "sha256": "ecd03410e2ba200a10198b98aceb7d6ab4f591831c731ec5f296bc23b35f513f"
+    },
+    {
+      "path": "receipts/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/plan.json",
+      "bytes": 34453,
+      "sha256": "f86ac9cf325b0a80e3432f083c205ec746545abf2f6b617f8a3aca0771bc992c"
+    },
+    {
+      "path": "receipts/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/closeout.json",
+      "bytes": 2934,
+      "sha256": "36917d4cf38bcc46c227dca3dc8364d13448bb998d4e071c40f9cf6e38e6de66"
+    },
+    {
+      "path": "receipts/verified-owner-capture.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/verified-owner-capture.json",
+      "bytes": 30777,
+      "sha256": "45fa1f49a305636dbb66958465f72640761350393ec816db76c1d39497378201"
+    },
+    {
+      "path": "receipts/visibility-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/visibility-result.json",
+      "bytes": 1449,
+      "sha256": "a0451d993674e4f2e5ba12482ca6720c7aac5787c047f054273e84102c6ddc5b"
+    },
+    {
+      "path": "receipts/visibility-terminal.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/visibility-terminal.json",
+      "bytes": 426,
+      "sha256": "1c2dd06f64dd51cbafd77603508fc8a4e16faf9130324cc7f14931867366a08f"
+    },
+    {
+      "path": "receipts/visibility-wrapper.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/visibility-wrapper.json",
+      "bytes": 171,
+      "sha256": "16222e54709891994bc201b4e2c1b61f0a6d3e6f7ca5046337e4eaf96429d862"
+    },
+    {
+      "path": "receipts/visibility-child.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/visibility-child.json",
+      "bytes": 86,
+      "sha256": "56c168c7141680c61bdb55d8cba164b0c438e6b3e9d5e435b190c914046cdac7"
+    },
+    {
+      "path": "receipts/visibility.log",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/visibility.log",
+      "bytes": 501,
+      "sha256": "d057accae2b31e959bdcb9c7b2275141d9fbf928be8c092b70b4aaf06b226b2e"
+    },
+    {
+      "path": "receipts/data-result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/data-result.json",
+      "bytes": 1417,
+      "sha256": "75d5e3ad8cbb7bde8833cead49208284303ad59340dc387530fd589544e12158"
+    },
+    {
+      "path": "receipts/data-terminal.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/data-terminal.json",
+      "bytes": 426,
+      "sha256": "31473e47b7f482e1dff5a0bc36f27e4a2c122fda68be37b2ecce67af4ddb4393"
+    },
+    {
+      "path": "receipts/data-wrapper.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/data-wrapper.json",
+      "bytes": 171,
+      "sha256": "4233d6820a69bd96364892e9451c32fe9cd219085b100bbb2b1b9beb1ae73075"
+    },
+    {
+      "path": "receipts/data-child.json",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/data-child.json",
+      "bytes": 86,
+      "sha256": "c21bd73e2cf5f10067921eea37a040feedc57d20f2d377ccc033e1c33d2bf0dd"
+    },
+    {
+      "path": "receipts/data.log",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/data.log",
+      "bytes": 26945,
+      "sha256": "667b9e0236f8ae8dde024b4dbb2f18876558db53b8051686bcdd6089398ddeef"
+    },
+    {
+      "path": "receipts/actual-msl.diff",
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/gpu-color-visibility-dependency-gpu-001-lr7_lcg8/actual-msl.diff",
+      "bytes": 664,
+      "sha256": "79199b0c3d3b4c1d56772cbde6938f83397d48f455f3544affe979f748ef7641"
+    },
+    {
+      "path": "receipts/root-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/visibility-samplex-independent-data-20261018.json",
+      "bytes": 572,
+      "sha256": "1e9050c80f0b1299ddfc7263166ffed0aa5fab4a0896e36ff6f21bc95a251f53"
+    }
+  ],
+  "verifiers": {
+    "dependency_data.py": "5813bfc10899b69d4b6fda56916d8ef61925f95552a23f4da88d6af49a9c245a",
+    "owner_data.py": "7769ebf9b68393fbbf4b6cbb8e9f5e3273f034f150845f03ec1515a3ecc5fc8b",
+    "verify_visibility.py": "3d62fbc2a8a695545d462a936486ab54f8cbbad13619db43d0f9494659433469"
+  },
+  "scope": "Portable recorded numeric data, actual MSL and retained process receipts; native executable remains external and is never executed by replay."
+}
