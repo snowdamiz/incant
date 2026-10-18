@@ -60,6 +60,30 @@ fn binary_nodes_survive_reopen_and_repeated_reversible_publication() {
     assert_eq!(store.read_binary(SOURCE).unwrap().unwrap(), RAW);
 }
 #[test]
+fn mixed_pending_protocols_refuse_before_binary_recovery_moves_bytes() {
+    for name in ["pending", "project.pending"] {
+        let root = tempfile::tempdir().unwrap();
+        let store = open(root.path());
+        let edit = prepare(&store, BinaryVersion::Missing);
+        store.begin_binary(OP, &edit).unwrap();
+        let marker = root.path().join(STATE).join(name);
+        fs::write(&marker, b"foreign pending protocol").unwrap();
+        assert!(store.binary_pending().is_err());
+        assert!(store.install_binary(OP, &edit).is_err());
+        assert!(store.rollback_binary(OP, &edit).is_err());
+        assert!(store.finish_binary(OP).is_err());
+        assert!(!root.path().join(DEST).exists());
+        assert_eq!(fs::read(&marker).unwrap(), b"foreign pending protocol");
+        assert_eq!(
+            fs::read(root.path().join(STATE).join(format!("{OP}.wasm-after"))).unwrap(),
+            RAW
+        );
+        fs::remove_file(marker).unwrap();
+        store.rollback_binary(OP, &edit).unwrap();
+        store.finish_binary(OP).unwrap();
+    }
+}
+#[test]
 fn binary_replacement_retains_old_node_and_rollback_never_clobbers_racing_content() {
     let root = tempfile::tempdir().unwrap();
     let store = open(root.path());

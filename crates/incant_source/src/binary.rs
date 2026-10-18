@@ -363,6 +363,13 @@ impl SourceStore {
         else {
             return Ok(None);
         };
+        // Recovery must not resolve one protocol while another owns the root.
+        // Do not parse or remove the conflicting marker to make progress.
+        for name in ["pending", "project.pending"] {
+            if !matches!(optional_read(&self.state, name, 0), Ok(None)) {
+                return Err(SourceError::RecoveryRequired);
+            }
+        }
         let pending: BinaryPending =
             serde_json::from_str(&raw).map_err(|_| SourceError::RecoveryRequired)?;
         if ulid::Ulid::from_string(&pending.operation).is_err() {
