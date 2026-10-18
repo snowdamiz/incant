@@ -246,11 +246,12 @@ fn light_transform_history_requires_accepted_radiance_continuity() {
     let mut owners = modes.map(|mode| current_owner(&r, &input, size, mode));
     let mut rows = Vec::new();
     let mut previous = initial;
-    // Eight stable phases, changed light at phase zero, stable recovery, moved
-    // geometry/vacated pixels, and disocclusion. The exact old algorithm remains
-    // an unchecked arm; no tolerances/coverage/first-winner semantics change.
-    for index in 0..12 {
-        let pose = if index == 10 {
+    // Warm past a complete eight-phase cycle, then change the light at phase
+    // six: retained GPU001 data has 48 missing current witnesses at that phase,
+    // while phase zero has none. Keep the positive fresh-PBR assertion meaningful.
+    // The unchecked arm and all coverage/first-winner thresholds are unchanged.
+    for index in 0..18 {
+        let pose = if index == 16 {
             Pose {
                 mesh_y: 6.,
                 ..initial
@@ -259,7 +260,7 @@ fn light_transform_history_requires_accepted_radiance_continuity() {
             initial
         };
         apply(&mut input, pose);
-        light(&mut input, if index < 8 { -1. } else { 1. });
+        light(&mut input, if index < 14 { -1. } else { 1. });
         assert!(
             input.nodes[4].light == typed_light,
             "only light world transform changes"
@@ -267,7 +268,7 @@ fn light_transform_history_requires_accepted_radiance_continuity() {
         for owner in &mut owners {
             submit(&r, owner, &input, &view, size);
         }
-        if index != 0 && index < 6 {
+        if index != 0 && index < 12 {
             continue;
         }
         let snapshots = owners
@@ -280,7 +281,7 @@ fn light_transform_history_requires_accepted_radiance_continuity() {
             assert_eq!(snapshot.frame.epoch(), 1);
         }
         assert_same(&snapshots[0], &snapshots[4]);
-        let admitted = index != 0 && ![8, 10, 11].contains(&index);
+        let admitted = index != 0 && ![14, 16, 17].contains(&index);
         assert!(
             snapshots[0]
                 .shading
@@ -291,7 +292,7 @@ fn light_transform_history_requires_accepted_radiance_continuity() {
             assert_eq!(snapshots[0].counts()[2], 0, "discontinuous radiance reused");
             assert_same(&snapshots[0], &snapshots[2]);
         }
-        if index == 7 || index == 9 {
+        if index == 13 || index == 15 {
             assert!(
                 snapshots[0].counts()[2] > 0,
                 "stable history must actually be exercised"
@@ -311,7 +312,7 @@ fn light_transform_history_requires_accepted_radiance_continuity() {
             }
         }
         let negative_l1 = color_l1(&snapshots[0], &snapshots[1]);
-        if index == 8 {
+        if index == 14 {
             assert!(
                 !snapshots[0].changed[0],
                 "geometry did not move with the light"
@@ -331,10 +332,10 @@ fn light_transform_history_requires_accepted_radiance_continuity() {
             );
         }
         rows.push(json!({"frame":index,"pose":[pose.mesh_y,pose.camera_y,pose.occluder_y,pose.occluder_z],
-            "point_translation":if index<8 {[-1.,-1.59,0.25]}else{[1.,-1.59,0.25]},
+            "point_translation":if index<14 {[-1.,-1.59,0.25]}else{[1.,-1.59,0.25]},
             "candidate_history_admitted":admitted,"exact_fallback_samples":exact_fallback,
             "unchecked_output_L1":negative_l1,"all_current_output_L1_not_acceptance":color_l1(&snapshots[0],&snapshots[3])}));
-        if index == 6 {
+        if index == 12 {
             // A candidate with a different packed light reaches output-format
             // refusal. Neither accepted pixels nor the light certificate may
             // change. Next accepted old-light output equals an untouched owner.
@@ -364,7 +365,7 @@ fn light_transform_history_requires_accepted_radiance_continuity() {
             write(&root, "refusal.json", &serde_json::to_vec_pretty(&json!({
                 "error":error.to_string(),"accepted_sequence":after.frame.sequence(),
                 "accepted_epoch":after.frame.epoch(),"attempted_point_translation":[1.,-1.59,0.25],
-                "next_untouched_comparison_frame":7,
+                "next_untouched_comparison_frame":13,
             })).unwrap());
         }
         previous = pose;
@@ -374,6 +375,7 @@ fn light_transform_history_requires_accepted_radiance_continuity() {
         "result.json",
         &serde_json::to_vec_pretty(&json!({
             "source_baseline":"cc8c023d442ce315dae36b04ea24bb01781a53a4","frames":rows,
+            "submitted_frames":18,"light_change_frame":14,"light_change_phase":6,
             "sample_positions":pattern,"output":size,"bytes_per_output_pixel":236,
             "mask_bits":{"fallback":[0,3],"current":[4,7],"history":[8,11],"history_policy":16},
             "same_phase_no_history_reference":true,"refusal_nonpublication":true,
