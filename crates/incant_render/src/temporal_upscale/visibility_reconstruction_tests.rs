@@ -3,11 +3,14 @@
 use super::{
     raster_geometry as geometry,
     raster_tests::write,
-    visibility_oracle::{self as oracle, OCCLUDER, Pose, Scene},
+    visibility_oracle::{self as oracle, Pose, Scene},
     visibility_tests::apply,
 };
 use crate::{Renderer, RetainedScene, RetainedTarget, SceneInput, motion::visibility::Probe};
 use serde_json::json;
+#[path = "visibility_reconstruction_fixture.rs"]
+mod fixture;
+use fixture::scene;
 #[path = "visibility_reconstruction_readback.rs"]
 mod readback;
 use readback::{Pixel, Reader};
@@ -28,15 +31,6 @@ fn visibility_reconstruction_shader_and_capacity_validate() {
     for size in [[0, 64], [64, 0], [129, 64], [u32::MAX, u32::MAX]] {
         assert!(super::visibility_reconstruction::bytes(size).is_err());
     }
-}
-fn scene() -> SceneInput {
-    let mut input = geometry::fixture();
-    let mut node = geometry::fixture_with(&[OCCLUDER], [1., 0., 0.], 2)
-        .nodes
-        .remove(0);
-    node.id = "occluder".into();
-    input.nodes.push(node);
-    input
 }
 fn retained(r: &Renderer, input: &SceneInput, size: [u32; 2]) -> RetainedScene {
     let mut s = super::raster_tests::owner(r, input);
