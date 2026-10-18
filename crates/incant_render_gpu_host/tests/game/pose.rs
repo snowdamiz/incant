@@ -5,7 +5,7 @@ use incant_render_game::{
     RenderInputConsumer,
     pose::{PoseConsumer, PoseRenderHost, PoseRequest},
 };
-use incant_render_gpu_host::pose::PoseTargets;
+use incant_render_gpu_host::PoseTargets;
 use incant_render_native::{UpdateKind, interpolation::PoseReceipt};
 use std::panic::{AssertUnwindSafe, catch_unwind};
 
@@ -75,7 +75,7 @@ fn expected(input: &SceneInput, x: f64) -> SceneInput {
 fn pose_endpoints_and_midpoint_match_independent_fresh_render_after_all_tick_admissions() {
     let (mut game, probe) = fixture();
     for tick in 1..=2 {
-        let mut pcm = vec![0.; game.next_output_frames().unwrap() * 2];
+        let mut pcm = vec![0.0_f32; game.next_output_frames().unwrap() * 2];
         let events = if tick == 2 {
             vec![InputEvent::Key {
                 code: KeyCode::Space,
