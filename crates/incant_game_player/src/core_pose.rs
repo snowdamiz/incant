@@ -312,6 +312,9 @@ fn actual_core_2156_route_preserves_gameplay_and_complete_pcm_with_hud_and_rigid
         render_input,
         session::input_report(pose.host()?.committed())?
     );
+    // Use the same final report as the ordinary player, including the actual
+    // accepted HUD sources, focus, values, glyph count and atlas identity.
+    let render_input = session::host_report(ordinary.host()?)?;
     let a_report = a_plan.finish(ordinary.world()?)?;
     let b_report = b_plan.finish(pose.world()?)?;
     assert!(a_report.passed && b_report.passed);
