@@ -130,22 +130,27 @@ The [Windows dependency-cache change](docs/spikes/windows-typescript-dependency-
 reuses the pinned SWC carrier's validated native image through a fixed OS-resolved
 cache, while preserving fresh project compilation and the eight-second deadline.
 Five common cook controls, the exact authored startup test and strict lint pass
-locally, along with all ten development checks. Windows path controls and the
-isolated cold/warm/corrupt-repair diagnostic remain pending; neither a Windows
-latency gain nor timeout repair is established.
+locally, along with all ten development checks. The corrected hosted diagnostic
+now passes all nineteen selected controls, including actual Windows path checks,
+the previously failing startup and isolated cold/warm/corrupt-repair behavior.
+The startup cook took 1.304 seconds; cold/warm/repair outputs match and changed
+source recompiles. This single successful observation does not establish a
+general Windows latency gain or permanent timeout repair.
 The cache change is merged through PR423 after exact-head development checks.
 Its first targeted Windows diagnostic failed before any tests or cooks ran:
 the Windows launch path was an owned `PathBuf` where the shared compiler
 configuration required `&Path`. The scoped correction uses `as_path()` on both
-platform branches; actual Windows cache behavior and timeout repair remain
-unqualified. All checkpoint57 workflows have now finished; the Windows desktop
+platform branches; the subsequent hosted result qualifies selected cache behavior
+while the original timeout's underlying cause remains unresolved.
+All checkpoint57 workflows have now finished; the Windows desktop
 failure prevents promotion, while the other seven workflows passed. The
 failed candidate remains historical. PR425 is merged after its local controls
 and exact-head development checks passed. Checkpoint58 now freezes candidate
 `53820888` with exactly main425 (`da7b7414`) tree `86013476`; all eight comprehensive
 workflows have started. Release remains at the previously qualified checkpoint55
 until every required exact-head context succeeds. The separate corrected Windows
-diagnostic is still running; no Windows runtime improvement is established.
+diagnostic succeeded on exact source `70a54db1`; it does not replace the complete
+release checks or establish a general runtime improvement.
 Checkpoint56 failed its Windows credential
 job on three tilemap tests that read the exclusively
 locked journal through an independent file handle. The

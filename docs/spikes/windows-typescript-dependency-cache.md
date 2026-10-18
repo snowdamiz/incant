@@ -29,8 +29,9 @@ Non-Windows cache policy is unchanged. Carrier eviction is best effort; its
 three-image policy is not a hard total storage cap while files are busy or staging
 files survive a killed process.
 
-This removes definite repeated materialization work; it does not yet demonstrate
-a latency gain or repair the Windows timeout. Cold first loading can still fail.
+This removes definite repeated materialization work. The targeted Windows run
+below confirms reuse and repair, but does not establish a general latency gain
+or permanent timeout repair. Cold first loading can still fail.
 The manual TypeScript diagnostic includes a Windows-only ignored control using
 an exclusively owned temporary cache: real compiler cold, warm and corrupt-repair
 outputs must match byte-for-byte; changed project source must produce changed
@@ -55,7 +56,7 @@ executables were copied before releasing the shared target. Commands used the
 CI profile, offline locked resolution, two jobs, and the retained renderer/sha2
 profile overrides. This qualifies the shared invocation and non-Windows
 regression path; it does not execute the new Windows resolver or carrier-cache
-controls. Hosted Windows cold/warm/repair and timeout outcomes remain pending.
+controls. Hosted Windows cold/warm/repair results are recorded separately below.
 All ten fast development checks also passed, with the intentionally dirty
 source contents preserved across the run. An initial runner selected Xcode
 Python 3.9 and failed on unsupported Python APIs; that failed attempt is retained,
@@ -75,9 +76,34 @@ the path lifetime, cache policy, fresh compilation and eight-second deadline.
 The corrected common code now passes five native cook controls and strict
 all-target Clippy on this Mac, as well as all ten development checks. The
 [local records](evidence/windows-launch-path-local.json) identify exact source
-`d8c7db25` and retain the raw command results. Hosted Windows execution remains
-pending. This compile failure neither reproduces nor repairs the original timeout. [The scoped receipt and inert raw records](evidence/windows-typescript-dependency-cache-hosted-001.json)
+`d8c7db25` and retain the raw command results. The subsequent hosted execution is
+recorded below. This compile failure neither reproduces nor repairs the original timeout. [The scoped receipt and inert raw records](evidence/windows-typescript-dependency-cache-hosted-001.json)
 retain all four compiler failures and the exact hosted source identity.
+
+The corrected [Windows diagnostic](https://github.com/snowdamiz/incant/actions/runs/39155781027/job/117758598082)
+at exact source `70a54db1` succeeded on 2026-10-18. All four commands exited zero:
+six fallback/template controls, the exact checkpoint57 startup control, eleven
+ordinary resolver/path/environment controls, and the isolated cache control.
+The latter is intentionally ignored in the ordinary suite and explicitly executed
+in its own command; it is not counted as a passing ignored test.
+
+The five successful fallback/template cooks took 1.560–2.142 seconds, alongside
+one expected refusal. The previously failing authored-startup cook took 1.304
+seconds, including a 31.234 ms SWC import interval. In the disposable cache,
+cold, warm, corrupt-repair and changed-source cooks took 1.787, 1.363, 1.630 and
+1.366 seconds respectively. Their SWC import intervals were 415.408, 38.440,
+301.887 and 33.933 ms. Cold/warm/repair outputs matched exactly; changed project
+source recompiled to changed output while retaining the validated native image.
+The normal user cache was not corrupted or altered by that diagnostic. The
+eight-second production deadline remains unchanged.
+
+[The hosted receipt and inert raw records](evidence/windows-typescript-dependency-cache-hosted-002.json)
+retain all nineteen passing controls, exact source/toolchain, phase observations,
+exit receipts and workflow result. This establishes the selected Windows
+behavior and one successful timing observation, not a repeated controlled
+performance comparison or a permanent timeout repair. The original outlier's
+underlying cause remains unestablished. Comprehensive release qualification is
+separate; the earlier compile failure and checkpoint57 timeout remain recorded.
 
 Source basis: pinned SWC 1.16.13, commit
 [`1391a346e1ba8ef0cbaaa7c1b90c391ad6d150c5`](https://github.com/swc-project/swc/tree/1391a346e1ba8ef0cbaaa7c1b90c391ad6d150c5),
