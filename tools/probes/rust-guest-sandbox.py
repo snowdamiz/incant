@@ -10,6 +10,7 @@ import json
 import os
 from pathlib import Path
 import signal
+import shutil
 import sys
 import threading
 import time
@@ -49,6 +50,8 @@ def check(plan_path, grant=None):
 
 def run(plan, cancelled, *, started=None):
     output = Path(plan['output'])
+    require(shutil.disk_usage(output.parent).free >= plan['bounds']['floor_bytes']
+            + plan['bounds']['scratch_bytes'], 'Initial private-scratch reserve above disk floor')
     output.mkdir(mode=0o700)
     # Publish wrapper identity before any native/tool initialization.
     service.write_json(output / 'wrapper.json', {'pid': os.getpid(), 'ppid': os.getppid(),
