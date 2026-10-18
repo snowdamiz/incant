@@ -53,6 +53,16 @@ impl Dir {
                 .collect::<io::Result<Vec<_>>>()?,
         })
     }
+    pub fn identity(&self) -> io::Result<[u64; 2]> {
+        identity(&self.file).map(|(volume, node)| [volume, node])
+    }
+    pub fn only_child(&self, expected: &str) -> io::Result<bool> {
+        let mut entries = std::fs::read_dir(&self.path)?;
+        let Some(entry) = entries.next() else {
+            return Ok(false);
+        };
+        Ok(entry?.file_name().to_str() == Some(expected) && entries.next().transpose()?.is_none())
+    }
     pub fn child(&self, name: &str) -> io::Result<Self> {
         let path = self.path.join(name);
         let mut ancestors = self

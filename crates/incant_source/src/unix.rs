@@ -16,6 +16,24 @@ impl Dir {
     pub fn duplicate(&self) -> io::Result<Self> {
         Ok(Self(self.0.try_clone()?))
     }
+    pub fn identity(&self) -> io::Result<[u64; 2]> {
+        identity(&self.0).map(|(device, node)| [device, node])
+    }
+    pub fn only_child(&self, expected: &str) -> io::Result<bool> {
+        let mut found = false;
+        for entry in fs::Dir::read_from(&self.0)? {
+            let entry = entry?;
+            let name = entry.file_name().to_bytes();
+            if name == b"." || name == b".." {
+                continue;
+            }
+            if found || name != expected.as_bytes() {
+                return Ok(false);
+            }
+            found = true;
+        }
+        Ok(found)
+    }
     pub fn child(&self, name: &str) -> io::Result<Self> {
         Ok(Self(
             fs::openat(

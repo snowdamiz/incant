@@ -882,6 +882,9 @@ mod source_protocol_tests;
 mod module_source_protocol_tests;
 
 #[cfg(test)]
+mod package_source_protocol_tests;
+
+#[cfg(test)]
 mod project_file_tests;
 
 #[cfg(test)]
