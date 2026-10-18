@@ -1286,20 +1286,23 @@ pub fn run(
                                 break;
                             }
                         }
-                        if independent && wake_ready && !suspended && !*exit {
-                            if !independent_display!(Pulse) {
-                                gamepads.pause_haptics()?;
-                                game.set_suspended(true)?;
-                                suspended = true;
-                                if has_ui {
-                                    ui_input.defer_surface();
-                                } else {
-                                    input.reset_focus(focused);
-                                    gamepads.discard_pending();
-                                }
-                                clock.reset(now);
-                                retry = now + Duration::from_millis(50);
+                        if independent
+                            && wake_ready
+                            && !suspended
+                            && !*exit
+                            && !independent_display!(Pulse)
+                        {
+                            gamepads.pause_haptics()?;
+                            game.set_suspended(true)?;
+                            suspended = true;
+                            if has_ui {
+                                ui_input.defer_surface();
+                            } else {
+                                input.reset_focus(focused);
+                                gamepads.discard_pending();
                             }
+                            clock.reset(now);
+                            retry = now + Duration::from_millis(50);
                         }
                     }
                 }
