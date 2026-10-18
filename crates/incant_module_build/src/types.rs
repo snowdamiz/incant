@@ -97,6 +97,9 @@ pub(crate) fn relative(value: &str, rust: bool) -> Result<()> {
 }
 #[derive(Clone, Debug, Serialize)]
 pub struct SourceView {
+    /// Present only for the additive registered-ID protocol.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub registered_source: Option<RegisteredSource>,
     pub snapshot_id: String,
     pub revision: u64,
     pub source_digest: String,
@@ -117,4 +120,49 @@ pub struct Actor {
     pub actor: String,
     pub model: Option<String>,
     pub conversation_id: Option<String>,
+}
+
+/// Trusted adapter authority, never deserialized from model/tool arguments.
+/// A snapshot belongs to one command-bus lifetime as well as a registration.
+#[derive(Clone, Debug, PartialEq, Eq, Serialize)]
+pub struct RegisteredSource {
+    pub bus_session_id: String,
+    pub module_id: String,
+    pub path: String,
+    pub version: incant_source::SourceVersion,
+}
+impl RegisteredSource {
+    pub(crate) fn query(&self, revision: u64) -> Result<SourceQuery> {
+        for id in [&self.bus_session_id, &self.module_id] {
+            ulid::Ulid::from_string(id).map_err(|_| Error::Invalid("registered source ULID"))?;
+        }
+        incant_source::validate_rust_path(&self.path)
+            .map_err(|_| Error::Invalid("registered Rust path"))?;
+        if matches!(self.version, incant_source::SourceVersion::Missing) {
+            return Err(Error::Invalid(
+                "registered source is missing; write it first",
+            ));
+        }
+        let (package, entry) = self
+            .path
+            .rsplit_once('/')
+            .ok_or(Error::Invalid("registered package"))?;
+        Ok(SourceQuery {
+            package: package.into(),
+            entry: entry.into(),
+            expected_revision: revision,
+        })
+    }
+    pub(crate) fn matches_entry(&self, source: &SourcePackage) -> bool {
+        self.path
+            .rsplit_once('/')
+            .is_some_and(|(_, entry)| entry == source.entry)
+            && source
+                .files
+                .iter()
+                .find(|file| file.path == source.entry)
+                .is_some_and(|file| {
+                    incant_source::SourceVersion::of(Some(&file.text)) == self.version
+                })
+    }
 }

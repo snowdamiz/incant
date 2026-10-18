@@ -271,6 +271,8 @@ pub enum CommandError {
 }
 
 pub struct CommandBus {
+    // Ephemeral authority, never part of project/CRDT/journal/checkpoint data.
+    session_id: String,
     document: Option<CollaborativeDocument>,
     project: Project,
     revision: u64,
@@ -285,6 +287,7 @@ pub struct CommandBus {
 impl CommandBus {
     pub fn new(project: Project) -> Result<Self, CommandError> {
         Ok(Self {
+            session_id: new_id(),
             document: Some(CollaborativeDocument::new(&project)?),
             project,
             revision: 0,
@@ -300,6 +303,7 @@ impl CommandBus {
     pub fn from_crdt(bytes: &[u8]) -> Result<Self, CommandError> {
         let document = CollaborativeDocument::from_export(bytes)?;
         Ok(Self {
+            session_id: new_id(),
             project: document.project()?,
             document: Some(document),
             revision: 0,
@@ -318,6 +322,7 @@ impl CommandBus {
     pub fn simulation(project: Project) -> Result<Self, CommandError> {
         project.validate()?;
         Ok(Self {
+            session_id: new_id(),
             document: None,
             project,
             revision: 0,
@@ -347,6 +352,11 @@ impl CommandBus {
     }
     pub fn project(&self) -> &Project {
         &self.project
+    }
+    /// Stable only for this opened bus. Reopen/rebind creates a new identity,
+    /// even when project ID, revision and source bytes are unchanged.
+    pub fn session_id(&self) -> &str {
+        &self.session_id
     }
 
     /// Allocate identities for one ordinary subtree copy. This does not mutate
@@ -880,6 +890,9 @@ mod source_protocol_tests;
 
 #[cfg(test)]
 mod module_source_protocol_tests;
+
+#[cfg(test)]
+mod package_source_protocol_tests;
 
 #[cfg(test)]
 mod project_file_tests;

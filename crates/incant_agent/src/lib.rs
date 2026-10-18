@@ -14,6 +14,7 @@ pub use conversation::Conversation;
 #[cfg(target_os = "macos")]
 mod local_credentials;
 mod module_jobs;
+mod module_registered;
 pub mod play;
 pub mod provider;
 mod scripts;
@@ -224,6 +225,7 @@ pub fn tools() -> Vec<Value> {
     tools.extend(play::tools());
     tools.extend(scripts::tools());
     tools.extend(module_jobs::tools());
+    tools.extend(module_registered::tools());
     tools.extend(skills::tools());
     tools
 }
@@ -258,6 +260,9 @@ fn dispatch_cancellable(
         return Err(AgentError::Interrupted);
     }
     match name {
+        "module_read" | "module_write" | "module_inspect" | "module_build_registered" => {
+            module_registered::dispatch(access, perception, name, args, actor, cancel, None)
+        }
         "module_source_read" | "module_build" | "module_build_status" | "module_build_cancel" => {
             module_jobs::dispatch(access, perception, name, args, actor, cancel)
         }
@@ -432,20 +437,48 @@ impl Agent {
         let mut tools = tools();
         if perception.module_jobs().is_none() {
             tools.retain(|tool| {
-                !tool["name"]
-                    .as_str()
-                    .is_some_and(|name| name.starts_with("module_"))
+                !matches!(
+                    tool["name"].as_str(),
+                    Some(
+                        "module_source_read"
+                            | "module_build"
+                            | "module_build_status"
+                            | "module_build_cancel"
+                            | "module_inspect"
+                            | "module_build_registered"
+                    )
+                )
             });
         } else if perception
             .module_jobs()
             .is_some_and(|jobs| !jobs.available())
         {
             tools.retain(|tool| {
-                tool["name"] != "module_source_read" && tool["name"] != "module_build"
+                !matches!(
+                    tool["name"].as_str(),
+                    Some(
+                        "module_source_read"
+                            | "module_build"
+                            | "module_inspect"
+                            | "module_build_registered"
+                    )
+                )
             });
         }
         if !access.with_bus(cancel, |bus| Ok(bus.has_source_store()))? {
-            tools.retain(|tool| tool["name"] != "script_read" && tool["name"] != "script_write");
+            tools.retain(|tool| {
+                !matches!(
+                    tool["name"].as_str(),
+                    Some(
+                        "script_read"
+                            | "script_write"
+                            | "module_read"
+                            | "module_write"
+                            | "module_inspect"
+                            | "module_build_registered"
+                    )
+                )
+            });
         }
         if perception.project_files().is_none() {
             tools.retain(|tool| {
@@ -556,6 +589,8 @@ impl Agent {
                             .ok_or_else(|| AgentError::Tool("missing arguments".into()))?,
                     )
                     .map_err(|_| AgentError::Tool("invalid tool JSON".into()))?;
+                    let observed =
+                        module_registered::before_approval(access, name, &arguments, cancel)?;
                     // All document patches require destructive-mode approval,
                     // including registered script replacement and removal.
                     let ask = matches!(self.approval, ApprovalMode::Always)
@@ -568,16 +603,29 @@ impl Agent {
                                     | "tilemap_paint"
                                     | "script_write"
                                     | "module_build"
+                                    | "module_write"
+                                    | "module_build_registered"
                             ));
                     if ask && !approve(name, &arguments) {
                         return Err(AgentError::Tool("user denied this operation".into()));
                     }
-                    Ok(arguments)
+                    Ok((arguments, observed))
                 })();
                 // Approvals may wait across sign-out/reconnection. The fence
                 // error is terminal, not an ordinary tool error to send back.
                 provider.check_active()?;
-                let result = arguments.and_then(|arguments| {
+                let result = arguments.and_then(|(arguments, observed)| {
+                    if observed.is_some() {
+                        return module_registered::dispatch(
+                            access,
+                            perception,
+                            name,
+                            arguments,
+                            Actor::agent(provider.model(), conversation_id),
+                            cancel,
+                            observed,
+                        );
+                    }
                     dispatch_cancellable(
                         access,
                         perception,

@@ -367,6 +367,7 @@ fn legacy_pending_script_recovers_under_exact_custom_journal_binding() {
     let operation = new_id();
     let edit = incant_source::SourceEdit {
         kind: incant_source::SourceKind::TypeScript,
+        created_tree: None,
         script_id: script.id.clone(),
         path: script.path.clone(),
         before: Some("before".into()),

@@ -130,12 +130,18 @@ impl CommandBus {
         if SourceVersion::of(before.as_deref()) != *expected {
             return Err(SourceError::Conflict.into());
         }
+        let created_tree = if kind == SourceKind::Rust && before.is_none() {
+            store.prepare_creation(&new_id(), path, source)?
+        } else {
+            None
+        };
         Ok(Some(SourceEdit {
             script_id: id.clone(),
             kind,
             path: path.clone(),
             before,
             after: Some(source.clone()),
+            created_tree,
         }))
     }
     pub(super) fn record(
@@ -274,9 +280,9 @@ impl CommandBus {
                     None => {
                         // Crash after durable marker but before durable Prepare:
                         // installation cannot have begun, so foreign changes block.
-                        if store.read(&pending.edit.path)? != pending.edit.before {
-                            return Err(SourceError::RecoveryRequired.into());
-                        }
+                        store
+                            .check_preimage(&pending.edit)
+                            .map_err(|_| SourceError::RecoveryRequired)?;
                     }
                 }
                 store
