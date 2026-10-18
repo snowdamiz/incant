@@ -100,7 +100,27 @@ The [touch delivery qualification](docs/spikes/native-desktop-touch.md) passes
 all-target lint configurations and all ten local development checks. Original
 compile and stale-test-expectation failures remain recorded. These are terminal
 checks; physical touch hardware, native-window interaction and other desktop
-platform execution are not established by them.
+platform execution are not established by them. The scoped change is merged
+through PR409 after independent review and the exact-head development check;
+main `dec42101` has the tested tree. It is outside frozen checkpoint55.
+
+Static sprite-alpha collider authoring is implemented locally through a shared
+import service, the host CLI and an engine-agent tool. The bounded exact texel
+cover creates ordinary fixed `Collider2D` entities in one reversible command-bus
+transaction. All 48 import tests pass, including geometry, physics queries and
+history/refusal controls. The first CLI compilation timed out before any selected
+test ran; the continuation reused compatible compiled dependencies and passed
+both CLI controls plus all-target strict import/headless lint. The real CLI test
+verifies saved JSON, journal ownership, reopen, Undo/Redo and refusal without
+writes. The agent adapter also passes 23 native CPU tests, including nine new
+alpha controls, and all-target strict lint. Final contract verification found one
+generated-contract omission before publication: the new agent tool was missing
+from the checked-in registry. The corrected registry now matches all 80 files
+from a fresh headless exporter, with only that tool added and all prior tool
+schemas preserved. This is locally qualified overlapping Phase 2 work, not a
+completed GUI tool or phase gate.
+[Shared contract](docs/spikes/static-alpha-colliders.md) and
+[agent admission](docs/spikes/agent-alpha-colliders.md).
 
 Compatible HUD text updates now reuse existing checked font-shaping engines;
 a new ordered fallback chain still prepares and atomically publishes a separate

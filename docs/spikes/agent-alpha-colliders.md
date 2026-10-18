@@ -3,9 +3,9 @@
 The engine-agent `collider_from_alpha` tool delegates to the same
 `ImportSnapshot::prepare_alpha_colliders` and `PreparedAlphaColliders::commit`
 service as the host CLI. It adds no geometry implementation or mutation path.
-Its source is based on alpha authoring commit `94fc63b9`; native compilation and
-behavioral execution of this agent adapter are pending. The controls described
-below are test sources, not live-account or hardware evidence.
+Its source is based on alpha authoring commit `94fc63b9`. At adapter source
+`caff2acd`, all 23 selected native CPU tests and all-target strict Clippy pass.
+These controls use mock providers, not a live account or hardware interaction.
 
 ```json
 {
@@ -63,8 +63,18 @@ Nine focused tests use deterministic mock providers and a real imported 2x2 PNG:
   cancellation, concurrent edit, a different project, and a replacement document
   with the same ID/revision all preserve the appropriate current world/history.
 
-The proposed CPU qualification is `cargo test -p incant_agent --test
-alpha_colliders --test assets --test shared` followed by ordinary all-target
-strict Clippy on `incant_agent`, using the repository's pinned toolchain/profile
-and a separately reviewed target/resource lease. No live model, engine window,
-GPU, screenshots or capture helper is required for this slice.
+The CPU qualification runs `cargo test -p incant_agent --test alpha_colliders
+--test assets --test shared` followed by all-target strict Clippy on
+`incant_agent`, using Rust 1.99 and the locked/offline CI profile with two workers.
+Nine new alpha tests, three asset tests and eleven shared-access tests pass;
+independent review checks every raw test name and all copied executable hashes.
+The actual process exits zero and all 74 observed wrapper/child identities are
+absent after cleanup. [Recorded commands and evidence](evidence/agent-alpha-colliders-native.json).
+
+Review found that the checked-in `agent-tools.json` still needed the new tool.
+The corrected file comes from a fresh headless build at `caff2acd`: all 80
+schemas were exported, 79 remained byte-identical, and the only addition is
+`collider_from_alpha`, preserving every prior tool schema and its order. The
+integrated registry passes the ordinary isolated `tools/check_schemas.py`
+comparison against that executable. [Schema evidence](evidence/alpha-colliders-schema.json).
+No live model, engine window, GPU, screenshots or capture helper was used.

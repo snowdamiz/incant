@@ -1,0 +1,152 @@
+{
+  "kind": "independent-source-review",
+  "time_utc": "2026-10-18T04:09:05.205523+00:00",
+  "reviewer": "astra /root/ci_shipping_freeze",
+  "base": "dec42101f2bb8468dd287e38ef022ec1248eb4dc",
+  "head": "8746c46d4c966cc92303847b5604a6724fdaa57a",
+  "diff_sha256": "1916e4ef6c8c6e0396517470b327a64b4c9aa115dc546ea8043ca88b7c04cfb4",
+  "committed_paths": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "1278eb66615deac92119e9c613e414b4c654f81a231b814972b5f0cbd2adcdce",
+      "bytes": 253604
+    },
+    {
+      "path": "crates/incant_agent/src/assets.rs",
+      "sha256": "5b284cccaf366fe40e4b4eea00d23cebf93385a54758605b312c3deab521659d",
+      "bytes": 8914
+    },
+    {
+      "path": "crates/incant_agent/src/assets/alpha.rs",
+      "sha256": "19eed4c7cf6572e3c41c38db28734222d9236066a99e640b655618609dcaab6b",
+      "bytes": 2727
+    },
+    {
+      "path": "crates/incant_agent/src/lib.rs",
+      "sha256": "ce9bf20e61bae9b3a1199f23b72d09008b20270441739e0ca1068aeabd44ea2c",
+      "bytes": 22479
+    },
+    {
+      "path": "crates/incant_agent/tests/alpha/admission.rs",
+      "sha256": "97182b6cfdfa46a21d87d1da16a1907589631bf03a7aaaa491a5ba2f12e52d98",
+      "bytes": 4691
+    },
+    {
+      "path": "crates/incant_agent/tests/alpha/authoring.rs",
+      "sha256": "fadec6a1d8bbdb957db2231d38bc14d9080e5eb05746183b0ea12a76cfd697ef",
+      "bytes": 3043
+    },
+    {
+      "path": "crates/incant_agent/tests/alpha/publication.rs",
+      "sha256": "3245432f5a3ba64404b256a7fed58d7b6c7590424f26d6f8cac988d78cf45dcb",
+      "bytes": 5289
+    },
+    {
+      "path": "crates/incant_agent/tests/alpha/support.rs",
+      "sha256": "f41d4a98f65510de18d956795c912747da17d788d72b69951d1c26131c175fb7",
+      "bytes": 4795
+    },
+    {
+      "path": "crates/incant_agent/tests/alpha/turns.rs",
+      "sha256": "d9b54d2b9e193e131e3ad96eef3a6d39a0057a953f6d108c08ffd167d229546d",
+      "bytes": 5564
+    },
+    {
+      "path": "crates/incant_agent/tests/alpha_colliders.rs",
+      "sha256": "580a84c4a0b29e1f17bbf177a49ad773fbe0f295655b0c3a74a7501eb0096981",
+      "bytes": 186
+    },
+    {
+      "path": "crates/incant_headless/src/alpha_cli.rs",
+      "sha256": "0227c47c86c95c4126930dd869a5594df666d47fc94802c1c0bddd867a5694fb",
+      "bytes": 1327
+    },
+    {
+      "path": "crates/incant_headless/src/assets.rs",
+      "sha256": "d4a7629322506aec14815e06eeb933469eeac545c79ff85a716213a5abcae601",
+      "bytes": 3667
+    },
+    {
+      "path": "crates/incant_headless/src/main.rs",
+      "sha256": "ca6100f2a3aa279cf707d5b9d4e6cc55e6a7c5c5ab033f57b66e93196637d3ca",
+      "bytes": 31582
+    },
+    {
+      "path": "crates/incant_headless/tests/alpha_cli.rs",
+      "sha256": "9c8921f62afcc6fd509d31bf7e6d611154b9c9ae1f3c841ffc1d124514e03e22",
+      "bytes": 6341
+    },
+    {
+      "path": "crates/incant_import/Cargo.toml",
+      "sha256": "b8e91b8ade89dd8611ee3025a1923f4a73645bba81917c697cade27c29f28434",
+      "bytes": 1163
+    },
+    {
+      "path": "crates/incant_import/src/alpha_colliders.rs",
+      "sha256": "471b582c2644938c72a42adb8b7d434b1fc0815cdd6b2ecae7e316a86aa332ae",
+      "bytes": 9541
+    },
+    {
+      "path": "crates/incant_import/src/alpha_colliders/geometry.rs",
+      "sha256": "51945571e921106e4f4499ee119c354be6bf901a7d3e62f838dd8d8b4ab8e541",
+      "bytes": 5223
+    },
+    {
+      "path": "crates/incant_import/src/lib.rs",
+      "sha256": "80ddf752250aabe233b37d6c757d6479172a74d798b50b36f95d4fd42a1388cf",
+      "bytes": 15509
+    },
+    {
+      "path": "crates/incant_import/tests/alpha_colliders.rs",
+      "sha256": "7c1456e37cee6665e6f5a3a7e7c3bd7067cb92cbb068644f9874e6ab9a05cf80",
+      "bytes": 94
+    },
+    {
+      "path": "crates/incant_import/tests/alpha_colliders/geometry.rs",
+      "sha256": "1aa6f352a7db6cf33472996ea7d2928d8ea3f2226f54c89b646ce4a68f781f60",
+      "bytes": 5695
+    },
+    {
+      "path": "crates/incant_import/tests/alpha_colliders/history.rs",
+      "sha256": "59515cc08c23af20fab9d2aa1894800fe62463828ff1ae21857ac276b4028297",
+      "bytes": 6594
+    },
+    {
+      "path": "crates/incant_import/tests/alpha_colliders/refusals.rs",
+      "sha256": "affc1bafaa52413cfa4c9719a9b78df9013084d4b8ee9c9e960fe06babf22cb9",
+      "bytes": 8822
+    },
+    {
+      "path": "crates/incant_import/tests/alpha_colliders/support.rs",
+      "sha256": "5639925764db594197ade832ac0757525eccecaa4fd70e4e0bf06c4491bf6bca",
+      "bytes": 6005
+    },
+    {
+      "path": "docs/spikes/agent-alpha-colliders.md",
+      "sha256": "23100ff2cea6fcb883a9b2444b657599c5be94561285e23b252605190a9ece2d",
+      "bytes": 3968
+    },
+    {
+      "path": "docs/spikes/static-alpha-colliders.md",
+      "sha256": "6b0f90187c1b6a05e46ed2cb112f6c8aeb00995b30b36967f110895926add80d",
+      "bytes": 7003
+    }
+  ],
+  "findings": [],
+  "result": "No actionable correctness findings in the scoped read-only audit.",
+  "reviewed": [
+    "Cooked Color/Rgba8 base-alpha admission, atlas/crop bounds, inclusive threshold and exact bounded greedy cover.",
+    "Texel-to-world conversion cross-checked against incant_2d::tessellate, including top-left source origin, pivot, flips and planar quaternion normalization.",
+    "One incant_cmd publication with complete-document/revision conflict check, stable generated IDs and transaction provenance.",
+    "Actual CLI fixture source checks save/journal reopen, Undo/Redo, source-deleted cooked derivation and refusal preserving project/journal bytes.",
+    "Agent host project capability, strict arguments, revision, normal approval policy, cancellation and lock reacquisition publication checks.",
+    "Behavior-test sources cover physics queries, malformed/missing cooked input, geometry limits, approval denial/edit, cancellation and same-ID/same-revision replacement."
+  ],
+  "limits": [
+    "No tests, compilation, native/GPU/window/capture or build-target access performed.",
+    "This reviews committed source/test behavior, not independent execution evidence or a live-provider claim.",
+    "Uncommitted root STATUS/static-alpha documentation and new development-evidence record are outside this immutable commit review.",
+    "Static sibling boxes intentionally do not track later source movement/reimport/deletion; no dynamic/compound-body or runtime performance claim."
+  ],
+  "worktree_status_observed": " M STATUS.md\n M docs/spikes/static-alpha-colliders.md\n?? docs/spikes/evidence/static-alpha-colliders-development.json\n?? docs/spikes/evidence/static-alpha-colliders-native.json\n"
+}

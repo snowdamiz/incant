@@ -4,8 +4,9 @@ This is a bounded authoring slice of the Phase 2 collider-from-alpha requirement
 It derives a set of fixed, ordinary `Collider2D` boxes from the selected simple
 sprite's cooked base-level alpha. It does not complete general contour/compound
 colliders, moving-body collision, automatic sprite linkage or GUI selection.
-CPU qualification is pending; this document currently describes source behavior
-and the proposed controls, not executed results.
+The import service's 48 CPU tests, both CLI controls and all-target strict lint
+pass. These are local headless checks; the source contract and qualification
+scope are recorded below.
 
 ## Shared command path
 
@@ -25,10 +26,11 @@ incant collider-from-alpha PROJECT SCENE_ULID SPRITE_ULID --threshold 128
 ```
 
 The optional host `--cache DIRECTORY` has the same explicit authority as import's
-cache override. It is not a project-supplied filesystem capability. This delivery
-does not expose engine-agent shell access or add a dedicated agent tool. Shared
-Rust callers can provide an ordinary user/import/agent actor; resulting edits are
-the same commands available to all authoring clients.
+cache override. It is not a project-supplied filesystem capability. The
+[engine-agent adapter](agent-alpha-colliders.md) calls this same service with
+host-bound project access and no model-supplied cache override or shell access.
+Shared Rust callers can provide an ordinary user/import/agent actor; resulting
+edits are the same commands available to all authoring clients.
 
 Each invocation adds one set of independent root entities, with new stable ULIDs
 allocated once during preparation. They are fixed because they have a
@@ -88,7 +90,7 @@ colliders as they were. Re-running adds another set. The caller must explicitly
 Undo/delete or regenerate as appropriate. This is not dynamic or live collision
 editing and provides no rendered appearance or runtime performance claim.
 
-## Planned CPU qualification
+## CPU qualification
 
 The source includes exhaustive 3x3-mask occupancy checks and real PNG/atlas
 imports with known alpha, exact cover/threshold checks, cropped/rotated/flipped
@@ -103,6 +105,22 @@ range. A separate real `incant_headless collider-from-alpha` child checks saved
 JSON/document correspondence, journal ownership, CLI provenance, reopen and
 exact Undo/Redo, with a subsequent source refusal preserving project/journal
 bytes. Its texture source is deleted before invocation, so the CLI must use the
-verified cooked asset. Existing import suites and strict scoped lint
-remain part of the proposed qualification. No native command, window or GPU
-execution has been performed for this source yet.
+verified cooked asset.
+
+At source `94fc63b9`, the complete import suite passes 48 tests with no failures or
+ignored tests. Its supervisor then rejected the selected-test inventory because
+15 expected names omitted their outer Rust module prefix. Independent replay of
+the raw output confirms all 48 exact source-derived names and rechecks the copied
+executables; that supervisor failure remains recorded. No import test was rerun
+to replace it.
+
+The first CLI compilation hit its 180-second bound while compiling dependencies,
+before either selected test ran, without a compiler error. A continuation reused
+those completed compatible artifacts and passed both CLI controls, including the
+real persisted command, followed by all-target strict Clippy for `incant_import`
+and `incant_headless`. The continuation's actual terminal exit is zero; independent
+review rechecks the exact raw test names, all 13 copied executables and absence of
+all 94 observed wrapper/child identities. The earlier timeout remains recorded.
+All attempts together consumed 485.840 seconds; the continuation did not rerun
+import tests or reset prior costs. No window, GPU, screen capture or live-account
+result is claimed. The agent adapter has its own separate qualification.
