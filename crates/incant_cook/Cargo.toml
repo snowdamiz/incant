@@ -12,7 +12,7 @@ script = ["dep:incant_script", "dep:sha2"]
 # Explicit candidate fixture route; never enables authored Android project export.
 probe-android-bytecode = ["script", "incant_script/probe-android-bytecode"]
 # Fixed host-side Node invocation; never a normal runtime dependency.
-typescript = ["dep:incant_wasm_abi", "scene", "script", "dep:tempfile", "dep:incant_source", "dep:incant_wasm_cook"]
+typescript = ["dep:windows-sys", "dep:incant_wasm_abi", "scene", "script", "dep:tempfile", "dep:incant_source", "dep:incant_wasm_cook"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [
@@ -66,3 +66,6 @@ incant_text.workspace = true
 incant_assets = { path = "../incant_assets", default-features = false }
 incant_assets_runtime = { workspace = true, features = ["visual"] }
 tempfile = "3"
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "=0.61.2", optional = true, features = ["Win32_Foundation", "Win32_Storage_FileSystem", "Win32_System_Com", "Win32_UI_Shell", "Win32_Globalization"] }

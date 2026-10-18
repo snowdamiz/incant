@@ -47,7 +47,12 @@ native restart remains unexecuted. Only the report and evidence enter main;
 the scheduling source stays on its experiment branch. The default-off
 [pose-interpolation adapter and composed host](../spikes/native-pose-interpolation.md)
 are merged through PR403 with CPU and actual Metal correctness; they are not yet
-integrated into the native window. GPU color reconstruction improves the small
+qualified in the native window. The later default-off
+[Core pose diagnostic](../spikes/native-core-pose-diagnostic.md) adds native-window
+wiring, simple clip animation and fixed-tick HUD. Its full 2,156-step CPU replay
+preserves historical gameplay, complete PCM and HUD reports through 6,468 pose
+displays; the original incomplete-report failure remains recorded. This is not
+shipping, window presentation or frame-pacing evidence. GPU color reconstruction improves the small
 analytic edge metric but still loses thin geometry and has no full visual
 acceptance. Its output-resolution visibility probe now isolates 48 inconsistent
 owner/depth samples for further diagnosis. These results narrow the remaining
@@ -149,10 +154,14 @@ through PR406. Scoped behavior tests and strict lints pass; the observed long
 event frames still need causal attribution and matched shipping measurement.
 
 The default-off [native-query diagnostic](../spikes/script-query-attribution.md)
-now passes focused CPU behavior controls and strict diagnostic/ordinary lints.
-It separates parsing, native execution and result conversion while preserving
-query admission, rollback and bounded storage. Full Core attribution is still
-pending; these tests establish neither an optimization nor the 2 ms gate.
+passes focused CPU controls, strict lints and a same-source shipping comparison
+with exact full-Core gameplay and offline PCM parity. It separates parsing,
+native execution and result conversion while preserving query admission,
+rollback and bounded storage. Parsing and result conversion account for only
+0.305% of ScriptTick time in the same-frame tail of the instrumented run; this
+does not support query marshalling as the next optimization. The 2 ms gate remains
+unmet. A distinct callback, VM or typed-view cost hypothesis is needed before
+another measured experiment; this diagnostic is not a performance improvement.
 
 The real-mouse capture check is pending the director's availability and is not
 blocking these lanes. Broader editor, agent, content, export, multiplayer, game

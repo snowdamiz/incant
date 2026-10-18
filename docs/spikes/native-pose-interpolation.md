@@ -69,3 +69,8 @@ owned processes/groups are absent after terminal results. This establishes scope
 CPU/GPU correctness, not native-window motion quality, shipping performance,
 full animated/UI support or a phase gate. Native scheduling integration and
 matched shipping-profile display/latency measurements remain next.
+
+The [Core integration successor](native-core-pose-diagnostic.md) prepares a
+default-off ordinary-window selection, fixed-step HUD admission and committed
+simple-clip sampling. Its new source/tests are not covered by these historical
+static receipts and remain unqualified until its own bounded controls execute.

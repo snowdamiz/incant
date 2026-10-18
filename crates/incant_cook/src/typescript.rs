@@ -10,6 +10,7 @@ use std::{
     time::{Duration, Instant},
 };
 
+mod command;
 mod phases;
 #[cfg(test)]
 mod tests;
@@ -92,41 +93,29 @@ fn compile_sources<T>(
     let phase_path = directory.path().join("phases.jsonl");
     File::create(&phase_path)?;
     let output = directory.path().join("cooked");
+    #[cfg(windows)]
+    let cache = windows::cache::dependency_cache(&root)?;
+    #[cfg(windows)]
+    let cache_path = cache.path();
+    #[cfg(not(windows))]
+    let transient_cache = directory.path().canonicalize()?.join("swc");
+    #[cfg(not(windows))]
+    let cache_path = transient_cache.as_path();
     let mut command = Command::new(&node);
+    command::CompilerPaths {
+        node: &node,
+        engine: launch_engine.as_path(),
+        project: &root,
+        output: &output,
+        temporary: directory.path(),
+        phases: &phase_path,
+        cache: cache_path,
+    }
+    .configure(&mut command);
     command
-        .args(["--max-old-space-size=512", "--disable-proto=throw"])
-        // Rust canonicalizes Windows paths to \?\ drive/UNC syntax. Pinned Node
-        // can fail in its CLI realpathSync before entering a namespaced script
-        // (nodejs/node#62446). Resolve only this fixed entry relative to the
-        // trusted engine cwd; retain canonical paths for checks and project data.
-        .arg(DRIVER)
-        .arg("--project")
-        .arg(&root)
-        .arg(&output)
-        .current_dir(launch_engine)
-        .env_clear()
-        .env("PATH", node.parent().expect("canonical executable parent"))
-        .env("TMPDIR", directory.path())
-        .env("TEMP", directory.path())
-        .env("TMP", directory.path())
-        .env("INCANT_NATIVE_COOK_PHASE_FILE", &phase_path)
-        // The pinned SWC carrier materializes its verified native payload. Keep
-        // this transient cache private instead of inheriting a user's HOME/cache.
-        // Its no-symlink check requires resolving macOS's /var -> /private/var.
-        .env(
-            "SWC_NATIVE_BINDING_CACHE",
-            directory.path().canonicalize()?.join("swc"),
-        )
         .stdin(Stdio::from(File::open(input_path)?))
         .stdout(Stdio::from(File::create(&stdout_path)?))
         .stderr(Stdio::from(File::create(&stderr_path)?));
-    // Windows needs these OS installation locations. Node configuration and
-    // credentials never enter the compiler's process environment.
-    for key in ["SystemRoot", "SystemDrive", "WINDIR"] {
-        if let Some(value) = std::env::var_os(key) {
-            command.env(key, value);
-        }
-    }
     let mut child = CookChild(command.spawn()?);
     let started = Instant::now();
     let status = wait_for_cook(

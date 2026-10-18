@@ -87,20 +87,66 @@ Skeleton and structural changes remain outside this admission rule.
 
 ## Current parallel qualification — 2026-10-18
 
-Checkpoint56 is frozen at candidate `41565147`, with exactly main416's tree.
-Its Windows credential job failed three tilemap tests that read the exclusively
+The explicit [untrusted Rust module build](docs/spikes/untrusted-rust-module-build.md)
+now has selected compiler/request and network-I/O qualification on this Mac.
+The worker captures bounded Rust source, compiles with the pinned SDK under a
+deny-default OS policy, validates through the normal Wasm cooker and publishes
+raw Wasm only after successful cleanup. Actual relative-module compilation,
+normal validation and atomic publication pass; unsupported build inputs,
+private-file inclusion and cancellation refuse. The separate trusted canary
+confirms TCP connect/bind and UDP bind/send denial, outside read/write/exec denial
+and a clean environment. Its original socket-creation criterion failed and stays
+recorded; the revised I/O checks do not claim that socket creation is forbidden.
+All ten local development checks pass, including 1,040 UI tests, and independent
+portable replay verifies the retained results and failure history. The normal
+headless authoring route now also passes import, idempotent reimport, scene-module
+selection, Undo/Redo, save and journal reopen using the actual service-built raw
+module. Stale revisions and malformed imports refuse without changing the
+project or journal. All six native owners and the wrapper are reaped and
+independently absent. This experimental Mac
+backend fails closed elsewhere; no broader security, editor/agent integration,
+performance or cross-platform isolation acceptance follows.
+The scoped worker is merged through PR422 after review and successful exact-head
+development checks. A shared editor/agent job service is being implemented
+separately; it has not yet qualified actual compiler and cancellation behavior.
+
+Checkpoint57 is frozen at candidate `53ec74d2`, with exactly main421's tree
+(`527d280a`). Its Windows desktop job failed the authored startup test at the
+unchanged eight-second TypeScript cook deadline. The phase record now localizes
+most of the elapsed time to loading SWC: TypeScript was ready at 0.434 seconds,
+SWC at 7.073 seconds, and source snapshot admission at 7.106 seconds. This is
+evidence of a slow dependency load, not its underlying cause or a repair.
+The [Windows dependency-cache change](docs/spikes/windows-typescript-dependency-cache.md)
+reuses the pinned SWC carrier's validated native image through a fixed OS-resolved
+cache, while preserving fresh project compilation and the eight-second deadline.
+Five common cook controls, the exact authored startup test and strict lint pass
+locally, along with all ten development checks. Windows path controls and the
+isolated cold/warm/corrupt-repair diagnostic remain pending; neither a Windows
+latency gain nor timeout repair is established.
+The cache change is merged through PR423 after exact-head development checks.
+Its first targeted Windows diagnostic failed before any tests or cooks ran:
+the Windows launch path was an owned `PathBuf` where the shared compiler
+configuration required `&Path`. The scoped correction uses `as_path()` on both
+platform branches; actual Windows cache behavior and timeout repair remain
+unqualified. All checkpoint57 workflows have now finished; the Windows desktop
+failure prevents promotion, while the other seven workflows passed. The
+candidate remains frozen and release remains at the previously qualified
+checkpoint55. Checkpoint56 failed its Windows credential
+job on three tilemap tests that read the exclusively
 locked journal through an independent file handle. The
 [test-only correction](docs/spikes/tilemap-journal-portability.md) preserves exact
 journal assertions and verifies project/history/redo after release and reopen.
 All ten tilemap tests, scoped strict lint and all ten development checks pass on
 this Mac. The initial post-test audit failure is retained separately from the
-successful native tests and corrected data audit. Windows confirmation remains
-pending. The same checkpoint also found a constant out-of-bounds indexing lint
+successful native tests and corrected data audit. Checkpoint57's
+[credential-storage workflow](https://github.com/snowdamiz/incant/actions/runs/39106688468)
+now passes on Windows, macOS and Linux. The same failed checkpoint56 also found a constant out-of-bounds indexing lint
 in the empty embedded Wasm catalog on Linux, macOS and Windows. The
 [checked catalog split](docs/spikes/static-catalog-payload.md) passes both new
 local boundary controls and strict static-conformance lint, including the actual
 zero-byte generated catalog. Both original failure classes remain recorded;
-release is held until a corrected candidate passes every required check.
+release is held until the corrected checkpoint57 candidate passes every required
+check. Its head stays frozen while subsequent development continues on main.
 
 
 The [process-cleanup correction](docs/spikes/native-process-cleanup.md) preserves
@@ -116,6 +162,26 @@ Computer use and screen capture are paused for every agent by the director's
 latest instruction. Owned capture helpers and test windows have been stopped;
 native window checks remain held. Terminal implementation, review and data-only
 verification continue.
+
+The default-off [Core pose diagnostic](docs/spikes/native-core-pose-diagnostic.md)
+now admits the sample's simple clip animation and fixed-tick HUD. All 461 focused
+behavior controls and both feature-on/off strict lints pass. A fresh full Core
+CPU replay completes 2,156 steps and 6,468 pose/HUD displays with exact historical
+gameplay, complete audio and final HUD parity. The initial incomplete-report
+failure is retained; sharing the ordinary report serializer repaired the fixture
+without changing the analyzer. Native-window wiring is present behind an
+explicit feature and option, but window presentation, lifecycle execution and
+shipping performance remain unqualified and capture checks remain held.
+
+The private GPU reconstruction experiment now passes numerical current-light
+continuity checks. A moved light invalidates stale color history; all 48 missing
+current samples exactly match independent fresh PBR shading/depth. The retained
+29-frame emission, 192-sample fallback, coplanar and cluster controls also pass,
+with independent saved-buffer replay. The original phase-zero fixture failure
+is retained; the corrected fixture exercises a phase with missing current
+samples without weakening the assertion. This prototype still uses 236 bytes
+per output pixel and differs from fully shaded reference images. It remains
+unadopted, with appearance, dynamic gameplay and shipping cost unqualified.
 
 The native desktop player now routes platform touch events into the existing
 input/gesture runtime, with bounded contact identities, shared mouse/UI capture,
