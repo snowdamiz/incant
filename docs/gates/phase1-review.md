@@ -8,9 +8,9 @@ uses four newly packaged shipping players from
 `50b5408b1d6be66dbb1dcbca501d4380add9d656` and five same-package CPU/capture routes.
 Those producing identities remain
 explicit; they are not relabeled as later integration builds.
-[Release checkpoint55](../spikes/release-checkpoint-55.md) promoted the main407 tree
+[Release checkpoint58](../spikes/release-checkpoint-58.md) promoted the main425 tree
 after all 23 required contexts and eight frozen-head workflows succeeded. Release
-`2d96f461` has the identical tested tree; main409 and later work remains outside
+`ae58b0bb` has the identical tested tree; main426 and later work remains outside
 that release baseline.
 Phase 1 remains open; this ledger records evidence and remaining work, not director
 approval. [PLAN.md](../../PLAN.md#phase-1-core-engine) defines the requirements.

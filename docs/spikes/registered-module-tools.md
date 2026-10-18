@@ -101,7 +101,11 @@ registered tools and two exact legacy-description clarifications. The private
 full-schema comparison and SDK generation/freshness passed; the other 81 schemas
 and SDK declarations stayed byte-identical. Commit `cc57167f` copies that exact
 exporter output. Root integration's separate ten development checks and 1,041 UI
-tests passed at `31609ddd`; this does not relabel the native producer.
+tests passed at `31609ddd` in 81.131 seconds (actual session `76163`, terminal
+exit zero). Source contents stayed unchanged and all 282 observed identities and
+their groups plus the wrapper were independently absent afterward. The portable
+packet retains the root closeout. Later evidence/release-status documentation
+does not relabel the native producer or the development-check producer.
 
 Fresh postterminal checks confirmed all 199 observed PIDs and 39 groups absent,
 including the wrapper, and rehashed all 121 protected copies. Target allocation
