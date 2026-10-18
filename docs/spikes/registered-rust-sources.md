@@ -83,6 +83,12 @@ marker remain inert. Reopen validates the ownership receipt alongside the existi
 journal before rollback or repeated Undo/Redo. This is not a new guarantee against
 arbitrary external writers racing after the final observation.
 
+Ownership binds the canonical journal path and exact root/directory identities.
+Copying or moving a project does not transfer first-package Undo/Redo authority;
+these operations fail closed rather than silently rebinding receipts. Same-path
+reopen remains supported. A focused move/reopen/refusal/return test is authored;
+its execution remains pending with the other native controls.
+
 Compatibility review covers serde/CRDT materialization, global ID and path alias
 validation, save/reopen, legacy journal decoding and generic destructive `doc_patch`
 approval. The UI's existing approval-description renderer identifies the new

@@ -217,3 +217,40 @@ fn invalid_revision_cas_or_mixed_write_creates_no_visible_directory_prefix() {
     assert!(!root.path().join("modules").exists());
     bus.ensure_sources_ready().unwrap();
 }
+
+#[test]
+fn moving_a_project_does_not_rebind_first_package_undo_authority() {
+    let outer = tempfile::tempdir().unwrap();
+    let original = outer.path().join("original");
+    let moved = outer.path().join("moved");
+    fs::create_dir(&original).unwrap();
+    let project = Project::empty("Relocation");
+    let module = module();
+    {
+        let mut bus = CommandBus::persistent_with_sources(
+            original.join("journal"),
+            project.clone(),
+            &original,
+        )
+        .unwrap();
+        create(&mut bus, &module);
+    }
+    fs::rename(&original, &moved).unwrap();
+    {
+        let mut bus =
+            CommandBus::persistent_with_sources(moved.join("journal"), project.clone(), &moved)
+                .unwrap();
+        let before = bus.project().clone();
+        assert!(bus.undo().is_err());
+        assert_eq!(bus.project(), &before);
+        assert_eq!(bus.revision(), 1);
+        assert_eq!(fs::read(moved.join(&module.path)).unwrap(), TEXT.as_bytes());
+    }
+    // Returning the exact nodes to the original journal path restores the old
+    // authority; opening the moved copy never rewrites its ownership receipt.
+    fs::rename(&moved, &original).unwrap();
+    let mut bus =
+        CommandBus::persistent_with_sources(original.join("journal"), project, &original).unwrap();
+    bus.undo().unwrap();
+    assert!(!original.join("modules").exists());
+}
