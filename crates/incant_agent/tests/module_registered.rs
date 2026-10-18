@@ -748,6 +748,7 @@ fn registered_build_cancellation_during_backend_keeps_candidate_unpublished() {
 fn missing_registered_source_can_be_authored_but_cannot_be_inspected_for_build() {
     let f = Fixture::new();
     std::fs::remove_file(f.root.path().join(&f.module.path)).unwrap();
+    std::fs::remove_dir(f.root.path().join("logic")).unwrap();
     let mut bus = f.bus.lock().unwrap();
     let read = dispatch(
         &mut bus,
@@ -792,7 +793,16 @@ fn missing_registered_source_can_be_authored_but_cannot_be_inspected_for_build()
             .as_deref(),
         Some(NEXT)
     );
+    assert!(
+        bus.history()[0]
+            .source_edit
+            .as_ref()
+            .unwrap()
+            .created_tree
+            .is_some()
+    );
     bus.undo().unwrap();
+    assert!(!f.root.path().join("logic").exists());
     assert!(
         bus.read_module_source(&f.module.id)
             .unwrap()
@@ -800,6 +810,7 @@ fn missing_registered_source_can_be_authored_but_cannot_be_inspected_for_build()
             .is_none()
     );
     bus.redo().unwrap();
+    assert!(f.root.path().join("logic").is_dir());
     assert_eq!(
         bus.read_module_source(&f.module.id)
             .unwrap()

@@ -16,8 +16,10 @@ The agent's preferred workflow is:
    compiler host is not. Missing registered content is readable as `Missing`.
 2. `module_write` takes that module ID, source, `expected_source`,
    `expected_revision` and description. It replaces at most 64 KiB of Rust source
-   through the existing command transaction. It can create missing registered
-   content in an existing package directory. It does not create directories.
+   through the existing command transaction. With the first-package source
+   foundation, missing Rust parent directories are privately staged and published
+   as one owned subtree through that same transaction; Undo/Redo retain and
+   restore its exact identities. The adapter creates no separate filesystem path.
 3. `module_inspect` takes the ID and observed source/revision. The engine derives
    the package/entry from the registration and captures the existing bounded
    package. Missing entry content must first be authored. The immutable snapshot
