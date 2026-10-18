@@ -1,10 +1,11 @@
 # Checked static catalog payload selection
 
-Checkpoint56's Linux Wasm conformance job rejected the player under strict Clippy:
+Checkpoint56's Linux, macOS and Windows Wasm conformance jobs rejected the player
+under strict Clippy:
 the non-authored build emits an empty `wasm-instances.bin`, so indexing the
 statically known `include_bytes!` array at byte32 triggered
 `clippy::out_of_bounds_indexing`. The preceding runtime empty check did not
-suppress that compile-time diagnostic. The original failed log is retained;
+suppress that compile-time diagnostic. All three original failed lint logs are retained;
 checkpoint56 is not reclassified as passing.
 
 Source `d4f4e1582007385a55d8897e7eba53eef08de5e7` replaces the direct indexing with
@@ -31,8 +32,8 @@ allocation and retained peak are10,681,225,216 bytes under its existing12GiB cap
 prior resource charges remain included. No GPU, window, capture or audio device
 was used.
 
-The [portable manifest](evidence/static-catalog-payload.json) binds24 UTF-8
-records in its gzip archive: the original Linux failure, complete source patch,
+The [portable manifest](evidence/static-catalog-payload.json) binds26 UTF-8
+records in its gzip archive: the original three-platform failures, complete source patch,
 source/tool/bundle identities, exact plan/runner/grant, raw Cargo/test/lint logs,
 generated-file identity, actual terminal and fresh process/target closeout.
 Decompression must match the manifest's byte count and SHA256; every record's
