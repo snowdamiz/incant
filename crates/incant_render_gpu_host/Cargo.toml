@@ -6,6 +6,7 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+experimental-batched-presentation = []
 native-metalfx = ["incant_render/native-metalfx"]
 default = ["physics-deterministic"]
 

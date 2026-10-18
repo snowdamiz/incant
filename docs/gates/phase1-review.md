@@ -28,6 +28,15 @@ span, substantially more drawable acquisition wait and four dropped wall ticks.
 The selected arm's strict timing receipt also remains failed at its partial final
 scheduler batch. The ordinary policy stays unchanged.
 
+The subsequent [upstream comparison](../spikes/upstream-rendering-comparison.md)
+uses pinned Godot, Bevy, Filament and FSR2 implementations to define new experiments.
+The [batched presentation route](../spikes/native-batched-presentation.md) has
+local CPU/Metal correctness and fresh shipping gameplay/audio parity; its first
+ordinary native arm is focus-interrupted, so the matched timing result remains
+open. GPU color reconstruction improves the small analytic edge metric but still
+loses thin geometry and has no full visual acceptance. These results narrow the
+remaining problems without changing any exit requirement.
+
 | Exit requirement | Recorded evidence | Remaining qualification |
 | --- | --- | --- |
 | Core Sample runs at 60 fps, using TypeScript and no editor | Authored Core gameplay, packaged HUD/audio and source-free native execution have scoped proofs. A [shipping native-window replay](../spikes/native-window-replay.md) completes the full 2,156-step route with exact headless observation parity. The later [complete host-stage diagnostic](../spikes/native-presentation-host-stages.md#complete-same-source-live-replay) also records all 2,156 steps with independent stage arithmetic, preserving its historical package and earlier failed attempt. [Core integration](../spikes/core-main182.md), [HUD](../spikes/core-result-hud-main192.md). | A shipping run of the complete rendered game meeting the frame budget. The latest same-player diagnostic has positive timestamps for every gameplay frame but retains uneven displayed intervals; earlier missing/zero callbacks remain historical. Complete timing coverage and CPU simulation timing do not establish FPS, causality or shader-stall freedom. Rendering reconstruction still has unresolved appearance defects. |

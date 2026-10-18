@@ -28,6 +28,9 @@ type Game = HostedOfflineGameSession<NativeRenderHost<GpuRenderConsumer<Targets>
 mod animated_refresh;
 #[path = "game/model_refresh.rs"]
 mod model_refresh;
+#[cfg(feature = "experimental-batched-presentation")]
+#[path = "game/presentation.rs"]
+mod presentation;
 #[path = "game/texture_refresh.rs"]
 mod texture_refresh;
 const FORMAT: wgpu::TextureFormat = wgpu::TextureFormat::Rgba8UnormSrgb;
@@ -101,6 +104,13 @@ fn game() -> (Game, Probe) {
 /// Optional text child of the moving model: packaged Latin/Arabic/CJK fonts
 /// are cooked, bound at startup and deleted with every other source file.
 fn game_with(text: bool) -> (Game, Probe) {
+    game_with_targets(text, |settings| settings)
+}
+type Hosted<P> = HostedOfflineGameSession<NativeRenderHost<GpuRenderConsumer<P>>>;
+fn game_with_targets<P: TargetProvider>(
+    text: bool,
+    wrap: impl FnOnce(GpuRenderSettings<Targets>) -> GpuRenderSettings<P>,
+) -> (Hosted<P>, Probe) {
     let temp = tempfile::tempdir().unwrap();
     let asset = models::model(temp.path(), 0.);
     let fingerprint =
@@ -230,7 +240,7 @@ fn game_with(text: bool) -> (Game, Probe) {
         json!({"move":{"kind":"button","bindings":[{"type":"key","code":"Space"}]}}),
     )
     .unwrap();
-    let game = Game::new(
+    let game = HostedOfflineGameSession::new(
         scene,
         code,
         actions,
@@ -242,10 +252,10 @@ fn game_with(text: bool) -> (Game, Probe) {
             model_cache: temp.path().join(".incant/cache/models"),
             texture_cache: temp.path().join("textures"),
             camera: id(2),
-            consumer: GpuRenderSettings {
+            consumer: wrap(GpuRenderSettings {
                 renderer: Arc::clone(&renderer),
                 targets,
-            },
+            }),
         },
     )
     .unwrap();

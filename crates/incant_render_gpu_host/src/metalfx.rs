@@ -52,6 +52,10 @@ impl<P: TargetProvider> TargetProvider for MetalFxTargets<P> {
     fn resolution_config(&self) -> Option<ResolutionConfig> {
         self.inner.resolution_config()
     }
+    #[cfg(feature = "experimental-batched-presentation")]
+    fn presentation_mode(&self) -> crate::PresentationMode {
+        self.inner.presentation_mode()
+    }
     fn motion_epoch(&self) -> Option<u64> {
         self.inner.motion_epoch()
     }

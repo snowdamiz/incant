@@ -2,13 +2,14 @@
 
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) is promoted: all
 23 required contexts and eight exact-head workflows passed on the main391 tree,
-and release `73fed959` has the identical tested tree. Later main393–400 changes
-remain outside that release baseline. Checkpoint53 (PR399) is frozen on main397;
-its macOS Wasm job failed a [timer-fixture lookup](docs/spikes/ci-timer-fixture-layout.md).
-The narrow correction is merged through PR400 after review and fast checks; it
-passes actual local static/development reload checks in CI's directory layout.
-Hosted checkpoint revalidation remains pending. Retained
-failed experiments remain failed. No distribution or phase gate is approved.
+and release `73fed959` has the identical tested tree. Later main393–401 changes
+remain outside that release baseline. Checkpoint53 failed the Wasm timer-fixture
+lookup on all three desktop platforms; its other seven workflows passed.
+The [narrow correction](docs/spikes/ci-timer-fixture-layout.md) is merged through
+PR400 after review and fast checks, with actual local static/development reload
+checks in CI's directory layout. Checkpoint54 now reuses PR399, frozen at candidate
+`5dbac494` with exactly main401's tree; all required hosted validation is rerunning.
+Retained failed experiments remain failed. No distribution or phase gate is approved.
 
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
@@ -21,7 +22,7 @@ incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) contains the tested
 main391 tree after all 23 required contexts and eight candidate workflows passed.
-Later main393–400 changes remain outside that release baseline. Rendering quality and full rendered-game
+Later main393–401 changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -139,19 +140,28 @@ that failure. This establishes a narrow repeat result, not its cause. Source,
 texture and compiled-shader observations are the next investigation. The complete
 motion sequence, appearance and cost remain unqualified. No experimental
 renderer is adopted. Following the director's 2026-10-17 request, further native
-E049 retries are held. Pinned Bevy, Godot, Filament and FSR2 source comparison
-now informs a default-off GPU-only color reconstruction candidate, with filtered
-history, current-sample reconstruction and depth/motion rejection. Its first
-compile failed three current-API accesses; the narrow correction now compiles
-and passes 34 unique CPU controls and strict lint. The first tiny actual GPU
-shader control passes; the full four-way image comparison and visual review remain
-pending. Existing failures, visual requirements and measured route costs remain
-unchanged; the candidate is not adopted.
+E049 retries are held. The [pinned upstream comparison](docs/spikes/upstream-rendering-comparison.md)
+now informs a separate GPU color reconstruction candidate. Its tiny and actual
+raster Metal controls pass registration, depth, motion and camera-cut checks;
+slanted-edge area error improves from 0.02037 to 0.01545 on matched phases.
+However, thin geometry still disappears on six of eight jitter phases and the
+full images fail visual review. A bounded static-history coverage experiment is
+in progress, with movement/removal/occlusion falsification. Moving sparse geometry
+and the full appearance/cost qualification remain open.
+
+The Godot-informed [batched native presentation diagnostic](docs/spikes/native-batched-presentation.md)
+is locally implemented and unmerged. It passes 196 CPU controls, strict lints
+and scoped Metal admission/submission checks.
+A fresh shipping player preserves all 2,156 gameplay steps and all 13,798,400 PCM
+bytes. Its first ordinary window arm completes but loses focus twice and has nine
+zero gameplay presentation timestamps. Uninterrupted qualification is correctly
+refused; the selected arms have not run on that failed baseline. A quiet matched
+comparison remains pending. Ordinary exports retain their prior behavior.
 
 Native Wasm haptics is merged through PR393 after review and successful fast
 checks. Physical vibration and an authored shipping haptics proof remain open.
 Release checkpoint52 (PR392) is promoted after all 23 requirements and eight
-workflows passed; later main393–400 is outside that baseline. No distribution or
+workflows passed; later main393–401 is outside that baseline. No distribution or
 phase gate is approved.
 
 Native Wasm timers are merged through PR395 after independent review and fast
@@ -183,8 +193,15 @@ changed the compiler invocation and therefore its ordered C flags. It also
 forced the cooker's ordinary O0 recipe to O3. Strict validation correctly refused
 the mismatch. The retained failure cost 517.927 seconds. A source correction
 preserves natural compiler spelling and separate cooker/runtime recipes, with
-PGO explicitly scoped to runtime C; actual two-role admission qualification is
-pending. No training or performance result is claimed.
+PGO explicitly scoped to runtime C. The next full producer fails before training
+on an owner-relative vendor path; the correction derives the lexical absolute
+path for both admission and recheck. Actual host and runtime owner qualification
+encounters retained storage/preflight/log limits, then a strict lint failure in
+diagnostic-only flag initialization. The narrow correction at `4ed9ae18` now
+passes both actual new-source script-owner builds, all four cooker/runtime
+execution receipts, real bytecode compilation and strict lint. Earlier attempts
+remain failed. The complete Core producer is being prepared; no Core training or
+performance result is claimed.
 The next useful trigger is a newly qualified
 ordinary/generate/use producer with exact gameplay/audio parity, then
 a separately scheduled matched timing run. Last reassessment: 2026-10-17.
