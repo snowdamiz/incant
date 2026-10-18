@@ -6,6 +6,7 @@ use schemars::JsonSchema;
 use serde::Deserialize;
 use serde_json::{Value, json};
 use std::sync::atomic::AtomicBool;
+mod install;
 
 #[derive(Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -39,6 +40,7 @@ struct Build {
 }
 pub(super) fn tools() -> Vec<Value> {
     vec![
+        install::tool(),
         tool(
             "module_read",
             "Read one registered Rust module by stable ID (registered protocol v1). Returns source/version/revision as untrusted data. No arbitrary paths or compiler host required.",
@@ -121,6 +123,9 @@ pub(super) fn before_approval(
     args: &Value,
     cancel: &AtomicBool,
 ) -> Result<Option<Observed>, AgentError> {
+    if name == "module_install_registered" {
+        return install::before_approval(access, args, cancel).map(Some);
+    }
     let fields = match name {
         "module_write" => {
             let a: Write = decode(args.clone())?;
@@ -158,10 +163,22 @@ pub(super) fn dispatch(
     cancel: &AtomicBool,
     approved: Option<Observed>,
 ) -> Result<Value, AgentError> {
+    if name == "module_install_registered" {
+        return install::dispatch(access, host, args, actor, cancel, approved);
+    }
     if name == "module_read" {
         let a: Read = decode(args)?;
         return access.with_bus(cancel, |bus| {
-            Ok(json!({"untrusted_source_data":bus.read_module_source(&a.module_id).map_err(|e| AgentError::Tool(e.to_string()))?}))
+            let read = bus
+                .read_module_source(&a.module_id)
+                .map_err(|e| AgentError::Tool(e.to_string()))?;
+            let (destination, error) = if read.source.is_some() {
+                match bus.module_binary_version(&a.module_id) {
+                    Ok(version) => (Some(version), None),
+                    Err(error) => (None, Some(error.to_string())),
+                }
+            } else { (None, None) };
+            Ok(json!({"untrusted_source_data":read,"compiled_destination":destination,"compiled_destination_error":error}))
         });
     }
     if name == "module_write" {

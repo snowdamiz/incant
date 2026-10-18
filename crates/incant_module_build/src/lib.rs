@@ -1,8 +1,13 @@
-//! Authoring-only build jobs. Private candidates never become project assets.
+//! Authoring-only build jobs. Completed candidates require a separate leased
+//! ordinary command transaction before becoming project assets.
+mod install;
 mod node;
+pub use install::{InstallRequest, Installation, InstallationReceipt};
 mod types;
 pub use types::*;
 pub mod backend;
+#[cfg(test)]
+mod install_tests;
 #[cfg(target_os = "macos")]
 mod process;
 #[cfg(any(target_os = "macos", test))]
@@ -54,6 +59,17 @@ pub trait Backend: Send + Sync {
         entry: &str,
         cancel: &dyn Fn() -> bool,
     ) -> Result<SourcePackage>;
+    /// Trusted registered inspection may exclude only its derived output; the
+    /// default preserves existing backend behavior. No tool supplies this flag.
+    fn inspect_registered(
+        &self,
+        root: &Path,
+        package: &str,
+        entry: &str,
+        cancel: &dyn Fn() -> bool,
+    ) -> Result<SourcePackage> {
+        self.inspect(root, package, entry, cancel)
+    }
     fn build(&self, source: &SourcePackage, cancel: &dyn Fn() -> bool) -> Result<backend::Built>;
 }
 struct Snapshot {
@@ -262,9 +278,15 @@ impl Service {
         }
         let epoch = incant_source::check_recovery(&root).map_err(|_| Error::Stale)?;
         let source = lease.bounded(
-            lease
-                .backend
-                .inspect(&root, &query.package, &query.entry, &stopped),
+            if registered.is_some() {
+                lease
+                    .backend
+                    .inspect_registered(&root, &query.package, &query.entry, &stopped)
+            } else {
+                lease
+                    .backend
+                    .inspect(&root, &query.package, &query.entry, &stopped)
+            },
             start,
             cancel,
         )?;
@@ -394,9 +416,15 @@ impl Service {
         let built = lease.bounded(lease.backend.build(&source, &stopped), start, cancel)?;
         lease.bounded(validate(), start, cancel)?;
         let current = lease.bounded(
-            lease
-                .backend
-                .inspect(&root, &package, &source.entry, &stopped),
+            if registered.is_some() {
+                lease
+                    .backend
+                    .inspect_registered(&root, &package, &source.entry, &stopped)
+            } else {
+                lease
+                    .backend
+                    .inspect(&root, &package, &source.entry, &stopped)
+            },
             start,
             cancel,
         )?;

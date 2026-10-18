@@ -67,3 +67,8 @@ providers/backends and synthesized filesystem edits; they make no native sandbox
 network, device, window, rendering, audio, shipping or performance claim. The
 existing qualified worker policy and native build evidence are separate in
 [module-build-host-jobs.md](module-build-host-jobs.md).
+
+The later source-only installation child is described in
+[registered-candidate-install.md](registered-candidate-install.md). Its new
+leased publication and registered output exclusion are separate from this
+original read/write/build qualification; native installation proof is pending.

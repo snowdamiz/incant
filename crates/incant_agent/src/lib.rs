@@ -260,7 +260,11 @@ fn dispatch_cancellable(
         return Err(AgentError::Interrupted);
     }
     match name {
-        "module_read" | "module_write" | "module_inspect" | "module_build_registered" => {
+        "module_read"
+        | "module_write"
+        | "module_inspect"
+        | "module_build_registered"
+        | "module_install_registered" => {
             module_registered::dispatch(access, perception, name, args, actor, cancel, None)
         }
         "module_source_read" | "module_build" | "module_build_status" | "module_build_cancel" => {
@@ -446,6 +450,7 @@ impl Agent {
                             | "module_build_cancel"
                             | "module_inspect"
                             | "module_build_registered"
+                            | "module_install_registered"
                     )
                 )
             });
@@ -461,6 +466,7 @@ impl Agent {
                             | "module_build"
                             | "module_inspect"
                             | "module_build_registered"
+                            | "module_install_registered"
                     )
                 )
             });
@@ -476,6 +482,7 @@ impl Agent {
                             | "module_write"
                             | "module_inspect"
                             | "module_build_registered"
+                            | "module_install_registered"
                     )
                 )
             });
@@ -605,6 +612,7 @@ impl Agent {
                                     | "module_build"
                                     | "module_write"
                                     | "module_build_registered"
+                                    | "module_install_registered"
                             ));
                     if ask && !approve(name, &arguments) {
                         return Err(AgentError::Tool("user denied this operation".into()));

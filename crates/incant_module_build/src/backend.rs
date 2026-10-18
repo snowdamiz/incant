@@ -176,14 +176,8 @@ fn identities(config: &Config) -> Result<Vec<(PathBuf, String)>> {
     paths.dedup();
     paths.into_iter().map(file_identity).collect()
 }
-impl Backend for Local {
-    fn inspect(
-        &self,
-        root: &Path,
-        package: &str,
-        entry: &str,
-        cancel: &dyn Fn() -> bool,
-    ) -> Result<SourcePackage> {
+impl Local {
+    fn inspect_authority(&self, root: &Path) -> Result<()> {
         if self.inputs()? != self.identities {
             return Err(Error::Unavailable(
                 "trusted worker/tool/SDK source changed".into(),
@@ -202,10 +196,54 @@ impl Backend for Local {
         {
             return Err(Error::Invalid("project overlaps host authority/storage"));
         }
+        Ok(())
+    }
+}
+impl Backend for Local {
+    fn inspect(
+        &self,
+        root: &Path,
+        package: &str,
+        entry: &str,
+        cancel: &dyn Fn() -> bool,
+    ) -> Result<SourcePackage> {
+        self.inspect_authority(root)?;
         let input =
             serde_json::json!({"mode":"inspect","root":root,"package":package,"entry":entry});
         let (_, reply) = self.execute(input, cancel)?;
         Ok(serde_json::from_value(reply)?)
+    }
+    fn inspect_registered(
+        &self,
+        root: &Path,
+        package: &str,
+        entry: &str,
+        cancel: &dyn Fn() -> bool,
+    ) -> Result<SourcePackage> {
+        self.inspect_authority(root)?;
+        if cancel() {
+            return Err(Error::Cancelled);
+        }
+        let held = incant_source::RustPackageSnapshot::capture(root, &format!("{package}/{entry}"))
+            .map_err(|e| Error::Worker(e.to_string()))?;
+        let source = SourcePackage {
+            entry: entry.into(),
+            files: held
+                .files()
+                .iter()
+                .map(|(path, text)| crate::SourceFile {
+                    path: path.clone(),
+                    text: text.clone(),
+                })
+                .collect(),
+        };
+        source.digest()?;
+        held.validate().map_err(|_| Error::Stale)?;
+        self.inspect_authority(root)?;
+        if cancel() {
+            return Err(Error::Cancelled);
+        }
+        Ok(source)
     }
     fn build(&self, source: &SourcePackage, cancel: &dyn Fn() -> bool) -> Result<Built> {
         let (job, reply) =

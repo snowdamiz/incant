@@ -56,7 +56,7 @@ class SourceTests(Fixture):
         self.assertEqual(rows[0]['sha256'], build.digest(files['helper.rs']))
 
     def test_manifests_build_scripts_and_native_inputs_refuse(self):
-        for name in ('Cargo.toml', 'Cargo.lock', 'build.rs', 'BUILD.rs', 'macro.dylib', 'data.txt'):
+        for name in ('Cargo.toml', 'Cargo.lock', 'build.rs', 'BUILD.rs', 'macro.dylib', 'data.txt', 'module.wasm'):
             with self.subTest(name=name):
                 path = self.write(name)
                 with self.assertRaises(sandbox.Refused):

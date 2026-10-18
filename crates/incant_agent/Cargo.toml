@@ -7,6 +7,8 @@ publish.workspace = true
 
 [features]
 default = ["physics-deterministic"]
+# Opt-in actual configured compiler-to-install route; ordinary tests remain pure.
+host-qualification = ["incant_module_build/host-qualification"]
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [
@@ -49,3 +51,8 @@ libc = "0.2"
 
 [target.'cfg(not(target_os = "macos"))'.dependencies]
 keyring = "=4.2.0"
+
+[dev-dependencies]
+incant_source.workspace = true
+incant_wasm_cook.workspace = true
+wat = "=1.258.3"
