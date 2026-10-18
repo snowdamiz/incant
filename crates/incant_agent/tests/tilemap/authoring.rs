@@ -90,7 +90,7 @@ fn no_op_agent_turn_returns_no_transaction_and_preserves_redo_and_journal() {
     let history = f.bus.history().to_vec();
     let redo: Vec<_> = f.bus.redo_history().cloned().collect();
     let revision = f.bus.revision();
-    let journal = fs::read(f.root.path().join("game.journal.jsonl")).unwrap();
+    let journal = f.journal_bytes();
     let mut args = f.args();
     args["brush"] = json!({"kind":"erase"});
     let mut provider = Mock::new(args.clone());
@@ -116,10 +116,7 @@ fn no_op_agent_turn_returns_no_transaction_and_preserves_redo_and_journal() {
     assert_eq!(f.bus.project(), &before);
     assert_eq!(f.bus.history(), history);
     assert_eq!(f.bus.redo_history().cloned().collect::<Vec<_>>(), redo);
-    assert_eq!(
-        fs::read(f.root.path().join("game.journal.jsonl")).unwrap(),
-        journal
-    );
+    assert_eq!(f.journal_bytes(), journal);
     f.bus.redo().unwrap();
     assert_eq!(f.bus.project(), &painted);
     assert!(
