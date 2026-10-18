@@ -4,6 +4,20 @@ use super::visibility_reconstruction;
 pub(crate) enum Mode {
     Missing,
     AllCurrent,
+    /// Same current filtering/fallback as Missing, with no history contribution.
+    NoHistory,
+    /// Retained negative arm: owner/depth alone do not establish radiance continuity.
+    UncheckedHistory,
+}
+impl Mode {
+    pub(crate) fn admits_history(self, previous: bool, stationary: bool) -> bool {
+        previous
+            && match self {
+                Self::Missing => stationary,
+                Self::UncheckedHistory => true,
+                Self::AllCurrent | Self::NoHistory => false,
+            }
+    }
 }
 pub(crate) struct Classification {
     pub pipeline: wgpu::RenderPipeline,
@@ -21,29 +35,52 @@ const GUARD: &str = r#"
         || any(position<vec2f(pixel)) || any(position>=vec2f(pixel)+vec2f(1)) {continue;}
 "#;
 pub(crate) fn classify_source(mode: Mode) -> String {
-    let base = visibility_reconstruction::source();
+    let base = radiance_source(mode);
     let helpers = base.split_once("struct Resolved").unwrap().0;
-    let predicate = if mode == Mode::AllCurrent {
-        "true"
+    let decision = if mode == Mode::AllCurrent {
+        "mask|=1u<<u32(lane);"
     } else {
-        "current_witness(position,id,depth).mass==0.0 && history_witness(position,id,m).mass==0.0"
+        r#"let c=current_witness(position,id,depth);let h=history_witness(position,id,m);
+        if c.mass>0.0 {mask|=1u<<u32(lane+4);}
+        if h.mass>0.0 {mask|=1u<<u32(lane+8);}
+        if c.mass==0.0 && h.mass==0.0 {mask|=1u<<u32(lane);}"#
     };
     format!(
         r#"{helpers}
 @fragment fn classify(@builtin(position) p:vec4f)->@location(0) u32 {{
-    let pixel=vec2i(p.xy);var mask=0u;
+    // Low four bits remain the actual shading requests. Spare bits retain
+    // current/history witness decisions and the accepted continuity policy;
+    // no additional attachment or CPU admission is introduced.
+    let pixel=vec2i(p.xy);var mask=select(0u,65536u,frame.output.z>0.5);
     for(var lane=0;lane<4;lane++) {{
         {GUARD}
         let m=vec4f(unpack(textureLoad(visible_xy,pixel,lane)),unpack(textureLoad(visible_zw,pixel,lane)));
-        if {predicate} {{mask|=1u<<u32(lane);}}
+        {decision}
     }}
     return mask;
 }}
 "#
     )
 }
+fn radiance_source(mode: Mode) -> String {
+    let source = visibility_reconstruction::source();
+    if mode == Mode::UncheckedHistory {
+        return source;
+    }
+    // A geometric match establishes visibility/correspondence, not unchanged
+    // illumination. The existing accepted snapshot includes packed light world
+    // transforms, camera and all geometry; material/environment bindings are
+    // immutable for this retained route. Conservatively reject all old radiance
+    // on any discontinuity. Only accepted submissions publish the snapshot.
+    let old = "if frame.depth.w<0.5 || !valid_motion(m)";
+    assert_eq!(source.matches(old).count(), 1);
+    source.replace(
+        old,
+        "if frame.output.z<0.5 || frame.depth.w<0.5 || !valid_motion(m)",
+    )
+}
 pub(crate) fn resolve_source(mode: Mode) -> String {
-    let mut source = visibility_reconstruction::source();
+    let mut source = radiance_source(mode);
     source.push_str(
         r#"
 @group(0) @binding(13) var missing_mask:texture_2d<u32>;

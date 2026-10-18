@@ -14,6 +14,7 @@ pub(crate) struct System {
     owner: [wgpu::TextureView; 2],
     pipeline: wgpu::RenderPipeline,
     layout: wgpu::BindGroupLayout,
+    mode: Option<super::visibility_fallback::Mode>,
     classify: Option<(wgpu::RenderPipeline, wgpu::BindGroupLayout)>,
     pub(crate) fallback: Option<Arc<crate::motion::visibility_shading::System>>,
 }
@@ -212,6 +213,7 @@ impl System {
             owner,
             pipeline,
             layout,
+            mode,
             classify,
             fallback,
         })
@@ -231,7 +233,14 @@ impl System {
             usage: wgpu::BufferUsages::UNIFORM,
             contents: bytemuck::bytes_of(&Frame {
                 source: p.input.rect,
-                output: [self.size[0] as f32, self.size[1] as f32, 0., 0.],
+                output: [
+                    self.size[0] as f32,
+                    self.size[1] as f32,
+                    f32::from(u8::from(self.mode.is_some_and(|mode| {
+                        mode.admits_history(p.input.frame.has_previous(), p.stationary)
+                    }))),
+                    0.,
+                ],
                 depth: [
                     camera.near,
                     camera.far,

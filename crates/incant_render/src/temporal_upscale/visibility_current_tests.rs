@@ -6,6 +6,8 @@ mod current_readback;
 use current_readback::{Reader as ShadedReader, Sample as Shaded};
 #[path = "visibility_current_fixture.rs"]
 mod pbr_fixture;
+#[path = "visibility_radiance_tests.rs"]
+mod radiance;
 
 #[test]
 fn current_radiance_shaders_validate_uniform_texture_sampling() {
@@ -15,6 +17,10 @@ fn current_radiance_shaders_validate_uniform_texture_sampling() {
         visibility_fallback::classify_source(Mode::AllCurrent),
         visibility_fallback::resolve_source(Mode::Missing),
         visibility_fallback::resolve_source(Mode::AllCurrent),
+        visibility_fallback::classify_source(Mode::NoHistory),
+        visibility_fallback::resolve_source(Mode::NoHistory),
+        visibility_fallback::classify_source(Mode::UncheckedHistory),
+        visibility_fallback::resolve_source(Mode::UncheckedHistory),
     ] {
         let m = naga::front::wgsl::parse_str(&source).unwrap();
         naga::valid::Validator::new(
@@ -50,8 +56,29 @@ fn validate_current(shaded: &[Shaded]) -> usize {
                 .chain([&s.depth, &s.visible_depth])
                 .all(|v| v.is_finite())
         );
-        assert_eq!(s.mask & !15, 0);
+        assert_eq!(s.mask & !0x10fff, 0);
         let requested = s.mask & (1 << (i % 4)) != 0;
+        let current = s.mask & (1 << (i % 4 + 4)) != 0;
+        let history = s.mask & (1 << (i % 4 + 8)) != 0;
+        assert!(
+            !history || s.mask & (1 << 16) != 0,
+            "history without admission"
+        );
+        assert!(
+            !requested || !(current || history),
+            "redundant current shading"
+        );
+        if s.visible_owner & 0x7fffffff == 0 {
+            assert!(
+                !(requested || current || history),
+                "clear sample has a witness"
+            );
+        } else {
+            assert!(
+                requested || current || history,
+                "visible sample has no radiance route"
+            );
+        }
         if requested {
             assert_ne!(s.visible_owner & 0x7fffffff, 0, "clear sample requested");
             assert_eq!(s.color[3], 1., "requested sample unwritten");
