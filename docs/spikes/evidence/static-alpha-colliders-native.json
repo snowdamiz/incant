@@ -1,0 +1,90 @@
+{
+  "source": "94fc63b9cb5d8aaf4e1b0ff9e1a6e2ac2fecffd2",
+  "profile": "ci; Rust1.99, render opt2, sha2 opt3, j2, Rayon2; locked/offline",
+  "scope": "CPU import/CLI behavior and strict all-target lint. No windows, GPU, capture, live model or performance claim. Agent adapter separately qualified in agent-alpha-colliders-native.json.",
+  "import": {
+    "tests": 48,
+    "failures": 0,
+    "ignored": 0,
+    "actual_cargo_exit": 0,
+    "supervisor_exit": 1,
+    "retained_failure": "Inventory expected15 names without outer alpha_colliders module prefix; independent raw replay verified actual48 names without native rerun.",
+    "result_sha256": "fa4fdb10b6c9d53cf95ca13c1be4209c0a59b0143f8ff4aadc86e6c3b0d35d21"
+  },
+  "cli_and_lint": {
+    "actual_exec": 5684,
+    "actual_exit": 0,
+    "stages": [
+      {
+        "name": "headless-alpha-cli-grammar-and-command",
+        "argv": [
+          "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+          "--config",
+          "profile.ci.package.incant_render.opt-level=2",
+          "--config",
+          "profile.ci.package.sha2.opt-level=3",
+          "test",
+          "-p",
+          "incant_headless",
+          "--bin",
+          "incant_headless",
+          "--test",
+          "alpha_cli",
+          "--profile",
+          "ci",
+          "--locked",
+          "--offline",
+          "-j2",
+          "--message-format=json",
+          "alpha_cli",
+          "--",
+          "--test-threads=2"
+        ],
+        "exit": 0,
+        "seconds": 96.44556954101427
+      },
+      {
+        "name": "all-target-import-headless-strict-lint",
+        "argv": [
+          "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+          "--config",
+          "profile.ci.package.incant_render.opt-level=2",
+          "--config",
+          "profile.ci.package.sha2.opt-level=3",
+          "clippy",
+          "-p",
+          "incant_import",
+          "-p",
+          "incant_headless",
+          "--all-targets",
+          "--profile",
+          "ci",
+          "--locked",
+          "--offline",
+          "-j2",
+          "--message-format=json",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0,
+        "seconds": 41.40135950001422
+      }
+    ],
+    "exact_cli_tests": [
+      "alpha_cli::static_alpha_command_requires_explicit_selection_and_bounded_threshold",
+      "alpha_cli_publishes_saved_json_and_reversible_history_and_refuses_without_writes"
+    ],
+    "copied_executables_rehashed": 13,
+    "fresh_owned_process_identities_absent": 94,
+    "result_sha256": "f7c72b5eecfd870672502116a0ec1721dbdb1145b2ff43916fbf0d72d38388da",
+    "closeout_sha256": "0b9227992dfc1488948ce50e6d8354513f8cfb74d0835f70bb60c09d122bd09b"
+  },
+  "retained_attempts": {
+    "initial_preflight": "No Cargo child; allocated filesystem blocks were mistakenly treated as immutable content identity. Corrected without relaxing source/content/target-cap checks.",
+    "first_cli_compilation": "180-second dependency compilation timeout before either test executed; no compiler error; artifacts reused under same source/tool/profile."
+  },
+  "cumulative_seconds": 485.84032516600564,
+  "peak_target_allocated_bytes": 9830699008,
+  "target_cap_bytes": 10737418240
+}

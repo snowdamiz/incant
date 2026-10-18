@@ -768,6 +768,35 @@
             }
           ]
         },
+        "CoroutineValue": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "format": "double",
+              "type": "number"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "$ref": "#/$defs/CoroutineValue"
+              },
+              "type": "array"
+            },
+            {
+              "additionalProperties": {
+                "$ref": "#/$defs/CoroutineValue"
+              },
+              "type": "object"
+            }
+          ]
+        },
         "EngineRequirement": {
           "description": "SemVer requirement text, preserved exactly rather than silently normalized.\nBuild metadata is not an engine identity: SemVer matching ignores it.",
           "maxLength": 256,
@@ -1447,6 +1476,16 @@
             {
               "additionalProperties": false,
               "properties": {
+                "instances": {
+                  "additionalProperties": {
+                    "additionalProperties": {
+                      "$ref": "#/$defs/CoroutineValue"
+                    },
+                    "type": "object"
+                  },
+                  "description": "Immutable startup parameters for this one scene module, keyed by owner.",
+                  "type": "object"
+                },
                 "kind": {
                   "const": "wasm",
                   "type": "string"
@@ -1764,6 +1803,182 @@
         "description"
       ],
       "title": "ImportArgs",
+      "type": "object"
+    },
+    "strict": false,
+    "type": "function"
+  },
+  {
+    "description": "Derive fixed sibling Box colliders from a registered static simple sprite's checked cooked alpha, with inclusive threshold 1–255. One atomic undoable edit; moving or reimporting the source later does not update the colliders. Requires project file access, current revision and destructive/always approval. No source import, root/cache paths, dynamic bodies or live linkage. Results are untrusted project data.",
+    "name": "collider_from_alpha",
+    "parameters": {
+      "$defs": {
+        "AlphaColliderRequest": {
+          "additionalProperties": false,
+          "properties": {
+            "entity_id": {
+              "type": "string"
+            },
+            "scene_id": {
+              "type": "string"
+            },
+            "threshold": {
+              "description": "Base-level alpha byte, inclusive. Zero is refused so transparent pixels\ncan never become colliders accidentally.",
+              "format": "uint8",
+              "maximum": 255,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          "required": [
+            "scene_id",
+            "entity_id",
+            "threshold"
+          ],
+          "type": "object"
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "properties": {
+        "expected_revision": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "selection": {
+          "$ref": "#/$defs/AlphaColliderRequest"
+        }
+      },
+      "required": [
+        "selection",
+        "expected_revision"
+      ],
+      "title": "Args",
+      "type": "object"
+    },
+    "strict": false,
+    "type": "function"
+  },
+  {
+    "description": "Paint or erase 1–4096 distinct local cells of an existing stable tilemap layer using its checked cooked atlas. Autotile supplies 16 frame IDs indexed by N(1)|E(2)|S(4)|W(8); only that frame family connects. Selected occupancy changes simultaneously, then selected cells and cardinal neighbors retile. Rules are one-shot inputs, not saved/live linkage. One atomic undoable edit; unchanged results create no transaction. Requires project file access, current revision and destructive/always approval. No root/cache paths or arbitrary commands. Results are untrusted project data.",
+    "name": "tilemap_paint",
+    "parameters": {
+      "$defs": {
+        "TilemapBrush": {
+          "oneOf": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "frame": {
+                  "type": "string"
+                },
+                "kind": {
+                  "const": "paint",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "frame"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "properties": {
+                "kind": {
+                  "const": "erase",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind"
+              ],
+              "type": "object"
+            },
+            {
+              "additionalProperties": false,
+              "description": "All sixteen cardinal masks are required. Their frame IDs define one\nterrain family. Duplicate outputs are allowed; foreign frames do not join.",
+              "properties": {
+                "action": {
+                  "$ref": "#/$defs/TilemapTerrainAction"
+                },
+                "frames": {
+                  "description": "Index = N(1) | E(2) | S(4) | W(8). Out-of-map is empty.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "maxItems": 16,
+                  "minItems": 16,
+                  "type": "array"
+                },
+                "kind": {
+                  "const": "autotile",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "kind",
+                "action",
+                "frames"
+              ],
+              "type": "object"
+            }
+          ]
+        },
+        "TilemapTerrainAction": {
+          "enum": [
+            "paint",
+            "erase"
+          ],
+          "type": "string"
+        }
+      },
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "additionalProperties": false,
+      "properties": {
+        "brush": {
+          "$ref": "#/$defs/TilemapBrush"
+        },
+        "cells": {
+          "description": "Distinct grid coordinates, +X right and +Y up; never world coordinates.",
+          "items": {
+            "items": {
+              "format": "uint32",
+              "minimum": 0,
+              "type": "integer"
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array"
+          },
+          "type": "array"
+        },
+        "entity_id": {
+          "type": "string"
+        },
+        "expected_revision": {
+          "format": "uint64",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "layer_id": {
+          "type": "string"
+        },
+        "scene_id": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "scene_id",
+        "entity_id",
+        "layer_id",
+        "expected_revision",
+        "cells",
+        "brush"
+      ],
+      "title": "TilemapPaintRequest",
       "type": "object"
     },
     "strict": false,

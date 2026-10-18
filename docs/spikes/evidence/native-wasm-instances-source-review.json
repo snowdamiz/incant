@@ -1,0 +1,40 @@
+{
+  "kind": "independent-source-review",
+  "time_utc": "2026-10-18T04:16:50.352376+00:00",
+  "reviewer": "astra /root/ci_shipping_freeze",
+  "base": "dec42101f2bb8468dd287e38ef022ec1248eb4dc",
+  "head": "9ee0f8ea27ea2536ab398902cb5b2ea5f92aecdb",
+  "source_packet": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-instances-001/source-001/review.json",
+  "source_packet_sha256": "3e0d871f2913ebe848722001654b0ef19c7ec5f2715bfd23c440dde171a41725",
+  "source_files_verified": 62,
+  "old_function_definitions_preserved": 75,
+  "new_opcodes": [
+    75,
+    76
+  ],
+  "old_constant_record_enum_namespace_values_unchanged": true,
+  "independent_TS_canonical_fingerprint": "67160f38ae1b302a6a0a365e7aadd6a467b0fed9ba7ca1d9599107dce31b101d",
+  "diff_sha256": "10184f5485645157144a6c7330bfd5db397fe5c5653cb2209f5d3b6a6add9b62",
+  "findings": [],
+  "conclusion": "No actionable source correctness finding in scoped audit. Native/guest/generated-schema qualification remains pending.",
+  "coverage": [
+    "Legacy module JSON default/skip-empty serialization and v2/v3 persistent framing remain intact; catalog wraps with v4.",
+    "Factored property encoder tags, lengths, signed-zero and sorted-object bytes match former TS implementation; aggregate budget handling preserved.",
+    "Cook embeds scene-bound canonical bytes; runtime depends on types/ABI/sha2 and consumes trusted binary, not authoring or JSON.",
+    "Bounds checked before copy, shared call/transfer quotas applied, current-epoch errors poison finish and stale epochs do not poison new authority.",
+    "Exact EntityIdentity membership captured at startup, pruned after accepted structural publication and at begin/checkpoint; fresh restore rebinds only saved members under catalog digest.",
+    "Both host reload paths prepare a fresh candidate with same catalog before transferring accepted state; checkpoint receiving program binds catalog.",
+    "Two-host fixtures cover independent props, unrelated entity, same-ID respawn, checkpoint continuation/mismatch and scratch/stale/callback/trap refusals."
+  ],
+  "qualification_notes": [
+    "Actual two-host fixtures and strict lint have not run; source review cannot replace those results.",
+    "New tests do not directly exercise catalog-bearing hot reload after owner retirement, nor immediate save on the removal tick. These are useful focused regressions for the new reload/prune seams, not identified source defects.",
+    "Raw transfer-quota and negative/out-of-range capacity boundaries rely on shared implementation; new focused tests directly cover short copy and call quota.",
+    "Fresh headless generated-schema comparison and ordinary authored source-free player proof are explicitly still pending."
+  ],
+  "review_helper_correction": "Initial data-only ABI comparison assumed registry key imports; actual key is functions. It stopped with KeyError after source hash checks; corrected comparison passed. No product change or native execution.",
+  "native_executed": false,
+  "target_accessed": false,
+  "checkout_mutated": false,
+  "computer_use_or_capture": false
+}

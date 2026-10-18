@@ -34,7 +34,7 @@ grandchild = subprocess.Popen([sys.executable, '-c', sys.argv[3], str(root / 'al
                              stdout=output, stderr=output)
 (root / 'pids.json').write_text(json.dumps([os.getpid(), grandchild.pid]))
 limit = time.monotonic() + 10
-while not (root / 'alive').exists():
+while not (root / 'alive').exists() or (root / 'alive').stat().st_size == 0:
     if time.monotonic() > limit:
         raise RuntimeError('Grandchild did not start')
     time.sleep(0.005)
@@ -193,7 +193,7 @@ class NativeProcessTests(unittest.TestCase):
     def test_keyboard_interrupt_during_wait_cleans_actual_tree(self):
         def interrupt(*_):
             limit = time.monotonic() + 10
-            while not (self.root / 'alive').exists():
+            while not (self.root / 'alive').exists() or (self.root / 'alive').stat().st_size == 0:
                 if time.monotonic() > limit:
                     self.fail('Grandchild did not start')
                 time.sleep(0.005)

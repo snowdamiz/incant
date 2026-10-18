@@ -35,6 +35,11 @@ pub use haptics::{HapticEffect, HapticTarget, HapticTargets};
 pub use incant_wasm_abi::{HAPTIC_MAX_BYTES, HAPTIC_MAX_REQUESTS};
 pub mod input;
 pub use hud::{HudControl, HudEvent, HudEventKind, HudRole, HudSnapshot, HudText, HudWidget};
+pub use incant_wasm_abi::INSTANCE_MAX_BYTES;
+pub use incant_wasm_abi::instances::{
+    Instance, Properties, Snapshot as InstanceSnapshot, Value as InitialValue,
+    Values as InitialValues,
+};
 pub mod localization;
 pub mod navigation;
 pub mod persistent;

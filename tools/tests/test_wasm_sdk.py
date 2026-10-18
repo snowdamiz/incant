@@ -62,6 +62,14 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(self.data['constants']['LOCALIZATION_MAX_REPORT_ROWS'],128)
         self.assertEqual(self.data['constants']['LOCALIZATION_MAX_RESULT_BYTES'],66560)
 
+    def test_instances_preserve_all_75_imports_and_use_copied_read_only_frames(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:75], sort_keys=True).encode()).hexdigest(), 'a728fa1bf412d2cbf1deccdd7a86f4480411088839f45bf024c1fae500bf28a4')
+        self.assertEqual([(f['namespace'], f['name'], f['opcode']) for f in self.data['functions'][75:]],
+                         [('incant_instances_v1', 'snapshot_len', 75), ('incant_instances_v1', 'read_snapshot', 76)])
+        self.assertEqual(self.data['constants']['INSTANCE_MAX_ROWS'], 32768)
+        self.assertEqual(self.data['constants']['INSTANCE_MAX_BYTES'], 3145728)
+
     def test_all_committed_host_guest_and_c_artifacts_are_exact(self):
         for name,text in generator.outputs().items():self.assertEqual((ROOT/name).read_text(),text,name)
     def test_unknown_versions_namespaces_signatures_and_layouts_fail_closed(self):

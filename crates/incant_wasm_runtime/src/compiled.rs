@@ -137,6 +137,21 @@ impl StaticModule {
     pub fn exports(&self) -> ModuleExports {
         self.exports
     }
+    pub fn instance_catalog(&self) -> Option<std::sync::Arc<crate::instances::Catalog>> {
+        self.capability.instance_catalog()
+    }
+    pub fn configure_instances(
+        &mut self,
+        catalog: std::sync::Arc<crate::instances::Catalog>,
+        world: &NativeWorld,
+    ) -> Result<(), StaticError> {
+        catalog.validate_world(world)?;
+        self.capability.configure_instances(catalog)?;
+        if world.tick() == 0 {
+            self.capability.bind_instances(world)?;
+        }
+        Ok(())
+    }
     pub fn persistent_checkpoint(
         &self,
         world: &NativeWorld,
@@ -161,6 +176,9 @@ impl StaticModule {
     /// bytes survive; all guest globals, memory and tables start fresh.
     pub fn reload(&mut self, exports: ModuleExports) -> Result<(), StaticError> {
         let mut candidate = Self::new(exports)?;
+        if let Some(catalog) = self.instance_catalog() {
+            candidate.capability.configure_instances(catalog)?;
+        }
         self.capability.prepare_reload(&candidate.capability)?;
         candidate.capability = self.capability.replacement();
         *self = candidate;

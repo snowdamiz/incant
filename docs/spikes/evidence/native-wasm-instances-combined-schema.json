@@ -1,0 +1,212 @@
+{
+  "actual_exec": 67361,
+  "actual_exit": 0,
+  "verified_at": "2026-10-18T04:49:45.901046+00:00",
+  "source": "9d44372ae379c6d0372ff48854828e837f1fb747",
+  "result_sha256": "4f6f054c39a86d77ffcdc3ae63070bb794cdd1924b16fc882b218a1be6e5fad0",
+  "checks": [
+    {
+      "pid": 2782,
+      "absent": true
+    },
+    {
+      "pid": 2796,
+      "absent": true
+    },
+    {
+      "pid": 2800,
+      "absent": true
+    },
+    {
+      "pid": 2803,
+      "absent": true
+    },
+    {
+      "pid": 2809,
+      "absent": true
+    },
+    {
+      "pid": 2817,
+      "absent": true
+    },
+    {
+      "pid": 2901,
+      "absent": true
+    },
+    {
+      "pid": 2944,
+      "absent": true
+    },
+    {
+      "pid": 3015,
+      "absent": true
+    },
+    {
+      "pid": 3029,
+      "absent": true
+    },
+    {
+      "pid": 3085,
+      "absent": true
+    },
+    {
+      "pid": 3163,
+      "absent": true
+    },
+    {
+      "pid": 3182,
+      "absent": true
+    },
+    {
+      "pid": 3230,
+      "absent": true
+    },
+    {
+      "pid": 3236,
+      "absent": true
+    },
+    {
+      "pid": 3241,
+      "absent": true
+    },
+    {
+      "pid": 3288,
+      "absent": true
+    },
+    {
+      "pid": 3296,
+      "absent": true
+    },
+    {
+      "pid": 3300,
+      "absent": true
+    },
+    {
+      "pid": 3315,
+      "absent": true
+    },
+    {
+      "pid": 3317,
+      "absent": true
+    },
+    {
+      "pid": 3342,
+      "absent": true
+    },
+    {
+      "pid": 3343,
+      "absent": true
+    },
+    {
+      "pid": 3347,
+      "absent": true
+    },
+    {
+      "pid": 3351,
+      "absent": true
+    },
+    {
+      "pid": 3354,
+      "absent": true
+    },
+    {
+      "pid": 3459,
+      "absent": true
+    },
+    {
+      "pid": 3476,
+      "absent": true
+    },
+    {
+      "pid": 3478,
+      "absent": true
+    },
+    {
+      "pid": 3491,
+      "absent": true
+    },
+    {
+      "pid": 3492,
+      "absent": true
+    },
+    {
+      "pid": 3495,
+      "absent": true
+    },
+    {
+      "pid": 3500,
+      "absent": true
+    },
+    {
+      "pid": 3505,
+      "absent": true
+    },
+    {
+      "pid": 3529,
+      "absent": true
+    },
+    {
+      "pid": 3538,
+      "absent": true
+    },
+    {
+      "pid": 3559,
+      "absent": true
+    },
+    {
+      "pid": 3566,
+      "absent": true
+    },
+    {
+      "pid": 3570,
+      "absent": true
+    },
+    {
+      "pid": 3571,
+      "absent": true
+    },
+    {
+      "pid": 3607,
+      "absent": true
+    },
+    {
+      "pid": 3616,
+      "absent": true
+    },
+    {
+      "pid": 3634,
+      "absent": true
+    },
+    {
+      "pid": 3635,
+      "absent": true
+    },
+    {
+      "pid": 3638,
+      "absent": true
+    },
+    {
+      "pid": 3682,
+      "absent": true
+    },
+    {
+      "pid": 3762,
+      "absent": true
+    }
+  ],
+  "groups_absent": [
+    2796,
+    3762
+  ],
+  "binary": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-instances-integration-001/incant_headless-9d44372a",
+    "bytes": 63423424,
+    "sha256": "f0fb0cf5c654dd03e4ad77e57901586cb6abb426a923dd77f86af169f272641f"
+  },
+  "all_schemas_match": true,
+  "elapsed_seconds": 101.54700320900884,
+  "cumulative_native_seconds": 1133.056417209009,
+  "target_peak": 6786748416,
+  "target_final": 6786748416,
+  "target_released": true
+}

@@ -49,6 +49,25 @@ it beside the actual Wasmtime development host. Shipped applications receive
 only trusted compiled native descriptors; they never compile or load guest Rust
 source, raw Wasm or cached native modules at runtime.
 
+## Copied input
+
+`tick.input(&mut scratch)` returns one accepted, borrowed `InputSnapshot`; use
+`INPUT_MAX_BYTES` initialized bytes for complete snapshots. It exposes named
+actions, keyboard/mouse edges, gamepad connections/values/sticks, active touches,
+ordered touch changes and tap/long-press/swipe/pinch gestures. Coordinates are
+logical pixels and device/contact IDs are `u32`, including their full range.
+`Gamepad::value` distinguishes an absent value from an explicitly reported zero.
+Focus loss releases held buttons and cancels contacts; a reused contact or
+reconnected gamepad starts without the old contact deltas or device values.
+
+[samples/input.rs](samples/input.rs) observes typed values using bounded,
+committed diagnostic lines. Its small conformance event sequence stays within
+normal log quotas; it is not a template for logging every device on every tick.
+The [input conformance scope](../../docs/spikes/native-wasm-input-conformance.md)
+separates the existing raw-frame evidence from the new actual Rust guest tests
+and their qualification status. Synthesized events do not prove hardware or
+native-window delivery.
+
 ## Simulation timers
 
 `tick.timers(&mut scratch)` returns the accepted-update clock and a borrowed,
@@ -436,6 +455,21 @@ numeric, structural and log changes; short reads never copy a partial frame.
 Queued commands never call an audio backend directly. See the real Rust
 [transport sample](samples/audio_transport.rs) and
 [scope/evidence](../../docs/spikes/native-wasm-audio.md).
+
+### Authored initial instances
+
+An ordinary scene `SetSceneProgram` may supply an `instances` map from existing
+owner ULIDs to immutable initial properties for its one Wasm module. Call
+`Tick::instances(scratch)` to obtain sorted owner IDs and nested read-only
+`InitialValue` views over a complete copied snapshot. Views borrow caller-owned
+scratch, never a host pointer. The shared property bounds and active owner
+membership are validated by the engine; same-ID respawn does not reattach a
+retired owner. Catalog changes refuse checkpoint restore. Module-only projects
+keep their previous behavior. See [the sample](samples/instances.rs) and
+[source scope and qualification limits](../../docs/spikes/native-wasm-instances.md).
+Focused actual Wasmtime/wasm2c parity, reload controls and one ordinary authored
+source-free export with retirement/checkpoint continuation passed. See the linked
+qualification limits; these are functional CPU results, not complete SDK parity.
 
 ### Explicit persistent state
 

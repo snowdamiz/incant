@@ -3993,6 +3993,7 @@ dependencies = [
  "incant_text",
  "incant_types",
  "incant_ui",
+ "incant_wasm_abi",
  "incant_wasm_cook",
  "serde_json",
  "sha2 0.10.9",
@@ -4175,7 +4176,9 @@ dependencies = [
  "incant_assets",
  "incant_cmd",
  "incant_doc",
+ "incant_physics_2d_runtime",
  "incant_text",
+ "incant_types",
  "incant_wasm_cook",
  "schemars 1.2.2",
  "serde",
@@ -4715,6 +4718,7 @@ dependencies = [
  "incant_runtime",
  "incant_types",
  "incant_wasm_abi",
+ "sha2 0.10.9",
  "thiserror 2.0.21",
 ]
 

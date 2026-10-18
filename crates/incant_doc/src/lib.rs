@@ -12,6 +12,7 @@ mod navigation;
 mod physics;
 mod physics_2d;
 pub mod prefab;
+mod wasm_instances;
 pub use prefab::{Prefab, PrefabLink, PrefabNode};
 mod ui;
 pub use agent_budget::{AgentBudgetSettings, DEFAULT_AGENT_TOKEN_CAP, MAX_AGENT_TOKEN_CAP};
@@ -28,6 +29,7 @@ pub use incant_2d::{
 pub use incant_input::InputActions;
 pub use incant_localization::{LocaleSettings, StringTable};
 pub use incant_nav::NavigationGrid;
+pub use incant_types::CoroutineValue;
 pub use incant_types::{AnimationRootMotion, RootMotionApplication};
 pub use incant_types::{PhysicsMode, UiNode};
 pub use navigation::{NavigationMesh, NavigationSource, NavigationSourceKind};
@@ -97,7 +99,12 @@ pub struct Scene {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
 pub enum SceneProgram {
-    Wasm { module: Id },
+    Wasm {
+        module: Id,
+        /// Immutable startup parameters for this one scene module, keyed by owner.
+        #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+        instances: BTreeMap<Id, BTreeMap<String, incant_types::CoroutineValue>>,
+    },
 }
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
@@ -416,7 +423,8 @@ impl Project {
         if scene.name.trim().is_empty() {
             issue(format!("{path}/name"), "name cannot be empty");
         }
-        if let Some(SceneProgram::Wasm { module }) = &scene.program {
+        if let Some(SceneProgram::Wasm { module, instances }) = &scene.program {
+            wasm_instances::validate(scene, instances, path, issue);
             if self
                 .assets
                 .get(module)

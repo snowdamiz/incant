@@ -19,12 +19,17 @@ def selection(project, scene):
     program = scenes[scene].get('program')
     if program is None:
         return None
-    require(isinstance(program, dict) and set(program) == {'kind', 'module'} and program['kind'] == 'wasm',
+    require(isinstance(program, dict) and {'kind', 'module'} <= set(program) <= {'kind', 'module', 'instances'} and program['kind'] == 'wasm',
             'Unsupported scene program selector')
     entities = scenes[scene].get('entities')
     require(isinstance(entities, dict) and all(isinstance(entity, dict) and isinstance(entity.get('components'), dict) for entity in entities.values()), 'Invalid scene entity table')
     require(not any('Script' in entity['components'] for entity in entities.values()),
             'Wasm scene programs cannot mix with per-entity TypeScript scripts')
+    instances = program.get('instances', {})
+    require(isinstance(instances, dict) and len(instances) <= 32768
+            and all(owner in entities and isinstance(props, dict) for owner, props in instances.items()),
+            'Invalid Wasm instance owner catalog')
+    # Complete finite/depth/node/byte validation belongs to the typed Rust cook.
     assets = document.get('assets')
     require(isinstance(assets, dict) and isinstance(program['module'], str), 'Invalid module asset reference')
     asset = assets.get(program['module'])

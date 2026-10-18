@@ -1,8 +1,13 @@
 # Implementation status
 
+[Checkpoint55 (PR408)](docs/spikes/release-checkpoint-55.md) is promoted after all
+23 required contexts and eight frozen-head workflows succeeded. Release `2d96f461`
+has exactly the tested main407 (`c504668e`) tree. Main409 and later changes remain
+outside this baseline; no distribution or phase gate is approved.
+
 [Release checkpoint54](docs/spikes/release-checkpoint-54.md) is promoted: all
 23 required contexts and eight exact-head workflows passed on the main401 tree,
-and release `503b90af` has the identical tested tree. Main402–406 changes
+and release `503b90af` has the identical tested tree. Later main changes
 remain outside that release baseline. Checkpoint53 failed the Wasm timer-fixture
 lookup on all three desktop platforms; its other seven workflows passed.
 The [narrow correction](docs/spikes/ci-timer-fixture-layout.md) is merged through
@@ -20,9 +25,9 @@ now also verifies winning HUD pixels, Arabic health direction, CJK glyphs and
 normal/narrow pseudo layouts in retained offscreen Metal frames. Earlier
 incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
-[Release checkpoint54](docs/spikes/release-checkpoint-54.md) contains the tested
-main401 tree after all 23 required contexts and eight candidate workflows passed.
-Main402–406 changes remain outside that release baseline. Rendering quality and full rendered-game
+[Release checkpoint55](docs/spikes/release-checkpoint-55.md) contains the tested
+main407 tree after all 23 required contexts and eight candidate workflows passed.
+Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -80,12 +85,69 @@ processes and wrapper are reaped and independently absent. The scoped feature is
 merged through PR390 after independent review and exact-head development checks.
 Skeleton and structural changes remain outside this admission rule.
 
-## Current parallel qualification — 2026-10-17
+## Current parallel qualification — 2026-10-18
 
 Computer use and screen capture are paused for every agent by the director's
 latest instruction. Owned capture helpers and test windows have been stopped;
 native window checks remain held. Terminal implementation, review and data-only
 verification continue.
+
+The native desktop player now routes platform touch events into the existing
+input/gesture runtime, with bounded contact identities, shared mouse/UI capture,
+logical coordinates and cancellation across focus, layout and session changes.
+The [touch delivery qualification](docs/spikes/native-desktop-touch.md) passes
+81 selected window-module CPU tests, including 14 new touch controls, both strict
+all-target lint configurations and all ten local development checks. Original
+compile and stale-test-expectation failures remain recorded. These are terminal
+checks; physical touch hardware, native-window interaction and other desktop
+platform execution are not established by them. The scoped change is merged
+through PR409 after independent review and the exact-head development check;
+main `dec42101` has the tested tree. It is outside frozen checkpoint55.
+
+Static sprite-alpha collider authoring is merged through PR410 after independent
+review and exact-head development-checks success. It provides a shared
+import service, the host CLI and an engine-agent tool. The bounded exact texel
+cover creates ordinary fixed `Collider2D` entities in one reversible command-bus
+transaction. All 48 import tests pass, including geometry, physics queries and
+history/refusal controls. The first CLI compilation timed out before any selected
+test ran; the continuation reused compatible compiled dependencies and passed
+both CLI controls plus all-target strict import/headless lint. The real CLI test
+verifies saved JSON, journal ownership, reopen, Undo/Redo and refusal without
+writes. The agent adapter also passes 23 native CPU tests, including nine new
+alpha controls, and all-target strict lint. Final contract verification found one
+generated-contract omission before publication: the new agent tool was missing
+from the checked-in registry. The corrected registry now matches all 80 files
+from a fresh headless exporter, with only that tool added and all prior tool
+schemas preserved. Main `b40cfc72` has the exact tested PR tree and is outside
+frozen checkpoint55. This is qualified overlapping Phase 2 work, not a
+completed GUI tool or phase gate.
+[Shared contract](docs/spikes/static-alpha-colliders.md) and
+[agent admission](docs/spikes/agent-alpha-colliders.md).
+
+Tilemap painting and cardinal autotile rules now have a shared prepared authoring
+service and real CLI. All sixteen connection masks, simultaneous strokes, neighbor
+repair, stale/digest refusal, provenance and Undo/Redo pass 16 import tests; the
+actual CLI also passes saved-file, journal, reopen and refusal checks. Both packages
+pass strict all-target lint, independent source/native-result review and all ten
+local development checks. [Qualified source and exact evidence](docs/spikes/tilemap-paint-authoring.md)
+retain the backend/CLI boundary: editor painting and the Phase 2 platformer gate
+remain open. The scoped source is merged through PR411 after independent review
+and exact-head development-checks success; main `634958cc` has the tested tree.
+
+The tilemap engine-agent adapter now uses the same prepared authoring service,
+capability and approval checks, with atomic revision checks, provenance and
+Undo/Redo. Its [scoped qualification](docs/spikes/agent-tilemap-paint.md) passes
+33 native CPU tests and strict all-target lint. The fresh combined headless
+export preserves all 79 other schemas and every existing tool, adding only
+`tilemap_paint`. The first combined build exposed an older ABI artifact reused
+from a different worktree; its failure is retained. Rebuilding unchanged local
+source inputs succeeds. Independent source and result review and all ten local development checks pass.
+An existing process-test race was corrected to wait for the first actual
+heartbeat byte, preserving the cleanup assertions and failed run. PR413 is
+merged after exact-head development-checks success; main `d10bf4d6` has the
+tested tree. The [composed-source review](docs/spikes/evidence/agent-tilemap-composed-source-review.json)
+records the merged lockfile separately from the original producer. Editor painting
+remains open.
 
 Compatible HUD text updates now reuse existing checked font-shaping engines;
 a new ordered fallback chain still prepares and atomically publishes a separate
@@ -94,6 +156,37 @@ lints and independent source review. It is merged through PR406 after all local
 development checks and the required exact-head fast check. There is no measured
 shipping frame-time claim. [Scope and evidence](docs/spikes/ui-font-reuse.md).
 
+
+Native Wasm modules now accept immutable initial properties for explicitly
+authored entity owners through normal scene-program commands and cold cooking.
+A bounded Rust SDK view shares the TypeScript property limits. Runtime incarnation
+checks retire removed owners; same-ID respawn cannot inherit old tuning. Checkpoint
+and reload preserve the accepted membership and reject changed catalogs.
+[Local qualification](docs/spikes/native-wasm-instances.md) passes authoring/cook,
+ABI and runtime controls, four actual Wasmtime/wasm2c tests, strict lints and all
+ten local development checks. A fresh combined headless build matches all 80
+schemas while preserving the merged alpha and tilemap additions. Initial lint,
+compile-timeout and lexical-schema refusals remain recorded. Independent reviews
+pass. The scoped feature is merged through PR412 after exact-head development
+checks; main `b9e1a587` has the tested tree. A subsequent
+[ordinary authored export](docs/spikes/native-wasm-instances.md#ordinary-authored-export)
+now passes fresh cooker/player builds, public authoring and four source-free
+standalone runs. Immediate-removal checkpoints, retired same-ID respawn, preserved
+owner tuning, exact final checkpoints and complete offline PCM continuation pass.
+A changed catalog digest refuses without outputs. Independent saved-byte review
+passes; this functional Mac proof does not establish full SDK parity or runtime
+performance. Its producing player remains identified as `28806e21`.
+
+The [typed Rust input conformance](docs/spikes/native-wasm-input-conformance.md)
+now passes real Wasmtime and wasm2c tests for every input collection, gamepad
+value/presence, touch gestures, focus cancellation and reused contact identities.
+Ignored input refusals, stale epochs and callback errors roll back staged numeric
+writes and logs. All eight selected SDK/host controls, both scoped strict lints,
+independent source/result review and all ten local development checks pass.
+The launch wrapper omitted its interactive tool handle, so its outer tool exit
+is unconfirmed; all six owned native child exits are zero and the completed
+result plus 59 freshly absent process/group identities are retained. This is
+CPU correctness evidence, without physical input-device or complete SDK approval.
 
 Rust/Wasm gameplay now has a bounded prepared localization coverage report,
 matching the existing TypeScript committed-snapshot behavior. Pages include
@@ -297,9 +390,20 @@ and all four win measurements above 2 ms do not justify enabling PGO. The
 the compiler changes remain on the retained experiment branch. These are
 CPU measurements, not rendered-game FPS. Independent saved-data review passes;
 all 81 observed identities are absent after terminal success.
-Last reassessment: 2026-10-18. The next useful trigger is a distinct residual-cost
-hypothesis or relevant engine change, with another bounded assessment after a few
-hours of active development. Do not repeat the unchanged PGO comparison.
+Last reassessment: 2026-10-18 at 05:03 UTC. A bounded
+[source/data review](docs/spikes/evidence/script-budget-source-reassessment-20261018.json)
+found no supported new optimization: typed-read fast paths, zero-copy loan views
+and reused physics queries already exist. Next useful trigger: finer attribution
+of callback parsing, native query execution and result materialization. The
+[default-off query diagnostic](docs/spikes/script-query-attribution.md) now passes
+36 selected CPU controls, the six real ScriptHost controls again after a narrow
+fixture-module lint repair, both strict all-target lint configurations and all
+ten local development checks on the integrated source. Independent source and
+retained-result review pass. PR415 is merged after exact-head development-checks
+success; main `7a9bad9f` has the tested tree. The original lint refusal remains recorded. Whole
+Core shipping-profile attribution and exact gameplay/audio parity are the next
+step; no new benchmark or optimization has been adopted. Do not repeat the
+unchanged PGO comparison; reassess after new attribution or relevant engine changes.
 The 2 ms ScriptTick target remains unmet; other work continues.
 
 ## Native presentation pacing — bounded intervention rejected
@@ -1146,19 +1250,18 @@ link keep dead stripping and source-free export checks. Core integration is now
 implemented for source review, using the project's ordinary scalar fast physics
 variant. No actual Core training or performance comparison has run yet.
 
-Last reassessment: 2026-10-17, the opt-in Core PGO integration passes 29 ordinary
+Historical prerequisite (2026-10-17, superseded by the completed 2026-10-18
+comparison above): the opt-in Core PGO integration passed 29 ordinary
 native controls and strict lint. A source successor also passes its actual
 compiler-environment control and strict lint; the original preparation failure
 is retained. A three-mode ordinary/generate/use shipping experiment is prepared
 for review, but no native Core training, profile-use build or measured speedup
 has run yet. Ordinary shipping remains unchanged.
 
-Next useful trigger: run representative full-Core training and profile-use
-qualification with the exact profile/tool identity against a matched shipping
-baseline. Keep training measurements separate, preserve workload and enforcement,
-and require exact gameplay/audio parity. No benefit is assumed; the 2 ms target
-remains unmet. Reassess after relevant runtime changes or a few hours of active
-development without occupying every lane.
+The subsequent full-Core training and profile-use comparison is recorded above.
+Its mixed result does not justify adoption; do not repeat that unchanged experiment.
+The current trigger is a distinct residual-cost hypothesis or relevant engine
+change, with bounded reassessment after a few hours of active development.
 
 ## Native Play texture refresh — merged through PR284
 

@@ -1,4 +1,11 @@
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // Every feature graph has a generated include; only the checked authored
+    // producer may replace this empty default with a typed instance catalog.
+    std::fs::write(
+        std::path::PathBuf::from(std::env::var_os("OUT_DIR").ok_or("OUT_DIR")?)
+            .join("wasm-instances.bin"),
+        [],
+    )?;
     for key in [
         "INCANT_NATIVE_PROJECT",
         "INCANT_NATIVE_PROJECT_SCENE",

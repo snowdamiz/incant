@@ -1,0 +1,50 @@
+{
+  "source": "caff2acdf80fc8d42157b595a8d29a3d7218cb57",
+  "actual_exec": 29813,
+  "actual_exit": 0,
+  "generated_schemas": 80,
+  "prior_unchanged": 79,
+  "changed": "agent-tools.json",
+  "only_added_tool": "collider_from_alpha",
+  "generated_sha256": "ac69376be9016a3a585bb3798e17b2cd927f877fc171afd08461c31585e53127",
+  "binary_sha256": "baf7ad09e5057d0df3215d2e8f3a4e4036c74d660c39a5bba1215b2e727b1e50",
+  "result_sha256": "06abda253d15755d46763825a9942b45b600d905302afde5db8afbbacf6177fe",
+  "closeout_sha256": "11e510db33941337941ecb73c3fb3e13d485fff2cfef645244793a9c88d4de07",
+  "fresh_absent_identities": 6,
+  "reviewed_at": "2026-10-18T04:20:38.416073+00:00",
+  "integrated_registry_and_format_checks": [
+    {
+      "argv": [
+        "python3",
+        "tools/check_schemas.py",
+        "--binary",
+        "/Users/andreyyurlov/.codex/incant-evidence/agent-alpha-colliders-001/schema-001/artifacts/0-incant_headless"
+      ],
+      "exit": 0,
+      "stdout": "Fresh headless schemas match every published file byte for byte.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "integration_verified_at": "2026-10-18T04:20:50.791944+00:00"
+}

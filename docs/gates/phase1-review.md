@@ -8,8 +8,10 @@ uses four newly packaged shipping players from
 `50b5408b1d6be66dbb1dcbca501d4380add9d656` and five same-package CPU/capture routes.
 Those producing identities remain
 explicit; they are not relabeled as later integration builds.
-[Release checkpoint54](../spikes/release-checkpoint-54.md) tested the main401 tree;
-later main402+ changes remain outside that release baseline.
+[Release checkpoint55](../spikes/release-checkpoint-55.md) promoted the main407 tree
+after all 23 required contexts and eight frozen-head workflows succeeded. Release
+`2d96f461` has the identical tested tree; main409 and later work remains outside
+that release baseline.
 Phase 1 remains open; this ledger records evidence and remaining work, not director
 approval. [PLAN.md](../../PLAN.md#phase-1-core-engine) defines the requirements.
 Only actual testing on the available Mac is required as device evidence. Other
@@ -58,9 +60,14 @@ problems without changing any exit requirement.
 | Navmesh enemies, pseudo-localization, RTL/CJK rendering and the 2D sample | Native Core/planar scenarios, text shaping and presentation have scoped evidence in [STATUS.md](../../STATUS.md). The [2D sample](../spikes/native-window-eligibility.md) completes its full native Mac win route with exact CPU parity and three actual window captures; desktop CI also runs `samples/planar/verify.py`. The combined [Core locale proof](../spikes/core-locale-sampled-captures.md) now passes five full CPU-matched routes with 37 selected offscreen Metal frames. Independent review of 13 originals verifies winning text, Arabic damaged-pip direction, complete CJK glyphs, pseudo expansion and narrow loss/win wrapping. | Sampled locale appearance is verified on this Mac, without phase approval. Continuous motion and native-window presentation are outside the new sampled result. Earlier [Arabic](../spikes/core-arabic-corrected-window.md) and CJK native routes retain their successful numerical runs and missed winning images; the pseudo native replay remains focus-paused/timed out. Those attempts are not relabeled by the new offscreen proof. Preserve the 2D run's focus interruption/surface deferral and the separate complete rendered-game FPS requirement. |
 | Script p95 within 2 ms with 10,000 scripted entities; no shader compilation stalls above twice the frame budget | Shipping script comparisons and exact gameplay/audio parity are recorded. The latest bounded [navigation cache comparison](../spikes/navigation-search-cache-outcome.md) remained above 2 ms and was not adopted. | The 2 ms requirement remains unmet. The director's 2026-10-14 clarification permits periodic bounded investigations, including subagents, while other engine work continues. Preserve negative results and require a distinct hypothesis before another measured experiment. Whole rendered-game shader/pipeline stall qualification also remains open. |
 | Native runtime data path and shipped dependency boundary | Cooked-world, source-free gameplay and runtime dependency checks have recorded implementations and proofs. See [Core integration](../spikes/core-main182.md) and the [shipping observations](../spikes/quickjs-loan-main278.md). | Retain the boundary on the final complete sample/export configuration. No authoring document, command bus or agent dependency may enter its runtime tick path. |
-| Shipped wasm2c module runs on this Mac, with cost recorded against TypeScript | A [matched shipping workload](../spikes/wasm-typescript-cost.md) records both backends and functional parity. Existing native target builds remain required. An [ordinary authored shipping save/load proof](../spikes/native-wasm-checkpoint-export.md) now verifies declared host-owned state in fresh VMs, exact checkpoint/audible PCM continuation and six specific refusals. The original wrapper failure and corrected data-only acceptance remain separate. | Keep each workload and native producer explicit; neither is a Core10k, rendered frame-time or startup result. Save/load covers opted-in explicit state in a plain scene, without physics/UI or arbitrary guest memory capture. A subsequent [authored timer export](../spikes/native-wasm-timers-export.md) verifies pending simulation schedules and exact gameplay/audio continuation through normal packaging and fresh processes. [Cooperative native coroutines](../spikes/native-wasm-coroutines.md) also pass local runtime and actual two-host continuation/refusal checks; the [normal authored shipping coroutine proof](../spikes/native-wasm-coroutines-export.md) now also passes exact owned continuation and complete audio parity in fresh processes. The [authored localization export](../spikes/native-wasm-localization-export.md) now also verifies canonical coverage pages, committed settings and exact save/audio continuation in fresh players. Its original checker-framing failure and separate same-package follow-up remain explicit. Complete Wasm SDK parity remains open. |
+| Shipped wasm2c module runs on this Mac, with cost recorded against TypeScript | A [matched shipping workload](../spikes/wasm-typescript-cost.md) records both backends and functional parity. Existing native target builds remain required. An [ordinary authored shipping save/load proof](../spikes/native-wasm-checkpoint-export.md) now verifies declared host-owned state in fresh VMs, exact checkpoint/audible PCM continuation and six specific refusals. The original wrapper failure and corrected data-only acceptance remain separate. | Keep each workload and native producer explicit; neither is a Core10k, rendered frame-time or startup result. Save/load covers opted-in explicit state in a plain scene, without physics/UI or arbitrary guest memory capture. A subsequent [authored timer export](../spikes/native-wasm-timers-export.md) verifies pending simulation schedules and exact gameplay/audio continuation through normal packaging and fresh processes. [Cooperative native coroutines](../spikes/native-wasm-coroutines.md) also pass local runtime and actual two-host continuation/refusal checks; the [normal authored shipping coroutine proof](../spikes/native-wasm-coroutines-export.md) now also passes exact owned continuation and complete audio parity in fresh processes. The [authored localization export](../spikes/native-wasm-localization-export.md) now also verifies canonical coverage pages, committed settings and exact save/audio continuation in fresh players. Its original checker-framing failure and separate same-package follow-up remain explicit. An [ordinary instance export](../spikes/native-wasm-instances.md#ordinary-authored-export) also preserves typed owner tuning, immediate-removal checkpoints, same-ID retirement and exact save/audio continuation through four fresh processes. Complete Wasm SDK parity remains open. |
 
 ## Current implementation priorities
+
+The real [Rust input guest qualification](../spikes/native-wasm-input-conformance.md)
+also passes typed collection/gesture/focus parity and transactional refusals on
+both native module hosts. This extends CPU conformance; physical input hardware,
+complete SDK parity and the separate shipping/frame-time gates remain open.
 
 - Finish portable temporal reconstruction and the Apple MetalFX path, then review
   the rendered result and measure the complete shipping game. Finite visibility
@@ -140,6 +147,12 @@ residual-cost hypothesis is required before another experiment.
 Compatible HUD text updates now [reuse checked font engines](../spikes/ui-font-reuse.md)
 through PR406. Scoped behavior tests and strict lints pass; the observed long
 event frames still need causal attribution and matched shipping measurement.
+
+The default-off [native-query diagnostic](../spikes/script-query-attribution.md)
+now passes focused CPU behavior controls and strict diagnostic/ordinary lints.
+It separates parsing, native execution and result conversion while preserving
+query admission, rollback and bounded storage. Full Core attribution is still
+pending; these tests establish neither an optimization nor the 2 ms gate.
 
 The real-mouse capture check is pending the director's availability and is not
 blocking these lanes. Broader editor, agent, content, export, multiplayer, game
