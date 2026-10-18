@@ -33,8 +33,10 @@ pub enum PoseRequest {
     Display {
         fraction: f64,
     },
-    /// Strictly increase this trusted epoch before discontinuous motion or a
-    /// resume/resize/debt reset. This resets to the exact current world pose.
+    /// Snap to the exact current world pose with a strictly greater epoch.
+    /// After committing discontinuous motion, call this BEFORE displaying it.
+    /// It resets current history immediately; it does not arm a future tick.
+    /// Resume, resize and discarded simulation debt also require this reset.
     Reset {
         continuity_epoch: u64,
     },
@@ -87,6 +89,9 @@ impl<C: PoseConsumer> PoseRenderHost<C> {
         world: &NativeWorld,
         epoch: u64,
     ) -> Result<(), PoseHostError<C::Error>> {
+        if world.requires_ui_checkpoint() {
+            return Err(PoseHostError::Unsupported);
+        }
         let view = world.spatial_view()?;
         let consumer = &mut self.consumer;
         self.input.try_sync(&view, epoch, |input, camera, kind| {
@@ -100,7 +105,7 @@ impl<C: PoseConsumer> SceneHost for PoseRenderHost<C> {
     type Settings = NativeRenderSettings<C::Settings>;
     type Error = PoseHostError<C::Error>;
     fn prepare(world: &NativeWorld, settings: Self::Settings) -> Result<Self, Self::Error> {
-        if settings.text.is_some() || settings.ui.is_some() {
+        if settings.text.is_some() || settings.ui.is_some() || world.requires_ui_checkpoint() {
             return Err(PoseHostError::Unsupported);
         }
         let input = PoseRenderInput::load(
@@ -139,6 +144,9 @@ impl<C: PoseConsumer> SceneHostPresentation for PoseRenderHost<C> {
         world: &NativeWorld,
         request: PoseRequest,
     ) -> Result<PoseReply, Self::Error> {
+        if world.requires_ui_checkpoint() {
+            return Err(PoseHostError::Unsupported);
+        }
         match request {
             PoseRequest::Display { fraction } => {
                 // Never render a stale host as though it represented this tick.
