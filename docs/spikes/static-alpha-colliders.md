@@ -98,7 +98,11 @@ cover transparent masks, threshold zero, pixel/rectangle bounds, unsupported
 source transforms/components/prefabs/modes, missing atlas frames, high precision,
 wrong-digest/missing cache, matching-digest malformed KTX, invalid actor, stale
 asset/document/revision, deleted selection and a replaced project with an equal
-revision. CLI grammar controls require explicit selection
-and the same threshold range. Existing import suites and strict scoped lint
+revision. CLI grammar controls require explicit selection and the same threshold
+range. A separate real `incant_headless collider-from-alpha` child checks saved
+JSON/document correspondence, journal ownership, CLI provenance, reopen and
+exact Undo/Redo, with a subsequent source refusal preserving project/journal
+bytes. Its texture source is deleted before invocation, so the CLI must use the
+verified cooked asset. Existing import suites and strict scoped lint
 remain part of the proposed qualification. No native command, window or GPU
 execution has been performed for this source yet.
