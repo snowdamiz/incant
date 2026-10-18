@@ -100,7 +100,7 @@ impl Reader {
             .as_chunks::<32>()
             .0
             .iter()
-            .map(bytemuck::pod_read_unaligned)
+            .map(|bytes| bytemuck::pod_read_unaligned(bytes))
             .collect();
         drop(map);
         readback.unmap();

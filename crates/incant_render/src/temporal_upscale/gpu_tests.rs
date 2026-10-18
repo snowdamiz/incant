@@ -183,6 +183,8 @@ fn actual_current_depth_and_history_support_refusals_remain_finite() {
             }),
             color: output.clone(),
             support: support.clone(),
+            identity: None,
+            visibility_before: false,
         };
         let mut encoder = d.create_command_encoder(&Default::default());
         {
