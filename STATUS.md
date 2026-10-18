@@ -152,7 +152,9 @@ ABI and runtime controls, four actual Wasmtime/wasm2c tests, strict lints and al
 ten local development checks. A fresh combined headless build matches all 80
 schemas while preserving the merged alpha and tilemap additions. Initial lint,
 compile-timeout and lexical-schema refusals remain recorded. Independent reviews
-pass; the PR check and ordinary authored source-free shipping proof remain open.
+pass. The scoped feature is merged through PR412 after exact-head development
+checks; main `b9e1a587` has the tested tree. The ordinary authored source-free
+shipping proof remains open.
 
 Rust/Wasm gameplay now has a bounded prepared localization coverage report,
 matching the existing TypeScript committed-snapshot behavior. Pages include
@@ -1205,19 +1207,18 @@ link keep dead stripping and source-free export checks. Core integration is now
 implemented for source review, using the project's ordinary scalar fast physics
 variant. No actual Core training or performance comparison has run yet.
 
-Last reassessment: 2026-10-17, the opt-in Core PGO integration passes 29 ordinary
+Historical prerequisite (2026-10-17, superseded by the completed 2026-10-18
+comparison above): the opt-in Core PGO integration passed 29 ordinary
 native controls and strict lint. A source successor also passes its actual
 compiler-environment control and strict lint; the original preparation failure
 is retained. A three-mode ordinary/generate/use shipping experiment is prepared
 for review, but no native Core training, profile-use build or measured speedup
 has run yet. Ordinary shipping remains unchanged.
 
-Next useful trigger: run representative full-Core training and profile-use
-qualification with the exact profile/tool identity against a matched shipping
-baseline. Keep training measurements separate, preserve workload and enforcement,
-and require exact gameplay/audio parity. No benefit is assumed; the 2 ms target
-remains unmet. Reassess after relevant runtime changes or a few hours of active
-development without occupying every lane.
+The subsequent full-Core training and profile-use comparison is recorded above.
+Its mixed result does not justify adoption; do not repeat that unchanged experiment.
+The current trigger is a distinct residual-cost hypothesis or relevant engine
+change, with bounded reassessment after a few hours of active development.
 
 ## Native Play texture refresh — merged through PR284
 
