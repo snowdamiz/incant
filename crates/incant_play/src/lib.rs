@@ -116,25 +116,68 @@ impl PreparedPlay {
         });
         let animations = incant_cook::load_project_animation_resources(document, &scene, root)
             .map_err(native)?;
-        let (cooked, code, script_source_sha256) = if let Some(incant_doc::SceneProgram::Wasm {
-            module,
-        }) = authored_module
-        {
-            #[cfg(not(feature = "wasmtime-host"))]
-            {
-                let _ = module;
-                return Err(invalid(
-                    "Wasm Play requires the wasmtime-host development feature",
-                ));
-            }
-            #[cfg(feature = "wasmtime-host")]
-            {
-                let asset = &document.assets[module];
-                let captured = incant_wasm_cook::CapturedModule::load(
-                    &incant_wasm_cook::project_cache(root, false).map_err(native)?,
-                    &asset.sha256,
+        let (cooked, code, script_source_sha256) =
+            if let Some(incant_doc::SceneProgram::Wasm { module, .. }) = authored_module {
+                #[cfg(not(feature = "wasmtime-host"))]
+                {
+                    let _ = module;
+                    return Err(invalid(
+                        "Wasm Play requires the wasmtime-host development feature",
+                    ));
+                }
+                #[cfg(feature = "wasmtime-host")]
+                {
+                    let asset = &document.assets[module];
+                    let captured = incant_wasm_cook::CapturedModule::load(
+                        &incant_wasm_cook::project_cache(root, false).map_err(native)?,
+                        &asset.sha256,
+                    )
+                    .map_err(native)?;
+                    let bytes = incant_cook::cook_scene_with_resources(
+                        document,
+                        &scene,
+                        &Default::default(),
+                        &animations,
+                    )
+                    .map_err(native)?;
+                    let cooked = CookedScene::from_bytes(&bytes).map_err(native)?;
+                    let mut program = incant_script::SessionProgram::DevelopmentWasm(
+                        captured.original().to_vec(),
+                    );
+                    if let Some(blob) =
+                        incant_cook::prepare_wasm_instances(document, &scene, &cooked)
+                            .map_err(native)?
+                    {
+                        let catalog = incant_script::WasmInstanceCatalog::from_frame(
+                            blob[..32].try_into().unwrap(),
+                            &blob[32..],
+                        )
+                        .map_err(native)?;
+                        program = program.with_instances(catalog).map_err(native)?;
+                    }
+                    let source = program
+                        .artifact_sha256()
+                        .expect("development module artifact")
+                        .iter()
+                        .map(|b| format!("{b:02x}"))
+                        .collect();
+                    (cooked, program, source)
+                }
+            } else if authored_scripts {
+                let prepared = incant_cook::prepare_script_scene_with_resources(
+                    document,
+                    &scene,
+                    &Default::default(),
+                    &animations,
                 )
                 .map_err(native)?;
+                let (cooked, code) = incant_cook::compile_project_sources(prepared, root)
+                    .map_err(native)?
+                    .program
+                    .into_parts();
+                let hash = source_hash(&code);
+                (cooked, code.into(), hash)
+            } else {
                 let bytes = incant_cook::cook_scene_with_resources(
                     document,
                     &scene,
@@ -142,42 +185,14 @@ impl PreparedPlay {
                     &animations,
                 )
                 .map_err(native)?;
+                let code = fallback().map_err(native)?;
+                let hash = source_hash(&code);
                 (
                     CookedScene::from_bytes(&bytes).map_err(native)?,
-                    incant_script::SessionProgram::DevelopmentWasm(captured.original().to_vec()),
-                    captured.input_sha256().to_owned(),
+                    code.into(),
+                    hash,
                 )
-            }
-        } else if authored_scripts {
-            let prepared = incant_cook::prepare_script_scene_with_resources(
-                document,
-                &scene,
-                &Default::default(),
-                &animations,
-            )
-            .map_err(native)?;
-            let (cooked, code) = incant_cook::compile_project_sources(prepared, root)
-                .map_err(native)?
-                .program
-                .into_parts();
-            let hash = source_hash(&code);
-            (cooked, code.into(), hash)
-        } else {
-            let bytes = incant_cook::cook_scene_with_resources(
-                document,
-                &scene,
-                &Default::default(),
-                &animations,
-            )
-            .map_err(native)?;
-            let code = fallback().map_err(native)?;
-            let hash = source_hash(&code);
-            (
-                CookedScene::from_bytes(&bytes).map_err(native)?,
-                code.into(),
-                hash,
-            )
-        };
+            };
         if camera.is_none()
             && (!cooked.spatial().is_empty()
                 || !cooked.visual_assets().is_empty()

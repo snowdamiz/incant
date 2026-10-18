@@ -55,6 +55,8 @@ pub use compiled::CompiledScript;
 #[cfg(feature = "compiler")]
 pub use compiler::ScriptBuild;
 use incant_runtime::NativeWorld;
+#[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+pub use incant_wasm_runtime::instances::Catalog as WasmInstanceCatalog;
 pub use logging::{LogLevel, NativeLog, NativeLogs};
 pub use program::SessionProgram;
 use rquickjs::{Context, Function, Persistent, Runtime, Value};

@@ -116,6 +116,26 @@ impl DevModuleHost {
     pub fn persistent_source(&self) -> Option<&[u8]> {
         self.persistent_source.as_deref()
     }
+    pub fn instance_catalog(
+        &self,
+    ) -> Option<std::sync::Arc<incant_wasm_runtime::instances::Catalog>> {
+        self.store.data().capability.instance_catalog()
+    }
+    pub fn configure_instances(
+        &mut self,
+        catalog: std::sync::Arc<incant_wasm_runtime::instances::Catalog>,
+        world: &NativeWorld,
+    ) -> Result<(), ModuleError> {
+        catalog.validate_world(world)?;
+        self.store
+            .data_mut()
+            .capability
+            .configure_instances(catalog)?;
+        if world.tick() == 0 {
+            self.store.data_mut().capability.bind_instances(world)?;
+        }
+        Ok(())
+    }
     pub fn persistent_checkpoint(
         &self,
         world: &NativeWorld,
@@ -175,6 +195,13 @@ impl DevModuleHost {
     /// replacement resets guest globals/memory; no VM-state migration is claimed.
     pub fn reload(&mut self, bytes: &[u8]) -> Result<(), ModuleError> {
         let mut candidate = Self::new(bytes)?;
+        if let Some(catalog) = self.instance_catalog() {
+            candidate
+                .store
+                .data_mut()
+                .capability
+                .configure_instances(catalog)?;
+        }
         self.store
             .data()
             .capability

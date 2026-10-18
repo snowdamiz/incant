@@ -16,6 +16,7 @@ mod audio;
 mod camera;
 mod collider_shapes;
 mod coroutines;
+pub mod properties;
 pub use coroutines::{CoroutineResult, CoroutineValue};
 mod lights;
 mod physics;

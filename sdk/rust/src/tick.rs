@@ -4,6 +4,7 @@ mod coroutines;
 mod haptics;
 mod hud;
 mod ik;
+mod instances;
 mod light;
 mod persistent;
 mod root_motion;

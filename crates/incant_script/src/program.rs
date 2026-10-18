@@ -17,6 +17,11 @@ use incant_runtime::NativeWorld;
 #[derive(Clone)]
 pub enum SessionProgram {
     Bytecode(CompiledScript),
+    #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+    WasmInstances {
+        program: Box<SessionProgram>,
+        catalog: std::sync::Arc<incant_wasm_runtime::instances::Catalog>,
+    },
     #[cfg(feature = "wasmtime-host")]
     DevelopmentWasm(Vec<u8>),
     #[cfg(feature = "static-module")]
@@ -34,11 +39,41 @@ impl From<incant_wasm_runtime::ModuleExports> for SessionProgram {
     }
 }
 impl SessionProgram {
+    #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+    pub fn with_instances(
+        self,
+        catalog: incant_wasm_runtime::instances::Catalog,
+    ) -> Result<Self, SessionError> {
+        if matches!(self, Self::Bytecode(_) | Self::WasmInstances { .. }) {
+            return Err(SessionError::Script(crate::ScriptError::ScriptBindings));
+        }
+        Ok(Self::WasmInstances {
+            program: Box::new(self),
+            catalog: std::sync::Arc::new(catalog),
+        })
+    }
+    #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+    pub(crate) fn base_program(&self) -> &Self {
+        match self {
+            #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+            Self::WasmInstances { program, .. } => program,
+            _ => self,
+        }
+    }
     /// Cold data provenance for a prepared behavior. It never authorizes loading
     /// executable bytes. Static modules lack a serialized artifact and refuse.
     pub fn artifact_sha256(&self) -> Option<[u8; 32]> {
         use sha2::{Digest, Sha256};
         match self {
+            #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+            Self::WasmInstances { program, catalog } => {
+                let base = program.artifact_sha256()?;
+                let mut h = Sha256::new();
+                h.update(b"Incant Wasm catalog provenance v1\0");
+                h.update(base);
+                h.update(catalog.digest());
+                Some(h.finalize().into())
+            }
             Self::Bytecode(script) => {
                 let metadata = script.metadata();
                 let mut hash = Sha256::new();
@@ -59,6 +94,36 @@ impl SessionProgram {
     }
     pub(crate) fn start(self, world: &NativeWorld) -> Result<SessionVm, SessionError> {
         match self {
+            #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+            Self::WasmInstances { program, catalog } => {
+                if matches!(
+                    program.as_ref(),
+                    Self::Bytecode(_) | Self::WasmInstances { .. }
+                ) {
+                    return Err(SessionError::Script(crate::ScriptError::ScriptBindings));
+                }
+                catalog
+                    .validate_world(world)
+                    .map_err(|_| SessionError::Script(crate::ScriptError::ScriptBindings))?;
+                // Owner validation precedes guest initialization. Restores bind only
+                // saved active members later, before any callback can obtain authority.
+                if world.tick() == 0 {
+                    catalog
+                        .validate_initial(world)
+                        .map_err(|_| SessionError::Script(crate::ScriptError::ScriptBindings))?;
+                }
+                let mut host = program.start(world)?;
+                match &mut host {
+                    #[cfg(feature = "wasmtime-host")]
+                    SessionVm::DevelopmentWasm(vm) => vm.configure_instances(catalog, world)?,
+                    #[cfg(feature = "static-module")]
+                    SessionVm::Static(vm) => vm.configure_instances(catalog, world)?,
+                    SessionVm::Bytecode(_) => {
+                        return Err(SessionError::Script(crate::ScriptError::ScriptBindings));
+                    }
+                }
+                Ok(host)
+            }
             #[cfg(feature = "wasmtime-host")]
             Self::DevelopmentWasm(bytes) => Ok(SessionVm::DevelopmentWasm(Box::new(
                 incant_wasm_dev::DevModuleHost::new(&bytes)?,

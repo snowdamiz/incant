@@ -106,7 +106,7 @@ fn embed(
     {
         return Err("TypeScript mobile project cannot select static Wasm build inputs".into());
     }
-    let wasm = if let Some(incant_doc::SceneProgram::Wasm { module }) = &authored.program {
+    let wasm = if let Some(incant_doc::SceneProgram::Wasm { module, .. }) = &authored.program {
         if mobile {
             wasm_bundle::destination(target)?;
         }
@@ -220,6 +220,9 @@ fn embed(
     let script_manifest: serde_json::Value = serde_json::from_str(&artifact.symbol_manifest)?;
     let scene_bytes = scene.to_bytes();
     fs::write(out.join("world.scene"), &scene_bytes)?;
+    let instance_blob =
+        crate::prepare_wasm_instances(&project, &scene_id, &scene)?.unwrap_or_default();
+    fs::write(out.join("wasm-instances.bin"), &instance_blob)?;
     fs::write(out.join("behavior.rs"), artifact.rust_module)?;
     fs::write(out.join("script-symbols.json"), artifact.symbol_manifest)?;
     if let Some(map) = artifact.source_map {
@@ -255,7 +258,7 @@ fn embed(
             asset.sha256.clone(),
         );
     }
-    let manifest = serde_json::json!({
+    let mut manifest = serde_json::json!({
         "format": "incant-native-project-build", "version": 1,
         "project_id": project.id, "scene_id": scene_id, "tick_rate": scene.tick_rate(),
         "physics_mode": project.settings.physics_mode,
@@ -275,6 +278,9 @@ fn embed(
         "startup_source_parsing": false,
         "program": wasm,
     });
+    if !instance_blob.is_empty() {
+        manifest["wasm_instances_sha256"] = serde_json::json!(hex(&Sha256::digest(&instance_blob)));
+    }
     // This receipt is last. A failed producer cannot advertise a complete build.
     if incant_source::check_recovery(root)? != source_epoch {
         return Err("script sources changed during native project build; retry".into());

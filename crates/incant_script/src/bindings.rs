@@ -12,10 +12,7 @@ use std::{
 mod cache_tests;
 
 pub const MAX_SCRIPT_SOURCES: usize = 64;
-pub const MAX_SCRIPT_INSTANCES: usize = 32_768;
-const MAX_PROP_NODES: usize = 65_536;
-const MAX_PROP_BYTES: usize = 1024 * 1024;
-const MAX_PROP_DEPTH: usize = 16;
+pub const MAX_SCRIPT_INSTANCES: usize = incant_types::properties::MAX_INSTANCES;
 
 /// Initial data only. Module-local mutable state is separate and is not a save
 /// format. Numeric values must be finite; keys are ordinary own data properties.
@@ -96,30 +93,19 @@ impl ScriptBindings {
 }
 
 #[derive(Default)]
-pub(crate) struct PropsBudget {
-    nodes: usize,
-    bytes: usize,
+pub(crate) struct PropsBudget(incant_types::properties::PropertyBudget);
+fn property_error(error: incant_types::properties::PropertyError) -> ScriptError {
+    match error {
+        incant_types::properties::PropertyError::Limit => ScriptError::InputLimit,
+        incant_types::properties::PropertyError::NonFinite => ScriptError::ScriptBindings,
+    }
 }
 impl PropsBudget {
     pub(crate) fn add(&mut self, depth: usize, bytes: usize) -> Result<(), ScriptError> {
-        self.nodes += 1;
-        self.bytes = self
-            .bytes
-            .checked_add(bytes)
-            .ok_or(ScriptError::InputLimit)?;
-        if depth > MAX_PROP_DEPTH || self.nodes > MAX_PROP_NODES || self.bytes > MAX_PROP_BYTES {
-            return Err(ScriptError::InputLimit);
-        }
-        Ok(())
+        self.0.add(depth, bytes).map_err(property_error)
     }
     pub(crate) fn text_size(&mut self, text: &str) -> Result<(), ScriptError> {
-        self.add(0, text.len().checked_add(8).ok_or(ScriptError::InputLimit)?)
-    }
-    fn text(&mut self, text: &str, hash: &mut Sha256) -> Result<(), ScriptError> {
-        self.text_size(text)?;
-        hash.update((text.len() as u64).to_le_bytes());
-        hash.update(text.as_bytes());
-        Ok(())
+        self.0.text_size(text).map_err(property_error)
     }
     fn object(
         &mut self,
@@ -127,46 +113,9 @@ impl PropsBudget {
         depth: usize,
         hash: &mut Sha256,
     ) -> Result<(), ScriptError> {
-        self.add(depth, 8)?;
-        hash.update([5]);
-        hash.update((values.len() as u64).to_le_bytes());
-        for (key, value) in values {
-            self.text(key, hash)?;
-            self.value(value, depth + 1, hash)?;
-        }
-        Ok(())
-    }
-    fn value(
-        &mut self,
-        value: &ScriptValue,
-        depth: usize,
-        hash: &mut Sha256,
-    ) -> Result<(), ScriptError> {
-        self.add(depth, 1)?;
-        match value {
-            ScriptValue::Null => hash.update([0]),
-            ScriptValue::Bool(value) => hash.update([1, u8::from(*value)]),
-            ScriptValue::Number(value) => {
-                if !value.is_finite() {
-                    return Err(ScriptError::ScriptBindings);
-                }
-                hash.update([2]);
-                hash.update(value.to_bits().to_le_bytes());
-            }
-            ScriptValue::String(value) => {
-                hash.update([3]);
-                self.text(value, hash)?;
-            }
-            ScriptValue::Array(values) => {
-                hash.update([4]);
-                hash.update((values.len() as u64).to_le_bytes());
-                for value in values {
-                    self.value(value, depth + 1, hash)?;
-                }
-            }
-            ScriptValue::Object(values) => self.object(values, depth, hash)?,
-        }
-        Ok(())
+        self.0
+            .object(values, depth, &mut |bytes| hash.update(bytes))
+            .map_err(property_error)
     }
 }
 

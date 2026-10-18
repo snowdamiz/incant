@@ -50,6 +50,7 @@ impl Capability {
                 self.epoch,
                 self.timers.checkpoint(self.tick),
                 self.coroutines.checkpoint(|id| world.entity_identity(id)),
+                self.instances.checkpoint(world),
             )
     }
     /// The receiver must be a fresh, inactive VM. Startup callbacks cannot have
@@ -80,10 +81,12 @@ impl Capability {
                 .restored(snapshot.coroutine_bytes(), snapshot.tick(), |id| {
                     world.entity_identity(id)
                 })?;
+        let instances = self.instances.restored(snapshot.instance_bytes(), world)?;
         self.persistent
             .as_mut()
             .ok_or(Error::Abi("module has no persistent state declaration"))?
             .restore(snapshot)?;
+        self.instances = instances;
         self.timers = timers;
         self.coroutines = coroutines;
         self.haptics.clear();
@@ -119,11 +122,16 @@ impl Capability {
         {
             return Err(Error::Abi("persistent reload declaration mismatch"));
         }
+        if !self.instances.same_catalog(&candidate.instances) {
+            return Err(Error::Abi("instance reload catalog mismatch"));
+        }
         if !self.coroutines.same_catalog(&candidate.coroutines) {
             return Err(Error::Abi("coroutine reload catalog mismatch"));
         }
         // A failed persistent transaction cannot become a healthy restored state.
-        if (self.persistent.is_some() || self.coroutines.enabled())
+        if (self.persistent.is_some()
+            || self.coroutines.enabled()
+            || self.instances.catalog().is_some())
             && (self.failed || self.restart_committed)
         {
             return Err(Error::Failed);

@@ -36,7 +36,10 @@ pub(super) fn program_identity(program: &SessionProgram) -> Result<[u8; 32]> {
                 hash.update((value.len() as u64).to_le_bytes());
                 hash.update(value.as_bytes());
             }
-            match program {
+            if let SessionProgram::WasmInstances { catalog, .. } = program {
+                hash.update(catalog.digest());
+            }
+            match program.base_program() {
                 #[cfg(feature = "wasmtime-host")]
                 SessionProgram::DevelopmentWasm(bytes) => {
                     hash.update(b"wasmtime\0");
@@ -52,7 +55,9 @@ pub(super) fn program_identity(program: &SessionProgram) -> Result<[u8; 32]> {
                             .fingerprint,
                     );
                 }
-                SessionProgram::Bytecode(_) => unreachable!(),
+                SessionProgram::Bytecode(_) | SessionProgram::WasmInstances { .. } => {
+                    return Err(CheckpointError::ProgramMismatch);
+                }
             }
             Ok(hash.finalize().into())
         }
@@ -60,7 +65,7 @@ pub(super) fn program_identity(program: &SessionProgram) -> Result<[u8; 32]> {
 }
 #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
 pub(super) fn wasm_declaration(program: &SessionProgram) -> Result<Declaration> {
-    match program {
+    match program.base_program() {
         #[cfg(feature = "wasmtime-host")]
         SessionProgram::DevelopmentWasm(bytes) => {
             incant_wasm_runtime::persistent::declaration_in_module(bytes)
@@ -72,7 +77,9 @@ pub(super) fn wasm_declaration(program: &SessionProgram) -> Result<Declaration> 
             .persistent_program()
             .map(|p| p.declaration)
             .ok_or(CheckpointError::Unsupported("static module state ABI")),
-        SessionProgram::Bytecode(_) => Err(CheckpointError::ProgramMismatch),
+        SessionProgram::Bytecode(_) | SessionProgram::WasmInstances { .. } => {
+            Err(CheckpointError::ProgramMismatch)
+        }
     }
 }
 /// Check the receiving owner without consuming outputs or granting authority.
@@ -102,7 +109,10 @@ pub(super) fn receiver(session: &NativeSession) -> Result<(SessionProgram, i64, 
                 .checkpoint_authority(&session.world)
                 .map_err(crate::SessionError::from)?;
             Ok((
-                SessionProgram::DevelopmentWasm(source.to_vec()),
+                attach_instances(
+                    SessionProgram::DevelopmentWasm(source.to_vec()),
+                    host.instance_catalog(),
+                ),
                 watermark,
                 restart,
             ))
@@ -116,7 +126,11 @@ pub(super) fn receiver(session: &NativeSession) -> Result<(SessionProgram, i64, 
             let (watermark, restart) = host
                 .checkpoint_authority(&session.world)
                 .map_err(crate::SessionError::from)?;
-            Ok((module.into(), watermark, restart))
+            Ok((
+                attach_instances(module.into(), host.instance_catalog()),
+                watermark,
+                restart,
+            ))
         }
     }
 }
@@ -208,5 +222,19 @@ pub(super) fn encode(
         }
         #[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
         _ => Err(CheckpointError::ProgramMismatch),
+    }
+}
+
+#[cfg(any(feature = "wasmtime-host", feature = "static-module"))]
+fn attach_instances(
+    program: SessionProgram,
+    catalog: Option<std::sync::Arc<incant_wasm_runtime::instances::Catalog>>,
+) -> SessionProgram {
+    match catalog {
+        Some(catalog) => SessionProgram::WasmInstances {
+            program: Box::new(program),
+            catalog,
+        },
+        None => program,
     }
 }

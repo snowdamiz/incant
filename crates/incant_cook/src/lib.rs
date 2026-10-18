@@ -55,3 +55,8 @@ pub use typescript::{
 mod project_build;
 #[cfg(feature = "typescript")]
 pub use project_build::{PROJECT_ENV, SCENE_ENV, embed_mobile_project, embed_project};
+
+#[cfg(feature = "typescript")]
+mod wasm_instances;
+#[cfg(feature = "typescript")]
+pub use wasm_instances::prepare_wasm_instances;

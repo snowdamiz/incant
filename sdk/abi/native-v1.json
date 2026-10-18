@@ -1434,6 +1434,40 @@
       "result": "i32",
       "opcode": 74,
       "call": "Call::LocalizationReport { offset, limit }"
+    },
+    {
+      "namespace": "incant_instances_v1",
+      "name": "snapshot_len",
+      "opcode": 75,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::InstancesLen"
+    },
+    {
+      "namespace": "incant_instances_v1",
+      "name": "read_snapshot",
+      "opcode": 76,
+      "params": [
+        [
+          "epoch",
+          "i64"
+        ],
+        [
+          "ptr",
+          "i32"
+        ],
+        [
+          "capacity",
+          "i32"
+        ]
+      ],
+      "result": "i32",
+      "call": "Call::ReadInstances {ptr,capacity}"
     }
   ],
   "enums": {
@@ -2227,6 +2261,32 @@
       [
         "Stop",
         2
+      ]
+    ],
+    "InitialValueKind": [
+      [
+        "Null",
+        0
+      ],
+      [
+        "Bool",
+        1
+      ],
+      [
+        "Number",
+        2
+      ],
+      [
+        "String",
+        3
+      ],
+      [
+        "Array",
+        4
+      ],
+      [
+        "Object",
+        5
       ]
     ]
   },
@@ -4135,6 +4195,55 @@
         "u8",
         16
       ]
+    ],
+    "InstanceHeader": [
+      [
+        "magic",
+        "u8",
+        8
+      ],
+      [
+        "version",
+        "u32"
+      ],
+      [
+        "count",
+        "u32"
+      ],
+      [
+        "bytes",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "InstanceRow": [
+      [
+        "entity",
+        "u8",
+        16
+      ],
+      [
+        "property_bytes",
+        "u32"
+      ],
+      [
+        "reserved",
+        "u32"
+      ]
+    ],
+    "InstanceMembershipHeader": [
+      [
+        "digest",
+        "u8",
+        32
+      ],
+      [
+        "count",
+        "u32"
+      ]
     ]
   },
   "input_sections": [
@@ -4258,7 +4367,12 @@
     "COROUTINE_STORE_BYTES": 262144,
     "COROUTINE_TRANSFER_BYTES": 1048576,
     "LOCALIZATION_MAX_REPORT_TOTAL": 4096,
-    "LOCALIZATION_MAX_REPORT_ROWS": 128
+    "LOCALIZATION_MAX_REPORT_ROWS": 128,
+    "INSTANCE_MAX_ROWS": 32768,
+    "INSTANCE_MAX_BYTES": 3145728,
+    "INSTANCE_MAX_PROP_NODES": 65536,
+    "INSTANCE_MAX_PROP_BYTES": 1048576,
+    "INSTANCE_MAX_PROP_DEPTH": 16
   },
   "magic": {
     "INPUT_MAGIC": "INPINP01",
@@ -4296,7 +4410,8 @@
     "TIMER_STATE_MAGIC": "INCTMS01",
     "COROUTINE_MAGIC": "INCCOR01",
     "COROUTINE_CATALOG_MAGIC": "INCCAT01",
-    "COROUTINE_STATE_MAGIC": "INCCTS01"
+    "COROUTINE_STATE_MAGIC": "INCCTS01",
+    "INSTANCE_MAGIC": "INCINS01"
   },
   "optional_none": -1,
   "namespaces": {
@@ -4324,6 +4439,7 @@
     "incant_state_v1": "state",
     "incant_haptics_v1": "haptics",
     "incant_timers_v1": "timers",
-    "incant_coroutines_v1": "coroutines"
+    "incant_coroutines_v1": "coroutines",
+    "incant_instances_v1": "instances"
   }
 }

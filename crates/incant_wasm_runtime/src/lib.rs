@@ -28,6 +28,7 @@ pub use incant_runtime::logging::{LogLevel, NativeLog, NativeLogs};
 pub use input::{MAGIC as INPUT_MAGIC, MAX_BYTES as MAX_INPUT_BYTES};
 mod compiled;
 pub use compiled::{Import, ModuleExports, StaticError, StaticModule};
+pub mod instances;
 pub mod limits;
 pub mod persistent;
 mod timers;

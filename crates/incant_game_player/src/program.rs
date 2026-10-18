@@ -23,9 +23,26 @@ pub fn load(module: Option<&str>) -> Result<SessionProgram> {
         Some(name) => {
             #[cfg(feature = "static-module")]
             {
-                Ok(incant_wasm_runtime::embedded::linked(name)
+                let program: SessionProgram = incant_wasm_runtime::embedded::linked(name)
                     .ok_or("unknown trusted linked module")?
-                    .into())
+                    .into();
+                if authored.is_some() {
+                    let bytes = include_bytes!(concat!(env!("OUT_DIR"), "/wasm-instances.bin"));
+                    if !bytes.is_empty() {
+                        let scene = bytes
+                            .get(..32)
+                            .ok_or("invalid built instance catalog")?
+                            .try_into()
+                            .unwrap();
+                        return Ok(program.with_instances(
+                            incant_wasm_runtime::instances::Catalog::from_frame(
+                                scene,
+                                &bytes[32..],
+                            )?,
+                        )?);
+                    }
+                }
+                Ok(program)
             }
             #[cfg(not(feature = "static-module"))]
             {

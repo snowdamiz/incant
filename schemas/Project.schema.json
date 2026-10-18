@@ -83,6 +83,35 @@
         }
       ]
     },
+    "CoroutineValue": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "boolean"
+        },
+        {
+          "format": "double",
+          "type": "number"
+        },
+        {
+          "type": "string"
+        },
+        {
+          "items": {
+            "$ref": "#/$defs/CoroutineValue"
+          },
+          "type": "array"
+        },
+        {
+          "additionalProperties": {
+            "$ref": "#/$defs/CoroutineValue"
+          },
+          "type": "object"
+        }
+      ]
+    },
     "EngineRequirement": {
       "description": "SemVer requirement text, preserved exactly rather than silently normalized.\nBuild metadata is not an engine identity: SemVer matching ignores it.",
       "maxLength": 256,
@@ -795,6 +824,16 @@
         {
           "additionalProperties": false,
           "properties": {
+            "instances": {
+              "additionalProperties": {
+                "additionalProperties": {
+                  "$ref": "#/$defs/CoroutineValue"
+                },
+                "type": "object"
+              },
+              "description": "Immutable startup parameters for this one scene module, keyed by owner.",
+              "type": "object"
+            },
             "kind": {
               "const": "wasm",
               "type": "string"
