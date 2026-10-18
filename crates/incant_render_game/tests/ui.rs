@@ -496,3 +496,7 @@ mod hud;
 
 #[path = "ui/recorded.rs"]
 mod recorded;
+
+#[cfg(feature = "experimental-pose-interpolation")]
+#[path = "ui/pose.rs"]
+mod pose;

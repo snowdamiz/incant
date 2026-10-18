@@ -241,6 +241,7 @@ fn pose_startup_display_refuses_unqualified_motion_and_resolution_policies() {
                 continuity_epoch: 0,
                 fraction: 0.5,
             },
+            None,
         );
         assert!(matches!(
             result,

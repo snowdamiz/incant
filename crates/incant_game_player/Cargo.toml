@@ -46,6 +46,11 @@ native-display-link = ["native-window", "dep:objc2", "dep:objc2-app-kit", "dep:o
 # Default-off separation of every simulation admission from batch-final display.
 native-batched-presentation = ["native-window", "incant_render_gpu_host/experimental-batched-presentation"]
 
+# Default-off ordinary-cadence Core pose diagnostic; no wake/pacing change.
+native-pose-interpolation = ["native-window", "incant_render_gpu_host/experimental-pose-interpolation"]
+# Manual CPU proof using the trusted build-linked Core program, never normal CI.
+diagnostic-core-pose = ["project", "render-input", "incant_render_game/experimental-pose-interpolation"]
+
 native-window = ["frame-capture", "incant_game_runtime/device", "dep:tao", "dep:pollster", "dep:gilrs"]
 # Trusted exporter opt-in; no project supplies executable shader artifacts.
 cooked-native-shaders = ["native-window", "incant_render/cooked-native-shaders"]

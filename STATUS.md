@@ -123,6 +123,8 @@ Five common cook controls, the exact authored startup test and strict lint pass
 locally, along with all ten development checks. Windows path controls and the
 isolated cold/warm/corrupt-repair diagnostic remain pending; neither a Windows
 latency gain nor timeout repair is established.
+The cache change is merged through PR423 after exact-head development checks;
+its targeted Windows diagnostic remains separate from release qualification.
 Remaining jobs continue against the frozen head; release remains at the
 previously qualified checkpoint55. Checkpoint56 failed its Windows credential
 job on three tilemap tests that read the exclusively
@@ -155,6 +157,16 @@ Computer use and screen capture are paused for every agent by the director's
 latest instruction. Owned capture helpers and test windows have been stopped;
 native window checks remain held. Terminal implementation, review and data-only
 verification continue.
+
+The default-off [Core pose diagnostic](docs/spikes/native-core-pose-diagnostic.md)
+now admits the sample's simple clip animation and fixed-tick HUD. All 461 focused
+behavior controls and both feature-on/off strict lints pass. A fresh full Core
+CPU replay completes 2,156 steps and 6,468 pose/HUD displays with exact historical
+gameplay, complete audio and final HUD parity. The initial incomplete-report
+failure is retained; sharing the ordinary report serializer repaired the fixture
+without changing the analyzer. Native-window wiring is present behind an
+explicit feature and option, but window presentation, lifecycle execution and
+shipping performance remain unqualified and capture checks remain held.
 
 The private GPU reconstruction experiment now passes numerical current-light
 continuity checks. A moved light invalidates stale color history; all 48 missing

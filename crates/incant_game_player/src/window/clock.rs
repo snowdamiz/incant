@@ -38,6 +38,11 @@ impl Clock {
         self.dropped += ticks.saturating_sub(MAX_CATCH_UP);
         ticks.min(MAX_CATCH_UP) as usize
     }
+    /// Residual of the last admitted clock pulse. This never advances time.
+    #[cfg(feature = "native-pose-interpolation")]
+    pub fn fraction(&self) -> f64 {
+        self.phase as f64 / 1_000_000_000.
+    }
     pub fn deadline(&self) -> Instant {
         self.last
             + Duration::from_nanos(
@@ -48,6 +53,25 @@ impl Clock {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    #[cfg(feature = "native-pose-interpolation")]
+    fn render_residual_is_read_only_and_resets_without_future_simulation() {
+        let start = Instant::now();
+        let mut clock = Clock::new(60, start);
+        assert_eq!(clock.due(start + Duration::from_millis(25)), 1);
+        let deadline = clock.deadline();
+        for _ in 0..10 {
+            assert_eq!(clock.fraction(), 0.5);
+        }
+        assert_eq!(clock.deadline(), deadline);
+        assert_eq!(clock.due(start + Duration::from_millis(25)), 0);
+        clock.reset(start + Duration::from_secs(30));
+        assert_eq!(clock.fraction(), 0.);
+        assert_eq!(clock.due(start + Duration::from_secs(30)), 0);
+        assert_eq!(clock.due(start + Duration::from_secs(31)), 4);
+        assert_eq!(clock.dropped, 56);
+        assert_eq!(clock.fraction(), 0.);
+    }
     #[test]
     fn continuous_background_events_do_not_starve_pending_redraws() {
         let start = Instant::now();

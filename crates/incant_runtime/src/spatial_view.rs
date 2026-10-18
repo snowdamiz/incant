@@ -71,6 +71,10 @@ impl<'a> SpatialView<'a> {
     pub fn has_text(&self) -> bool {
         !self.world.font_assets.is_empty() || !self.world.text_ids.is_empty()
     }
+    /// World-space glyph geometry, distinct from a screen UI font catalog.
+    pub fn has_world_text(&self) -> bool {
+        !self.world.text_ids.is_empty()
+    }
     pub fn assets(&self) -> &'a [VisualAssetRef] {
         &self.world.visual_assets
     }

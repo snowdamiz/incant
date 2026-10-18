@@ -51,6 +51,8 @@ struct Entry {
     current_global: DMat4,
     blended: DMat4,
     snapped: bool,
+    previous_animation: Option<incant_types::AnimationSample>,
+    current_animation: Option<incant_types::AnimationSample>,
 }
 
 pub(super) struct History {
@@ -62,7 +64,7 @@ pub(super) struct History {
 
 fn supported(node: &SpatialNode<'_>) -> Result<(), PoseError> {
     if let Some(d) = node.declaration
-        && (d.animation.is_some()
+        && (d.animation.as_ref().is_some_and(|a| a.graph.is_some())
             || d.ik.is_some()
             || d.root_motion.is_some()
             || d.sprite.is_some()
@@ -72,6 +74,9 @@ fn supported(node: &SpatialNode<'_>) -> Result<(), PoseError> {
                 .as_ref()
                 .is_some_and(|c| matches!(c.projection, CameraProjection::PixelPerfect { .. })))
     {
+        return Err(PoseError::Unsupported);
+    }
+    if node.animation_blend.is_some() || node.animation_pose.is_some() {
         return Err(PoseError::Unsupported);
     }
     if node.parent_index.is_some_and(|p| p >= node.index) || !node.global.is_finite() {
@@ -89,7 +94,7 @@ impl History {
         if count > MAX_POSE_NODES || bytes > MAX_POSE_BYTES {
             return Err(PoseError::Capacity);
         }
-        if view.has_text() {
+        if view.has_world_text() {
             return Err(PoseError::Unsupported);
         }
         let mut entries = Vec::new();
@@ -115,6 +120,8 @@ impl History {
                 current_global: *node.global,
                 blended: *node.global,
                 snapped: true,
+                previous_animation: node.animation,
+                current_animation: node.animation,
             });
         }
         Ok(Self {
@@ -131,7 +138,7 @@ impl History {
         Ok(())
     }
     pub(super) fn validate(&self, view: &SpatialView<'_>, epoch: u64) -> Result<(), PoseError> {
-        if self.entries.len() != view.nodes().len() || view.has_text() {
+        if self.entries.len() != view.nodes().len() || view.has_world_text() {
             return Err(PoseError::Invalid);
         }
         for (node, entry) in view.nodes().zip(&self.entries) {
@@ -142,7 +149,9 @@ impl History {
             }
             if view.tick() == self.tick
                 && epoch == self.epoch
-                && (pose != entry.current || *node.global != entry.current_global)
+                && (pose != entry.current
+                    || *node.global != entry.current_global
+                    || node.animation != entry.current_animation)
             {
                 return Err(PoseError::SameTickMutation);
             }
@@ -164,6 +173,12 @@ impl History {
             } else {
                 *node.global
             };
+            entry.previous_animation = if continuous {
+                entry.current_animation
+            } else {
+                node.animation
+            };
+            entry.current_animation = node.animation;
             entry.current = pose;
             entry.current_global = *node.global;
         }
@@ -204,6 +219,41 @@ impl History {
     }
     pub(super) fn global(&self, index: usize) -> DMat4 {
         self.entries[index].blended
+    }
+    pub(super) fn animation(
+        &self,
+        index: usize,
+        fraction: f64,
+    ) -> (
+        Option<incant_types::AnimationSample>,
+        Option<incant_types::AnimationBlendSample>,
+    ) {
+        let entry = &self.entries[index];
+        let (Some(previous), Some(current)) = (entry.previous_animation, entry.current_animation)
+        else {
+            return (entry.current_animation, None);
+        };
+        if entry.snapped || fraction == 1. || previous.clip != current.clip {
+            return (Some(current), None);
+        }
+        if fraction == 0. {
+            return (Some(previous), None);
+        }
+        // Blend two accepted local model poses. Never interpolate wrapped clip
+        // seconds or advance an independent animation clock.
+        (
+            Some(current),
+            Some(incant_types::AnimationBlendSample {
+                sample: previous,
+                weight: fraction,
+            }),
+        )
+    }
+    pub(super) fn committed_animation(
+        &self,
+        index: usize,
+    ) -> Option<incant_types::AnimationSample> {
+        self.entries[index].current_animation
     }
     pub(super) fn committed_global(&self, index: usize) -> DMat4 {
         self.entries[index].current_global

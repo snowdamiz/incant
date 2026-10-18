@@ -47,7 +47,12 @@ native restart remains unexecuted. Only the report and evidence enter main;
 the scheduling source stays on its experiment branch. The default-off
 [pose-interpolation adapter and composed host](../spikes/native-pose-interpolation.md)
 are merged through PR403 with CPU and actual Metal correctness; they are not yet
-integrated into the native window. GPU color reconstruction improves the small
+qualified in the native window. The later default-off
+[Core pose diagnostic](../spikes/native-core-pose-diagnostic.md) adds native-window
+wiring, simple clip animation and fixed-tick HUD. Its full 2,156-step CPU replay
+preserves historical gameplay, complete PCM and HUD reports through 6,468 pose
+displays; the original incomplete-report failure remains recorded. This is not
+shipping, window presentation or frame-pacing evidence. GPU color reconstruction improves the small
 analytic edge metric but still loses thin geometry and has no full visual
 acceptance. Its output-resolution visibility probe now isolates 48 inconsistent
 owner/depth samples for further diagnosis. These results narrow the remaining
