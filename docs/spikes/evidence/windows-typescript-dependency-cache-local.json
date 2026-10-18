@@ -1,0 +1,335 @@
+{
+  "format": "windows-typescript-dependency-cache-local-v1",
+  "date": "2026-10-18",
+  "platform": "macOS arm64",
+  "source": {
+    "base_commit": "d0988f462448d7f5ef7991d20e3e52007ad20d0b",
+    "dirty_patch_sha256": "5ac9cdb9683c3d250ef0cbd2bc6afb74da8d96cdcf324c845ddcf0722fcefdaf",
+    "full_manifest_sha256": "9882b17f66517aa7522461f32997903ffbce443d5728f183ca28e1aa82e40d81",
+    "native_code_sha256": {
+      "Cargo.lock": "7034d453907eba348850d62211c600af4b8c31b6fb1a41a524317cb132c169f7",
+      "crates/incant_cook/Cargo.toml": "ccbf708a0d350fb91df13cfba19de2bfe518555eb3843a8d889e862b98492357",
+      "crates/incant_cook/src/typescript.rs": "3a2242e2f38b9c18532fd46034b59b75295f515f3533abb6b307bd523103732b",
+      "crates/incant_cook/src/typescript/command.rs": "848b7fe1ccdf0b0b63892d6c178b512df7ace309e7cd22992b7ca08b6287510e",
+      "crates/incant_cook/src/typescript/windows.rs": "5efb005f048736acae35701d9e799b759feddb7840e4a5e4f744ca4a9cc8fd5a",
+      "crates/incant_cook/src/typescript/windows/cache.rs": "dc51100237880235b357c8175dc6824b6bf70aaf2c8630905e14f67cd8e764dc",
+      "crates/incant_cook/src/typescript/windows/cache/tests.rs": "b0be3186640fdf9aa0121b01611cf07506c4b81691b921b6b1a5bc721cb48207",
+      "crates/incant_cook/src/typescript/windows/cache/diagnostic.rs": "aa1bda058190cb3d11ee719adcb690eacae860ebf6be204a7748448eebb95caa"
+    },
+    "later_changes": "Scoped result documentation only; this is not a clean committed producer claim."
+  },
+  "cpu": {
+    "passed": true,
+    "stages": [
+      {
+        "command": [
+          "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+          "test",
+          "-p",
+          "incant_cook",
+          "--lib",
+          "--features",
+          "typescript",
+          "--profile",
+          "ci",
+          "--offline",
+          "--locked",
+          "-j2",
+          "--config",
+          "profile.ci.package.incant_render.opt-level=2",
+          "--config",
+          "profile.ci.package.sha2.opt-level=3",
+          "--message-format=json-render-diagnostics",
+          "typescript::",
+          "--",
+          "--nocapture",
+          "--test-threads=1"
+        ],
+        "actual_exec_session": 27040,
+        "terminal_exit": 0,
+        "seconds": 65.6148546669865,
+        "tests": [
+          "typescript::command::tests::compiler_environment_discards_ambient_node_and_cache_overrides",
+          "typescript::phases::tests::fixed_phase_prefix_survives_partial_write_without_exposing_tail",
+          "typescript::phases::tests::loader_deadlines_retain_the_last_completed_dependency",
+          "typescript::phases::tests::observations_reject_unknown_fields_names_order_times_and_excess_bytes",
+          "typescript::tests::timeout_before_first_child_phase_still_refuses_and_reaps"
+        ],
+        "phase_observation": null,
+        "result_sha256": "f962c7fdbac820d0510cc4e4f27990167250e4baa41938c379c478672ba4e505",
+        "log_sha256": {
+          "000.stderr.log": "e3dcbb32f36779656f13e1a8eaf029953753b8e6a1be8044376df089eeaffeb9",
+          "000.stdout.log": "98c2cc7aa27f076bb6dac1083bdd8ac596db3b25c8c8fc50ce72869e91bf3c0f"
+        }
+      },
+      {
+        "command": [
+          "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+          "test",
+          "-p",
+          "incant_play",
+          "--test",
+          "startup",
+          "--features",
+          "incant_audio_runtime/scene",
+          "--profile",
+          "ci",
+          "--offline",
+          "--locked",
+          "-j2",
+          "--config",
+          "profile.ci.package.incant_render.opt-level=2",
+          "--config",
+          "profile.ci.package.sha2.opt-level=3",
+          "--message-format=json-render-diagnostics",
+          "authored_startup_uses_shared_cook_and_never_the_engine_fallback",
+          "--",
+          "--exact",
+          "--nocapture",
+          "--test-threads=1"
+        ],
+        "actual_exec_session": 26428,
+        "terminal_exit": 0,
+        "seconds": 12.2707192079979,
+        "tests": [
+          "authored_startup_uses_shared_cook_and_never_the_engine_fallback"
+        ],
+        "phase_observation": {
+          "outcome": "exited_success",
+          "parent_elapsed_us": 624056,
+          "phases": [
+            {
+              "elapsed_us": 61,
+              "phase": "driver_entry"
+            },
+            {
+              "elapsed_us": 132475,
+              "phase": "typescript_ready"
+            },
+            {
+              "elapsed_us": 389560,
+              "phase": "swc_ready"
+            },
+            {
+              "elapsed_us": 393913,
+              "phase": "compiler_ready"
+            },
+            {
+              "elapsed_us": 395331,
+              "phase": "input_ready"
+            },
+            {
+              "elapsed_us": 401949,
+              "phase": "snapshot_ready"
+            },
+            {
+              "elapsed_us": 580932,
+              "phase": "typecheck_done"
+            },
+            {
+              "elapsed_us": 585062,
+              "phase": "transform_done"
+            },
+            {
+              "elapsed_us": 585541,
+              "phase": "artifact_ready"
+            },
+            {
+              "elapsed_us": 586542,
+              "phase": "publish_done"
+            }
+          ],
+          "state": "valid_prefix",
+          "version": 2
+        },
+        "result_sha256": "c5b0594f5aecbe8d0ad42aafea6c0d02988305af4da816673114cfc2f8f72df6",
+        "log_sha256": {
+          "000.stderr.log": "e540285ec6b0443fc28b900955b75bd6127099a961e081afc265cdb4e9e4e6df",
+          "000.stdout.log": "7e2055e5b7e53f7e0f79c89797192d19118057cdcd6f65c32e1aec115be887c6"
+        }
+      },
+      {
+        "command": [
+          "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+          "clippy",
+          "-p",
+          "incant_cook",
+          "--features",
+          "typescript",
+          "--all-targets",
+          "--profile",
+          "ci",
+          "--offline",
+          "--locked",
+          "-j2",
+          "--config",
+          "profile.ci.package.incant_render.opt-level=2",
+          "--config",
+          "profile.ci.package.sha2.opt-level=3",
+          "--message-format=json-render-diagnostics",
+          "--",
+          "-D",
+          "warnings"
+        ],
+        "actual_exec_session": 55459,
+        "terminal_exit": 0,
+        "seconds": 11.932698999997228,
+        "tests": null,
+        "phase_observation": null,
+        "result_sha256": "bfca9cd1c29b685c5950623c6fb21e5890b9f1f1068c844e219020a2b326fc8f",
+        "log_sha256": {
+          "000.stderr.log": "f8c9f970bc21c99e48ca740434d4133247e30657231f15cb8cadeb7df463f9f7",
+          "000.stdout.log": "72a28115d34a2a4859cc12dac400aa38b12cd9d21cc1f40b7545cd7850413ad2"
+        }
+      }
+    ],
+    "total_seconds": 89.81827287498163,
+    "fresh_absent_identities": 55,
+    "closeout_sha256": "593fc20cbc52d39437b3400401abe291f0f84fb7a2a91a80175d649a879a196a",
+    "preserved_prior_costs": true,
+    "copied_executables": [
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/windows-swc-cache-cpu-001/cook/incant_cook-fcebaf39baa55686",
+        "bytes": 4288112,
+        "sha256": "ea0b98dd41fc225a51a0c8f94ab594a148296285dbbb3ec6d2d2784d076c21ea"
+      },
+      {
+        "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/windows-swc-cache-cpu-001/startup/startup-5397795c20e2f6eb",
+        "bytes": 25079272,
+        "sha256": "552f2c1084f9388bd3fc992670b828d19277bc3932159efbff51980b9dcaa5f4"
+      }
+    ],
+    "target_final_and_retained_peak_bytes": 12266975232,
+    "target_cap_bytes": 19327352832
+  },
+  "development": {
+    "passed": true,
+    "required_checks": 10,
+    "carried_check": {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "actual_session": 78252,
+      "reason": "Conventions inputs and command unchanged; failed later Python3.9 aggregate preserved."
+    },
+    "remaining_commands": [
+      {
+        "command": [
+          "npm",
+          "run",
+          "test:tools"
+        ],
+        "exit": 0,
+        "seconds": 44.25090516702039
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "--all",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 1.7409534160397016
+      },
+      {
+        "command": [
+          "node",
+          "tools/build_bridge.mjs",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.14308420900488272
+      },
+      {
+        "command": [
+          "node",
+          "tools/generate_sdk.mjs",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.13995779096148908
+      },
+      {
+        "command": [
+          "node_modules/.bin/tsc",
+          "-p",
+          "sdk/ts/tsconfig.json"
+        ],
+        "exit": 0,
+        "seconds": 0.32078720798017457
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "build",
+          "--workspace",
+          "editor/ui"
+        ],
+        "exit": 0,
+        "seconds": 3.5352213330334052
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "test",
+          "--workspace",
+          "editor/ui"
+        ],
+        "exit": 0,
+        "seconds": 9.015631791029591
+      },
+      {
+        "command": [
+          "python3",
+          "tools/generate_wasm_sdk.py",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.29068916698452085
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.12813633400946856
+      }
+    ],
+    "actual_session": 88100,
+    "terminal_exit": 0,
+    "fresh_absent_identities": 255,
+    "closeout_sha256": "667438dcf07a2183af7071a005ddc8d09c34a145a919acd0c788a238a376292a",
+    "source_content_preserved": true,
+    "clean_tree_claim": false,
+    "python_tests": {
+      "run": 732,
+      "skipped": 4
+    },
+    "node_compiler_tests": 26,
+    "core_stress_python_tests": 10,
+    "ui_tests": 1040,
+    "ui_test_files": 50,
+    "retained_environment_failure": {
+      "actual_session": 78252,
+      "terminal_exit": 1,
+      "cause": "Fast-runner PATH selected Xcode Python3.9; source unchanged. Corrected runner pins Python3.14.",
+      "closeout_sha256": "30a116075f1818c1d05a9f12d69dd47bd81e0714d5bf57e83b999fe8a18b032d"
+    }
+  },
+  "pending": [
+    "Native Windows resolver/Unicode containment/junction/held-path tests",
+    "Four-cook disposable cold/warm/corrupt-repair/changed-source compiler output parity",
+    "Exact hosted checkpoint57 authored-startup consumer and older fallback/templates",
+    "Windows timeout repair and latency claims"
+  ],
+  "no_GPU_window_audio_capture": true,
+  "raw_records": "Full raw logs and source manifests retained in local windows-swc-cache-cpu-001 and windows-swc-cache-fast-{001,002}; not embedded in this summary."
+}

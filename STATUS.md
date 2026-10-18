@@ -106,6 +106,9 @@ project or journal. All six native owners and the wrapper are reaped and
 independently absent. This experimental Mac
 backend fails closed elsewhere; no broader security, editor/agent integration,
 performance or cross-platform isolation acceptance follows.
+The scoped worker is merged through PR422 after review and successful exact-head
+development checks. A shared editor/agent job service is being implemented
+separately; it has not yet qualified actual compiler and cancellation behavior.
 
 Checkpoint57 is frozen at candidate `53ec74d2`, with exactly main421's tree
 (`527d280a`). Its Windows desktop job failed the authored startup test at the
@@ -113,6 +116,13 @@ unchanged eight-second TypeScript cook deadline. The phase record now localizes
 most of the elapsed time to loading SWC: TypeScript was ready at 0.434 seconds,
 SWC at 7.073 seconds, and source snapshot admission at 7.106 seconds. This is
 evidence of a slow dependency load, not its underlying cause or a repair.
+The [Windows dependency-cache change](docs/spikes/windows-typescript-dependency-cache.md)
+reuses the pinned SWC carrier's validated native image through a fixed OS-resolved
+cache, while preserving fresh project compilation and the eight-second deadline.
+Five common cook controls, the exact authored startup test and strict lint pass
+locally, along with all ten development checks. Windows path controls and the
+isolated cold/warm/corrupt-repair diagnostic remain pending; neither a Windows
+latency gain nor timeout repair is established.
 Remaining jobs continue against the frozen head; release remains at the
 previously qualified checkpoint55. Checkpoint56 failed its Windows credential
 job on three tilemap tests that read the exclusively
