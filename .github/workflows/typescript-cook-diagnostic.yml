@@ -24,6 +24,7 @@ jobs:
           save-if: 'false'
       - run: npm ci
       - name: Record source and toolchain
+        id: inputs
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Force artifacts/typescript-cook-diagnostic | Out-Null
@@ -63,6 +64,62 @@ jobs:
           if ($testExit -eq 0 -and ([regex]::Matches($text, 'test result: ok\. 3 passed; 0 failed; 0 ignored;').Count -ne 2 -or
               @($rows | Where-Object { $_.outcome -eq 'exited_success' -and $_.phases.Count -eq 10 -and $_.state -eq 'valid_prefix' }).Count -ne 5)) {
             throw 'The authored contract and four scripted starters did not complete with all compiler phases.'
+          }
+          exit $testExit
+      - name: Observe exact checkpoint57 authored startup once
+        if: ${{ !cancelled() && steps.inputs.outcome == 'success' }}
+        env:
+          INCANT_NATIVE_COOK_DIAGNOSTIC: '1'
+        shell: pwsh
+        run: |
+          cargo test -p incant_play --test startup --profile ci --locked -j2 --features incant_audio_runtime/scene authored_startup_uses_shared_cook_and_never_the_engine_fallback -- --exact --nocapture --test-threads=1 2>&1 | Tee-Object -FilePath artifacts/typescript-cook-diagnostic/startup.log
+          $testExit = $LASTEXITCODE
+          $testExit | Out-File artifacts/typescript-cook-diagnostic/startup-exit.txt
+          $text = Get-Content artifacts/typescript-cook-diagnostic/startup.log -Raw
+          $matches = [regex]::Matches($text, 'INCANT_NATIVE_COOK_PHASES (\{[^\r\n]+\})')
+          if ($testExit -eq 0) {
+            if ([regex]::Matches($text, 'test result: ok\. 1 passed; 0 failed; 0 ignored;').Count -ne 1 -or $matches.Count -ne 1) {
+              throw 'The exact authored startup did not execute one complete cook.'
+            }
+            $row = $matches[0].Groups[1].Value | ConvertFrom-Json
+            $names = @('driver_entry', 'typescript_ready', 'swc_ready', 'compiler_ready', 'input_ready', 'snapshot_ready', 'typecheck_done', 'transform_done', 'artifact_ready', 'publish_done')
+            if ($row.version -ne 2 -or $row.outcome -ne 'exited_success' -or $row.state -ne 'valid_prefix' -or $row.phases.Count -ne 10) {
+              throw 'The exact authored startup lacks successful full phase evidence.'
+            }
+            $previous = 0
+            for ($i = 0; $i -lt $names.Count; $i++) {
+              if ($row.phases[$i].phase -cne $names[$i] -or $row.phases[$i].elapsed_us -lt $previous) {
+                throw 'Unexpected authored startup compiler phase order or time.'
+              }
+              $previous = $row.phases[$i].elapsed_us
+            }
+          }
+          exit $testExit
+      - name: Verify Windows resolver, path and ambient controls
+        if: ${{ !cancelled() && steps.inputs.outcome == 'success' }}
+        shell: pwsh
+        run: |
+          cargo test -p incant_cook --lib --features typescript --profile ci --locked -j2 typescript:: -- --nocapture --test-threads=1 2>&1 | Tee-Object -FilePath artifacts/typescript-cook-diagnostic/resolver.log
+          $testExit = $LASTEXITCODE
+          $testExit | Out-File artifacts/typescript-cook-diagnostic/resolver-exit.txt
+          $text = Get-Content artifacts/typescript-cook-diagnostic/resolver.log -Raw
+          if ($testExit -eq 0 -and [regex]::Matches($text, 'test result: ok\. 11 passed; 0 failed; 1 ignored;').Count -ne 1) {
+            throw 'Expected eleven actual TypeScript controls and one explicitly ignored cache diagnostic.'
+          }
+          exit $testExit
+      - name: Verify Windows native dependency cache cold, warm and repair
+        if: ${{ !cancelled() && steps.inputs.outcome == 'success' }}
+        shell: pwsh
+        run: |
+          cargo test -p incant_cook --lib --features typescript --profile ci --locked -j2 typescript::windows::cache::diagnostic::windows_dependency_cache_cold_warm_corrupt_preserves_fresh_compiler_outputs -- --ignored --exact --nocapture --test-threads=1 2>&1 | Tee-Object -FilePath artifacts/typescript-cook-diagnostic/cache.log
+          $testExit = $LASTEXITCODE
+          $testExit | Out-File artifacts/typescript-cook-diagnostic/cache-exit.txt
+          $text = Get-Content artifacts/typescript-cook-diagnostic/cache.log -Raw
+          if ($testExit -eq 0 -and
+              ([regex]::Matches($text, 'test result: ok\. 1 passed; 0 failed; 0 ignored;').Count -ne 1 -or
+               [regex]::Matches($text, 'INCANT_SWC_CACHE_RESULT ').Count -ne 1 -or
+               [regex]::Matches($text, 'INCANT_SWC_CACHE_PHASES ').Count -ne 4)) {
+            throw 'Expected one actual four-cook native dependency cache control.'
           }
           exit $testExit
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
