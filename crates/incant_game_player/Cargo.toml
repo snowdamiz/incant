@@ -12,6 +12,7 @@ profile = ["incant_profile/summary", "incant_game_runtime/profile", "incant_scri
 diagnostic-script-phases = ["profile", "incant_script/diagnostic-script-phases"]
 diagnostic-navigation = ["diagnostic-script-phases", "incant_script/diagnostic-navigation"]
 diagnostic-script-budget = ["diagnostic-script-phases", "incant_script/diagnostic-script-budget"]
+diagnostic-script-queries = ["diagnostic-script-phases", "incant_script/diagnostic-script-queries"]
 profile-tracy = ["profile", "incant_profile/tracy"]
 default = ["physics-deterministic"]
 native-checkpoints = ["incant_game_runtime/native-checkpoints", "incant_script/native-checkpoints", "incant_runtime/native-checkpoints"]
