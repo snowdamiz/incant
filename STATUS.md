@@ -383,10 +383,15 @@ Last reassessment: 2026-10-18 at 05:03 UTC. A bounded
 [source/data review](docs/spikes/evidence/script-budget-source-reassessment-20261018.json)
 found no supported new optimization: typed-read fast paths, zero-copy loan views
 and reused physics queries already exist. Next useful trigger: finer attribution
-of callback parsing, native query execution and result materialization. A
-default-off diagnostic is being prepared; no new benchmark or optimization has
-been adopted. Do not repeat the unchanged PGO comparison; reassess after new
-attribution or relevant engine changes.
+of callback parsing, native query execution and result materialization. The
+[default-off query diagnostic](docs/spikes/script-query-attribution.md) now passes
+36 selected CPU controls, the six real ScriptHost controls again after a narrow
+fixture-module lint repair, both strict all-target lint configurations and all
+ten local development checks on the integrated source. Independent source and
+retained-result review pass. The original lint refusal remains recorded. Whole
+Core shipping-profile attribution and exact gameplay/audio parity are the next
+step; no new benchmark or optimization has been adopted. Do not repeat the
+unchanged PGO comparison; reassess after new attribution or relevant engine changes.
 The 2 ms ScriptTick target remains unmet; other work continues.
 
 ## Native presentation pacing — bounded intervention rejected

@@ -143,6 +143,12 @@ Compatible HUD text updates now [reuse checked font engines](../spikes/ui-font-r
 through PR406. Scoped behavior tests and strict lints pass; the observed long
 event frames still need causal attribution and matched shipping measurement.
 
+The default-off [native-query diagnostic](../spikes/script-query-attribution.md)
+now passes focused CPU behavior controls and strict diagnostic/ordinary lints.
+It separates parsing, native execution and result conversion while preserving
+query admission, rollback and bounded storage. Full Core attribution is still
+pending; these tests establish neither an optimization nor the 2 ms gate.
+
 The real-mouse capture check is pending the director's availability and is not
 blocking these lanes. Broader editor, agent, content, export, multiplayer, game
 production and distribution work remains in the plan's later and overlapping

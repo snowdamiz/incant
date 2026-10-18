@@ -1,0 +1,43 @@
+{
+  "format": "incant-independent-source-review-v1",
+  "reviewed_at": "2026-10-18T05:22:59.404793+00:00",
+  "reviewer": "astra/profile_consumer_review",
+  "source_root": "/Users/andreyyurlov/.codex/worktrees/render-cost-negative-040/incant",
+  "base": "064b47278db30da67f7b522bbb1e615e6e1b49fb",
+  "initial_source": "a8de928d974ac8d06c1c247a9701cf9b25af7872",
+  "reviewed_successor": "555498e3d203990767dbb3bf795e9c72825ff660",
+  "scope": "Read-only default-off ScriptTick query attribution; no tests, compilation, native execution, target access, window, GPU or capture",
+  "findings": [],
+  "blocking_findings": 0,
+  "production_identical_across_fixture_correction": true,
+  "successor_diff_sha256": "11b911d8816e8d8f18bbdbc2c3b6dc6f4f71d5cabd65f7e360fe48164a62c790",
+  "reviewed_paths": {
+    "crates/incant_game_player/Cargo.toml": "26e4fa3bc2fb78b06581dd59e7ce479a59964b9647daebe7a4330a7487ff64e4",
+    "crates/incant_profile/Cargo.toml": "a65c126ad7a691b2c6498c7078ea4e39b2ed7e63e55391def79c61e3a84efcbf",
+    "crates/incant_profile/src/diagnostic.rs": "1975ea1aea2b3e0b91ceb2dcd6e61861f71302b55e02410cf244689230053931",
+    "crates/incant_profile/src/diagnostic/budget/tests.rs": "e46b772d64f7c2017adf3b393fd37d4102e56a975afad6a4b4ab53349857f38d",
+    "crates/incant_profile/src/diagnostic/navigation/tests.rs": "b51c2c7334e1546a2e7bc0d46e1b0069f3b38685ec024db445d96419dfb19615",
+    "crates/incant_profile/src/diagnostic/queries.rs": "2de9f493b03e34062fc3fbd2e5480d9ab09290988b86aa69aa67f7fd21583add",
+    "crates/incant_profile/src/diagnostic/queries/tests.rs": "64168f2361c02e5a699b0fe2092b28c99c83a8f3e78940dee6bbe39cb5d3decb",
+    "crates/incant_profile/src/diagnostic/storage.rs": "03078098df82166fab451f5d3bef411a5f909246a3fd8d5746e15e5461cce326",
+    "crates/incant_profile/src/diagnostic/tests.rs": "fe93d45bd134a07eae4c6ba8c26398054ead7a069d99aa0b06463937b510f0ee",
+    "crates/incant_script/Cargo.toml": "96c6b5eac1c9395c0803b93fff15c259e779d55811a5074d93be72b7e6c57916",
+    "crates/incant_script/src/lib.rs": "7a79a5de41474f3931506c6e4f0b0d86b7f57a27ea752591fe4f2b8335f7a1e6",
+    "crates/incant_script/src/navigation_tests.rs": "adde95877c6a0f5b89eaa450852ed826fb34976697b718576ad7fc7f1d430542",
+    "crates/incant_script/src/queries.rs": "89c9f26cda71245341f8835c2098fd34a75cfa47f10711d186f6848f404642b1",
+    "crates/incant_script/src/query_diagnostic_tests.rs": "d23593e90b7e0842357d7e2bc0de2c3a4750f5093ddccd0710f75dc5ff1f28bd",
+    "docs/spikes/script-query-attribution.md": "f83492c6ed40534e79d8845de81a21be357cc546d6125645af62835acd9bbb83"
+  },
+  "checks": [
+    "Feature forwarding remains opt-in; query module, hooks and serialized fields are cfg-gated. Existing schemas1\u20134 and absent-field feature-off tests remain; selected schemas5\u20138 are distinct.",
+    "Call/Span tokens bind generation/frame/ordinal plus per-row checked sequence. Rc phantom markers prohibit Send; thread-local state never stays borrowed across guest parse/getters/native/materialization.",
+    "Nested getter calls restore parent Context and retain inclusive counters while permanently invalidating coverage. Missing/reordered/overlapping/leaked scopes and caught unwind invalidate; default call drop records ordinary early errors.",
+    "Native query admission, counters, work charging, both deadlines, dispatch, output charging and failure publication ordering match the base; only scoped diagnostic observations are added.",
+    "Fixed six-by-four arrays and source masks have no per-query heap allocation. Checked durations/counts/sequence preserve anomalies as invalid data; compile-time2KiB row bound/4096rows remains finite.",
+    "Navigation and budget spans can nest within the query call/execute boundaries and must close before stage/call finish. Outer region/callback boundaries reject leaked query state.",
+    "Source tests cover every category/stage, early refusals, recursion, overflow/backward clocks, foreign-thread exclusion, retired capture and unwind. Actual ScriptHost test sources exercise real query results/failures/revocation/limits and compare typed state plus the next solver step.",
+    "Successor replaces unsupported legacy world saves on physics fixtures with public entity/physics/locale observations plus next-step parity. Navigation also compares actual path results before/after; production hook bytes are unchanged."
+  ],
+  "timing_boundary_note": "Call timestamps are taken at queries.rs131 after token/counter setup and at175 before drop bookkeeping. Stage timestamps similarly exclude their own start/drop bookkeeping. Body-resident observer work remains included; omitted observer bookkeeping stays in callback residual. No exclusive CPU or saving inference follows.",
+  "remaining_evidence": "Native compilation, feature-combination tests/lints and actual serialization are pending. This review does not claim any native qualification, full Core result or performance/adoption."
+}

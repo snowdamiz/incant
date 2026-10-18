@@ -121,6 +121,13 @@ commits. Missing external artifacts or refs explicitly refuse those optional
 checks. The archive carries identities, not executable binaries or a shipping
 reproduction environment.
 
+Independent [source review](evidence/native-script-query-attribution-source-20261018.json)
+and [retained native-result review](evidence/script-query-attribution-native-20261018.json)
+found no blocking issues. The integrated fifteen affected Rust/manifests match
+qualified producer `d6ef9bc4` byte-for-byte; newer main changes are outside those
+paths. The integration replay also rechecks all 88 archived records, originals,
+five binaries and historical source identities without launching native code.
+
 ## Proposed full Core diagnostic protocol
 
 After CPU qualification and separate resource review, extend the existing private
