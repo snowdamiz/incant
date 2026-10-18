@@ -25,8 +25,8 @@ mod tuning;
 use incant_module::{Result, Tick};
 #[panic_handler]
 fn panic(_: &core::panic::PanicInfo<'_>) -> ! { core::arch::wasm32::unreachable() }
-incant_module::module!(update);
-fn update(tick: &mut Tick<'_>, _: f64) -> Result<()> { tick.log(tuning::MESSAGE, incant_module::LogLevel::Info) }
+incant_module::module!(on_update);
+fn on_update(tick: &mut Tick<'_>, _: f64) -> Result<()> { tick.log(tuning::MESSAGE, incant_module::LogLevel::Info) }
 '''
 
 
