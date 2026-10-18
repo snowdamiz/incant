@@ -162,6 +162,15 @@ class PolicyTests(Fixture):
         self.assertIn('(allow file-read-metadata (literal "' + str(policy.rustc.parent) + '"))', text)
         self.assertNotIn('(subpath "' + str(policy.rustc.parent) + '")', text)
 
+    def test_executable_mapping_excludes_source_sdk_and_writable_run(self):
+        policy = self.policy()
+        mapped = [line for line in policy.text().splitlines() if line.startswith('(allow file-map-executable')]
+        for executable in (policy.rustc, policy.linker, policy.validator):
+            self.assertIn('(allow file-map-executable (literal "' + str(executable) + '"))', mapped)
+        self.assertIn('(allow file-map-executable (subpath "' + str(policy.sysroot / 'lib') + '"))', mapped)
+        for untrusted_or_data in (policy.source, policy.run, policy.sdk):
+            self.assertFalse(any(str(untrusted_or_data) in line for line in mapped))
+
     def test_profile_quoting_cannot_inject_a_rule(self):
         policy = replace(self.policy(), source=self.root / 'x") (allow default) ("')
         text = policy.text()

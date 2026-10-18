@@ -33,6 +33,9 @@ Apple's installed `sandbox-exec(1)` manual explicitly calls the utility
 deprecated. The service fails closed on unsupported OS, absent tools or failed
 sandbox initialization. It does not use private sandbox initialization SPI,
 import broad system profiles or fall back to unrestricted project compilation.
+Executable mappings are separate explicit rules: exact admitted executables,
+pinned toolchain libraries and public OS library/framework code only. Source,
+SDK data and writable run trees receive no executable mapping allowance.
 Actual controls must qualify the selected OS/toolchain; this is not a portable
 security guarantee or a production distribution/signing claim.
 
@@ -57,7 +60,7 @@ compiler/validator refusals, cancellation, collision, publication replacement,
 resource/cleanup error preservation and failure receipts without OS children.
 The two existing trusted SDK cache controls remain. None is native evidence.
 
-Source qualification on 2026-10-18: all 35 selected pure controls passed with
+Source qualification on 2026-10-18: all 36 selected pure controls passed with
 `python3 -m unittest tools.tests.test_rust_guest tools.tests.test_rust_guest_build`.
 This includes the exact historical SDK argv/cache digest control. Python syntax,
 the trusted OS canary's Rust formatting, generated conventions and `git diff
