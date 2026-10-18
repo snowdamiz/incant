@@ -1,11 +1,12 @@
 # Registered Rust source authoring
 
 This source foundation adds stable registered Rust entry IDs and shared atomic
-source editing. It is not the complete `module.read/write/build` agent workflow:
-the dedicated tool adapters, source-ID-to-build resolver and checked candidate
-installation remain follow-on work.
+source editing. The additive registered-ID tool adapters and source-to-build
+resolver are described in [registered-module-tools.md](registered-module-tools.md);
+checked candidate installation remains separate work.
 No new compiler, shell, runtime authoring dependency or module selection is added.
-The implementation and tests in this branch are source-only until CPU qualification.
+The first-package CPU qualification is recorded below; it is not a complete
+author/build/apply workflow.
 
 `Project.module_sources` maps globally unique ULIDs to `RustModuleSource { id,
 name, path }`. This optional map defaults to empty and is omitted when empty, so
@@ -34,7 +35,7 @@ TypeScript and is omitted for TypeScript records. Rust records explicitly use
 stable source ID. Old journal records do not gain a required field or a new
 version. Old binaries fail closed on new Rust records.
 
-The source-only child implementation also creates the first nested package
+The first-package implementation also creates the first nested package
 through the same registration and source-write transaction. Paths
 must be project-relative, ASCII, at most 1,024 bytes, at most eight components,
 and at most 128 bytes per component. Components begin with an ASCII letter,
@@ -42,8 +43,8 @@ digit or underscore and otherwise contain letters, digits, `_`, `-` or `.`.
 Rust entries end in lowercase `.rs`; hidden names, traversal, Windows device and
 trailing-dot/space aliases, `build.rs`, symlinks and hardlinked source files are
 refused. Root-level `main.rs` is explicitly refused: the current worker package
-snapshot must not include unrelated project-root JSON/assets. A future adapter
-can resolve `movement/main.rs` as package `movement`, entry `main.rs`, or
+snapshot must not include unrelated project-root JSON/assets. The registered build
+adapter resolves `movement/main.rs` as package `movement`, entry `main.rs`, or
 `movement/src/lib.rs` as package `movement`, entry `src/lib.rs`, without accepting
 the project root. The package still has to satisfy the worker's complete source
 snapshot and Rust-only recipe; registering a path does not certify that package.
@@ -86,16 +87,15 @@ arbitrary external writers racing after the final observation.
 Ownership binds the canonical journal path and exact root/directory identities.
 Copying or moving a project does not transfer first-package Undo/Redo authority;
 these operations fail closed rather than silently rebinding receipts. Same-path
-reopen remains supported. A focused move/reopen/refusal/return test is authored;
-its execution remains pending with the other native controls.
+reopen remains supported. The focused move/reopen/refusal/return control passed
+in the combined CPU qualification.
 
 Compatibility review covers serde/CRDT materialization, global ID and path alias
 validation, save/reopen, legacy journal decoding and generic destructive `doc_patch`
 approval. The UI's existing approval-description renderer identifies the new
 operations without implying build authority or file deletion. Fresh schemas and
-TypeScript declarations must be generated through the ordinary headless schema
-export and SDK generator before integration; handwritten generated snapshots are
-not evidence.
+TypeScript declarations are generated through the ordinary headless schema
+export and SDK generator; handwritten generated snapshots are not evidence.
 
 Authored controls cover legacy canonical/wire bytes, typed schema admission,
 registration/write order, exact provenance, external CAS conflicts, mixed-write
@@ -105,5 +105,14 @@ apply, Undo and Redo, including first-package creation. Additional controls cove
 an empty saved project, preexisting ancestors, no-replace collisions, same-content
 directory replacement, foreign additions and ownership metadata tampering.
 The subprocess fixtures are self-contained and need no
-external project, compiler, device, window or account. CPU execution and generated
-contract checks are pending; no build, rendering or performance gate is claimed.
+external project, compiler, device, window or account.
+
+Combined source `1152e5e6` passed 129 selected parent controls, strict all-target
+lint and fresh headless/schema/SDK checks. This includes all eight source-store
+subtree controls, five package integrations (including relocation refusal and
+package Undo/Redo), registered tool first-package creation and the recovery
+parent's assertions for 21 actual crash children. Four unrelated process
+diagnostics remain ignored. See the [qualification and limits](registered-module-tools.md)
+and [portable raw receipts](evidence/registered-module-tools/manifest.json).
+The source foundation's earlier producer and failures remain distinct; this
+success does not replace them or claim a runtime, rendering or performance gate.
