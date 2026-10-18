@@ -8,6 +8,7 @@ pub(crate) enum Storage {
     Rgba,
     Slots,
     SampleX,
+    Compact,
 }
 impl Storage {
     pub fn name(self) -> &'static str {
@@ -17,14 +18,17 @@ impl Storage {
             Self::Rgba => "rgba-forward",
             Self::Slots => "rgba-swapped",
             Self::SampleX => "rgba-sample-x",
+            Self::Compact => "compact-three-plane",
         }
     }
     /// Semantic reader bindings -> physical render attachment slots.
-    pub fn readback_slots(self) -> [usize; 4] {
+    pub fn readback_slots(self) -> Vec<usize> {
         if self == Self::Slots {
-            [0, 2, 1, 3]
+            vec![0, 2, 1, 3]
+        } else if self == Self::Compact {
+            vec![0, 1, 2]
         } else {
-            [0, 1, 2, 3]
+            vec![0, 1, 2, 3]
         }
     }
 }
@@ -37,7 +41,7 @@ pub(crate) struct Record {
 }
 const _: () = assert!(size_of::<Record>() == 80);
 
-fn replace(text: String, from: &str, to: &str) -> String {
+pub(super) fn replace(text: String, from: &str, to: &str) -> String {
     assert_eq!(text.matches(from).count(), 1, "storage diagnostic anchor");
     text.replace(from, to)
 }
@@ -63,6 +67,7 @@ pub(super) fn source(storage: Storage) -> String {
             // sample-qualified X input, with original owner halves untouched.
             "vec4u(in.owner&65535u,in.owner>>16u,pack(in.sample_position).xy)",
         ),
+        Storage::Compact => super::compact::source(),
     }
 }
 fn swap_locations(text: String, owner: &str) -> String {
@@ -85,6 +90,9 @@ fn redundant(v:vec2f,owner:u32)->vec4u {
 }
 "#;
 pub(super) fn calibration(storage: Storage) -> String {
+    if storage == Storage::Compact {
+        return super::compact::calibration();
+    }
     let text = format!("{}\n{}", super::CALIBRATION, super::PACK);
     if matches!(storage, Storage::Rgba | Storage::Slots | Storage::SampleX) {
         let text = replace(
@@ -103,6 +111,9 @@ pub(super) fn calibration(storage: Storage) -> String {
 }
 pub(super) fn copy(storage: Storage) -> String {
     assert_ne!(storage, Storage::Original);
+    if storage == Storage::Compact {
+        return super::compact::COPY.into();
+    }
     let mut text = replace(
         super::diagnostic::copy(false),
         "struct Sample {motion:vec4f,position_depth:vec4f,owner:vec4u}",
@@ -176,7 +187,7 @@ fn visibility_storage_variants_validate_and_lossless_fixture_packing_refuses_inv
 fn visibility_slot_mapping_matches_compiled_fragment_interfaces() {
     for storage in [Storage::Rgba, Storage::Slots, Storage::SampleX] {
         let mapping = storage.readback_slots();
-        let mut sorted = mapping;
+        let mut sorted = mapping.clone();
         sorted.sort_unstable();
         assert_eq!(sorted, [0, 1, 2, 3], "no duplicated or missing attachment");
         for (source, names) in [
@@ -199,7 +210,7 @@ fn visibility_slot_mapping_matches_compiled_fragment_interfaces() {
             let naga::TypeInner::Struct { members, .. } = &module.types[result.ty].inner else {
                 panic!("fragment output must retain all semantic fields");
             };
-            for (name, slot) in names.into_iter().zip(mapping) {
+            for (name, &slot) in names.into_iter().zip(&mapping) {
                 let member = members
                     .iter()
                     .find(|m| m.name.as_deref() == Some(name))

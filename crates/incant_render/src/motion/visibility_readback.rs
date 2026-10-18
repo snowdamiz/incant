@@ -43,13 +43,14 @@ impl Reader {
             label: Some("Per-sample visibility readback"),
             source: wgpu::ShaderSource::Wgsl(text.clone().into()),
         });
-        let mut entries: Vec<_> = (0..5)
+        let depth_binding = storage.readback_slots().len() as u32;
+        let mut entries: Vec<_> = (0..=depth_binding)
             .map(|binding| wgpu::BindGroupLayoutEntry {
                 binding,
                 visibility: wgpu::ShaderStages::COMPUTE,
                 count: None,
                 ty: wgpu::BindingType::Texture {
-                    sample_type: if binding == 4 {
+                    sample_type: if binding == depth_binding {
                         wgpu::TextureSampleType::Depth
                     } else {
                         wgpu::TextureSampleType::Uint
@@ -60,7 +61,7 @@ impl Reader {
             })
             .collect();
         entries.push(wgpu::BindGroupLayoutEntry {
-            binding: 5,
+            binding: depth_binding + 1,
             visibility: wgpu::ShaderStages::COMPUTE,
             count: None,
             ty: wgpu::BindingType::Buffer {
@@ -122,9 +123,8 @@ impl Reader {
             mapped_at_creation: false,
         });
         let slots = self.1.readback_slots();
-        let colors = slots.map(|slot| &probe.colors[slot]);
+        let colors = slots.iter().map(|&slot| &probe.colors[slot]);
         let mut entries: Vec<_> = colors
-            .into_iter()
             .chain([&probe.depth])
             .enumerate()
             .map(|(i, v)| wgpu::BindGroupEntry {
@@ -133,7 +133,7 @@ impl Reader {
             })
             .collect();
         entries.push(wgpu::BindGroupEntry {
-            binding: 5,
+            binding: slots.len() as u32 + 1,
             resource: storage.as_entire_binding(),
         });
         let group = d.create_bind_group(&wgpu::BindGroupDescriptor {

@@ -3,6 +3,8 @@ use super::{MotionDraw, system};
 use crate::Renderer;
 use glam::{Mat4, Vec3};
 use wgpu::util::DeviceExt;
+#[path = "visibility_compact.rs"]
+mod compact;
 #[path = "visibility_owner.rs"]
 mod diagnostic;
 #[path = "visibility_msl.rs"]
@@ -11,6 +13,7 @@ mod msl;
 mod readback;
 #[path = "visibility_storage.rs"]
 mod storage;
+pub(crate) use compact::decode as decode_compact;
 pub(crate) use msl::Session as MslSession;
 pub(crate) use readback::Sample;
 pub(crate) use storage::{Record as StorageRecord, Storage};
@@ -81,7 +84,7 @@ struct F { @location(0) motion_xy:vec4u, @location(1) motion_zw:vec4u, @location
 pub(crate) struct Probe {
     pipelines: [wgpu::RenderPipeline; 4],
     calibration: wgpu::RenderPipeline,
-    pub(crate) colors: [wgpu::TextureView; 4],
+    pub(crate) colors: Vec<wgpu::TextureView>,
     pub(crate) depth: wgpu::TextureView,
     reader: Option<readback::Reader>,
     pub(crate) size: [u32; 2],
@@ -125,12 +128,17 @@ impl Probe {
     ) -> Self {
         let d = &r.device;
         let usage = wgpu::TextureUsages::RENDER_ATTACHMENT | wgpu::TextureUsages::TEXTURE_BINDING;
-        let mut formats = FORMATS;
+        let mut formats = if storage == Storage::Compact {
+            vec![wgpu::TextureFormat::Rgba16Uint; 3]
+        } else {
+            FORMATS.to_vec()
+        };
         if matches!(storage, Storage::Rgba | Storage::Slots | Storage::SampleX) {
             formats[2] = wgpu::TextureFormat::Rgba16Uint;
         }
         for f in formats
-            .into_iter()
+            .iter()
+            .copied()
             .chain([wgpu::TextureFormat::Depth32Float])
         {
             let features = r.adapter.get_texture_format_features(f);
@@ -180,13 +188,17 @@ impl Probe {
             label: Some("Output4x sampled owner"),
             source: wgpu::ShaderSource::Wgsl(wgsl.clone().into()),
         });
-        let targets = formats.map(|format| {
-            Some(wgpu::ColorTargetState {
-                format,
-                blend: None,
-                write_mask: wgpu::ColorWrites::ALL,
+        let targets: Vec<_> = formats
+            .iter()
+            .copied()
+            .map(|format| {
+                Some(wgpu::ColorTargetState {
+                    format,
+                    blend: None,
+                    write_mask: wgpu::ColorWrites::ALL,
+                })
             })
-        });
+            .collect();
         let depth = wgpu::DepthStencilState {
             format: wgpu::TextureFormat::Depth32Float,
             depth_write_enabled: Some(true),
@@ -258,7 +270,7 @@ impl Probe {
             label: Some("Actual sample-location calibration"),
             source: wgpu::ShaderSource::Wgsl(calibration_wgsl.clone().into()),
         });
-        let colors = formats.map(make);
+        let colors: Vec<_> = formats.iter().copied().map(make).collect();
         let depth_view = make(wgpu::TextureFormat::Depth32Float);
         if let Some(arm) = &diagnostic {
             diagnostic::write(
@@ -286,17 +298,21 @@ impl Probe {
         }
     }
     fn pass<'a>(&'a self, encoder: &'a mut wgpu::CommandEncoder) -> wgpu::RenderPass<'a> {
-        let colors = self.colors.each_ref().map(|view| {
-            Some(wgpu::RenderPassColorAttachment {
-                view,
-                depth_slice: None,
-                resolve_target: None,
-                ops: wgpu::Operations {
-                    load: wgpu::LoadOp::Clear(wgpu::Color::TRANSPARENT),
-                    store: wgpu::StoreOp::Store,
-                },
+        let colors: Vec<_> = self
+            .colors
+            .iter()
+            .map(|view| {
+                Some(wgpu::RenderPassColorAttachment {
+                    view,
+                    depth_slice: None,
+                    resolve_target: None,
+                    ops: wgpu::Operations {
+                        load: wgpu::LoadOp::Clear(wgpu::Color::TRANSPARENT),
+                        store: wgpu::StoreOp::Store,
+                    },
+                })
             })
-        });
+            .collect();
         encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("Visibility-only output4x"),
             color_attachments: &colors,

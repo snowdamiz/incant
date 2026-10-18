@@ -13,6 +13,8 @@ use crate::{
 };
 use serde_json::json;
 use std::sync::Arc;
+#[path = "visibility_compact_tests.rs"]
+mod compact_tests;
 
 pub(super) fn normalized(raw: &[Sample]) -> Vec<Sample> {
     raw.iter()
@@ -93,6 +95,7 @@ enum Capture {
     Storage,
     Slots,
     Dependency,
+    Compact,
 }
 fn capture(root: &std::path::Path, mode: Capture) {
     let storage_probe = mode != Capture::Owner;
@@ -106,6 +109,8 @@ fn capture(root: &std::path::Path, mode: Capture) {
     let _session = MslSession::start();
     let mut pattern = None;
     let mut results = Vec::new();
+    let mut compact_reference = Vec::new();
+    let mut compact_low = Vec::new();
     let arms = match mode {
         Capture::Storage => vec![
             ("original-forward", false, false, Storage::Original),
@@ -125,6 +130,10 @@ fn capture(root: &std::path::Path, mode: Capture) {
         Capture::Dependency => vec![
             ("rgba-forward", false, false, Storage::Rgba),
             ("rgba-sample-x", false, false, Storage::SampleX),
+        ],
+        Capture::Compact => vec![
+            ("rgba-sample-x", false, false, Storage::SampleX),
+            ("compact-three-plane", false, false, Storage::Compact),
         ],
     };
     let frame_count = 11 * arms.len();
@@ -153,6 +162,17 @@ fn capture(root: &std::path::Path, mode: Capture) {
                 "storage_record":"Original storage:48-byte semantic record; all other storage:80 bytes = same48-byte prefix + raw motionZW4xu32 + raw ownerRGBA4xu32",
                 "redundant_packing":"finite positive-sign depth[0,1]; validity+0/+1 in depth sign bit; full owner in original validity lanes; invalid inputs yield NaN refusal",
                 "no_new_color_resolver":true,"capture_completion_is_acceptance":false})).unwrap());
+            if mode == Capture::Compact {
+                write(root, "compact-layout.json", &serde_json::to_vec_pretty(&json!({
+                    "physical_planes": ["motion.xy RGBA16Uint4", "previous depth/validity + owner RGBA16Uint4", "sample.xy RGBA16Uint4", "current Depth32Float4"],
+                    "visibility_bytes_per_pixel":112,"reference_visibility_bytes_per_pixel":144,
+                    "duplicate_X_validation":false,"reference_duplicate_X_validation":true,
+                    "compact_raw_owner_words":"absent plane represented by four reserved zero words, never a duplicate-X witness",
+                    "signed_zero":"depth sign in bit30; binary validity in bit31; positive depth magnitude unchanged",
+                    "comparison":"all 16384 samples of all 11 frames, exact owner/motion/sample/current+previous depth bits and low planes",
+                    "reconstruction_and_fallback_unchanged":true,"packing_is_not_a_driver_cause_claim":true
+                })).unwrap());
+            }
         }
         let pattern = pattern.unwrap();
         let initial = Pose::initial();
@@ -197,6 +217,21 @@ fn capture(root: &std::path::Path, mode: Capture) {
                 |records| records.iter().map(|v| v.sample).collect(),
             );
             let samples = normalized(&raw);
+            let comparison = if mode == Capture::Compact {
+                let low_bits: Vec<_> = low.0.iter().flatten().map(|v| v.to_bits()).collect();
+                if arm_index == 0 {
+                    compact_reference.push(samples.clone());
+                    compact_low.push(low_bits);
+                    None
+                } else {
+                    Some((
+                        compact_tests::differences(&samples, &compact_reference[index]),
+                        low_bits == compact_low[index],
+                    ))
+                }
+            } else {
+                None
+            };
             let frame = retained.motion_frame().unwrap();
             let changes = retained.motion_changes().unwrap();
             assert!(frame.same_owner(changes.frame()));
@@ -229,7 +264,13 @@ fn capture(root: &std::path::Path, mode: Capture) {
             );
             let packed = extra.as_ref().map_or_else(
                 || packing_errors(&raw, explicit),
-                |records| storage_packing_errors(records, storage),
+                |records| {
+                    if storage == Storage::Compact {
+                        compact_tests::packing_errors(records)
+                    } else {
+                        storage_packing_errors(records, storage)
+                    }
+                },
             );
             let duplicate = extra
                 .as_ref()
@@ -263,10 +304,13 @@ fn capture(root: &std::path::Path, mode: Capture) {
             }
             let accepted = inspection["mismatches"].as_array().unwrap().is_empty()
                 && packed.is_empty()
+                && comparison
+                    .as_ref()
+                    .is_none_or(|(diff, low)| diff.is_empty() && *low)
                 && duplicate
                     .as_ref()
                     .is_none_or(|v| v["mismatches"].as_array().unwrap().is_empty());
-            if index == 10 || !accepted {
+            if mode == Capture::Compact || index == 10 || !accepted {
                 if let Some(extra) = &extra {
                     // The 80-byte record already contains all original semantic fields.
                     // Retain it once; avoid another identical 48-byte plane in the packet.
@@ -296,13 +340,20 @@ fn capture(root: &std::path::Path, mode: Capture) {
                 &format!("frame-{index}.json"),
                 &serde_json::to_vec_pretty(&report).unwrap(),
             );
+            if let Some((differences, low_exact)) = &comparison {
+                write(&path, &format!("frame-{index}-comparison.json"), &serde_json::to_vec_pretty(&json!({
+                    "exact_semantic_differences":differences,"low_planes_exact":low_exact,
+                    "compared_samples":samples.len(),"duplicate_X_validation":false,
+                    "reference":"rgba-sample-x, separately rendered unchanged shader and geometric oracle"
+                })).unwrap());
+            }
             if index < 10 {
                 assert!(
                     accepted,
                     "unexpected failure before arriving occluder: {report}"
                 );
             }
-            if storage_probe && arm_index == 0 && index == 10 {
+            if storage_probe && mode != Capture::Compact && arm_index == 0 && index == 10 {
                 let errors = inspection["mismatches"].as_array().unwrap();
                 assert_eq!(
                     errors.len(),
@@ -329,9 +380,15 @@ fn capture(root: &std::path::Path, mode: Capture) {
         "capture.json",
         &serde_json::to_vec_pretty(&json!({"capture_complete":true,"arms":results,
         "visibility_accepted":results.iter().all(|v|v["visibility_accepted"]==true),
-        "accepted_frames":frame_count,"visibility_passes":frame_count+1,"baseline_reproduction_required":storage_probe,"original_oracle_unchanged":true,"appearance_or_performance_accepted":false}))
+        "accepted_frames":frame_count,"visibility_passes":frame_count+1,"baseline_reproduction_required":storage_probe && mode != Capture::Compact,"original_oracle_unchanged":true,"appearance_or_performance_accepted":false}))
         .unwrap(),
     );
+    if mode == Capture::Compact {
+        assert!(
+            results.iter().all(|v| v["visibility_accepted"] == true),
+            "compact result differs; raw data retained"
+        );
+    }
 }
 
 fn storage_packing_errors(raw: &[StorageRecord], storage: Storage) -> Vec<usize> {
