@@ -256,6 +256,13 @@ where
     pub fn refresh_host(&mut self) -> Result<(), H::Error> {
         self.core.refresh_host()
     }
+    /// Trusted presentation only; no simulation/input/audio advancement.
+    pub fn present_host(&mut self, request: H::Presentation) -> Result<H::Presented, H::Error>
+    where
+        H: crate::SceneHostPresentation,
+    {
+        crate::host_present::present(&mut self.core, request)
+    }
     pub fn poll_audio(&mut self) -> Result<(), H::Error> {
         self.core.poll_audio()
     }
@@ -445,6 +452,13 @@ impl<H: SceneHost> HostedOfflineGameSession<H> {
     /// transport, input or simulation. Host error/unwind is terminal.
     pub fn refresh_host(&mut self) -> Result<(), H::Error> {
         self.inner.core.refresh_host()
+    }
+    /// Trusted presentation only; offline PCM and pending haptics stay unchanged.
+    pub fn present_host(&mut self, request: H::Presentation) -> Result<H::Presented, H::Error>
+    where
+        H: crate::SceneHostPresentation,
+    {
+        crate::host_present::present(&mut self.inner.core, request)
     }
     pub fn poll_audio(&mut self) -> Result<(), H::Error> {
         self.inner.core.poll_audio()

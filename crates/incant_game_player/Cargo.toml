@@ -42,6 +42,8 @@ native-presentations = ["native-window", "dep:wgpu-hal", "wgpu-hal/diagnostic-pr
 native-minimum-duration = ["native-window", "dep:wgpu-hal", "wgpu-hal/diagnostic-minimum-duration"]
 # Wake-source-only diagnostic; preserves the normal fixed-step wall clock.
 native-display-link = ["native-window", "dep:objc2", "dep:objc2-app-kit", "dep:objc2-foundation", "dep:objc2-quartz-core"]
+# Default-off separation of every simulation admission from batch-final display.
+native-batched-presentation = ["native-window", "incant_render_gpu_host/experimental-batched-presentation"]
 
 native-window = ["frame-capture", "incant_game_runtime/device", "dep:tao", "dep:pollster", "dep:gilrs"]
 # Trusted exporter opt-in; no project supplies executable shader artifacts.

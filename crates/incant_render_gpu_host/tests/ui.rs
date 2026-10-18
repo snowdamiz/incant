@@ -235,6 +235,14 @@ impl Probe {
     }
 }
 fn game(with_ui: bool, size: [u32; 2]) -> (Game, Probe) {
+    game_with_targets(with_ui, size, |settings| settings)
+}
+type Hosted<P> = HostedOfflineGameSession<NativeRenderHost<GpuRenderConsumer<P>>>;
+fn game_with_targets<P: TargetProvider>(
+    with_ui: bool,
+    size: [u32; 2],
+    wrap: impl FnOnce(GpuRenderSettings<Targets>) -> GpuRenderSettings<P>,
+) -> (Hosted<P>, Probe) {
     let temp = tempfile::tempdir().unwrap();
     let asset = models::model(temp.path(), 0.);
     let fingerprint =
@@ -336,7 +344,7 @@ fn game(with_ui: bool, size: [u32; 2]) -> (Game, Probe) {
         "exports.default={update({input,log}){for(const e of input.ui.events)log(e.kind+('value' in e?':'+e.value:''));}};",
     )
     .unwrap();
-    let game = Game::new(
+    let game = HostedOfflineGameSession::new(
         scene,
         script,
         Default::default(),
@@ -350,10 +358,10 @@ fn game(with_ui: bool, size: [u32; 2]) -> (Game, Probe) {
             model_cache: temp.path().join(".incant/cache/models"),
             texture_cache: temp.path().join("textures"),
             camera: id(2),
-            consumer: GpuRenderSettings {
+            consumer: wrap(GpuRenderSettings {
                 renderer: Arc::clone(&renderer),
                 targets: Targets(Arc::clone(&shared)),
-            },
+            }),
         },
     )
     .unwrap();
@@ -581,3 +589,7 @@ fn refresh_and_viewport_relayout_use_the_same_ui_without_advancing_the_game() {
         [120., 160.]
     );
 }
+
+#[cfg(feature = "experimental-batched-presentation")]
+#[path = "ui/presentation.rs"]
+mod presentation;

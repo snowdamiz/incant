@@ -1,14 +1,15 @@
 # Implementation status
 
-[Release checkpoint52](docs/spikes/release-checkpoint-52.md) is promoted: all
-23 required contexts and eight exact-head workflows passed on the main391 tree,
-and release `73fed959` has the identical tested tree. Later main393–400 changes
-remain outside that release baseline. Checkpoint53 (PR399) is frozen on main397;
-its macOS Wasm job failed a [timer-fixture lookup](docs/spikes/ci-timer-fixture-layout.md).
-The narrow correction is merged through PR400 after review and fast checks; it
-passes actual local static/development reload checks in CI's directory layout.
-Hosted checkpoint revalidation remains pending. Retained
-failed experiments remain failed. No distribution or phase gate is approved.
+[Release checkpoint54](docs/spikes/release-checkpoint-54.md) is promoted: all
+23 required contexts and eight exact-head workflows passed on the main401 tree,
+and release `503b90af` has the identical tested tree. Main402–406 changes
+remain outside that release baseline. Checkpoint53 failed the Wasm timer-fixture
+lookup on all three desktop platforms; its other seven workflows passed.
+The [narrow correction](docs/spikes/ci-timer-fixture-layout.md) is merged through
+PR400 after review and fast checks, with actual local static/development reload
+checks in CI's directory layout. Checkpoint54 reused PR399, frozen at candidate
+`5dbac494` with exactly main401's tree throughout the successful comprehensive run.
+Retained failed experiments remain failed. No distribution or phase gate is approved.
 
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
@@ -19,9 +20,9 @@ now also verifies winning HUD pixels, Arabic health direction, CJK glyphs and
 normal/narrow pseudo layouts in retained offscreen Metal frames. Earlier
 incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
-[Release checkpoint52](docs/spikes/release-checkpoint-52.md) contains the tested
-main391 tree after all 23 required contexts and eight candidate workflows passed.
-Later main393–400 changes remain outside that release baseline. Rendering quality and full rendered-game
+[Release checkpoint54](docs/spikes/release-checkpoint-54.md) contains the tested
+main401 tree after all 23 required contexts and eight candidate workflows passed.
+Main402–406 changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -81,14 +82,34 @@ Skeleton and structural changes remain outside this admission rule.
 
 ## Current parallel qualification — 2026-10-17
 
+Computer use and screen capture are paused for every agent by the director's
+latest instruction. Owned capture helpers and test windows have been stopped;
+native window checks remain held. Terminal implementation, review and data-only
+verification continue.
+
+Compatible HUD text updates now reuse existing checked font-shaping engines;
+a new ordered fallback chain still prepares and atomically publishes a separate
+candidate. The local change passes 68 scoped UI/host controls, strict all-target
+lints and independent source review. It is merged through PR406 after all local
+development checks and the required exact-head fast check. There is no measured
+shipping frame-time claim. [Scope and evidence](docs/spikes/ui-font-reuse.md).
+
+
 Rust/Wasm gameplay now has a bounded prepared localization coverage report,
 matching the existing TypeScript committed-snapshot behavior. Pages include
 canonical table/key, requested/resolved locale and missing kind; callback quotas
 and atomic refusal remain shared with other localization queries. The
 [scoped qualification](docs/spikes/native-wasm-localization-report.md) passes
 27 native controls, six actual Wasmtime/wasm2c guests, strict lints, independent
-review and all ten local development checks. This feature is locally qualified;
-a fresh authored shipping export for this query and complete SDK parity remain open.
+review and all ten local development checks; the feature is merged through PR401.
+The [authored shipping proof](docs/spikes/native-wasm-localization-export.md) now
+also passes normal import/authoring/export and ten fresh-player cases, with exact
+checkpoint and complete PCM continuation. The original producer failed its old
+save-framing assumption after a successful build and first player. Its failure
+remains explicit; a separate reviewed checker correction and follow-up verify
+the same unchanged package. This proof is merged through PR404 after independent
+review and exact-head development checks;
+complete SDK parity remains open.
 
 Native Wasm cooperative coroutines now pass local ABI/runtime, actual Wasmtime
 and wasm2c guest parity, saved continuation, reload and refusal checks. An
@@ -139,19 +160,75 @@ that failure. This establishes a narrow repeat result, not its cause. Source,
 texture and compiled-shader observations are the next investigation. The complete
 motion sequence, appearance and cost remain unqualified. No experimental
 renderer is adopted. Following the director's 2026-10-17 request, further native
-E049 retries are held. Pinned Bevy, Godot, Filament and FSR2 source comparison
-now informs a default-off GPU-only color reconstruction candidate, with filtered
-history, current-sample reconstruction and depth/motion rejection. Its first
-compile failed three current-API accesses; the narrow correction now compiles
-and passes 34 unique CPU controls and strict lint. The first tiny actual GPU
-shader control passes; the full four-way image comparison and visual review remain
-pending. Existing failures, visual requirements and measured route costs remain
-unchanged; the candidate is not adopted.
+E049 retries are held. The [pinned upstream comparison](docs/spikes/upstream-rendering-comparison.md)
+now informs a separate GPU color reconstruction candidate. Its tiny and actual
+raster Metal controls pass registration, depth, motion and camera-cut checks;
+slanted-edge area error improves from 0.02037 to 0.01545 on matched phases.
+However, thin geometry still disappears on six of eight jitter phases and the
+full images fail visual review. The bounded static-history coverage experiment
+also fails: thin coverage survives, but slanted-edge area error worsens by 1.26%
+with 148 halo pixels outside analytic geometry. An output-resolution four-sample
+visibility-only experiment passes shader/oracle CPU controls and strict lint,
+but its actual Metal run fails at 48 occluded samples: depth and motion describe
+the nearer occluder while the owner ID describes the hidden strip. The saved
+records do not establish a driver defect. The draw-order/sample-frequency
+comparison reproduces the same 48 errors in both forward modes and none in reverse.
+A subsequent three-arm Metal discriminator reproduces the same original-owner
+errors after widening that attachment to RGBA16. Duplicating the exact owner in
+the existing motion attachment instead yields zero errors; all other semantic
+fields remain bit-identical. This narrows the investigation to attachment or
+output routing behavior without establishing its cause. The slot-order comparison's
+first build reached its 90-second deadline before producing an executable; its
+CPU controls and numerical GPU test did not run. The failure remains retained,
+and no production renderer change is adopted. Moving sparse
+geometry and full appearance/cost qualification remain open.
+
+The Godot-informed [batched native presentation diagnostic](docs/spikes/native-batched-presentation.md)
+is merged through PR402. It passes 196 CPU controls, strict lints
+and scoped Metal admission/submission checks.
+A fresh shipping player preserves all 2,156 gameplay steps and all 13,798,400 PCM
+bytes. Its first ordinary window arm completes but loses focus twice and has nine
+zero gameplay presentation timestamps. Uninterrupted qualification is correctly
+refused; the selected arms did not run on that failed baseline. The authorized
+quiet follow-up completes all three arms without focus loss. Ordinary and
+display-link-only presentation p95 are 16.667 ms; latest-batch is 25 ms, with
+193 intervals over 20 ms versus ordinary's nine. The selected arm also fails its
+strict capture receipt because committed-redraw wake metadata is omitted and
+the initial timestamp is treated inconsistently. Independent saved-data analysis
+keeps that failure and includes all display roles. A separate default-off
+simulation-deadline [experiment](docs/spikes/native-independent-simulation-deadline.md)
+passes source review, 202 selected and 151
+ordinary CPU controls, and both strict lints after a mechanical lint correction.
+Its fresh shipping build passes dependency/codegen/source-free checks, and
+the full 2,156-step CPU replay matches the complete gameplay report and all
+13,798,400 PCM bytes. The focused ordinary/independent native pair completes:
+both valid positive-adjacent interval p95 values are 16.667 ms; intervals over
+20 ms number 10 and 12 respectively. The ordinary and independent captures retain
+two and one reported-zero callbacks respectively; neither establishes continuous
+full-run delivery. Independent scheduling eliminates the alternating zero/two
+simulation-step pattern, but does not improve displayed timing. The CPU restart
+continuation also preserves the full old-session PCM prefix and exact new-session
+report. A separate focus/resize window attempt times out after losing focus at
+step 2,151; resize does not occur and complete results are absent. That failed
+attempt remains retained, both process identities/groups are absent, and restart
+window qualification is unexecuted. Computer use and screen capture are paused
+for all agents by the director; native lifecycle gates remain open. Ordinary
+exports retain their prior behavior. Main receives only the report and inert
+evidence; the scheduling implementation remains on its retained experiment branch.
+
+The [native pose-interpolation adapter and composed host](docs/spikes/native-pose-interpolation.md)
+are merged through PR403 after independent review and exact-head development
+checks, with 111 CPU controls, strict lints and three actual Metal
+controls. Endpoint/midpoint pixels match independent reference renders;
+gameplay, input, complete PCM and haptics remain unchanged. Continuity resets,
+bounded history and terminal failure handling are explicit. This default-off
+static-mesh/camera/light scope retains its explicit one-step visual latency; native-window integration,
+animated/UI support and shipping display/latency measurements remain open.
 
 Native Wasm haptics is merged through PR393 after review and successful fast
 checks. Physical vibration and an authored shipping haptics proof remain open.
-Release checkpoint52 (PR392) is promoted after all 23 requirements and eight
-workflows passed; later main393–400 is outside that baseline. No distribution or
+Release checkpoint54 (PR399) is promoted after all 23 requirements and eight
+workflows passed; later main402–405 is outside that baseline. No distribution or
 phase gate is approved.
 
 Native Wasm timers are merged through PR395 after independent review and fast
@@ -168,7 +245,10 @@ complete SDK parity remains open.
 [Contract](docs/spikes/native-wasm-timers.md) and
 [authored export evidence](docs/spikes/native-wasm-timers-export.md).
 
-The bounded QuickJS C PGO follow-up has not trained or measured Core yet. Its
+The bounded QuickJS C PGO follow-up now completes actual Core training and
+ordinary/use functional qualification at `af775fd1`; its matched CPU timing
+comparison is complete and does not justify adoption. Earlier failed attempts
+remain retained below. Its first
 ordinary shipping build completed, then the verifier misread rustc's `env`
 prefix as the linker. The original 322.341-second attempt remains failed. A
 strict parser correction passes saved-output replay. A second ordinary shipping
@@ -183,11 +263,43 @@ changed the compiler invocation and therefore its ordered C flags. It also
 forced the cooker's ordinary O0 recipe to O3. Strict validation correctly refused
 the mismatch. The retained failure cost 517.927 seconds. A source correction
 preserves natural compiler spelling and separate cooker/runtime recipes, with
-PGO explicitly scoped to runtime C; actual two-role admission qualification is
-pending. No training or performance result is claimed.
-The next useful trigger is a newly qualified
-ordinary/generate/use producer with exact gameplay/audio parity, then
-a separately scheduled matched timing run. Last reassessment: 2026-10-17.
+PGO explicitly scoped to runtime C. The next full producer fails before training
+on an owner-relative vendor path; the correction derives the lexical absolute
+path for both admission and recheck. Actual host and runtime owner qualification
+encounters retained storage/preflight/log limits, then a strict lint failure in
+diagnostic-only flag initialization. The narrow correction at `4ed9ae18` now
+passes both actual new-source script-owner builds, all four cooker/runtime
+execution receipts, real bytecode compilation and strict lint. Earlier attempts
+remain failed. The next fresh producer completes ordinary/generation builds but
+its verifier wrongly requires the original compiler-runtime archive path: rustc
+has bundled the exact pinned bytes into its dependency archive. The bounded
+archive parser correction passes 35 controls and saved-output replay without
+weakening byte/role/link requirements. The next producer passes ordinary and
+generation compilation and the archive checks, then its post-strip verifier
+incorrectly requires local instrumentation symbol names removed by `strip -x`.
+Saved Mach-O comparison confirms the instrumentation sections and executable
+code remain intact. The failure is retained. A stage-specific audit correction passes 42 portable
+controls and saved-byte replay; the exact pre-strip APIs, executable code,
+initializers and profiling sections remain checked. A fresh ordinary/generate/use
+producer now completes all three shipping builds, actual 2,156-step training,
+and six source-free ordinary/use win, held-out loss and restart runs. Every full
+gameplay report and complete PCM output matches, and all observed processes are
+absent after terminal success. This is functional qualification, not a timing gain.
+The first timing wrapper failed before launching any native child because its
+process-owner module was not attached; no samples were produced. A corrected,
+separately reviewed harness completes one balanced eight-arm comparison on the
+unchanged ordinary/use binaries. All eight full gameplay reports and complete PCM
+outputs match. Win-route ScriptTick p95 changes from 2.27–2.28 to 2.17–2.18 ms in
+one pair, but from 2.23–2.24 to 2.41–2.42 ms in the other. Loss-route p95 improves
+slightly in both pairs and remains below 2 ms in both modes. The mixed win result
+and all four win measurements above 2 ms do not justify enabling PGO. The
+[complete outcome](docs/spikes/quickjs-core-pgo.md) and inert evidence enter main;
+the compiler changes remain on the retained experiment branch. These are
+CPU measurements, not rendered-game FPS. Independent saved-data review passes;
+all 81 observed identities are absent after terminal success.
+Last reassessment: 2026-10-18. The next useful trigger is a distinct residual-cost
+hypothesis or relevant engine change, with another bounded assessment after a few
+hours of active development. Do not repeat the unchanged PGO comparison.
 The 2 ms ScriptTick target remains unmet; other work continues.
 
 ## Native presentation pacing — bounded intervention rejected

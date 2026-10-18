@@ -8,8 +8,8 @@ uses four newly packaged shipping players from
 `50b5408b1d6be66dbb1dcbca501d4380add9d656` and five same-package CPU/capture routes.
 Those producing identities remain
 explicit; they are not relabeled as later integration builds.
-[Release checkpoint52](../spikes/release-checkpoint-52.md) tested the main391 tree;
-later main393+ changes remain outside that release baseline.
+[Release checkpoint54](../spikes/release-checkpoint-54.md) tested the main401 tree;
+later main402+ changes remain outside that release baseline.
 Phase 1 remains open; this ledger records evidence and remaining work, not director
 approval. [PLAN.md](../../PLAN.md#phase-1-core-engine) defines the requirements.
 Only actual testing on the available Mac is required as device evidence. Other
@@ -28,14 +28,37 @@ span, substantially more drawable acquisition wait and four dropped wall ticks.
 The selected arm's strict timing receipt also remains failed at its partial final
 scheduler batch. The ordinary policy stays unchanged.
 
+The subsequent [upstream comparison](../spikes/upstream-rendering-comparison.md)
+uses pinned Godot, Bevy, Filament and FSR2 implementations to define new experiments.
+The [batched presentation route](../spikes/native-batched-presentation.md) has
+local CPU/Metal correctness and fresh shipping gameplay/audio parity. The later
+quiet three-arm comparison completes without focus loss but rejects latest-batch
+timing: presented-interval p95 is 25 ms versus ordinary's 16.667 ms. Its strict
+selected-arm capture receipt also fails because committed-redraw wake metadata
+is incomplete; independent analysis preserves that failure and includes all
+display roles. The separate [simulation-deadline experiment](../spikes/native-independent-simulation-deadline.md)
+now has a fresh shipping build, exact full CPU gameplay/PCM parity and one quiet
+native pair. Valid positive-adjacent interval p95 and maximum are unchanged;
+long intervals number 10 ordinary and 12 independent, with two and one zero
+callbacks retained. Its focus/resize attempt timed out without a resize, and
+native restart remains unexecuted. Only the report and evidence enter main;
+the scheduling source stays on its experiment branch. The default-off
+[pose-interpolation adapter and composed host](../spikes/native-pose-interpolation.md)
+are merged through PR403 with CPU and actual Metal correctness; they are not yet
+integrated into the native window. GPU color reconstruction improves the small
+analytic edge metric but still loses thin geometry and has no full visual
+acceptance. Its output-resolution visibility probe now isolates 48 inconsistent
+owner/depth samples for further diagnosis. These results narrow the remaining
+problems without changing any exit requirement.
+
 | Exit requirement | Recorded evidence | Remaining qualification |
 | --- | --- | --- |
 | Core Sample runs at 60 fps, using TypeScript and no editor | Authored Core gameplay, packaged HUD/audio and source-free native execution have scoped proofs. A [shipping native-window replay](../spikes/native-window-replay.md) completes the full 2,156-step route with exact headless observation parity. The later [complete host-stage diagnostic](../spikes/native-presentation-host-stages.md#complete-same-source-live-replay) also records all 2,156 steps with independent stage arithmetic, preserving its historical package and earlier failed attempt. [Core integration](../spikes/core-main182.md), [HUD](../spikes/core-result-hud-main192.md). | A shipping run of the complete rendered game meeting the frame budget. The latest same-player diagnostic has positive timestamps for every gameplay frame but retains uneven displayed intervals; earlier missing/zero callbacks remain historical. Complete timing coverage and CPU simulation timing do not establish FPS, causality or shader-stall freedom. Rendering reconstruction still has unresolved appearance defects. |
-| CI plays Core Sample and asserts game state | The general Mac and desktop workflows execute `samples/core/verify.py` against the native headless binary. All required checks passed on [checkpoint52](../spikes/release-checkpoint-52.md). | Preserve these checks as the sample and runtime change. This requirement's recorded coverage does not pass the other exit requirements. |
+| CI plays Core Sample and asserts game state | The general Mac and desktop workflows execute `samples/core/verify.py` against the native headless binary. All required checks passed on [checkpoint54](../spikes/release-checkpoint-54.md). | Preserve these checks as the sample and runtime change. This requirement's recorded coverage does not pass the other exit requirements. |
 | Navmesh enemies, pseudo-localization, RTL/CJK rendering and the 2D sample | Native Core/planar scenarios, text shaping and presentation have scoped evidence in [STATUS.md](../../STATUS.md). The [2D sample](../spikes/native-window-eligibility.md) completes its full native Mac win route with exact CPU parity and three actual window captures; desktop CI also runs `samples/planar/verify.py`. The combined [Core locale proof](../spikes/core-locale-sampled-captures.md) now passes five full CPU-matched routes with 37 selected offscreen Metal frames. Independent review of 13 originals verifies winning text, Arabic damaged-pip direction, complete CJK glyphs, pseudo expansion and narrow loss/win wrapping. | Sampled locale appearance is verified on this Mac, without phase approval. Continuous motion and native-window presentation are outside the new sampled result. Earlier [Arabic](../spikes/core-arabic-corrected-window.md) and CJK native routes retain their successful numerical runs and missed winning images; the pseudo native replay remains focus-paused/timed out. Those attempts are not relabeled by the new offscreen proof. Preserve the 2D run's focus interruption/surface deferral and the separate complete rendered-game FPS requirement. |
 | Script p95 within 2 ms with 10,000 scripted entities; no shader compilation stalls above twice the frame budget | Shipping script comparisons and exact gameplay/audio parity are recorded. The latest bounded [navigation cache comparison](../spikes/navigation-search-cache-outcome.md) remained above 2 ms and was not adopted. | The 2 ms requirement remains unmet. The director's 2026-10-14 clarification permits periodic bounded investigations, including subagents, while other engine work continues. Preserve negative results and require a distinct hypothesis before another measured experiment. Whole rendered-game shader/pipeline stall qualification also remains open. |
 | Native runtime data path and shipped dependency boundary | Cooked-world, source-free gameplay and runtime dependency checks have recorded implementations and proofs. See [Core integration](../spikes/core-main182.md) and the [shipping observations](../spikes/quickjs-loan-main278.md). | Retain the boundary on the final complete sample/export configuration. No authoring document, command bus or agent dependency may enter its runtime tick path. |
-| Shipped wasm2c module runs on this Mac, with cost recorded against TypeScript | A [matched shipping workload](../spikes/wasm-typescript-cost.md) records both backends and functional parity. Existing native target builds remain required. An [ordinary authored shipping save/load proof](../spikes/native-wasm-checkpoint-export.md) now verifies declared host-owned state in fresh VMs, exact checkpoint/audible PCM continuation and six specific refusals. The original wrapper failure and corrected data-only acceptance remain separate. | Keep each workload and native producer explicit; neither is a Core10k, rendered frame-time or startup result. Save/load covers opted-in explicit state in a plain scene, without physics/UI or arbitrary guest memory capture. A subsequent [authored timer export](../spikes/native-wasm-timers-export.md) verifies pending simulation schedules and exact gameplay/audio continuation through normal packaging and fresh processes. [Cooperative native coroutines](../spikes/native-wasm-coroutines.md) also pass local runtime and actual two-host continuation/refusal checks; the [normal authored shipping coroutine proof](../spikes/native-wasm-coroutines-export.md) now also passes exact owned continuation and complete audio parity in fresh processes. Complete Wasm SDK parity remains open. |
+| Shipped wasm2c module runs on this Mac, with cost recorded against TypeScript | A [matched shipping workload](../spikes/wasm-typescript-cost.md) records both backends and functional parity. Existing native target builds remain required. An [ordinary authored shipping save/load proof](../spikes/native-wasm-checkpoint-export.md) now verifies declared host-owned state in fresh VMs, exact checkpoint/audible PCM continuation and six specific refusals. The original wrapper failure and corrected data-only acceptance remain separate. | Keep each workload and native producer explicit; neither is a Core10k, rendered frame-time or startup result. Save/load covers opted-in explicit state in a plain scene, without physics/UI or arbitrary guest memory capture. A subsequent [authored timer export](../spikes/native-wasm-timers-export.md) verifies pending simulation schedules and exact gameplay/audio continuation through normal packaging and fresh processes. [Cooperative native coroutines](../spikes/native-wasm-coroutines.md) also pass local runtime and actual two-host continuation/refusal checks; the [normal authored shipping coroutine proof](../spikes/native-wasm-coroutines-export.md) now also passes exact owned continuation and complete audio parity in fresh processes. The [authored localization export](../spikes/native-wasm-localization-export.md) now also verifies canonical coverage pages, committed settings and exact save/audio continuation in fresh players. Its original checker-framing failure and separate same-package follow-up remain explicit. Complete Wasm SDK parity remains open. |
 
 ## Current implementation priorities
 
@@ -101,13 +124,22 @@ also rejects that specific scan-only hypothesis for reaching 2 ms: its hypotheti
 same-frame zero-cost p95 is still 2.544041 ms. The reusable observer is default off;
 no navigation optimization or new shipping performance result is adopted.
 
-A separate [QuickJS C profile-guided compilation experiment](../spikes/quickjs-c-pgo-feasibility.md)
-now passes standalone behavior and strict invalid-profile refusal checks. It
-establishes compiler feasibility only. The first ordinary Core shipping build completed, then its verifier rejected
-rustc's environment wrapper. That attempt remains failed; a strict parser
-correction now passes saved-data replay and portable controls. Core training,
-matched shipping measurements and gameplay/audio parity remain unperformed; the 2 ms
-requirement is still unmet and ordinary builds are unchanged.
+The retained [QuickJS C profile-guided experiment](../spikes/quickjs-core-pgo.md)
+completes one coherent ordinary/generation/use Core producer, with exact full
+win/loss/restart gameplay and PCM after build/input deletion. Its eight matched
+CPU arms preserve a mixed win result: ScriptTick p95 improves from 2.270–2.280 to
+2.170–2.180 ms in one pair, but regresses from 2.230–2.240 to 2.410–2.420 ms in
+the other. All four win arms remain above 2 ms. Held-out loss improves modestly,
+with both modes already below 2 ms. Main receives documentation and self-contained
+inert evidence only; the full default-off implementation remains on the retained
+`codex/quickjs-core-pgo` experiment branch at `bb5ae0db`. The ordinary build stays
+unchanged. No adoption, rendering/FPS result or phase approval follows. Original
+failures and exact producing sources remain preserved; a new source-specific
+residual-cost hypothesis is required before another experiment.
+
+Compatible HUD text updates now [reuse checked font engines](../spikes/ui-font-reuse.md)
+through PR406. Scoped behavior tests and strict lints pass; the observed long
+event frames still need causal attribution and matched shipping measurement.
 
 The real-mouse capture check is pending the director's availability and is not
 blocking these lanes. Broader editor, agent, content, export, multiplayer, game
@@ -125,5 +157,6 @@ including readable normal-size Arabic and corrected pip direction. The later
 winning pixels for Arabic/CJK/pseudo and narrow pseudo loss/win layouts, with
 exact full-route CPU parity. This is sampled appearance evidence, not complete
 native-window motion/presentation or phase approval.
-The director has allowed capture again; the retained
-focus-interrupted runs are not relabeled as complete.
+Computer use and screen capture are currently paused for all agents by the
+director. Native window checks are held. The retained focus-interrupted runs
+are not relabeled as complete; terminal implementation and data-only replay continue.

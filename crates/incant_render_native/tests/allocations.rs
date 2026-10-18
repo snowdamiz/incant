@@ -42,6 +42,38 @@ impl Drop for Recording {
         ENABLED.set(false);
     }
 }
+
+#[cfg(feature = "experimental-pose-interpolation")]
+#[test]
+fn pose_history_sync_and_repeated_presentations_allocate_nothing() {
+    use incant_render_native::{VisualCaches, interpolation::PoseRenderInput};
+    use std::path::Path;
+    let mut world = world();
+    let mut input = PoseRenderInput::load(
+        &world.spatial_view().unwrap(),
+        VisualCaches {
+            models: Path::new("absent"),
+            textures: Path::new("absent"),
+        },
+        id(2),
+        0,
+    )
+    .unwrap();
+    for _ in 0..32 {
+        world.step().unwrap();
+        let view = world.spatial_view().unwrap();
+        ALLOCS.set(0);
+        ENABLED.set(true);
+        let recording = Recording;
+        let rejected = input.try_sync(&view, 0, |_, _, _| Err::<(), _>(()));
+        let accepted = input.try_sync(&view, 0, |_, _, _| Ok::<_, ()>(()));
+        let a = input.present(0.25, |_, _, _| Ok::<_, ()>(()));
+        let b = input.present(0.75, |_, _, _| Err::<(), _>(()));
+        drop(recording);
+        assert!(rejected.is_err() && accepted.is_ok() && a.is_ok() && b.is_err());
+        assert_eq!(ALLOCS.get(), 0);
+    }
+}
 #[test]
 fn ordinary_committed_motion_and_callback_rejection_allocate_nothing() {
     let mut world = world();

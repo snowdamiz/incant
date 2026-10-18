@@ -14,12 +14,14 @@ pub struct RoutedUiInput {
     pub events: Vec<incant_input::InputEvent>,
     pub snapshot: incant_input::UiSnapshot,
 }
+mod host_present;
 mod host_update;
 mod hosted;
 pub use host_update::PreparedHostUpdate;
 mod offline;
 mod seed;
 use core::{Core, NoHost};
+pub use host_present::SceneHostPresentation;
 pub use hosted::{HostedGameSession, HostedOfflineGameSession, SceneHost, SceneHostUpdate};
 use incant_audio_runtime::{
     AudioError, AudioManagerSettings, ClipBinding, SceneAudio, SourceState,

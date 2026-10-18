@@ -1,0 +1,68 @@
+{
+  "base": "0063b97c03045e285e128fed76d72f82bca4095d",
+  "source_files": {
+    "crates/incant_ui/src/fonts.rs": "13eb6f37559f5984fca8f3c88240ff02e88cf27861ebc2deb90b6d6ce062dff8",
+    "crates/incant_ui/tests/fonts.rs": "46b544ececea43137a8f867da43f7cf4bf7b6cbb1f0bd6cd9dfcb18d7929b4e7",
+    "crates/incant_ui/tests/fonts/rebind.rs": "c2429069c427ae5720eb2c3b64582a50db678ded1fe77c63060b903a5d686145",
+    "crates/incant_render_game/src/ui.rs": "16d685686e90389c0f9e4d7ee842550e9525860d35d098664712274b03eacb06"
+  },
+  "checks": {
+    "incant_ui_tests": 48,
+    "render_game_ui_tests": 20,
+    "strict_clippy_all_targets": true,
+    "all_ten_local_development_commands": true
+  },
+  "actual_sessions": {
+    "initial_failed_generic_test": 20417,
+    "corrected_tests": 70585,
+    "lint": 29229,
+    "development_commands": 43249
+  },
+  "shipping_performance_measured": false,
+  "native_window_or_pixel_acceptance": false,
+  "prior_failure": "Initial tests used UiText<String> instead of runtime UiText<StableId>; corrected test helper, no production change.",
+  "source_review_sha256": "70938b9ea7b15823da4ded85302e12734642bcb404f9caee729415229221df73",
+  "test_generic_delta_review_sha256": "a4e0b9cf7d4a69821404dfcd5cd1c8477847d4730b718aea2971073c416477e9",
+  "records": {
+    "docs/spikes/evidence/ui-font-reuse/ui-font-reuse-001-tests-result.json": {
+      "sha256": "4b869af9892ef4e40626eb50e09b7cb53189698b2e8874861bd665323f61b46c",
+      "bytes": 657,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/ui-font-reuse-001/tests-result.json"
+    },
+    "docs/spikes/evidence/ui-font-reuse/ui-font-reuse-001-tests-0.log": {
+      "sha256": "326c9271f6b46a4272864c9ff526d5c1bf7d020c917d1c56a0ef583d6af1e091",
+      "bytes": 2091,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/ui-font-reuse-001/tests-0.log"
+    },
+    "docs/spikes/evidence/ui-font-reuse/ui-font-reuse-002-tests-result.json": {
+      "sha256": "cdb073646b0117b19a01bb5aabfa88fea007c3ad0d05d9d97a22307bb9ac2ac2",
+      "bytes": 1173,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/ui-font-reuse-002/tests-result.json"
+    },
+    "docs/spikes/evidence/ui-font-reuse/ui-font-reuse-002-tests-0.log": {
+      "sha256": "2db6d78196ea9f1efe623f657fe0a6b7278c9b2ad283c63c62c8a5139717eb07",
+      "bytes": 5797,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/ui-font-reuse-002/tests-0.log"
+    },
+    "docs/spikes/evidence/ui-font-reuse/ui-font-reuse-002-tests-1.log": {
+      "sha256": "db579636242418e7ff9b5b9a83866d75af770a79f52569557b94c3ff08cc712b",
+      "bytes": 5316,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/ui-font-reuse-002/tests-1.log"
+    },
+    "docs/spikes/evidence/ui-font-reuse/ui-font-reuse-002-lint-result.json": {
+      "sha256": "20b407619302f75c79ff167c0cb95b31bf30478c8b5aa78c6fa184ad29efb400",
+      "bytes": 719,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/ui-font-reuse-002/lint-result.json"
+    },
+    "docs/spikes/evidence/ui-font-reuse/ui-font-reuse-002-lint-0.log": {
+      "sha256": "a66c4e8d34055f74c56ba404eb39eef8768e2156a5a0e8692d6fa64c2fc9b2d2",
+      "bytes": 3758,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/ui-font-reuse-002/lint-0.log"
+    },
+    "docs/spikes/evidence/ui-font-reuse/ui-font-reuse-fast-001-result.json": {
+      "sha256": "c1cea00ea4a9bcb432362a58808e54300310d3924601d672638b196788c12e79",
+      "bytes": 3718,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/ui-font-reuse-fast-001/result.json"
+    }
+  }
+}

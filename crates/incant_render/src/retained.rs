@@ -441,6 +441,17 @@ impl RetainedScene {
         Ok(())
     }
 
+    /// Validate a later presentation candidate against the retained bindings.
+    /// This prepares CPU scratch only: no target, queue write, submission,
+    /// accepted pose, temporal history or resolution receipt changes. A later
+    /// submit stages its own exact input again; this grants no reusable ticket.
+    pub fn validate_presentation(&mut self, renderer: &Renderer, input: &SceneInput) -> Result<()> {
+        if !Arc::ptr_eq(&self.owner, &renderer.identity) {
+            return Err(SceneError::Input("retained scene belongs to another renderer").into());
+        }
+        self.stage(input)
+    }
+
     /// Validate/stage/encode before any frame buffer writes. An ordinary error
     /// leaves the accepted scene and its GPU buffers unchanged and is retryable.
     /// Successful calls write and immediately submit on the owning renderer's
