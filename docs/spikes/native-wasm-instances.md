@@ -155,7 +155,9 @@ peaked at 7,254,212,608 bytes, within the 8 GiB limits. Existing CI targets were
 not written. The retained player is 9,966,224 bytes, SHA-256
 `94cb06ebd7681a18ddb9e4147fd0c99ce58df3b14106e9746cc2ca52b7294a60`.
 These are bounded functional results, not performance or complete SDK-parity
-acceptance.
+acceptance. An [independent saved-data review](evidence/native-wasm-instances-export-review.json)
+rechecks all 63 observations, exact PCM/checkpoint joins, specific refusal,
+49 retained streams and the protected/player binary identities.
 
 ## Integration review
 
