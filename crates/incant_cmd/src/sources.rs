@@ -1,5 +1,5 @@
 use super::*;
-use incant_source::{SourceEdit, SourceStore};
+use incant_source::{SourceEdit, SourceKind, SourceStore};
 use std::path::Path;
 
 #[derive(Debug, Clone, Serialize, Deserialize, JsonSchema)]
@@ -46,6 +46,7 @@ impl CommandBus {
             .scripts
             .get(script_id)
             .ok_or_else(|| CommandError::Invalid("script does not exist".into()))?;
+        incant_source::validate_path(&script.path)?;
         let source = store.read(&script.path)?;
         let last = self
             .history
@@ -73,46 +74,66 @@ impl CommandBus {
                 script_id,
                 expected_source,
                 source,
-            } => Some((script_id, expected_source, source)),
+            } => Some((SourceKind::TypeScript, script_id, expected_source, source)),
+            Command::WriteModuleSource {
+                module_id,
+                expected_source,
+                source,
+            } => Some((SourceKind::Rust, module_id, expected_source, source)),
             _ => None,
         });
-        let Some((id, expected, source)) = writes.next() else {
+        let Some((kind, id, expected, source)) = writes.next() else {
             return Ok(None);
         };
         if writes.next().is_some() {
             return Err(CommandError::Invalid(
-                "one script source write per transaction is supported".into(),
+                "one source write per transaction is supported (TypeScript or Rust)".into(),
             ));
         }
         if revision.is_none() {
             return Err(CommandError::Invalid(
-                "script writes require expected_revision".into(),
+                "source writes require expected_revision".into(),
             ));
         }
         let store = self.sources.as_ref().ok_or(SourceError::Unavailable)?;
         if self.journal.is_none() {
             return Err(SourceError::Unavailable.into());
         }
-        let script = after.scripts.get(id).ok_or_else(|| {
-            CommandError::Invalid("written script must exist in the final project".into())
+        let path = match kind {
+            SourceKind::TypeScript => after.scripts.get(id).map(|source| &source.path),
+            SourceKind::Rust => after.module_sources.get(id).map(|source| &source.path),
+        }
+        .ok_or_else(|| {
+            CommandError::Invalid("written source must exist in the final project".into())
         })?;
-        if after.scripts.values().any(|other| {
-            other.id != *id
-                && (other.path.eq_ignore_ascii_case(&script.path)
-                    || store.same_file(&script.path, &other.path).unwrap_or(false))
-        }) {
+        kind.validate_path(path)?;
+        if after
+            .scripts
+            .values()
+            .map(|s| (&s.id, &s.path))
+            .chain(after.module_sources.values().map(|s| (&s.id, &s.path)))
+            .any(|(other_id, other_path)| {
+                other_id != id
+                    && (other_path.eq_ignore_ascii_case(path)
+                        || store.same_file(path, other_path).unwrap_or(false))
+            })
+        {
             return Err(CommandError::Invalid(
-                "multiple script IDs alias the written path".into(),
+                "multiple source IDs alias the written path".into(),
             ));
         }
-        incant_source::validate_source(source)?;
-        let before = store.read(&script.path)?;
+        kind.validate_source(source)?;
+        let before = store.read(path)?;
+        if let Some(text) = &before {
+            kind.validate_source(text)?;
+        }
         if SourceVersion::of(before.as_deref()) != *expected {
             return Err(SourceError::Conflict.into());
         }
         Ok(Some(SourceEdit {
             script_id: id.clone(),
-            path: script.path.clone(),
+            kind,
+            path: path.clone(),
             before,
             after: Some(source.clone()),
         }))

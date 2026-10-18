@@ -366,6 +366,7 @@ fn legacy_pending_script_recovers_under_exact_custom_journal_binding() {
     let mut old = CommandBus::persistent_with_sources(&journal, p.clone(), root.path()).unwrap();
     let operation = new_id();
     let edit = incant_source::SourceEdit {
+        kind: incant_source::SourceKind::TypeScript,
         script_id: script.id.clone(),
         path: script.path.clone(),
         before: Some("before".into()),

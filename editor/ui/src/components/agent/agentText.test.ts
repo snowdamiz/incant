@@ -70,6 +70,19 @@ describe('token accounting', () => {
 });
 
 describe('approval review', () => {
+  it('identifies registered Rust source edits without suggesting compilation or file deletion', () => {
+    const review = reviewApproval('doc_patch', { expected_revision: 2, description: 'Rust source', ops: [
+      { op: 'upsert_module_source', module: { id: 'M1', name: 'Movement', path: 'movement/main.rs' } },
+      { op: 'write_module_source', module_id: 'M1', source: 'é', expected_source: { state: 'missing' } },
+      { op: 'remove_module_source', module_id: 'M1' },
+    ] }, names);
+    expect(review.rows.map((row) => [row.kind, words(row.parts)])).toEqual([
+      ['change', 'Register Rust source movement/main.rs'],
+      ['change', 'Replace Rust source M1 (2 bytes)'],
+      ['remove', 'Unregister Rust source M1 (file retained)'],
+    ]);
+  });
+
   it('reads document operations from the exact arguments, naming known entities', () => {
     const review = reviewApproval(
       'doc_patch',

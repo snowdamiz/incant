@@ -201,6 +201,7 @@ fn fresh_ids(project: &Project, mapping: &BTreeMap<Id, Id>) -> Result<(), Comman
             .assets
             .keys()
             .chain(project.scripts.keys())
+            .chain(project.module_sources.keys())
             .chain(project.string_tables.keys())
             .any(&used)
         || project

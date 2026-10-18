@@ -27,6 +27,7 @@ use std::{
 use thiserror::Error;
 
 pub const MAX_SOURCE_BYTES: usize = 256 * 1024;
+pub const MAX_RUST_SOURCE_BYTES: usize = 64 * 1024;
 const STATE: &str = ".incant-source-transactions";
 const MAX_MARKER_BYTES: usize = 12 * MAX_SOURCE_BYTES + 4096;
 
@@ -60,11 +61,42 @@ impl SourceVersion {
         })
     }
 }
+/// Language admission for a durable source edit. Missing historical values are TS.
+#[derive(Debug, Default, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "snake_case")]
+pub enum SourceKind {
+    #[default]
+    #[serde(rename = "typescript")]
+    TypeScript,
+    Rust,
+}
+impl SourceKind {
+    pub fn is_typescript(&self) -> bool {
+        *self == Self::TypeScript
+    }
+    pub fn validate_path(self, path: &str) -> Result<(), SourceError> {
+        match self {
+            Self::TypeScript => validate_path(path),
+            Self::Rust => validate_rust_path(path),
+        }
+    }
+    pub fn validate_source(self, source: &str) -> Result<(), SourceError> {
+        validate_source(source)?;
+        if self == Self::Rust && source.len() > MAX_RUST_SOURCE_BYTES {
+            return Err(SourceError::Invalid("Rust source exceeds 64 KiB".into()));
+        }
+        Ok(())
+    }
+}
+
 /// Internal, exact preimage and postimage, populated by the bus after validation.
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(deny_unknown_fields)]
 pub struct SourceEdit {
+    /// Historical wire name: the stable registered source ID for either kind.
     pub script_id: String,
+    #[serde(default, skip_serializing_if = "SourceKind::is_typescript")]
+    pub kind: SourceKind,
     pub path: String,
     pub before: Option<String>,
     pub after: Option<String>,
@@ -73,6 +105,7 @@ impl SourceEdit {
     pub fn reversed(&self) -> Self {
         Self {
             script_id: self.script_id.clone(),
+            kind: self.kind,
             path: self.path.clone(),
             before: self.after.clone(),
             after: self.before.clone(),
@@ -81,9 +114,9 @@ impl SourceEdit {
     pub fn validate(&self) -> Result<(), SourceError> {
         ulid::Ulid::from_string(&self.script_id)
             .map_err(|_| SourceError::Invalid("invalid script ULID".into()))?;
-        validate_path(&self.path)?;
+        self.kind.validate_path(&self.path)?;
         for source in [&self.before, &self.after].into_iter().flatten() {
-            validate_source(source)?;
+            self.kind.validate_source(source)?;
         }
         Ok(())
     }
@@ -106,15 +139,42 @@ pub fn validate_source(source: &str) -> Result<(), SourceError> {
     }
     Ok(())
 }
-pub fn validate_path(path: &str) -> Result<(), SourceError> {
-    if path.len() > 1024
-        || !path.ends_with(".ts")
-        || path.ends_with(".d.ts")
-        || path.contains(['\\', ':'])
-        || path.chars().any(char::is_control)
+pub fn validate_rust_path(path: &str) -> Result<(), SourceError> {
+    validate_portable_path(path)?;
+    if !path.ends_with(".rs")
+        || !path.contains('/')
+        || path.split('/').count() > 8
+        || path.split('/').any(|part| {
+            part.len() > 128
+                || !part
+                    .as_bytes()
+                    .first()
+                    .is_some_and(|b| b.is_ascii_alphanumeric() || *b == b'_')
+                || part.eq_ignore_ascii_case("build.rs")
+                || !part
+                    .bytes()
+                    .all(|b| b.is_ascii_alphanumeric() || b"_.-".contains(&b))
+        })
     {
         return Err(SourceError::Invalid(
+            "expected a bounded package-relative Rust source path without build.rs".into(),
+        ));
+    }
+    Ok(())
+}
+
+pub fn validate_path(path: &str) -> Result<(), SourceError> {
+    if !path.ends_with(".ts") || path.ends_with(".d.ts") {
+        return Err(SourceError::Invalid(
             "expected a portable project-relative .ts path".into(),
+        ));
+    }
+    validate_portable_path(path)
+}
+fn validate_portable_path(path: &str) -> Result<(), SourceError> {
+    if path.len() > 1024 || path.contains(['\\', ':']) || path.chars().any(char::is_control) {
+        return Err(SourceError::Invalid(
+            "expected a portable project-relative source path".into(),
         ));
     }
     for part in path.split('/') {
@@ -256,7 +316,11 @@ impl SourceStore {
         })
     }
     fn parent(&self, path: &str) -> Result<(Dir, String), SourceError> {
-        validate_path(path)?;
+        if path.ends_with(".rs") {
+            validate_rust_path(path)?;
+        } else {
+            validate_path(path)?;
+        }
         let mut parts = path.split('/').peekable();
         let mut parent = self.root.duplicate()?;
         while let Some(part) = parts.next() {
@@ -269,7 +333,15 @@ impl SourceStore {
     }
     pub fn read(&self, path: &str) -> Result<Option<String>, SourceError> {
         let (parent, leaf) = self.parent(path)?;
-        optional_read(&parent, &leaf, MAX_SOURCE_BYTES)
+        optional_read(
+            &parent,
+            &leaf,
+            if path.ends_with(".rs") {
+                MAX_RUST_SOURCE_BYTES
+            } else {
+                MAX_SOURCE_BYTES
+            },
+        )
     }
     pub fn same_file(&self, left: &str, right: &str) -> Result<bool, SourceError> {
         let open = |path| -> Result<Option<File>, SourceError> {
