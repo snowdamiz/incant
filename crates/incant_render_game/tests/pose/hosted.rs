@@ -59,7 +59,9 @@ impl PoseConsumer for Consumer {
         _: &str,
         _: UpdateKind,
         tick: u64,
+        ui: Option<&Arc<UiInput>>,
     ) -> Result<(), Self::Error> {
+        assert!(ui.is_none());
         self.0.borrow_mut().ticks.push(tick);
         Ok(())
     }
@@ -68,7 +70,9 @@ impl PoseConsumer for Consumer {
         input: &SceneInput,
         _: &str,
         receipt: PoseReceipt,
+        ui: Option<&Arc<UiInput>>,
     ) -> Result<(), Self::Error> {
+        assert!(ui.is_none());
         let record = self.0.borrow();
         assert!(!record.panic, "injected presentation unwind");
         if record.fail {
