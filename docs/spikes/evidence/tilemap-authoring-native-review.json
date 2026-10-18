@@ -1,0 +1,32 @@
+{
+  "reviewer": "root/astra",
+  "source": "93daeb0ff9e56ae07b36ecbabc67ad184aa8f2c5",
+  "actual_exec": 77362,
+  "actual_exit": 0,
+  "native_exact_names": [
+    "tilemap_paint::history::invalid_actor_refuses_the_whole_prepared_edit",
+    "tilemap_paint::history::no_op_preserves_revision_history_and_redo_but_stale_no_op_still_refuses",
+    "tilemap_paint::history::changed_asset_deleted_selection_and_same_revision_swaps_refuse_without_publication",
+    "tilemap_paint::history::source_free_stroke_is_one_provenanced_transaction_with_exact_undo_redo_reopen",
+    "tilemap_paint::refusals::empty_oversized_duplicate_and_outside_cells_refuse_before_cooked_reads",
+    "tilemap_paint::refusals::corrupted_and_matching_digest_malformed_cooked_payloads_refuse_atomically",
+    "tilemap_paint::refusals::first_solid_cell_refuses_invalid_planar_geometry_before_returning_a_preview",
+    "tilemap_paint::refusals::full_admissible_stroke_and_missing_brush_or_existing_map_frames_are_explicit",
+    "tilemap_paint::refusals::ordinary_texture_without_atlas_is_not_a_tileset",
+    "tilemap_paint::refusals::stable_selection_revision_and_foreign_terrain_refuse_without_editing",
+    "tilemap_paint::refusals::strict_request_grammar_rejects_incomplete_rules_unknown_fields_and_invalid_actions",
+    "tilemap_paint::rules::boundaries_do_not_wrap_and_duplicate_rule_outputs_define_a_single_family",
+    "tilemap_paint::rules::erasing_empty_cell_repairs_stale_cardinal_neighbors_and_preserves_foreign_cells",
+    "tilemap_paint::rules::simultaneous_stroke_order_is_irrelevant_and_erase_retiles_neighbors",
+    "tilemap_paint::rules::unchanged_selection_repairs_neighbors_and_rules_do_not_link_later_plain_edits",
+    "tilemap_paint::rules::every_cardinal_mask_uses_local_north_east_south_west_without_diagonals",
+    "tilemap_cli_saves_one_reversible_stroke_noops_and_refuses_without_writes"
+  ],
+  "copied_executables_rehashed": 3,
+  "fresh_owned_identities_absent": 50,
+  "strict_lint_exit": 0,
+  "result_sha256": "52c84c6aba75a3c1c59d0524e2db3d39e358c7dd2b0492a22431a07d0c85ba49",
+  "closeout_sha256": "22b03431d04a08f127180974823c9dc075467eecaa394b37017cdf0bab6d0d36",
+  "reviewed_at": "2026-10-18T04:39:40.976365+00:00",
+  "scope": "Independent saved native output/artifact review, not a second execution. No computer use, window or screen capture."
+}

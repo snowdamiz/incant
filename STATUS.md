@@ -11,10 +11,10 @@ checks in CI's directory layout. Checkpoint54 reused PR399, frozen at candidate
 `5dbac494` with exactly main401's tree throughout the successful comprehensive run.
 Retained failed experiments remain failed. No distribution or phase gate is approved.
 
-[Checkpoint55 (PR408)](https://github.com/snowdamiz/incant/pull/408) is running
-comprehensive CI on frozen candidate `931226f9`, whose tree exactly matches
-main407 (`c504668e`). Development continues separately; this candidate is not
-promoted, and pending checks do not qualify release.
+[Checkpoint55 (PR408)](docs/spikes/release-checkpoint-55.md) is promoted after all
+23 required contexts and eight frozen-head workflows succeeded. Release `2d96f461`
+has exactly the tested main407 (`c504668e`) tree. Main409 and later changes remain
+outside this baseline; no distribution or phase gate is approved.
 
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
@@ -104,7 +104,8 @@ platform execution are not established by them. The scoped change is merged
 through PR409 after independent review and the exact-head development check;
 main `dec42101` has the tested tree. It is outside frozen checkpoint55.
 
-Static sprite-alpha collider authoring is implemented locally through a shared
+Static sprite-alpha collider authoring is merged through PR410 after independent
+review and exact-head development-checks success. It provides a shared
 import service, the host CLI and an engine-agent tool. The bounded exact texel
 cover creates ordinary fixed `Collider2D` entities in one reversible command-bus
 transaction. All 48 import tests pass, including geometry, physics queries and
@@ -117,10 +118,20 @@ alpha controls, and all-target strict lint. Final contract verification found on
 generated-contract omission before publication: the new agent tool was missing
 from the checked-in registry. The corrected registry now matches all 80 files
 from a fresh headless exporter, with only that tool added and all prior tool
-schemas preserved. This is locally qualified overlapping Phase 2 work, not a
+schemas preserved. Main `b40cfc72` has the exact tested PR tree and is outside
+frozen checkpoint55. This is qualified overlapping Phase 2 work, not a
 completed GUI tool or phase gate.
 [Shared contract](docs/spikes/static-alpha-colliders.md) and
 [agent admission](docs/spikes/agent-alpha-colliders.md).
+
+Tilemap painting and cardinal autotile rules now have a shared prepared authoring
+service and real CLI. All sixteen connection masks, simultaneous strokes, neighbor
+repair, stale/digest refusal, provenance and Undo/Redo pass 16 import tests; the
+actual CLI also passes saved-file, journal, reopen and refusal checks. Both packages
+pass strict all-target lint, independent source/native-result review and all ten
+local development checks. [Qualified source and exact evidence](docs/spikes/tilemap-paint-authoring.md)
+retain the backend/CLI boundary: editor painting and the Phase 2 platformer gate
+remain open. The change is locally qualified and awaiting its required PR check.
 
 Compatible HUD text updates now reuse existing checked font-shaping engines;
 a new ordered fallback chain still prepares and atomically publishes a separate
