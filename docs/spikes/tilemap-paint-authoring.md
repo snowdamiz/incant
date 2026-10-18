@@ -1,7 +1,9 @@
 # Shared tilemap painting and cardinal autotiles
 
-Source preparation only; CPU qualification has not run. This is a shared authoring
-service and headless command, not an editor painter UI or a completed Phase 2 gate.
+At producing source `93daeb0ff9e56ae07b36ecbabc67ad184aa8f2c5`, all 17 focused
+CPU tests and strict all-target import/headless Clippy pass. This is a shared
+authoring service and headless command, not an editor painter UI or a completed
+Phase 2 gate.
 Existing maps, cooked atlas format, rendering, collision generation and shipping
 runtime are unchanged. No rule interpreter or authoring dependency enters gameplay.
 
@@ -75,7 +77,7 @@ whole-file rollback. No-op/refusal paths do not save or modify existing project 
 journal bytes. A host-granted cache override has the same meaning as import's
 existing `--cache`; there are no root/cache paths in the shared request itself.
 
-## Intended CPU checks
+## CPU qualification
 
 The focused import suite covers all sixteen masks, boundaries, diagonals, foreign
 terrain, repeated output frames, simultaneous order independence, neighbor repair,
@@ -86,6 +88,25 @@ test checks a persisted autotile stroke, JSON receipt, Undo/Redo, no-op file ide
 and stale/duplicate/malformed/oversized refusal. Tests use temporary local assets;
 no renderer, GPU, native window, browser, capture, device audio or network is used.
 
-Planned qualification is scoped import and headless tilemap tests plus strict
-all-target Clippy for those packages with pinned Rust 1.99, CI profile, locked/offline
-and two jobs. It remains unexecuted pending a separately coordinated CPU target.
+Actual exec `77362` completed with zero exit: 16 import tests in 28.979 seconds,
+one real CLI test in 79.159 seconds, then strict all-target Clippy on both packages
+in 10.244 seconds. These are qualification wall times, not runtime performance
+measurements. The pinned Rust 1.99 CI profile used locked/offline dependencies and
+two compiler/Rayon workers. All three executable artifacts were copied and
+rehashed before target handoff; 50 observed wrapper/child PID and process-group
+identities were freshly absent. No tests were ignored or retried.
+
+The 125.167-second managed episode retained the incoming target history and peak,
+with an explicit 12 GiB ceiling; final/current peak was 10,491,092,992 bytes. No
+fingerprints or cache files were deleted. The producing checkout remained clean
+and all 23,444 tracked inputs were rehashed at closure.
+
+[Portable records](evidence/tilemap-paint-authoring/manifest.json) retain the exact
+source, plan, managed commands, raw test/lint logs, cleanup and independent source
+review. Run `python3 docs/spikes/evidence/tilemap-paint-authoring/verify.py` for
+bounded data-only replay. `--originals` also checks retained external originals
+and the full source inventory; `--binaries` checks the three copied executables;
+`--source-root PATH` checks the explicitly listed implementation/support bytes.
+Default replay verifies recorded artifact identities; it neither executes nor
+reconstructs missing native binaries. No editor, visual, GPU or phase gate is
+claimed by this CPU evidence.
