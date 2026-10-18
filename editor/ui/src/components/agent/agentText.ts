@@ -236,6 +236,19 @@ function describeOperation(op: JsonValue, names: Names): ReviewRow {
         parts: ['Replace script ', id(text(fields.script_id) ?? 'without an ID'), ...(source === null ? [] : [` (${sizeText(utf8Bytes(source))})`])],
       };
     }
+    case 'upsert_module_source': {
+      const path = text(record(fields.module)?.path);
+      return { kind: 'change', parts: ['Register Rust source ', path === null ? 'without a path' : id(path)] };
+    }
+    case 'remove_module_source':
+      return { kind: 'remove', parts: ['Unregister Rust source ', id(text(fields.module_id) ?? 'without an ID'), ' (file retained)'] };
+    case 'write_module_source': {
+      const source = text(fields.source);
+      return {
+        kind: 'change',
+        parts: ['Replace Rust source ', id(text(fields.module_id) ?? 'without an ID'), ...(source === null ? [] : [` (${sizeText(utf8Bytes(source))})`])],
+      };
+    }
     case 'set_memory':
       return { kind: 'change', parts: ['Update project memory ', name(text(fields.section) ?? 'without a section')] };
     case 'upsert_string_table': {

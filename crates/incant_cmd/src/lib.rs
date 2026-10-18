@@ -8,16 +8,18 @@ pub use project_checkpoint::{
 };
 mod journal;
 mod localization;
+mod module_sources;
 mod prefab;
 mod sources;
 mod subtree;
 use incant_doc::{
-    Asset, CollaborativeDocument, DocumentError, Entity, Id, Origin, Project, Provenance, Scene,
-    ScriptSource, new_id,
+    Asset, CollaborativeDocument, DocumentError, Entity, Id, Origin, Project, Provenance,
+    RustModuleSource, Scene, ScriptSource, new_id,
 };
 pub use incant_source::{SourceError, SourceVersion};
 pub use journal::Journal;
 pub use localization::{PreparedTranslations, TranslationImportResult};
+pub use module_sources::ModuleSourceRead;
 pub use project_file::ProjectPinReview;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -132,6 +134,20 @@ pub enum Command {
     /// Write one registered source through the persistent, file-aware transaction.
     WriteScript {
         script_id: Id,
+        expected_source: SourceVersion,
+        source: String,
+    },
+    /// Register an authored Rust entry, not a compiled Wasm asset or scene program.
+    UpsertModuleSource {
+        module: RustModuleSource,
+    },
+    /// Remove metadata only; source bytes are retained.
+    RemoveModuleSource {
+        module_id: Id,
+    },
+    /// One checked Rust source write through the existing durable source journal.
+    WriteModuleSource {
+        module_id: Id,
         expected_source: SourceVersion,
         source: String,
     },
@@ -807,7 +823,18 @@ fn apply(
             }
             entity.provenance = Some(provenance.clone());
         }
-        Command::WriteScript { .. } => {}
+        Command::UpsertModuleSource { module } => {
+            project
+                .module_sources
+                .insert(module.id.clone(), module.clone());
+        }
+        Command::RemoveModuleSource { module_id } => {
+            project
+                .module_sources
+                .remove(module_id)
+                .ok_or_else(|| CommandError::Invalid("module source does not exist".into()))?;
+        }
+        Command::WriteScript { .. } | Command::WriteModuleSource { .. } => {}
         Command::SetMemory { section, text } => {
             if section.trim().is_empty() {
                 return Err(CommandError::Invalid(
@@ -850,6 +877,9 @@ fn apply(
 
 #[cfg(test)]
 mod source_protocol_tests;
+
+#[cfg(test)]
+mod module_source_protocol_tests;
 
 #[cfg(test)]
 mod project_file_tests;

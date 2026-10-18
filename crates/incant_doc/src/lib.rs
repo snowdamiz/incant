@@ -8,7 +8,9 @@ mod camera;
 mod crdt;
 mod engine_version;
 mod lights;
+mod module_sources;
 mod navigation;
+pub use module_sources::RustModuleSource;
 mod physics;
 mod physics_2d;
 pub mod prefab;
@@ -62,6 +64,9 @@ pub struct Project {
     pub scenes: BTreeMap<Id, Scene>,
     pub assets: BTreeMap<Id, Asset>,
     pub scripts: BTreeMap<Id, ScriptSource>,
+    /// Registered authored Rust entries, separate from compiled Wasm assets.
+    #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
+    pub module_sources: BTreeMap<Id, RustModuleSource>,
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     pub string_tables: BTreeMap<Id, StringTable>,
     pub settings: ProjectSettings,
@@ -216,6 +221,7 @@ impl Project {
             scenes: BTreeMap::new(),
             assets: BTreeMap::new(),
             scripts: BTreeMap::new(),
+            module_sources: BTreeMap::new(),
             string_tables: BTreeMap::new(),
             settings: ProjectSettings {
                 tick_rate: 60,
@@ -296,6 +302,9 @@ impl Project {
         }
         for sid in self.scripts.keys() {
             check_id(sid, format!("/scripts/{sid}/id"));
+        }
+        for id in self.module_sources.keys() {
+            check_id(id, format!("/module_sources/{id}/id"));
         }
         for id in self.string_tables.keys() {
             check_id(id, format!("/string_tables/{id}/id"));
@@ -383,6 +392,7 @@ impl Project {
                 );
             }
         }
+        module_sources::validate(self, &mut issue);
         for (sid, scene) in &self.scenes {
             self.scene_diagnostics(sid, scene, &format!("/scenes/{sid}"), &mut issue);
         }
@@ -807,6 +817,10 @@ fn validate_component(kind: &str, value: &Value, project: &Project) -> Result<()
 pub fn schema_registry() -> BTreeMap<String, Value> {
     let mut registry = BTreeMap::from([
         ("Project".into(), json!(schemars::schema_for!(Project))),
+        (
+            "RustModuleSource".into(),
+            json!(schemars::schema_for!(RustModuleSource)),
+        ),
         ("Prefab".into(), json!(schemars::schema_for!(Prefab))),
         (
             "PrefabLink".into(),
