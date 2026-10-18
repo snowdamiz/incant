@@ -101,7 +101,7 @@ fn rendered_animation_uses_accepted_endpoints_without_advancing_world_or_losing_
                 let position = player
                     .skin_position(3, 0, 0, [vertex[0], vertex[1], vertex[2]])
                     .unwrap();
-                assert!((f64::from(position[0]) - (11. + (7. + fraction) / 60.)).abs() < 1e-5);
+                assert!((position[0] - (11. + (7. + fraction) / 60.)).abs() < 1e-5);
                 assert_eq!((receipt.previous_tick, receipt.current_tick), (7, 8));
                 Ok::<_, ()>(())
             })
@@ -211,7 +211,7 @@ fn loop_boundary_blends_local_poses_instead_of_interpolating_wrapped_seconds() {
                 .skin_position(3, 0, 0, [vertex[0], vertex[1], vertex[2]])
                 .unwrap()[0];
             let expected = 11. + (5. * (2. - before) + 5. * after) * 0.5;
-            assert!((f64::from(actual) - expected).abs() < 1e-5);
+            assert!((actual - expected).abs() < 1e-5);
             assert!(
                 actual < 11.1,
                 "wrapped clock midpoint would select the curve peak"
