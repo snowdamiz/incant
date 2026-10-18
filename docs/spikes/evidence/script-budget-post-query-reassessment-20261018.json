@@ -1,0 +1,218 @@
+{
+  "format": "incant-script-budget-source-reassessment-v1",
+  "observed_at_utc": "2026-10-18T18:51:11.488607+00:00",
+  "source": "70a54db1b7dddca261fbdc66a312da8279c963f8",
+  "worktree": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant",
+  "worktree_clean": true,
+  "registered_source_preserved": {
+    "source": "e1b4d8dd5318d3c7b9901a296b0e8dfafade47ef",
+    "worktree": "/Users/andreyyurlov/.codex/worktrees/static-catalog-payload/incant",
+    "clean": true
+  },
+  "result": "no_credible_distinct_optimization_candidate",
+  "inputs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/PLAN.md",
+      "bytes": 135340,
+      "sha256": "dc3a7369624c545bdedc28c53486679138fd546751e7b56916a622767ecb74a7"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/STATUS.md",
+      "bytes": 333670,
+      "sha256": "98515954be6f44ace7b12f6a269113e4aeadedb02b9a0a5da9e0c2bda2638521"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/gates/phase1-review.md",
+      "bytes": 18446,
+      "sha256": "ae98d2fd6ac496f1351ad5b5ed7fc4cf466248a3d67ecd4f6548fd932cd02180"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/spikes/script-query-attribution.md",
+      "bytes": 17020,
+      "sha256": "370bae4eaf81adb20d0e9d32baa4c4b4c6efb4a7cb8dc3a295f62ec7666e9b81"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/spikes/core-script-attribution.md",
+      "bytes": 19764,
+      "sha256": "0b046d136eed3a7d2da41cf7fa97e9fb0674091596d0e9bba1b0bdde7185a0f0"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/spikes/quickjs-core-pgo.md",
+      "bytes": 11526,
+      "sha256": "a9f76a426f150174097294c1aad10cd1e588428a05c5a490ac82a44589297829"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/spikes/script-budget-check-attribution.md",
+      "bytes": 10521,
+      "sha256": "50779442c4dacc873aec07891ff6ec8adecf5724095cd4d494cadec06fc8c585"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/spikes/ordered-numeric-query.md",
+      "bytes": 9226,
+      "sha256": "4af3971287830963325c2501a3eb995ec2f09ec230d49c9a69ac169990696d44"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/spikes/core-tick-cost-diagnostics.md",
+      "bytes": 4474,
+      "sha256": "bda36ffb05d270e49e7241d3e362450012fc47dc2b30f0e6b7e2ac21cf8e7f6c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/spikes/numeric-loan-main262.md",
+      "bytes": 5664,
+      "sha256": "7e244bb7f93fb295c2a4001cc71a60d360eace1bcaeb6e752f617b5618800982"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/spikes/quickjs-loan-capacity.md",
+      "bytes": 5159,
+      "sha256": "a9fe5f6905d9dad9e4d7398b900da412134d2a4524d5358bc9b671c8fb31ebf4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/docs/spikes/evidence/script-budget-source-reassessment-20261018.json",
+      "bytes": 15702,
+      "sha256": "ad7022e9bc7601848e3894e6c76026a3a51d7f8a9fb346ec894e29f4cdf04fc4"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/samples/core/stress.ts",
+      "bytes": 3513,
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_script/src/lib.rs",
+      "bytes": 42138,
+      "sha256": "7a79a5de41474f3931506c6e4f0b0d86b7f57a27ea752591fe4f2b8335f7a1e6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_script/src/loan.rs",
+      "bytes": 10420,
+      "sha256": "5aca7cf70f2c174dec2b993f1736ff4b6e575eb0af2ad3fbeca9b3c10a117c86"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_script/src/loan/scratch.rs",
+      "bytes": 3083,
+      "sha256": "7c08b23dcf95d614dc29c25212289d4ec13901090b6765219d653f22e419a8d1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_runtime/src/world.rs",
+      "bytes": 35503,
+      "sha256": "681843915dc9b2f3fee921b2f534862d091b5f5c3c60a86e06bfae6d327c25d2"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_runtime/src/columns.rs",
+      "bytes": 12068,
+      "sha256": "cc58d02ea968d89d83d2ceaf92bdb1b6675cd7777635089781148565efae7fa5"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_runtime/src/spatial_view.rs",
+      "bytes": 5847,
+      "sha256": "a38123ff2c19fae7dc94b106f3cb35147e051172c92dd8ac42c261853a46a0c3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/rquickjs-sys/quickjs/quickjs.c",
+      "bytes": 2146912,
+      "sha256": "d2230f99482f79501dd1ab67430433298116120f01eccfea66c220e9c890f0e2"
+    }
+  ],
+  "raw_inputs": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/paired-run-001/attribution-receipt.json",
+      "bytes": 12343,
+      "sha256": "39ec8c4c493d0b16a72004ac9c58e26913d9302675dcb82ee82543943e4e745b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/paired-run-001/query/stdout.json",
+      "bytes": 2471970,
+      "sha256": "570f092887220d853b282bd859ab2378f28fe71afb560ab2fcf5c1018f8fa3ee"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/paired-run-001/query/analysis.json",
+      "bytes": 496822,
+      "sha256": "6430c703f25f06a10c222097bf5d6d37db1b421090f240f4250123435402c451"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/paired-run-001/ordinary/stdout.json",
+      "bytes": 537771,
+      "sha256": "59fdfa50e4a89909e567bca6e546bb6aeb8ea97765b6f2a1fa02d227201f9c1c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/paired-run-001/ordinary/analysis.json",
+      "bytes": 1071,
+      "sha256": "495a3f0898e2798ce44a523c8ea27a41ce09cfa9295dcc4b512a676897a19545"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/paired-run-001/result.json",
+      "bytes": 7597,
+      "sha256": "1ac7a9679497cd1bf7515ac89b29e8d1425ec5d1a1922772fe0402cbef4b0c1d"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/paired-run-001/closeout.json",
+      "bytes": 1427,
+      "sha256": "d5a7b544fc61b1eb029235761368e5712c5d7e33ac336cd41e6d7cf62c5cb425"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/paired-run-001/outer-closeout.json",
+      "bytes": 1908,
+      "sha256": "6a23886e8453d53fc3465950df40229e8a0001c40cccdca7603493dabc70ea27"
+    }
+  ],
+  "latest_data_replay": {
+    "all_frames": {
+      "frames": 2156,
+      "whole_tick_ns": 3265764458,
+      "parse_materialize_ns": 7261663,
+      "parse_materialize_pct": 0.22235721814570622,
+      "parse_materialize_mean_us": 3.36811827458256,
+      "stress_callback_inclusive_ns": 2024478553,
+      "navigation_execute_inclusive_ns": 158449085
+    },
+    "same_frame_tail": {
+      "frames": 108,
+      "whole_tick_ns": 272544834,
+      "parse_materialize_ns": 830682,
+      "parse_materialize_pct": 0.30478728501601315,
+      "parse_materialize_mean_us": 7.6915,
+      "stress_callback_inclusive_ns": 105261377,
+      "navigation_execute_inclusive_ns": 83938711
+    }
+  },
+  "publication_scope_check": {
+    "observed_instrumented_whole_p95_ns": 2144292,
+    "hypothetical_zero_publication_reranked_p95_ns": 2113082,
+    "publication_over_100us_frames": 7,
+    "publication_median_ns": 1541,
+    "interpretation": "Unphysical data-only subtraction and reranking, not a realizable optimization or new benchmark; no claim of reclaimable duration."
+  },
+  "observations": [
+    "Latest same-source ordinary p95 remains 2.100001-2.110000 ms; instrumented query p95 is 2.140001-2.150000 ms. This fixed-order pair establishes parity and attribution, not a reliable isolated overhead estimate or gate pass.",
+    "Query parse plus materialize is 0.222357% overall and 0.304787% of the same 108 whole-tick tail frames (7.6915 us mean on those selected frames). The previously open query-marshalling ambiguity is resolved negatively; repeating attribution or implementing marshalling changes is not justified.",
+    "All query source masks refer only to gameplay slot0. Stress slot1 performs the original 9,999-row numeric writes and actual checksum reads; its inclusive callback time is not proven exclusive interpreter/opcode time.",
+    "Native navigation execute dominates query tail time (83.938711 ms), but graph-cache/repeated-start/endpoint-only proposals are not new candidates; their preserved measured or same-row-subtraction negative outcomes remain binding.",
+    "Numeric prepare/validation and publish-global costs remain inclusive measured regions. Existing ordered-query and matrix-basis experiments did not establish adoption; an aggregate duration does not establish removable checks or a safe new algorithm.",
+    "Loan buffers are foreign views over native ECS data, not guest copies; native undo storage already reuses capacity and keeps required rollback copies. Pinned QuickJS integer-index typed reads already have a direct fast path. Prior store/loop/PGO changes were measured negative or mixed.",
+    "The reviewed script/runtime/navigation/QuickJS/Core paths differ from the latest measured producer only by the unused-in-ScriptTick has_world_text helper; no distinct new source hot-path regression was found. Other source/compiler changes are not claimed measured by the historical pair.",
+    "Publication concentration was also checked: only seven rows exceed 100 us, median 1.541 us. Removing its entire duration in an unrealizable same-row model still leaves reranked instrumented p95 at 2.113082 ms. This does not support a publication-only route to the target."
+  ],
+  "recommendation": "Stop this bounded source/data reassessment without a new experiment or optimization branch. The 2 ms requirement remains unmet. Revisit after a concrete changed callback/VM/typed-view-validation path or source-bound evidence of a distinct expensive operation; do not repeat unchanged query parsing/materialization, PGO, navigation, deadline or numeric-query experiments.",
+  "conditional_measurement_contract": {
+    "status": "No new experiment proposed or authorized",
+    "trigger": "A distinct source-level operation with direct relevant cost evidence, preserving all authored work and safety/correctness checks. Inclusive callback residual alone is insufficient.",
+    "expected_affected_cost": "No credible saving estimated. Attributing all 125.438379 ms callback residual or 21.494833 ms tail validation to an unproven optimization would be misleading.",
+    "matched_protocol_if_trigger_arrives": "Freeze one cause-specific change and same-source ordinary control with unchanged shipping opt3/fat-LTO/one-CGU/abort, physics selection, SWC/QuickJS/Node closure, 60 runtime inputs bound to the 74-file historical manifest and empty recovery epoch. First require exact complete 2,156-step nonprofile gameplay/observations/state and full 13,798,400-byte PCM; retain loss/restart held-out parity. Only then schedule fixed balanced quiet same-device shipping pairs, keep every result and PlayerFrame/memory separately.",
+    "discard_criteria": "Any logical/PCM difference, weakened workload/limits/rollback/observability, invalid/partial timing, or unstable/nonrepeated paired improvement rejects adoption. Never pool marginal quantiles, drop outliers, or change the 2 ms threshold."
+  },
+  "limits": [
+    "This is source/data-only; no new measured timing or performance improvement.",
+    "Existing profiles are instrumented wall observations, nested amounts are not added. The 108-frame tail is selected by whole ScriptTick, not per-region quantiles.",
+    "Full native/PCM verifier was not rerun; raw report equality and retained receipt bindings were independently rechecked.",
+    "No evidence is offered that 2 ms is impossible."
+  ],
+  "execution": {
+    "repository_edits": 0,
+    "native_builds_tests_players": 0,
+    "benchmarks_or_profile_collection": 0,
+    "target_access": 0,
+    "windows_gpu_device_audio": 0,
+    "computer_use_capture_helpers": 0,
+    "source_reads_and_pure_json_calculations_only": true,
+    "external_receipt_created": true
+  }
+}

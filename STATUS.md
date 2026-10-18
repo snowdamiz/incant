@@ -481,9 +481,18 @@ and all four win measurements above 2 ms do not justify enabling PGO. The
 the compiler changes remain on the retained experiment branch. These are
 CPU measurements, not rendered-game FPS. Independent saved-data review passes;
 all 81 observed identities are absent after terminal success.
-Last reassessment: 2026-10-18 06:27 UTC. A fresh same-source ordinary/query
-shipping pair now completes all 2,156 Core steps with exact full gameplay and
-complete PCM parity. Ordinary ScriptTick p95 is 2.100001–2.110000 ms; instrumented
+Last reassessment: 2026-10-18 18:51 UTC. The bounded source/data review found
+no distinct optimization supported by the retained profile. Query parse and
+materialization remain 0.305% of the same slow-frame tail. Publication exceeds
+100 microseconds in only seven of 2,156 rows; even an unrealizable data-only
+removal and reranking leaves instrumented p95 above 2 ms. This is neither a new
+benchmark nor a claim of reclaimable cost. [Review and bound inputs](docs/spikes/evidence/script-budget-post-query-reassessment-20261018.json)
+preserve the negative result. Reassess after a concrete callback, VM or typed-view
+validation operation changes or has new direct cost evidence; do not rerun unchanged
+experiments. No optimization was adopted.
+
+The earlier 06:27 UTC same-source ordinary/query shipping pair completes all
+2,156 Core steps with exact full gameplay and complete PCM parity. Ordinary ScriptTick p95 is 2.100001–2.110000 ms; instrumented
 p95 is 2.140001–2.150000 ms, with no gate or isolated-overhead claim. Query parsing
 plus result construction accounts for only 0.305% of the same 108 slow whole
 frames; all native queries belong to gameplay, while the stress callback has none.
