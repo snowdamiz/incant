@@ -28,18 +28,8 @@ pub fn load(module: Option<&str>) -> Result<SessionProgram> {
                     .into();
                 if authored.is_some() {
                     let bytes = include_bytes!(concat!(env!("OUT_DIR"), "/wasm-instances.bin"));
-                    if !bytes.is_empty() {
-                        let scene = bytes
-                            .get(..32)
-                            .ok_or("invalid built instance catalog")?
-                            .try_into()
-                            .unwrap();
-                        return Ok(program.with_instances(
-                            incant_wasm_runtime::instances::Catalog::from_frame(
-                                scene,
-                                &bytes[32..],
-                            )?,
-                        )?);
+                    if let Some(catalog) = built_instances(bytes)? {
+                        return Ok(program.with_instances(catalog)?);
                     }
                 }
                 Ok(program)
@@ -51,6 +41,19 @@ pub fn load(module: Option<&str>) -> Result<SessionProgram> {
             }
         }
     }
+}
+#[cfg(feature = "static-module")]
+fn built_instances(bytes: &[u8]) -> Result<Option<incant_wasm_runtime::instances::Catalog>> {
+    if bytes.is_empty() {
+        return Ok(None);
+    }
+    let (scene, frame) = bytes
+        .split_at_checked(32)
+        .ok_or("invalid built instance catalog")?;
+    Ok(Some(incant_wasm_runtime::instances::Catalog::from_frame(
+        scene.try_into()?,
+        frame,
+    )?))
 }
 #[cfg(test)]
 mod tests {
@@ -70,6 +73,49 @@ mod tests {
         );
         assert!(split_args(&args[..2]).is_err());
         assert!(load(Some("untrusted.wasm")).is_err());
+    }
+    #[test]
+    #[cfg(feature = "static-module")]
+    fn built_catalog_empty_default_is_absent_but_nonempty_truncation_refuses() {
+        // The non-authored build emits an include_bytes array of this exact size.
+        const EMPTY: &[u8; 0] = b"";
+        assert_eq!(built_instances(EMPTY).unwrap(), None);
+        #[cfg(not(feature = "project"))]
+        {
+            let generated = include_bytes!(concat!(env!("OUT_DIR"), "/wasm-instances.bin"));
+            assert!(generated.is_empty());
+            assert_eq!(built_instances(generated).unwrap(), None);
+        }
+        for length in 1..=32 {
+            assert!(
+                built_instances(&vec![0; length]).is_err(),
+                "length {length}"
+            );
+        }
+    }
+    #[test]
+    #[cfg(feature = "static-module")]
+    fn built_catalog_preserves_scene_rows_and_rejects_malformed_payload() {
+        use incant_runtime::StableId;
+        use incant_types::CoroutineValue;
+        use incant_wasm_runtime::instances::Catalog;
+        use std::collections::BTreeMap;
+        let catalog = Catalog::new(
+            [7; 32],
+            BTreeMap::from([(
+                StableId(1u128.to_be_bytes()),
+                BTreeMap::from([("value".into(), CoroutineValue::Bool(true))]),
+            )]),
+        )
+        .unwrap();
+        let mut bytes = catalog.scene().to_vec();
+        bytes.extend(catalog.frame());
+        assert_eq!(built_instances(&bytes).unwrap(), Some(catalog));
+        bytes.push(0);
+        assert!(built_instances(&bytes).is_err());
+        bytes.pop();
+        bytes[32] ^= 1;
+        assert!(built_instances(&bytes).is_err());
     }
     #[test]
     #[cfg(feature = "static-module")]

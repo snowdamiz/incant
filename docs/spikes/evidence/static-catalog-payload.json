@@ -1,0 +1,11 @@
+{
+  "format": "static-catalog-payload-manifest-v1",
+  "source": "d4f4e1582007385a55d8897e7eba53eef08de5e7",
+  "archive": "static-catalog-payload.json.gz",
+  "packed_bytes": 301813,
+  "packed_sha256": "24f347edfa57d68e538c4966ccf81509324c0aa72026078c003662546bb5449b",
+  "expanded_bytes": 1592248,
+  "expanded_sha256": "43258b0b8d9d39d7f9a0bdb5480d0715ea19eb4b2ea19eaf3719ff3e6ccf18f0",
+  "record_count": 26,
+  "limit": "Focused Mac static-conformance regression, not Linux CI or full-suite completion. Executables and retained guest bundle are external identities only."
+}

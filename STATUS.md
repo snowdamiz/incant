@@ -95,7 +95,12 @@ journal assertions and verifies project/history/redo after release and reopen.
 All ten tilemap tests, scoped strict lint and all ten development checks pass on
 this Mac. The initial post-test audit failure is retained separately from the
 successful native tests and corrected data audit. Windows confirmation remains
-pending; release is held until a corrected candidate passes every required check.
+pending. The same checkpoint also found a constant out-of-bounds indexing lint
+in the empty embedded Wasm catalog on Linux, macOS and Windows. The
+[checked catalog split](docs/spikes/static-catalog-payload.md) passes both new
+local boundary controls and strict static-conformance lint, including the actual
+zero-byte generated catalog. Both original failure classes remain recorded;
+release is held until a corrected candidate passes every required check.
 
 
 The [process-cleanup correction](docs/spikes/native-process-cleanup.md) preserves
