@@ -64,8 +64,15 @@ producing manifest; `--binaries` rehashes the four external copied executables;
 `--source-root PATH` checks the listed implementation/test/support bytes. The
 archive contains no binaries and does not rerun native code.
 
-The generated `schemas/agent-tools.json` update remains reserved for root's
-combined Wasm integration and must be generated/checked before publication.
+The combined headless build at `064b4727` generates all 80 schemas. Only
+`agent-tools.json` changes: it adds `tilemap_paint` and preserves every prior tool.
+The first combined build reused a stale ABI library from another worktree;
+rebuilding unchanged local inputs succeeds, and both attempts remain recorded
+in the [combined receipt](evidence/agent-tilemap-combined-schema.json).
+The [native review](evidence/agent-tilemap-native-review.json) and all ten
+[local development checks](evidence/agent-tilemap-development.json) pass. An
+existing process-test readiness race was corrected without weakening its
+deadline or cleanup assertions; the original failed run remains retained.
 This packet proves CPU authoring/agent-loop behavior with in-process mock
 providers. It does not establish live provider, editor UI, GPU, window or capture
 behavior. No runtime or public-shipping dependency change is introduced.

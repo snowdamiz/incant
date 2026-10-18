@@ -134,6 +134,18 @@ retain the backend/CLI boundary: editor painting and the Phase 2 platformer gate
 remain open. The scoped source is merged through PR411 after independent review
 and exact-head development-checks success; main `634958cc` has the tested tree.
 
+The tilemap engine-agent adapter now uses the same prepared authoring service,
+capability and approval checks, with atomic revision checks, provenance and
+Undo/Redo. Its [scoped qualification](docs/spikes/agent-tilemap-paint.md) passes
+33 native CPU tests and strict all-target lint. The fresh combined headless
+export preserves all 79 other schemas and every existing tool, adding only
+`tilemap_paint`. The first combined build exposed an older ABI artifact reused
+from a different worktree; its failure is retained. Rebuilding unchanged local
+source inputs succeeds. Independent source and result review and all ten local development checks pass.
+An existing process-test race was corrected to wait for the first actual
+heartbeat byte, preserving the cleanup assertions and failed run. Publication
+is in progress. Editor painting remains open.
+
 Compatible HUD text updates now reuse existing checked font-shaping engines;
 a new ordered fallback chain still prepares and atomically publishes a separate
 candidate. The local change passes 68 scoped UI/host controls, strict all-target
@@ -358,9 +370,14 @@ and all four win measurements above 2 ms do not justify enabling PGO. The
 the compiler changes remain on the retained experiment branch. These are
 CPU measurements, not rendered-game FPS. Independent saved-data review passes;
 all 81 observed identities are absent after terminal success.
-Last reassessment: 2026-10-18. The next useful trigger is a distinct residual-cost
-hypothesis or relevant engine change, with another bounded assessment after a few
-hours of active development. Do not repeat the unchanged PGO comparison.
+Last reassessment: 2026-10-18 at 05:03 UTC. A bounded
+[source/data review](docs/spikes/evidence/script-budget-source-reassessment-20261018.json)
+found no supported new optimization: typed-read fast paths, zero-copy loan views
+and reused physics queries already exist. Next useful trigger: finer attribution
+of callback parsing, native query execution and result materialization. A
+default-off diagnostic is being prepared; no new benchmark or optimization has
+been adopted. Do not repeat the unchanged PGO comparison; reassess after new
+attribution or relevant engine changes.
 The 2 ms ScriptTick target remains unmet; other work continues.
 
 ## Native presentation pacing — bounded intervention rejected
