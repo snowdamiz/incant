@@ -86,6 +86,22 @@ impl PoseRenderInput {
         &self.input
     }
 
+    /// Ensure a composed host is presenting its exact accepted native owner.
+    /// This also catches trusted same-tick numeric edits without a reset.
+    pub fn validate_committed(&self, view: &SpatialView<'_>) -> Result<(), PoseError> {
+        if view.identity() != &self.input.identity {
+            return Err(NativeRenderError::DifferentWorld.into());
+        }
+        if view.tick() != self.input.tick
+            || view.topology_generation() != self.input.topology_generation
+            || view.binding_generation() != self.input.binding_generation
+        {
+            return Err(PoseError::Sequence);
+        }
+        self.history
+            .validate(view, self.history.receipt(1.).continuity_epoch)
+    }
+
     /// Publish history only after canonical input and its consumer both accept.
     /// Same-layout motion reuses every buffer. Gaps, explicit epoch changes and
     /// structural/binding changes snap to the new accepted state. A failed or

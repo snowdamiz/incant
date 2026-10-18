@@ -12,8 +12,12 @@ mod motion;
 #[cfg(feature = "native-metalfx")]
 pub use metalfx::{MetalFxSettings, MetalFxSetup, MetalFxTargets};
 pub use motion::{MotionReset, MotionTargets};
+#[cfg(feature = "experimental-pose-interpolation")]
+mod pose;
 #[cfg(feature = "experimental-batched-presentation")]
 mod presentation;
+#[cfg(feature = "experimental-pose-interpolation")]
+pub use pose::PoseTargets;
 mod resolution;
 mod resolution_mailbox;
 use incant_render::resolution::{ResolutionConfig, ResolutionError, ResolutionFrame};
