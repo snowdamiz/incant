@@ -136,7 +136,7 @@ fn output_visibility_owner_depth_four_arm_capture() {
             let samples = normalized(&raw);
             let frame = retained.motion_frame().unwrap();
             let changes = retained.motion_changes().unwrap();
-            assert!(frame.same_owner(&changes.frame()));
+            assert!(frame.same_owner(changes.frame()));
             assert_eq!(frame.epoch(), 1);
             assert_eq!(frame.sequence(), index as u64 + 1);
             assert_eq!(frame.jitter_phase(), Some(index as u32 % 8));
