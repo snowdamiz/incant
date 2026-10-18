@@ -3,8 +3,13 @@ use super::{MotionDraw, system};
 use crate::Renderer;
 use glam::{Mat4, Vec3};
 use wgpu::util::DeviceExt;
+#[path = "visibility_owner.rs"]
+mod diagnostic;
+#[path = "visibility_msl.rs"]
+mod msl;
 #[path = "visibility_readback.rs"]
 mod readback;
+pub(crate) use msl::Session as MslSession;
 pub(crate) use readback::Sample;
 pub(crate) const SIZE: u32 = 64;
 // Guaranteed multisample integer attachments. Split each f32/u32 into exact
@@ -77,9 +82,21 @@ pub(crate) struct Probe {
     pub(super) depth: wgpu::TextureView,
     reader: readback::Reader,
     globals: wgpu::BindGroupLayout,
+    diagnostic: Option<diagnostic::Arm>,
 }
 impl Probe {
     pub(crate) fn new(r: &Renderer) -> Self {
+        Self::build(r, None)
+    }
+    pub(crate) fn owner_diagnostic(
+        r: &Renderer,
+        root: &std::path::Path,
+        explicit: bool,
+        reverse: bool,
+    ) -> Self {
+        Self::build(r, Some(diagnostic::Arm::new(root, explicit, reverse)))
+    }
+    fn build(r: &Renderer, diagnostic: Option<diagnostic::Arm>) -> Self {
         let d = &r.device;
         let usage = wgpu::TextureUsages::RENDER_ATTACHMENT | wgpu::TextureUsages::TEXTURE_BINDING;
         for f in FORMATS
@@ -124,9 +141,10 @@ impl Probe {
             bind_group_layouts: &[Some(&globals), Some(&r.materials.layout)],
             immediate_size: 0,
         });
+        let wgsl = diagnostic::source(diagnostic.as_ref().is_some_and(|arm| arm.explicit));
         let shader = d.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("Output4x sampled owner"),
-            source: wgpu::ShaderSource::Wgsl(source().into()),
+            source: wgpu::ShaderSource::Wgsl(wgsl.clone().into()),
         });
         let targets = FORMATS.map(|format| {
             Some(wgpu::ColorTargetState {
@@ -147,7 +165,7 @@ impl Probe {
                         layout: Option<&wgpu::PipelineLayout>,
                         buffers: &[wgpu::VertexBufferLayout<'_>],
                         i: usize| {
-            d.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+            let descriptor = wgpu::RenderPipelineDescriptor {
                 label: Some("Visibility-only diagnostic"),
                 layout,
                 vertex: wgpu::VertexState {
@@ -182,7 +200,19 @@ impl Probe {
                 }),
                 multiview_mask: None,
                 cache: None,
-            })
+            };
+            diagnostic::pipeline(
+                d,
+                &descriptor,
+                diagnostic.as_ref(),
+                i,
+                if buffers.is_empty() {
+                    "calibration"
+                } else {
+                    "scene"
+                },
+                &wgsl,
+            )
         };
         let pipelines = std::array::from_fn(|i| pipeline(&shader, Some(&layout), &buffers, i));
         let calibration = d.create_shader_module(wgpu::ShaderModuleDescriptor {
@@ -194,8 +224,9 @@ impl Probe {
             calibration: pipeline(&calibration, None, &[], 2),
             colors: FORMATS.map(make),
             depth: make(wgpu::TextureFormat::Depth32Float),
-            reader: readback::Reader::new(d),
+            reader: readback::Reader::new(d, diagnostic.as_ref()),
             globals,
+            diagnostic,
         }
     }
     fn pass<'a>(&'a self, encoder: &'a mut wgpu::CommandEncoder) -> wgpu::RenderPass<'a> {
@@ -248,6 +279,9 @@ impl Probe {
             previous: draw.visibility_matrices[1].to_cols_array_2d(),
             rect: [0., 0., 64., 64.],
         };
+        if let Some(arm) = &self.diagnostic {
+            arm.record(draw, bytemuck::bytes_of(&f));
+        }
         let uniform = d.create_buffer_init(&wgpu::util::BufferInitDescriptor {
             label: None,
             contents: bytemuck::bytes_of(&f),
@@ -264,7 +298,12 @@ impl Probe {
         let mut p = self.pass(e);
         p.set_viewport(0., 0., 64., 64., 0., 1.);
         p.set_bind_group(0, &group, &[]);
-        for item in &draw.draws {
+        for ordinal in 0..draw.draws.len() {
+            let item = &draw.draws[if self.diagnostic.as_ref().is_some_and(|arm| arm.reverse) {
+                draw.draws.len() - 1 - ordinal
+            } else {
+                ordinal
+            }];
             let b = &item.batch;
             let primitive = &b.model.primitives[b.primitive];
             let material = &b.model.materials.materials[primitive.material];

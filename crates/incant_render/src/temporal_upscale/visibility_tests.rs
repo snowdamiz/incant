@@ -13,7 +13,7 @@ use glam::{DMat4, DVec3};
 use serde_json::json;
 use std::{path::Path, sync::Arc};
 
-fn save(root: &Path, name: &str, low: &Pixels, samples: &[Sample]) {
+pub(super) fn save(root: &Path, name: &str, low: &Pixels, samples: &[Sample]) {
     let raw: Vec<_> = low
         .0
         .iter()
@@ -23,7 +23,7 @@ fn save(root: &Path, name: &str, low: &Pixels, samples: &[Sample]) {
     write(root, &format!("{name}-low.f32le"), &raw);
     save_samples(root, name, samples);
 }
-fn save_samples(root: &Path, name: &str, samples: &[Sample]) {
+pub(super) fn save_samples(root: &Path, name: &str, samples: &[Sample]) {
     let raw: Vec<_> = samples
         .iter()
         .flat_map(|s| {
@@ -36,12 +36,12 @@ fn save_samples(root: &Path, name: &str, samples: &[Sample]) {
         .collect();
     write(root, &format!("{name}-visibility.bin"), &raw);
 }
-fn prepare(r: &Renderer, input: &SceneInput, probe: &Arc<Probe>) -> RetainedScene {
+pub(super) fn prepare(r: &Renderer, input: &SceneInput, probe: &Arc<Probe>) -> RetainedScene {
     let mut s = owner(r, input);
     s.set_visibility_test_probe(Arc::clone(probe));
     s
 }
-fn apply(input: &mut SceneInput, pose: Pose) {
+pub(super) fn apply(input: &mut SceneInput, pose: Pose) {
     input.nodes[0].world = DMat4::from_translation(DVec3::new(0., pose.mesh_y, 0.));
     input.nodes[1].world = DMat4::from_translation(DVec3::new(0., pose.camera_y, 10.));
     input.nodes[2].world =

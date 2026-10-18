@@ -4386,6 +4386,7 @@ dependencies = [
  "incant_shader_cook",
  "incant_text",
  "incant_types",
+ "log",
  "naga",
  "objc2",
  "objc2-metal",

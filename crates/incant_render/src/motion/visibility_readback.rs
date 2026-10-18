@@ -27,10 +27,14 @@ fn unpack(v:vec4u)->vec2f {return bitcast<vec2f>(vec2u(v.x|(v.y<<16u),v.z|(v.w<<
 "#;
 pub(super) struct Reader(wgpu::ComputePipeline);
 impl Reader {
-    pub fn new(d: &wgpu::Device) -> Self {
+    pub fn new(d: &wgpu::Device, arm: Option<&super::diagnostic::Arm>) -> Self {
+        let text = arm.map_or_else(
+            || COPY.to_string(),
+            |arm| super::diagnostic::copy(arm.explicit),
+        );
         let m = d.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("Per-sample visibility readback"),
-            source: wgpu::ShaderSource::Wgsl(COPY.into()),
+            source: wgpu::ShaderSource::Wgsl(text.clone().into()),
         });
         let mut entries: Vec<_> = (0..5)
             .map(|binding| wgpu::BindGroupLayoutEntry {
@@ -67,14 +71,25 @@ impl Reader {
             bind_group_layouts: &[Some(&group)],
             immediate_size: 0,
         });
-        Self(d.create_compute_pipeline(&wgpu::ComputePipelineDescriptor {
-            label: None,
-            layout: Some(&layout),
-            module: &m,
-            entry_point: Some("copy"),
-            compilation_options: Default::default(),
-            cache: None,
-        }))
+        let (pipeline, msl) = super::msl::capture(arm.is_some(), &[("copy", "Compute")], || {
+            d.create_compute_pipeline(&wgpu::ComputePipelineDescriptor {
+                label: None,
+                layout: Some(&layout),
+                module: &m,
+                entry_point: Some("copy"),
+                compilation_options: Default::default(),
+                cache: None,
+            })
+        });
+        if let Some(arm) = arm {
+            super::diagnostic::write(
+                &arm.root,
+                "pipeline-readback.json",
+                &serde_json::json!({"WGSL":text,"MSL":msl}),
+            );
+            assert_eq!(msl["complete"], true, "actual readback MSL required");
+        }
+        Self(pipeline)
     }
     fn bytes() -> u64 {
         u64::from(SIZE * SIZE * 4) * size_of::<Sample>() as u64

@@ -19,6 +19,8 @@ mod tests;
 #[cfg(test)]
 mod visibility_oracle;
 #[cfg(test)]
+mod visibility_owner_tests;
+#[cfg(test)]
 mod visibility_tests;
 pub(crate) use owner::{Pending, State};
 pub(crate) use system::System;
