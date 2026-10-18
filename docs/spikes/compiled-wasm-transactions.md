@@ -24,6 +24,11 @@ hash at the durable file boundary. A same-ID/revision reopened bus, external
 source edit, same-content destination replacement, alias or unrelated collision
 refuses. A prior destination may be replaced only through its existing ordinary
 Wasm asset identity; unregistered files are never adopted implicitly.
+The nonserialized preparation retains the observed destination and every parent
+handle until publication finishes, preventing their identities from being
+recycled during that interval. Unix tests unlink the file and parents while the
+held nodes remain alive; the Windows control checks that parent replacement is
+denied until preparation is dropped.
 
 `BinaryEdit` is a separate optional transaction field; old text source fields and
 journal versions retain their encodings. Version-5 binary Prepare/Commit/Abort
@@ -48,6 +53,10 @@ Completed asset/file history survives save/reopen and private candidate removal.
 The dependency on exact filesystem identities is intentional: copied/moved
 projects do not inherit old binary or first-package Undo authority. These
 receipts are not silently rebound. Ordinary same-path reopen is supported.
+Persisted receipts check identities and bytes but cannot pin filesystem IDs across
+process exit: they do not establish security against an external writer who can
+delete retained state and recreate matching data with reused IDs. In-process
+preparation pinning and durable recovery are distinct guarantees.
 Private retained nodes must not be treated as disposable cache while their
 history remains live.
 

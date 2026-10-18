@@ -10,6 +10,80 @@ pub enum BinaryVersion {
     Missing,
     Present { sha256: String },
 }
+
+#[cfg(test)]
+mod pinned_tests {
+    use super::*;
+    use std::fs;
+    const SOURCE: &str = "modules/game/module.rs";
+    const DEST: &str = "modules/game/module.wasm";
+    const RAW: &[u8] = b"\0asm\x01\0\0\0candidate";
+
+    fn setup(root: &Path) -> SourceStore {
+        fs::create_dir_all(root.join("modules/game")).unwrap();
+        fs::write(root.join(SOURCE), "source").unwrap();
+        fs::write(root.join(DEST), RAW).unwrap();
+        let journal = root.join("journal");
+        fs::write(&journal, "").unwrap();
+        SourceStore::open(root, &journal, "01ARZ3NDEKTSV4RRFFQ69G5FAV").unwrap()
+    }
+    #[cfg(unix)]
+    #[test]
+    fn preparation_keeps_unlinked_file_and_parent_nodes_alive() {
+        use std::os::unix::fs::MetadataExt;
+        let root = tempfile::tempdir().unwrap();
+        let store = setup(root.path());
+        let snapshot = store
+            .capture_binary(SOURCE, &BinaryVersion::of(Some(RAW)))
+            .unwrap();
+        let expected = snapshot.image.as_ref().unwrap().identity;
+        fs::remove_file(root.path().join(DEST)).unwrap();
+        fs::remove_file(root.path().join(SOURCE)).unwrap();
+        fs::remove_dir(root.path().join("modules/game")).unwrap();
+        fs::remove_dir(root.path().join("modules")).unwrap();
+        let held = snapshot._node.as_ref().unwrap();
+        assert_eq!(held.metadata().unwrap().nlink(), 0);
+        assert_eq!(
+            platform::identity(held).unwrap(),
+            (expected[0], expected[1])
+        );
+        assert_eq!(
+            snapshot
+                ._parents
+                .iter()
+                .map(|dir| dir.identity().unwrap())
+                .collect::<Vec<_>>(),
+            snapshot.parents
+        );
+        fs::create_dir_all(root.path().join("modules/game")).unwrap();
+        fs::write(root.path().join(SOURCE), "source").unwrap();
+        fs::write(root.path().join(DEST), RAW).unwrap();
+        assert!(store.check_binary_snapshot(&snapshot).is_err());
+        assert_eq!(fs::read(root.path().join(DEST)).unwrap(), RAW);
+        drop(snapshot);
+        let new_snapshot = store
+            .capture_binary(SOURCE, &BinaryVersion::of(Some(RAW)))
+            .unwrap();
+        store.check_binary_snapshot(&new_snapshot).unwrap();
+    }
+    #[cfg(windows)]
+    #[test]
+    fn preparation_pins_parent_path_until_the_snapshot_is_dropped() {
+        let root = tempfile::tempdir().unwrap();
+        let store = setup(root.path());
+        let snapshot = store
+            .capture_binary(SOURCE, &BinaryVersion::of(Some(RAW)))
+            .unwrap();
+        assert!(fs::rename(root.path().join("modules"), root.path().join("moved")).is_err());
+        store.check_binary_snapshot(&snapshot).unwrap();
+        drop(snapshot);
+        fs::rename(root.path().join("modules"), root.path().join("moved")).unwrap();
+        assert_eq!(
+            fs::read(root.path().join("moved/game/module.wasm")).unwrap(),
+            RAW
+        );
+    }
+}
 impl BinaryVersion {
     pub fn of(bytes: Option<&[u8]>) -> Self {
         bytes.map_or(Self::Missing, |bytes| Self::Present {
@@ -50,6 +124,10 @@ pub struct BinarySnapshot {
     source_path: String,
     parents: Vec<[u64; 2]>,
     image: Option<Image>,
+    // These handles are part of preparation authority, not serialized receipts.
+    // IDs alone could be recycled after an external unlink/replacement.
+    _parents: Vec<Dir>,
+    _node: Option<File>,
 }
 /// Host/bus-only borrowed preparation inputs; never a wire capability.
 pub struct BinaryPublication<'a> {
@@ -142,7 +220,19 @@ impl BinaryEdit {
         Ok(())
     }
 }
+struct PinnedImage {
+    image: Image,
+    bytes: Vec<u8>,
+    node: File,
+}
 fn read_image(dir: &Dir, name: &str, slot: &str) -> Result<Option<(Image, Vec<u8>)>, SourceError> {
+    Ok(read_pinned_image(dir, name, slot)?.map(|read| (read.image, read.bytes)))
+}
+fn read_pinned_image(
+    dir: &Dir,
+    name: &str,
+    slot: &str,
+) -> Result<Option<PinnedImage>, SourceError> {
     let mut file = match dir.open(name) {
         Ok(file) => file,
         Err(error) if error.kind() == io::ErrorKind::NotFound => return Ok(None),
@@ -171,15 +261,16 @@ fn read_image(dir: &Dir, name: &str, slot: &str) -> Result<Option<(Image, Vec<u8
     {
         return Err(SourceError::Conflict);
     }
-    Ok(Some((
-        Image {
+    Ok(Some(PinnedImage {
+        image: Image {
             slot: slot.into(),
             bytes: bytes.len() as u64,
             sha256: format!("{:x}", Sha256::digest(&bytes)),
             identity: [device, node],
         },
         bytes,
-    )))
+        node: file,
+    }))
 }
 impl SourceStore {
     pub fn check_root(&self, root: &Path) -> Result<(), SourceError> {
@@ -192,16 +283,24 @@ impl SourceStore {
         &self,
         source_path: &str,
     ) -> Result<(Dir, String, Vec<[u64; 2]>), SourceError> {
+        let (mut held, leaf, identities) = self.binary_parent_pinned(source_path)?;
+        Ok((held.pop().expect("root or child parent"), leaf, identities))
+    }
+    fn binary_parent_pinned(
+        &self,
+        source_path: &str,
+    ) -> Result<(Vec<Dir>, String, Vec<[u64; 2]>), SourceError> {
         let path = wasm_path(source_path)?;
         let mut parts = path.split('/').peekable();
-        let mut parent = self.root.duplicate()?;
-        let mut identities = vec![parent.identity()?];
+        let mut held = vec![self.root.duplicate()?];
+        let mut identities = vec![held[0].identity()?];
         while let Some(part) = parts.next() {
             if parts.peek().is_none() {
-                return Ok((parent, part.into(), identities));
+                return Ok((held, part.into(), identities));
             }
-            parent = parent.child(part)?;
+            let parent = held.last().expect("root or child parent").child(part)?;
             identities.push(parent.identity()?);
+            held.push(parent);
         }
         Err(SourceError::Invalid("binary path".into()))
     }
@@ -216,16 +315,19 @@ impl SourceStore {
         expected: &BinaryVersion,
     ) -> Result<BinarySnapshot, SourceError> {
         self.ensure_ready()?;
-        let (parent, leaf, parents) = self.binary_parent(source_path)?;
-        let actual = read_image(&parent, &leaf, "")?;
-        if BinaryVersion::of(actual.as_ref().map(|(_, bytes)| bytes.as_slice())) != *expected {
+        let (held, leaf, parents) = self.binary_parent_pinned(source_path)?;
+        let actual = read_pinned_image(held.last().expect("root or child parent"), &leaf, "")?;
+        if BinaryVersion::of(actual.as_ref().map(|read| read.bytes.as_slice())) != *expected {
             return Err(SourceError::Conflict);
         }
+        let (image, node) = actual.map_or((None, None), |read| (Some(read.image), Some(read.node)));
         Ok(BinarySnapshot {
             binding: self.binding.clone(),
             source_path: source_path.into(),
             parents,
-            image: actual.map(|(image, _)| image),
+            image,
+            _parents: held,
+            _node: node,
         })
     }
     pub fn check_binary_snapshot(&self, snapshot: &BinarySnapshot) -> Result<(), SourceError> {
