@@ -52,6 +52,19 @@ fn capture_correlates_exact_tick_and_rejects_missing_nested_and_retired_traces()
     assert_eq!(report.version, 4);
     let d = report.script_phase_diagnostic;
     assert!(d.diagnostic_only && !d.eligible_for_performance_gate && d.complete);
+    assert_eq!(
+        d.schema,
+        1 + u32::from(cfg!(feature = "diagnostic-navigation"))
+            + 2 * u32::from(cfg!(feature = "diagnostic-script-budget"))
+            + 4 * u32::from(cfg!(feature = "diagnostic-script-queries"))
+    );
+    #[cfg(not(feature = "diagnostic-script-queries"))]
+    {
+        let json = serde_json::to_value(&d).unwrap();
+        assert!(json.get("query_capabilities").is_none());
+        assert!(json["rows"][0].get("queries").is_none());
+        assert!(d.raw_storage_bound_bytes <= 4 * 1024 * 1024);
+    }
     assert_eq!(d.rows.len(), 1);
     let r = &d.rows[0];
     assert_eq!(r.frame, 1);
@@ -153,7 +166,10 @@ fn fixed_storage_overflow_is_reported_without_growing_or_dropping_successfully()
     assert!(!report.complete);
     assert_eq!(report.attempted, MAX_FRAMES as u64 + 1);
     assert_eq!(report.rows.len(), MAX_FRAMES);
-    assert!(report.raw_storage_bound_bytes <= 4 * 1024 * 1024);
+    assert!(
+        report.raw_storage_bound_bytes
+            <= crate::diagnostic::MAX_RAW_ROW_BYTES * crate::diagnostic::MAX_FRAMES
+    );
 }
 #[test]
 fn boundary_arithmetic_refuses_regression_and_accumulation_overflow() {

@@ -8,6 +8,8 @@
 pub mod budget;
 #[cfg(feature = "diagnostic-navigation")]
 pub mod navigation;
+#[cfg(feature = "diagnostic-script-queries")]
+pub mod queries;
 mod storage;
 #[cfg(test)]
 mod tests;
@@ -16,6 +18,11 @@ pub(crate) use storage::{Identity, RawRow, Storage};
 pub use storage::{Report, Row};
 
 pub const MAX_FRAMES: usize = 4096;
+pub const MAX_RAW_ROW_BYTES: usize = if cfg!(feature = "diagnostic-script-queries") {
+    2048
+} else {
+    1024
+};
 pub const REGIONS: [&str; 14] = [
     "initial_checks",
     "snapshots",
@@ -66,12 +73,26 @@ struct Active {
     visited: u16,
     callback: bool,
     numeric: u8,
+    #[cfg(feature = "diagnostic-script-queries")]
+    query: queries::State,
+    #[cfg(feature = "diagnostic-script-queries")]
+    callback_source: Option<usize>,
     #[cfg(feature = "diagnostic-script-budget")]
     budget_check: Option<usize>,
     #[cfg(feature = "diagnostic-navigation")]
     navigation: u8,
 }
 impl Active {
+    fn query_idle(&self) -> bool {
+        #[cfg(feature = "diagnostic-script-queries")]
+        {
+            self.query.current.is_none()
+        }
+        #[cfg(not(feature = "diagnostic-script-queries"))]
+        {
+            true
+        }
+    }
     fn budget_idle(&self) -> bool {
         #[cfg(feature = "diagnostic-script-budget")]
         {
@@ -140,6 +161,10 @@ impl Frame {
                 visited: 1,
                 callback: false,
                 numeric: 0,
+                #[cfg(feature = "diagnostic-script-queries")]
+                query: Default::default(),
+                #[cfg(feature = "diagnostic-script-queries")]
+                callback_source: None,
                 #[cfg(feature = "diagnostic-script-budget")]
                 budget_check: None,
                 #[cfg(feature = "diagnostic-navigation")]
@@ -179,6 +204,7 @@ impl Drop for Frame {
             a.row.valid &= a.visited == (1 << REGIONS.len()) - 1
                 && !a.callback
                 && a.numeric == 0
+                && a.query_idle()
                 && a.navigation_idle()
                 && a.budget_idle()
                 && a.row.whole_tick_calls == 1;
@@ -198,6 +224,7 @@ pub fn mark(region: Region) {
             a.row.valid &= region as usize == a.region as usize + 1
                 && !a.callback
                 && a.numeric == 0
+                && a.query_idle()
                 && a.navigation_idle()
                 && a.budget_idle();
             a.row.regions_ns[a.region as usize] = elapsed(a.previous, now, &mut a.row.valid);
@@ -244,12 +271,19 @@ impl Span {
                 return None;
             };
             match kind {
-                Kind::Source(_) => {
+                Kind::Source(index) => {
+                    #[cfg(not(feature = "diagnostic-script-queries"))]
+                    let _ = index;
                     a.row.valid &= a.region == Region::Callbacks
                         && !a.callback
+                        && a.query_idle()
                         && a.navigation_idle()
                         && a.budget_idle();
                     a.callback = true;
+                    #[cfg(feature = "diagnostic-script-queries")]
+                    {
+                        a.callback_source = Some(index);
+                    }
                 }
                 Kind::Numeric(n) => {
                     let expected = match n {
@@ -259,6 +293,7 @@ impl Span {
                     let bit = 1 << n as usize;
                     a.row.valid &= a.region == expected
                         && a.numeric & bit == 0
+                        && a.query_idle()
                         && a.navigation_idle()
                         && a.budget_idle();
                     a.numeric |= bit;
@@ -286,8 +321,12 @@ impl Drop for Span {
                 let ns = elapsed(start, now, &mut a.row.valid);
                 let (total, count) = match kind {
                     Kind::Source(index) => {
-                        a.row.valid &= a.navigation_idle() && a.budget_idle();
+                        a.row.valid &= a.query_idle() && a.navigation_idle() && a.budget_idle();
                         a.callback = false;
+                        #[cfg(feature = "diagnostic-script-queries")]
+                        {
+                            a.callback_source = None;
+                        }
                         (&mut a.row.source_ns[index], &mut a.row.source_calls[index])
                     }
                     Kind::Numeric(n) => {
