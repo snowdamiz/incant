@@ -215,13 +215,16 @@ impl TargetProvider for PolicyTargets {
 fn pose_startup_display_refuses_unqualified_motion_and_resolution_policies() {
     let (game, probe) = fixture();
     let input = game.host().unwrap().committed();
+    let mut renderer = models::checked(Renderer::headless().unwrap());
+    pollster::block_on(renderer.enable_motion_vectors()).unwrap();
+    let renderer = Arc::new(renderer);
     for motion in [false, true] {
         let mut consumer = GpuRenderConsumer::prepare(
             input.input(),
             input.camera_label(),
             None,
             GpuRenderSettings {
-                renderer: Arc::clone(&probe.renderer),
+                renderer: Arc::clone(&renderer),
                 targets: PoseTargets::new(PolicyTargets {
                     _inner: targets(&probe),
                     motion,
