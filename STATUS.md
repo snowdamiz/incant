@@ -112,14 +112,15 @@ now passes thirteen service controls, two agent approval/refusal controls and fi
 actual process/worker controls on this Mac, including compilation through the
 shared bridge and cancellation after a child begins. Strict service, agent and
 editor lints and a fresh headless schema export also pass. All ten integrated
-development checks pass. The original agent-fixture budget failure and subsequent
-editor lint failure remain retained. This is locally verified build-only behavior:
+development checks pass. The scoped service is merged through PR426 after review
+and successful exact-head development checks. The original agent-fixture budget
+failure and subsequent editor lint failure remain retained. This is verified build-only behavior:
 source writes, candidate installation and actual editor interaction remain separate.
 Registered Rust source editing has independent source review and is entering native
 qualification; first-package directory creation remains source-only pending its
 parent. No compiler shell or arbitrary path authority is exposed to the agent.
 
-Checkpoint57 is frozen at candidate `53ec74d2`, with exactly main421's tree
+Checkpoint57 tested candidate `53ec74d2`, with exactly main421's tree
 (`527d280a`). Its Windows desktop job failed the authored startup test at the
 unchanged eight-second TypeScript cook deadline. The phase record now localizes
 most of the elapsed time to loading SWC: TypeScript was ready at 0.434 seconds,
@@ -159,8 +160,9 @@ in the empty embedded Wasm catalog on Linux, macOS and Windows. The
 [checked catalog split](docs/spikes/static-catalog-payload.md) passes both new
 local boundary controls and strict static-conformance lint, including the actual
 zero-byte generated catalog. Both original failure classes remain recorded;
-release is held until the corrected checkpoint57 candidate passes every required
-check. Its head stays frozen while subsequent development continues on main.
+the failed checkpoint57 remains historical. These corrections are now included
+in frozen checkpoint58; release stays held until every required check passes,
+while subsequent development continues on main.
 
 
 The [process-cleanup correction](docs/spikes/native-process-cleanup.md) preserves
