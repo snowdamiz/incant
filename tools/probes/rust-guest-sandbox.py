@@ -66,12 +66,25 @@ def run_control(owner, tools, valid_work, output, plan):
     for name in ('home', 'tmp'):
         (env_run / name).mkdir(mode=0o700)
     environment = clean_environment(env_run, tools.rustc)
-    compiled = owner.run([str(tools.rustc), str(ROOT / 'tools/probes/rust-guest-sandbox-control.rs'),
-                          '--edition=2024', '--crate-name=incant_sandbox_control', '-C', 'opt-level=0',
-                          '-C', 'debuginfo=0', '-C', 'linker=' + plan['native_linker'],
-                          '-C', 'link-arg=-isysroot', '-C', 'link-arg=' + plan['macos_sdk'],
-                          '-o', str(control)], cwd=env_run, env=environment, label='trusted-control-build')
-    require(compiled.returncode == 0, 'Trusted native control did not compile')
+    command = [str(tools.rustc), str(ROOT / 'tools/probes/rust-guest-sandbox-control.rs'),
+               '--edition=2024', '--crate-name=incant_sandbox_control', '-C', 'opt-level=0',
+               '-C', 'debuginfo=0', '-C', 'linker=' + plan['native_linker'],
+               '-C', 'link-arg=-isysroot', '-C', 'link-arg=' + plan['macos_sdk'], '-o', str(control)]
+    reuse = plan.get('trusted_canary_reuse')
+    if reuse is None:
+        compiled = owner.run(command, cwd=env_run, env=environment, label='trusted-control-build')
+        require(compiled.returncode == 0, 'Trusted native control did not compile')
+    else:
+        require(set(reuse) == {'path', 'bytes', 'sha256', 'source_sha256', 'build_receipt'}, 'Exact trusted canary reuse fields')
+        control = service.trusted_file(Path(reuse['path']))
+        data = service.read_file(control, 16 * service.MIB)
+        require(len(data) == reuse['bytes'] and service.digest(data) == reuse['sha256'], 'Trusted canary bytes changed')
+        require(service.digest(service.read_file(Path(command[1]), service.MIB)) == reuse['source_sha256'],
+                'Trusted canary source changed')
+        built = json.loads(service.read_file(Path(reuse['build_receipt']), service.MIB))
+        require(built['returncode'] == 0 and built['group_absent'] is True
+                and built['argv'] == [*command[:-1], str(control)], 'Exact prior canary compilation recipe')
+        service.write_json(output / 'trusted-canary-reuse.json', reuse)
     initial = service.read_file(valid_work / 'result.json', service.MIB)
     initial = json.loads(initial)
     rustc, linker, validator = (Path(row['path']) for row in initial['tools'])
@@ -94,8 +107,12 @@ def run_control(owner, tools, valid_work, output, plan):
             endpoint.bind(('127.0.0.1', 0))
             address, port = endpoint.getsockname()
             require(address == '127.0.0.1' and 0 < port <= 65535, 'Owned loopback endpoint required')
-        require(tcp.getsockopt(socket.SOL_SOCKET, socket.SO_ACCEPTCONN) == 0,
-                'TCP reservation must not listen')
+        require((tcp.family, tcp.type) == (socket.AF_INET, socket.SOCK_STREAM)
+                and (udp.family, udp.type) == (socket.AF_INET, socket.SOCK_DGRAM),
+                'Exact owned endpoint protocols')
+        # No listen() call exists in this trusted setup. SO_ACCEPTCONN querying
+        # returned ENOPROTOOPT on the tested Mac; it is not an I/O test.
+        receipt['endpoint_protocols'] = ['AF_INET/SOCK_STREAM', 'AF_INET/SOCK_DGRAM']
         receipt['tcp_reservation'] = tcp.getsockname()
         receipt['udp_sink'] = udp.getsockname()
         udp.settimeout(receipt['sink_wait_seconds'])
@@ -112,6 +129,9 @@ def run_control(owner, tools, valid_work, output, plan):
         require(receipt['sink_datagrams'] == 0, 'Loopback sink received a datagram')
         require(executed.returncode == 0, 'Actual sandbox escape control failed')
         controls = validate_control(json.loads(executed.stdout))
+        if reuse is not None:
+            require(service.digest(service.read_file(control, 16 * service.MIB)) == reuse['sha256'],
+                    'Trusted canary changed during execution')
         require((env_run / 'actual-write').read_bytes() == b'control executed'
                 and not (output / 'must-not-write').exists(), 'Actual canary write boundary')
         receipt['status'] = 'complete'
