@@ -10,6 +10,8 @@ Those producing identities remain
 explicit; they are not relabeled as later integration builds.
 [Release checkpoint54](../spikes/release-checkpoint-54.md) tested the main401 tree;
 later main402+ changes remain outside that release baseline.
+[Checkpoint55](https://github.com/snowdamiz/incant/pull/408) is frozen at
+`931226f9` on the main407 tree while comprehensive CI runs; it is not promoted.
 Phase 1 remains open; this ledger records evidence and remaining work, not director
 approval. [PLAN.md](../../PLAN.md#phase-1-core-engine) defines the requirements.
 Only actual testing on the available Mac is required as device evidence. Other
