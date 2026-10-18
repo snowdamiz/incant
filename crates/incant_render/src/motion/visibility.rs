@@ -113,7 +113,7 @@ impl Probe {
         let usage = wgpu::TextureUsages::RENDER_ATTACHMENT | wgpu::TextureUsages::TEXTURE_BINDING;
         let storage = diagnostic.as_ref().map_or(Storage::Original, |a| a.storage);
         let mut formats = FORMATS;
-        if storage == Storage::Rgba {
+        if matches!(storage, Storage::Rgba | Storage::Slots) {
             formats[2] = wgpu::TextureFormat::Rgba16Uint;
         }
         for f in formats
@@ -245,11 +245,27 @@ impl Probe {
             label: Some("Actual sample-location calibration"),
             source: wgpu::ShaderSource::Wgsl(calibration_wgsl.clone().into()),
         });
+        let colors = formats.map(make);
+        let depth_view = make(wgpu::TextureFormat::Depth32Float);
+        if let Some(arm) = &diagnostic {
+            diagnostic::write(
+                &arm.root,
+                "attachment-routing.json",
+                &serde_json::json!({
+                    "storage_arm":storage.name(),
+                    "physical_color_attachments":colors.iter().zip(formats).enumerate().map(|(slot,(view,format))|
+                        serde_json::json!({"slot":slot,"format":format!("{format:?}"),"view":format!("{view:?}")})).collect::<Vec<_>>(),
+                    "depth_view":format!("{depth_view:?}"),
+                    "semantic_readback_slots":storage.readback_slots(),
+                    "receipt_kind":"actual wgpu views used by this probe; not native driver state introspection"
+                }),
+            );
+        }
         Self {
             pipelines,
             calibration: pipeline(&calibration, None, &[], 2),
-            colors: formats.map(make),
-            depth: make(wgpu::TextureFormat::Depth32Float),
+            colors,
+            depth: depth_view,
             reader: readback::Reader::new(d, diagnostic.as_ref()),
             globals,
             diagnostic,
@@ -289,7 +305,15 @@ impl Probe {
             p.draw(0..3, 0..1);
         }
         r.queue.submit([e.finish()]);
-        self.read(r)
+        if self
+            .diagnostic
+            .as_ref()
+            .is_some_and(|a| a.storage != Storage::Original)
+        {
+            self.read_storage(r).into_iter().map(|r| r.sample).collect()
+        } else {
+            self.read(r)
+        }
     }
     pub(crate) fn encode(&self, d: &wgpu::Device, e: &mut wgpu::CommandEncoder, draw: &MotionDraw) {
         assert_eq!(draw.rect, [0., 0., 48., 48.]);

@@ -121,9 +121,10 @@ impl Reader {
             usage: wgpu::BufferUsages::COPY_DST | wgpu::BufferUsages::MAP_READ,
             mapped_at_creation: false,
         });
-        let mut entries: Vec<_> = probe
-            .colors
-            .iter()
+        let slots = self.1.readback_slots();
+        let colors = slots.map(|slot| &probe.colors[slot]);
+        let mut entries: Vec<_> = colors
+            .into_iter()
             .chain([&probe.depth])
             .enumerate()
             .map(|(i, v)| wgpu::BindGroupEntry {

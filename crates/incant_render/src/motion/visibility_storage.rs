@@ -6,6 +6,7 @@ pub(crate) enum Storage {
     Original,
     Redundant,
     Rgba,
+    Slots,
 }
 impl Storage {
     pub fn name(self) -> &'static str {
@@ -13,6 +14,15 @@ impl Storage {
             Self::Original => "original-forward",
             Self::Redundant => "redundant-forward",
             Self::Rgba => "rgba-forward",
+            Self::Slots => "rgba-swapped",
+        }
+    }
+    /// Semantic reader bindings -> physical render attachment slots.
+    pub fn readback_slots(self) -> [usize; 4] {
+        if self == Self::Slots {
+            [0, 2, 1, 3]
+        } else {
+            [0, 1, 2, 3]
         }
     }
 }
@@ -43,7 +53,15 @@ pub(super) fn source(storage: Storage) -> String {
             "vec2u(in.owner&65535u,in.owner>>16u)",
             "vec4u(in.owner&65535u,in.owner>>16u,0u,0u)",
         ),
+        Storage::Slots => swap_locations(source(Storage::Rgba), "owner:vec4u"),
     }
+}
+fn swap_locations(text: String, owner: &str) -> String {
+    replace(
+        replace(text, "@location(1) motion_zw:", "@location(2) motion_zw:"),
+        &format!("@location(2) {owner}"),
+        &format!("@location(1) {owner}"),
+    )
 }
 const REDUNDANT: &str = r#"
 fn redundant(v:vec2f,owner:u32)->vec4u {
@@ -59,12 +77,17 @@ fn redundant(v:vec2f,owner:u32)->vec4u {
 "#;
 pub(super) fn calibration(storage: Storage) -> String {
     let text = format!("{}\n{}", super::CALIBRATION, super::PACK);
-    if storage == Storage::Rgba {
-        replace(
+    if matches!(storage, Storage::Rgba | Storage::Slots) {
+        let text = replace(
             replace(text, "sample_id:vec2u", "sample_id:vec4u"),
             "vec2u(i+1u,0u)",
             "vec4u(i+1u,0u,0u,0u)",
-        )
+        );
+        if storage == Storage::Slots {
+            swap_locations(text, "sample_id:vec4u")
+        } else {
+            text
+        }
     } else {
         text
     }
@@ -93,7 +116,12 @@ pub(super) fn copy(storage: Storage) -> String {
 
 #[test]
 fn visibility_storage_variants_validate_and_lossless_fixture_packing_refuses_invalid() {
-    for storage in [Storage::Original, Storage::Redundant, Storage::Rgba] {
+    for storage in [
+        Storage::Original,
+        Storage::Redundant,
+        Storage::Rgba,
+        Storage::Slots,
+    ] {
         let mut texts = vec![source(storage), calibration(storage)];
         if storage != Storage::Original {
             texts.push(copy(storage));
@@ -131,5 +159,49 @@ fn visibility_storage_variants_validate_and_lossless_fixture_packing_refuses_inv
     }
     for valid in [-0., -1., 0.5, 2., f32::NAN] {
         assert!(encode(0.5, valid, 1).is_none());
+    }
+}
+
+#[test]
+fn visibility_slot_mapping_matches_compiled_fragment_interfaces() {
+    for storage in [Storage::Rgba, Storage::Slots] {
+        let mapping = storage.readback_slots();
+        let mut sorted = mapping;
+        sorted.sort_unstable();
+        assert_eq!(sorted, [0, 1, 2, 3], "no duplicated or missing attachment");
+        for (source, names) in [
+            (
+                source(storage),
+                ["motion_xy", "motion_zw", "owner", "sample_position"],
+            ),
+            (
+                calibration(storage),
+                ["motion_xy", "motion_zw", "sample_id", "xy"],
+            ),
+        ] {
+            let module = naga::front::wgsl::parse_str(&source).unwrap();
+            let fragment = module
+                .entry_points
+                .iter()
+                .find(|e| e.stage == naga::ShaderStage::Fragment)
+                .unwrap();
+            let result = fragment.function.result.as_ref().unwrap();
+            let naga::TypeInner::Struct { members, .. } = &module.types[result.ty].inner else {
+                panic!("fragment output must retain all semantic fields");
+            };
+            for (name, slot) in names.into_iter().zip(mapping) {
+                let member = members
+                    .iter()
+                    .find(|m| m.name.as_deref() == Some(name))
+                    .unwrap();
+                let Some(naga::Binding::Location { location, .. }) = &member.binding else {
+                    panic!("missing fragment color location");
+                };
+                assert_eq!(
+                    *location as usize, slot,
+                    "writer/reader mismatch for {name}"
+                );
+            }
+        }
     }
 }

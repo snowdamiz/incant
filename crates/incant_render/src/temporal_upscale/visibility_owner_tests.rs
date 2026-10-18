@@ -63,7 +63,7 @@ fn visibility_owner_raw_lanes_detect_changed_halves_and_wrong_sample() {
 fn output_visibility_owner_depth_four_arm_capture() {
     let root =
         std::path::PathBuf::from(std::env::var_os("INCANT_VISIBILITY_OWNER_OUTPUT").unwrap());
-    capture(&root, false);
+    capture(&root, Capture::Owner);
 }
 
 #[test]
@@ -71,10 +71,23 @@ fn output_visibility_owner_depth_four_arm_capture() {
 fn output_visibility_owner_storage_three_arm_capture() {
     let root =
         std::path::PathBuf::from(std::env::var_os("INCANT_VISIBILITY_STORAGE_OUTPUT").unwrap());
-    capture(&root, true);
+    capture(&root, Capture::Storage);
 }
 
-fn capture(root: &std::path::Path, storage_probe: bool) {
+#[test]
+#[ignore = "coordinated offscreen numerical MRT slot diagnostic; no desktop capture"]
+fn output_visibility_owner_slot_two_arm_capture() {
+    let root = std::path::PathBuf::from(std::env::var_os("INCANT_VISIBILITY_SLOT_OUTPUT").unwrap());
+    capture(&root, Capture::Slots);
+}
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum Capture {
+    Owner,
+    Storage,
+    Slots,
+}
+fn capture(root: &std::path::Path, mode: Capture) {
+    let storage_probe = mode != Capture::Owner;
     std::fs::create_dir(root).unwrap();
     let mut renderer = crate::test_support::checked(Renderer::headless().unwrap());
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
@@ -85,22 +98,25 @@ fn capture(root: &std::path::Path, storage_probe: bool) {
     let _session = MslSession::start();
     let mut pattern = None;
     let mut results = Vec::new();
-    let arms = if storage_probe {
-        vec![
+    let arms = match mode {
+        Capture::Storage => vec![
             ("original-forward", false, false, Storage::Original),
             ("redundant-forward", false, false, Storage::Redundant),
             ("rgba-forward", false, false, Storage::Rgba),
-        ]
-    } else {
-        vec![
+        ],
+        Capture::Owner => vec![
             ("original-forward", false, false, Storage::Original),
             ("original-reverse", false, true, Storage::Original),
             ("explicit-forward", true, false, Storage::Original),
             ("explicit-reverse", true, true, Storage::Original),
-        ]
+        ],
+        Capture::Slots => vec![
+            ("rgba-forward", false, false, Storage::Rgba),
+            ("rgba-swapped", false, false, Storage::Slots),
+        ],
     };
     let frame_count = 11 * arms.len();
-    for (name, explicit, reverse, storage) in arms {
+    for (arm_index, (name, explicit, reverse, storage)) in arms.into_iter().enumerate() {
         let path = root.join(name);
         std::fs::create_dir(&path).unwrap();
         let probe = Arc::new(if storage_probe {
@@ -119,8 +135,8 @@ fn capture(root: &std::path::Path, storage_probe: bool) {
                 "explicit_sample_index":"raw_validity_lo, only for covered explicit arms; original has no observed fragment index",
                 "validity_decoding":"explicit arm clears only low two bits before f32 reconstruction; original arm unmodified",
                 "geometry_tie_distance_pixels":1e-5,"position_epsilon_pixels":2e-5,"depth_motion_epsilon":2e-6,
-                "storage_probe":storage_probe,
-                "storage_record":"nonbaseline: original 48-byte semantic record + raw motionZW 4xu32 + raw ownerRGBA 4xu32; baseline unchanged48",
+                "storage_probe":storage_probe,"slot_probe":mode == Capture::Slots,
+                "storage_record":"Original storage:48-byte semantic record; all other storage:80 bytes = same48-byte prefix + raw motionZW4xu32 + raw ownerRGBA4xu32",
                 "redundant_packing":"finite positive-sign depth[0,1]; validity+0/+1 in depth sign bit; full owner in original validity lanes; invalid inputs yield NaN refusal",
                 "no_new_color_resolver":true,"capture_completion_is_acceptance":false})).unwrap());
         }
@@ -272,7 +288,7 @@ fn capture(root: &std::path::Path, storage_probe: bool) {
                     "unexpected failure before arriving occluder: {report}"
                 );
             }
-            if storage_probe && storage == Storage::Original && index == 10 {
+            if storage_probe && arm_index == 0 && index == 10 {
                 let errors = inspection["mismatches"].as_array().unwrap();
                 assert_eq!(
                     errors.len(),
@@ -326,7 +342,7 @@ fn storage_packing_errors(raw: &[StorageRecord], storage: Storage) -> Vec<usize>
                 && s.owner == [decoded, o[0], o[1], v[2]]
                 && s.motion[2].to_bits() == bits[0]
                 && s.motion[3].to_bits() == bits[1]
-                && (storage != Storage::Rgba || o[2..] == [0, 0]);
+                && (!matches!(storage, Storage::Rgba | Storage::Slots) || o[2..] == [0, 0]);
             (!good).then_some(i)
         })
         .collect()
