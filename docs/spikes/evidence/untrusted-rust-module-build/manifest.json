@@ -1,0 +1,274 @@
+{
+  "archive": {
+    "bytes": 674920,
+    "expanded_bytes": 3600560,
+    "expanded_sha256": "76d7e3a11ad5d60adcca5e702e1582a2ccf09d0348d567178bd776e42c318420",
+    "path": "records.json.gz",
+    "sha256": "57ab8796b1baa0e6327bd35bd85ec1e8bdc2a7dc35cfdd9e7d3212ac194f324c"
+  },
+  "canary_producer": "7c18d1d8c752d7528537dc8aea75950e92e58873",
+  "claims": {
+    "all_socket_creation_denied": false,
+    "blanket_security": false,
+    "browser": false,
+    "cross_platform": false,
+    "normal_project_import_history": false,
+    "original_native005_status": "failed",
+    "original_socket_creation_denial_passed": false,
+    "performance": false,
+    "selected_macos_request_and_network_io_controls": true,
+    "source_free_export_rerun": false,
+    "windows_gpu_capture_audio": false
+  },
+  "cumulative_native_seconds": 21.79315050196601,
+  "format": "incant-untrusted-rust-build-evidence",
+  "limits": [
+    "Data-only archive; never execute source/code records",
+    "Deprecated sandbox-exec on exact tested macOS27.0.1 arm64/Rust1.99; sampled resource caps, not kernel quotas",
+    "Eight request observations from failed native005 plus separate revised network-I/O followup; failed creation criterion stays failed",
+    "No direct listen/IPv6/Unix-domain isolation test or normal importer/UndoRedo proof yet"
+  ],
+  "original_native_account_seconds": 180,
+  "primary_sources": [
+    "https://github.com/apple-oss-distributions/xnu/blob/xnu-12377.1.9/security/mac_socket.c",
+    "https://github.com/apple-oss-distributions/xnu/blob/xnu-12377.1.9/bsd/kern/uipc_syscalls.c",
+    "https://developer.apple.com/documentation/xcode/configuring-the-macos-app-sandbox"
+  ],
+  "record_count": 496,
+  "remaining_seconds": 158.206849498034,
+  "retained_external_artifacts": [
+    {
+      "bytes": 1220574,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-001/valid-relative-sdk/work/sdk/libincant_module.rlib",
+      "sha256": "2738e10a4bd790cf8eb365d95a2b6bbeb8e6a0cc1cf436da91390a0c9cc70ebb"
+    },
+    {
+      "bytes": 2709858,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-001/valid-relative-sdk/work/sdk/libincant_wasm_abi.rlib",
+      "sha256": "e025cd7e50b9a637241944fe3ea6893bfe029439abbdb2a3594d4f04c13c5d21"
+    },
+    {
+      "bytes": 1220574,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-003/valid-relative-sdk/work/sdk/libincant_module.rlib",
+      "sha256": "e5b2f12db78a262bed069e23cb5fb6abea0e9518b2688cf316d32813497c03fb"
+    },
+    {
+      "bytes": 2709858,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-003/valid-relative-sdk/work/sdk/libincant_wasm_abi.rlib",
+      "sha256": "fad020e16748beea9bf9fcaa112c25e17e233a7e869eaf98cdf96a881c2e161b"
+    },
+    {
+      "bytes": 1220744,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-004/private-include-refused/work/sdk/libincant_module.rlib",
+      "sha256": "463b10fc5608818a3aeb30405dc4195a9a8dc454cb0556a756b27f70876e1ea6"
+    },
+    {
+      "bytes": 2709928,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-004/private-include-refused/work/sdk/libincant_wasm_abi.rlib",
+      "sha256": "fe1964df38188be1e7af8a6e6bd7063f0139812e49bba6aca78e12e775d8f02c"
+    },
+    {
+      "bytes": 1633057,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-004/proc-macro-refused/work/run/module.wasm",
+      "sha256": "0b6f72751b2b3c67c158c4aa774b9613c157ef0e3ecb244bf38863d95810ab1d"
+    },
+    {
+      "bytes": 1220574,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-004/proc-macro-refused/work/sdk/libincant_module.rlib",
+      "sha256": "3166456f714c3b385126ac71f667fa03827170489e2a666092c529cef13ed5cc"
+    },
+    {
+      "bytes": 2709858,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-004/proc-macro-refused/work/sdk/libincant_wasm_abi.rlib",
+      "sha256": "25565aa82c612724671d194f5b307ee8efa8093293709a028fae9dc5c8e04b26"
+    },
+    {
+      "bytes": 617335,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-004/valid-relative-sdk/module.wasm",
+      "sha256": "8d86dbd4e85120728eb69f9792f854242c7036443277017571552314d01a65d9"
+    },
+    {
+      "bytes": 617335,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-004/valid-relative-sdk/work/run/module.wasm",
+      "sha256": "8d86dbd4e85120728eb69f9792f854242c7036443277017571552314d01a65d9"
+    },
+    {
+      "bytes": 620676,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-004/valid-relative-sdk/work/run/validated.wasm",
+      "sha256": "c000437d11c2bcae60403ab1ba73b3f285a6b50de499b617b2cb2f64e6e16a57"
+    },
+    {
+      "bytes": 1220574,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-004/valid-relative-sdk/work/sdk/libincant_module.rlib",
+      "sha256": "a855b356f0443520e250b5b1b764a2009f0617fe9bcc5bf762890457bed21562"
+    },
+    {
+      "bytes": 2709858,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-004/valid-relative-sdk/work/sdk/libincant_wasm_abi.rlib",
+      "sha256": "1fe851567dcb4b607cc7ae40276b53ff2b0d77bcfb629b74470a4e87012fe1b5"
+    },
+    {
+      "bytes": 1220574,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/cancelled-compiler/work/sdk/libincant_module.rlib",
+      "sha256": "425dc88b4ea3071c2190b386cd44b82e4fc99def0d15375f9d9c58e5e08191e3"
+    },
+    {
+      "bytes": 2709858,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/cancelled-compiler/work/sdk/libincant_wasm_abi.rlib",
+      "sha256": "44d2b51886c1728cd3e0d886cf8cb78267c68268ff3f58b6b90b13929e0a0f2d"
+    },
+    {
+      "bytes": 1220710,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/external-macro-refused/work/sdk/libincant_module.rlib",
+      "sha256": "4d6f63a1fa8fa7f1b407f2891440513264ead2876d880ead0cd3953257dc3349"
+    },
+    {
+      "bytes": 2709914,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/external-macro-refused/work/sdk/libincant_wasm_abi.rlib",
+      "sha256": "13fe7f10726ee40cc3bc2e95cb1ac5c4e5cda4e05b8423d4fd2c063056789b52"
+    },
+    {
+      "bytes": 551,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/normal-validator-refused/work/run/module.wasm",
+      "sha256": "8f66566ddb9d0f725c703cfcb31bee63cddbbd04ab3e4a2bf06621e8b6df832f"
+    },
+    {
+      "bytes": 1220778,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/normal-validator-refused/work/sdk/libincant_module.rlib",
+      "sha256": "78e1fffab4c8e9794c0ebf03ab7d9913547438490bf1bd55b16083966be4ce1d"
+    },
+    {
+      "bytes": 2709942,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/normal-validator-refused/work/sdk/libincant_wasm_abi.rlib",
+      "sha256": "3298f20bb21c2bd7c06601504a3bdc3d396015f923753ffa681bc021bbb26c6f"
+    },
+    {
+      "bytes": 1220744,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/private-include-refused/work/sdk/libincant_module.rlib",
+      "sha256": "24f55c0b6de68f159a56001b654a6f42f3e2d9c9cf005945a040638bc5d09565"
+    },
+    {
+      "bytes": 2709928,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/private-include-refused/work/sdk/libincant_wasm_abi.rlib",
+      "sha256": "e74cf114520629a0e473e06bff848c391834e2dc774c054321f3f9defa6cde47"
+    },
+    {
+      "bytes": 1220574,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/proc-macro-refused/work/sdk/libincant_module.rlib",
+      "sha256": "85936bdfedb1c0897865d861b270ff1ee2aa1d688322baa447aa6a256663cfa4"
+    },
+    {
+      "bytes": 2709858,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/proc-macro-refused/work/sdk/libincant_wasm_abi.rlib",
+      "sha256": "a159516db26ffcf9319dc77b3526a044d0703cb8a40fa3574ada656afa627026"
+    },
+    {
+      "bytes": 577168,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/sandbox-control",
+      "sha256": "659721f000bd3368706c37b61767dd3a0b1c6b09cf44335a8a105117212604bc"
+    },
+    {
+      "bytes": 617335,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/valid-relative-sdk/module.wasm",
+      "sha256": "8d86dbd4e85120728eb69f9792f854242c7036443277017571552314d01a65d9"
+    },
+    {
+      "bytes": 617335,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/valid-relative-sdk/work/run/module.wasm",
+      "sha256": "8d86dbd4e85120728eb69f9792f854242c7036443277017571552314d01a65d9"
+    },
+    {
+      "bytes": 620676,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/valid-relative-sdk/work/run/validated.wasm",
+      "sha256": "c000437d11c2bcae60403ab1ba73b3f285a6b50de499b617b2cb2f64e6e16a57"
+    },
+    {
+      "bytes": 1220574,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/valid-relative-sdk/work/sdk/libincant_module.rlib",
+      "sha256": "f6fc6cf140ccc6a020a7ee40a35ff93ebdcdb7d63f9b0ffd6cd10ffeab326f93"
+    },
+    {
+      "bytes": 2709858,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-005/valid-relative-sdk/work/sdk/libincant_wasm_abi.rlib",
+      "sha256": "4952e336f52194b2aef89f8f038d0aa2fae20f4e1d9665437443af4f431a8b0f"
+    },
+    {
+      "bytes": 602400,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-untrusted-rust-build-001/native-006/sandbox-control",
+      "sha256": "2fd5c90f31a9007259ac880eb6b41fd7da87a454bd6ad70214e639a2538ba1c6"
+    },
+    {
+      "bytes": 3490816,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/native-wasm-input-001/cpu-001/artifacts/0-incant_wasm_cook",
+      "producer": "0d672757b8fb1c7108116097341d64470aee8b83",
+      "sha256": "0bb4f7ccfb81dcb7a05a0e814f6b9655cf52b39ae7f46153522f975e8ae5bb15"
+    }
+  ],
+  "runs": [
+    {
+      "actual_tool_exit": 1,
+      "actual_tool_session_or_chunk": 72517,
+      "closeout": "native-001-closeout.json",
+      "elapsed_seconds": 1.686923041997943,
+      "name": "native-001",
+      "source": "dcc9fc5ca3776d43aab2186342c095723b0fc814",
+      "status": "failed"
+    },
+    {
+      "actual_tool_exit": 0,
+      "actual_tool_session_or_chunk": "6467dc",
+      "closeout": "startup-002-closeout.json",
+      "elapsed_seconds": 0.7800697080092505,
+      "name": "startup-002",
+      "source": "a6051dc06fca1df8a83489386c9c353f81e4b600",
+      "status": "complete"
+    },
+    {
+      "actual_tool_exit": 1,
+      "actual_tool_session_or_chunk": 84432,
+      "closeout": "native-003-closeout.json",
+      "elapsed_seconds": 1.7783060840447433,
+      "name": "native-003",
+      "source": "a6051dc06fca1df8a83489386c9c353f81e4b600",
+      "status": "failed"
+    },
+    {
+      "actual_tool_exit": 1,
+      "actual_tool_session_or_chunk": 77365,
+      "closeout": "native-004-closeout.json",
+      "elapsed_seconds": 5.131108124973252,
+      "name": "native-004",
+      "source": "5e6233a5f1401dacc53c66688e2d78bac574cb4c",
+      "status": "failed"
+    },
+    {
+      "actual_tool_exit": 1,
+      "actual_tool_session_or_chunk": 43261,
+      "closeout": "native-005-closeout.json",
+      "elapsed_seconds": 10.893011084001046,
+      "name": "native-005",
+      "source": "717c6ecbb5e9c4ddf6c2c6161d95bb9664a467c8",
+      "status": "failed"
+    },
+    {
+      "actual_tool_exit": 1,
+      "actual_tool_session_or_chunk": "7b4168",
+      "closeout": "native-006-closeout.json",
+      "elapsed_seconds": 0.5207103749853559,
+      "name": "native-006",
+      "source": "7c18d1d8c752d7528537dc8aea75950e92e58873",
+      "status": "failed"
+    },
+    {
+      "actual_tool_exit": 0,
+      "actual_tool_session_or_chunk": "75cda4",
+      "closeout": "native-007-closeout.json",
+      "elapsed_seconds": 1.00302208395442,
+      "name": "native-007",
+      "source": "6e265da1ed76664445f10c8b5fcf09a72076df12",
+      "status": "complete"
+    }
+  ],
+  "source": "6e265da1ed76664445f10c8b5fcf09a72076df12",
+  "version": 1
+}

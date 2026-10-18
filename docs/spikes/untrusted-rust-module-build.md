@@ -1,9 +1,10 @@
 # Explicit untrusted Rust module build
 
-Source implementation for PLAN 6.3's module-build isolation milestone. Native
-sandbox qualification remains pending. Actual compiler/request controls have run;
-the full isolation episode failed its original socket-creation criterion. Pure
-controls and individual passing cases do not establish complete isolation.
+Source implementation for PLAN 6.3's module-build isolation milestone. Selected
+Mac compiler/request and revised network-I/O controls passed in the scoped
+episodes below. The original socket-creation criterion remains failed; this is
+not a blanket security guarantee or cross-platform qualification. Ordinary
+project import/history integration is the separate next proof.
 
 The existing `tools/rust_guest.py::compile` remains a trusted repository-guest
 helper. Its SDK cache keys, fixed library recipes and argv order are preserved.
@@ -148,13 +149,13 @@ the sink during its bounded 50 ms read. Every owned descriptor closes on success
 allocation failure or child/receipt error. Listen, IPv6 and Unix-domain behavior
 are not separately tested or claimed. Production policy remains unchanged.
 
-This canary-only follow-up needs one new trusted compile because its source
-changed. The eight passing request observations stay bound to their original
+The first revised canary-only follow-up needed one new trusted compile because
+its source changed. The eight passing request observations stay bound to their original
 failed full episode and unchanged service/SDK/request bytes; they are not
 relabeled as a new complete producer. Cumulative native time is 20.269418043
 seconds, leaving 159.730581957 of the original 180. All prior outputs/logs and
-resource charges remain retained. The revised native checks are unexecuted
-pending a separately reviewed grant; full backend isolation remains unqualified.
+resource charges remain retained. At that checkpoint the revised native checks were unexecuted pending a separate
+grant; the later scoped result is recorded below.
 
 
 The first revised canary-only attempt compiled the new trusted control under
@@ -172,4 +173,38 @@ hash, exact successful compilation argv and terminal receipt all verified.
 Changed bytes/source/recipe refuse before socket setup. No compiler, production
 policy or actual I/O-denial predicate changes. Native time is now cumulatively
 20.790128418 seconds, leaving 159.209871582 of the original account. The next
-canary-only execution remains unlaunched pending its exact review/grant.
+canary-only execution was then held for its exact review/grant; its result follows.
+
+
+The separate revised network-I/O follow-up succeeded under controller source
+`6e265da1`. Actual tool chunk `75cda4` exited 0; the reused canary image was built
+under `7c18d1d8` and rehashed before/after. TCP connect, TCP bind, UDP bind and UDP
+send-to each returned -1/EPERM (1). All four sockets were created successfully,
+explicitly reported as creation permitted; outside read/write/exec and environment
+controls also passed. The owned UDP sink received no datagram during its bounded
+50ms read; both loopback descriptors closed. Wrapper 65332 and canary 65341 were
+independently absent, with all 1,150 source/tool/retained-input bindings unchanged.
+No compiler or request case was rerun in this final follow-up.
+
+The combined observations qualify these selected controls for the tested Mac,
+pinned toolchain and exact policy. They do not turn failed native005 into a
+successful original episode or establish a blanket sandbox/security guarantee.
+Cumulative native time is 21.793150502 seconds, leaving 158.206849498 of the
+original 180. All earlier failures, raw diagnostics, terminal/group receipts,
+criterion revision and independent root review are retained in the compact
+[data-only packet](evidence/untrusted-rust-module-build/manifest.json). Its 496
+inert UTF-8 records include source snapshots; native binaries/SDK libraries/Wasm
+remain external hashed identities. The portable verifier executes none of them:
+
+```sh
+python3 docs/spikes/evidence/untrusted-rust-module-build/verify.py --self-test
+```
+
+Optional `--originals --artifacts` rehashes the retained local files. Bounded
+manifest/archive reads and gzip decompression use the already verified byte
+snapshot, including a path-replacement control. Seventeen corrupt/boundary
+controls cover false pass/scope claims, missing cases, errno substitution,
+sink/cleanup failure, artifact substitution, caps and archive replacement.
+Normal public import/`SetSceneProgram`/Undo/Redo remains a separate next
+qualification; no new source-free export, browser, performance, window, device
+or cross-platform isolation result is claimed here.
