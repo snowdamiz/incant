@@ -100,6 +100,15 @@ class MacPolicy:
         # Exact executable bytes/mmap, including a separately admitted canary
         # outside these trees. Never grant its enclosing user directory data.
         lines += ['(allow file-read* (literal ' + _literal(path) + '))' for path in executables]
+        # Executable mmap is a separate operation on current Apple profiles.
+        # Source, SDK rlibs and writable run files get no executable mapping.
+        code_libraries = (self.sysroot / 'lib', Path('/usr/lib'),
+                          Path('/System/Library/Frameworks'), Path('/System/Library/PrivateFrameworks'),
+                          Path('/System/Library/dyld'))
+        lines += ['(allow file-map-executable (literal ' + _literal(path) + '))'
+                  for path in executables]
+        lines += ['(allow file-map-executable (subpath ' + _literal(path) + '))'
+                  for path in code_libraries]
         lines += ['(allow file-read-metadata (literal ' + _literal(path) + '))' for path in parents]
         lines += ['(allow file-read* (literal "/dev/null") (literal "/dev/urandom"))',
                   '(allow file-write* (literal "/dev/null") (subpath ' + _literal(self.run) + '))']
