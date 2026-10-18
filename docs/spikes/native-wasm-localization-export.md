@@ -1,11 +1,14 @@
 # Authored Rust/Wasm localization report export
 
-This is a prepared, unexecuted shipping proof on main401
-`843d6d4b3838d35a158a5178ea5a9fd6e010a7e5`. The authored Rust guest, independent
-TypeScript reference and data-only oracle are implemented. Native compilation,
-public export and player execution require the separately reviewed CPU grant.
-There is no new runtime implementation, GPU/window route, performance result or
-complete SDK/hardware parity claim.
+The ordinary authored export and ten fresh shipping-player cases now pass on
+this Mac. The original producer at `b79fb1b97ad99951e1579ebda5ea2c5c1d48a529`
+successfully built, authored and exported the package, then failed its first
+save-state check because the checker expected the older persistence framing.
+That failed attempt is retained. A separately reviewed checker correction at
+`486303d5e10c7a56596efa8b5b058c5e2176c79d` and a separate ten-process follow-up
+verify the same unchanged package, complete audio and saved continuation.
+There is no runtime implementation change, GPU/window result, performance result
+or complete SDK/hardware parity claim.
 
 The [earlier report qualification](native-wasm-localization-report.md) covers the
 ABI, development/static backend behavior and internal callback rollback. This
@@ -40,7 +43,7 @@ atomic source/attachment transaction, executed by native Play, then undone befor
 the Wasm export. Whole binary checkpoints are not compared across JS and Wasm;
 selected gameplay observations, locale logs and actual PCM are compared.
 
-## Planned public lifecycle
+## Verified public lifecycle
 
 All project edits use the command bus. Raw Rust source, compiled Wasm and a fixed
 integer-generated WAV are private ingress files, not direct project mutations.
@@ -69,9 +72,9 @@ valid input/native step; these subprocess controls do **not** claim whole-tick
 rollback or inspect hidden failed-session memory. Internal guest-transaction
 rollback remains bound to the prior report qualification.
 
-## Prepared bounds and current evidence
+## Bounds and actual evidence
 
-The proposed owner reuses the checkpoint proof's non-reaping managed groups and
+The producer reuses the checkpoint proof's non-reaping managed groups and
 append-only observed PID inventory. It admits one fresh target, jobs/Rayon 2,
 5,400 seconds total, a 28 GiB launch floor, 6 GiB ongoing floor, 12 GiB target,
 8 GiB private scratch, 2 GiB retained output and 8 GiB owned RSS. Native stages
@@ -82,14 +85,44 @@ The small private copied Node dependency closure is separately inventoried and
 bounded to 64 MiB before launch; pinned Node/TypeScript/SWC are authoring tools.
 No project chooses executables or grants an engine shell capability.
 
-The 12 pure Python controls currently pass, including malformed/partial evidence,
-row-field/order changes, clock/schema/count mismatches, PCM corruption and
-compiler-override refusals. Strict TypeScript source checking passes. An initial
-negative test mistakenly treated a higher valid epoch watermark as invalid; its
-failed source/result is retained externally, and the corrected test supplies a
-watermark below the saved tick without changing the oracle. These are checker
-and source results only. Rust guest compilation, every actual native assertion,
-typed stderr classification and shipping lifecycle remain pending.
+The original producer took 548.282 seconds and exited 1. Guest compilation,
+public import/authoring, journal recovery, TypeScript reference, fresh export,
+dependency/symbol/codegen checks and source-free startup succeeded. Its first
+12-tick player exited 0 with correct gameplay and PCM; the checker then refused
+the save's current timer framing. No remaining player cases ran in that attempt.
+All 508 observed process identities/groups were confirmed absent afterward.
+
+The saved state contains the current `INCWPS02` envelope, an 80-byte `INCWST01`
+declaration/tick/watermark/guest section and a 32-byte empty `INCTMS01` timer
+clock. The guest's declared payload remains eight bytes. The correction verifies
+this exact framing, empty timer count, row stride and elapsed clock built by
+repeated fixed-step addition. It does not change runtime persistence or accept
+legacy framing. Thirteen pure controls now pass, including coherently rehashed
+wrong clock, count, stride and wrapper cases. The initial fixture used Python's
+compensated `sum`, whose rounding differs from repeated runtime addition; that
+test fixture was corrected to model the actual clock operation.
+
+The separate follow-up took 1.814 seconds and ran all ten fresh processes:
+12 ticks, a five-tick prefix, two independent seven-tick continuations and six
+specific refusals. Every coverage row/witness, selected gameplay observation,
+whole final checkpoint and all PCM bytes pass. The baseline checkpoint and PCM
+are byte-identical to the original successful 12-tick player, and baseline PCM
+matches the TypeScript reference. No compiler, export or GPU stage was repeated.
+All eleven wrapper/player identities and groups were freshly absent afterward.
+Combined elapsed time is 550.095 seconds, not a replacement for the failed
+original receipt.
+
+Independent source and saved-data review found no issues. The latter rechecked
+105 bound inputs, 62 follow-up files, actual build/authoring records, every player
+stream and the full continuation comparison. The original package player SHA256
+is `5cbf32940628ab5f57ce9762b6c297c6463e90516932e558c7b0803e2f32a2bd`.
+The [retained evidence manifest](evidence/native-wasm-localization-export-20261018/manifest.json)
+contains 192 compressed records with compressed and decoded hashes, including
+the failed producer, separate follow-up, raw reports/PCM/save and review receipts.
+Executables and compiler storage remain external and are identified by hashes.
+All ten local development checks passed before the narrow checker correction;
+the corrected checker has its separate thirteen-control result, and the entire
+tools suite passes again after that correction.
 
 Producer tools: `tools/probes/native-wasm-localization-export.py` and
 `tools/probes/native_wasm_localization/`. Data controls:
@@ -101,4 +134,4 @@ The restricted runtime PATH and deletion of owned source/build inputs establish
 a source-free package demonstration, not an OS filesystem sandbox. Process-group
 ownership assumes trusted tool children retain their group; periodic sampling
 does not prove observation of every transient descendant. No phase gate passes
-from this prepared packet.
+from this scoped proof.
