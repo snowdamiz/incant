@@ -1,0 +1,367 @@
+{
+  "format": "static-catalog-root-review-v1",
+  "reviewer": "root independent of producing agent",
+  "reviewed_source": "d4f4e1582007385a55d8897e7eba53eef08de5e7",
+  "integration_source": "ff46b974ff487a66d5077b3739ae60e2d50ea28b",
+  "review": "Checked split preserves no-catalog default and routes bounded nonempty bytes into existing validator; no lint suppression or platform change. No blocker found.",
+  "native_result": {
+    "actual_session": 63629,
+    "exit": 0,
+    "new_tests": 2,
+    "strict_static_conformance_all_target_lint": true,
+    "actual_generated_catalog_bytes": 0,
+    "logs_rehashed": 4,
+    "test_binary_rehashed": true,
+    "fresh_absent_children": 92
+  },
+  "portable_evidence": {
+    "records": 26,
+    "all_originals_equal": true
+  },
+  "fast": {
+    "source": "ff46b974ff487a66d5077b3739ae60e2d50ea28b",
+    "passed": true,
+    "wrapper_pid": 58650,
+    "stages": [
+      {
+        "command": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.09043858299264684
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "test:tools"
+        ],
+        "exit": 0,
+        "seconds": 44.12434249999933
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "--all",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 1.8064088330138475
+      },
+      {
+        "command": [
+          "node",
+          "tools/build_bridge.mjs",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.07628187502268702
+      },
+      {
+        "command": [
+          "node",
+          "tools/generate_sdk.mjs",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.0778022080194205
+      },
+      {
+        "command": [
+          "node_modules/.bin/tsc",
+          "-p",
+          "sdk/ts/tsconfig.json"
+        ],
+        "exit": 0,
+        "seconds": 0.24629870796343312
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "build",
+          "--workspace",
+          "editor/ui"
+        ],
+        "exit": 0,
+        "seconds": 3.384193291014526
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "test",
+          "--workspace",
+          "editor/ui",
+          "--",
+          "--maxWorkers=2"
+        ],
+        "exit": 0,
+        "seconds": 27.40028112498112
+      },
+      {
+        "command": [
+          "python3",
+          "tools/generate_wasm_sdk.py",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.21437829098431394
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.0663520410307683
+      }
+    ],
+    "seconds": 77.51215829100693,
+    "groups": [
+      {
+        "pid": 58662,
+        "argv": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "cleanup_confirmed": true,
+        "exit": 0
+      },
+      {
+        "pid": 58665,
+        "argv": [
+          "npm",
+          "run",
+          "test:tools"
+        ],
+        "cleanup_confirmed": true,
+        "exit": 0
+      },
+      {
+        "pid": 59687,
+        "argv": [
+          "cargo",
+          "fmt",
+          "--all",
+          "--check"
+        ],
+        "cleanup_confirmed": true,
+        "exit": 0
+      },
+      {
+        "pid": 59695,
+        "argv": [
+          "node",
+          "tools/build_bridge.mjs",
+          "--check"
+        ],
+        "cleanup_confirmed": true,
+        "exit": 0
+      },
+      {
+        "pid": 59698,
+        "argv": [
+          "node",
+          "tools/generate_sdk.mjs",
+          "--check"
+        ],
+        "cleanup_confirmed": true,
+        "exit": 0
+      },
+      {
+        "pid": 59701,
+        "argv": [
+          "node_modules/.bin/tsc",
+          "-p",
+          "sdk/ts/tsconfig.json"
+        ],
+        "cleanup_confirmed": true,
+        "exit": 0
+      },
+      {
+        "pid": 59704,
+        "argv": [
+          "npm",
+          "run",
+          "build",
+          "--workspace",
+          "editor/ui"
+        ],
+        "cleanup_confirmed": true,
+        "exit": 0
+      },
+      {
+        "pid": 59742,
+        "argv": [
+          "npm",
+          "run",
+          "test",
+          "--workspace",
+          "editor/ui",
+          "--",
+          "--maxWorkers=2"
+        ],
+        "cleanup_confirmed": true,
+        "exit": 0
+      },
+      {
+        "pid": 59930,
+        "argv": [
+          "python3",
+          "tools/generate_wasm_sdk.py",
+          "--check"
+        ],
+        "cleanup_confirmed": true,
+        "exit": 0
+      },
+      {
+        "pid": 59938,
+        "argv": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "cleanup_confirmed": true,
+        "exit": 0
+      }
+    ],
+    "peaks": {
+      "target": 8044544,
+      "scratch": 8044544,
+      "output": 33718272,
+      "rss": 1416249344
+    }
+  },
+  "actual_fast_session": 67727,
+  "actual_fast_exit": 0,
+  "fresh_process_absence": true,
+  "checked_at": "2026-10-18T07:03:02.688970+00:00",
+  "file_bindings": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/000.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/000.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/001.stderr.log",
+      "bytes": 116994,
+      "sha256": "379d768a83e4dafa0c855edcacc799a0b77be8423b4e8349e615048a1e2b487b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/001.stdout.log",
+      "bytes": 7745,
+      "sha256": "02790ec06662268f6ce91519ee0c73143fd18e83ca9d3c671cda0d72391d0e25"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/002.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/002.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/003.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/003.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/004.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/004.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/005.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/005.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/006.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/006.stdout.log",
+      "bytes": 1550,
+      "sha256": "b8941b71a756fe13ab2c44e731f2d83ebb573a7a0de581dcd5de12998bed44f8"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/007.stderr.log",
+      "bytes": 3600,
+      "sha256": "b39acf51b68a8940ef8dac9f92e07443c04b70348e5950a735cea5972bde77ce"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/007.stdout.log",
+      "bytes": 524,
+      "sha256": "be61da786cb1b7f2cce0789f12c581024c2dc0a9185b7b734a28aa0c32c090c9"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/008.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/008.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/009.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/009.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/output/owner.json",
+      "bytes": 7936,
+      "sha256": "8ee69a66f20d5f604f2b69b3f25d872f469beb048adf1cc39c805925962411b3"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/result.json",
+      "bytes": 3797,
+      "sha256": "e6e4290fa2e9fd38fe0ee885aebae6d8dbf27d392c51fbda0a4e27f2bc276ef6"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/run.py",
+      "bytes": 1704,
+      "sha256": "754047f53365ffa763b73b80cdda9a6adf172c6f41e315a7e49b0c01f9e74b97"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/static-catalog-integration-fast-001/steps.json",
+      "bytes": 698,
+      "sha256": "f8599f45fde435e5632cfbf9ca34be1cd8015c7818414b5f585b7c10c581c86e"
+    }
+  ]
+}
