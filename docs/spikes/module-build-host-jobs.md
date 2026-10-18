@@ -5,15 +5,10 @@ This source slice connects the bounded Rust module worker to one shared
 same service instance. It inspects existing source and builds private candidates;
 installation and source-write command transactions remain separate work.
 
-The source and mock controls are implemented. The first macOS CPU attempt at
-`9984d54b` passed eleven shared-service controls and the default ignored inventory,
-then stopped at an agent mock fixture's insufficient token budget (one agent
-control passed; approval control returned `Budget`). Its original failed outcome
-and 62.416758 s charge remain retained. The successor corrects only that fixture
-budget plus portable held-node handling; its Rust checks remain pending.
-Actual bridge execution and fresh schema-export comparison are pending. This
-is not a new sandbox-isolation, shipping, runtime, device or visual acceptance.
-The worker's prior isolation and ordinary-import evidence remains in
+The source slice has scoped macOS CPU qualification. The service/agent/worker
+producer is `a0dd8eb7`; the editor guard correction and fresh schema producer is
+`c9733e5c`. This is not a new sandbox-isolation, shipping, runtime, device or visual
+acceptance. The worker's prior isolation and ordinary-import evidence remains in
 [untrusted-rust-module-build.md](untrusted-rust-module-build.md).
 
 ## Contract
@@ -91,24 +86,72 @@ Each service operation has a 180 s aggregate bound and 90 s child bound, with
 floor. Retained jobs count toward that global budget; this slice provides no
 automatic deletion or cleanup credit.
 
-## Verification boundary
+## Qualification
 
-The pure Python mailbox and existing worker controls pass: 42 tests. These start
-no native children and do not establish OS isolation. Source tests cover shared
-service source/identity bounds, stale/rebound projects, busy/cancel behavior,
-revision/epoch validation, candidate retirement, cleanup poisoning, exact child
-recipes/environment and agent approval with no document/history mutation.
+The 42 pure Python mailbox and existing worker controls pass. They start no
+native children and do not establish OS isolation. The managed native episode
+retains these distinct attempts:
 
-Ignored macOS test sources additionally cover terminal/cancel cleanup, an exited
-parent with a pipe-holding descendant, a crashed bridge with a separately owned
-child, retained ownership after exit-observer refusal, and a real shared worker
-build followed by cancellation after delegated compilation begins. These tests
-are unexecuted until separately bounded CPU qualification.
-The configured bridge test additionally requires the default-off
-`incant_module_build/host-qualification` feature. Ordinary workspace ignored tests
-never require a configured external worker or launch its compiler.
+| Attempt / producer | Actual result | Scope |
+| --- | --- | --- |
+| CPU001 / `9984d54b` | session 81328, terminal 1, 62.416758 s | Eleven shared controls and default ignored inventory pass; agent approval fixture returns `Budget` with its insufficient 100-token test budget. Later stages unrun. |
+| CPU002 / `a0dd8eb7` | session 52495, terminal 1, 269.008551 s | Thirteen shared controls, two agent controls, both ignored inventories, five actual lifecycle/worker controls and service/agent strict all-target Clippy pass. Editor lint refuses two `collapsible_if` guards; schema stages unrun. |
+| CPU003 / `c9733e5c` | session 79787, terminal 0, 171.767952 s | Only pending editor strict lint, fresh headless build and complete schema comparison pass. Service/agent/worker source and earlier passing evidence are carried unchanged. |
 
-The four agent schemas are source-derived additions preserving every prior tool
-value. A newly built matching headless exporter must verify the complete registry
-before publication. Editor IPC compilation is required; no UI, native-window or
-hardware claim follows from it.
+The first correction also adds portable held-root identity and opened-handle
+regular/single-link checks. The shared mock tests remain enabled on Windows;
+these macOS results do not execute that platform's API path. The second correction
+only collapses the editor callback's equivalent error guards. Both failed attempts
+remain failures in the packet. Total elapsed is 503.193261 s of the original
+900 s; no retry budget or storage history was reset.
+
+The selected Rust checks cover source/identity bounds, stale/rebound projects,
+busy/cancel behavior, revision/epoch validation, candidate retirement, cleanup
+poisoning, exact child recipes/environment and agent approval with zero document,
+history or project-file mutation. The actual five controls additionally exercise:
+
+- A real source inspect, SDK/Wasm compile, normal validation, private candidate
+  return, then cancellation after the delegated compiler starts.
+- Terminal and cancelled direct-child cleanup.
+- An exited parent with a pipe-holding descendant.
+- A crashed bridge while a separately owned child still requires cleanup.
+- An exit-observer refusal that retains the unreaped owner without blocking wait.
+
+The configured bridge test requires the default-off
+`incant_module_build/host-qualification` feature. Actual default `--list --ignored`
+excludes it; the explicit feature inventory includes it. The four self-contained
+process controls remain in the ordinary ignored inventory. Each direct-process
+control asserts its own group closure; the outer packet independently records and
+rechecks every observed identity. Fresh post-terminal checks found 50, 623 and
+110 recorded PIDs respectively absent (including wrappers), and all recorded
+groups absent. These observations are separate from broad OS isolation claims.
+
+All Cargo stages use pinned Rust 1.99, `--locked --offline --profile ci -j2`,
+Rayon 2, renderer opt-level 2 and sha2 opt-level 3. The exact commands, environments,
+source/tool bindings, actual raw stdout/stderr and owned-process receipts are in
+[the portable manifest](evidence/module-build-host-jobs/manifest.json) and its
+bounded, data-only [replay](evidence/module-build-host-jobs/verify.py). Run:
+
+```sh
+python3 docs/spikes/evidence/module-build-host-jobs/verify.py --self-test
+```
+
+It replays 152 inert records and six meaningful refusal controls; it executes no
+archived code. Local-only `--originals --artifacts` additionally rehashes the
+retained originals and eight external executable/Wasm identities. Executable bytes
+are excluded from the archive. The unchanged standalone isolation canaries and
+ordinary import/Undo/Redo proof are retained separately and were not repeated.
+
+The fresh headless copy is 63,697,952 bytes, SHA-256
+`5709e749e813eb3c39627de54baa0d589950d49501c416655202c5fcaf280ead`,
+Cargo `fresh:false` at `c9733e5c`. Its export matched every published schema file
+byte for byte, including the four new tool schemas and all prior entries.
+Final shared target allocation/retained peak was 13,524,672,512 bytes under the
+existing 18 GiB cap. The 99 protected artifact identities and prior global charges
+were retained; global totals became 5,187.800573 s post-cleanup and 5,646.805217 s
+including deleted history. The target was released after actual terminal cleanup.
+
+No UI interaction, native window, screen capture, physical input/audio device,
+GPU, candidate installation, source write or source-free export was exercised.
+Installation and stable-ID source-write adapters remain a distinct command-bus
+integration task.
