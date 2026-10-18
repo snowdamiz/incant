@@ -44,6 +44,8 @@ native-minimum-duration = ["native-window", "dep:wgpu-hal", "wgpu-hal/diagnostic
 native-display-link = ["native-window", "dep:objc2", "dep:objc2-app-kit", "dep:objc2-foundation", "dep:objc2-quartz-core"]
 # Default-off separation of every simulation admission from batch-final display.
 native-batched-presentation = ["native-window", "incant_render_gpu_host/experimental-batched-presentation"]
+# Private scheduling falsification: rational simulation deadlines, independent display pulses.
+native-independent-presentation = ["native-batched-presentation", "native-display-link", "native-presentations"]
 
 native-window = ["frame-capture", "incant_game_runtime/device", "dep:tao", "dep:pollster", "dep:gilrs"]
 # Trusted exporter opt-in; no project supplies executable shader artifacts.

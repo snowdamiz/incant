@@ -1,6 +1,8 @@
 //! Single-threaded surface ownership. Reserve before simulation, consume inside
 //! mandatory sync, present before returning to the event loop. No frame survives
 //! a resize callback, and only this module can construct a reservation/provider.
+//! The explicit independent diagnostic admits simulation with an empty slot and
+//! reserves only at display; no ordinary caller receives that authority.
 use super::Error;
 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
 use super::presentations::{Boundary, Capture, Failure, Role, Schedule, Status};
@@ -128,6 +130,19 @@ impl SurfaceState {
         }
     }
     #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    pub fn presentation_display_attempt(
+        &mut self,
+        generation: u64,
+        step: u64,
+        reason: super::presentations::DisplayReason,
+        callback: Option<(u64, std::time::Instant, f64)>,
+        pulse: std::time::Instant,
+    ) {
+        if let Some(capture) = &mut self.capture {
+            capture.display_begin(generation, step, reason, callback, pulse);
+        }
+    }
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
     pub fn presentation_gameplay_attempt(
         &mut self,
         generation: u64,
@@ -236,6 +251,22 @@ impl SurfaceState {
             return Err(Error::Reservation);
         }
         Ok(())
+    }
+    /// Only the independent diagnostic can admit without owning a drawable.
+    /// An accidental target acquire still fails in SurfaceTargets::acquire.
+    pub fn admit_without_reservation(&mut self) -> Result<(), Error> {
+        #[cfg(feature = "native-independent-presentation")]
+        if self.slot.borrow().is_none() && self.presentation.get() == PresentationMode::Present {
+            self.presentation.set(PresentationMode::AdmitOnly);
+            return Ok(());
+        }
+        Err(Error::Reservation)
+    }
+    /// A delayed resize notification must not let an independent UI tick use
+    /// geometry for a different currently observed native extent.
+    pub fn current_extent_is_admitted(&self) -> bool {
+        let size = self.window.inner_size();
+        self.configured && size.width == self.config.width && size.height == self.config.height
     }
     pub fn has_supported_size(&self) -> bool {
         let size = self.window.inner_size();

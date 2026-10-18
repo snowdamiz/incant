@@ -13,6 +13,7 @@ mod display_link;
 mod gamepad;
 mod haptics;
 mod ime;
+mod independent;
 mod input;
 #[cfg(test)]
 mod pacing_tests;
@@ -69,6 +70,8 @@ pub enum Error {
     SurfaceValidation,
     #[error("native surface reservation invariant failed")]
     Reservation,
+    #[error("independent boundary presentation deferred after accepted state")]
+    IndependentBoundary,
     #[error(
         "this native window host supports keyboard, three-button mouse and gamepad IDs0..15 only"
     )]
@@ -249,6 +252,10 @@ pub fn run(
 ) -> session::Result<serde_json::Value> {
     let options = Options::parse(args)?;
     let batch_latest = batch_mode.selected();
+    let independent = batch_mode.independent();
+    if independent && !wake_mode.selected() {
+        return Err(crate::batching::Error::IndependentWake.into());
+    }
     // Explicit selection refuses wrong scene/OS before creating diagnostic
     // outputs, a window, audio device or GPU. Ordinary startup order is retained.
     let admitted_scene = if pacing.selected() || wake_mode.selected() {
@@ -287,6 +294,7 @@ pub fn run(
             )
             .map(|mut capture| {
                 capture.enable_batches(batch_latest);
+                capture.enable_independent(independent);
                 capture
             })
         })
@@ -422,6 +430,8 @@ pub fn run(
     let mut host_steps = 0u64;
     let mut gameplay_presentations = 0u64;
     let mut idle_presentations = 0u64;
+    let mut independent_displays = 0u64;
+    let mut independent_boundary_flushes = 0u64;
     let mut controls = crate::restart::InputFence::default();
     let mut suspended = true;
     let mut focused = window.is_focused();
@@ -647,7 +657,68 @@ pub fn run(
                     };
                     #[cfg(not(all(feature = "native-display-link", target_os = "macos")))]
                     let wake_ready = true;
+                    // Reuse the ordinary committed refresh and mandatory resource
+                    // synchronization. No reservation survives this expression.
+                    macro_rules! independent_display {
+                        ($reason:ident) => {{
+                            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                            {
+                                #[cfg(feature = "native-independent-presentation")]
+                                let callback = if presentations::DisplayReason::$reason
+                                    == presentations::DisplayReason::Pulse
+                                {
+                                    display_wake
+                                        .as_ref()
+                                        .and_then(display_link::Host::accepted)
+                                        .map(|p| (p.sequence, p.arrived, p.target_seconds))
+                                } else {
+                                    None
+                                };
+                                #[cfg(not(feature = "native-independent-presentation"))]
+                                let callback = None;
+                                surface.presentation_display_attempt(
+                                    generation,
+                                    host_steps,
+                                    presentations::DisplayReason::$reason,
+                                    callback,
+                                    now,
+                                );
+                            }
+                            if !reserve_observed(
+                                &mut surface,
+                                &renderer,
+                                &mut state_log,
+                                #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                                &compilation,
+                            )? {
+                                false
+                            } else {
+                                #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                                let mut display_compilation =
+                                    compilation_scope!(Background, generation, host_steps);
+                                let result = crate::profile::presentation(|| game.refresh_host());
+                                let consumed = surface.consumed();
+                                surface.cancel();
+                                result?;
+                                if !consumed {
+                                    return Err(Error::Reservation.into());
+                                }
+                                #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                                surface.presentation_complete(Status::RefreshCompleted);
+                                ui_input.presented(game.host()?.ui(), &mut input)?;
+                                #[cfg(all(feature = "native-compilation", target_os = "macos"))]
+                                compilations::commit(&mut display_compilation);
+                                redraw_pending = false;
+                                presentation_refreshes += 1;
+                                independent_displays += 1;
+                                true
+                            }
+                        }};
+                    }
                     let mut batch_refresh = false;
+                    if independent && has_ui && !surface.current_extent_is_admitted() {
+                        ui_resize = true;
+                    }
                     if has_ui && ui_resize && presentable {
                         #[cfg(feature = "profile")]
                         cadence.interrupt();
@@ -705,7 +776,7 @@ pub fn run(
                         ui_resize = false;
                         redraw_pending = false;
                         presentation_refreshes += 1;
-                        if batch_latest {
+                        if batch_latest || independent {
                             // This opportunity already displayed committed state.
                             // Keep the wall-clock debt for the next opportunity;
                             // still process inactivity and text-session lifecycle.
@@ -789,13 +860,34 @@ pub fn run(
                             presentation_refreshes += 1;
                             initial_frame = false;
                         }
-                    } else if now >= retry && wake_ready && !batch_refresh {
-                        if initial_frame {
+                    } else if now >= retry
+                        && (if independent {
+                            independent::ready(now, clock.deadline(), wake_ready)
+                        } else {
+                            wake_ready
+                        })
+                        && !batch_refresh
+                    {
+                        if initial_frame || (independent && suspended) {
+                            // A real display opportunity/reservation re-establishes
+                            // surface eligibility, then starts a fresh rational clock.
+                            // Resume itself does not invent a simulation tick.
+                            if independent && !wake_ready {
+                                return Ok(());
+                            }
                             #[cfg(feature = "profile")]
                             cadence.interrupt();
                             if !{
                                 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
-                                surface.presentation_attempt(Role::Initial, generation, host_steps);
+                                surface.presentation_attempt(
+                                    if initial_frame {
+                                        Role::Initial
+                                    } else {
+                                        Role::Background
+                                    },
+                                    generation,
+                                    host_steps,
+                                );
                                 reserve_observed(
                                     &mut surface,
                                     &renderer,
@@ -814,7 +906,19 @@ pub fn run(
                             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
                             let mut refresh_compilation =
                                 compilation_scope!(Background, generation, host_steps);
-                            let result = crate::profile::presentation(|| game.refresh_host());
+                            let result = crate::profile::presentation(|| -> session::Result<()> {
+                                if independent && has_ui {
+                                    ui_relayouts += fit_ui(
+                                        &mut game,
+                                        &surface,
+                                        window.scale_factor(),
+                                        &mut ui_input,
+                                        &mut input,
+                                    )?;
+                                }
+                                game.refresh_host()?;
+                                Ok(())
+                            });
                             let consumed = surface.consumed();
                             surface.cancel();
                             result?;
@@ -829,7 +933,15 @@ pub fn run(
                             initial_frame = false;
                             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
                             compilations::commit(&mut refresh_compilation);
-                            clock.reset(now);
+                            if independent {
+                                game.set_suspended(false)?;
+                                suspended = false;
+                                ui_input.resume(&mut input, focused);
+                                gamepads.synchronize(&mut input)?;
+                                clock.reset(Instant::now());
+                            } else {
+                                clock.reset(now);
+                            }
                             return Ok(());
                         }
                         #[cfg(all(feature = "native-presentations", target_os = "macos"))]
@@ -897,7 +1009,22 @@ pub fn run(
                             // normal haptics. This is CPU host time, not scanout.
                             #[cfg(feature = "profile")]
                             let host_started = cadence.begin();
-                            if (!batch_latest || _tick_index == 0)
+                            #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                            if independent {
+                                surface.presentation_gameplay_attempt(
+                                    generation,
+                                    host_steps + 1,
+                                    presentations::Schedule {
+                                        pulse: now,
+                                        deadline: schedule_deadline,
+                                        due,
+                                        ordinal: _tick_index,
+                                        discarded_ticks: clock.dropped - dropped_before,
+                                    },
+                                );
+                            }
+                            if !independent
+                                && (!batch_latest || _tick_index == 0)
                                 && !{
                                     #[cfg(all(
                                         feature = "native-presentations",
@@ -949,7 +1076,7 @@ pub fn run(
                                 break;
                             }
                             game.poll_device()?;
-                            if has_ui {
+                            if has_ui && !independent {
                                 ui_relayouts += fit_ui(
                                     &mut game,
                                     &surface,
@@ -977,10 +1104,15 @@ pub fn run(
                             let events = controls.filter(packet)?;
                             // Preserve all fixed-step input/audio/resource admissions.
                             // Only the final accepted state consumes the reservation.
-                            let defer = batch_latest
-                                && _tick_index + 1 < due
-                                && !options.stop_after.is_some_and(|n| host_steps + 1 >= n);
-                            surface.admission_only(defer)?;
+                            let defer = independent
+                                || (batch_latest
+                                    && _tick_index + 1 < due
+                                    && !options.stop_after.is_some_and(|n| host_steps + 1 >= n));
+                            if independent {
+                                surface.admit_without_reservation()?;
+                            } else {
+                                surface.admission_only(defer)?;
+                            }
                             crate::profile::frame(|| -> session::Result<()> {
                                 let result = if has_ui {
                                     game.tick_with_ui(
@@ -995,11 +1127,12 @@ pub fn run(
                                     game.tick(events)
                                 };
                                 let consumed = surface.consumed();
-                                if result.is_err() || !defer {
+                                if result.is_err() || !defer || independent {
                                     surface.cancel(); // release on retryable input failure too
                                 }
                                 result?;
-                                if consumed == defer {
+                                if (independent && !consumed) || (!independent && consumed == defer)
+                                {
                                     return Err(Error::Reservation.into());
                                 }
                                 Ok(())
@@ -1007,7 +1140,7 @@ pub fn run(
                             gamepads.commit();
                             input.clear();
                             ui_input.accepted();
-                            if !batch_latest {
+                            if !batch_latest && !independent {
                                 ui_input.presented(game.host()?.ui(), &mut input)?;
                                 redraw_pending = false;
                             }
@@ -1018,7 +1151,9 @@ pub fn run(
                                 drop(tick_compilation);
                             }
                             #[cfg(all(feature = "native-presentations", target_os = "macos"))]
-                            if !batch_latest {
+                            if independent {
+                                surface.presentation_complete(Status::Admitted);
+                            } else if !batch_latest {
                                 surface.presentation_complete(Status::HostCommitted);
                             }
                             if let Some(plan) = &mut observations {
@@ -1027,7 +1162,7 @@ pub fn run(
                             let restart = game.take_session_request()?.is_some();
                             // A restart can shorten a batch after admission. Display
                             // the accepted old generation before destroying its owner.
-                            if defer && restart {
+                            if defer && restart && !independent {
                                 surface.admission_only(false)?;
                                 let result = crate::profile::presentation(|| game.refresh_host());
                                 let consumed = surface.consumed();
@@ -1037,7 +1172,7 @@ pub fn run(
                                     return Err(Error::Reservation.into());
                                 }
                             }
-                            let displayed = !defer || restart;
+                            let displayed = !independent && (!defer || restart);
                             if displayed {
                                 gameplay_presentations = gameplay_presentations
                                     .checked_add(1)
@@ -1060,13 +1195,19 @@ pub fn run(
                             if restart {
                                 gamepads.pause_haptics()?;
                                 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
-                                if displayed {
+                                if displayed || independent {
                                     surface.presentation_host_finished();
                                 }
                                 #[cfg(feature = "profile")]
                                 {
                                     cadence.finish(host_started);
                                     cadence.interrupt();
+                                }
+                                if independent {
+                                    if !independent_display!(Restart) {
+                                        return Err(Error::IndependentBoundary.into());
+                                    }
+                                    independent_boundary_flushes += 1;
                                 }
                                 let _profile =
                                     incant_profile::scope(incant_profile::Phase::Restart);
@@ -1126,17 +1267,38 @@ pub fn run(
                             if !restart {
                                 gamepads.haptics(&haptics)?;
                                 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
-                                if displayed {
+                                if displayed || independent {
                                     surface.presentation_host_finished();
                                 }
                                 #[cfg(feature = "profile")]
                                 cadence.finish(host_started);
                             }
                             if options.stop_after.is_some_and(|n| host_steps >= n) {
+                                if independent && !restart {
+                                    if !independent_display!(Stop) {
+                                        return Err(Error::IndependentBoundary.into());
+                                    }
+                                    independent_boundary_flushes += 1;
+                                }
                                 *exit = true;
                             }
                             if restart || *exit {
                                 break;
+                            }
+                        }
+                        if independent && wake_ready && !suspended && !*exit {
+                            if !independent_display!(Pulse) {
+                                gamepads.pause_haptics()?;
+                                game.set_suspended(true)?;
+                                suspended = true;
+                                if has_ui {
+                                    ui_input.defer_surface();
+                                } else {
+                                    input.reset_focus(focused);
+                                    gamepads.discard_pending();
+                                }
+                                clock.reset(now);
+                                retry = now + Duration::from_millis(50);
                             }
                         }
                     }
@@ -1164,13 +1326,21 @@ pub fn run(
             ControlFlow::Exit
         } else {
             ControlFlow::WaitUntil(if suspended {
-                retry.max(Instant::now() + Duration::from_millis(1))
+                retry.max(Instant::now() + Duration::from_millis(if independent { 50 } else { 1 }))
             } else {
-                // Health deadline only; it cannot authorize gameplay.
+                // Ordinary display-link mode still uses only its health timer.
+                // Independent mode additionally wakes at the exact rational deadline.
                 #[cfg(all(feature = "native-display-link", target_os = "macos"))]
-                let deadline = display_wake
-                    .as_ref()
-                    .map_or_else(|| clock.deadline(), display_link::Host::deadline);
+                let deadline = display_wake.as_ref().map_or_else(
+                    || clock.deadline(),
+                    |wake| {
+                        if independent {
+                            independent::wait_until(clock.deadline(), wake.deadline(), retry)
+                        } else {
+                            wake.deadline()
+                        }
+                    },
+                );
                 #[cfg(not(all(feature = "native-display-link", target_os = "macos")))]
                 let deadline = clock.deadline();
                 deadline
@@ -1203,6 +1373,16 @@ pub fn run(
                 "simulation_tick_rate":rate,
                 "diagnostic_only":true,
                 "performance_gate_passed":false
+            });
+        }
+        if independent {
+            report["native_independent"] = serde_json::json!({
+                "version":1,"mode":"independent-simulation-deadline", "simulation_steps":host_steps,
+                "committed_displays":independent_displays,"boundary_flushes":independent_boundary_flushes,
+                "simulation_requires_drawable":false,"actual_surface_refusal_observed_at_display":true,
+                "resume_admits_immediate_tick":false,"maximum_ticks_per_due_call":clock::MAX_CATCH_UP,
+                "future_target_used_for_simulation":false,"interpolated_poses":false,
+                "diagnostic_only":true,"performance_gate_passed":false
             });
         }
         if batch_latest {

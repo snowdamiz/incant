@@ -10,6 +10,7 @@ pub(in crate::window) enum Role {
     UiResize,
     Gameplay,
     Committed,
+    Simulation,
 }
 #[derive(Clone, Copy, Debug, Serialize)]
 #[repr(u8)]
@@ -46,6 +47,7 @@ pub(in crate::window) enum Status {
     Deferred,
     RefreshCompleted,
     HostCommitted,
+    Admitted,
 }
 #[derive(Clone, Copy, Debug, Serialize)]
 pub(super) struct Attempt {
@@ -60,6 +62,23 @@ pub(super) struct Attempt {
     /// callback identities after acquisition.
     #[serde(skip_serializing_if = "Option::is_none")]
     pub batch: Option<Batch>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub display: Option<Display>,
+}
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
+#[serde(rename_all = "snake_case")]
+pub(in crate::window) enum DisplayReason {
+    Pulse,
+    Stop,
+    Restart,
+}
+#[derive(Clone, Copy, Debug, Serialize)]
+pub(super) struct Display {
+    pub reason: DisplayReason,
+    pub callback_sequence: Option<u64>,
+    pub callback_arrived_ns: Option<u64>,
+    /// Native target metadata has no shared epoch with Rust Instant.
+    pub callback_target_seconds: Option<f64>,
 }
 #[derive(Clone, Copy, Debug, Serialize)]
 pub(super) struct Batch {
@@ -117,6 +136,10 @@ pub(super) struct Model {
     pending: u16,
     #[serde(skip)]
     surface_generation: u64,
+    #[serde(skip)]
+    last_display_role: Option<Role>,
+    #[serde(skip)]
+    last_display_callback: Option<u64>,
 }
 impl Model {
     pub fn new(capacity: usize) -> Result<Self, std::collections::TryReserveError> {
@@ -138,6 +161,8 @@ impl Model {
             finish_pending: None,
             pending: 0,
             surface_generation: 1,
+            last_display_role: None,
+            last_display_callback: None,
         };
         value.boundary(Boundary::Start);
         Ok(value)
@@ -168,8 +193,11 @@ impl Model {
             self.omitted_attempts = self.omitted_attempts.saturating_add(1);
             return;
         }
-        if self.attempts.last().is_some_and(|a| a.role != role) {
-            self.boundary(Boundary::Role);
+        if role != Role::Simulation {
+            if self.last_display_role.is_some_and(|last| last != role) {
+                self.boundary(Boundary::Role);
+            }
+            self.last_display_role = Some(role);
         }
         if self
             .attempts
@@ -190,6 +218,7 @@ impl Model {
                 ..HostTiming::default()
             },
             batch: None,
+            display: None,
         });
         if began_ns.is_none() {
             self.timing_errors = self.timing_errors.saturating_add(1);
@@ -198,7 +227,7 @@ impl Model {
     pub fn schedule(&mut self, schedule: Schedule) {
         let Some(i) = self.active else { return };
         let timing = &self.attempts[i].host_timing;
-        let valid = self.attempts[i].role == Role::Gameplay
+        let valid = matches!(self.attempts[i].role, Role::Gameplay | Role::Simulation)
             && timing.schedule.is_none()
             && (1..=4).contains(&schedule.due)
             && schedule.ordinal < schedule.due
@@ -220,6 +249,35 @@ impl Model {
         // error count prevents partial metadata from becoming a timing verdict.
         if timing.schedule.is_none() {
             self.attempts[i].host_timing.schedule = Some(schedule);
+        }
+    }
+    pub fn display(&mut self, display: Display) {
+        let Some(i) = self.active else { return };
+        let a = &self.attempts[i];
+        let valid = a.role == Role::Committed
+            && a.display.is_none()
+            && if display.reason == DisplayReason::Pulse {
+                display.callback_sequence.is_some_and(|n| {
+                    n > 0 && self.last_display_callback.is_none_or(|last| n > last)
+                }) && display
+                    .callback_arrived_ns
+                    .zip(a.host_timing.began_ns)
+                    .is_some_and(|(p, b)| p <= b)
+                    && display
+                        .callback_target_seconds
+                        .is_some_and(|t| t.is_finite() && t > 0.0)
+            } else {
+                display.callback_sequence.is_none()
+                    && display.callback_arrived_ns.is_none()
+                    && display.callback_target_seconds.is_none()
+            };
+        if !valid {
+            self.timing_errors = self.timing_errors.saturating_add(1);
+        } else if display.reason == DisplayReason::Pulse {
+            self.last_display_callback = display.callback_sequence;
+        }
+        if a.display.is_none() {
+            self.attempts[i].display = Some(display);
         }
     }
     pub fn wake(&mut self, wake: Option<PulseWake>) {
@@ -330,7 +388,10 @@ impl Model {
     /// Called just before each native acquisition, after configure/retry boundaries.
     pub fn context(&mut self) -> Option<(u64, u64, u64, u64)> {
         let a = self.attempts.get(self.active?)?;
-        if self.exhausted {
+        if self.exhausted || a.role == Role::Simulation {
+            if a.role == Role::Simulation {
+                self.timing_errors = self.timing_errors.saturating_add(1);
+            }
             return None;
         }
         if self.pending != 0 || self.segments.is_empty() {
@@ -375,10 +436,22 @@ impl Model {
                 }
             }
             let timing = self.attempts[i].host_timing;
+            if (status == Status::Admitted || self.attempts[i].role == Role::Simulation)
+                && !(status == Status::Admitted
+                    && self.attempts[i].role == Role::Simulation
+                    && timing.reserved_ns.is_none()
+                    && timing.acquisitions.iter().all(Option::is_none)
+                    && timing.schedule.is_some()
+                    && self.attempts[i].batch.is_none())
+            {
+                self.timing_errors = self.timing_errors.saturating_add(1);
+            }
             let checked = self.checked_time(timing.reserved_ns.or(timing.began_ns), at_ns);
             self.attempts[i].status = status;
             self.attempts[i].host_timing.completed_ns = checked;
-            if status == Status::HostCommitted && self.attempts[i].role == Role::Gameplay {
+            if (status == Status::HostCommitted && self.attempts[i].role == Role::Gameplay)
+                || (status == Status::Admitted && self.attempts[i].role == Role::Simulation)
+            {
                 self.finish_pending = Some(i);
             }
         }

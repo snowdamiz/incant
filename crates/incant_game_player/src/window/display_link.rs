@@ -49,6 +49,14 @@ pub(super) fn supported() -> bool {
             .is_some()
 }
 
+#[cfg(feature = "native-independent-presentation")]
+#[derive(Clone, Copy)]
+pub(super) struct Receipt {
+    pub sequence: u64,
+    pub arrived: Instant,
+    pub target_seconds: f64,
+}
+
 pub(super) struct Host {
     link: Retained<CADisplayLink>,
     _target: Retained<IncantDisplayWake>,
@@ -109,6 +117,15 @@ impl Host {
         let result = self.gate.poll(&mut inbox, now, active);
         self.inbox.set(inbox);
         Ok(result?)
+    }
+    /// Exact latest callback consumed by the most recent active poll only.
+    #[cfg(feature = "native-independent-presentation")]
+    pub fn accepted(&self) -> Option<Receipt> {
+        self.gate.accepted.map(|(sequence, pulse)| Receipt {
+            sequence,
+            arrived: pulse.arrived,
+            target_seconds: pulse.target,
+        })
     }
     pub fn deadline(&self) -> Instant {
         self.gate.deadline(&self.inbox.get())

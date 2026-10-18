@@ -1,5 +1,7 @@
 //! A display callback permits scheduling; input and watchdog events do not.
 use super::inbox::Inbox;
+#[cfg(feature = "native-independent-presentation")]
+use super::inbox::Pulse;
 use std::time::{Duration, Instant};
 
 const WATCHDOG: Duration = Duration::from_millis(500);
@@ -24,6 +26,8 @@ pub(super) struct Gate {
     eligible_after: Instant,
     notified: bool,
     pub gameplay_pulses: u64,
+    #[cfg(feature = "native-independent-presentation")]
+    pub accepted: Option<(u64, Pulse)>,
 }
 impl Gate {
     pub fn new(started: Instant) -> Self {
@@ -33,12 +37,18 @@ impl Gate {
             eligible_after: started,
             notified: false,
             gameplay_pulses: 0,
+            #[cfg(feature = "native-independent-presentation")]
+            accepted: None,
         }
     }
     pub fn boundary(&mut self, inbox: &mut Inbox, now: Instant) {
         // Discard stale data without freeing a still-queued Tao event token.
         inbox.take();
         self.notified = false;
+        #[cfg(feature = "native-independent-presentation")]
+        {
+            self.accepted = None;
+        }
         self.active_since = None;
         self.eligible_after = now;
     }
@@ -47,6 +57,10 @@ impl Gate {
         self.notified = true;
     }
     pub fn poll(&mut self, inbox: &mut Inbox, now: Instant, active: bool) -> Result<bool, Error> {
+        #[cfg(feature = "native-independent-presentation")]
+        {
+            self.accepted = None;
+        }
         if active {
             self.active_since.get_or_insert(now);
         } else {
@@ -64,6 +78,10 @@ impl Gate {
         let ready = active && pulse.is_some_and(|p| p.arrived >= self.eligible_after);
         if ready {
             self.gameplay_pulses = self.gameplay_pulses.saturating_add(1);
+            #[cfg(feature = "native-independent-presentation")]
+            {
+                self.accepted = pulse.map(|pulse| (self.gameplay_pulses, pulse));
+            }
         }
         Ok(ready)
     }
@@ -191,5 +209,39 @@ mod tests {
         );
         q.close();
         assert_eq!(g.poll(&mut q, resume, false), Err(Error::InvalidOrClosed));
+    }
+    #[cfg(feature = "native-independent-presentation")]
+    #[test]
+    fn display_receipt_binds_only_the_consumed_post_boundary_callback() {
+        let start = Instant::now();
+        let mut q = Inbox::default();
+        let mut g = Gate::new(start);
+        q.publish(Pulse {
+            arrived: start,
+            timestamp: 1.,
+            target: 999.,
+            duration: 0.016,
+        });
+        assert!(!g.poll(&mut q, start, true).unwrap());
+        assert!(g.accepted.is_none());
+        g.acknowledge(&mut q);
+        assert!(g.poll(&mut q, start, true).unwrap());
+        let (sequence, p) = g.accepted.unwrap();
+        assert_eq!((sequence, p.arrived, p.target), (1, start, 999.));
+        assert!(!g.poll(&mut q, start, true).unwrap());
+        assert!(g.accepted.is_none());
+        q.publish(Pulse {
+            arrived: start + Duration::from_millis(1),
+            timestamp: 999.,
+            target: 1000.,
+            duration: 0.016,
+        });
+        g.acknowledge(&mut q);
+        g.boundary(&mut q, start + Duration::from_millis(2));
+        assert!(
+            !g.poll(&mut q, start + Duration::from_millis(3), true)
+                .unwrap()
+        );
+        assert!(g.accepted.is_none());
     }
 }

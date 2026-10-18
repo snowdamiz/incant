@@ -1,10 +1,12 @@
 //! Trusted process selection for the default-off latest-state presentation test.
-//! This selects no clock, interpolation or renderer history policy.
+//! Ordinary/latest selection is unchanged; independent additionally separates
+//! rational simulation deadlines from display opportunities. No interpolation.
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub(crate) enum Mode {
     #[default]
     Ordinary,
     Latest,
+    Independent,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -13,12 +15,16 @@ pub(crate) enum Error {
     Selection,
     Bound,
     Conflict,
+    IndependentCapability,
+    IndependentWake,
 }
 impl std::fmt::Display for Error {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         f.write_str(match self {
+            Self::IndependentCapability => "independent presentation requires native-independent-presentation on macOS",
+            Self::IndependentWake => "independent presentation requires explicit display-link60",
             Self::Unsupported => "latest presentation requires native-batched-presentation",
-            Self::Selection => "expected one --present-batch latest",
+            Self::Selection => "expected one --present-batch latest or independent",
             Self::Bound => "latest presentation requires one --window and --stop-after 1..36000",
             Self::Conflict => {
                 "latest presentation conflicts with offline, capture, checkpoint, material, lifecycle or minimum-duration modes"
@@ -30,10 +36,26 @@ impl std::error::Error for Error {}
 
 impl Mode {
     pub(crate) fn split(args: Vec<String>) -> Result<(Vec<String>, Self), Error> {
-        Self::split_enabled(args, cfg!(feature = "native-batched-presentation"))
+        Self::split_capabilities(
+            args,
+            cfg!(feature = "native-batched-presentation"),
+            cfg!(all(
+                feature = "native-independent-presentation",
+                target_os = "macos"
+            )),
+        )
     }
 
+    #[cfg(test)]
     fn split_enabled(args: Vec<String>, enabled: bool) -> Result<(Vec<String>, Self), Error> {
+        Self::split_capabilities(args, enabled, false)
+    }
+
+    fn split_capabilities(
+        args: Vec<String>,
+        enabled: bool,
+        independent: bool,
+    ) -> Result<(Vec<String>, Self), Error> {
         // Keep the ordinary argument vector and downstream admission unchanged.
         if !args.iter().any(|arg| arg == "--present-batch") {
             return Ok((args, Self::Ordinary));
@@ -43,13 +65,18 @@ impl Mode {
         }
         let mut remaining = Vec::with_capacity(args.len());
         let mut input = args.into_iter();
-        let mut selected = false;
+        let mut selected = None;
         while let Some(arg) = input.next() {
             if arg == "--present-batch" {
-                if selected || input.next().as_deref() != Some("latest") {
+                if selected.is_some() {
                     return Err(Error::Selection);
                 }
-                selected = true;
+                selected = Some(match input.next().as_deref() {
+                    Some("latest") => Self::Latest,
+                    Some("independent") if independent => Self::Independent,
+                    Some("independent") => return Err(Error::IndependentCapability),
+                    _ => return Err(Error::Selection),
+                });
             } else {
                 remaining.push(arg);
             }
@@ -102,12 +129,24 @@ impl Mode {
         if windows != 1 || bound.is_none() {
             return Err(Error::Bound);
         }
-        Ok((remaining, Self::Latest))
+        let selected = selected.ok_or(Error::Selection)?;
+        if selected == Self::Independent
+            && !remaining
+                .windows(2)
+                .any(|pair| pair[0] == "--native-wake-source" && pair[1] == "display-link60")
+        {
+            return Err(Error::IndependentWake);
+        }
+        Ok((remaining, selected))
     }
 
     #[cfg(any(feature = "native-window", test))]
     pub(crate) fn selected(self) -> bool {
         self == Self::Latest
+    }
+    #[cfg(any(feature = "native-window", test))]
+    pub(crate) fn independent(self) -> bool {
+        self == Self::Independent
     }
 }
 
@@ -283,5 +322,87 @@ mod tests {
                 "{flag}"
             );
         }
+    }
+    #[test]
+    fn independent_selection_is_explicit_and_requires_the_actual_display_route() {
+        let input = args(&[
+            "--window",
+            "--stop-after",
+            "2156",
+            "--native-wake-source",
+            "display-link60",
+            "--present-batch",
+            "independent",
+        ]);
+        assert_eq!(
+            Mode::split_capabilities(input.clone(), true, false),
+            Err(Error::IndependentCapability)
+        );
+        let (remaining, mode) = Mode::split_capabilities(input, true, true).unwrap();
+        assert!(mode.independent());
+        assert!(!mode.selected());
+        assert_eq!(
+            remaining,
+            args(&[
+                "--window",
+                "--stop-after",
+                "2156",
+                "--native-wake-source",
+                "display-link60"
+            ])
+        );
+        assert_eq!(
+            Mode::split_capabilities(
+                args(&[
+                    "--window",
+                    "--stop-after",
+                    "2156",
+                    "--present-batch",
+                    "independent"
+                ]),
+                true,
+                true
+            ),
+            Err(Error::IndependentWake)
+        );
+        assert_eq!(
+            Mode::split_capabilities(
+                args(&[
+                    "--window",
+                    "--stop-after",
+                    "0",
+                    "--present-batch",
+                    "independent"
+                ]),
+                true,
+                true
+            ),
+            Err(Error::Bound)
+        );
+        assert_eq!(
+            Mode::split_capabilities(
+                args(&[
+                    "--window",
+                    "--stop-after",
+                    "1",
+                    "--present-batch",
+                    "independent",
+                    "--gpu-offscreen"
+                ]),
+                true,
+                true
+            ),
+            Err(Error::Conflict)
+        );
+        let ordinary = args(&["--window", "--stop-after", "1"]);
+        assert_eq!(
+            Mode::split_capabilities(ordinary.clone(), true, true),
+            Ok((ordinary, Mode::Ordinary))
+        );
+        let legacy = selected(&["--window", "--stop-after", "1"]);
+        assert_eq!(
+            Mode::split_capabilities(legacy.clone(), true, true),
+            Mode::split_capabilities(legacy, true, false)
+        );
     }
 }

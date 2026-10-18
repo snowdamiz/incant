@@ -4,6 +4,8 @@ mod batch_tests;
 mod boundaries;
 #[cfg(test)]
 mod boundary_tests;
+#[cfg(test)]
+mod independent_tests;
 mod model;
 #[cfg(test)]
 mod tests;
@@ -11,7 +13,7 @@ use super::Error;
 use crate::session;
 pub(super) use boundaries::AcquisitionOutcome;
 use incant_render::wgpu;
-pub(super) use model::{Boundary, Failure, Role, Status};
+pub(super) use model::{Boundary, DisplayReason, Failure, Role, Status};
 use serde::Serialize;
 use std::{
     fs::{File, OpenOptions},
@@ -34,6 +36,7 @@ pub(super) struct Capture {
     wakes: boundaries::Wakes,
     pulse_wake: Option<boundaries::PulseWake>,
     batches: bool,
+    independent: bool,
 }
 /// The scheduler's existing decision, observed without changing its clock.
 pub(super) struct Schedule {
@@ -63,7 +66,11 @@ impl Capture {
             wakes: boundaries::Wakes::default(),
             pulse_wake: None,
             batches: false,
+            independent: false,
         })
+    }
+    pub fn enable_independent(&mut self, selected: bool) {
+        self.independent = selected;
     }
     pub fn enable_batches(&mut self, selected: bool) {
         self.batches = selected;
@@ -85,8 +92,35 @@ impl Capture {
         self.model
             .begin(role, generation, step, self.time(Instant::now()));
     }
+    pub fn display_begin(
+        &mut self,
+        generation: u64,
+        step: u64,
+        reason: DisplayReason,
+        callback: Option<(u64, Instant, f64)>,
+        pulse: Instant,
+    ) {
+        self.begin(Role::Committed, generation, step);
+        let pulse_ns = self.time(pulse);
+        self.model
+            .wake(self.pulse_wake.filter(|w| w.pulse_ns == pulse_ns));
+        self.model.display(model::Display {
+            reason,
+            callback_sequence: callback.map(|p| p.0),
+            callback_arrived_ns: callback.and_then(|p| self.time(p.1)),
+            callback_target_seconds: callback.map(|p| p.2),
+        });
+    }
     pub fn gameplay_begin(&mut self, generation: u64, step: u64, schedule: Schedule) {
-        self.begin(Role::Gameplay, generation, step);
+        self.begin(
+            if self.independent {
+                Role::Simulation
+            } else {
+                Role::Gameplay
+            },
+            generation,
+            step,
+        );
         let pulse_ns = self.time(schedule.pulse);
         self.model
             .wake(self.pulse_wake.filter(|wake| wake.pulse_ns == pulse_ns));
@@ -234,7 +268,7 @@ impl Capture {
             remaining: OUTPUT_LIMIT,
         };
         let mut report = serde_json::json!({
-            "format":"incant-native-presentations","version":if self.batches { 3 } else { 2 },"diagnostic_only":true,
+            "format":"incant-native-presentations","version":if self.independent { 4 } else if self.batches { 3 } else { 2 },"diagnostic_only":true,
             "display_gate":false,"uncapped_gpu_throughput":false,"final_process_exit_status":null,
             "source_identity":"requires external executable/source/package binding",
             "per_present_registration_overhead":true,"snapshot_after_gameplay":true,
@@ -260,6 +294,24 @@ impl Capture {
             "failure_index_order":["timeout","occluded","outdated","lost","validation","unsupported_size","minimized","reservation","device"],
             "host":self.model,"rows":rows,"finalization":status
         });
+        if self.independent {
+            report["independent_contract"] = serde_json::json!({
+                "version":1,"maximum_ticks_per_due_call":4,
+                "simulation":"Role simulation, Status admitted; no drawable or acquisition; finished after haptics",
+                "display":"Role committed; exact accepted generation/step, no simulation advancement",
+                "display_reason":"pulse requires actual consumed callback sequence/arrival/target; stop and restart are explicit forced boundary flushes without a fabricated callback",
+                "wake":"each simulation or committed display attempt records the current MainEventsCleared pulse; shared pulse is permitted",
+                "callback_target":"native metadata only; never simulation time and never subtracted from Rust Instant",
+                "capacity":"shared bounded attempts for simulation plus display; overflow is partial, never complete evidence",
+                "ordinary_and_batch_analyzer_compatible":false
+            });
+            report["host_timing_contract"]["version"] = 3.into();
+            report["host_timing_contract"]["changes_frame_admission"] = true.into();
+            report["host_timing_contract"]["began"] =
+                "simulation admission or display attempt entry".into();
+            report["host_timing_contract"]["reserved"] =
+                "absent by contract for simulation; actual acquired drawable for display".into();
+        }
         if self.batches {
             report["batch_contract"] = serde_json::json!({
                 "version":1,"maximum_ticks":4,
