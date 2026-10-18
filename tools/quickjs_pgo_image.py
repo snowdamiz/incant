@@ -64,7 +64,9 @@ def image(path):
         require(offset == len(commands) and len(uuids) == 1
                 and set(sections) == {*PROFILE_SECTIONS, '__text', '__mod_init_func'}
                 and sections['__text']['segment'] == '__TEXT'
-                and all(row['bytes'] > 0 for row in sections.values()), 'Complete generation image identity/sections')
+                and all(sections[name]['bytes'] > 0 for name in ('__text', '__mod_init_func',
+                    '__llvm_prf_cnts', '__llvm_prf_data', '__llvm_prf_names')),
+                'Complete generation image identity/sections')
         after = os.fstat(stream.fileno())
         require((actual.st_size, actual.st_mtime_ns) == (after.st_size, after.st_mtime_ns), 'Generation image changed')
     return {'path': str(path), 'bytes': actual.st_size, 'sha256': digest, 'uuid': uuids[0], 'sections': sections}

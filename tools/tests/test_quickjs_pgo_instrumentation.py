@@ -53,6 +53,19 @@ class Instrumentation(unittest.TestCase):
         self.assertEqual(proof['section_stage'],'packaged-generation')
         self.assertNotEqual(proof['symbols_sha256'],proof['packaged_symbols_sha256'])
 
+    def test_Clang21_empty_optional_sections_remain_exact_but_empty_counters_refuse(self):
+        for path in (self.before,self.packaged):
+            data=bytearray(path.read_bytes())
+            for name in ('__llvm_prf_bits','__llvm_prf_vns','__llvm_prf_vtab'):
+                struct.pack_into('<Q',data,data.index(name.encode())+40,0)
+            path.write_bytes(data)
+        self.admit()
+        for path in (self.before,self.packaged):
+            data=bytearray(path.read_bytes())
+            struct.pack_into('<Q',data,data.index(b'__llvm_prf_cnts')+40,0)
+            path.write_bytes(data)
+        with self.assertRaises(ValueError):self.admit()
+
     def test_missing_renamed_duplicate_or_out_of_code_profile_API_refuses(self):
         for bad in (self.symbols.replace(PROFILE_APIS[0],'unrelated_API'),
                     self.symbols+'0000000000001000 t '+PROFILE_APIS[0],
