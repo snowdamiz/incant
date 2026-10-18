@@ -47,6 +47,16 @@ def checkpoint(data, tick):
     require(sum(lengths) + 128 == len(data) and lengths[2] == 0 and lengths[3] > 0, 'Exact sections')
     start = 128 + lengths[0]
     payload = data[start:start + lengths[1]]
+    # Current hosts always persist their timer clock, even when this guest has
+    # scheduled no timers. Refuse legacy/unexpected framing rather than dropping
+    # this state from the continuation comparison.
+    elapsed = 0.
+    for _ in range(tick):
+        elapsed += 1. / 60.
+    timers = b'INCTMS01' + struct.pack('<QdII', tick, elapsed, 0, 80)
+    require(payload[:8] == b'INCWPS02' and payload[88:] == timers,
+            'Current empty timer schedule and exact simulation clock')
+    payload = payload[8:88]
     require(len(payload) == 80 and payload[:16] == b'INCWST01' + struct.pack('<II', 1, 8)
             and payload[16:48] == f.SCHEMA and payload[48:56] == bytes(8), 'Explicit eight-byte state only')
     saved_tick, watermark, count = struct.unpack_from('<QqQ', payload, 56)

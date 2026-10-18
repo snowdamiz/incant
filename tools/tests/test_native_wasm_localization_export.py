@@ -31,6 +31,10 @@ def report(start=0, end=f.TICKS):
 
 def saved(tick=f.TICKS):
     state = b'INCWST01' + struct.pack('<II', 1, 8) + f.SCHEMA + bytes(8) + struct.pack('<QqQ', tick, tick, tick)
+    elapsed = 0.
+    for _ in range(tick):
+        elapsed += 1. / 60.
+    state = b'INCWPS02' + state + b'INCTMS01' + struct.pack('<QdII', tick, elapsed, 0, 80)
     header = b'INCSES01' + struct.pack('<II', 7, 1) + bytes([2]) * 64 + struct.pack('<4I', 1, len(state), 0, 1)
     payload = b'w' + state + b'a'
     return header + hashlib.sha256(header + payload).digest() + payload
@@ -119,19 +123,38 @@ class LocalizationExportTests(unittest.TestCase):
             oracle.gameplay(value | {'pcm_sha256': '0' * 64}, pcm, 0, f.TICKS)
 
     def test_coherent_wrong_saved_state_schema_and_clock_refused(self):
-        for offset in (8, 129 + 16, 129 + 56, 129 + 72):
+        for offset in (8, 137 + 16, 137 + 56, 137 + 72):
             content = bytearray(saved())
             content[offset] ^= 1
             content[96:128] = hashlib.sha256(content[:96] + content[128:]).digest()
             with self.assertRaises(ValueError):
                 oracle.checkpoint(bytes(content), f.TICKS)
         content = bytearray(saved())
-        struct.pack_into('<q', content, 129 + 64, f.TICKS - 1)
+        struct.pack_into('<q', content, 137 + 64, f.TICKS - 1)
         content[96:128] = hashlib.sha256(content[:96] + content[128:]).digest()
         with self.assertRaises(ValueError):
             oracle.checkpoint(bytes(content), f.TICKS)
         with self.assertRaises(ValueError):
             oracle.checkpoint(saved()[:-1], f.TICKS)
+
+    def test_timer_wrapper_and_empty_schedule_are_checked_not_ignored(self):
+        # A coherent outer digest cannot hide changed timer framing, clock,
+        # elapsed time, a fabricated row count or a wrong timer row stride.
+        for offset in (129, 217, 225, 233, 241, 245):
+            content = bytearray(saved())
+            content[offset] ^= 1
+            content[96:128] = hashlib.sha256(content[:96] + content[128:]).digest()
+            with self.assertRaises(ValueError, msg=str(offset)):
+                oracle.checkpoint(bytes(content), f.TICKS)
+        # The prior synthetic fixture used legacy framing and missed the actual
+        # current host wrapper. Keep it as an explicit refused control.
+        content = bytearray(saved())
+        content[84:88] = struct.pack('<I', 80)
+        del content[217:249]
+        del content[129:137]
+        content[96:128] = hashlib.sha256(content[:96] + content[128:]).digest()
+        with self.assertRaises(ValueError):
+            oracle.checkpoint(bytes(content), f.TICKS)
 
     def test_exact_refusal_not_unrelated_startup_or_success(self):
         for kind in f.FAILURES.values():
