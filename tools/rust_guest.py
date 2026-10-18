@@ -12,14 +12,20 @@ import subprocess
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def compile(rustc, source, output, *, env=None, cfg=()):
-    rustc, source, output = map(Path, (rustc, source, output))
-    environment = dict(os.environ if env is None else env)
-    environment['PATH'] = str(rustc.parent)+os.pathsep+environment.get('PATH','')
-    storage=output.parent/'rust-sdk-libraries';storage.mkdir(exist_ok=True)
+FLAGS = ['--edition=2024','--target=wasm32-unknown-unknown','-C','panic=abort','-C','opt-level=2']
+
+
+def prepare_sdk(rustc, storage, environment, *, execute=subprocess.run, compiler=None):
+    """Only engine-owned sources; the untrusted service supplies its bounded owner.
+
+    Keep the trusted helper's recipe/digest and argument ordering unchanged.
+    Never pass project source here or let an untrusted child write this storage.
+    """
+    rustc, storage = Path(rustc), Path(storage)
+    storage.mkdir(exist_ok=True)
     roots=[('incant_wasm_abi',ROOT/'crates/incant_wasm_abi/src/lib.rs'),('incant_module',ROOT/'sdk/rust/src/lib.rs')]
-    flags=['--edition=2024','--target=wasm32-unknown-unknown','-C','panic=abort','-C','opt-level=2']
-    compiler=subprocess.check_output([str(rustc),'-vV'],env=environment)
+    flags=FLAGS
+    if compiler is None:compiler=subprocess.check_output([str(rustc),'-vV'],env=environment)
     for name,root in roots:
         library=storage/f'lib{name}.rlib'
         files=sorted(root.parent.rglob('*.rs'))
@@ -29,10 +35,18 @@ def compile(rustc, source, output, *, env=None, cfg=()):
         if not library.exists() or not stamp.exists() or stamp.read_text()!=digest:
             command=[rustc,root,'--crate-name',name,'--crate-type=rlib',*flags,'-o',library]
             if name=='incant_module':command+=['--extern',f'incant_wasm_abi={storage/"libincant_wasm_abi.rlib"}']
-            built=subprocess.run([str(x) for x in command],env=environment,capture_output=True,text=True,encoding='utf-8')
+            built=execute([str(x) for x in command],env=environment,capture_output=True,text=True,encoding='utf-8')
             if built.returncode:raise RuntimeError(f'trusted SDK library failed: {built.stderr}')
             stamp.write_text(digest)
-    command=[rustc,source,'--crate-type=cdylib',*flags,'--extern',f'incant_module={storage/"libincant_module.rlib"}','-L',f'dependency={storage}','-o',output]
+    return storage
+
+
+def compile(rustc, source, output, *, env=None, cfg=()):
+    rustc, source, output = map(Path, (rustc, source, output))
+    environment = dict(os.environ if env is None else env)
+    environment['PATH'] = str(rustc.parent)+os.pathsep+environment.get('PATH','')
+    storage=prepare_sdk(rustc,output.parent/'rust-sdk-libraries',environment,execute=subprocess.run)
+    command=[rustc,source,'--crate-type=cdylib',*FLAGS,'--extern',f'incant_module={storage/"libincant_module.rlib"}','-L',f'dependency={storage}','-o',output]
     for value in cfg:command+=['--cfg',value]
     result=subprocess.run([str(x) for x in command],env=environment,capture_output=True,text=True,encoding='utf-8')
     if result.returncode:raise RuntimeError(f'trusted Rust SDK guest failed: {result.stderr}')
@@ -50,6 +64,10 @@ def provenance():
 def main():
     import argparse
     import json
+    import sys
+    if '--untrusted' in sys.argv[1:]:
+        from rust_guest_build import main as untrusted_main
+        return untrusted_main(sys.argv[1:])
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('source',type=Path,help='Trusted Rust guest source')
     parser.add_argument('output',type=Path)

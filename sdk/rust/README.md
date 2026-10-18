@@ -37,6 +37,42 @@ Compile the standalone sample (install the pinned toolchain's wasm32 target firs
 python3 tools/rust_guest.py sdk/rust/samples/gameplay.rs /tmp/gameplay.wasm
 ```
 
+For source supplied by a project, use the separate explicit build service:
+
+```
+python3 tools/rust_guest.py --untrusted \
+  --source-root /absolute/project-source --entry module.rs \
+  --output /absolute/artifacts/new-module.wasm --work-dir /absolute/private/new-attempt \
+  --rustc /absolute/pinned-1.99.0-toolchain/bin/rustc \
+  --validator /absolute/qualified-engine/incant_wasm_cook
+```
+
+Compiler/validator and output/work roots are **trusted operator configuration**,
+not project capability fields. Both output and work directory must be new; use
+canonical paths without symlink ancestors (`/private/tmp`, rather than `/tmp`,
+on macOS). The source package admits only up to 32 UTF-8 `.rs` files, 64 KiB per
+file, 256 KiB total and eight path components. It refuses Cargo manifests,
+`build.rs`, links, native artifacts and other dependencies. A relative `mod`
+within that package is supported. The compiler receives only the vetted SDK,
+a fixed wasm32 recipe and a clean private environment. No project native code,
+Cargo build script or procedural macro dependency is executed.
+
+The initial backend uses Apple's **deprecated** `sandbox-exec` on macOS. Other
+platforms and unavailable/broken policies refuse; there is no bare-compiler
+fallback. The implementation and pure controls alone do not establish sandbox
+safety: [actual isolation qualification](../../docs/spikes/untrusted-rust-module-build.md)
+is still required. This service is not an App Sandbox or a cross-version
+security guarantee.
+
+The normal Wasm cook validator must accept the result before create-only
+publication. The published artifact is the original **untrusted raw Wasm**, not
+the validator's metered output or a trusted native descriptor. Import it using
+the ordinary public Wasm importer and `SetSceneProgram` transaction; this build
+service does not mutate the project or automatically attach code. Diagnostics
+and retained failure work are untrusted data. Deadline, storage and RSS limits
+are sampled; they are not hard OS memory/disk quotas. Source-free native export,
+shipping performance and physical-device delivery remain separate checks.
+
 Run the actual two-host suite with:
 
 ```
