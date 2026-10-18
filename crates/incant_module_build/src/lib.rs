@@ -63,6 +63,7 @@ struct Snapshot {
     source: SourcePackage,
     digest: String,
     epoch: incant_source::SourceEpoch,
+    registered: Option<RegisteredSource>,
 }
 struct Binding {
     project: String,
@@ -223,6 +224,29 @@ impl Service {
         cancel: &AtomicBool,
         validate: &mut Validate<'_>,
     ) -> Result<SourceView> {
+        self.inspect_inner(project, query, None, cancel, validate)
+    }
+    /// Capture a registered source through the same bounded package backend.
+    /// The caller rechecks the actual bus/session/registration in `validate`.
+    pub fn inspect_registered(
+        &self,
+        project: &str,
+        authority: RegisteredSource,
+        expected_revision: u64,
+        cancel: &AtomicBool,
+        validate: &mut Validate<'_>,
+    ) -> Result<SourceView> {
+        let query = authority.query(expected_revision)?;
+        self.inspect_inner(project, query, Some(authority), cancel, validate)
+    }
+    fn inspect_inner(
+        &self,
+        project: &str,
+        query: SourceQuery,
+        registered: Option<RegisteredSource>,
+        cancel: &AtomicBool,
+        validate: &mut Validate<'_>,
+    ) -> Result<SourceView> {
         types::relative(&query.package, false)?;
         types::relative(&query.entry, true)?;
         validate()?;
@@ -245,6 +269,12 @@ impl Service {
             cancel,
         )?;
         let digest = source.digest()?;
+        if registered
+            .as_ref()
+            .is_some_and(|authority| !authority.matches_entry(&source))
+        {
+            return Err(Error::Stale);
+        }
         lease.bounded(validate(), start, cancel)?;
         lease.bounded(Ok(()), start, cancel)?;
         if incant_source::check_recovery(&root).map_err(|_| Error::Stale)? != epoch {
@@ -259,6 +289,7 @@ impl Service {
             source: source.clone(),
             digest: digest.clone(),
             epoch,
+            registered: registered.clone(),
         });
         state.candidate = None;
         state.status = Some(JobStatus {
@@ -268,6 +299,7 @@ impl Service {
             candidate_id: None,
         });
         Ok(SourceView {
+            registered_source: registered,
             snapshot_id: id,
             revision: query.expected_revision,
             source_digest: digest,
@@ -279,6 +311,29 @@ impl Service {
         project: &str,
         request: BuildRequest,
         actor: Actor,
+        cancel: &AtomicBool,
+        validate: &mut Validate<'_>,
+    ) -> Result<BuildResult> {
+        self.build_inner(project, request, actor, None, cancel, validate)
+    }
+    pub fn build_registered(
+        &self,
+        project: &str,
+        request: BuildRequest,
+        actor: Actor,
+        authority: RegisteredSource,
+        cancel: &AtomicBool,
+        validate: &mut Validate<'_>,
+    ) -> Result<BuildResult> {
+        authority.query(request.expected_revision)?;
+        self.build_inner(project, request, actor, Some(authority), cancel, validate)
+    }
+    fn build_inner(
+        &self,
+        project: &str,
+        request: BuildRequest,
+        actor: Actor,
+        registered: Option<RegisteredSource>,
         cancel: &AtomicBool,
         validate: &mut Validate<'_>,
     ) -> Result<BuildResult> {
@@ -303,7 +358,10 @@ impl Service {
         let (package, source, digest, epoch) = {
             let s = self.lock()?;
             let old = s.snapshot.as_ref().ok_or(Error::Stale)?;
-            if old.id != request.snapshot_id || old.revision != request.expected_revision {
+            if old.id != request.snapshot_id
+                || old.revision != request.expected_revision
+                || old.registered != registered
+            {
                 return Err(Error::Stale);
             }
             (
@@ -353,7 +411,10 @@ impl Service {
             return Err(Error::Invalid("diagnostics bound"));
         }
         let id = ulid::Ulid::new().to_string();
-        let provenance = serde_json::json!({"actor":actor,"description":request.description,"worker":built.receipt,"project_id":project,"revision":request.expected_revision,"source_digest":digest,"not_installed":true,"snapshot_only":true,"installation_requires_revalidation":true});
+        let mut provenance = serde_json::json!({"actor":actor,"description":request.description,"worker":built.receipt,"project_id":project,"revision":request.expected_revision,"source_digest":digest,"not_installed":true,"snapshot_only":true,"installation_requires_revalidation":true});
+        if let Some(authority) = registered {
+            provenance["registered_source"] = serde_json::to_value(authority)?;
+        }
         let diagnostics = built.diagnostics.clone();
         let mut state = lease.publish()?;
         state.candidate = Some(built);

@@ -377,3 +377,169 @@ fn exact_ordered_recipes_refuse_native_or_unknown_control() {
         );
     }
 }
+
+fn registered() -> RegisteredSource {
+    RegisteredSource {
+        bus_session_id: ulid::Ulid::new().to_string(),
+        module_id: ulid::Ulid::new().to_string(),
+        path: "modules/logic/module.rs".into(),
+        version: incant_source::SourceVersion::of(Some("fn entry(){}")),
+    }
+}
+#[test]
+fn registered_snapshot_cannot_be_downgraded_or_rebound_to_other_authority() {
+    let f = Fixture::new();
+    let authority = registered();
+    let view = f
+        .service
+        .inspect_registered(&f.project, authority.clone(), 3, &f.cancel, &mut || Ok(()))
+        .unwrap();
+    assert_eq!(view.registered_source, Some(authority.clone()));
+    assert!(matches!(f.build(&view.snapshot_id), Err(Error::Stale)));
+    for changed in 0..4 {
+        let mut other = authority.clone();
+        match changed {
+            0 => other.bus_session_id = ulid::Ulid::new().to_string(),
+            1 => other.module_id = ulid::Ulid::new().to_string(),
+            2 => other.path = "modules/other/module.rs".into(),
+            _ => other.version = incant_source::SourceVersion::of(Some("changed")),
+        }
+        assert!(matches!(
+            f.service.build_registered(
+                &f.project,
+                f.request(&view.snapshot_id),
+                f.actor(),
+                other,
+                &f.cancel,
+                &mut || Ok(())
+            ),
+            Err(Error::Stale)
+        ));
+    }
+    assert_eq!(f.backend.builds.load(Ordering::Relaxed), 0);
+    let result = f
+        .service
+        .build_registered(
+            &f.project,
+            f.request(&view.snapshot_id),
+            f.actor(),
+            authority.clone(),
+            &f.cancel,
+            &mut || Ok(()),
+        )
+        .unwrap();
+    assert_eq!(
+        result.provenance["registered_source"],
+        serde_json::to_value(authority).unwrap()
+    );
+    assert_eq!(result.provenance["not_installed"], true);
+}
+#[test]
+fn legacy_snapshot_and_wire_contract_stay_unbound() {
+    let f = Fixture::new();
+    let view = f.inspect();
+    assert!(
+        serde_json::to_value(&view)
+            .unwrap()
+            .get("registered_source")
+            .is_none()
+    );
+    assert!(matches!(
+        f.service.build_registered(
+            &f.project,
+            f.request(&view.snapshot_id),
+            f.actor(),
+            registered(),
+            &f.cancel,
+            &mut || Ok(())
+        ),
+        Err(Error::Stale)
+    ));
+    assert_eq!(f.backend.builds.load(Ordering::Relaxed), 0);
+    assert!(
+        f.build(&view.snapshot_id)
+            .unwrap()
+            .provenance
+            .get("registered_source")
+            .is_none()
+    );
+}
+#[test]
+fn registered_capture_requires_exact_present_entry_and_safe_registry_path() {
+    for path in [
+        "../module.rs",
+        "module.rs",
+        "modules/build.rs",
+        "modules\\module.rs",
+    ] {
+        let f = Fixture::new();
+        let mut authority = registered();
+        authority.path = path.into();
+        assert!(
+            f.service
+                .inspect_registered(&f.project, authority, 3, &f.cancel, &mut || Ok(()))
+                .is_err()
+        );
+        assert!(f.service.lock().unwrap().snapshot.is_none());
+    }
+    for version in [
+        incant_source::SourceVersion::Missing,
+        incant_source::SourceVersion::of(Some("wrong")),
+    ] {
+        let f = Fixture::new();
+        let mut authority = registered();
+        authority.version = version;
+        assert!(
+            f.service
+                .inspect_registered(&f.project, authority, 3, &f.cancel, &mut || Ok(()))
+                .is_err()
+        );
+        assert!(f.service.lock().unwrap().snapshot.is_none());
+    }
+    let f = Fixture::new();
+    let mut authority = registered();
+    authority.path = "modules/other.rs".into();
+    assert!(matches!(
+        f.service
+            .inspect_registered(&f.project, authority, 3, &f.cancel, &mut || Ok(())),
+        Err(Error::Stale)
+    ));
+}
+#[test]
+fn registered_validation_and_cancellation_fence_post_build_candidate() {
+    for cancelled in [false, true] {
+        let f = Fixture::new();
+        let authority = registered();
+        let view = f
+            .service
+            .inspect_registered(&f.project, authority.clone(), 3, &f.cancel, &mut || Ok(()))
+            .unwrap();
+        let valid = Arc::new(AtomicBool::new(true));
+        let changed = valid.clone();
+        *f.backend.action.lock().unwrap() =
+            Some(Box::new(move || changed.store(false, Ordering::Release)));
+        let result = f.service.build_registered(
+            &f.project,
+            f.request(&view.snapshot_id),
+            f.actor(),
+            authority,
+            &f.cancel,
+            &mut || {
+                if valid.load(Ordering::Acquire) {
+                    Ok(())
+                } else if cancelled {
+                    Err(Error::Cancelled)
+                } else {
+                    Err(Error::Stale)
+                }
+            },
+        );
+        assert!(if cancelled {
+            matches!(result, Err(Error::Cancelled))
+        } else {
+            matches!(result, Err(Error::Stale))
+        });
+        assert_eq!(f.backend.builds.load(Ordering::Relaxed), 1);
+        assert!(f.service.lock().unwrap().candidate.is_none());
+    }
+}
