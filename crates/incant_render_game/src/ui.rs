@@ -147,25 +147,26 @@ impl Binding {
                 self.runtime.prepare_refresh(viewport, &mut self.fonts)?,
             ))
         };
-        let mut fonts = if view.generation() != self.generation {
+        let mut fonts = None;
+        if view.generation() != self.generation {
             let widgets = widgets(&view);
-            // Both old/new bounded shaping engines can coexist. Raw immutable
-            // font bytes retain the same Arc; no project/cache I/O occurs here.
-            let mut fonts = UiFonts::new(self.fonts.sources().cloned().collect(), &widgets)?;
+            // Text-only HUD changes need no font parsing or replacement shaper.
+            // A new fallback chain still prepares a separately owned candidate.
+            fonts = self.fonts.prepare_rebind(&widgets)?;
+            let candidate_fonts = fonts.as_mut().unwrap_or(&mut self.fonts);
             state = match state {
                 State::Input(pending) => State::Input(Box::new((*pending).reconcile(
                     &self.runtime,
                     widgets,
-                    &mut fonts,
+                    candidate_fonts,
                 )?)),
-                State::Refresh(pending) => State::Refresh(Box::new(
-                    self.runtime.reconcile(*pending, widgets, &mut fonts)?,
-                )),
+                State::Refresh(pending) => State::Refresh(Box::new(self.runtime.reconcile(
+                    *pending,
+                    widgets,
+                    candidate_fonts,
+                )?)),
             };
-            Some(fonts)
-        } else {
-            None
-        };
+        }
         let pending = match &state {
             State::Input(routed) => routed.pending(),
             State::Refresh(pending) => pending,

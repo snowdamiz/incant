@@ -1,6 +1,8 @@
 use incant_text::SharedFontSource;
 use incant_ui::*;
 use std::sync::Arc;
+#[path = "fonts/rebind.rs"]
+mod rebind;
 const LATIN: &[u8] = include_bytes!("../../incant_text/tests/fonts/NotoSans-Regular.ttf");
 const HEBREW: &[u8] = include_bytes!("../../incant_text/tests/fonts/NotoSansHebrew.ttf");
 const CJK: &[u8] = include_bytes!("../../incant_text/tests/fonts/IncantCJKFixture.ttf");

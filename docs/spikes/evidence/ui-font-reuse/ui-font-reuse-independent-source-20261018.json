@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "reviewer": "astra/runtime_review",
+  "reviewed_at_utc": "2026-10-18T02:37:08.080715+00:00",
+  "worktree": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant",
+  "head": "0063b97c03045e285e128fed76d72f82bca4095d",
+  "scope": "Uncommitted four-path UI font reuse source, including new test module. STATUS changes excluded. Source-only; no tests/native/GPU/window/capture executed.",
+  "files": [
+    {
+      "path": "crates/incant_ui/src/fonts.rs",
+      "bytes": 8799,
+      "sha256": "13eb6f37559f5984fca8f3c88240ff02e88cf27861ebc2deb90b6d6ce062dff8"
+    },
+    {
+      "path": "crates/incant_ui/tests/fonts.rs",
+      "bytes": 9994,
+      "sha256": "46b544ececea43137a8f867da43f7cf4bf7b6cbb1f0bd6cd9dfcb18d7929b4e7"
+    },
+    {
+      "path": "crates/incant_ui/tests/fonts/rebind.rs",
+      "bytes": 3145,
+      "sha256": "b48b11b23ff252ec4291f8b7db403cdd84fdebc63d215b4c0b10ad70711f18b6"
+    },
+    {
+      "path": "crates/incant_render_game/src/ui.rs",
+      "bytes": 11005,
+      "sha256": "ddfd4f33903eb98fec2a47a6b544a707f93250c7ccc1483b3af6660b1ece267c"
+    }
+  ],
+  "tracked_diff_sha256": "3cb3a19ac38059eb67efd9e025519ca367ac9acde1d6ec742046d8341361165c",
+  "tracked_diff_bytes": 3833,
+  "findings": [],
+  "resolved_findings": [
+    {
+      "priority": 2,
+      "path": "crates/incant_ui/tests/fonts.rs",
+      "detail": "Bare mod rebind did not resolve the new tests/fonts/rebind.rs integration-test child. Root added explicit #[path = \"fonts/rebind.rs\"] during source review; exact final bytes above include repair."
+    }
+  ],
+  "assessment": [
+    "prepare_rebind validates every requested UiNode and widget cap before choosing reuse. It matches the exact ordered font-ID chain; changed priority or missing assets uses separately validated Self::new and retains original owner on refusal.",
+    "Retained UiFonts sources and engine catalogs are privately owned immutable Arc data. No package reload or mutable-catalog path is added. Existing native host reconstruction retains separate font-content ownership.",
+    "Reuse changes private shaper/cache scratch only. Accepted ShapedText, paint, glyph handles and atlas are immutable retained owners; runtime/paint/input/generation publication remains after successful native consumer admission and commit. Candidate fonts publish only with accepted UI state.",
+    "Known-chain reuse cannot accumulate new engines; at most the original 32 remain. Unknown chains replace with separately bounded requested catalog, rather than unioning historic chains. Font byte, node, text, aggregate glyph/line and atlas checks remain in their existing paths.",
+    "Shape identity remains font engine plus text and all TextStyle fields (font size, line height, width, wrap); Unicode direction is derived from actual content. Layout and paint arithmetic, order, clipping, halo and routing logic are untouched.",
+    "New source controls compare retained/fresh multilingual glyphs, lines, size and missing clusters, retain old shaped Arc/content, exercise reordered fallback candidate and missing/invalid/oversized refusal. These are not executed qualification evidence yet."
+  ],
+  "recommendation": "No blocking production source finding. Proceed with bounded CPU qualification including the repaired integration-test path. A real same-workload measurement is still needed before claiming reduced host spikes or display improvement.",
+  "limitations": [
+    "No new CPU tests, compiler, window, GPU or timing process ran for this review.",
+    "Private shaping/cache scratch may change during a rejected candidate; accepted visual/UI state remains the transactional boundary.",
+    "Long-lived engines retain bounded earlier chains until a replacement or owner teardown; this is intentionally different scratch retention from rebuilding every UI generation."
+  ]
+}

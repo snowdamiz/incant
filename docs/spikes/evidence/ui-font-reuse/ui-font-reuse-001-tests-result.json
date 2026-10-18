@@ -1,0 +1,32 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "--config",
+        "profile.ci.package.incant_render.opt-level=2",
+        "--config",
+        "profile.ci.package.sha2.opt-level=3",
+        "test",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_ui",
+        "--tests"
+      ],
+      "exit": 101
+    }
+  ],
+  "error": "RuntimeError('native failure; stop')",
+  "seconds": 11.409109292028006,
+  "owned": [
+    {
+      "pid": 11535,
+      "pid_absent": true,
+      "group_absent": true
+    }
+  ]
+}

@@ -6,6 +6,8 @@ rust-version.workspace = true
 publish.workspace = true
 
 [features]
+experimental-batched-presentation = []
+experimental-pose-interpolation = ["experimental-batched-presentation", "incant_render_game/experimental-pose-interpolation"]
 native-metalfx = ["incant_render/native-metalfx"]
 default = ["physics-deterministic"]
 

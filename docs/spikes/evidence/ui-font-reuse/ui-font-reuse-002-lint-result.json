@@ -1,0 +1,37 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "--config",
+        "profile.ci.package.incant_render.opt-level=2",
+        "--config",
+        "profile.ci.package.sha2.opt-level=3",
+        "clippy",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_ui",
+        "-p",
+        "incant_render_game",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit": 0
+    }
+  ],
+  "error": null,
+  "seconds": 8.96518008300336,
+  "owned": [
+    {
+      "pid": 13879,
+      "pid_absent": true,
+      "group_absent": true
+    }
+  ]
+}

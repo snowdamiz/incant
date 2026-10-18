@@ -62,6 +62,28 @@ impl UiFonts {
             bytes,
         })
     }
+    /// Reuse the checked, immutable font catalog and existing shaping engines
+    /// when every requested fallback chain is already bound. Text, layout and
+    /// focus changes may alter shaping scratch, but never accepted shaped text.
+    /// A new chain gets a separate candidate; publish it only with its UI state.
+    /// Unused existing engines stay within the original bounded chain count.
+    pub fn prepare_rebind(&self, widgets: &[Widget]) -> Result<Option<Self>, UiError> {
+        if widgets.len() > crate::MAX_UI_NODES {
+            return Err(UiError::Limit("font or widget count"));
+        }
+        let mut known = true;
+        for widget in widgets {
+            widget.node.validate().map_err(UiError::Invalid)?;
+            if let Some(text) = widget.node.kind.text() {
+                known &= self.engines.contains_key(&text.fonts);
+            }
+        }
+        if known {
+            Ok(None)
+        } else {
+            Self::new(self.sources().cloned().collect(), widgets).map(Some)
+        }
+    }
     pub(crate) fn raster(
         &self,
         widget: &Widget,

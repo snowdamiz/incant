@@ -5,7 +5,11 @@ use super::Error;
 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
 use super::presentations::{Boundary, Capture, Failure, Role, Schedule, Status};
 use incant_render::{Renderer, RetainedTarget, wgpu};
+#[cfg(feature = "native-batched-presentation")]
+use incant_render_gpu_host::PresentationMode;
 use incant_render_gpu_host::{RenderFrame, TargetProvider};
+#[cfg(feature = "native-batched-presentation")]
+use std::cell::Cell;
 use std::{cell::RefCell, rc::Rc, sync::Arc};
 use tao::window::Window;
 
@@ -19,12 +23,16 @@ pub struct SurfaceState {
     config: wgpu::SurfaceConfiguration,
     configured: bool,
     slot: Rc<RefCell<Option<Frame>>>,
+    #[cfg(feature = "native-batched-presentation")]
+    presentation: Rc<Cell<PresentationMode>>,
     pub reconfigurations: u64,
     pub recreations: u64,
     pub skipped: u64,
 }
 pub struct SurfaceTargets {
     slot: Rc<RefCell<Option<Frame>>>,
+    #[cfg(feature = "native-batched-presentation")]
+    presentation: Rc<Cell<PresentationMode>>,
 }
 pub struct Frame {
     texture: wgpu::SurfaceTexture,
@@ -79,8 +87,12 @@ impl SurfaceState {
         };
         admit_pacing_configuration(pacing, renderer.adapter.get_info().backend, &config)?;
         let slot = Rc::new(RefCell::new(None));
+        #[cfg(feature = "native-batched-presentation")]
+        let presentation = Rc::new(Cell::new(PresentationMode::Present));
         let targets = SurfaceTargets {
             slot: Rc::clone(&slot),
+            #[cfg(feature = "native-batched-presentation")]
+            presentation: Rc::clone(&presentation),
         };
         Ok((
             Self {
@@ -93,6 +105,8 @@ impl SurfaceState {
                 config,
                 configured: false,
                 slot,
+                #[cfg(feature = "native-batched-presentation")]
+                presentation,
                 reconfigurations: 0,
                 recreations: 0,
                 skipped: 0,
@@ -128,6 +142,18 @@ impl SurfaceState {
     pub fn presentation_host_finished(&mut self) {
         if let Some(capture) = &mut self.capture {
             capture.host_finished();
+        }
+    }
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    pub fn presentation_batch_begin(&mut self, due: usize) {
+        if let Some(capture) = &mut self.capture {
+            capture.batch_begin(due);
+        }
+    }
+    #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+    pub fn presentation_batch_accept(&mut self, step: u64, displayed: bool) {
+        if let Some(capture) = &mut self.capture {
+            capture.batch_accept(step, displayed);
         }
     }
     #[cfg(all(feature = "native-presentations", target_os = "macos"))]
@@ -180,14 +206,36 @@ impl SurfaceState {
         }
         Ok(SurfaceTargets {
             slot: Rc::clone(&self.slot),
+            #[cfg(feature = "native-batched-presentation")]
+            presentation: Rc::clone(&self.presentation),
         })
     }
     pub fn invalidate(&mut self) {
-        self.slot.borrow_mut().take();
+        self.cancel();
         self.configured = false;
     }
     pub fn cancel(&mut self) {
         self.slot.borrow_mut().take();
+        #[cfg(feature = "native-batched-presentation")]
+        self.presentation.set(PresentationMode::Present);
+    }
+    /// A batch retains one drawable while every intermediate state is admitted.
+    /// Selection stays in this trusted host and cannot come from project data.
+    pub fn admission_only(&mut self, defer: bool) -> Result<(), Error> {
+        if self.slot.borrow().is_none() {
+            return Err(Error::Reservation);
+        }
+        #[cfg(feature = "native-batched-presentation")]
+        self.presentation.set(if defer {
+            PresentationMode::AdmitOnly
+        } else {
+            PresentationMode::Present
+        });
+        #[cfg(not(feature = "native-batched-presentation"))]
+        if defer {
+            return Err(Error::Reservation);
+        }
+        Ok(())
     }
     pub fn has_supported_size(&self) -> bool {
         let size = self.window.inner_size();
@@ -476,6 +524,10 @@ mod pacing_tests {
 impl TargetProvider for SurfaceTargets {
     type Error = Error;
     type Frame = Frame;
+    #[cfg(feature = "native-batched-presentation")]
+    fn presentation_mode(&self) -> PresentationMode {
+        self.presentation.get()
+    }
     fn acquire(&mut self, _: &Renderer) -> Result<Frame, Error> {
         self.slot.borrow_mut().take().ok_or(Error::Reservation)
     }
