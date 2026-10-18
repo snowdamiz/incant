@@ -16,6 +16,8 @@ pub(crate) struct State {
     continuity: super::continuity::Continuity,
     #[cfg(test)]
     pub(crate) visibility: Option<Arc<crate::motion::visibility::Probe>>,
+    #[cfg(test)]
+    pub(crate) reconstruction: Option<Arc<super::visibility_reconstruction::System>>,
 }
 pub(crate) struct Pending {
     pub(super) targets: Arc<Targets>,
@@ -25,6 +27,8 @@ pub(crate) struct Pending {
     camera: super::continuity::Camera,
     #[cfg(test)]
     pub(crate) visibility: Option<Arc<crate::motion::visibility::Probe>>,
+    #[cfg(test)]
+    pub(crate) reconstruction: Option<Arc<super::visibility_reconstruction::System>>,
 }
 pub(super) fn bytes(size: [u32; 2], limit: u32) -> Result<u64> {
     let n = u64::from(size[0]) * u64::from(size[1]);
@@ -39,6 +43,15 @@ pub(super) fn bytes(size: [u32; 2], limit: u32) -> Result<u64> {
 }
 impl State {
     #[cfg(test)]
+    pub(crate) fn reconstruction_views(&self) -> [wgpu::TextureView; 3] {
+        let targets = self.targets.as_ref().unwrap();
+        [
+            targets.color[self.slot].clone(),
+            targets.support[self.slot].clone(),
+            self.reconstruction.as_ref().unwrap().owner_view(self.slot),
+        ]
+    }
+    #[cfg(test)]
     pub(crate) fn color_test_view(&self) -> wgpu::TextureView {
         self.targets.as_ref().unwrap().color[self.slot].clone()
     }
@@ -50,6 +63,8 @@ impl State {
             continuity: super::continuity::Continuity::new(light_capacity),
             #[cfg(test)]
             visibility: None,
+            #[cfg(test)]
+            reconstruction: None,
         }
     }
     // Explicit cold allocation. Accepted and candidate history are bounded to
@@ -106,6 +121,12 @@ impl State {
                     "TAAU output extent was not prepared at startup",
                 ))?;
         let s = input.surfaces.as_ref().ok_or(TemporalError::History)?;
+        #[cfg(test)]
+        if let Some(r) = &self.reconstruction {
+            if r.size != output || s.owner.is_none() {
+                return Err(TemporalError::History.into());
+            }
+        }
         if input.frame.bypassed()
             || s.slot > 1
             || input.frame.jitter_phase().is_none()
@@ -135,6 +156,8 @@ impl State {
             camera,
             #[cfg(test)]
             visibility: self.visibility.clone(),
+            #[cfg(test)]
+            reconstruction: self.reconstruction.clone(),
         })
     }
     pub fn accept(&mut self, pending: Pending, lights: &[crate::lighting::scene::Light]) {

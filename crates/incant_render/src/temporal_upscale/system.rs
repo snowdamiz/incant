@@ -4,11 +4,11 @@ use std::collections::HashMap;
 use wgpu::util::DeviceExt;
 #[repr(C)]
 #[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
-struct Frame {
-    source: [f32; 4],
-    output: [f32; 4],
-    depth: [f32; 4],
-    jitter: [f32; 4],
+pub(super) struct Frame {
+    pub(super) source: [f32; 4],
+    pub(super) output: [f32; 4],
+    pub(super) depth: [f32; 4],
+    pub(super) jitter: [f32; 4],
 }
 const _: () = assert!(size_of::<Frame>() == 64);
 pub(crate) struct System {
@@ -17,10 +17,14 @@ pub(crate) struct System {
     resolve: wgpu::RenderPipeline,
 }
 pub(crate) struct Draw {
-    pipeline: wgpu::RenderPipeline,
-    group: wgpu::BindGroup,
+    pub(super) pipeline: wgpu::RenderPipeline,
+    pub(super) group: wgpu::BindGroup,
     pub color: wgpu::TextureView,
-    support: wgpu::TextureView,
+    pub(super) support: wgpu::TextureView,
+    #[cfg(test)]
+    pub(super) identity: Option<wgpu::TextureView>,
+    #[cfg(test)]
+    pub(crate) visibility_before: bool,
 }
 pub(super) fn center_source() -> String {
     let material = include_str!("../model_material.wgsl").replace(
@@ -165,6 +169,10 @@ impl System {
         current: &wgpu::TextureView,
         camera: crate::camera::CameraView,
     ) -> Draw {
+        #[cfg(test)]
+        if let Some(r) = &p.reconstruction {
+            return r.prepare(device, p, current, camera);
+        }
         let surfaces = p.input.surfaces.as_ref().expect("TAAU admitted motion");
         let jitter = crate::temporal::jitter::SAMPLES
             [p.input.frame.jitter_phase().expect("TAAU phase") as usize];
@@ -222,6 +230,10 @@ impl System {
             }),
             color: p.targets.color[surfaces.slot].clone(),
             support: p.targets.support[surfaces.slot].clone(),
+            #[cfg(test)]
+            identity: None,
+            #[cfg(test)]
+            visibility_before: false,
         }
     }
 }
@@ -231,7 +243,7 @@ impl Draw {
         e: &mut wgpu::CommandEncoder,
         timestamps: Option<wgpu::RenderPassTimestampWrites<'_>>,
     ) {
-        let attachments = [&self.color, &self.support].map(|view| {
+        let attachment = |view| {
             Some(wgpu::RenderPassColorAttachment {
                 view,
                 resolve_target: None,
@@ -241,7 +253,16 @@ impl Draw {
                     store: wgpu::StoreOp::Store,
                 },
             })
-        });
+        };
+        let attachments = [&self.color, &self.support].map(attachment);
+        #[cfg(test)]
+        let attachments = {
+            let mut attachments = Vec::from(attachments);
+            if let Some(identity) = &self.identity {
+                attachments.push(attachment(identity));
+            }
+            attachments
+        };
         let mut pass = e.begin_render_pass(&wgpu::RenderPassDescriptor {
             label: Some("Reconstruct output HDR and current-depth support"),
             color_attachments: &attachments,

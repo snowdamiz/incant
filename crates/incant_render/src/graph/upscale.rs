@@ -57,6 +57,14 @@ impl FrameGraph {
                     .encode_opaque(e, q.and_then(|q| q.render_range(1, count)));
             }
         });
+        #[cfg(test)]
+        if draw.visibility_before {
+            visibility.expect("reconstruction visibility").encode(
+                device,
+                &mut encoder.0,
+                frame.motion.as_ref().expect("TAAU motion"),
+            );
+        }
         encoder.timed(crate::timing::GpuPass::SceneResolve, |e, q| {
             draw.encode(e, q.map(|q| q.render()))
         });
@@ -64,7 +72,7 @@ impl FrameGraph {
             frame.output.encode(e, q.map(|q| q.render()))
         });
         #[cfg(test)]
-        if let Some(probe) = visibility {
+        if let Some(probe) = visibility.filter(|_| !draw.visibility_before) {
             probe.encode(
                 device,
                 &mut encoder.0,

@@ -83,6 +83,8 @@ pub(crate) struct TemporalSurfaces {
     pub previous_depth: wgpu::TextureView,
     #[cfg(feature = "experimental-taau")]
     pub current_depth: wgpu::TextureView,
+    #[cfg(all(test, feature = "experimental-taau"))]
+    pub owner: Option<wgpu::TextureView>,
     pub slot: usize,
 }
 impl Prepared {
@@ -96,6 +98,8 @@ impl Prepared {
                 #[cfg(feature = "experimental-taau")]
                 current_depth: targets.depth[self.slot].clone(),
                 slot: self.slot,
+                #[cfg(all(test, feature = "experimental-taau"))]
+                owner: targets.owner.clone(),
             }),
         }
     }

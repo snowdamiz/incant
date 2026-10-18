@@ -48,12 +48,58 @@ pub struct RetainedScene {
 }
 #[cfg(all(test, feature = "experimental-taau"))]
 impl RetainedScene {
+    pub(crate) fn visibility_reconstruction_views(&self) -> [wgpu::TextureView; 3] {
+        self.temporal_upscale
+            .as_ref()
+            .unwrap()
+            .reconstruction_views()
+    }
+    pub(crate) fn visibility_reconstruction_probe(&self) -> Arc<crate::motion::visibility::Probe> {
+        Arc::clone(
+            self.temporal_upscale
+                .as_ref()
+                .unwrap()
+                .visibility
+                .as_ref()
+                .unwrap(),
+        )
+    }
     pub(crate) fn set_visibility_test_probe(
         &mut self,
         probe: Arc<crate::motion::visibility::Probe>,
     ) {
         assert!(self.motion_frame().is_none());
         self.temporal_upscale.as_mut().unwrap().visibility = Some(probe);
+    }
+    /// Correctness prototype only; ordinary and prior experimental routes stay unchanged.
+    pub(crate) fn prepare_visibility_reconstruction(
+        &mut self,
+        r: &Renderer,
+        size: [u32; 2],
+    ) -> Result<()> {
+        if !Arc::ptr_eq(&self.owner, &r.identity) || self.temporal_upscale.is_none() {
+            return Err(crate::motion::MotionError::Owner.into());
+        }
+        if !r.motion.as_ref().is_some_and(|m| m.owner_enabled()) {
+            return Err(crate::motion::MotionError::OwnerDisabled.into());
+        }
+        if self.live.batches.iter().any(|b| {
+            b.model.materials.materials[b.model.primitives[b.primitive].material].alpha
+                != incant_assets_runtime::AlphaMode::Opaque
+        }) {
+            return Err(crate::SceneError::Input(
+                "visibility reconstruction supports opaque models only",
+            )
+            .into());
+        }
+        let candidate =
+            Arc::new(crate::temporal_upscale::visibility_reconstruction::System::new(r, size)?);
+        self.prepare_temporal_upscale_extent(r, size)?;
+        self.motion.as_mut().expect("TAAU motion").owner_attachment = true;
+        let state = self.temporal_upscale.as_mut().unwrap();
+        state.visibility = Some(Arc::clone(&candidate.visibility));
+        state.reconstruction = Some(candidate);
+        Ok(())
     }
     pub(crate) fn visibility_test_owner(&self, node: usize) -> Option<u32> {
         self.motion.as_ref().unwrap().owner_test_id(node)

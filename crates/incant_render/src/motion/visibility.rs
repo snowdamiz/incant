@@ -81,9 +81,10 @@ struct F { @location(0) motion_xy:vec4u, @location(1) motion_zw:vec4u, @location
 pub(crate) struct Probe {
     pipelines: [wgpu::RenderPipeline; 4],
     calibration: wgpu::RenderPipeline,
-    pub(super) colors: [wgpu::TextureView; 4],
-    pub(super) depth: wgpu::TextureView,
-    reader: readback::Reader,
+    pub(crate) colors: [wgpu::TextureView; 4],
+    pub(crate) depth: wgpu::TextureView,
+    reader: Option<readback::Reader>,
+    pub(crate) size: [u32; 2],
     globals: wgpu::BindGroupLayout,
     diagnostic: Option<diagnostic::Arm>,
 }
@@ -109,9 +110,21 @@ impl Probe {
         Self::build(r, Some(arm))
     }
     fn build(r: &Renderer, diagnostic: Option<diagnostic::Arm>) -> Self {
+        let storage = diagnostic.as_ref().map_or(Storage::Original, |a| a.storage);
+        Self::build_extent(r, diagnostic, storage, [SIZE; 2], true)
+    }
+    pub(crate) fn reconstruction(r: &Renderer, size: [u32; 2]) -> Self {
+        Self::build_extent(r, None, Storage::SampleX, size, false)
+    }
+    fn build_extent(
+        r: &Renderer,
+        diagnostic: Option<diagnostic::Arm>,
+        storage: Storage,
+        size: [u32; 2],
+        readback: bool,
+    ) -> Self {
         let d = &r.device;
         let usage = wgpu::TextureUsages::RENDER_ATTACHMENT | wgpu::TextureUsages::TEXTURE_BINDING;
-        let storage = diagnostic.as_ref().map_or(Storage::Original, |a| a.storage);
         let mut formats = FORMATS;
         if matches!(storage, Storage::Rgba | Storage::Slots | Storage::SampleX) {
             formats[2] = wgpu::TextureFormat::Rgba16Uint;
@@ -136,8 +149,8 @@ impl Probe {
             d.create_texture(&wgpu::TextureDescriptor {
                 label: Some("Test-only output4x visibility"),
                 size: wgpu::Extent3d {
-                    width: SIZE,
-                    height: SIZE,
+                    width: size[0],
+                    height: size[1],
                     depth_or_array_layers: 1,
                 },
                 mip_level_count: 1,
@@ -266,7 +279,8 @@ impl Probe {
             calibration: pipeline(&calibration, None, &[], 2),
             colors,
             depth: depth_view,
-            reader: readback::Reader::new(d, diagnostic.as_ref()),
+            reader: readback.then(|| readback::Reader::new(d, diagnostic.as_ref())),
+            size,
             globals,
             diagnostic,
         }
@@ -316,7 +330,9 @@ impl Probe {
         }
     }
     pub(crate) fn encode(&self, d: &wgpu::Device, e: &mut wgpu::CommandEncoder, draw: &MotionDraw) {
-        assert_eq!(draw.rect, [0., 0., 48., 48.]);
+        if self.reader.is_some() {
+            assert_eq!(draw.rect, [0., 0., 48., 48.]);
+        }
         #[repr(C)]
         #[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
         struct Frame {
@@ -327,7 +343,7 @@ impl Probe {
         let f = Frame {
             current: draw.visibility_matrices[0].to_cols_array_2d(),
             previous: draw.visibility_matrices[1].to_cols_array_2d(),
-            rect: [0., 0., 64., 64.],
+            rect: [0., 0., self.size[0] as f32, self.size[1] as f32],
         };
         if let Some(arm) = &self.diagnostic {
             arm.record(draw, bytemuck::bytes_of(&f));
@@ -346,7 +362,7 @@ impl Probe {
             }],
         });
         let mut p = self.pass(e);
-        p.set_viewport(0., 0., 64., 64., 0., 1.);
+        p.set_viewport(0., 0., self.size[0] as f32, self.size[1] as f32, 0., 1.);
         p.set_bind_group(0, &group, &[]);
         for ordinal in 0..draw.draws.len() {
             let item = &draw.draws[if self.diagnostic.as_ref().is_some_and(|arm| arm.reverse) {
@@ -378,14 +394,28 @@ impl Probe {
         }
     }
     pub(crate) fn read(&self, r: &Renderer) -> Vec<Sample> {
-        let samples = self.reader.read(r, self);
+        let samples = self
+            .reader
+            .as_ref()
+            .expect("diagnostic reader")
+            .read(r, self);
         if let Some(arm) = &self.diagnostic {
             arm.flush_uploads();
         }
         samples
     }
+    // Explicit diagnostic readback, called only after the submitted prototype.
+    // No map/wait or CPU admission exists in the reconstruction encode path.
+    pub(crate) fn read_fixture(&self, r: &Renderer) -> Vec<Sample> {
+        assert_eq!(self.size, [SIZE; 2]);
+        readback::Reader::new(&r.device, None).read(r, self)
+    }
     pub(crate) fn read_storage(&self, r: &Renderer) -> Vec<StorageRecord> {
-        let samples = self.reader.read_storage(r, self);
+        let samples = self
+            .reader
+            .as_ref()
+            .expect("diagnostic reader")
+            .read_storage(r, self);
         if let Some(arm) = &self.diagnostic {
             arm.flush_uploads();
         }
