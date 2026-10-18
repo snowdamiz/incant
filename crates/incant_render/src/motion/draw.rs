@@ -6,6 +6,8 @@ pub(super) struct Draw {
     pub batch: Arc<Batch>,
     pub previous_vertices: wgpu::Buffer,
     pub previous_instances: wgpu::Buffer,
+    #[cfg(all(test, feature = "experimental-taau"))]
+    pub previous_upload: Arc<std::sync::Mutex<(u64, Vec<u8>)>>,
     pub pipeline: wgpu::RenderPipeline,
     pub depth_pipeline: wgpu::RenderPipeline,
 }

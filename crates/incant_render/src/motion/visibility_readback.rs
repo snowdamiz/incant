@@ -25,12 +25,19 @@ fn unpack(v:vec4u)->vec2f {return bitcast<vec2f>(vec2u(v.x|(v.y<<16u),v.z|(v.w<<
         vec4f(unpack(textureLoad(position,p,s)),textureLoad(depth,p,s),f32(s)),vec4u(o.x|(o.y<<16u),0u,0u,0u));
 }
 "#;
-pub(super) struct Reader(wgpu::ComputePipeline);
+pub(super) struct Reader(wgpu::ComputePipeline, super::Storage);
 impl Reader {
     pub fn new(d: &wgpu::Device, arm: Option<&super::diagnostic::Arm>) -> Self {
+        let storage = arm.map_or(super::Storage::Original, |a| a.storage);
         let text = arm.map_or_else(
             || COPY.to_string(),
-            |arm| super::diagnostic::copy(arm.explicit),
+            |arm| {
+                if storage == super::Storage::Original {
+                    super::diagnostic::copy(arm.explicit)
+                } else {
+                    super::storage::copy(storage)
+                }
+            },
         );
         let m = d.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("Per-sample visibility readback"),
@@ -59,7 +66,7 @@ impl Reader {
             ty: wgpu::BindingType::Buffer {
                 ty: wgpu::BufferBindingType::Storage { read_only: false },
                 has_dynamic_offset: false,
-                min_binding_size: wgpu::BufferSize::new(Self::bytes()),
+                min_binding_size: wgpu::BufferSize::new(Self::bytes(storage)),
             },
         });
         let group = d.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
@@ -89,15 +96,19 @@ impl Reader {
             );
             assert_eq!(msl["complete"], true, "actual readback MSL required");
         }
-        Self(pipeline)
+        Self(pipeline, storage)
     }
-    fn bytes() -> u64 {
-        u64::from(SIZE * SIZE * 4) * size_of::<Sample>() as u64
+    fn bytes(storage: super::Storage) -> u64 {
+        u64::from(SIZE * SIZE * 4)
+            * if storage == super::Storage::Original {
+                48
+            } else {
+                80
+            }
     }
-    pub fn read(&self, r: &Renderer, probe: &Probe) -> Vec<Sample> {
+    fn read_bytes(&self, r: &Renderer, probe: &Probe) -> Vec<u8> {
         let d = &r.device;
-        let bytes = Self::bytes();
-        assert_eq!(bytes, 786432);
+        let bytes = Self::bytes(self.1);
         let storage = d.create_buffer(&wgpu::BufferDescriptor {
             label: None,
             size: bytes,
@@ -151,24 +162,49 @@ impl Reader {
             .unwrap()
             .unwrap();
         let map = readback.slice(..).get_mapped_range();
-        let result = map
-            .as_chunks::<48>()
-            .0
-            .iter()
-            .map(|b| Sample {
-                motion: std::array::from_fn(|i| {
-                    f32::from_le_bytes(b[i * 4..i * 4 + 4].try_into().unwrap())
-                }),
-                position_depth: std::array::from_fn(|i| {
-                    f32::from_le_bytes(b[16 + i * 4..20 + i * 4].try_into().unwrap())
-                }),
-                owner: std::array::from_fn(|i| {
-                    u32::from_le_bytes(b[32 + i * 4..36 + i * 4].try_into().unwrap())
-                }),
-            })
-            .collect();
+        let result = map.to_vec();
         drop(map);
         readback.unmap();
         result
+    }
+    pub fn read(&self, r: &Renderer, probe: &Probe) -> Vec<Sample> {
+        assert_eq!(self.1, super::Storage::Original);
+        self.read_bytes(r, probe)
+            .as_chunks::<48>()
+            .0
+            .iter()
+            .map(|b| parse(b))
+            .collect()
+    }
+    pub fn read_storage(&self, r: &Renderer, probe: &Probe) -> Vec<super::StorageRecord> {
+        assert_ne!(self.1, super::Storage::Original);
+        self.read_bytes(r, probe)
+            .as_chunks::<80>()
+            .0
+            .iter()
+            .map(|b| super::StorageRecord {
+                sample: parse(&b[..48]),
+                raw_motion_zw: std::array::from_fn(|i| {
+                    u32::from_le_bytes(b[48 + i * 4..52 + i * 4].try_into().unwrap())
+                }),
+                raw_owner: std::array::from_fn(|i| {
+                    u32::from_le_bytes(b[64 + i * 4..68 + i * 4].try_into().unwrap())
+                }),
+            })
+            .collect()
+    }
+}
+
+fn parse(b: &[u8]) -> Sample {
+    Sample {
+        motion: std::array::from_fn(|i| {
+            f32::from_le_bytes(b[i * 4..4 + i * 4].try_into().unwrap())
+        }),
+        position_depth: std::array::from_fn(|i| {
+            f32::from_le_bytes(b[16 + i * 4..20 + i * 4].try_into().unwrap())
+        }),
+        owner: std::array::from_fn(|i| {
+            u32::from_le_bytes(b[32 + i * 4..36 + i * 4].try_into().unwrap())
+        }),
     }
 }

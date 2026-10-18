@@ -9,12 +9,12 @@ use super::{
 };
 use crate::{
     Renderer,
-    motion::visibility::{MslSession, Probe, Sample},
+    motion::visibility::{MslSession, Probe, Sample, Storage, StorageRecord},
 };
 use serde_json::json;
 use std::sync::Arc;
 
-fn normalized(raw: &[Sample]) -> Vec<Sample> {
+pub(super) fn normalized(raw: &[Sample]) -> Vec<Sample> {
     raw.iter()
         .map(|sample| {
             let mut sample = *sample;
@@ -23,7 +23,7 @@ fn normalized(raw: &[Sample]) -> Vec<Sample> {
         })
         .collect()
 }
-fn packing_errors(raw: &[Sample], explicit: bool) -> Vec<usize> {
+pub(super) fn packing_errors(raw: &[Sample], explicit: bool) -> Vec<usize> {
     raw.iter()
         .enumerate()
         .filter_map(|(i, s)| {
@@ -63,7 +63,19 @@ fn visibility_owner_raw_lanes_detect_changed_halves_and_wrong_sample() {
 fn output_visibility_owner_depth_four_arm_capture() {
     let root =
         std::path::PathBuf::from(std::env::var_os("INCANT_VISIBILITY_OWNER_OUTPUT").unwrap());
-    std::fs::create_dir(&root).unwrap();
+    capture(&root, false);
+}
+
+#[test]
+#[ignore = "coordinated MRT storage diagnostic; capture success is not geometry acceptance"]
+fn output_visibility_owner_storage_three_arm_capture() {
+    let root =
+        std::path::PathBuf::from(std::env::var_os("INCANT_VISIBILITY_STORAGE_OUTPUT").unwrap());
+    capture(&root, true);
+}
+
+fn capture(root: &std::path::Path, storage_probe: bool) {
+    std::fs::create_dir(root).unwrap();
     let mut renderer = crate::test_support::checked(Renderer::headless().unwrap());
     assert_eq!(renderer.adapter.get_info().backend, wgpu::Backend::Metal);
     pollster::block_on(renderer.enable_temporal_upscale()).unwrap();
@@ -73,26 +85,43 @@ fn output_visibility_owner_depth_four_arm_capture() {
     let _session = MslSession::start();
     let mut pattern = None;
     let mut results = Vec::new();
-    for (name, explicit, reverse) in [
-        ("original-forward", false, false),
-        ("original-reverse", false, true),
-        ("explicit-forward", true, false),
-        ("explicit-reverse", true, true),
-    ] {
+    let arms = if storage_probe {
+        vec![
+            ("original-forward", false, false, Storage::Original),
+            ("redundant-forward", false, false, Storage::Redundant),
+            ("rgba-forward", false, false, Storage::Rgba),
+        ]
+    } else {
+        vec![
+            ("original-forward", false, false, Storage::Original),
+            ("original-reverse", false, true, Storage::Original),
+            ("explicit-forward", true, false, Storage::Original),
+            ("explicit-reverse", true, true, Storage::Original),
+        ]
+    };
+    let frame_count = 11 * arms.len();
+    for (name, explicit, reverse, storage) in arms {
         let path = root.join(name);
         std::fs::create_dir(&path).unwrap();
-        let probe = Arc::new(Probe::owner_diagnostic(&renderer, &path, explicit, reverse));
+        let probe = Arc::new(if storage_probe {
+            Probe::storage_diagnostic(&renderer, &path, storage)
+        } else {
+            Probe::owner_diagnostic(&renderer, &path, explicit, reverse)
+        });
         if pattern.is_none() {
             let raw = probe.calibrate(&renderer);
-            save_samples(&root, "calibration-raw", &raw);
+            save_samples(root, "calibration-raw", &raw);
             assert!(packing_errors(&raw, false).is_empty());
             pattern = Some(oracle::calibration(&normalized(&raw)).unwrap());
-            write(&root,"fixture.json",&serde_json::to_vec_pretty(&json!({"measured_sample_offsets":pattern,
+            write(root,"fixture.json",&serde_json::to_vec_pretty(&json!({"measured_sample_offsets":pattern,
                 "adapter":format!("{:?}",renderer.adapter.get_info()),"edge":geometry::EDGE,"strip":geometry::STRIP,"occluder":OCCLUDER,
                 "layout":"48 bytes little-endian: motion4 f32, sample_position.xy/current_depth/compute_lane f32, decoded_owner/raw_owner_lo/raw_owner_hi/raw_validity_lo u32",
                 "explicit_sample_index":"raw_validity_lo, only for covered explicit arms; original has no observed fragment index",
                 "validity_decoding":"explicit arm clears only low two bits before f32 reconstruction; original arm unmodified",
                 "geometry_tie_distance_pixels":1e-5,"position_epsilon_pixels":2e-5,"depth_motion_epsilon":2e-6,
+                "storage_probe":storage_probe,
+                "storage_record":"nonbaseline: original 48-byte semantic record + raw motionZW 4xu32 + raw ownerRGBA 4xu32; baseline unchanged48",
+                "redundant_packing":"finite positive-sign depth[0,1]; validity+0/+1 in depth sign bit; full owner in original validity lanes; invalid inputs yield NaN refusal",
                 "no_new_color_resolver":true,"capture_completion_is_acceptance":false})).unwrap());
         }
         let pattern = pattern.unwrap();
@@ -132,7 +161,11 @@ fn output_visibility_owner_depth_four_arm_capture() {
         for (index, current) in poses.into_iter().enumerate() {
             apply(&mut input, current);
             let low = render(&renderer, &mut retained, &input, &view, &reader);
-            let raw = probe.read(&renderer);
+            let extra = (storage != Storage::Original).then(|| probe.read_storage(&renderer));
+            let raw = extra.as_ref().map_or_else(
+                || probe.read(&renderer),
+                |records| records.iter().map(|v| v.sample).collect(),
+            );
             let samples = normalized(&raw);
             let frame = retained.motion_frame().unwrap();
             let changes = retained.motion_changes().unwrap();
@@ -164,7 +197,33 @@ fn output_visibility_owner_depth_four_arm_capture() {
                     has_previous: frame.has_previous(),
                 },
             );
-            let packed = packing_errors(&raw, explicit);
+            let packed = extra.as_ref().map_or_else(
+                || packing_errors(&raw, explicit),
+                |records| storage_packing_errors(records, storage),
+            );
+            let duplicate = extra
+                .as_ref()
+                .filter(|_| storage == Storage::Redundant)
+                .map(|records| {
+                    let duplicate_samples: Vec<_> = records
+                        .iter()
+                        .map(|v| {
+                            let mut s = v.sample;
+                            s.owner = [v.raw_motion_zw[2] | (v.raw_motion_zw[3] << 16), 0, 0, 0];
+                            s
+                        })
+                        .collect();
+                    oracle::inspect(
+                        &duplicate_samples,
+                        pattern,
+                        &Scene {
+                            current,
+                            previous,
+                            words,
+                            has_previous: frame.has_previous(),
+                        },
+                    )
+                });
             if index == 7 {
                 write(
                     &path,
@@ -172,12 +231,32 @@ fn output_visibility_owner_depth_four_arm_capture() {
                     &serde_json::to_vec_pretty(&oracle::static_metrics(&samples, ids[0])).unwrap(),
                 );
             }
-            let accepted =
-                inspection["mismatches"].as_array().unwrap().is_empty() && packed.is_empty();
+            let accepted = inspection["mismatches"].as_array().unwrap().is_empty()
+                && packed.is_empty()
+                && duplicate
+                    .as_ref()
+                    .is_none_or(|v| v["mismatches"].as_array().unwrap().is_empty());
             if index == 10 || !accepted {
-                save(&path, &format!("frame-{index}"), &low, &raw);
+                if let Some(extra) = &extra {
+                    // The 80-byte record already contains all original semantic fields.
+                    // Retain it once; avoid another identical 48-byte plane in the packet.
+                    let low_bytes: Vec<_> = low
+                        .0
+                        .iter()
+                        .flatten()
+                        .flat_map(|v| v.to_le_bytes())
+                        .collect();
+                    write(&path, &format!("frame-{index}-low.f32le"), &low_bytes);
+                    write(
+                        &path,
+                        &format!("frame-{index}-storage.bin"),
+                        bytemuck::cast_slice(extra),
+                    );
+                } else {
+                    save(&path, &format!("frame-{index}"), &low, &raw);
+                }
             }
-            let report = json!({"frame_index":index,"sequence":frame.sequence(),"epoch":frame.epoch(),"phase":frame.jitter_phase(),
+            let report = json!({"storage_arm":storage.name(),"duplicate_owner_oracle":duplicate,"frame_index":index,"sequence":frame.sequence(),"epoch":frame.epoch(),"phase":frame.jitter_phase(),
                 "has_previous":frame.has_previous(),"owner_words":words,"explicit":explicit,"reverse":reverse,
                 "current_pose":[current.mesh_y,current.camera_y,current.occluder_y,current.occluder_z],
                 "previous_pose":[previous.mesh_y,previous.camera_y,previous.occluder_y,previous.occluder_z],
@@ -193,18 +272,88 @@ fn output_visibility_owner_depth_four_arm_capture() {
                     "unexpected failure before arriving occluder: {report}"
                 );
             }
+            if storage_probe && storage == Storage::Original && index == 10 {
+                let errors = inspection["mismatches"].as_array().unwrap();
+                assert_eq!(
+                    errors.len(),
+                    48,
+                    "baseline did not reproduce; no repair inference"
+                );
+                for (x, e) in (6..54).zip(errors) {
+                    assert_eq!(
+                        [e[0].as_u64(), e[1].as_u64(), e[2].as_u64()],
+                        [Some(x), Some(44), Some(3)],
+                        "baseline discrepancy changed"
+                    );
+                }
+                assert!(packed.is_empty());
+            }
             if index == 10 {
-                results.push(json!({"arm":name,"visibility_accepted":accepted,"oracle_mismatches":inspection["mismatches"].as_array().unwrap().len(),"packing_mismatches":packed.len()}));
+                results.push(json!({"arm":name,"visibility_accepted":accepted,"oracle_mismatches":inspection["mismatches"].as_array().unwrap().len(),"packing_mismatches":packed.len(),"duplicate_owner_oracle":duplicate}));
             }
             previous = current;
         }
     }
     write(
-        &root,
+        root,
         "capture.json",
         &serde_json::to_vec_pretty(&json!({"capture_complete":true,"arms":results,
         "visibility_accepted":results.iter().all(|v|v["visibility_accepted"]==true),
-        "accepted_frames":44,"visibility_passes":45,"original_oracle_unchanged":true,"appearance_or_performance_accepted":false}))
+        "accepted_frames":frame_count,"visibility_passes":frame_count+1,"baseline_reproduction_required":storage_probe,"original_oracle_unchanged":true,"appearance_or_performance_accepted":false}))
         .unwrap(),
     );
+}
+
+fn storage_packing_errors(raw: &[StorageRecord], storage: Storage) -> Vec<usize> {
+    raw.iter()
+        .enumerate()
+        .filter_map(|(i, r)| {
+            let v = r.raw_motion_zw;
+            let o = r.raw_owner;
+            let s = r.sample;
+            let bits = if storage == Storage::Redundant {
+                [
+                    v[0] | ((v[1] & 32767) << 16),
+                    if v[1] & 32768 == 0 { 0 } else { 1f32.to_bits() },
+                ]
+            } else {
+                [v[0] | (v[1] << 16), v[2] | (v[3] << 16)]
+            };
+            let decoded = o[0] | (o[1] << 16);
+            let owner_range = o.into_iter().all(|x| x <= 65535);
+            let good = v.into_iter().all(|x| x <= 65535)
+                && owner_range
+                && s.owner == [decoded, o[0], o[1], v[2]]
+                && s.motion[2].to_bits() == bits[0]
+                && s.motion[3].to_bits() == bits[1]
+                && (storage != Storage::Rgba || o[2..] == [0, 0]);
+            (!good).then_some(i)
+        })
+        .collect()
+}
+#[test]
+fn visibility_storage_raw_records_preserve_distinct_owners_and_refuse_corruption() {
+    let mut r = StorageRecord {
+        sample: Sample {
+            motion: [0.; 4],
+            position_depth: [0.; 4],
+            owner: [0x80000002, 2, 32768, 1],
+        },
+        raw_motion_zw: [0, 0, 1, 32768],
+        raw_owner: [2, 32768, 0, 1],
+    };
+    // Different duplicate owner is evidence, not a packing error silently repaired.
+    assert!(storage_packing_errors(&[r], Storage::Redundant).is_empty());
+    assert_ne!(
+        r.sample.owner[0],
+        r.raw_motion_zw[2] | (r.raw_motion_zw[3] << 16)
+    );
+    r.raw_motion_zw[1] = 32768;
+    assert_eq!(storage_packing_errors(&[r], Storage::Redundant), [0]);
+    r.sample.motion[3] = 1.;
+    assert!(storage_packing_errors(&[r], Storage::Redundant).is_empty());
+    r.raw_owner[0] = 1;
+    assert_eq!(storage_packing_errors(&[r], Storage::Redundant), [0]);
+    r.raw_owner[0] = 2;
+    assert_eq!(storage_packing_errors(&[r], Storage::Rgba), [0]);
 }

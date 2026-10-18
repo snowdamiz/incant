@@ -4,14 +4,23 @@ use serde_json::{Value, json};
 use std::{
     io::Write,
     path::{Path, PathBuf},
-    sync::Mutex,
+    sync::{Arc, Mutex},
 };
 
 pub(super) struct Arm {
     pub root: PathBuf,
     pub explicit: bool,
     pub reverse: bool,
+    pub storage: super::Storage,
     sequence: Mutex<u32>,
+    uploads: Mutex<Option<(u32, Vec<Upload>)>>,
+}
+struct Upload {
+    ordinal: usize,
+    count: usize,
+    handle: String,
+    previous_sequence: u64,
+    bytes: Arc<Mutex<(u64, Vec<u8>)>>,
 }
 pub(super) fn write(root: &Path, name: &str, value: &Value) {
     let bytes = serde_json::to_vec_pretty(value).unwrap();
@@ -30,17 +39,25 @@ impl Arm {
             root: root.into(),
             explicit,
             reverse,
+            storage: super::Storage::Original,
             sequence: Mutex::new(0),
+            uploads: Mutex::new(None),
         }
     }
     pub fn record(&self, draw: &MotionDraw, uniform: &[u8]) {
         let mut sequence = self.sequence.lock().unwrap();
         assert!(*sequence < 11, "bounded eleven accepted frames per arm");
+        let mut uploads = Vec::new();
         let order: Vec<_> = (0..draw.draws.len()).map(|ordinal| {
             let index = if self.reverse { draw.draws.len()-1-ordinal } else { ordinal };
             let item = &draw.draws[index];
             let b = &item.batch;
             let primitive = &b.model.primitives[b.primitive];
+            let upload = item.previous_upload.lock().unwrap();
+            assert!(b.count <= 16);
+            uploads.push(Upload { ordinal, count: b.count as usize,
+                handle: format!("{:?}", item.previous_instances),
+                previous_sequence: upload.0, bytes: Arc::clone(&item.previous_upload) });
             json!({"ordinal":ordinal,"original_draw_index":index,"primitive":b.primitive,
                 "nodes":b.placements.iter().map(|p|p.node).collect::<Vec<_>>(),
                 "instances":b.count,"index_count":primitive.index_count,"mirrored":b.mirrored,
@@ -56,10 +73,31 @@ impl Arm {
             &json!({
             "accepted_frame_index":*sequence,"uniform_actual_bytes":uniform,"draw_order":order,
             "reverse":self.reverse,"explicit_sample_index":self.explicit,
+            "storage_arm":self.storage.name(),
             "recorded_before_encode":true,"depth_clear":1,"depth_compare":"Less","depth_write":true,
             "color_load":"clear zero","color_store":"store","resolve":false,"viewport":[0,0,64,64]}),
         );
+        let mut pending = self.uploads.lock().unwrap();
+        assert!(pending.is_none(), "previous upload receipt not drained");
+        *pending = Some((*sequence, uploads));
         *sequence += 1;
+    }
+    pub fn flush_uploads(&self) {
+        if let Some((frame, pending)) = self.uploads.lock().unwrap().take() {
+            let uploads: Vec<_> = pending.iter().map(|p| {
+                let actual = p.bytes.lock().unwrap();
+                assert_eq!(actual.0, p.previous_sequence + 1, "current upload not observed");
+                assert_eq!(actual.1.len(), p.count * 80);
+                json!({"ordinal":p.ordinal,"buffer":p.handle,"instances":p.count,
+                    "upload_sequence":actual.0,"CPU_upload_bytes":actual.1,
+                    "receipt_kind":"exact queue.write_buffer source slice after call; not GPU memory readback"})
+            }).collect();
+            write(
+                &self.root,
+                &format!("upload-{frame}.json"),
+                &json!({"frame":frame,"uploads":uploads}),
+            );
+        }
     }
 }
 pub(super) fn source(explicit: bool) -> String {
@@ -125,11 +163,7 @@ pub(super) fn pipeline(
         || d.create_render_pipeline(desc),
     );
     if let Some(arm) = arm {
-        let source = if kind == "calibration" {
-            format!("{}\n{}", super::CALIBRATION, super::PACK)
-        } else {
-            scene.to_string()
-        };
+        let source = scene.to_string();
         write(
             &arm.root,
             &format!("pipeline-{kind}-{index}.json"),

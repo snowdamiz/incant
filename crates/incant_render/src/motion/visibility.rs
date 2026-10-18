@@ -9,8 +9,11 @@ mod diagnostic;
 mod msl;
 #[path = "visibility_readback.rs"]
 mod readback;
+#[path = "visibility_storage.rs"]
+mod storage;
 pub(crate) use msl::Session as MslSession;
 pub(crate) use readback::Sample;
+pub(crate) use storage::{Record as StorageRecord, Storage};
 pub(crate) const SIZE: u32 = 64;
 // Guaranteed multisample integer attachments. Split each f32/u32 into exact
 // low/high u16 lanes; no adapter-specific format feature or f16 narrowing.
@@ -96,10 +99,24 @@ impl Probe {
     ) -> Self {
         Self::build(r, Some(diagnostic::Arm::new(root, explicit, reverse)))
     }
+    pub(crate) fn storage_diagnostic(
+        r: &Renderer,
+        root: &std::path::Path,
+        storage: Storage,
+    ) -> Self {
+        let mut arm = diagnostic::Arm::new(root, false, false);
+        arm.storage = storage;
+        Self::build(r, Some(arm))
+    }
     fn build(r: &Renderer, diagnostic: Option<diagnostic::Arm>) -> Self {
         let d = &r.device;
         let usage = wgpu::TextureUsages::RENDER_ATTACHMENT | wgpu::TextureUsages::TEXTURE_BINDING;
-        for f in FORMATS
+        let storage = diagnostic.as_ref().map_or(Storage::Original, |a| a.storage);
+        let mut formats = FORMATS;
+        if storage == Storage::Rgba {
+            formats[2] = wgpu::TextureFormat::Rgba16Uint;
+        }
+        for f in formats
             .into_iter()
             .chain([wgpu::TextureFormat::Depth32Float])
         {
@@ -141,12 +158,16 @@ impl Probe {
             bind_group_layouts: &[Some(&globals), Some(&r.materials.layout)],
             immediate_size: 0,
         });
-        let wgsl = diagnostic::source(diagnostic.as_ref().is_some_and(|arm| arm.explicit));
+        let wgsl = if storage == Storage::Original {
+            diagnostic::source(diagnostic.as_ref().is_some_and(|arm| arm.explicit))
+        } else {
+            storage::source(storage)
+        };
         let shader = d.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("Output4x sampled owner"),
             source: wgpu::ShaderSource::Wgsl(wgsl.clone().into()),
         });
-        let targets = FORMATS.map(|format| {
+        let targets = formats.map(|format| {
             Some(wgpu::ColorTargetState {
                 format,
                 blend: None,
@@ -161,6 +182,7 @@ impl Probe {
             bias: Default::default(),
         };
         let buffers = system::owner_buffers();
+        let calibration_wgsl = storage::calibration(storage);
         let pipeline = |shader: &wgpu::ShaderModule,
                         layout: Option<&wgpu::PipelineLayout>,
                         buffers: &[wgpu::VertexBufferLayout<'_>],
@@ -211,18 +233,22 @@ impl Probe {
                 } else {
                     "scene"
                 },
-                &wgsl,
+                if buffers.is_empty() {
+                    &calibration_wgsl
+                } else {
+                    &wgsl
+                },
             )
         };
         let pipelines = std::array::from_fn(|i| pipeline(&shader, Some(&layout), &buffers, i));
         let calibration = d.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("Actual sample-location calibration"),
-            source: wgpu::ShaderSource::Wgsl(format!("{CALIBRATION}\n{PACK}").into()),
+            source: wgpu::ShaderSource::Wgsl(calibration_wgsl.clone().into()),
         });
         Self {
             pipelines,
             calibration: pipeline(&calibration, None, &[], 2),
-            colors: FORMATS.map(make),
+            colors: formats.map(make),
             depth: make(wgpu::TextureFormat::Depth32Float),
             reader: readback::Reader::new(d, diagnostic.as_ref()),
             globals,
@@ -328,7 +354,18 @@ impl Probe {
         }
     }
     pub(crate) fn read(&self, r: &Renderer) -> Vec<Sample> {
-        self.reader.read(r, self)
+        let samples = self.reader.read(r, self);
+        if let Some(arm) = &self.diagnostic {
+            arm.flush_uploads();
+        }
+        samples
+    }
+    pub(crate) fn read_storage(&self, r: &Renderer) -> Vec<StorageRecord> {
+        let samples = self.reader.read_storage(r, self);
+        if let Some(arm) = &self.diagnostic {
+            arm.flush_uploads();
+        }
+        samples
     }
 }
 #[test]

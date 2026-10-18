@@ -27,6 +27,8 @@ struct Rows {
     owner_base: u32,
     packed: Vec<Previous>,
     buffer: wgpu::Buffer,
+    #[cfg(all(test, feature = "experimental-taau"))]
+    upload: Arc<std::sync::Mutex<(u64, Vec<u8>)>>,
 }
 #[repr(C)]
 #[derive(Clone, Copy, bytemuck::Pod, bytemuck::Zeroable)]
@@ -263,6 +265,8 @@ impl MotionState {
                 slots,
                 owner_base: owner.first,
                 packed: Vec::with_capacity(count),
+                #[cfg(all(test, feature = "experimental-taau"))]
+                upload: Arc::new(std::sync::Mutex::new((0, Vec::new()))),
                 buffer: renderer.device.create_buffer(&wgpu::BufferDescriptor {
                     label: Some("Motion previous instance rows"),
                     size: (count.max(1) * size_of::<Previous>()) as u64,
@@ -505,6 +509,8 @@ impl MotionState {
                 batch: Arc::clone(batch),
                 previous_vertices: old.vertices.as_ref().unwrap_or(&primitive.vertices).clone(),
                 previous_instances: rows.buffer.clone(),
+                #[cfg(all(test, feature = "experimental-taau"))]
+                previous_upload: Arc::clone(&rows.upload),
                 pipeline: if self.owner_attachment {
                     system
                         .owner_pipelines
@@ -558,6 +564,18 @@ impl MotionState {
         for rows in &self.rows {
             if !rows.packed.is_empty() {
                 queue.write_buffer(&rows.buffer, 0, bytemuck::cast_slice(&rows.packed));
+                #[cfg(all(test, feature = "experimental-taau"))]
+                {
+                    // Exact CPU upload slice, not a readback of GPU buffer contents.
+                    let mut upload = rows.upload.lock().unwrap();
+                    upload.0 = upload.0.checked_add(1).unwrap();
+                    upload.1.clear();
+                    if rows.packed.len() <= 16 {
+                        upload
+                            .1
+                            .extend_from_slice(bytemuck::cast_slice(&rows.packed));
+                    }
+                }
             }
         }
     }
