@@ -86,19 +86,20 @@ class MacPolicy:
         # trees and public, OS-owned loader libraries; no /Users or /Library rule.
         reads = (self.sysroot, self.sdk, self.source, self.run,
                  Path('/usr/lib'), Path('/System/Library'))
-        parents = sorted({parent for path in (*reads, self.validator)
+        executables = (self.rustc, self.linker, self.validator)
+        parents = sorted({parent for path in (*reads, *executables)
                           for parent in absolute(path).parents}, key=str)
         lines = ['(version 1)', '(deny default)', '(deny network*)', '(deny system-socket)',
                  '(allow process-fork)',
                  '(allow process-exec ' + ' '.join('(literal ' + _literal(p) + ')'
-                                                    for p in (self.rustc, self.linker, self.validator)) + ')',
+                                                    for p in executables) + ')',
                  '(allow sysctl-read (sysctl-name-regex #"^hw\\."))',
                  '(allow sysctl-read (sysctl-name "kern.osrelease") (sysctl-name "kern.osversion")'
                  ' (sysctl-name "kern.ostype"))']
         lines += ['(allow file-read* (subpath ' + _literal(path) + '))' for path in reads]
-        # A standalone qualified cooker is commonly outside the toolchain. Admit
-        # only its executable bytes/mmap, never its enclosing user directory.
-        lines += ['(allow file-read* (literal ' + _literal(self.validator) + '))']
+        # Exact executable bytes/mmap, including a separately admitted canary
+        # outside these trees. Never grant its enclosing user directory data.
+        lines += ['(allow file-read* (literal ' + _literal(path) + '))' for path in executables]
         lines += ['(allow file-read-metadata (literal ' + _literal(path) + '))' for path in parents]
         lines += ['(allow file-read* (literal "/dev/null") (literal "/dev/urandom"))',
                   '(allow file-write* (literal "/dev/null") (subpath ' + _literal(self.run) + '))']
@@ -124,7 +125,7 @@ def group_sample(group):
     if sys.platform != 'darwin':
         raise Unsupported('macOS process sampling required')
     api = ctypes.CDLL('/usr/lib/libproc.dylib', use_errno=True)
-    api.proc_listpgrppids.argtypes = (ctypes.c_uint32, ctypes.c_void_p, ctypes.c_int)
+    api.proc_listpgrppids.argtypes = (ctypes.c_int, ctypes.c_void_p, ctypes.c_int)
     api.proc_listpgrppids.restype = ctypes.c_int
     api.proc_pidinfo.argtypes = (ctypes.c_int, ctypes.c_int, ctypes.c_uint64, ctypes.c_void_p, ctypes.c_int)
     api.proc_pidinfo.restype = ctypes.c_int

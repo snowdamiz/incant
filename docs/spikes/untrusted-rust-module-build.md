@@ -57,7 +57,7 @@ compiler/validator refusals, cancellation, collision, publication replacement,
 resource/cleanup error preservation and failure receipts without OS children.
 The two existing trusted SDK cache controls remain. None is native evidence.
 
-Source qualification on 2026-10-18: all 32 selected pure controls passed with
+Source qualification on 2026-10-18: all 35 selected pure controls passed with
 `python3 -m unittest tools.tests.test_rust_guest tools.tests.test_rust_guest_build`.
 This includes the exact historical SDK argv/cache digest control. Python syntax,
 the trusted OS canary's Rust formatting, generated conventions and `git diff
