@@ -259,14 +259,16 @@ fn dispatch_cancellable(
         "play_run" | "play_state_query" | "profiler_read" => {
             play::dispatch(access, perception, name, args, cancel)
         }
-        "asset_list" | "asset_inspect" | "asset_import" => assets::dispatch(
-            access,
-            perception.project_files(),
-            name,
-            args,
-            actor,
-            cancel,
-        ),
+        "asset_list" | "asset_inspect" | "asset_import" | "collider_from_alpha" => {
+            assets::dispatch(
+                access,
+                perception.project_files(),
+                name,
+                args,
+                actor,
+                cancel,
+            )
+        }
         "doc_query" => access.with_bus(cancel, |bus| {
             let args: QueryArgs = decode(args)?;
             let project = json!(bus.project());
@@ -421,7 +423,9 @@ impl Agent {
             tools.retain(|tool| tool["name"] != "script_read" && tool["name"] != "script_write");
         }
         if perception.project_files().is_none() {
-            tools.retain(|tool| tool["name"] != "asset_import");
+            tools.retain(|tool| {
+                tool["name"] != "asset_import" && tool["name"] != "collider_from_alpha"
+            });
         }
         if !perception.native_play_available()
             || (access.is_shared() && !perception.shared_play_available())
@@ -529,7 +533,13 @@ impl Agent {
                     // including registered script replacement and removal.
                     let ask = matches!(self.approval, ApprovalMode::Always)
                         || (matches!(self.approval, ApprovalMode::Destructive)
-                            && matches!(name, "doc_patch" | "asset_import" | "script_write"));
+                            && matches!(
+                                name,
+                                "doc_patch"
+                                    | "asset_import"
+                                    | "collider_from_alpha"
+                                    | "script_write"
+                            ));
                     if ask && !approve(name, &arguments) {
                         return Err(AgentError::Tool("user denied this operation".into()));
                     }
