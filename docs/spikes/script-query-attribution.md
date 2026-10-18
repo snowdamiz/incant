@@ -1,8 +1,9 @@
 # Native query stages inside ScriptTick
 
 This default-off diagnostic observes the existing TypeScript query path. It does
-not optimize it or change the 2 ms target. Source and controls are prepared; no
-native qualification, full Core run or performance result is claimed here.
+not optimize it or change the 2 ms target. The scoped CPU qualification below
+passed; no full Core diagnostic run, measured optimization or performance result
+is claimed here.
 
 `diagnostic-script-queries` forwards from the native player through `incant_script`
 to `incant_profile`, and implies the existing ScriptTick phase observer. Ordinary
@@ -59,7 +60,7 @@ A subsequent explicit query-aware adapter must require the selected exact schema
 category/region arrays, bounds and complete raw coverage; unknown schemas/features
 must refuse. Nothing here changes public exporter admission.
 
-## Prepared CPU controls
+## CPU qualification
 
 Collector controls cover every category/stage and early error, recursive getters,
 missing/reordered/overlapping/leaked scopes, duration/count overflow and backward
@@ -73,6 +74,52 @@ The same actual query workload also runs without a recording and compares typed 
 Legacy world saves correctly refuse these physics-bearing fixtures; they are not
 used as a substitute checkpoint. Existing phase/navigation/budget controls retain schema and storage
 assertions for their exact feature combinations.
+
+The original source `a8de928d` was not executed: source review found that the
+new fixtures attempted legacy saves of physics-bearing worlds, which correctly
+refuse. Test-only successor `555498e3` used the supported state/next-step checks.
+Actual supervisor `20459` then passed 20 collector controls (query/navigation/
+budget), 3 prior-schema controls, 6 real ScriptHost controls and 7 ordinary query
+controls. Its following strict lint failed on duplicate shared fixture modules
+and two unused helpers; the complete failed run and its four copied executables
+remain evidence. It was not reported as a passing qualification.
+
+Successor `d6ef9bc4` reuses the existing localization/navigation fixture modules;
+production code and all behavior assertions are unchanged. Actual supervisor
+`93482` passed the six real ScriptHost controls again and both diagnostic/ordinary
+strict all-target Clippy selections for profile, script and player. Thus there
+are **36 feature-qualified controls, 42 passing executions, and two passing final
+strict lint modes**. The 33 unique test names include three existing collector
+controls exercised in both prior-schema and query-enabled modes. The 13 new controls consist of seven collector and six real
+VM tests. Existing schema1 output and query-field absence are checked separately;
+normal summary selection omits the new query feature. Formatting and convention
+checks passed. These CPU checks do not run an ignored external-input fixture,
+player window, GPU, audio device, capture helper or Tracy listener.
+
+The two native attempts retained their original 900-second aggregate allowance,
+12 GiB target ceiling and 6 GiB free floor. Actual combined supervisor time was
+99.299201 seconds, recorded only for resource accounting. All observed child
+processes/groups and both supervisors were freshly absent after terminal return.
+Five executed test binaries were copied independently; all prior target history,
+peaks and protected artifact identities were retained. No cache deletion or
+fingerprint retirement occurred. Root independently replayed the native records
+and subsequently passed all ten development checks at integrated source
+`179eff78` (actual `27263`). Its raw logs and corrected data-only process-record
+inspection are retained separately from the native producer results. The first run refreshed 1,911 bound local input
+mtimes before Cargo to avoid stale cross-worktree metadata; the repair refreshed
+only its two changed test files and rehashed unchanged contents.
+
+The [portable packet](evidence/script-query-attribution/manifest.json) retains raw
+Cargo/test/lint output, all source generations, first refusal/failure, resource
+plans/closeouts and independent source reviews. Its data-only verifier runs with
+`python3 -B docs/spikes/evidence/script-query-attribution/verify.py`. It does not
+execute an archived runner or executable. Optional `--originals` rechecks retained
+external raw records; `--binaries` verifies the five copied executable hashes;
+`--source-root PATH` rehashes all 5,113 current producer compiler/source inputs;
+`--git-source PATH` checks the recorded changed code bytes at all three historical
+commits. Missing external artifacts or refs explicitly refuse those optional
+checks. The archive carries identities, not executable binaries or a shipping
+reproduction environment.
 
 ## Proposed full Core diagnostic protocol
 
