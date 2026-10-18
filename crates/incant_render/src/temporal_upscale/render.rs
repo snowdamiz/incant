@@ -40,6 +40,24 @@ impl Renderer {
             models.center_materials(system)?;
         }
         let draw = system.prepare(&self.device, pending, &attachments.resolved, scene.camera);
+        #[cfg(test)]
+        let current_shading = pending
+            .reconstruction
+            .as_ref()
+            .and_then(|s| s.fallback.as_ref().map(|f| (s, f)))
+            .map(|(s, f)| {
+                let models = models.as_ref().ok_or(crate::SceneError::Input(
+                    "current radiance requires model resources",
+                ))?;
+                f.prepare(
+                    self,
+                    scene,
+                    &motion,
+                    &s.visibility.colors[2],
+                    &models.shadows.maps,
+                )
+            })
+            .transpose()?;
         let output = self.output.prepare(
             &self.device,
             &draw.color,
@@ -67,6 +85,8 @@ impl Renderer {
             &draw,
             #[cfg(test)]
             pending.visibility.as_deref(),
+            #[cfg(test)]
+            current_shading.as_ref(),
         )
     }
 }

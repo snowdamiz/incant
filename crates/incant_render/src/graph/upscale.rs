@@ -7,6 +7,7 @@ impl FrameGraph {
         frame: PreparedFrame,
         draw: &crate::temporal_upscale::system::Draw,
         #[cfg(test)] visibility: Option<&crate::motion::visibility::Probe>,
+        #[cfg(test)] current_shading: Option<&crate::motion::visibility_shading::Prepared>,
     ) -> Result<wgpu::CommandBuffer> {
         let state = self
             .0
@@ -63,6 +64,22 @@ impl FrameGraph {
                 device,
                 &mut encoder.0,
                 frame.motion.as_ref().expect("TAAU motion"),
+            );
+        }
+        #[cfg(test)]
+        if let Some(shading) = current_shading {
+            draw.classification
+                .as_ref()
+                .expect("classified current radiance")
+                .encode(&mut encoder.0);
+            // The low-resolution draw has consumed its clusters. Rebuild for the
+            // unjittered output rectangle before evaluating fallback lighting.
+            if let Some(grid) = &shading.lighting.compute {
+                grid.encode(&mut encoder.0, None);
+            }
+            shading.encode(
+                &mut encoder.0,
+                frame.motion.as_ref().expect("current geometry"),
             );
         }
         encoder.timed(crate::timing::GpuPass::SceneResolve, |e, q| {

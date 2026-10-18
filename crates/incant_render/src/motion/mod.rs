@@ -13,6 +13,8 @@ mod targets;
 mod tests;
 #[cfg(all(test, feature = "experimental-taau"))]
 pub(crate) mod visibility;
+#[cfg(all(test, feature = "experimental-taau"))]
+pub(crate) mod visibility_shading;
 
 pub(crate) use draw::MotionDraw;
 pub use owner::MotionFrame;

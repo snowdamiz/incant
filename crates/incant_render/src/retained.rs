@@ -48,6 +48,23 @@ pub struct RetainedScene {
 }
 #[cfg(all(test, feature = "experimental-taau"))]
 impl RetainedScene {
+    pub(crate) fn visibility_current_views(&self) -> [wgpu::TextureView; 5] {
+        let reconstruction = self
+            .temporal_upscale
+            .as_ref()
+            .unwrap()
+            .reconstruction
+            .as_ref()
+            .unwrap();
+        let system = reconstruction.fallback.as_ref().unwrap();
+        [
+            system.color.clone(),
+            system.depth.clone(),
+            system.mask.clone(),
+            reconstruction.visibility.colors[2].clone(),
+            reconstruction.visibility.depth.clone(),
+        ]
+    }
     pub(crate) fn visibility_reconstruction_views(&self) -> [wgpu::TextureView; 3] {
         self.temporal_upscale
             .as_ref()
@@ -77,6 +94,14 @@ impl RetainedScene {
         r: &Renderer,
         size: [u32; 2],
     ) -> Result<()> {
+        self.prepare_current_radiance_mode(r, size, None)
+    }
+    pub(crate) fn prepare_current_radiance_mode(
+        &mut self,
+        r: &Renderer,
+        size: [u32; 2],
+        mode: Option<crate::temporal_upscale::visibility_fallback::Mode>,
+    ) -> Result<()> {
         if !Arc::ptr_eq(&self.owner, &r.identity) || self.temporal_upscale.is_none() {
             return Err(crate::motion::MotionError::Owner.into());
         }
@@ -92,8 +117,15 @@ impl RetainedScene {
             )
             .into());
         }
-        let candidate =
-            Arc::new(crate::temporal_upscale::visibility_reconstruction::System::new(r, size)?);
+        let candidate = Arc::new(if let Some(mode) = mode {
+            crate::temporal_upscale::visibility_reconstruction::System::with_fallback(
+                r,
+                size,
+                Some(mode),
+            )?
+        } else {
+            crate::temporal_upscale::visibility_reconstruction::System::new(r, size)?
+        });
         self.prepare_temporal_upscale_extent(r, size)?;
         self.motion.as_mut().expect("TAAU motion").owner_attachment = true;
         let state = self.temporal_upscale.as_mut().unwrap();

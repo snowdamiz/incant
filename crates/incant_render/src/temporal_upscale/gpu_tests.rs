@@ -185,6 +185,7 @@ fn actual_current_depth_and_history_support_refusals_remain_finite() {
             support: support.clone(),
             identity: None,
             visibility_before: false,
+            classification: None,
         };
         let mut encoder = d.create_command_encoder(&Default::default());
         {

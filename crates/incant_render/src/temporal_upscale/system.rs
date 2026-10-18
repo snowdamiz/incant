@@ -25,6 +25,8 @@ pub(crate) struct Draw {
     pub(super) identity: Option<wgpu::TextureView>,
     #[cfg(test)]
     pub(crate) visibility_before: bool,
+    #[cfg(test)]
+    pub(crate) classification: Option<super::visibility_fallback::Classification>,
 }
 pub(super) fn center_source() -> String {
     let material = include_str!("../model_material.wgsl").replace(
@@ -234,6 +236,8 @@ impl System {
             identity: None,
             #[cfg(test)]
             visibility_before: false,
+            #[cfg(test)]
+            classification: None,
         }
     }
 }

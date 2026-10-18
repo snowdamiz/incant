@@ -14,6 +14,8 @@ pub(crate) struct System {
     owner: [wgpu::TextureView; 2],
     pipeline: wgpu::RenderPipeline,
     layout: wgpu::BindGroupLayout,
+    classify: Option<(wgpu::RenderPipeline, wgpu::BindGroupLayout)>,
+    pub(crate) fallback: Option<Arc<crate::motion::visibility_shading::System>>,
 }
 // Correctness episode is intentionally tiny. Allocation is checked before any
 // GPU resource creation; this is not a proposed shipping memory budget.
@@ -35,7 +37,14 @@ impl System {
         self.owner[slot].clone()
     }
     pub fn new(r: &Renderer, size: [u32; 2]) -> Result<Self> {
-        bytes(size)?;
+        Self::with_fallback(r, size, None)
+    }
+    pub(crate) fn with_fallback(
+        r: &Renderer,
+        size: [u32; 2],
+        mode: Option<super::visibility_fallback::Mode>,
+    ) -> Result<Self> {
+        fallback_bytes(size, mode.is_some())?;
         let d = &r.device;
         let visibility = Arc::new(Probe::reconstruction(r, size));
         let owner = std::array::from_fn(|_| {
@@ -56,7 +65,7 @@ impl System {
             })
             .create_view(&Default::default())
         });
-        let entries: Vec<_> = (0..13)
+        let mut entries: Vec<_> = (0..13)
             .map(|binding| wgpu::BindGroupLayoutEntry {
                 binding,
                 visibility: wgpu::ShaderStages::FRAGMENT,
@@ -82,6 +91,72 @@ impl System {
                 },
             })
             .collect();
+        let classify = mode.map(|mode| {
+            let layout = d.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
+                label: None,
+                entries: &entries,
+            });
+            let pipeline_layout = d.create_pipeline_layout(&wgpu::PipelineLayoutDescriptor {
+                label: None,
+                bind_group_layouts: &[Some(&layout)],
+                immediate_size: 0,
+            });
+            let module = d.create_shader_module(wgpu::ShaderModuleDescriptor {
+                label: Some("GPU missing-sample classification"),
+                source: wgpu::ShaderSource::Wgsl(
+                    super::visibility_fallback::classify_source(mode).into(),
+                ),
+            });
+            let pipeline = d.create_render_pipeline(&wgpu::RenderPipelineDescriptor {
+                label: None,
+                layout: Some(&pipeline_layout),
+                vertex: wgpu::VertexState {
+                    module: &module,
+                    entry_point: Some("vertex"),
+                    compilation_options: Default::default(),
+                    buffers: &[],
+                },
+                primitive: Default::default(),
+                depth_stencil: None,
+                multisample: Default::default(),
+                fragment: Some(wgpu::FragmentState {
+                    module: &module,
+                    entry_point: Some("classify"),
+                    compilation_options: Default::default(),
+                    targets: &[Some(wgpu::ColorTargetState {
+                        format: wgpu::TextureFormat::R32Uint,
+                        blend: None,
+                        write_mask: wgpu::ColorWrites::ALL,
+                    })],
+                }),
+                multiview_mask: None,
+                cache: None,
+            });
+            (pipeline, layout)
+        });
+        let fallback = mode.map(|mode| {
+            Arc::new(crate::motion::visibility_shading::System::new(
+                r,
+                size,
+                mode == super::visibility_fallback::Mode::AllCurrent,
+            ))
+        });
+        if fallback.is_some() {
+            entries.extend((13..16).map(|binding| wgpu::BindGroupLayoutEntry {
+                binding,
+                visibility: wgpu::ShaderStages::FRAGMENT,
+                count: None,
+                ty: wgpu::BindingType::Texture {
+                    sample_type: match binding {
+                        13 => wgpu::TextureSampleType::Uint,
+                        15 => wgpu::TextureSampleType::Depth,
+                        _ => wgpu::TextureSampleType::Float { filterable: false },
+                    },
+                    view_dimension: wgpu::TextureViewDimension::D2,
+                    multisampled: binding != 13,
+                },
+            }));
+        }
         let layout = d.create_bind_group_layout(&wgpu::BindGroupLayoutDescriptor {
             label: Some("GPU visibility reconstruction"),
             entries: &entries,
@@ -93,7 +168,10 @@ impl System {
         });
         let shader = d.create_shader_module(wgpu::ShaderModuleDescriptor {
             label: Some("Visibility admitted radiance"),
-            source: wgpu::ShaderSource::Wgsl(source().into()),
+            source: wgpu::ShaderSource::Wgsl(
+                mode.map_or_else(source, super::visibility_fallback::resolve_source)
+                    .into(),
+            ),
         });
         let targets = [
             crate::frame::HDR_FORMAT,
@@ -134,6 +212,8 @@ impl System {
             owner,
             pipeline,
             layout,
+            classify,
+            fallback,
         })
     }
     pub fn prepare(
@@ -193,6 +273,28 @@ impl System {
                     resource: wgpu::BindingResource::TextureView(v),
                 }),
         );
+        let classification = self.classify.as_ref().map(|(pipeline, layout)| {
+            super::visibility_fallback::Classification {
+                pipeline: pipeline.clone(),
+                group: d.create_bind_group(&wgpu::BindGroupDescriptor {
+                    label: None,
+                    layout,
+                    entries: &entries,
+                }),
+                mask: self.fallback.as_ref().unwrap().mask.clone(),
+            }
+        });
+        if let Some(f) = &self.fallback {
+            entries.extend(
+                [&f.mask, &f.color, &f.depth]
+                    .into_iter()
+                    .enumerate()
+                    .map(|(i, v)| wgpu::BindGroupEntry {
+                        binding: 13 + i as u32,
+                        resource: wgpu::BindingResource::TextureView(v),
+                    }),
+            );
+        }
         Draw {
             pipeline: self.pipeline.clone(),
             group: d.create_bind_group(&wgpu::BindGroupDescriptor {
@@ -204,6 +306,17 @@ impl System {
             support: p.targets.support[s.slot].clone(),
             identity: Some(self.owner[s.slot].clone()),
             visibility_before: true,
+            classification,
         }
     }
+}
+
+pub(super) fn fallback_bytes(size: [u32; 2], enabled: bool) -> Result<u64> {
+    let old = bytes(size)?;
+    Ok(old
+        + if enabled {
+            u64::from(size[0]) * u64::from(size[1]) * 52
+        } else {
+            0
+        })
 }

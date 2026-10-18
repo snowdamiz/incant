@@ -327,3 +327,6 @@ fn visibility_admitted_reconstruction_motion_reversal_depth_resize_and_refusal()
     );
     write(&root,"result.json",&serde_json::to_vec_pretty(&json!({"frames":summaries,"sample_positions":pattern,"refusal_same_sequence_equal":true,"cut_fresh_equal":true,"resize_fresh_equal":true,"removal_clear":true,"bytes_per_output_pixel":184,"bytes_per_input_owner_pixel":4,"source_readback_admits_frames":false,"appearance_accepted":false,"performance_accepted":false})).unwrap());
 }
+
+#[path = "visibility_current_tests.rs"]
+mod current;

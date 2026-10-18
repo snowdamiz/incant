@@ -17,15 +17,17 @@ pub(crate) mod system;
 #[cfg(test)]
 mod tests;
 #[cfg(test)]
+pub(crate) mod visibility_fallback;
+#[cfg(test)]
 mod visibility_oracle;
 #[cfg(test)]
 mod visibility_owner_tests;
 #[cfg(test)]
-mod visibility_tests;
-#[cfg(test)]
 pub(crate) mod visibility_reconstruction;
 #[cfg(test)]
 mod visibility_reconstruction_tests;
+#[cfg(test)]
+mod visibility_tests;
 pub(crate) use owner::{Pending, State};
 pub(crate) use system::System;
 pub const MAX_HISTORY_BYTES: u64 = 64 * 1024 * 1024;
