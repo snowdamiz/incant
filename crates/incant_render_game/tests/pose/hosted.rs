@@ -287,7 +287,12 @@ fn presentation_between_fixed_steps_preserves_complete_gameplay_input_audio_and_
             game.tick(&events, &mut b).unwrap();
             assert_eq!(a, b);
             nonzero |= a.iter().any(|x| x.abs() > 0.001);
-            let bytes = game.checkpoint_bytes().unwrap();
+            // Pending device haptics deliberately prohibit saving. Compare the
+            // live world/input now, then compare full saves after draining the
+            // unchanged haptic outputs from both compositions below.
+            assert!(game.checkpoint_bytes().is_err());
+            let world = game.world().unwrap().snapshot();
+            let input = game.input().unwrap().clone();
             let frames = game.rendered_frames().unwrap();
             for fraction in [0., 0.3, 0.7, 1.] {
                 let reply = game
@@ -296,7 +301,9 @@ fn presentation_between_fixed_steps_preserves_complete_gameplay_input_audio_and_
                 assert!(
                     matches!(reply,PoseReply::Displayed(r) if r.current_tick==total && r.previous_tick==total-1)
                 );
-                assert_eq!(game.checkpoint_bytes().unwrap(), bytes);
+                assert_eq!(game.world().unwrap().snapshot(), world);
+                assert_eq!(game.input().unwrap(), &input);
+                assert!(game.checkpoint_bytes().is_err());
                 assert_eq!(game.rendered_frames().unwrap(), frames);
             }
             let h = game.take_haptics().unwrap();
