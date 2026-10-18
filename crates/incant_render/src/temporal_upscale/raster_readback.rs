@@ -12,12 +12,12 @@ pub(super) const COPY_SHADER: &str = r#"
 @compute @workgroup_size(64) fn copy(@builtin(global_invocation_id) id:vec3u) {
     let i=id.x;
     if i<2304u {
-        let p=vec2i(i%48u,i/48u);
+        let p=vec2i(vec2u(i%48u,i/48u));
         output[i]=textureLoad(color,p,0);
         output[4096u+i]=textureLoad(motion,p,0);
         output[8192u+i]=vec4f(textureLoad(depth,p,0),0,0,0);
     }
-    if i<4096u { output[12288u+i]=textureLoad(history,vec2i(i%64u,i/64u),0); }
+    if i<4096u { output[12288u+i]=textureLoad(history,vec2i(vec2u(i%64u,i/64u)),0); }
 }
 "#;
 pub(super) struct Pixels(pub Vec<[f32; 4]>);
