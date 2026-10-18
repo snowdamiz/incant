@@ -1,9 +1,10 @@
 # Rust input views across the native Wasm hosts
 
 This slice adds actual Rust guest test sources for existing input APIs. It adds
-no import, ABI version, host permission or production input behavior. Native
-qualification is pending; source and preparation controls are not execution
-evidence for either Wasmtime or wasm2c.
+no import, ABI version, host permission or production input behavior. Eight
+selected CPU tests and two scoped strict lints pass on the identified Mac
+producer, including the real Rust guest on both Wasmtime and build-linked
+wasm2c. Synthesized input is not hardware or native-window delivery evidence.
 
 The Phase 1 SDK deliverables and section 12 decisions are in PLAN.md. The audit compared
 `sdk/ts/src/native.d.ts`, `sdk/rust/src`, the generated ABI and both host dispatch
@@ -66,15 +67,100 @@ Larger gaps rank after this bounded conformance addition:
    stacks and borrowed views must not become implicit checkpoint state.
 
 The added helper `input_guests` prepares four fixed source-bound guests through
-the existing pinned compiler and translation machinery. A focused later native
-episode should prepare those guests plus the five existing input WAT controls,
-then run only `incant_wasm_dev` tests `rust_input` and `input_parity` with
-`static-conformance`, followed by strict feature lint and the ordinary SDK
-snapshot tests as appropriate. It must not invoke the full shipping-Wasm suite
-merely to qualify this small addition. No device, UI routing, audio-device,
-window, rendering, performance or full-SDK parity gate is claimed here.
+the existing pinned compiler and translation machinery. The qualification below
+prepares those guests and five unchanged input WAT controls, without invoking
+the broad shipping-Wasm suite.
 
 Source preparation passed 29 Python controls (`test_wasm_input`,
 `test_wasm_sdk`, `test_rust_guest`), including two new fixed-input preparation
 controls. Rust formatting, generated ABI/conventions checks and `git diff
---check` also pass. These checks did not compile or execute the new Rust guests.
+--check` also pass. Those preparation checks are separate from actual guest
+execution below.
+
+## Actual local qualification
+
+Native producer `0d672757b8fb1c7108116097341d64470aee8b83`, based on main414
+`04272288c08095cc0eb9bfcd88d3bae23324a994`, uses pinned Rust 1.99.0 on
+`aarch64-apple-darwin`, the ordinary `ci` profile, locked/offline Cargo, jobs 2
+and Rayon 2. Per-package overrides retain renderer opt2 and sha2 opt3. This is
+not a shipping-profile or timing measurement. The exact commands, environment,
+tools and source hashes are in the [portable packet](evidence/native-wasm-input.json).
+
+| Stage | Actual result | Seconds |
+| --- | --- | ---: |
+| Build scoped Wasm cooker | Exit 0; independent executable copy retained | 2.458 |
+| Prepare four Rust and five unchanged WAT guests | Exit 0; all nine validated/metered and translated | 2.197 |
+| Ordinary SDK `snapshots` | 3 passed, 0 failed/ignored | 0.861 |
+| `rust_input` and unchanged `input_parity`, `static-conformance` | 2 new plus 3 existing tests passed, 0 failed/ignored | 73.573 |
+| Strict Clippy for the two selected host-test targets | Exit 0 | 11.072 |
+| Strict ordinary SDK all-target Clippy | Exit 0 | 0.638 |
+
+The managed episode completed in 94.052508 seconds. Target allocation peaked
+and finished at 7,691,522,048 bytes under the existing 12 GiB cap; sampled owned
+RSS peaked at 1,643,134,976 bytes. The prior 1,498.691294 seconds remain charged,
+for a cumulative target account of 1,592.743802 seconds. Fifteen previous copies
+were preserved and rehashed; four independent Cargo-reported executables add
+68,072,256 bytes. All 19 protected copies total 466,462,456 bytes. No target
+cleanup or dependency deletion occurred.
+
+The launch adapter accidentally omitted the outer interactive tool session ID
+from its response. Its exact outer tool terminal exit remains unconfirmed; no
+rerun was performed to repair that receipt. The recorded six native-owner child
+exits are all zero, the supervisor result is complete, and independent checks
+confirm wrapper/group 34936 plus all 58 observed native identities/groups are
+absent. The root reviewer independently rehashed all 12 raw streams and 19
+copies, checked the exact eight test names and repeated the 59 absence checks.
+
+Separately, root's integration producer `865ee031d198a41218f1a262dccd7c13da7f8358`
+passes all ten local development checks in 79.515127 seconds, actual tool 91513
+exit 0, with its wrapper and ten child groups absent. These checks cover the
+main415 composition; they do not relabel the native producer above. Root source
+and native review receipts, integration logs and both closeouts are retained in
+the same inert portable packet.
+
+No device, UI routing, audio-device, window, rendering, shipping source-deletion,
+performance or full-SDK parity gate is claimed. No window, computer-use, capture
+or physical-audio helper was launched by this episode.
+
+## Data-only replay
+
+The packet contains 48 UTF-8 records (2,141,782 expanded bytes, 351,542 gzip
+bytes), including the exact source inventory, plan, preparation identities,
+actual native logs/results, closeout, reviews and integration logs. It contains
+no executable or compiler bytes. This bounded standard-library command verifies
+the saved snapshot without executing archived content or starting native work:
+
+```sh
+python3 - <<'PY'
+import gzip, hashlib, io, json
+from pathlib import Path
+root = Path('docs/spikes/evidence')
+def bounded(path, cap):
+    with path.open('rb') as stream: data = stream.read(cap + 1)
+    assert len(data) <= cap
+    return data
+sha = lambda data: hashlib.sha256(data).hexdigest()
+m = json.loads(bounded(root / 'native-wasm-input.json', 65536))
+assert m['archive'] == 'native-wasm-input.json.gz'
+packed = bounded(root / m['archive'], 524288)
+assert (len(packed), sha(packed)) == (m['packed_bytes'], m['packed_sha256'])
+with gzip.GzipFile(fileobj=io.BytesIO(packed), mode='rb') as stream:
+    raw = stream.read(4194304 + 1)
+assert len(raw) <= 4194304
+assert (len(raw), sha(raw)) == (m['expanded_bytes'], m['expanded_sha256'])
+p = json.loads(raw)
+assert len(p['records']) == m['record_count'] == 48
+for record in p['records'].values():
+    data = record['utf8'].encode('utf-8')
+    assert (len(data), sha(data)) == (record['bytes'], record['sha256'])
+read = lambda name: json.loads(p['records'][name]['utf8'])
+n, c, f = map(read, ['native/result.json', 'native/closeout.json', 'fast/result.json'])
+assert n['status'] == 'complete' and len(n['stages']) == 6
+assert all(s['exit'] == 0 for s in n['stages'])
+assert sum(len(s.get('tests', [])) for s in n['stages']) == 8
+assert c['all_absent'] and len(c['checks']) == 59
+assert c['actual_outer_tool_exit'] is None
+assert f['passed'] and len(f['stages']) == 10 and all(s['exit'] == 0 for s in f['stages'])
+print('48 saved records verified; native and integration producer scopes remain separate')
+PY
+```
