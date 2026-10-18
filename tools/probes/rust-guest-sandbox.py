@@ -28,6 +28,11 @@ fn panic(_: &core::panic::PanicInfo<'_>) -> ! { core::arch::wasm32::unreachable(
 incant_module::module!(on_update);
 fn on_update(tick: &mut Tick<'_>, _: f64) -> Result<()> { tick.log(tuning::MESSAGE, incant_module::LogLevel::Info) }
 '''
+PROC_MACRO = '''#![crate_type="proc-macro"]
+extern crate proc_macro;
+#[proc_macro]
+pub fn forbidden(tokens: proc_macro::TokenStream) -> proc_macro::TokenStream { tokens }
+'''
 
 
 def check(plan_path, grant=None):
@@ -117,8 +122,7 @@ def run(plan, cancelled, *, started=None):
         case('build-script-refused', VALID, 'build scripts', extra='build.rs')
         case('private-include-refused', VALID + '\nconst PRIVATE: &[u8] = include_bytes!(' + json.dumps(str(secret)) + ');\n',
              'Sandboxed Rust compiler refused')
-        case('proc-macro-refused', '#![crate_type="proc-macro"]\nextern crate proc_macro;\n',
-             'Sandboxed Rust compiler refused')
+        case('proc-macro-refused', PROC_MACRO, 'Sandboxed Rust compiler refused')
         case('external-macro-refused', VALID + '\nextern crate project_macro;\n', 'Sandboxed Rust compiler refused')
         unknown = VALID.replace('tick.log(tuning::MESSAGE, incant_module::LogLevel::Info)', 'unsafe { forbidden(); } Ok(())')
         unknown += '\n#[link(wasm_import_module="wasi_snapshot_preview1")]\nunsafe extern "C" { fn forbidden(); }\n'

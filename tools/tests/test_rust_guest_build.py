@@ -537,6 +537,23 @@ class OwnerTests(Fixture):
 
 
 class ProbeContractTests(Fixture):
+    def test_proc_macro_probe_declares_a_macro_under_fixed_wasm_cdylib_recipe(self):
+        path = Path(__file__).resolve().parents[1] / 'probes/rust-guest-sandbox.py'
+        spec = importlib.util.spec_from_file_location('rust_sandbox_macro_fixture', path)
+        probe = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(probe)
+        self.assertIn('#[proc_macro]\npub fn forbidden(', probe.PROC_MACRO)
+        self.assertIn('tokens: proc_macro::TokenStream) -> proc_macro::TokenStream', probe.PROC_MACRO)
+        # The attribute/extern-only native004 fixture lacked a procedural macro.
+        old_fixture = '#![crate_type="proc-macro"]\nextern crate proc_macro;\n'
+        self.assertNotIn('#[proc_macro]', old_fixture)
+        command = build.guest_command(Path('/trusted/rustc'), Path('/trusted/rust-lld'),
+                                      self.package / 'module.rs', self.root / 'sdk', self.root / 'module.wasm')
+        self.assertIn('--crate-type=cdylib', command)
+        self.assertIn('--target=wasm32-unknown-unknown', command)
+        self.assertNotIn('--crate-type=proc-macro', command)
+        self.assertEqual(command.count('--extern'), 1)
+
     def test_actual_probe_callback_does_not_shadow_sdk_macro_exports(self):
         tools = Path(__file__).resolve().parents[1]
         spec = importlib.util.spec_from_file_location('rust_sandbox_fixture', tools / 'probes/rust-guest-sandbox.py')
