@@ -1,4 +1,8 @@
 //! The only mutable owner of an editor document. GUI, scripts and AI share commands.
+mod binary_protocol;
+mod compiled_wasm;
+pub use compiled_wasm::PreparedWasmAsset;
+pub use incant_source::{BinaryVersion, wasm_path};
 mod engine_version;
 mod project_checkpoint;
 mod project_file;
@@ -245,6 +249,8 @@ pub struct Transaction {
     pub source_edit: Option<incant_source::SourceEdit>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub project_edit: Option<incant_source::ProjectEdit>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub binary_edit: Option<incant_source::BinaryEdit>,
 }
 #[derive(Debug, Error)]
 pub enum CommandError {
@@ -420,6 +426,7 @@ impl CommandBus {
         let transaction = Transaction {
             source_edit,
             project_edit: None,
+            binary_edit: None,
             id,
             description: description.into(),
             actor,
@@ -432,12 +439,14 @@ impl CommandBus {
     }
     fn commit_transaction(&mut self, transaction: Transaction) -> Result<(), CommandError> {
         validate_agent_budget_authority(&transaction)?;
+        compiled_wasm::validate_transaction(&transaction)?;
         let next = self.stage(&transaction.after)?;
         self.record(
             journal::Change::Apply {
                 transaction: Box::new(transaction.clone()),
             },
             transaction.source_edit.as_ref(),
+            transaction.binary_edit.as_ref(),
             transaction.project_edit.as_ref(),
             next.as_ref(),
         )?;
@@ -462,6 +471,10 @@ impl CommandBus {
             .source_edit
             .as_ref()
             .map(incant_source::SourceEdit::reversed);
+        let binary_edit = tx
+            .binary_edit
+            .as_ref()
+            .map(incant_source::BinaryEdit::reversed);
         let project_edit = tx
             .project_edit
             .as_ref()
@@ -471,6 +484,7 @@ impl CommandBus {
                 transaction_id: id.clone(),
             },
             edit.as_ref(),
+            binary_edit.as_ref(),
             project_edit.as_ref(),
             next.as_ref(),
         )?;
@@ -489,12 +503,14 @@ impl CommandBus {
         let project = tx.after.clone();
         let next = self.stage(&project)?;
         let edit = tx.source_edit.clone();
+        let binary_edit = tx.binary_edit.clone();
         let project_edit = tx.project_edit.clone();
         self.record(
             journal::Change::Redo {
                 transaction_id: id.clone(),
             },
             edit.as_ref(),
+            binary_edit.as_ref(),
             project_edit.as_ref(),
             next.as_ref(),
         )?;
@@ -533,6 +549,7 @@ impl CommandBus {
             id,
             source_edit: None,
             project_edit: None,
+            binary_edit: None,
             description: "Merge remote document".into(),
             actor,
             commands: vec![],
@@ -891,6 +908,8 @@ mod source_protocol_tests;
 #[cfg(test)]
 mod module_source_protocol_tests;
 
+#[cfg(test)]
+mod binary_protocol_tests;
 #[cfg(test)]
 mod package_source_protocol_tests;
 

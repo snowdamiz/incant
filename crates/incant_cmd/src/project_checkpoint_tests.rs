@@ -385,6 +385,7 @@ fn legacy_pending_script_recovers_under_exact_custom_journal_binding() {
         before: p.clone(),
         after: p,
         source_edit: Some(edit.clone()),
+        binary_edit: None,
         project_edit: None,
     };
     old.sources

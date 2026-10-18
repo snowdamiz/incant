@@ -21,6 +21,11 @@ enum Pending {
         change: Option<Change>,
         crdt: String,
     },
+    Binary {
+        operation: Id,
+        change: Change,
+        crdt: String,
+    },
     Source {
         operation: Id,
         change: Change,
@@ -37,6 +42,7 @@ pub(crate) struct Replay {
     pub checkpoints: BTreeSet<String>,
     pub complete: usize,
     pub last_source: Option<SourceRecord>,
+    pub last_binary: Option<BinaryRecord>,
     pub last_project: Option<ProjectRecord>,
 }
 pub(crate) fn project_digest(project: &Project) -> Result<String, CommandError> {
@@ -111,6 +117,7 @@ pub(crate) fn replay(
     bus.replaying = true;
     let mut pending = None;
     let mut last_source = None;
+    let mut last_binary = None;
     let mut last_project = None;
     let mut checkpoints = BTreeSet::new();
     for line in bytes[..complete]
@@ -121,8 +128,8 @@ pub(crate) fn replay(
             return Err(corrupt("journal record exceeds limit"));
         }
         let entry: Entry = serde_json::from_slice(line).map_err(|e| corrupt(&e.to_string()))?;
-        if !matches!(entry.version, 1..=4)
-            || (!bounded && entry.version >= 3)
+        if !matches!(entry.version, 1..=5)
+            || (!bounded && matches!(entry.version, 3 | 4))
             || entry.sequence != journal.sequence
             || entry.previous != journal.previous
             || entry.digest
@@ -139,7 +146,10 @@ pub(crate) fn replay(
         let mut logical = true;
         let committed = matches!(
             entry.action,
-            Action::Commit { .. } | Action::ProjectCommit { .. } | Action::CheckpointCommit { .. }
+            Action::Commit { .. }
+                | Action::ProjectCommit { .. }
+                | Action::CheckpointCommit { .. }
+                | Action::BinaryCommit { .. }
         );
         match entry.action {
             Action::Initialize { project } => {
@@ -159,6 +169,7 @@ pub(crate) fn replay(
                     || pending.is_some()
                     || change_edit(&bus, &change).as_ref() != Some(&edit)
                     || project_edit(&bus, &change).is_some()
+                    || binary_edit(&bus, &change).is_some()
                     || ulid::Ulid::from_string(&operation).is_err()
                 {
                     return Err(corrupt("invalid source prepare"));
@@ -176,6 +187,66 @@ pub(crate) fn replay(
                 });
                 logical = false;
             }
+            Action::BinaryPrepare {
+                operation,
+                edit,
+                change,
+            } => {
+                if entry.version != 5
+                    || journal.sequence == 0
+                    || pending.is_some()
+                    || binary_edit(&bus, &change).as_ref() != Some(&edit)
+                    || change_edit(&bus, &change).is_some()
+                    || project_edit(&bus, &change).is_some()
+                    || ulid::Ulid::from_string(&operation)
+                        .map(|id| id.to_string())
+                        .ok()
+                        .as_ref()
+                        != Some(&operation)
+                {
+                    return Err(corrupt("invalid binary prepare"));
+                }
+                edit.validate()?;
+                if let Change::Apply { transaction } = &change {
+                    super::super::compiled_wasm::validate_transaction(transaction)?;
+                    if transaction.before != bus.project {
+                        return Err(corrupt("binary prepare base mismatch"));
+                    }
+                    transaction.actor.provenance(&transaction.id)?;
+                    transaction.after.validate()?;
+                }
+                last_binary = Some(BinaryRecord {
+                    operation: operation.clone(),
+                    edit,
+                    finished: false,
+                });
+                pending = Some(Pending::Binary {
+                    operation,
+                    change,
+                    crdt: entry.crdt.clone(),
+                });
+                logical = false;
+            }
+            Action::BinaryCommit { operation } | Action::BinaryAbort { operation } => {
+                let Some(Pending::Binary {
+                    operation: prepared,
+                    change,
+                    crdt,
+                }) = pending.take()
+                else {
+                    return Err(corrupt("binary terminal without prepare"));
+                };
+                if entry.version != 5 || operation != prepared {
+                    return Err(corrupt("binary operation mismatch"));
+                }
+                if committed {
+                    if entry.crdt != crdt {
+                        return Err(corrupt("binary commit projection mismatch"));
+                    }
+                    replay_change(&mut bus, change, &initial.id)?;
+                }
+                last_binary.as_mut().expect("binary prepare").finished = true;
+            }
             Action::ProjectPrepare {
                 operation,
                 edit,
@@ -186,6 +257,7 @@ pub(crate) fn replay(
                     || pending.is_some()
                     || project_edit(&bus, &change).as_ref() != Some(&edit)
                     || change_edit(&bus, &change).is_some()
+                    || binary_edit(&bus, &change).is_some()
                     || ulid::Ulid::from_string(&operation)
                         .map(|id| id.to_string())
                         .ok()
@@ -355,7 +427,10 @@ pub(crate) fn replay(
                     Action::Redo { transaction_id } => Change::Redo { transaction_id },
                     _ => unreachable!(),
                 };
-                if change_edit(&bus, &change).is_some() || project_edit(&bus, &change).is_some() {
+                if change_edit(&bus, &change).is_some()
+                    || project_edit(&bus, &change).is_some()
+                    || binary_edit(&bus, &change).is_some()
+                {
                     return Err(corrupt("file change lacks prepare/commit"));
                 }
                 replay_change(&mut bus, change, &initial.id)?;
@@ -395,6 +470,7 @@ pub(crate) fn replay(
         checkpoints,
         complete,
         last_source,
+        last_binary,
         last_project,
     })
 }

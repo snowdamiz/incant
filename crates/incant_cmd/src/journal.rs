@@ -44,6 +44,17 @@ pub(super) enum Action {
     Abort {
         operation: Id,
     },
+    BinaryPrepare {
+        operation: Id,
+        edit: incant_source::BinaryEdit,
+        change: Change,
+    },
+    BinaryCommit {
+        operation: Id,
+    },
+    BinaryAbort {
+        operation: Id,
+    },
     ProjectPrepare {
         operation: Id,
         edit: incant_source::ProjectEdit,
@@ -82,6 +93,30 @@ pub(super) struct SourceRecord {
     pub operation: Id,
     pub edit: incant_source::SourceEdit,
     pub finished: bool,
+}
+pub(super) struct BinaryRecord {
+    pub operation: Id,
+    pub edit: incant_source::BinaryEdit,
+    pub finished: bool,
+}
+pub(super) fn binary_edit(bus: &CommandBus, change: &Change) -> Option<incant_source::BinaryEdit> {
+    match change {
+        Change::Apply { transaction } => transaction.binary_edit.clone(),
+        Change::Undo { transaction_id } => bus
+            .history
+            .last()
+            .filter(|tx| tx.id == *transaction_id)
+            .and_then(|tx| {
+                tx.binary_edit
+                    .as_ref()
+                    .map(incant_source::BinaryEdit::reversed)
+            }),
+        Change::Redo { transaction_id } => bus
+            .redo
+            .last()
+            .filter(|tx| tx.id == *transaction_id)
+            .and_then(|tx| tx.binary_edit.clone()),
+    }
 }
 pub(super) fn replay_change(
     bus: &mut CommandBus,
@@ -202,6 +237,7 @@ impl Journal {
         let scan::Replay {
             mut bus,
             last_source,
+            last_binary,
             last_project,
             complete,
             ..
@@ -216,8 +252,11 @@ impl Journal {
         bus.initialize_journal()?;
         if let Some(root) = root {
             let store = incant_source::SourceStore::open(root, path, &bus.project.id)?;
+            bus.recover_binary(&store, last_binary)?;
             bus.recover_sources(store, last_source)?;
-        } else if last_source.is_some_and(|r| !r.finished) {
+        } else if last_source.is_some_and(|r| !r.finished)
+            || last_binary.is_some_and(|r| !r.finished)
+        {
             return Err(SourceError::RecoveryRequired.into());
         }
         Ok(bus)
@@ -309,6 +348,52 @@ impl Journal {
         }
         Ok(())
     }
+    pub(super) fn admit_binary(
+        &self,
+        prepare: &Action,
+        operation: &str,
+        current: &[u8],
+        desired: &[u8],
+    ) -> Result<(), CommandError> {
+        if self.poisoned {
+            return Err(SourceError::RecoveryRequired.into());
+        }
+        let size = |action: &Action, bytes: &[u8]| -> Result<usize, CommandError> {
+            let crdt = STANDARD.encode(bytes);
+            let entry = Entry {
+                version: 5,
+                sequence: u64::MAX,
+                previous: self.previous.clone(),
+                digest: digest(5, u64::MAX, &self.previous, action, &crdt)?,
+                action: action.clone(),
+                crdt,
+            };
+            Ok(incant_source::bounded_json(&entry, MAX_PROJECT_RECORD_BYTES)?.len() + 1)
+        };
+        let terminal = size(
+            &Action::BinaryCommit {
+                operation: operation.into(),
+            },
+            desired,
+        )?
+        .max(size(
+            &Action::BinaryAbort {
+                operation: operation.into(),
+            },
+            current,
+        )?);
+        let required = size(prepare, desired)?
+            .checked_add(terminal)
+            .ok_or_else(|| CommandError::Invalid("binary journal size overflow".into()))?;
+        if self.file.metadata()?.len().saturating_add(required as u64)
+            > MAX_PROJECT_JOURNAL_BYTES as u64
+        {
+            return Err(CommandError::Invalid(
+                "journal has no room for binary Prepare and terminal record".into(),
+            ));
+        }
+        Ok(())
+    }
     pub(super) fn checkpoint_bytes(&self) -> Result<Vec<u8>, CommandError> {
         STANDARD
             .decode(self.checkpoint.as_ref().ok_or(SourceError::Unavailable)?)
@@ -341,8 +426,14 @@ impl Journal {
             Action::Prepare { .. }
                 | Action::ProjectPrepare { .. }
                 | Action::CheckpointPrepare { .. }
+                | Action::BinaryPrepare { .. }
         );
         let version = if matches!(
+            action,
+            Action::BinaryPrepare { .. } | Action::BinaryCommit { .. } | Action::BinaryAbort { .. }
+        ) {
+            5
+        } else if matches!(
             action,
             Action::CheckpointPrepare { .. }
                 | Action::CheckpointCommit { .. }
@@ -379,14 +470,14 @@ impl Journal {
             crdt,
             digest: hash.clone(),
         };
-        let mut bytes = if self.bounded {
+        let mut bytes = if self.bounded || version == 5 {
             incant_source::bounded_json(&entry, MAX_PROJECT_RECORD_BYTES)?
         } else {
             serde_json::to_vec(&entry).map_err(|e| CommandError::Corrupt(e.to_string()))?
         };
         bytes.push(b'\n');
         let position = self.file.seek(SeekFrom::End(0))?;
-        if self.bounded
+        if (self.bounded || version == 5)
             && position.saturating_add(bytes.len() as u64) > MAX_PROJECT_JOURNAL_BYTES as u64
         {
             return Err(CommandError::Invalid(

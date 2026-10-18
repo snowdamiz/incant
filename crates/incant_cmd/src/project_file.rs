@@ -28,7 +28,8 @@ pub(super) fn validate_transaction(tx: &Transaction) -> Result<(), CommandError>
     };
     edit.validate()?;
     let target = incant_doc::EngineRequirement::exact_current();
-    if tx.source_edit.is_some()
+    if tx.binary_edit.is_some()
+        || tx.source_edit.is_some()
         || tx.before.engine_version.is_some()
         || tx.commands
             != [Command::SetEngineVersion {
@@ -116,6 +117,7 @@ impl CommandBus {
         let scan::Replay {
             mut bus,
             last_source,
+            last_binary,
             last_project,
             complete,
             ..
@@ -134,7 +136,10 @@ impl CommandBus {
                 opened.verify_result(&store, p, status == Some(ProjectStatus::Committed))?;
             }
         }
-        if pending.is_some() && last_source.as_ref().is_some_and(|r| !r.finished) {
+        if pending.is_some()
+            && (last_source.as_ref().is_some_and(|r| !r.finished)
+                || last_binary.as_ref().is_some_and(|r| !r.finished))
+        {
             return Err(SourceError::RecoveryRequired.into());
         }
         bus.journal
@@ -142,6 +147,7 @@ impl CommandBus {
             .expect("journal")
             .finish_read(complete, bytes.len())?;
         bus.initialize_journal()?;
+        bus.recover_binary(&store, last_binary)?;
         bus.recover_sources(store, last_source)?;
         bus.project_file = Some(opened);
         bus.recover_project(last_project)?;
@@ -221,6 +227,7 @@ impl CommandBus {
             before: self.project.clone(),
             after: Project::from_text(&pending.edit.after)?,
             source_edit: None,
+            binary_edit: None,
             project_edit: Some(pending.edit),
         };
         validate_transaction(&transaction)?;

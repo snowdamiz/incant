@@ -13,8 +13,8 @@ pub(super) fn journal_failure(
     bytes: &[u8],
 ) -> std::io::Result<()> {
     let phase = match action {
-        journal::Action::Prepare { .. } => "prepare",
-        journal::Action::Commit { .. } => "commit",
+        journal::Action::Prepare { .. } | journal::Action::BinaryPrepare { .. } => "prepare",
+        journal::Action::Commit { .. } | journal::Action::BinaryCommit { .. } => "commit",
         _ => return Ok(()),
     };
     let crash = std::env::var("INCANT_CMD_CRASH_PHASE").ok();

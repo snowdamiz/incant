@@ -148,11 +148,18 @@ impl CommandBus {
         &mut self,
         change: journal::Change,
         edit: Option<&SourceEdit>,
+        binary_edit: Option<&incant_source::BinaryEdit>,
         project_edit: Option<&incant_source::ProjectEdit>,
         next: Option<&CollaborativeDocument>,
     ) -> Result<(), CommandError> {
         if self.replaying {
             return Ok(());
+        }
+        if let Some(binary_edit) = binary_edit {
+            if edit.is_some() || project_edit.is_some() {
+                return Err(CommandError::Invalid("mixed binary file edits".into()));
+            }
+            return self.record_binary(change, binary_edit, next);
         }
         if let Some(project_edit) = project_edit {
             if edit.is_some() {
