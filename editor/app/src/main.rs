@@ -254,10 +254,10 @@ fn main() {
                 move || project::open(project_path.as_deref()),
                 move || {
                     if let (Some(root),Ok(load))=(&project_editor.asset_root,project_editor.bus.lock())
-                        && let project::LoadState::Ready(bus)=&*load {
-                        if let Err(error)=project_editor.module_jobs.bind(&bus.project().id,root) {
-                            if let Ok(mut console)=project_editor.console.lock() {console.push(ConsoleEvent::new("error",error.to_string()));}
-                        }
+                        && let project::LoadState::Ready(bus)=&*load
+                        && let Err(error)=project_editor.module_jobs.bind(&bus.project().id,root)
+                        && let Ok(mut console)=project_editor.console.lock() {
+                        console.push(ConsoleEvent::new("error",error.to_string()));
                     }
                     use tauri::Emitter;
                     let _ = project_app.emit_to(
