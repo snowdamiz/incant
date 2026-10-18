@@ -324,7 +324,7 @@ fn restart_reannounces_real_adapter_topology_and_release_cannot_become_a_fresh_p
     assert!(fresh.frame().gamepads.contains_key(&0));
     assert!(fresh.frame().gamepads[&0].buttons.held.is_empty());
     let mut ui = super::super::ui_input::UiInput::new();
-    ui.defer_surface();
+    ui.defer_surface(None, &mut pending).unwrap();
     batch(
         &mut adapter,
         &mut pending,

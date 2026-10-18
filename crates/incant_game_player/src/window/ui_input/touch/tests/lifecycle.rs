@@ -62,6 +62,7 @@ fn lifecycle_boundaries_cancel_contacts_and_ignore_late_native_continuations() {
         let mut input = UiInput::new();
         let mut physical = PendingInput::new();
         let mut state = InputRuntime::default();
+        let mut router = UiRouter::default();
         deliver(
             &mut input,
             &mut physical,
@@ -79,8 +80,19 @@ fn lifecycle_boundaries_cancel_contacts_and_ignore_late_native_continuations() {
             [10., 10.],
         );
         state.advance(physical.events(), 1. / 60.).unwrap();
+        let next = router
+            .prepare(
+                &ui,
+                physical.events(),
+                input.receipts(),
+                1. / 60.,
+                [400., 100.],
+                &mut Measure,
+            )
+            .unwrap();
+        router.commit(&mut ui, next).unwrap();
         physical.clear();
-        accept(&mut ui, &mut input);
+        input.accepted();
         match boundary {
             0 => {
                 physical.reset_focus(false);
@@ -93,6 +105,7 @@ fn lifecycle_boundaries_cancel_contacts_and_ignore_late_native_continuations() {
                 physical.reset_focus(true);
                 ui = runtime(true);
                 state = InputRuntime::default();
+                router = UiRouter::default();
             }
             _ => unreachable!(),
         }
@@ -119,7 +132,6 @@ fn lifecycle_boundaries_cancel_contacts_and_ignore_late_native_continuations() {
         if boundary == 0 {
             assert!(!state.frame().focused); // No native End is needed to release it.
         }
-        let mut router = UiRouter::default();
         let next = router
             .prepare(
                 &ui,
