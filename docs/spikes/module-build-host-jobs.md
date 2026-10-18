@@ -25,6 +25,13 @@ The worker's prior isolation and ordinary-import evidence remains in
   the job busy until the owned process cleanup returns. Cleanup uncertainty
   poisons new work and remains visible as `cleanup_unproven`.
 
+`complete` is a historical build result for its explicit immutable snapshot and
+observed revision. The pre/post checks reject observed changes; they do not hold
+the authoring bus lock across receipt publication. Completion grants no current
+document installation authority. Any future installation must revalidate project
+session/revision/source identity in its own command transaction; provenance marks
+this result `snapshot_only` and `installation_requires_revalidation`.
+
 Snapshots are bound to a saved project's held root identity and a fresh session
 ULID. Closing/rebinding even the same project ID invalidates prior handles and
 cancels active work. Source bytes, recovery epoch and document/revision are
@@ -88,6 +95,9 @@ parent with a pipe-holding descendant, a crashed bridge with a separately owned
 child, retained ownership after exit-observer refusal, and a real shared worker
 build followed by cancellation after delegated compilation begins. These tests
 are unexecuted until separately bounded CPU qualification.
+The configured bridge test additionally requires the default-off
+`incant_module_build/host-qualification` feature. Ordinary workspace ignored tests
+never require a configured external worker or launch its compiler.
 
 The four agent schemas are source-derived additions preserving every prior tool
 value. A newly built matching headless exporter must verify the complete registry

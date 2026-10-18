@@ -719,7 +719,7 @@ mod tests {
             assert!(text.starts_with(&output));
         }
     }
-    #[cfg(target_os = "macos")]
+    #[cfg(all(target_os = "macos", feature = "host-qualification"))]
     #[test]
     #[ignore = "actual configured worker bridge; separately granted CPU qualification only"]
     fn actual_shared_bridge_build_and_cancellation() {

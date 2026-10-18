@@ -356,7 +356,7 @@ impl Service {
             return Err(Error::Invalid("diagnostics bound"));
         }
         let id = ulid::Ulid::new().to_string();
-        let provenance = serde_json::json!({"actor":actor,"description":request.description,"worker":built.receipt,"project_id":project,"revision":request.expected_revision,"source_digest":digest,"not_installed":true});
+        let provenance = serde_json::json!({"actor":actor,"description":request.description,"worker":built.receipt,"project_id":project,"revision":request.expected_revision,"source_digest":digest,"not_installed":true,"snapshot_only":true,"installation_requires_revalidation":true});
         let diagnostics = built.diagnostics.clone();
         let mut state = lease.publish()?;
         state.candidate = Some(built);
