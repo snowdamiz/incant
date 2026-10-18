@@ -177,6 +177,17 @@ A changed catalog digest refuses without outputs. Independent saved-byte review
 passes; this functional Mac proof does not establish full SDK parity or runtime
 performance. Its producing player remains identified as `28806e21`.
 
+The [typed Rust input conformance](docs/spikes/native-wasm-input-conformance.md)
+now passes real Wasmtime and wasm2c tests for every input collection, gamepad
+value/presence, touch gestures, focus cancellation and reused contact identities.
+Ignored input refusals, stale epochs and callback errors roll back staged numeric
+writes and logs. All eight selected SDK/host controls, both scoped strict lints,
+independent source/result review and all ten local development checks pass.
+The launch wrapper omitted its interactive tool handle, so its outer tool exit
+is unconfirmed; all six owned native child exits are zero and the completed
+result plus 59 freshly absent process/group identities are retained. This is
+CPU correctness evidence, without physical input-device or complete SDK approval.
+
 Rust/Wasm gameplay now has a bounded prepared localization coverage report,
 matching the existing TypeScript committed-snapshot behavior. Pages include
 canonical table/key, requested/resolved locale and missing kind; callback quotas
@@ -388,7 +399,8 @@ of callback parsing, native query execution and result materialization. The
 36 selected CPU controls, the six real ScriptHost controls again after a narrow
 fixture-module lint repair, both strict all-target lint configurations and all
 ten local development checks on the integrated source. Independent source and
-retained-result review pass. The original lint refusal remains recorded. Whole
+retained-result review pass. PR415 is merged after exact-head development-checks
+success; main `7a9bad9f` has the tested tree. The original lint refusal remains recorded. Whole
 Core shipping-profile attribution and exact gameplay/audio parity are the next
 step; no new benchmark or optimization has been adopted. Do not repeat the
 unchanged PGO comparison; reassess after new attribution or relevant engine changes.
