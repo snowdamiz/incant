@@ -2,7 +2,7 @@
 
 [Release checkpoint54](docs/spikes/release-checkpoint-54.md) is promoted: all
 23 required contexts and eight exact-head workflows passed on the main401 tree,
-and release `503b90af` has the identical tested tree. Main402–406 changes
+and release `503b90af` has the identical tested tree. Later main changes
 remain outside that release baseline. Checkpoint53 failed the Wasm timer-fixture
 lookup on all three desktop platforms; its other seven workflows passed.
 The [narrow correction](docs/spikes/ci-timer-fixture-layout.md) is merged through
@@ -10,6 +10,11 @@ PR400 after review and fast checks, with actual local static/development reload
 checks in CI's directory layout. Checkpoint54 reused PR399, frozen at candidate
 `5dbac494` with exactly main401's tree throughout the successful comprehensive run.
 Retained failed experiments remain failed. No distribution or phase gate is approved.
+
+[Checkpoint55 (PR408)](https://github.com/snowdamiz/incant/pull/408) is running
+comprehensive CI on frozen candidate `931226f9`, whose tree exactly matches
+main407 (`c504668e`). Development continues separately; this candidate is not
+promoted, and pending checks do not qualify release.
 
 The current phase remains **Phase 1: Core engine**. The
 [Phase 1 review ledger](docs/gates/phase1-review.md) maps each exit requirement to
@@ -22,7 +27,7 @@ incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
 [Release checkpoint54](docs/spikes/release-checkpoint-54.md) contains the tested
 main401 tree after all 23 required contexts and eight candidate workflows passed.
-Main402–406 changes remain outside that release baseline. Rendering quality and full rendered-game
+Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -86,6 +91,16 @@ Computer use and screen capture are paused for every agent by the director's
 latest instruction. Owned capture helpers and test windows have been stopped;
 native window checks remain held. Terminal implementation, review and data-only
 verification continue.
+
+The native desktop player now routes platform touch events into the existing
+input/gesture runtime, with bounded contact identities, shared mouse/UI capture,
+logical coordinates and cancellation across focus, layout and session changes.
+The [touch delivery qualification](docs/spikes/native-desktop-touch.md) passes
+81 selected window-module CPU tests, including 14 new touch controls, both strict
+all-target lint configurations and all ten local development checks. Original
+compile and stale-test-expectation failures remain recorded. These are terminal
+checks; physical touch hardware, native-window interaction and other desktop
+platform execution are not established by them.
 
 Compatible HUD text updates now reuse existing checked font-shaping engines;
 a new ordered fallback chain still prepares and atomically publishes a separate

@@ -1,5 +1,5 @@
 //! Physical mapping shared by the desktop gameplay and UI receipt adapters.
-//! Unrecognized physical keys, touch and haptics are ignored.
+//! Unrecognized physical keys are ignored. Touch ownership lives in UiInput.
 use super::Error;
 use incant_input::{InputEvent, KeyCode, MAX_EVENTS_PER_TICK, MouseButton, WheelUnit};
 use tao::{
@@ -11,6 +11,11 @@ pub struct PendingInput {
     events: Vec<InputEvent>,
     motion_start: usize,
 }
+#[derive(Clone, Copy)]
+pub(super) struct Checkpoint {
+    len: usize,
+    motion_start: usize,
+}
 impl PendingInput {
     pub fn new() -> Self {
         Self {
@@ -20,6 +25,24 @@ impl PendingInput {
     }
     pub fn events(&self) -> &[InputEvent] {
         &self.events
+    }
+    // Touch admission only appends discrete events; rollback cannot discard or
+    // overwrite a previously accepted/coalesced cursor sample.
+    pub(super) fn checkpoint(&self) -> Checkpoint {
+        Checkpoint {
+            len: self.events.len(),
+            motion_start: self.motion_start,
+        }
+    }
+    pub(super) fn rollback(&mut self, checkpoint: Checkpoint) {
+        self.events.truncate(checkpoint.len);
+        self.motion_start = checkpoint.motion_start;
+    }
+    pub(super) fn reserve_events(&self, count: usize) -> Result<(), Error> {
+        if self.events.len().saturating_add(count) > MAX_EVENTS_PER_TICK {
+            return Err(Error::InputCapacity);
+        }
+        Ok(())
     }
     pub fn clear(&mut self) {
         self.events.clear();
@@ -245,6 +268,7 @@ pub fn validate_actions(actions: &incant_input::InputActions) -> Result<(), Erro
             if !matches!(
                 binding,
                 InputBinding::Key { .. }
+                    | InputBinding::Gesture { .. }
                     | InputBinding::MouseButton {
                         button: MouseButton::Left | MouseButton::Right | MouseButton::Middle,
                         ..

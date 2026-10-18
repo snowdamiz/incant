@@ -1,0 +1,110 @@
+{
+  "source": "bb2bb5add6009e263b6b890d83dcc15bac1da6d5",
+  "qualified_native_source": "d0b7c88e3bf111e3fac723ab787ba1e4894638d6",
+  "all_crates_byte_identical_to_native_source": true,
+  "actual_exec_session": 49533,
+  "actual_exit": 0,
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.4667871249839664
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "seconds": 50.654126334004104
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 2.748592042014934
+    },
+    {
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.48012166703119874
+    },
+    {
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.44202141696587205
+    },
+    {
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.6644243329646997
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build",
+        "--workspace",
+        "editor/ui"
+      ],
+      "exit": 0,
+      "seconds": 5.700729875010438
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test",
+        "--workspace",
+        "editor/ui",
+        "--",
+        "--maxWorkers=2"
+      ],
+      "exit": 0,
+      "seconds": 33.45197529200232
+    },
+    {
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.6082034170394763
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.3937119580223225
+    }
+  ],
+  "seconds": 96.63825087499572,
+  "fresh_wrapper_and_owned_groups_absent": true,
+  "result_sha256": "01b561088df34a6df42636e64bb21902e34f9011140c9dba563d1c7e53bcf85d",
+  "qualification": "Local terminal development checks; frontend tests use jsdom, no computer use or screen capture. Hosted development check remains pending."
+}
