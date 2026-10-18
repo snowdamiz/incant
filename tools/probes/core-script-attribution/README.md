@@ -115,14 +115,14 @@ Schema1/2 behavior remains separate; combined navigation/budget schema4 is not
 admitted by this private adapter. Public exporter and normal v3 reader admission
 are unchanged. Preparation/data-only controls do not execute a shipping workload.
 
-## Query-stage variant (prepared only)
+## Query-stage variant
 
 `project,render-input,profile,diagnostic-script-queries` selects schema5. The four
 phase receivers remain exact; only player, script and profile also gain queries.
 Runtime gains phase diagnostics, not query diagnostics. No combined navigation or
 budget mode is admitted. Existing modes retain their Node 24.21 and 74-file rules.
 
-For this new mode, the proposed same-source ordinary/diagnostic pair uses the
+For this mode, the qualified same-source ordinary/diagnostic pair uses the
 retained, hashed Node 22.23.3 executable and exactly 60 retained Core files whose
 bytes match the historical 74-file manifest. The missing 14 names must all be
 authoring transaction history or `source.journal.jsonl`; no script, project or
@@ -151,3 +151,10 @@ containment, recursion/failure/invalid numerics, schema/refusal behavior, exact
 target feature recipients, retained-input subset and Node-mode admission.
 All 27 private adapter controls pass. No new Cargo, Core, audio device, window,
 GPU, capture or timing run is established by these preparation tests.
+
+The later same-source pair completed both full Core routes with exact gameplay
+and complete PCM parity. Its ordinary ScriptTick p95 remains above 2 ms; the
+instrumented query observations do not adopt an optimization. See the
+[full result and retained failures](../../../docs/spikes/script-query-attribution.md#completed-same-source-shipping-observation)
+and portable replay. Those recorded executions do not authorize an unbounded
+rerun or make the preparation-only controls native evidence.
