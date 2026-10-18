@@ -270,7 +270,7 @@ class SequenceLifecycleTests(unittest.TestCase):
         errors = []
         def terminate_when_started():
             limit = time.monotonic() + 5
-            while not (self.root / 'alive').exists():
+            while not (self.root / 'alive').exists() or (self.root / 'alive').stat().st_size == 0:
                 if time.monotonic() >= limit:
                     errors.append('Grandchild did not start')
                     return

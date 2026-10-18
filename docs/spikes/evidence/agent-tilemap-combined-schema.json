@@ -1,0 +1,22 @@
+{
+  "passed": true,
+  "source": "064b47278db30da67f7b522bbb1e615e6e1b49fb",
+  "artifact": {
+    "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-integration-002/incant_headless-064b4727",
+    "bytes": 63511904,
+    "sha256": "467d37d9ad55b8b42a0e680a137f48672f8d11ce148f86d455df594da0d3b997"
+  },
+  "result_sha256": "9f309ee5eaf908cdfd1194b8df64d8ade0b66dce7c482308af76ba9776978925",
+  "actual_exec": 99475,
+  "wrapper_and_groups_absent": true,
+  "native_seconds": 1399.3920921670797,
+  "retained_target_peak": 7329554432,
+  "prior_failure": "agent-tilemap-integration-001/output/result.json",
+  "cache_invalidation": "agent-tilemap-integration-001/cache-invalidation.json",
+  "schema_files": 80,
+  "unchanged_schema_files": 79,
+  "added_tools": [
+    "tilemap_paint"
+  ],
+  "prior_tools_unchanged": 15
+}
