@@ -358,10 +358,19 @@ and all four win measurements above 2 ms do not justify enabling PGO. The
 the compiler changes remain on the retained experiment branch. These are
 CPU measurements, not rendered-game FPS. Independent saved-data review passes;
 all 81 observed identities are absent after terminal success.
-Last reassessment: 2026-10-18. The next useful trigger is a distinct residual-cost
-hypothesis or relevant engine change, with another bounded assessment after a few
-hours of active development. Do not repeat the unchanged PGO comparison.
-The 2 ms ScriptTick target remains unmet; other work continues.
+Last reassessment: 2026-10-18 06:27 UTC. A fresh same-source ordinary/query
+shipping pair now completes all 2,156 Core steps with exact full gameplay and
+complete PCM parity. Ordinary ScriptTick p95 is 2.100001–2.110000 ms; instrumented
+p95 is 2.140001–2.150000 ms, with no gate or isolated-overhead claim. Query parsing
+plus result construction accounts for only 0.305% of the same 108 slow whole
+frames; all native queries belong to gameplay, while the stress callback has none.
+This does not support a query-marshaling optimization. Navigation execution still
+dominates query-tail cost; rejected cache/scan experiments remain rejected.
+[Raw attribution, retained build failure and portable replay](docs/spikes/script-query-attribution.md#completed-same-source-shipping-observation)
+are preserved. The next useful trigger is a specific callback, VM or typed-view
+validation change, or a distinct concrete residual-cost hypothesis. Periodic
+bounded reassessment remains allowed; do not repeat unchanged PGO/navigation/
+deadline-check experiments. The 2 ms target remains unmet; other work continues.
 
 ## Native presentation pacing — bounded intervention rejected
 
