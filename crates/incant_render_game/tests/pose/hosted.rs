@@ -202,12 +202,17 @@ fn direct_host_refuses_ui_ownership_before_prepare_admit_or_display() {
         order: 0,
         disabled: false,
     });
+    let ui_entity = CookedEntity {
+        id: id(50),
+        parent: None,
+        transform: Default::default(),
+        velocity: None,
+    };
     let ui_world = NativeWorld::new(
-        fixture
-            .scene
-            .clone()
+        CookedScene::new(id(99), 60, vec![ui_entity.clone()])
+            .unwrap()
             .with_ui(vec![CookedUi {
-                entity: id(1),
+                entity: id(50),
                 node: node.clone(),
             }])
             .unwrap(),
@@ -219,9 +224,10 @@ fn direct_host_refuses_ui_ownership_before_prepare_admit_or_display() {
     let mut host =
         PoseRenderHost::<Consumer>::prepare(&world, settings(&fixture, record.clone())).unwrap();
     let mut commands = FrameCommands::default();
+    commands.push(StructuralCommand::Spawn(ui_entity)).unwrap();
     commands
         .push(StructuralCommand::SetUi {
-            entity: id(1),
+            entity: id(50),
             node: Some(node),
         })
         .unwrap();
@@ -242,7 +248,7 @@ fn direct_host_refuses_ui_ownership_before_prepare_admit_or_display() {
     );
     commands
         .push(StructuralCommand::SetUi {
-            entity: id(1),
+            entity: id(50),
             node: None,
         })
         .unwrap();
@@ -253,9 +259,9 @@ fn direct_host_refuses_ui_ownership_before_prepare_admit_or_display() {
     assert!(record.borrow().displayed.is_empty());
 }
 fn script() -> CompiledScript {
-    code(
-        "for(const c of chunks)for(let i=0;i<c.ids.length;i++)if(c.ids[i]==='00000000000000000000000001'&&input.actions.jump.pressed)c.transforms[i*10]+=0.25;const targets=commands.hapticCapabilities();if(targets.length)commands.playHaptic(targets[0],{kind:'rumble',strong:0.5,weak:1,durationMs:125});",
-    )
+    CompiledScript::compile(
+        "exports.default={persistence:{version:1},update({chunks,commands,input}){for(const c of chunks)for(let i=0;i<c.ids.length;i++)if(c.ids[i]==='00000000000000000000000001'&&input.actions.jump.pressed)c.transforms[i*10]+=0.25;const targets=commands.hapticCapabilities();if(targets.length)commands.playHaptic(targets[0],{kind:'rumble',strong:0.5,weak:1,durationMs:125});}};",
+    ).unwrap()
 }
 
 #[test]
