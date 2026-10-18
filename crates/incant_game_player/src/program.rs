@@ -80,6 +80,12 @@ mod tests {
         // The non-authored build emits an include_bytes array of this exact size.
         const EMPTY: &[u8; 0] = b"";
         assert_eq!(built_instances(EMPTY).unwrap(), None);
+        #[cfg(not(feature = "project"))]
+        {
+            let generated = include_bytes!(concat!(env!("OUT_DIR"), "/wasm-instances.bin"));
+            assert!(generated.is_empty());
+            assert_eq!(built_instances(generated).unwrap(), None);
+        }
         for length in 1..=32 {
             assert!(
                 built_instances(&vec![0; length]).is_err(),
