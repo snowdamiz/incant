@@ -36,8 +36,13 @@ quiet three-arm comparison completes without focus loss but rejects latest-batch
 timing: presented-interval p95 is 25 ms versus ordinary's 16.667 ms. Its strict
 selected-arm capture receipt also fails because committed-redraw wake metadata
 is incomplete; independent analysis preserves that failure and includes all
-display roles. A separate simulation-deadline diagnostic has CPU qualification,
-with shipping/window measurements pending. The default-off
+display roles. The separate [simulation-deadline experiment](../spikes/native-independent-simulation-deadline.md)
+now has a fresh shipping build, exact full CPU gameplay/PCM parity and one quiet
+native pair. Valid positive-adjacent interval p95 and maximum are unchanged;
+long intervals number 10 ordinary and 12 independent, with two and one zero
+callbacks retained. Its focus/resize attempt timed out without a resize, and
+native restart remains unexecuted. Only the report and evidence enter main;
+the scheduling source stays on its experiment branch. The default-off
 [pose-interpolation adapter and composed host](../spikes/native-pose-interpolation.md)
 are merged through PR403 with CPU and actual Metal correctness; they are not yet
 integrated into the native window. GPU color reconstruction improves the small
@@ -119,16 +124,22 @@ also rejects that specific scan-only hypothesis for reaching 2 ms: its hypotheti
 same-frame zero-cost p95 is still 2.544041 ms. The reusable observer is default off;
 no navigation optimization or new shipping performance result is adopted.
 
-A separate [QuickJS C profile-guided compilation experiment](../spikes/quickjs-c-pgo-feasibility.md)
-now passes standalone behavior and strict invalid-profile refusal checks. It
-establishes compiler feasibility only. Subsequent Core shipping attempts preserve
-their compilation and verifier failures. The latest completes ordinary/generation
-builds and proves the bundled compiler-runtime archive bytes, then fails an
-incorrect post-strip requirement for local symbol names. Saved binary inspection
-shows the profiling sections and executable code are unchanged; the audit is
-being corrected without relaxing ordinary/use absence checks. Core training,
-matched shipping measurements and gameplay/audio parity remain unperformed; the
-2 ms requirement is still unmet and ordinary builds are unchanged.
+The retained [QuickJS C profile-guided experiment](../spikes/quickjs-core-pgo.md)
+completes one coherent ordinary/generation/use Core producer, with exact full
+win/loss/restart gameplay and PCM after build/input deletion. Its eight matched
+CPU arms preserve a mixed win result: ScriptTick p95 improves from 2.270–2.280 to
+2.170–2.180 ms in one pair, but regresses from 2.230–2.240 to 2.410–2.420 ms in
+the other. All four win arms remain above 2 ms. Held-out loss improves modestly,
+with both modes already below 2 ms. Main receives documentation and self-contained
+inert evidence only; the full default-off implementation remains on the retained
+`codex/quickjs-core-pgo` experiment branch at `bb5ae0db`. The ordinary build stays
+unchanged. No adoption, rendering/FPS result or phase approval follows. Original
+failures and exact producing sources remain preserved; a new source-specific
+residual-cost hypothesis is required before another experiment.
+
+Compatible HUD text updates now [reuse checked font engines](../spikes/ui-font-reuse.md)
+through PR406. Scoped behavior tests and strict lints pass; the observed long
+event frames still need causal attribution and matched shipping measurement.
 
 The real-mouse capture check is pending the director's availability and is not
 blocking these lanes. Broader editor, agent, content, export, multiplayer, game
@@ -146,5 +157,6 @@ including readable normal-size Arabic and corrected pip direction. The later
 winning pixels for Arabic/CJK/pseudo and narrow pseudo loss/win layouts, with
 exact full-route CPU parity. This is sampled appearance evidence, not complete
 native-window motion/presentation or phase approval.
-The director has allowed capture again; the retained
-focus-interrupted runs are not relabeled as complete.
+Computer use and screen capture are currently paused for all agents by the
+director. Native window checks are held. The retained focus-interrupted runs
+are not relabeled as complete; terminal implementation and data-only replay continue.

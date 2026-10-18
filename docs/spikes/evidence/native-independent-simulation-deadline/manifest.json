@@ -1,0 +1,2319 @@
+{
+  "adopted": false,
+  "archive": {
+    "bytes": 4406060,
+    "path": "records.json.gz",
+    "sha256": "a1879bef842573f463961927188931c09f2ae0cbc5eb618eac81a82fba1dd135",
+    "uncompressed_bytes": 73913042,
+    "uncompressed_sha256": "039caacd9f667c377bb0c3fc729d93488b04ec40c7f859103e2e9a96f99ca3c1"
+  },
+  "base": "557c196c69a8a71a1202a4e19d9b60cde54988a2",
+  "behavior_test_source": "e73793638c7f5d35cc872c648dcb57149480a892",
+  "default_off": true,
+  "external_artifacts": {
+    "bundle-player": {
+      "bytes": 18457760,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-live-artifacts-001/Core Independent Deadline.app/Contents/MacOS/incant_game_player",
+      "sha256": "c99d4b5cc35955597d680fb0c0c72cb0782d2f8846612a0fe39280f6d7dca281"
+    },
+    "cooked/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json": {
+      "bytes": 1096,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/audio/08b4d5af1f19e43c1c228d7c6ca243e8d2362f27f336f87a347cb697f6ebca28.json",
+      "sha256": "59363a80bbac59c6f139695407f2e76c31ed47b4345b03177801b01640480139"
+    },
+    "cooked/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm": {
+      "bytes": 691200,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/audio/1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46.ipcm",
+      "sha256": "1e53cd57bfecb7115ad888e9d40f01c6d957b7130bd6f8975a2d16100d7eda46"
+    },
+    "cooked/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm": {
+      "bytes": 8777144,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/audio/2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718.ipcm",
+      "sha256": "2b67780f0ec6ce10736909aa8ec0a3b386d6b308382b7eaf33d40a5a28977718"
+    },
+    "cooked/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm": {
+      "bytes": 345600,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/audio/2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637.ipcm",
+      "sha256": "2e05653f8752033823f84b711926070f2d4d237aef0087105be217b401c89637"
+    },
+    "cooked/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm": {
+      "bytes": 576000,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/audio/384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778.ipcm",
+      "sha256": "384ae95c87bd2678c8b4b80f85bca02c73035338461b423f514e25fc891f9778"
+    },
+    "cooked/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json": {
+      "bytes": 561,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/audio/3d3e537168e5bf96036e6625c0b5d55b12cf122a4715f7e8d77baf937edc8c58.json",
+      "sha256": "fd7c43cb6347a021fcfe215fa66bbd817620ff596a04bc8b32259202352921ea"
+    },
+    "cooked/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json": {
+      "bytes": 963,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/audio/4ecb37a4cf20667d8d7922971a3b609c1898cb988fb96bc0a3857546f3123c4e.json",
+      "sha256": "d9ca5bd9b8d52ced2826915913857e90baea981bcdfe6d9ace42e9105929fdd2"
+    },
+    "cooked/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json": {
+      "bytes": 9341,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/audio/4f31a36d777d5ce2702b9a5237742cc8a69efa73d7067afae35dff713cbb935f.json",
+      "sha256": "8d841a107aff6df0511e0e9dfdf8c6d36cf01928d91dd82e415b26858f58cc96"
+    },
+    "cooked/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm": {
+      "bytes": 138240,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/audio/6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56.ipcm",
+      "sha256": "6c94df51cc76f31375178021c1fec7775a5e448cba6bde2d1120f9efa6a32c56"
+    },
+    "cooked/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json": {
+      "bytes": 764,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/audio/b63a98f27758a1bb7f2a4ba44f4fb8d263230bf401520116b87e6946cdf56117.json",
+      "sha256": "d5748ced504a28a21d72eaf9c0b26c3fee6ff900c07ea491c06b79c4c5680642"
+    },
+    "cooked/clips.bin": {
+      "bytes": 252,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/clips.bin",
+      "sha256": "1047a8c04273bb4b8157d4c933e93de4aab1128b7891d0e195431722f369d865"
+    },
+    "cooked/empty-input.json": {
+      "bytes": 103,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/empty-input.json",
+      "sha256": "73eb94082113815606e7ba036fc3325f5dac1a7fdd6b02c5dc95abd150ee80b5"
+    },
+    "cooked/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json": {
+      "bytes": 323,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/fonts/0e1cd7265c7a2fa6109d995205dd8e070723bb824fe28daa8299ba1105063a1f.json",
+      "sha256": "0538183b4a25a91d05296686e8092634f8c572c4c1dc34329c4685843c7661e1"
+    },
+    "cooked/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont": {
+      "bytes": 310300,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/fonts/3127f0b873387ee37e2040135a06e9e9c05030f509eb63689529becf28b50384.ifont",
+      "sha256": "48804b712c66bb0ce00b2cc3272c7be18171810a3bb0555e3d247544951e0fdc"
+    },
+    "cooked/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json": {
+      "bytes": 317,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/fonts/74f2395f9b27e4c4ff06183b1baed5684ce4a090490bd00f42637547cca5da0f.json",
+      "sha256": "76b2977309e2485a6007bcb9c6e75df3a2e161dc576ebbf6be00f6b8b961d0f0"
+    },
+    "cooked/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont": {
+      "bytes": 13812,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/fonts/9ec258961c8800c709f05586b6fca8a47061f3f776ac088bb87fbb2a462c116e.ifont",
+      "sha256": "db12e66306387bf4fdcf4b6be1fc31eed9f136e60211061e65cc97ba71500311"
+    },
+    "cooked/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont": {
+      "bytes": 765788,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/fonts/ee489b994b3e62def9874c918145e32b133b625abaf98cec60502bdb40102c56.ifont",
+      "sha256": "8bd20a742cc19c0fe65b106d983ea1ed816c4cd5ca1c3d50bdc4d05aeb5f8e7a"
+    },
+    "cooked/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json": {
+      "bytes": 318,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/fonts/efbee025bcb27036123566525a911cd346bbe425cceb413eb800661df6b65767.json",
+      "sha256": "ce4cd118624295e30ed4514c80bfad49c379702ead14327faf7ff92184d6034a"
+    },
+    "cooked/input-actions.json": {
+      "bytes": 859,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/input-actions.json",
+      "sha256": "aa13d11e49bbd03a2bfb59cc64b60701f83e5b1b4985f4272c12b4640dd12bdf"
+    },
+    "cooked/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel": {
+      "bytes": 25810,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/models/018d021c673a74b618fc3516d8ab4e64b32a88f6c8323d0d84395e684d811c13.incmodel",
+      "sha256": "509cf7c24253b675ed0a3d36ae344d35272050107a97c4aeae4db79417d132e7"
+    },
+    "cooked/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel": {
+      "bytes": 18726133,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/models/1649bb952607a07a912661374fa6a8c104a261d625b339a5aa2e096f52970bec.incmodel",
+      "sha256": "b32c0ae9a0305abd7610713aa77a270e320090bbb31be1792a47f857ec939f99"
+    },
+    "cooked/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel": {
+      "bytes": 181633,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/models/b85f1046e4d28277bd6bb792cdcff4dc070268bb95b3b8040b697bbf7f631262.incmodel",
+      "sha256": "80dbf175a19dfda0db4c8e5c1992657fd435b6778d0b49d056755d088563e778"
+    },
+    "cooked/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel": {
+      "bytes": 207725,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/models/da2588e81cf9f61d9b06dec86cbf644e5322cdc48594af5c9ac4e9aa08a6e1ad.incmodel",
+      "sha256": "a20e33175acb4af55ddad2168307ce3e0c02a23127566cac769e6f290bf799bf"
+    },
+    "cooked/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel": {
+      "bytes": 2832033,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/models/ec9f2569b551d61c9552dd311c3190e9dd262c96b8823e1f3c3c04819811bf99.incmodel",
+      "sha256": "88e2f2c56975f6bde0c0e7c131e870bf783fb86384a27d55b20fd40d40d77621"
+    },
+    "cooked/package.json": {
+      "bytes": 479,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/package.json",
+      "sha256": "aa59400b3bd2059bf6a34251c1f3096fba45ecfcf6b90a7835bb00a8b37d6060"
+    },
+    "cooked/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2": {
+      "bytes": 699516,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/textures/17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333.ktx2",
+      "sha256": "17da802ffd07a79a3041b9ba748180e8eccde82c6461eb24ce092cb378e94333"
+    },
+    "cooked/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json": {
+      "bytes": 413,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/textures/5c2d2703c28f3deb6e566781de8833f45f442888602c7a72872b3ea7f5b141c8.json",
+      "sha256": "f0bd2e231b9cc1839811dd7faf3a748bb2a41df3e95e84e45c727b5be5a5d840"
+    },
+    "cooked/world.scene": {
+      "bytes": 1058647,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/data/world.scene",
+      "sha256": "2d1ec2682e03748ce06adc9a048e6c81f82cb2358c4b979a0133849bab6a16f4"
+    },
+    "ordinary-test": {
+      "bytes": 37059120,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/output/stage-1-test-0",
+      "sha256": "a249c91ae043dbb7f6b92cf48675631fe160fa22f3869a53e80e32115e462e09"
+    },
+    "original-PCM": {
+      "bytes": 13798400,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/functional-001/artifacts/output.pcm",
+      "sha256": "ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3"
+    },
+    "player": {
+      "bytes": 18457760,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/player/incant_game_player",
+      "sha256": "c99d4b5cc35955597d680fb0c0c72cb0782d2f8846612a0fe39280f6d7dca281"
+    },
+    "producer/bytecode.bin": {
+      "bytes": 17710,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/producer/bytecode.bin",
+      "sha256": "03787b108214f66cabc6d8d1f92059f36188fbbc0e2151daf7a436b612e8329d"
+    },
+    "producer/hardening.bin": {
+      "bytes": 2678,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/producer/hardening.bin",
+      "sha256": "55fe1133618a4cf87ed69a1f1d62b08bd2ad5359981fe2004d4d332c29d38235"
+    },
+    "restart-PCM": {
+      "bytes": 14182400,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-001/artifacts/output.pcm",
+      "sha256": "916116579b7eb8a175e9c1f2739bcc319b675032a71c21cc4b27f96910c7f5d3"
+    },
+    "selected-test": {
+      "bytes": 37401968,
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/output/stage-0-test-0",
+      "sha256": "e8874fc29a37cda1e2f963da2d4de020c380f56f6af07d5da9673e54ac1483db"
+    }
+  },
+  "feature": "native-independent-presentation",
+  "format": "incant-independent-deadline-evidence-v1",
+  "limits": [
+    "Portable data replay does not execute recorded scripts or rerun tests/builds/GPU/windows",
+    "No binaries, PCM or full cooked payloads embedded; --binaries requires exact external files",
+    "The 4815-input shipping source manifest is archived; --git-source checks the two 28-file source snapshots only",
+    "Positive-adjacent intervals exclude and retain zero/outcome/boundary breaks; they are not continuous whole-run display evidence",
+    "Computer use, capture and window launches are prohibited; native lifecycle gates remain open",
+    "No performance, appearance, audible-quality, adoption or phase-gate claim"
+  ],
+  "native_lifecycle": {
+    "CPU_restart": "2216 steps passed; original 2156-step PCM prefix exact",
+    "focus_resize": "failed timeout after focus loss at step 2151; no size change; empty final report/sidecars",
+    "restart": "not executed"
+  },
+  "player_sha256": "c99d4b5cc35955597d680fb0c0c72cb0782d2f8846612a0fe39280f6d7dca281",
+  "records": {
+    "cpu-002/closeout.json": {
+      "bytes": 1378,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/closeout.json",
+      "sha256": "1f3cf4bb5f432ac2c7d2d2c9bcfa51ba15458cbc6d94551491f679f5cd049c2e"
+    },
+    "cpu-002/output/000.stderr.log": {
+      "bytes": 2916,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/output/000.stderr.log",
+      "sha256": "cf0a93c828380099d2bdff82d964077f6ad5c5a3b9deece0e2b95303f98cd247"
+    },
+    "cpu-002/output/000.stdout.log": {
+      "bytes": 568141,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/output/000.stdout.log",
+      "sha256": "bfd3d58c70bc01fe3aeb60ca29f833b434920bab6134a6d8645e1e93a8ee6872"
+    },
+    "cpu-002/output/001.stderr.log": {
+      "bytes": 1907,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/output/001.stderr.log",
+      "sha256": "50d9856801e755bda748c2acc4971610ddbfca0c6a4648203f778bc46cb509bd"
+    },
+    "cpu-002/output/001.stdout.log": {
+      "bytes": 561784,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/output/001.stdout.log",
+      "sha256": "0d867768db7e8ab3b678927f724590db6a5cfaa199346e34bc7a769c105e2b2b"
+    },
+    "cpu-002/output/002.stderr.log": {
+      "bytes": 11544,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/output/002.stderr.log",
+      "sha256": "0a4e1b7f67c91c8ec63663cd5ca015c52cf1e130df7cdb8e4f89b280b647e313"
+    },
+    "cpu-002/output/002.stdout.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/output/002.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cpu-002/output/owner.json": {
+      "bytes": 5023,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/output/owner.json",
+      "sha256": "223ace78a2bda58f3636839d4a1d4a2cc1df3e3fd344e226bb5bcffc4dbec173"
+    },
+    "cpu-002/plan.json": {
+      "bytes": 14002,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/plan.json",
+      "sha256": "db4d67c0502ea957a62a43296dbb1af3ea082efcbd3e6099110f23577b992eda"
+    },
+    "cpu-002/preflight-controls.json": {
+      "bytes": 752,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/preflight-controls.json",
+      "sha256": "517abd90a3f998e8348c063e3d26d21fd9d712657355c50bcd531b74bbef8907"
+    },
+    "cpu-002/result.json": {
+      "bytes": 8609,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/result.json",
+      "sha256": "7c832e33ebbe9fd5c9064acc036f0f19adbae7ea5e092bb74afc9886bea98dc0"
+    },
+    "cpu-002/root-grant.json": {
+      "bytes": 566,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/root-grant.json",
+      "sha256": "1c401674a50d20086ff84e6ce3b0d0fd583c278e40362609b59650b657dbba6a"
+    },
+    "cpu-002/run.py": {
+      "bytes": 8244,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-002/run.py",
+      "sha256": "2d0ffcc19dfe541f3a18b27191f6acce5984c916cde8cad28126868243ca8b2f"
+    },
+    "cpu-003/check.json": {
+      "bytes": 626,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/check.json",
+      "sha256": "93e2d2da7c30f02425a6c60987dafc47edf8b05dbc9e074cdd5def984211af16"
+    },
+    "cpu-003/check.stderr.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/check.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cpu-003/check.stdout.log": {
+      "bytes": 197,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/check.stdout.log",
+      "sha256": "76ac9f54b6c9c16bab68f5ae29c4d0090ef9e1b8137345ba7687d4c963dc7f98"
+    },
+    "cpu-003/closeout.json": {
+      "bytes": 1183,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/closeout.json",
+      "sha256": "a3585fd6dfc4fe6d2fcb55da27b62fdc8f9758ab690342252a16fa809e458ed0"
+    },
+    "cpu-003/output/000.stderr.log": {
+      "bytes": 7660,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/output/000.stderr.log",
+      "sha256": "16fa2cf38cd276cbf5fa4074649ee2ff4ae187965ab86be5883a14fe4327eadd"
+    },
+    "cpu-003/output/000.stdout.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/output/000.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cpu-003/output/001.stderr.log": {
+      "bytes": 9232,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/output/001.stderr.log",
+      "sha256": "c196f279cc35bab090a346b3a081aa0b24f75a04baac680dcf78ecde839a0a4c"
+    },
+    "cpu-003/output/001.stdout.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/output/001.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cpu-003/output/owner.json": {
+      "bytes": 3368,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/output/owner.json",
+      "sha256": "f58b272d5608a6f6a617bff4221a68f2eec7e2b460cafaca9ce9cd867d47b6be"
+    },
+    "cpu-003/plan.json": {
+      "bytes": 19792,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/plan.json",
+      "sha256": "63839a4573dabf7953a5e319f710955e3a1fa3cd0214c168919f9b54037a9247"
+    },
+    "cpu-003/result.json": {
+      "bytes": 3306,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/result.json",
+      "sha256": "30c1524e2f64feff4383d47612ae5b54ae1bb9f80f578ef21824d86400c22fd9"
+    },
+    "cpu-003/root-grant.json": {
+      "bytes": 414,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/root-grant.json",
+      "sha256": "87a28f77ad391d9efdc6ed8a68587b6991cbf8b006f052eb17ac53b232dd8ea7"
+    },
+    "cpu-003/run.py": {
+      "bytes": 8958,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/run.py",
+      "sha256": "d8d782795201cd6c203c38c7480ca7754662e0cf2713ae770f988347824004a6"
+    },
+    "cpu-003/runner.patch": {
+      "bytes": 2041,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-003/runner.patch",
+      "sha256": "4a94d06c0576ff5c07664e2555ee63393312279144c31dae6ecbf0a3ff0dd7e0"
+    },
+    "cpu-final-001.json": {
+      "bytes": 7340,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-final-001.json",
+      "sha256": "018a0c2cc5ae3e97ecc770a7e42f4dab8852ac9fe672e42269a80facad323dfa"
+    },
+    "cpu-proposal-001.json": {
+      "bytes": 3387,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/cpu-proposal-001.json",
+      "sha256": "17d72f8ad48ed47501e24efee8da14fa3793b25b8bcec77ffebf42f9bc1287b6"
+    },
+    "functional-001/artifacts/stderr.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/functional-001/artifacts/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "functional-001/artifacts/stdout.json": {
+      "bytes": 8455,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/functional-001/artifacts/stdout.json",
+      "sha256": "37ccafc52a22a341c7776961e5171f48c988638224445395fe94db55da2f4279"
+    },
+    "functional-001/closeout.json": {
+      "bytes": 1047,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/functional-001/closeout.json",
+      "sha256": "e78f8128b0917748fb9db3d6e82fbf8f114117db2d297ca33571ea0fde9c396f"
+    },
+    "functional-001/metadata/managed-calls.json": {
+      "bytes": 1866,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/functional-001/metadata/managed-calls.json",
+      "sha256": "4154fe512f7ddbe00ad8d001074b3645f9e471ee4f9f5f363664bee003baadc9"
+    },
+    "functional-001/metadata/storage.json": {
+      "bytes": 2020,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/functional-001/metadata/storage.json",
+      "sha256": "e3ef07ecf35a64b4fb903ca4df1c7f42b7943155084ba05467e8f46c7e4d85a1"
+    },
+    "functional-001/result.json": {
+      "bytes": 1200,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/functional-001/result.json",
+      "sha256": "24dfe2f59ba0bff847041339e889ae94171737dd8d1a149c1abf57ae303816bf"
+    },
+    "historical/full-report.json": {
+      "bytes": 8455,
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/recovered/incant-evidence/mac-core-numeric-loan-shipping-001/functional-win/stdout.json",
+      "sha256": "37ccafc52a22a341c7776961e5171f48c988638224445395fe94db55da2f4279"
+    },
+    "historical/input.json": {
+      "bytes": 27753,
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/recovered/incant-evidence/mac-core-numeric-loan-shipping-001/functional-win/input.json",
+      "sha256": "4fbfffad568d1b7b8eae3b7b9041579fce6f0e8e67c83a66f76c9f78a1c5fcbf"
+    },
+    "historical/observe.json": {
+      "bytes": 2893,
+      "original": "/Users/andreyyurlov/.codex/incant-resume-20261017/recovered/incant-evidence/mac-core-numeric-loan-shipping-001/functional-win/observe.json",
+      "sha256": "36915362c461c0772414c2b97aa80d522b6ada851e94e0ca718057d700e1f89b"
+    },
+    "historical/previous-batched-review.json": {
+      "bytes": 46109,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/native-batched-presentation-001/independent-analysis-002/review.json",
+      "sha256": "a9668788be94ba307363bb28994382f040272fda6aa00c5e1f617ac128b7fcac"
+    },
+    "lifecycle-cpu-001/artifacts/stderr.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-001/artifacts/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "lifecycle-cpu-001/artifacts/stdout.json": {
+      "bytes": 9938,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-001/artifacts/stdout.json",
+      "sha256": "11dbcd40446b516ea5f72e3dc1acccbb49d60c44abe765b119109c6e4303a432"
+    },
+    "lifecycle-cpu-001/closeout.json": {
+      "bytes": 862,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-001/closeout.json",
+      "sha256": "3cbe87e9c55052c02263837d53d82dfa5e0916ed24cc76786efb59e8189d685e"
+    },
+    "lifecycle-cpu-001/metadata/managed-calls.json": {
+      "bytes": 1860,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-001/metadata/managed-calls.json",
+      "sha256": "ffab1c62bd00b30c010d108d4d696766158f26e77943e341fa524af94e3ddfe1"
+    },
+    "lifecycle-cpu-001/metadata/storage.json": {
+      "bytes": 2597,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-001/metadata/storage.json",
+      "sha256": "0d7150764d510b2a6ca36011f648537b40a48bec7e43565ffbf5fa1a4dc932bc"
+    },
+    "lifecycle-cpu-001/result.json": {
+      "bytes": 2067,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-001/result.json",
+      "sha256": "9032fc52ecf14dab84b5d06c02d801634b40cd5c56eb3d701ba61441d4eff690"
+    },
+    "lifecycle-cpu-packet-001/check-001.log": {
+      "bytes": 228,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/check-001.log",
+      "sha256": "fc2cfecdb4187ccf87e4464f697dbedc3a733f7b09f32c72d9d6b9071577d6e8"
+    },
+    "lifecycle-cpu-packet-001/data-controls-001.log": {
+      "bytes": 2619,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/data-controls-001.log",
+      "sha256": "34a5958a9d245b86732da697b904b50c0a39aaaa8042ae0f9967c50cc3264778"
+    },
+    "lifecycle-cpu-packet-001/data-controls-002.log": {
+      "bytes": 2005,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/data-controls-002.log",
+      "sha256": "8acdb6124cfe4d476a0ac7bf860cb6c0bb61398add7d88a50a0a3175c3bd2064"
+    },
+    "lifecycle-cpu-packet-001/data-controls-003.log": {
+      "bytes": 1260,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/data-controls-003.log",
+      "sha256": "aa2b73f15100ba5e3508370edac30cde06390d4db109113a8849e220838b6ad2"
+    },
+    "lifecycle-cpu-packet-001/data-controls-failure-001.json": {
+      "bytes": 516,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/data-controls-failure-001.json",
+      "sha256": "df81b2362ff5a0942569cec5672b7d0fb0e21a507f14f3a638bb4cd7f2d7f7c9"
+    },
+    "lifecycle-cpu-packet-001/data-controls-failure-002.json": {
+      "bytes": 345,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/data-controls-failure-002.json",
+      "sha256": "fa5955555b755e9c41eb3d7055d4171b7feff40ddab853137c7d8dc74fed7025"
+    },
+    "lifecycle-cpu-packet-001/oracle.failed-001.py": {
+      "bytes": 6480,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/oracle.failed-001.py",
+      "sha256": "b6116079eb8164162147efb4ac13932db7d7764e88f0dd8e6d91ed65023c567a"
+    },
+    "lifecycle-cpu-packet-001/oracle.py": {
+      "bytes": 7082,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/oracle.py",
+      "sha256": "f65aea64290a61c55697818699e4c80aabd135a63c9efc5b44b034a8b661eb53"
+    },
+    "lifecycle-cpu-packet-001/packet-review.json": {
+      "bytes": 3613,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/packet-review.json",
+      "sha256": "f306a04e22811c28f730e91ee8c6441a5cffedc8529c4f16d28556cad391afba"
+    },
+    "lifecycle-cpu-packet-001/plan.json": {
+      "bytes": 38829,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/plan.json",
+      "sha256": "b1874d6451a678d6f0c3439988adf068a39698ecfc9bc15fc70c4dc962fa3297"
+    },
+    "lifecycle-cpu-packet-001/proposal.md": {
+      "bytes": 3062,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/proposal.md",
+      "sha256": "e6a8ceff66162a85d51f2dc3e0002e761ba427ad80126773bcff3bbcdb31488f"
+    },
+    "lifecycle-cpu-packet-001/root-grant.json": {
+      "bytes": 572,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/root-grant.json",
+      "sha256": "8313342851253feea627afe3c48b3cfe78e3ca7f291ba07c0d921c56e5bbfbaf"
+    },
+    "lifecycle-cpu-packet-001/run.py": {
+      "bytes": 7116,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/run.py",
+      "sha256": "4d99868efd2b72069a2b43ad1dea94423ba548b92b5ce36d72f1d9b5eac9cf81"
+    },
+    "lifecycle-cpu-packet-001/test_oracle.failed-002.py": {
+      "bytes": 7903,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/test_oracle.failed-002.py",
+      "sha256": "27481dd621ac6d438a01afcbe47102d6bb492d9ed8de226c0e156b94ab4a2b2f"
+    },
+    "lifecycle-cpu-packet-001/test_oracle.py": {
+      "bytes": 7974,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-cpu-packet-001/test_oracle.py",
+      "sha256": "65c9d61a61e0b86d611e67df1735685941274352f78b736c68f18c6d196db2c4"
+    },
+    "lifecycle-window-preparation-001/bind.py": {
+      "bytes": 4493,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/bind.py",
+      "sha256": "99b57eace6f9039db06bb2436f68426e77a10102f8c237bbfa5bb639f9c64ec1"
+    },
+    "lifecycle-window-preparation-001/data-controls-001.log": {
+      "bytes": 984,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/data-controls-001.log",
+      "sha256": "49490a5d9533d1bae15a568d4725a824c0af4799415ca02f3dcf7a4f3a088318"
+    },
+    "lifecycle-window-preparation-001/focus-resize/analyze.py": {
+      "bytes": 7730,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/analyze.py",
+      "sha256": "82d1719ecb4cad65b96c7071a20d5a2b3dad05d2af7f91707e646cbc24fc6e3a"
+    },
+    "lifecycle-window-preparation-001/focus-resize/check-001.log": {
+      "bytes": 43,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/check-001.log",
+      "sha256": "1a0d9a27af667d7aea97721dbceed56e94f1aff32d8948937736032991fcbae8"
+    },
+    "lifecycle-window-preparation-001/focus-resize/compilation_analysis.py": {
+      "bytes": 10116,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/compilation_analysis.py",
+      "sha256": "5a9cc0db1475d79c996ed848dd19d2b665cf31bf26b1d37b850a2e8f52abc68a"
+    },
+    "lifecycle-window-preparation-001/focus-resize/descendants.py": {
+      "bytes": 5831,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/descendants.py",
+      "sha256": "57f5f911e0d9cbb0308e33575d687329c63104cc6d31c2ecc6c0dde3f84db63a"
+    },
+    "lifecycle-window-preparation-001/focus-resize/exec-player.py": {
+      "bytes": 416,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/exec-player.py",
+      "sha256": "a972ceb8bca47276e75001a33e66add4eff923da170ae668cc035f9481952dd2"
+    },
+    "lifecycle-window-preparation-001/focus-resize/independent_analysis.py": {
+      "bytes": 16901,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/independent_analysis.py",
+      "sha256": "8f141848942928d3b781ec9dc4eba59414957c2611da529f4090313a7beb4d71"
+    },
+    "lifecycle-window-preparation-001/focus-resize/lifecycle_analysis.py": {
+      "bytes": 14338,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/lifecycle_analysis.py",
+      "sha256": "16f3e0b80b9435a88f85ebe317b2325dbcaf0202612c36e736953b8afb0ac8af"
+    },
+    "lifecycle-window-preparation-001/focus-resize/macos_session.py": {
+      "bytes": 2373,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/macos_session.py",
+      "sha256": "6085e1b22e57ef52f6a3787de0982ab9b03a66ccb98dc13e8908e00620b4eabe"
+    },
+    "lifecycle-window-preparation-001/focus-resize/native_process.py": {
+      "bytes": 19307,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/native_process.py",
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    "lifecycle-window-preparation-001/focus-resize/pair_analysis.py": {
+      "bytes": 12580,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/pair_analysis.py",
+      "sha256": "1465b4da1ae9d483a319ce52d0801b4ce81b1981349aceab23dab25f93f8789e"
+    },
+    "lifecycle-window-preparation-001/focus-resize/plan.json": {
+      "bytes": 27798,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/plan.json",
+      "sha256": "9db8c35f468181c170c3c04ee73162bca0de65faeb56076b5694073e7ce776ec"
+    },
+    "lifecycle-window-preparation-001/focus-resize/presentation_boundaries.py": {
+      "bytes": 13161,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/presentation_boundaries.py",
+      "sha256": "ae6c65e65476de3cfec22b3c2619facdbe07d9af4bd4f929efdcb71a39ca691c"
+    },
+    "lifecycle-window-preparation-001/focus-resize/presentation_host_stages.py": {
+      "bytes": 21626,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/presentation_host_stages.py",
+      "sha256": "3ca697d782bc2c39a97216df9d410123d7169f5c1eb344f29042493171d2fee7"
+    },
+    "lifecycle-window-preparation-001/focus-resize/root-grant.json": {
+      "bytes": 490,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/root-grant.json",
+      "sha256": "c12abb82982771110806f3d6a431c29a7ad7ecd1222b17c7532adc15e877097e"
+    },
+    "lifecycle-window-preparation-001/focus-resize/run.py": {
+      "bytes": 11071,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/focus-resize/run.py",
+      "sha256": "f51bba39cf7cb031619a1f283579a2cc8781d46db4b3eb6619815afe7011ee49"
+    },
+    "lifecycle-window-preparation-001/lifecycle_analysis.py": {
+      "bytes": 14338,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/lifecycle_analysis.py",
+      "sha256": "16f3e0b80b9435a88f85ebe317b2325dbcaf0202612c36e736953b8afb0ac8af"
+    },
+    "lifecycle-window-preparation-001/packet-review.json": {
+      "bytes": 8762,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/packet-review.json",
+      "sha256": "7e6b93a45bcd286fdbe13286c73238b64b567591d0c72d668bd5f3007f640df8"
+    },
+    "lifecycle-window-preparation-001/proposal.md": {
+      "bytes": 4101,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/proposal.md",
+      "sha256": "71e4f23f3989a5640b59b4aab7d6a6424c0a4aa40b7c0028115da66ebb4f6fc8"
+    },
+    "lifecycle-window-preparation-001/restart/analyze.py": {
+      "bytes": 7730,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/analyze.py",
+      "sha256": "82d1719ecb4cad65b96c7071a20d5a2b3dad05d2af7f91707e646cbc24fc6e3a"
+    },
+    "lifecycle-window-preparation-001/restart/check-001.log": {
+      "bytes": 43,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/check-001.log",
+      "sha256": "1a0d9a27af667d7aea97721dbceed56e94f1aff32d8948937736032991fcbae8"
+    },
+    "lifecycle-window-preparation-001/restart/compilation_analysis.py": {
+      "bytes": 10116,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/compilation_analysis.py",
+      "sha256": "5a9cc0db1475d79c996ed848dd19d2b665cf31bf26b1d37b850a2e8f52abc68a"
+    },
+    "lifecycle-window-preparation-001/restart/descendants.py": {
+      "bytes": 5831,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/descendants.py",
+      "sha256": "57f5f911e0d9cbb0308e33575d687329c63104cc6d31c2ecc6c0dde3f84db63a"
+    },
+    "lifecycle-window-preparation-001/restart/exec-player.py": {
+      "bytes": 416,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/exec-player.py",
+      "sha256": "a972ceb8bca47276e75001a33e66add4eff923da170ae668cc035f9481952dd2"
+    },
+    "lifecycle-window-preparation-001/restart/independent_analysis.py": {
+      "bytes": 16901,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/independent_analysis.py",
+      "sha256": "8f141848942928d3b781ec9dc4eba59414957c2611da529f4090313a7beb4d71"
+    },
+    "lifecycle-window-preparation-001/restart/lifecycle_analysis.py": {
+      "bytes": 14338,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/lifecycle_analysis.py",
+      "sha256": "16f3e0b80b9435a88f85ebe317b2325dbcaf0202612c36e736953b8afb0ac8af"
+    },
+    "lifecycle-window-preparation-001/restart/macos_session.py": {
+      "bytes": 2373,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/macos_session.py",
+      "sha256": "6085e1b22e57ef52f6a3787de0982ab9b03a66ccb98dc13e8908e00620b4eabe"
+    },
+    "lifecycle-window-preparation-001/restart/native_process.py": {
+      "bytes": 19307,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/native_process.py",
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    "lifecycle-window-preparation-001/restart/pair_analysis.py": {
+      "bytes": 12580,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/pair_analysis.py",
+      "sha256": "1465b4da1ae9d483a319ce52d0801b4ce81b1981349aceab23dab25f93f8789e"
+    },
+    "lifecycle-window-preparation-001/restart/plan.json": {
+      "bytes": 27689,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/plan.json",
+      "sha256": "c893228a4bcc0d441a20a30a3fff99332c125a7d6f4aeae741490f3100456b4a"
+    },
+    "lifecycle-window-preparation-001/restart/presentation_boundaries.py": {
+      "bytes": 13161,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/presentation_boundaries.py",
+      "sha256": "ae6c65e65476de3cfec22b3c2619facdbe07d9af4bd4f929efdcb71a39ca691c"
+    },
+    "lifecycle-window-preparation-001/restart/presentation_host_stages.py": {
+      "bytes": 21626,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/presentation_host_stages.py",
+      "sha256": "3ca697d782bc2c39a97216df9d410123d7169f5c1eb344f29042493171d2fee7"
+    },
+    "lifecycle-window-preparation-001/restart/run.py": {
+      "bytes": 11071,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/restart/run.py",
+      "sha256": "f51bba39cf7cb031619a1f283579a2cc8781d46db4b3eb6619815afe7011ee49"
+    },
+    "lifecycle-window-preparation-001/runner-delta.patch": {
+      "bytes": 676,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/runner-delta.patch",
+      "sha256": "9064bce56cc84a699450cdf95f939d7f1ce5b1105deb06e1c59548efc8ee17e1"
+    },
+    "lifecycle-window-preparation-001/saved-smoke-001.json": {
+      "bytes": 1159,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/saved-smoke-001.json",
+      "sha256": "b410375ac8508a982b51610af74894982bf8316da4e14d5f8f47a0136c490027"
+    },
+    "lifecycle-window-preparation-001/saved-smoke-001.log": {
+      "bytes": 93,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/saved-smoke-001.log",
+      "sha256": "e1314c1cdc5583c03a03d2bcfa705e8f98f8978695a60da545cecc6cad737139"
+    },
+    "lifecycle-window-preparation-001/saved-smoke.py": {
+      "bytes": 1581,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/saved-smoke.py",
+      "sha256": "461a33bec46928b703259fd69835a921afd2f0d200b3fbe97273999bda8dad48"
+    },
+    "lifecycle-window-preparation-001/test_lifecycle.py": {
+      "bytes": 6246,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/lifecycle-window-preparation-001/test_lifecycle.py",
+      "sha256": "c844dad17dd80a7db5e0c28bc521eba533fc0ef68b2959cb19391db35a7a062e"
+    },
+    "packet-preparation/build-portable.failed-001.py": {
+      "bytes": 4444,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/documentation-preparation-001/build-portable.failed-001.py",
+      "sha256": "5fe740470708c5ef5c83b6d978ec703e3ae83c3a4f6c484f59c670b4ffe905d4"
+    },
+    "packet-preparation/preparation-failure-001.json": {
+      "bytes": 402,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/documentation-preparation-001/preparation-failure-001.json",
+      "sha256": "7eac26e5126e3e3c86e1ff9f0a6ec810f44b5d9030eb73a873ef2e2cd0424c0a"
+    },
+    "paired-independent-review-001/preparation-failure-001.json": {
+      "bytes": 369,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-independent-review-001/preparation-failure-001.json",
+      "sha256": "530e004aba80f68142a92b0581eebf351e83756d2171d0473567cb02965d4b4f"
+    },
+    "paired-independent-review-001/preparation-failure-002.json": {
+      "bytes": 362,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-independent-review-001/preparation-failure-002.json",
+      "sha256": "114742151dbd0915a3e98b62a0f568c565907cb317d917833033a375187c3cbe"
+    },
+    "paired-independent-review-001/replay.failed-001.py": {
+      "bytes": 9285,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-independent-review-001/replay.failed-001.py",
+      "sha256": "63ac1f156c104d109ea538d4a108a7ae033493697cbc15c731a79068908655c7"
+    },
+    "paired-independent-review-001/replay.failed-002.py": {
+      "bytes": 9309,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-independent-review-001/replay.failed-002.py",
+      "sha256": "42f2b33238363a3e7ee778c79487e7acac32d1b9219a23ba39a3a3ece0e1c449"
+    },
+    "paired-independent-review-001/replay.py": {
+      "bytes": 9429,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-independent-review-001/replay.py",
+      "sha256": "57c5f45ff359ee6bb880ce730dea90667b9398dd53d78cdd87445c328085d67a"
+    },
+    "paired-independent-review-001/result.json": {
+      "bytes": 19142,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-independent-review-001/result.json",
+      "sha256": "09fd52114d0c0bb76cc9abe6b5803babb307e4342417a731c757f2eb595fe4cd"
+    },
+    "paired-preparation-001/analyze.py": {
+      "bytes": 7730,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/analyze.py",
+      "sha256": "82d1719ecb4cad65b96c7071a20d5a2b3dad05d2af7f91707e646cbc24fc6e3a"
+    },
+    "paired-preparation-001/bind.py": {
+      "bytes": 6780,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/bind.py",
+      "sha256": "975406ea28fab72eb203b4e295e926303cebaba9b2864ecea147121d6a2fd564"
+    },
+    "paired-preparation-001/compilation_analysis.py": {
+      "bytes": 10116,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/compilation_analysis.py",
+      "sha256": "5a9cc0db1475d79c996ed848dd19d2b665cf31bf26b1d37b850a2e8f52abc68a"
+    },
+    "paired-preparation-001/descendants.py": {
+      "bytes": 5831,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/descendants.py",
+      "sha256": "57f5f911e0d9cbb0308e33575d687329c63104cc6d31c2ecc6c0dde3f84db63a"
+    },
+    "paired-preparation-001/exec-player.py": {
+      "bytes": 416,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/exec-player.py",
+      "sha256": "a972ceb8bca47276e75001a33e66add4eff923da170ae668cc035f9481952dd2"
+    },
+    "paired-preparation-001/independent/analyze.py": {
+      "bytes": 7730,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent/analyze.py",
+      "sha256": "82d1719ecb4cad65b96c7071a20d5a2b3dad05d2af7f91707e646cbc24fc6e3a"
+    },
+    "paired-preparation-001/independent/compilation_analysis.py": {
+      "bytes": 10116,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent/compilation_analysis.py",
+      "sha256": "5a9cc0db1475d79c996ed848dd19d2b665cf31bf26b1d37b850a2e8f52abc68a"
+    },
+    "paired-preparation-001/independent/descendants.py": {
+      "bytes": 5831,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent/descendants.py",
+      "sha256": "57f5f911e0d9cbb0308e33575d687329c63104cc6d31c2ecc6c0dde3f84db63a"
+    },
+    "paired-preparation-001/independent/exec-player.py": {
+      "bytes": 416,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent/exec-player.py",
+      "sha256": "a972ceb8bca47276e75001a33e66add4eff923da170ae668cc035f9481952dd2"
+    },
+    "paired-preparation-001/independent/independent_analysis.py": {
+      "bytes": 16901,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent/independent_analysis.py",
+      "sha256": "8f141848942928d3b781ec9dc4eba59414957c2611da529f4090313a7beb4d71"
+    },
+    "paired-preparation-001/independent/macos_session.py": {
+      "bytes": 2373,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent/macos_session.py",
+      "sha256": "6085e1b22e57ef52f6a3787de0982ab9b03a66ccb98dc13e8908e00620b4eabe"
+    },
+    "paired-preparation-001/independent/native_process.py": {
+      "bytes": 19307,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent/native_process.py",
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    "paired-preparation-001/independent/pair_analysis.py": {
+      "bytes": 12580,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent/pair_analysis.py",
+      "sha256": "1465b4da1ae9d483a319ce52d0801b4ce81b1981349aceab23dab25f93f8789e"
+    },
+    "paired-preparation-001/independent/plan.json": {
+      "bytes": 18853,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent/plan.json",
+      "sha256": "7a910a05dd7fc8e9a691e0cca955936ac2159c82087ec602fe3b78be88008392"
+    },
+    "paired-preparation-001/independent/presentation_boundaries.py": {
+      "bytes": 13161,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent/presentation_boundaries.py",
+      "sha256": "ae6c65e65476de3cfec22b3c2619facdbe07d9af4bd4f929efdcb71a39ca691c"
+    },
+    "paired-preparation-001/independent/presentation_host_stages.py": {
+      "bytes": 21626,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent/presentation_host_stages.py",
+      "sha256": "3ca697d782bc2c39a97216df9d410123d7169f5c1eb344f29042493171d2fee7"
+    },
+    "paired-preparation-001/independent/root-grant.json": {
+      "bytes": 630,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent/root-grant.json",
+      "sha256": "dd1b70848a09dd586a3016af2138df6f20e9070a046b00bf4529b4b10c193834"
+    },
+    "paired-preparation-001/independent/run.py": {
+      "bytes": 11054,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent/run.py",
+      "sha256": "5408e7ff54c4e8b7e6346977a1ef02440c17f3735f59c7bdf6e3118c4f9e447a"
+    },
+    "paired-preparation-001/independent_analysis.py": {
+      "bytes": 16901,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/independent_analysis.py",
+      "sha256": "8f141848942928d3b781ec9dc4eba59414957c2611da529f4090313a7beb4d71"
+    },
+    "paired-preparation-001/macos_session.py": {
+      "bytes": 2373,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/macos_session.py",
+      "sha256": "6085e1b22e57ef52f6a3787de0982ab9b03a66ccb98dc13e8908e00620b4eabe"
+    },
+    "paired-preparation-001/native_process.py": {
+      "bytes": 19307,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/native_process.py",
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    "paired-preparation-001/ordinary/analyze.py": {
+      "bytes": 7730,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/ordinary/analyze.py",
+      "sha256": "82d1719ecb4cad65b96c7071a20d5a2b3dad05d2af7f91707e646cbc24fc6e3a"
+    },
+    "paired-preparation-001/ordinary/compilation_analysis.py": {
+      "bytes": 10116,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/ordinary/compilation_analysis.py",
+      "sha256": "5a9cc0db1475d79c996ed848dd19d2b665cf31bf26b1d37b850a2e8f52abc68a"
+    },
+    "paired-preparation-001/ordinary/descendants.py": {
+      "bytes": 5831,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/ordinary/descendants.py",
+      "sha256": "57f5f911e0d9cbb0308e33575d687329c63104cc6d31c2ecc6c0dde3f84db63a"
+    },
+    "paired-preparation-001/ordinary/exec-player.py": {
+      "bytes": 416,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/ordinary/exec-player.py",
+      "sha256": "a972ceb8bca47276e75001a33e66add4eff923da170ae668cc035f9481952dd2"
+    },
+    "paired-preparation-001/ordinary/independent_analysis.py": {
+      "bytes": 16901,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/ordinary/independent_analysis.py",
+      "sha256": "8f141848942928d3b781ec9dc4eba59414957c2611da529f4090313a7beb4d71"
+    },
+    "paired-preparation-001/ordinary/macos_session.py": {
+      "bytes": 2373,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/ordinary/macos_session.py",
+      "sha256": "6085e1b22e57ef52f6a3787de0982ab9b03a66ccb98dc13e8908e00620b4eabe"
+    },
+    "paired-preparation-001/ordinary/native_process.py": {
+      "bytes": 19307,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/ordinary/native_process.py",
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    "paired-preparation-001/ordinary/pair_analysis.py": {
+      "bytes": 12580,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/ordinary/pair_analysis.py",
+      "sha256": "1465b4da1ae9d483a319ce52d0801b4ce81b1981349aceab23dab25f93f8789e"
+    },
+    "paired-preparation-001/ordinary/plan.json": {
+      "bytes": 18225,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/ordinary/plan.json",
+      "sha256": "1517629f910e6931d4215c6067974a6254639eb66c2e0746faf3e7ee00fad442"
+    },
+    "paired-preparation-001/ordinary/presentation_boundaries.py": {
+      "bytes": 13161,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/ordinary/presentation_boundaries.py",
+      "sha256": "ae6c65e65476de3cfec22b3c2619facdbe07d9af4bd4f929efdcb71a39ca691c"
+    },
+    "paired-preparation-001/ordinary/presentation_host_stages.py": {
+      "bytes": 21626,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/ordinary/presentation_host_stages.py",
+      "sha256": "3ca697d782bc2c39a97216df9d410123d7169f5c1eb344f29042493171d2fee7"
+    },
+    "paired-preparation-001/ordinary/root-grant.json": {
+      "bytes": 630,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/ordinary/root-grant.json",
+      "sha256": "3a5df40efaadac74e0466223ba167846dd61c850f50486722c3b3c9e64467604"
+    },
+    "paired-preparation-001/ordinary/run.py": {
+      "bytes": 11054,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/ordinary/run.py",
+      "sha256": "5408e7ff54c4e8b7e6346977a1ef02440c17f3735f59c7bdf6e3118c4f9e447a"
+    },
+    "paired-preparation-001/packet-review.json": {
+      "bytes": 3944,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/packet-review.json",
+      "sha256": "e255a41d47cdb4f485d56d83da7b315d808f9b9d5b764b01094f0e6bba2d9ed6"
+    },
+    "paired-preparation-001/pair-controls-001.log": {
+      "bytes": 647,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/pair-controls-001.log",
+      "sha256": "5a64dc22e0efc33576344b37c8011a972967fb9c5146f484b0b71b3b5b4f145f"
+    },
+    "paired-preparation-001/pair_analysis.py": {
+      "bytes": 12580,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/pair_analysis.py",
+      "sha256": "1465b4da1ae9d483a319ce52d0801b4ce81b1981349aceab23dab25f93f8789e"
+    },
+    "paired-preparation-001/presentation_boundaries.py": {
+      "bytes": 13161,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/presentation_boundaries.py",
+      "sha256": "ae6c65e65476de3cfec22b3c2619facdbe07d9af4bd4f929efdcb71a39ca691c"
+    },
+    "paired-preparation-001/presentation_host_stages.py": {
+      "bytes": 21626,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/presentation_host_stages.py",
+      "sha256": "3ca697d782bc2c39a97216df9d410123d7169f5c1eb344f29042493171d2fee7"
+    },
+    "paired-preparation-001/proposal.md": {
+      "bytes": 4263,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/proposal.md",
+      "sha256": "632075b74f9cfb7b9f9f4cde190306f019d25f9258c9a9efe68d97e0cc6c661e"
+    },
+    "paired-preparation-001/run.py": {
+      "bytes": 11054,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/run.py",
+      "sha256": "5408e7ff54c4e8b7e6346977a1ef02440c17f3735f59c7bdf6e3118c4f9e447a"
+    },
+    "paired-preparation-001/saved-ordinary-replay-001/compilations.json": {
+      "bytes": 25472,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/saved-ordinary-replay-001/compilations.json",
+      "sha256": "e28325aecab3a7daf92678ca8c9ba3db6e8b1f7b71c38cd5383efa94114f3551"
+    },
+    "paired-preparation-001/saved-ordinary-replay-001/creation-coverage.json": {
+      "bytes": 2665,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/saved-ordinary-replay-001/creation-coverage.json",
+      "sha256": "d778eebca755d5edee86b2029de67cf2082ca242e250525ac757befd757580ca"
+    },
+    "paired-preparation-001/saved-ordinary-replay-001/expected-refusal.json": {
+      "bytes": 587,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/saved-ordinary-replay-001/expected-refusal.json",
+      "sha256": "c90d829fea3faeba66378b04c11a810dcf222cdf2935e56a9d854bf3818bce55"
+    },
+    "paired-preparation-001/saved-ordinary-replay-001/presentations.json": {
+      "bytes": 1811270,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/saved-ordinary-replay-001/presentations.json",
+      "sha256": "2f3517b0614ac9da9304cefa13a4da1b5b64bfd942c54d359f9ccfb945a9a2bb"
+    },
+    "paired-preparation-001/saved-ordinary-replay-001/stdout.json": {
+      "bytes": 576614,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/saved-ordinary-replay-001/stdout.json",
+      "sha256": "2b1f88348e46375115c6c2c9a6ce50416faac3ad7ea88a82a7b43ac43ad86479"
+    },
+    "paired-preparation-001/saved-ordinary-replay-001/window-state.jsonl": {
+      "bytes": 20793,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/saved-ordinary-replay-001/window-state.jsonl",
+      "sha256": "5c18a6ab5630a035866aef8e224f5d86ebb901dbbae1f76d76b38c86be68e756"
+    },
+    "paired-preparation-001/test_pair_analysis.py": {
+      "bytes": 3864,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-preparation-001/test_pair_analysis.py",
+      "sha256": "6152c47dde5024114a20467ad641fb75daa26b9bfb9a82d3c18ec000e08c7a8d"
+    },
+    "paired-root-closeout-001.json": {
+      "bytes": 5050,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/paired-root-closeout-001.json",
+      "sha256": "777994acd4a0371b89964ad3507271151d680dbd4f1999cf9f75462141c3aefb"
+    },
+    "replay-preparation-001/analyzer-controls-002.log": {
+      "bytes": 2285,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/analyzer-controls-002.log",
+      "sha256": "4f71c26d95400db8266ffb729f1975211c083074cdf7e51fc0aa739ab17fe517"
+    },
+    "replay-preparation-001/analyzer-controls-failure-001.json": {
+      "bytes": 586,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/analyzer-controls-failure-001.json",
+      "sha256": "9868044ccc885d1a971f2bc69434884232799a86c11f9456d69ca26929a763d0"
+    },
+    "replay-preparation-001/bind-cpu-plan.py": {
+      "bytes": 3941,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/bind-cpu-plan.py",
+      "sha256": "eec64ad82699b31c24fa70b4b8b9f0dea4ecf678549f65dc705930a1979240ab"
+    },
+    "replay-preparation-001/cpu-plan-001.json": {
+      "bytes": 26809,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/cpu-plan-001.json",
+      "sha256": "a79e0e8eb15fa406cfc508bbb49054407db833d2e9b4c5c15624a913bc1cb1e2"
+    },
+    "replay-preparation-001/cpu-replay.py": {
+      "bytes": 6015,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/cpu-replay.py",
+      "sha256": "c378253968e6cde05a93b24a919bec55286fbe8f59193ef0d0856e240d89eed1"
+    },
+    "replay-preparation-001/data-controls-003.log": {
+      "bytes": 3388,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/data-controls-003.log",
+      "sha256": "f3840cc7396f7f24c0dfbe1a79e82ec4e9cf0151d2c395ee5b72d3f06b5dc3ee"
+    },
+    "replay-preparation-001/data-controls-004.log": {
+      "bytes": 2690,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/data-controls-004.log",
+      "sha256": "289dde0c6b3fd9a1753e530f7b144df49cf1306a37badb0f76a3d1c66fcb1d39"
+    },
+    "replay-preparation-001/data-controls-005.log": {
+      "bytes": 2899,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/data-controls-005.log",
+      "sha256": "67a8223c696b30e3e0cc14ed6cdfbac1bd14d44d57a982d56486e1eddf232818"
+    },
+    "replay-preparation-001/derive-restart.py": {
+      "bytes": 3521,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/derive-restart.py",
+      "sha256": "054a6bbfc6d7ac7e5300b00f6a06a458e912f13349a86298061a40841d84dc4e"
+    },
+    "replay-preparation-001/independent_analysis.py": {
+      "bytes": 16901,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/independent_analysis.py",
+      "sha256": "8f141848942928d3b781ec9dc4eba59414957c2611da529f4090313a7beb4d71"
+    },
+    "replay-preparation-001/lifecycle-proposal.md": {
+      "bytes": 3767,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/lifecycle-proposal.md",
+      "sha256": "997f16317690f3c685852cd31b607aa4a9fcdfcc442ae21fa29c7fd7a6398a76"
+    },
+    "replay-preparation-001/presentation_boundaries.py": {
+      "bytes": 13161,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/presentation_boundaries.py",
+      "sha256": "ae6c65e65476de3cfec22b3c2619facdbe07d9af4bd4f929efdcb71a39ca691c"
+    },
+    "replay-preparation-001/presentation_host_stages.py": {
+      "bytes": 21626,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/presentation_host_stages.py",
+      "sha256": "3ca697d782bc2c39a97216df9d410123d7169f5c1eb344f29042493171d2fee7"
+    },
+    "replay-preparation-001/restart-input-001/derivation.json": {
+      "bytes": 1707,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/restart-input-001/derivation.json",
+      "sha256": "95baff1b94d5faef0e5855df86c4cc00bdd18eb5671df1e5e8628643a6b88820"
+    },
+    "replay-preparation-001/restart-input-001/input.json": {
+      "bytes": 28060,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/restart-input-001/input.json",
+      "sha256": "4815e155c9974baae881e7716378a61a11d28012ceda6282aaf73e37c846f89e"
+    },
+    "replay-preparation-001/restart-input-001/observe.json": {
+      "bytes": 3989,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/restart-input-001/observe.json",
+      "sha256": "51b8faddc1c5ff2b785b554f3e4fdec6f0a2ae685a0f1ef846c3ab52ced1968b"
+    },
+    "replay-preparation-001/root-cpu-replay-grant.json": {
+      "bytes": 441,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/root-cpu-replay-grant.json",
+      "sha256": "d99ffaba72df355a4dabab59f00ba7ec586925234a4c863c13c03a9558508d28"
+    },
+    "replay-preparation-001/test_independent_analysis.failed-001.py": {
+      "bytes": 12306,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/test_independent_analysis.failed-001.py",
+      "sha256": "b0a097565c90f3d2376adff9d8a990135e21a40a4e01beae2602eda4e836f97b"
+    },
+    "replay-preparation-001/test_independent_analysis.py": {
+      "bytes": 13449,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/test_independent_analysis.py",
+      "sha256": "da59a2e352db6f97d7d17af1b97e4f3b1fd1e1aa5a5967c9d2d7d9e05bad7f58"
+    },
+    "replay-preparation-001/test_replay_data.failed-003.py": {
+      "bytes": 2786,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/test_replay_data.failed-003.py",
+      "sha256": "d85eb020e1d84da7451ddee264b704a4ce489e2b525fbb1ad4f7b8023afa3dc0"
+    },
+    "replay-preparation-001/test_replay_data.py": {
+      "bytes": 2831,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/replay-preparation-001/test_replay_data.py",
+      "sha256": "eec2586545c6c5706526df5eb5021cbb8847694e14274c011e23d263ece2d42e"
+    },
+    "reviews/independent-deadline-paired-runtime-review-20261018.json": {
+      "bytes": 2959,
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/independent-deadline-paired-runtime-review-20261018.json",
+      "sha256": "81c365e8bc65be608395938f478741f8d1efe0fdb246b7d6d40723003f0b13a6"
+    },
+    "reviews/independent-simulation-e737-root-source-20261018.json": {
+      "bytes": 2492,
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/independent-simulation-e737-root-source-20261018.json",
+      "sha256": "4c318e57221118d0e924cecf3fd26b93838ed774baed69be3b8adaf32e586f42"
+    },
+    "shipping-001/closeout.json": {
+      "bytes": 11439,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/closeout.json",
+      "sha256": "5b039b60f7d2e473e2cea134abb3eb4d9e050e7664d0478ddef78790db8937af"
+    },
+    "shipping-001/metadata/call-000.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-000.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-000.stdout.raw.log": {
+      "bytes": 41,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-000.stdout.raw.log",
+      "sha256": "56e64f577e915b4d80cba02f8e03370e1314d807ce7136507a7ff77b7540fa5e"
+    },
+    "shipping-001/metadata/call-001.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-001.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-001.stdout.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-001.stdout.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-002.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-002.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-002.stdout.raw.log": {
+      "bytes": 1697281,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-002.stdout.raw.log",
+      "sha256": "45b2344e48b902712dcbc333a682d7fe768201a480af96d6b78fd4edaef27f56"
+    },
+    "shipping-001/metadata/call-003.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-003.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-003.stdout.raw.log": {
+      "bytes": 9,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-003.stdout.raw.log",
+      "sha256": "33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9"
+    },
+    "shipping-001/metadata/call-004.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-004.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-004.stdout.raw.log": {
+      "bytes": 7,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-004.stdout.raw.log",
+      "sha256": "d49bd31f65cb736f4045946e1c8365657cfed300dc0e4f173af5e93ab4500e1a"
+    },
+    "shipping-001/metadata/call-005.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-005.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-005.stdout.raw.log": {
+      "bytes": 77,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-005.stdout.raw.log",
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d"
+    },
+    "shipping-001/metadata/call-006.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-006.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-006.stdout.raw.log": {
+      "bytes": 36,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-006.stdout.raw.log",
+      "sha256": "8dc912acd5bfeafc70b01b1d2a2afb0844afa02f5dba2f1ae8d5c212d005afb6"
+    },
+    "shipping-001/metadata/call-007.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-007.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-007.stdout.raw.log": {
+      "bytes": 43,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-007.stdout.raw.log",
+      "sha256": "024e83842db917ed79a567b48b5f70bf468a2a914d5dc6df59f9d19c25ad3a0e"
+    },
+    "shipping-001/metadata/call-008.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-008.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-008.stdout.raw.log": {
+      "bytes": 99,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-008.stdout.raw.log",
+      "sha256": "7da0fd6d11521838939c36a6c45bfaeb893ecd0f8db281f9093f2c93af465ed1"
+    },
+    "shipping-001/metadata/call-009.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-009.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-009.stdout.raw.log": {
+      "bytes": 5,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-009.stdout.raw.log",
+      "sha256": "7b01c549928398a045692f24bcac7803b348524cdd76f21265b02984b2ba556a"
+    },
+    "shipping-001/metadata/call-010.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-010.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-010.stdout.raw.log": {
+      "bytes": 93,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-010.stdout.raw.log",
+      "sha256": "083060ae79a9cc17bc69cb6166b1e16396c638b533de036324d8c6d49b77af24"
+    },
+    "shipping-001/metadata/call-011.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-011.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-011.stdout.raw.log": {
+      "bytes": 95,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-011.stdout.raw.log",
+      "sha256": "57613754e93aabf81ad5eb87c8ee8daea625e53bca4bdf5f881c5f1eb26c59d0"
+    },
+    "shipping-001/metadata/call-012.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-012.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-012.stdout.raw.log": {
+      "bytes": 90,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-012.stdout.raw.log",
+      "sha256": "e017764597376b88ed73966dddb05bd358a6c9d9b430d2373016b10b514cc1fd"
+    },
+    "shipping-001/metadata/call-013.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-013.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-013.stdout.raw.log": {
+      "bytes": 90,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-013.stdout.raw.log",
+      "sha256": "d40e2ce944a97993a9e7d111ab4e6b309caf109903b68cdfe56bde1984b3b0af"
+    },
+    "shipping-001/metadata/call-014.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-014.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-014.stdout.raw.log": {
+      "bytes": 94,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-014.stdout.raw.log",
+      "sha256": "4ee07be1967edfc93f5c32873b4642c74dd94c76bfca548cce868599c6dec1de"
+    },
+    "shipping-001/metadata/call-015.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-015.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-015.stdout.raw.log": {
+      "bytes": 90,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-015.stdout.raw.log",
+      "sha256": "83b2a256356bb337f057ffb453b4e32c9d5f5f96737855843feb966c59816c88"
+    },
+    "shipping-001/metadata/call-016.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-016.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-016.stdout.raw.log": {
+      "bytes": 93,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-016.stdout.raw.log",
+      "sha256": "be3ae617c2bec4a687a58bf1a2a6af48498a82f9b472bed0c1f705e6b1f3e9f1"
+    },
+    "shipping-001/metadata/call-017.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-017.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-017.stdout.raw.log": {
+      "bytes": 96,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-017.stdout.raw.log",
+      "sha256": "aabcb542524157b9d53c7b2ed6d0400830b41ae170e029b1a4d528fa06522a20"
+    },
+    "shipping-001/metadata/call-018.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-018.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-018.stdout.raw.log": {
+      "bytes": 97,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-018.stdout.raw.log",
+      "sha256": "f50fc08140b073a4d8d824b6c4df6f599239d8ed8f70f340a3a3a61a11e00cab"
+    },
+    "shipping-001/metadata/call-019.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-019.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-019.stdout.raw.log": {
+      "bytes": 1750,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-019.stdout.raw.log",
+      "sha256": "dd411232e5da2111e2cfb25a5e9d96900807f025b83b090c1c8e58a1c5e1a4ca"
+    },
+    "shipping-001/metadata/call-020.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-020.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-020.stdout.raw.log": {
+      "bytes": 53809,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-020.stdout.raw.log",
+      "sha256": "9b461a59ae83449b936d890af5fffe57f3961a8d8574183e57ee391341eca76b"
+    },
+    "shipping-001/metadata/call-021.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-021.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-021.stdout.raw.log": {
+      "bytes": 56726,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-021.stdout.raw.log",
+      "sha256": "d589c55f52a2d2eb090d723c2224114b01170da86d4d83dc60212e190a339b74"
+    },
+    "shipping-001/metadata/call-022.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-022.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-022.stdout.raw.log": {
+      "bytes": 77,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-022.stdout.raw.log",
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d"
+    },
+    "shipping-001/metadata/call-023.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-023.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-023.stdout.raw.log": {
+      "bytes": 192,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-023.stdout.raw.log",
+      "sha256": "352d6857968e80a6357a926ac685b9b07f77c479aaafde33e73a53945e802909"
+    },
+    "shipping-001/metadata/call-024.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-024.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-024.stdout.raw.log": {
+      "bytes": 67,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-024.stdout.raw.log",
+      "sha256": "b22adee5ac5a93ade5d52f11392360e1c1a95ef2add2bd03365e896e8f1688e1"
+    },
+    "shipping-001/metadata/call-025.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-025.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-025.stdout.raw.log": {
+      "bytes": 56726,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-025.stdout.raw.log",
+      "sha256": "d589c55f52a2d2eb090d723c2224114b01170da86d4d83dc60212e190a339b74"
+    },
+    "shipping-001/metadata/call-026.stdout.raw.log": {
+      "bytes": 33731014,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-026.stdout.raw.log",
+      "sha256": "7f63f3947ed7a09d1fed6fa69da0c0d0b761deb7b1230f9d5e99d5f53aa29071"
+    },
+    "shipping-001/metadata/call-027.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-027.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-027.stdout.raw.log": {
+      "bytes": 2433268,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-027.stdout.raw.log",
+      "sha256": "a348a2657fa19ff86745d56e271c655d6446b3a88d5cb613ca91066c1290d2bd"
+    },
+    "shipping-001/metadata/call-028.stdout.raw.log": {
+      "bytes": 12495,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-028.stdout.raw.log",
+      "sha256": "eec6a6f238a42f53dae7ad1bbd2fdc166fa908d98db307d55324950237e58cb5"
+    },
+    "shipping-001/metadata/call-029.stdout.raw.log": {
+      "bytes": 26731,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-029.stdout.raw.log",
+      "sha256": "a4cb3793df4a4511d3255d0c846958cc5df694834a2554cf46733072d10f6252"
+    },
+    "shipping-001/metadata/call-030.stdout.raw.log": {
+      "bytes": 207,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-030.stdout.raw.log",
+      "sha256": "0f250787d893eade8d4d3e85ee7dedd8239250cb82951f7552bdccc3b447f63a"
+    },
+    "shipping-001/metadata/call-031.stdout.raw.log": {
+      "bytes": 244,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-031.stdout.raw.log",
+      "sha256": "a6e9244d3d604addf18367d237af37375d90aefe70f3038cf796b692bb0101c6"
+    },
+    "shipping-001/metadata/call-032.stdout.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-032.stdout.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-033.stdout.raw.log": {
+      "bytes": 177,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-033.stdout.raw.log",
+      "sha256": "e8972c1d6c10fdecda3f86bff2f65874514b81a6505e4bc54335152ca4d2985b"
+    },
+    "shipping-001/metadata/call-034.stdout.raw.log": {
+      "bytes": 7945,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-034.stdout.raw.log",
+      "sha256": "a5db8baf7bf9e8bcf5df9ffae9826025d871162eeece66d61c7f0a06735fc619"
+    },
+    "shipping-001/metadata/call-035.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-035.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-035.stdout.raw.log": {
+      "bytes": 2226,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-035.stdout.raw.log",
+      "sha256": "a6de4ceddefb4527c5fe986636466a29773397d03f4503d56c3061501f176806"
+    },
+    "shipping-001/metadata/call-036.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-036.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-036.stdout.raw.log": {
+      "bytes": 9,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-036.stdout.raw.log",
+      "sha256": "33e26f35db6e57ce0c486ddc815fe966867e4f649e418eaf323f75f4720eb8e9"
+    },
+    "shipping-001/metadata/call-037.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-037.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-037.stdout.raw.log": {
+      "bytes": 7,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-037.stdout.raw.log",
+      "sha256": "d49bd31f65cb736f4045946e1c8365657cfed300dc0e4f173af5e93ab4500e1a"
+    },
+    "shipping-001/metadata/call-038.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-038.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-038.stdout.raw.log": {
+      "bytes": 77,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-038.stdout.raw.log",
+      "sha256": "1dc5ff25a027f5c0a04ac183e96b6665181272c327130fb0663c5c1be8aad81d"
+    },
+    "shipping-001/metadata/call-039.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-039.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-039.stdout.raw.log": {
+      "bytes": 36,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-039.stdout.raw.log",
+      "sha256": "8dc912acd5bfeafc70b01b1d2a2afb0844afa02f5dba2f1ae8d5c212d005afb6"
+    },
+    "shipping-001/metadata/call-040.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-040.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-040.stdout.raw.log": {
+      "bytes": 43,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-040.stdout.raw.log",
+      "sha256": "024e83842db917ed79a567b48b5f70bf468a2a914d5dc6df59f9d19c25ad3a0e"
+    },
+    "shipping-001/metadata/call-041.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-041.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-041.stdout.raw.log": {
+      "bytes": 99,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-041.stdout.raw.log",
+      "sha256": "7da0fd6d11521838939c36a6c45bfaeb893ecd0f8db281f9093f2c93af465ed1"
+    },
+    "shipping-001/metadata/call-042.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-042.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-042.stdout.raw.log": {
+      "bytes": 5,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-042.stdout.raw.log",
+      "sha256": "7b01c549928398a045692f24bcac7803b348524cdd76f21265b02984b2ba556a"
+    },
+    "shipping-001/metadata/call-043.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-043.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-043.stdout.raw.log": {
+      "bytes": 93,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-043.stdout.raw.log",
+      "sha256": "083060ae79a9cc17bc69cb6166b1e16396c638b533de036324d8c6d49b77af24"
+    },
+    "shipping-001/metadata/call-044.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-044.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-044.stdout.raw.log": {
+      "bytes": 95,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-044.stdout.raw.log",
+      "sha256": "57613754e93aabf81ad5eb87c8ee8daea625e53bca4bdf5f881c5f1eb26c59d0"
+    },
+    "shipping-001/metadata/call-045.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-045.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-045.stdout.raw.log": {
+      "bytes": 90,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-045.stdout.raw.log",
+      "sha256": "e017764597376b88ed73966dddb05bd358a6c9d9b430d2373016b10b514cc1fd"
+    },
+    "shipping-001/metadata/call-046.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-046.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-046.stdout.raw.log": {
+      "bytes": 90,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-046.stdout.raw.log",
+      "sha256": "d40e2ce944a97993a9e7d111ab4e6b309caf109903b68cdfe56bde1984b3b0af"
+    },
+    "shipping-001/metadata/call-047.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-047.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-047.stdout.raw.log": {
+      "bytes": 94,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-047.stdout.raw.log",
+      "sha256": "4ee07be1967edfc93f5c32873b4642c74dd94c76bfca548cce868599c6dec1de"
+    },
+    "shipping-001/metadata/call-048.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-048.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-048.stdout.raw.log": {
+      "bytes": 90,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-048.stdout.raw.log",
+      "sha256": "83b2a256356bb337f057ffb453b4e32c9d5f5f96737855843feb966c59816c88"
+    },
+    "shipping-001/metadata/call-049.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-049.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-049.stdout.raw.log": {
+      "bytes": 93,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-049.stdout.raw.log",
+      "sha256": "be3ae617c2bec4a687a58bf1a2a6af48498a82f9b472bed0c1f705e6b1f3e9f1"
+    },
+    "shipping-001/metadata/call-050.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-050.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-050.stdout.raw.log": {
+      "bytes": 96,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-050.stdout.raw.log",
+      "sha256": "aabcb542524157b9d53c7b2ed6d0400830b41ae170e029b1a4d528fa06522a20"
+    },
+    "shipping-001/metadata/call-051.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-051.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-051.stdout.raw.log": {
+      "bytes": 97,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-051.stdout.raw.log",
+      "sha256": "f50fc08140b073a4d8d824b6c4df6f599239d8ed8f70f340a3a3a61a11e00cab"
+    },
+    "shipping-001/metadata/call-052.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-052.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-052.stdout.raw.log": {
+      "bytes": 1750,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-052.stdout.raw.log",
+      "sha256": "dd411232e5da2111e2cfb25a5e9d96900807f025b83b090c1c8e58a1c5e1a4ca"
+    },
+    "shipping-001/metadata/call-053.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-053.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-053.stdout.raw.log": {
+      "bytes": 41,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-053.stdout.raw.log",
+      "sha256": "56e64f577e915b4d80cba02f8e03370e1314d807ce7136507a7ff77b7540fa5e"
+    },
+    "shipping-001/metadata/call-054.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-054.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-054.stdout.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-054.stdout.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-055.stderr.raw.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-055.stderr.raw.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-001/metadata/call-055.stdout.raw.log": {
+      "bytes": 1697281,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/call-055.stdout.raw.log",
+      "sha256": "45b2344e48b902712dcbc333a682d7fe768201a480af96d6b78fd4edaef27f56"
+    },
+    "shipping-001/metadata/managed-calls.json": {
+      "bytes": 66281,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/managed-calls.json",
+      "sha256": "cd41bb4323c5ec7a2511eaad2245d6412d3f2c8685e232f9ce1b356734b48fdc"
+    },
+    "shipping-001/metadata/prepared-runtime-inputs.json": {
+      "bytes": 7152,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/prepared-runtime-inputs.json",
+      "sha256": "1d8741c19927814936cd20832c070598bb53645a84bc2fafcda8487067d699d0"
+    },
+    "shipping-001/metadata/result.json": {
+      "bytes": 32861,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/result.json",
+      "sha256": "9a5cb1483bdc7d37461b4bafa172d97783c764dc54162aad56efc3b57f2f779d"
+    },
+    "shipping-001/metadata/storage.json": {
+      "bytes": 137165,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/metadata/storage.json",
+      "sha256": "a695991d8a6cf6c0eed38b961f290e8a575cb89113d26e0c49f5bb6dbe59a7e0"
+    },
+    "shipping-001/package/build.log": {
+      "bytes": 1760853,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/build.log",
+      "sha256": "c73831641d4906b70df88560fe86d216feab8ce5ea481652e2f90e2484729a82"
+    },
+    "shipping-001/package/diagnostic-build.json": {
+      "bytes": 35811,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/diagnostic-build.json",
+      "sha256": "f8cd885b152ebf9b4af7d37d6e91bbc19b1f1e88fc65a2b80701c0d1f05ad3f3"
+    },
+    "shipping-001/package/diagnostic-dependencies.txt": {
+      "bytes": 56726,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/diagnostic-dependencies.txt",
+      "sha256": "d589c55f52a2d2eb090d723c2224114b01170da86d4d83dc60212e190a339b74"
+    },
+    "shipping-001/package/normal-dependencies.txt": {
+      "bytes": 56726,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/normal-dependencies.txt",
+      "sha256": "d589c55f52a2d2eb090d723c2224114b01170da86d4d83dc60212e190a339b74"
+    },
+    "shipping-001/package/ordinary-summary-dependencies.txt": {
+      "bytes": 53809,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/ordinary-summary-dependencies.txt",
+      "sha256": "9b461a59ae83449b936d890af5fffe57f3961a8d8574183e57ee391341eca76b"
+    },
+    "shipping-001/package/producer/behavior.js.map": {
+      "bytes": 38929,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/producer/behavior.js.map",
+      "sha256": "06b1371b49cc9cff20157cd52be4f50bc568e5e1bae3640ac39f7bad0a5cdbff"
+    },
+    "shipping-001/package/producer/behavior.rs": {
+      "bytes": 2479396,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/producer/behavior.rs",
+      "sha256": "86ca2f12db45ce7724e2139cdaaeae5a9a927f1f960054a98e11fa12b33a13f2"
+    },
+    "shipping-001/package/producer/project-export.json": {
+      "bytes": 5291,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/producer/project-export.json",
+      "sha256": "a7e502b45617bbda758064dc361514e2807d407c9ee7f280ebe65fc30fa43052"
+    },
+    "shipping-001/package/producer/script-symbols.json": {
+      "bytes": 1359,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/producer/script-symbols.json",
+      "sha256": "700ae839c0c94b49fc174a27c985d22ae25d5bc8949253513a750d1036949804"
+    },
+    "shipping-001/package/project-build.json": {
+      "bytes": 5292,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/project-build.json",
+      "sha256": "6dff981efa9d7aaf836926a35e0e3d54b79f6e3aac888bac34bd8688ddc75af6"
+    },
+    "shipping-001/package/symbols/behavior.js.map": {
+      "bytes": 38929,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/symbols/behavior.js.map",
+      "sha256": "06b1371b49cc9cff20157cd52be4f50bc568e5e1bae3640ac39f7bad0a5cdbff"
+    },
+    "shipping-001/package/symbols/script-symbols.json": {
+      "bytes": 1359,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-001/package/symbols/script-symbols.json",
+      "sha256": "700ae839c0c94b49fc174a27c985d22ae25d5bc8949253513a750d1036949804"
+    },
+    "shipping-packet-001/authoring-manifest.json": {
+      "bytes": 4958,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/authoring-manifest.json",
+      "sha256": "393f4d0abf1aff52edb628b564d5aa9e3d424b641a9610fc41ebaae8df0f4b51"
+    },
+    "shipping-packet-001/build.py": {
+      "bytes": 19397,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/build.py",
+      "sha256": "22fe03b56ece8341382fb6485b9dab2f63881f78f092cba5e6b02c0df45beb1d"
+    },
+    "shipping-packet-001/build.py.patch": {
+      "bytes": 7196,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/build.py.patch",
+      "sha256": "abc282bdf88e6f35114fc731406f9fa9b45c33eb8b741dac2821632a03f00f4c"
+    },
+    "shipping-packet-001/compiler-inputs.json": {
+      "bytes": 103346,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/compiler-inputs.json",
+      "sha256": "e2917a460a24dcdab2768aef0bcaa15430aca478576e957e2b238e0c87f0d6bf"
+    },
+    "shipping-packet-001/compiler-module-admission-001.cjs": {
+      "bytes": 2173,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/compiler-module-admission-001.cjs",
+      "sha256": "1d02ccfc6527a2e10caf59f4d52e2c66f4d70f5dbbe7c58a7c77f2ce09415ef4"
+    },
+    "shipping-packet-001/compiler-smoke.cjs": {
+      "bytes": 2513,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/compiler-smoke.cjs",
+      "sha256": "c4d290a71519f21b1a0b4d74a939c0f19e466ac29f61457468c513e91df29602"
+    },
+    "shipping-packet-001/compiler-smoke.cjs.patch": {
+      "bytes": 692,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/compiler-smoke.cjs.patch",
+      "sha256": "48ba768117d9dcd7e3c7b326cea8bdb0562bde3c8bbef837496ac9ad899ce4c1"
+    },
+    "shipping-packet-001/cooked-asset-inputs.json": {
+      "bytes": 11540,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/cooked-asset-inputs.json",
+      "sha256": "bc2540a622e720533b04feb14ac08418a2ce4307cc6c1e538d04a505fd277254"
+    },
+    "shipping-packet-001/guard-base.py": {
+      "bytes": 20665,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/guard-base.py",
+      "sha256": "aadc159070f8ab488009e0736099c2d9c7c1b6c2dd62f91f138c4f5ac633c543"
+    },
+    "shipping-packet-001/guard-base.py.patch": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/guard-base.py.patch",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "shipping-packet-001/guard.py": {
+      "bytes": 24281,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/guard.py",
+      "sha256": "289b44d8697f54bca5824f3effa6a6c58247166cd564eabf71719d1125bfe09f"
+    },
+    "shipping-packet-001/guard.py.patch": {
+      "bytes": 459,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/guard.py.patch",
+      "sha256": "412da9631bd6c9d56f40ef47c5fd185fdfa0855541e6eb3006be98edcde2ae86"
+    },
+    "shipping-packet-001/plan.json": {
+      "bytes": 66570,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/plan.json",
+      "sha256": "450fee7074ed40f75a0a79193c3cfbbb95b8fb304c4ae4cc2e24e8293dec918f"
+    },
+    "shipping-packet-001/policy.py": {
+      "bytes": 6252,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/policy.py",
+      "sha256": "3fcc700334755e2c3fc8e12eb051d872d79d6c6a29ab9d8bcec655e0885ecd79"
+    },
+    "shipping-packet-001/policy.py.patch": {
+      "bytes": 695,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/policy.py.patch",
+      "sha256": "e08e74bbc95974a8ec8283fa615d906a6c9f157c641eb5db341aa53c3c0a0e28"
+    },
+    "shipping-packet-001/preparation-controls.json": {
+      "bytes": 462,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/preparation-controls.json",
+      "sha256": "27291e698a86ae6563cea937dfbe6dd9a6dabbe69b21ddbce58d952f1cbcda7d"
+    },
+    "shipping-packet-001/root-grant.json": {
+      "bytes": 575,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/root-grant.json",
+      "sha256": "c2d090d4f705ea88c1a6e9ca0c74c25d32615ee334c8d69ec7d4c24905eb5f01"
+    },
+    "shipping-packet-001/source-manifest.json": {
+      "bytes": 605895,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/source-manifest.json",
+      "sha256": "e4ef1f4753e2a08737d138159a21e1040bf09d4197c6c2b02ead31b41c40f92f"
+    },
+    "shipping-packet-001/test_build.py": {
+      "bytes": 4552,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/test_build.py",
+      "sha256": "34bfb961539973c0cc65f1d5e14a6bc121bc533daf26258718e7227d9a9d437f"
+    },
+    "shipping-packet-001/test_independent_policy.py": {
+      "bytes": 2296,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/test_independent_policy.py",
+      "sha256": "94978458644beb63328aa37bec87b704dbb3d057181a4a0991341226c99c0ad2"
+    },
+    "shipping-packet-001/test_policy.py": {
+      "bytes": 1619,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/test_policy.py",
+      "sha256": "cb48a6cf197331744817e456b4686a9650ea198fb08ac35dec8a088a4835942b"
+    },
+    "shipping-packet-001/tool-identities.json": {
+      "bytes": 223815,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/shipping-packet-001/tool-identities.json",
+      "sha256": "e60aea0e7367ee942ac5ddd5eac61306d1ab649e7da636a53db8e13a9f1152ff"
+    },
+    "source-001/files/Cargo.lock": {
+      "bytes": 253557,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/Cargo.lock",
+      "sha256": "4d902f46cda1688dd3e9fb26968aec830512a7e92b2fe6b8629f7a9fdab8a043"
+    },
+    "source-001/files/Cargo.toml": {
+      "bytes": 3956,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/Cargo.toml",
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7"
+    },
+    "source-001/files/crates/incant_game_player/Cargo.toml": {
+      "bytes": 7801,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/Cargo.toml",
+      "sha256": "c5871c3c33c8630398f5a46b4e535406e711470e1a4d647cc382b5fe99d4f4d9"
+    },
+    "source-001/files/crates/incant_game_player/src/batching.rs": {
+      "bytes": 13593,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/batching.rs",
+      "sha256": "e67f3df91fa92b6b9f8b453e666599f745dccb50512bf307f9e0f183ef0fc9a9"
+    },
+    "source-001/files/crates/incant_game_player/src/lib.rs": {
+      "bytes": 13403,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/lib.rs",
+      "sha256": "2ac402401898a54f0688d7330fb9d69e2fa9c655d2c2a1a73d3e382445c3149e"
+    },
+    "source-001/files/crates/incant_game_player/src/wake.rs": {
+      "bytes": 5751,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/wake.rs",
+      "sha256": "fd03ed4b138e143bb162f96f65fff8f53facc332d3ddb6073f7b6ddf6f70974f"
+    },
+    "source-001/files/crates/incant_game_player/src/window/clock.rs": {
+      "bytes": 3174,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/clock.rs",
+      "sha256": "f19acd30cfb0a599f487a6f5811f7fc400a7df5d9b8b647f919a38df359f3461"
+    },
+    "source-001/files/crates/incant_game_player/src/window/display_link.rs": {
+      "bytes": 6079,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/display_link.rs",
+      "sha256": "d86e6e399ec7828aeeff9c3837693af59e8a68e80155adac64f796b344ff6f4c"
+    },
+    "source-001/files/crates/incant_game_player/src/window/display_link/gate.rs": {
+      "bytes": 8500,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/display_link/gate.rs",
+      "sha256": "00fa3c89f3f38f3f72115398c11ee96dd0ad47b5030ee19a7f5880bacb37a4a6"
+    },
+    "source-001/files/crates/incant_game_player/src/window/display_link/inbox.rs": {
+      "bytes": 4016,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/display_link/inbox.rs",
+      "sha256": "3d942a36ff715f60005023aca687a0d76d924adb8443fbcdb9abbf10ae8100c2"
+    },
+    "source-001/files/crates/incant_game_player/src/window/independent.rs": {
+      "bytes": 462,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/independent.rs",
+      "sha256": "a4845fb6f0ce05a69beab9eeea466e1c56311c51a81ef095fe742db4f94a2beb"
+    },
+    "source-001/files/crates/incant_game_player/src/window/independent/tests.rs": {
+      "bytes": 3372,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/independent/tests.rs",
+      "sha256": "26e4dab0b2574faf232bc4f495503b5395ab0cb8ee3d559356dcdde46b06f43e"
+    },
+    "source-001/files/crates/incant_game_player/src/window/mod.rs": {
+      "bytes": 82778,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/mod.rs",
+      "sha256": "96eb4ebd86a424ed186d990ebfe3c3541c35d31620bfdf0bbac6717bf5d45719"
+    },
+    "source-001/files/crates/incant_game_player/src/window/presentations.rs": {
+      "bytes": 17496,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/presentations.rs",
+      "sha256": "bca62e2afd0f5599d9fcb37467c4efc779bfe017f6f0c3693def8fc0cada3471"
+    },
+    "source-001/files/crates/incant_game_player/src/window/presentations/boundaries.rs": {
+      "bytes": 3333,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/presentations/boundaries.rs",
+      "sha256": "fa5683355154d0dbc796e3d3df560e9f84a0a8fcfddf24e4b54de1f1616ae23f"
+    },
+    "source-001/files/crates/incant_game_player/src/window/presentations/independent_tests.rs": {
+      "bytes": 4058,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/presentations/independent_tests.rs",
+      "sha256": "77eeda35ce843602822b749909cbbdd3b10fd32fb824c1be05f54900d520ca01"
+    },
+    "source-001/files/crates/incant_game_player/src/window/presentations/model.rs": {
+      "bytes": 16700,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/presentations/model.rs",
+      "sha256": "9bff7df08375ab5348a5f492f78b21afe0b64fed6a401cd2e8e47be4ee1d0d3e"
+    },
+    "source-001/files/crates/incant_game_player/src/window/presentations/tests.rs": {
+      "bytes": 12750,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/presentations/tests.rs",
+      "sha256": "628d153e93d0a7ebda1739a576e6a0fb5e03780103ac0aa8dbd5b58225d09f78"
+    },
+    "source-001/files/crates/incant_game_player/src/window/surface.rs": {
+      "bytes": 25822,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/surface.rs",
+      "sha256": "0ab78c033eccc4e544eb49412ebc10cc159b125dea903b7dfed9ed2189dc6560"
+    },
+    "source-001/files/crates/incant_game_player/src/window/termination.rs": {
+      "bytes": 3899,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/termination.rs",
+      "sha256": "af723978fc8dcb560cf9f3a922f087fb5b3644632275001b16d8af0ca2a86812"
+    },
+    "source-001/files/crates/incant_game_player/src/window/ui_input.rs": {
+      "bytes": 15877,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_player/src/window/ui_input.rs",
+      "sha256": "a6296e20f3675210f9dd045b3ea0ac144022aa949098f20b8581f63047db22f5"
+    },
+    "source-001/files/crates/incant_game_runtime/src/hosted.rs": {
+      "bytes": 19711,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_game_runtime/src/hosted.rs",
+      "sha256": "75ab15f46c76d459faef987a46cd4b2f208ded8e5707ae11d9ab4e351beaf42d"
+    },
+    "source-001/files/crates/incant_render_gpu_host/src/lib.rs": {
+      "bytes": 16868,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_render_gpu_host/src/lib.rs",
+      "sha256": "3f8b86046af0a2f115ede195748109e23d8c499609683f53b9d7e84b2484ee18"
+    },
+    "source-001/files/crates/incant_render_gpu_host/src/presentation.rs": {
+      "bytes": 2055,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/crates/incant_render_gpu_host/src/presentation.rs",
+      "sha256": "48a3dee702db4c748c318b23548e734feec6958a08bfce76d2bdc9c52d20987d"
+    },
+    "source-001/files/docs/spikes/native-independent-simulation-deadline.md": {
+      "bytes": 8146,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/docs/spikes/native-independent-simulation-deadline.md",
+      "sha256": "024c3543db8f7915f2a87a3851498031727886cbf58c7ec2d7aa296508d9012f"
+    },
+    "source-001/files/rust-toolchain.toml": {
+      "bytes": 100,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/rust-toolchain.toml",
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124"
+    },
+    "source-001/files/tools/cargo": {
+      "bytes": 179,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/tools/cargo",
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3"
+    },
+    "source-001/files/tools/native_process.py": {
+      "bytes": 19307,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/files/tools/native_process.py",
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    "source-001/freeze.json": {
+      "bytes": 6169,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/freeze.json",
+      "sha256": "28197ea3eb37be5c4e0befe29c368a3f37a678208d2c3fefaaeaa4e4d8c85639"
+    },
+    "source-001/patch.diff": {
+      "bytes": 68086,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-001/patch.diff",
+      "sha256": "9b793f6d2f37a248c0ac94a542a033f918d969e74fbc8c013e27f2ef8a9b9f6f"
+    },
+    "source-002/files/Cargo.lock": {
+      "bytes": 253557,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/Cargo.lock",
+      "sha256": "4d902f46cda1688dd3e9fb26968aec830512a7e92b2fe6b8629f7a9fdab8a043"
+    },
+    "source-002/files/Cargo.toml": {
+      "bytes": 3956,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/Cargo.toml",
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7"
+    },
+    "source-002/files/crates/incant_game_player/Cargo.toml": {
+      "bytes": 7801,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/Cargo.toml",
+      "sha256": "c5871c3c33c8630398f5a46b4e535406e711470e1a4d647cc382b5fe99d4f4d9"
+    },
+    "source-002/files/crates/incant_game_player/src/batching.rs": {
+      "bytes": 13593,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/batching.rs",
+      "sha256": "e67f3df91fa92b6b9f8b453e666599f745dccb50512bf307f9e0f183ef0fc9a9"
+    },
+    "source-002/files/crates/incant_game_player/src/lib.rs": {
+      "bytes": 13403,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/lib.rs",
+      "sha256": "2ac402401898a54f0688d7330fb9d69e2fa9c655d2c2a1a73d3e382445c3149e"
+    },
+    "source-002/files/crates/incant_game_player/src/wake.rs": {
+      "bytes": 5751,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/wake.rs",
+      "sha256": "fd03ed4b138e143bb162f96f65fff8f53facc332d3ddb6073f7b6ddf6f70974f"
+    },
+    "source-002/files/crates/incant_game_player/src/window/clock.rs": {
+      "bytes": 3174,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/clock.rs",
+      "sha256": "f19acd30cfb0a599f487a6f5811f7fc400a7df5d9b8b647f919a38df359f3461"
+    },
+    "source-002/files/crates/incant_game_player/src/window/display_link.rs": {
+      "bytes": 6079,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/display_link.rs",
+      "sha256": "d86e6e399ec7828aeeff9c3837693af59e8a68e80155adac64f796b344ff6f4c"
+    },
+    "source-002/files/crates/incant_game_player/src/window/display_link/gate.rs": {
+      "bytes": 8500,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/display_link/gate.rs",
+      "sha256": "00fa3c89f3f38f3f72115398c11ee96dd0ad47b5030ee19a7f5880bacb37a4a6"
+    },
+    "source-002/files/crates/incant_game_player/src/window/display_link/inbox.rs": {
+      "bytes": 4016,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/display_link/inbox.rs",
+      "sha256": "3d942a36ff715f60005023aca687a0d76d924adb8443fbcdb9abbf10ae8100c2"
+    },
+    "source-002/files/crates/incant_game_player/src/window/independent.rs": {
+      "bytes": 462,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/independent.rs",
+      "sha256": "a4845fb6f0ce05a69beab9eeea466e1c56311c51a81ef095fe742db4f94a2beb"
+    },
+    "source-002/files/crates/incant_game_player/src/window/independent/tests.rs": {
+      "bytes": 3372,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/independent/tests.rs",
+      "sha256": "26e4dab0b2574faf232bc4f495503b5395ab0cb8ee3d559356dcdde46b06f43e"
+    },
+    "source-002/files/crates/incant_game_player/src/window/mod.rs": {
+      "bytes": 82810,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/mod.rs",
+      "sha256": "8a17dcae0c37ed22d7d4795b25270254ad35a0644613c98282262065f8382637"
+    },
+    "source-002/files/crates/incant_game_player/src/window/presentations.rs": {
+      "bytes": 17496,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/presentations.rs",
+      "sha256": "bca62e2afd0f5599d9fcb37467c4efc779bfe017f6f0c3693def8fc0cada3471"
+    },
+    "source-002/files/crates/incant_game_player/src/window/presentations/boundaries.rs": {
+      "bytes": 3333,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/presentations/boundaries.rs",
+      "sha256": "fa5683355154d0dbc796e3d3df560e9f84a0a8fcfddf24e4b54de1f1616ae23f"
+    },
+    "source-002/files/crates/incant_game_player/src/window/presentations/independent_tests.rs": {
+      "bytes": 4058,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/presentations/independent_tests.rs",
+      "sha256": "77eeda35ce843602822b749909cbbdd3b10fd32fb824c1be05f54900d520ca01"
+    },
+    "source-002/files/crates/incant_game_player/src/window/presentations/model.rs": {
+      "bytes": 16700,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/presentations/model.rs",
+      "sha256": "9bff7df08375ab5348a5f492f78b21afe0b64fed6a401cd2e8e47be4ee1d0d3e"
+    },
+    "source-002/files/crates/incant_game_player/src/window/presentations/tests.rs": {
+      "bytes": 12750,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/presentations/tests.rs",
+      "sha256": "628d153e93d0a7ebda1739a576e6a0fb5e03780103ac0aa8dbd5b58225d09f78"
+    },
+    "source-002/files/crates/incant_game_player/src/window/surface.rs": {
+      "bytes": 25822,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/surface.rs",
+      "sha256": "0ab78c033eccc4e544eb49412ebc10cc159b125dea903b7dfed9ed2189dc6560"
+    },
+    "source-002/files/crates/incant_game_player/src/window/termination.rs": {
+      "bytes": 3899,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/termination.rs",
+      "sha256": "af723978fc8dcb560cf9f3a922f087fb5b3644632275001b16d8af0ca2a86812"
+    },
+    "source-002/files/crates/incant_game_player/src/window/ui_input.rs": {
+      "bytes": 15877,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_player/src/window/ui_input.rs",
+      "sha256": "a6296e20f3675210f9dd045b3ea0ac144022aa949098f20b8581f63047db22f5"
+    },
+    "source-002/files/crates/incant_game_runtime/src/hosted.rs": {
+      "bytes": 19711,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_game_runtime/src/hosted.rs",
+      "sha256": "75ab15f46c76d459faef987a46cd4b2f208ded8e5707ae11d9ab4e351beaf42d"
+    },
+    "source-002/files/crates/incant_render_gpu_host/src/lib.rs": {
+      "bytes": 16868,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_render_gpu_host/src/lib.rs",
+      "sha256": "3f8b86046af0a2f115ede195748109e23d8c499609683f53b9d7e84b2484ee18"
+    },
+    "source-002/files/crates/incant_render_gpu_host/src/presentation.rs": {
+      "bytes": 2055,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/crates/incant_render_gpu_host/src/presentation.rs",
+      "sha256": "48a3dee702db4c748c318b23548e734feec6958a08bfce76d2bdc9c52d20987d"
+    },
+    "source-002/files/docs/spikes/native-independent-simulation-deadline.md": {
+      "bytes": 8146,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/docs/spikes/native-independent-simulation-deadline.md",
+      "sha256": "024c3543db8f7915f2a87a3851498031727886cbf58c7ec2d7aa296508d9012f"
+    },
+    "source-002/files/rust-toolchain.toml": {
+      "bytes": 100,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/rust-toolchain.toml",
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124"
+    },
+    "source-002/files/tools/cargo": {
+      "bytes": 179,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/tools/cargo",
+      "sha256": "9aef98d613601b0c374c1d0499afb39d710cbf5002faba537f21be9c11ff72e3"
+    },
+    "source-002/files/tools/native_process.py": {
+      "bytes": 19307,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/files/tools/native_process.py",
+      "sha256": "58dd2a8231d7f9d1e42070fc85425461e06a43f279fa5e7f8e57b4a40c3a3aa4"
+    },
+    "source-002/freeze.json": {
+      "bytes": 6255,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/freeze.json",
+      "sha256": "eb6f9ef065387becabf0c3d330ed760befe963e6c82eff0f1eb1faa5db69f1ef"
+    },
+    "source-002/repair.patch": {
+      "bytes": 2012,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-002/repair.patch",
+      "sha256": "fb29d3c2f926e219a5b710a62959abc3c7afb7deb55217121b43eb3c8e9ea837"
+    },
+    "source-receipt-001.json": {
+      "bytes": 1644,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-receipt-001.json",
+      "sha256": "4bedb44c6e249facea794f855ee6e082f05f48614725423959e1f1ae8276b29b"
+    },
+    "source-receipt-002.json": {
+      "bytes": 1584,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/source-receipt-002.json",
+      "sha256": "1aa05cdee26201718554ed42f6014c1d34675e4bea0539238f056ef58cb506eb"
+    },
+    "window-independent-001/child-result.json": {
+      "bytes": 5608,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-independent-001/child-result.json",
+      "sha256": "89ad7ddf929cbcc73ea38800090803e0d6838bef9327365a9bad11478af8a6cc"
+    },
+    "window-independent-001/compilations.json": {
+      "bytes": 25468,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-independent-001/compilations.json",
+      "sha256": "e4da45cfe002e0374838907880d7eee3f1b632a7bd51661dac030fc4ea9fc49e"
+    },
+    "window-independent-001/creation-coverage.json": {
+      "bytes": 2666,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-independent-001/creation-coverage.json",
+      "sha256": "2b5e8c2b834042bb1bcb51968411e8f056b1f4d19f1ec1f440cf4632f852d1bc"
+    },
+    "window-independent-001/display-intervals.json": {
+      "bytes": 934136,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-independent-001/display-intervals.json",
+      "sha256": "0d0c3dabd8e5c6fe85dff970cc65ab7d2d77cb2fa9d9e21997641af144f44bfa"
+    },
+    "window-independent-001/host-stages.json": {
+      "bytes": 4721027,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-independent-001/host-stages.json",
+      "sha256": "8ce0c74c760570c34ef67e5ef41b05ec73ddd3cd90fb7d7a44636ec65b8a8459"
+    },
+    "window-independent-001/player-pid.json": {
+      "bytes": 243,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-independent-001/player-pid.json",
+      "sha256": "fd3c9aab28abf9181d192f6c8cbdd8a1b799610c1e22bda0756df73c9c154522"
+    },
+    "window-independent-001/presentations.json": {
+      "bytes": 3128522,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-independent-001/presentations.json",
+      "sha256": "1866d1e5403284d53b9e499d3b3ad400e495ceadfaecef2872c1c1557c2a52bb"
+    },
+    "window-independent-001/process.json": {
+      "bytes": 69,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-independent-001/process.json",
+      "sha256": "c2739fc8c32cf16ea3e99f726483eb1861b973be540a37c938e30b450f028470"
+    },
+    "window-independent-001/result.json": {
+      "bytes": 2939,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-independent-001/result.json",
+      "sha256": "f577e7ddbd427b2390239d3d496c8f12148b5a2f0f6c0c81e3331c52dcae17c2"
+    },
+    "window-independent-001/started.json": {
+      "bytes": 1325,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-independent-001/started.json",
+      "sha256": "c62ba1480c0202d1f7e73a13c1964b60e406730e0c915a89a6093c07594efd75"
+    },
+    "window-independent-001/stderr.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-independent-001/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "window-independent-001/stdout.json": {
+      "bytes": 577444,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-independent-001/stdout.json",
+      "sha256": "014cc67fa7015ebb3f8a0725f57d55303837a648cc45a4131e56e5fccadee13b"
+    },
+    "window-independent-001/window-state.jsonl": {
+      "bytes": 20796,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-independent-001/window-state.jsonl",
+      "sha256": "b5b8a4b3928c589fa88f8e433bc6a2efb9ebbef1bf0cbdfee3e8aa9dd1045216"
+    },
+    "window-lifecycle-focus-resize-001/child-result.json": {
+      "bytes": 11129,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-lifecycle-focus-resize-001/child-result.json",
+      "sha256": "fa6143707c4ccc950b02659293f77a575adec21a1623fb81dc117bb077697d14"
+    },
+    "window-lifecycle-focus-resize-001/compilations.json": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-lifecycle-focus-resize-001/compilations.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "window-lifecycle-focus-resize-001/player-pid.json": {
+      "bytes": 243,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-lifecycle-focus-resize-001/player-pid.json",
+      "sha256": "75c6d8b7a2c70e0118b52665ca75e12f18ec36e007b647217064e16a37984cc5"
+    },
+    "window-lifecycle-focus-resize-001/presentations.json": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-lifecycle-focus-resize-001/presentations.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "window-lifecycle-focus-resize-001/process.json": {
+      "bytes": 70,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-lifecycle-focus-resize-001/process.json",
+      "sha256": "013f557bad20eab16da83f7d16315b49aeb10e0e2e1a310550a2a16e1eaadcfe"
+    },
+    "window-lifecycle-focus-resize-001/result.json": {
+      "bytes": 2079,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-lifecycle-focus-resize-001/result.json",
+      "sha256": "923240d253c0c789eaf5ec0e252f2ff3ca05d2e3e3e590e362ef4ac48ac6faa8"
+    },
+    "window-lifecycle-focus-resize-001/root-absence-001.json": {
+      "bytes": 322,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-lifecycle-focus-resize-001/root-absence-001.json",
+      "sha256": "3265215e65e79c76a9423b977e0088b5d58f9c89f8b6113897e2a801605f9ab7"
+    },
+    "window-lifecycle-focus-resize-001/started.json": {
+      "bytes": 1358,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-lifecycle-focus-resize-001/started.json",
+      "sha256": "046199b7a456221013f46b3ec7df0d7c4c22b819d9960fa52b73cdba1acd45a9"
+    },
+    "window-lifecycle-focus-resize-001/stderr.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-lifecycle-focus-resize-001/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "window-lifecycle-focus-resize-001/stdout.json": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-lifecycle-focus-resize-001/stdout.json",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "window-lifecycle-focus-resize-001/window-state.jsonl": {
+      "bytes": 51186,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-lifecycle-focus-resize-001/window-state.jsonl",
+      "sha256": "868d3af7b663dab5ca82874185c0fe633007906bb2c5c683324dd8a93b563d8a"
+    },
+    "window-ordinary-001/child-result.json": {
+      "bytes": 5632,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-ordinary-001/child-result.json",
+      "sha256": "43ca27b770ddb476a832ff45f42805b2d375d8a44b0827a2624bcc3230f53a10"
+    },
+    "window-ordinary-001/compilations.json": {
+      "bytes": 25637,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-ordinary-001/compilations.json",
+      "sha256": "af9617db4022e6783fd53cf07bfa3497fe38ac29c5a5098b4dd0b0017734541b"
+    },
+    "window-ordinary-001/creation-coverage.json": {
+      "bytes": 2678,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-ordinary-001/creation-coverage.json",
+      "sha256": "fb13097bf6aa41eb3580c13a2fc5686b26771f71a080f2b96783b6e8f08f295e"
+    },
+    "window-ordinary-001/display-intervals.json": {
+      "bytes": 923406,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-ordinary-001/display-intervals.json",
+      "sha256": "5d722a17dea18a01743206d8a2e26f9d18d7f46ad2c5dcefac69ff3ae0f0c6ec"
+    },
+    "window-ordinary-001/host-stages.json": {
+      "bytes": 4006924,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-ordinary-001/host-stages.json",
+      "sha256": "63fc4180d7bab4d77bba44c9dcd73d90035b0a9d4241f4bc00f88b29a703934a"
+    },
+    "window-ordinary-001/player-pid.json": {
+      "bytes": 243,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-ordinary-001/player-pid.json",
+      "sha256": "1d2a906b90ffa19c0746db7bf71143d8bd4aad36020fe877d6a6b6f8b69f4d7f"
+    },
+    "window-ordinary-001/presentations.json": {
+      "bytes": 1811513,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-ordinary-001/presentations.json",
+      "sha256": "638706156c733316217832236b4d6d7bd05bfd4d635c77565f866e661b129b52"
+    },
+    "window-ordinary-001/process.json": {
+      "bytes": 70,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-ordinary-001/process.json",
+      "sha256": "8f2942a76bc11d4b411a2d0f16437873a7eb7c5c616a6a0cf22018656d57c4d9"
+    },
+    "window-ordinary-001/result.json": {
+      "bytes": 2983,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-ordinary-001/result.json",
+      "sha256": "9929603caa0dacc8c08585204e2dc9c3df9363332d7b98b1fef415b41d45cb36"
+    },
+    "window-ordinary-001/started.json": {
+      "bytes": 1244,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-ordinary-001/started.json",
+      "sha256": "0db37a7a821cc922237f6bb0130fb65fc61d5a2d69fdbac7061cdaf0a5b4fe0f"
+    },
+    "window-ordinary-001/stderr.log": {
+      "bytes": 0,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-ordinary-001/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "window-ordinary-001/stdout.json": {
+      "bytes": 576545,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-ordinary-001/stdout.json",
+      "sha256": "67486436b8599ceab95ddbb76d9d07d211a2c4001b35ce365f1c9d61031486ed"
+    },
+    "window-ordinary-001/window-state.jsonl": {
+      "bytes": 20799,
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/independent-simulation-deadline-001/window-ordinary-001/window-state.jsonl",
+      "sha256": "bb7cebfd23ad44723bfb70864587d4ff3a2e0b0645e4a12e9336098bea8a2af4"
+    }
+  },
+  "source": "b0d37fb8af69f5ff74658011a525f9a37af77d3e"
+}

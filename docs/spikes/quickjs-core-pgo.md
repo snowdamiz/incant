@@ -1,7 +1,7 @@
 # Core C-PGO: functional qualification and mixed CPU outcome
 
 The retained branch experiment builds and runs Core Sample with ordinary,
-instrumented and profile-use QuickJS C code. Full gameplay and audible PCM match,
+instrumented and profile-use QuickJS C code. Full gameplay and complete PCM match,
 but the matched CPU result does **not** justify adoption: both win-route repeats
 remain above the 2 ms ScriptTick p95 target, and their measured changes have
 opposite signs. Main receives documentation and inert evidence only. The complete

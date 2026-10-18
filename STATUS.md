@@ -2,7 +2,7 @@
 
 [Release checkpoint54](docs/spikes/release-checkpoint-54.md) is promoted: all
 23 required contexts and eight exact-head workflows passed on the main401 tree,
-and release `503b90af` has the identical tested tree. Main402–405 changes
+and release `503b90af` has the identical tested tree. Main402–406 changes
 remain outside that release baseline. Checkpoint53 failed the Wasm timer-fixture
 lookup on all three desktop platforms; its other seven workflows passed.
 The [narrow correction](docs/spikes/ci-timer-fixture-layout.md) is merged through
@@ -22,7 +22,7 @@ incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
 [Release checkpoint54](docs/spikes/release-checkpoint-54.md) contains the tested
 main401 tree after all 23 required contexts and eight candidate workflows passed.
-Main402–405 changes remain outside that release baseline. Rendering quality and full rendered-game
+Main402–406 changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -82,10 +82,16 @@ Skeleton and structural changes remain outside this admission rule.
 
 ## Current parallel qualification — 2026-10-17
 
+Computer use and screen capture are paused for every agent by the director's
+latest instruction. Owned capture helpers and test windows have been stopped;
+native window checks remain held. Terminal implementation, review and data-only
+verification continue.
+
 Compatible HUD text updates now reuse existing checked font-shaping engines;
 a new ordered fallback chain still prepares and atomically publishes a separate
 candidate. The local change passes 68 scoped UI/host controls, strict all-target
-lints and independent source review. It is not merged yet and has no measured
+lints and independent source review. It is merged through PR406 after all local
+development checks and the required exact-head fast check. There is no measured
 shipping frame-time claim. [Scope and evidence](docs/spikes/ui-font-reuse.md).
 
 
@@ -171,8 +177,10 @@ A subsequent three-arm Metal discriminator reproduces the same original-owner
 errors after widening that attachment to RGBA16. Duplicating the exact owner in
 the existing motion attachment instead yields zero errors; all other semantic
 fields remain bit-identical. This narrows the investigation to attachment or
-output routing behavior without establishing its cause. A slot-order comparison
-is prepared next; no production renderer change is adopted. Moving sparse
+output routing behavior without establishing its cause. The slot-order comparison's
+first build reached its 90-second deadline before producing an executable; its
+CPU controls and numerical GPU test did not run. The failure remains retained,
+and no production renderer change is adopted. Moving sparse
 geometry and full appearance/cost qualification remain open.
 
 The Godot-informed [batched native presentation diagnostic](docs/spikes/native-batched-presentation.md)
@@ -188,7 +196,8 @@ display-link-only presentation p95 are 16.667 ms; latest-batch is 25 ms, with
 strict capture receipt because committed-redraw wake metadata is omitted and
 the initial timestamp is treated inconsistently. Independent saved-data analysis
 keeps that failure and includes all display roles. A separate default-off
-simulation-deadline implementation passes source review, 202 selected and 151
+simulation-deadline [experiment](docs/spikes/native-independent-simulation-deadline.md)
+passes source review, 202 selected and 151
 ordinary CPU controls, and both strict lints after a mechanical lint correction.
 Its fresh shipping build passes dependency/codegen/source-free checks, and
 the full 2,156-step CPU replay matches the complete gameplay report and all
@@ -204,7 +213,8 @@ step 2,151; resize does not occur and complete results are absent. That failed
 attempt remains retained, both process identities/groups are absent, and restart
 window qualification is unexecuted. Computer use and screen capture are paused
 for all agents by the director; native lifecycle gates remain open. Ordinary
-exports retain their prior behavior.
+exports retain their prior behavior. Main receives only the report and inert
+evidence; the scheduling implementation remains on its retained experiment branch.
 
 The [native pose-interpolation adapter and composed host](docs/spikes/native-pose-interpolation.md)
 are merged through PR403 after independent review and exact-head development
@@ -282,7 +292,9 @@ unchanged ordinary/use binaries. All eight full gameplay reports and complete PC
 outputs match. Win-route ScriptTick p95 changes from 2.27–2.28 to 2.17–2.18 ms in
 one pair, but from 2.23–2.24 to 2.41–2.42 ms in the other. Loss-route p95 improves
 slightly in both pairs and remains below 2 ms in both modes. The mixed win result
-and all four win measurements above 2 ms do not justify enabling PGO. These are
+and all four win measurements above 2 ms do not justify enabling PGO. The
+[complete outcome](docs/spikes/quickjs-core-pgo.md) and inert evidence enter main;
+the compiler changes remain on the retained experiment branch. These are
 CPU measurements, not rendered-game FPS. Independent saved-data review passes;
 all 81 observed identities are absent after terminal success.
 Last reassessment: 2026-10-18. The next useful trigger is a distinct residual-cost
