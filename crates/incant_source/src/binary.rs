@@ -11,79 +11,6 @@ pub enum BinaryVersion {
     Present { sha256: String },
 }
 
-#[cfg(test)]
-mod pinned_tests {
-    use super::*;
-    use std::fs;
-    const SOURCE: &str = "modules/game/module.rs";
-    const DEST: &str = "modules/game/module.wasm";
-    const RAW: &[u8] = b"\0asm\x01\0\0\0candidate";
-
-    fn setup(root: &Path) -> SourceStore {
-        fs::create_dir_all(root.join("modules/game")).unwrap();
-        fs::write(root.join(SOURCE), "source").unwrap();
-        fs::write(root.join(DEST), RAW).unwrap();
-        let journal = root.join("journal");
-        fs::write(&journal, "").unwrap();
-        SourceStore::open(root, &journal, "01ARZ3NDEKTSV4RRFFQ69G5FAV").unwrap()
-    }
-    #[cfg(unix)]
-    #[test]
-    fn preparation_keeps_unlinked_file_and_parent_nodes_alive() {
-        use std::os::unix::fs::MetadataExt;
-        let root = tempfile::tempdir().unwrap();
-        let store = setup(root.path());
-        let snapshot = store
-            .capture_binary(SOURCE, &BinaryVersion::of(Some(RAW)))
-            .unwrap();
-        let expected = snapshot.image.as_ref().unwrap().identity;
-        fs::remove_file(root.path().join(DEST)).unwrap();
-        fs::remove_file(root.path().join(SOURCE)).unwrap();
-        fs::remove_dir(root.path().join("modules/game")).unwrap();
-        fs::remove_dir(root.path().join("modules")).unwrap();
-        let held = snapshot._node.as_ref().unwrap();
-        assert_eq!(held.metadata().unwrap().nlink(), 0);
-        assert_eq!(
-            platform::identity(held).unwrap(),
-            (expected[0], expected[1])
-        );
-        assert_eq!(
-            snapshot
-                ._parents
-                .iter()
-                .map(|dir| dir.identity().unwrap())
-                .collect::<Vec<_>>(),
-            snapshot.parents
-        );
-        fs::create_dir_all(root.path().join("modules/game")).unwrap();
-        fs::write(root.path().join(SOURCE), "source").unwrap();
-        fs::write(root.path().join(DEST), RAW).unwrap();
-        assert!(store.check_binary_snapshot(&snapshot).is_err());
-        assert_eq!(fs::read(root.path().join(DEST)).unwrap(), RAW);
-        drop(snapshot);
-        let new_snapshot = store
-            .capture_binary(SOURCE, &BinaryVersion::of(Some(RAW)))
-            .unwrap();
-        store.check_binary_snapshot(&new_snapshot).unwrap();
-    }
-    #[cfg(windows)]
-    #[test]
-    fn preparation_pins_parent_path_until_the_snapshot_is_dropped() {
-        let root = tempfile::tempdir().unwrap();
-        let store = setup(root.path());
-        let snapshot = store
-            .capture_binary(SOURCE, &BinaryVersion::of(Some(RAW)))
-            .unwrap();
-        assert!(fs::rename(root.path().join("modules"), root.path().join("moved")).is_err());
-        store.check_binary_snapshot(&snapshot).unwrap();
-        drop(snapshot);
-        fs::rename(root.path().join("modules"), root.path().join("moved")).unwrap();
-        assert_eq!(
-            fs::read(root.path().join("moved/game/module.wasm")).unwrap(),
-            RAW
-        );
-    }
-}
 impl BinaryVersion {
     pub fn of(bytes: Option<&[u8]>) -> Self {
         bytes.map_or(Self::Missing, |bytes| Self::Present {
@@ -575,5 +502,79 @@ impl SourceStore {
         self.publish_receipt(operation)?;
         self.state.remove("binary.pending")?;
         Ok(())
+    }
+}
+
+#[cfg(test)]
+mod pinned_tests {
+    use super::*;
+    use std::fs;
+    const SOURCE: &str = "modules/game/module.rs";
+    const DEST: &str = "modules/game/module.wasm";
+    const RAW: &[u8] = b"\0asm\x01\0\0\0candidate";
+
+    fn setup(root: &Path) -> SourceStore {
+        fs::create_dir_all(root.join("modules/game")).unwrap();
+        fs::write(root.join(SOURCE), "source").unwrap();
+        fs::write(root.join(DEST), RAW).unwrap();
+        let journal = root.join("journal");
+        fs::write(&journal, "").unwrap();
+        SourceStore::open(root, &journal, "01ARZ3NDEKTSV4RRFFQ69G5FAV").unwrap()
+    }
+    #[cfg(unix)]
+    #[test]
+    fn preparation_keeps_unlinked_file_and_parent_nodes_alive() {
+        use std::os::unix::fs::MetadataExt;
+        let root = tempfile::tempdir().unwrap();
+        let store = setup(root.path());
+        let snapshot = store
+            .capture_binary(SOURCE, &BinaryVersion::of(Some(RAW)))
+            .unwrap();
+        let expected = snapshot.image.as_ref().unwrap().identity;
+        fs::remove_file(root.path().join(DEST)).unwrap();
+        fs::remove_file(root.path().join(SOURCE)).unwrap();
+        fs::remove_dir(root.path().join("modules/game")).unwrap();
+        fs::remove_dir(root.path().join("modules")).unwrap();
+        let held = snapshot._node.as_ref().unwrap();
+        assert_eq!(held.metadata().unwrap().nlink(), 0);
+        assert_eq!(
+            platform::identity(held).unwrap(),
+            (expected[0], expected[1])
+        );
+        assert_eq!(
+            snapshot
+                ._parents
+                .iter()
+                .map(|dir| dir.identity().unwrap())
+                .collect::<Vec<_>>(),
+            snapshot.parents
+        );
+        fs::create_dir_all(root.path().join("modules/game")).unwrap();
+        fs::write(root.path().join(SOURCE), "source").unwrap();
+        fs::write(root.path().join(DEST), RAW).unwrap();
+        assert!(store.check_binary_snapshot(&snapshot).is_err());
+        assert_eq!(fs::read(root.path().join(DEST)).unwrap(), RAW);
+        drop(snapshot);
+        let new_snapshot = store
+            .capture_binary(SOURCE, &BinaryVersion::of(Some(RAW)))
+            .unwrap();
+        store.check_binary_snapshot(&new_snapshot).unwrap();
+    }
+    #[cfg(windows)]
+    #[test]
+    fn preparation_pins_parent_path_until_the_snapshot_is_dropped() {
+        let root = tempfile::tempdir().unwrap();
+        let store = setup(root.path());
+        let snapshot = store
+            .capture_binary(SOURCE, &BinaryVersion::of(Some(RAW)))
+            .unwrap();
+        assert!(fs::rename(root.path().join("modules"), root.path().join("moved")).is_err());
+        store.check_binary_snapshot(&snapshot).unwrap();
+        drop(snapshot);
+        fs::rename(root.path().join("modules"), root.path().join("moved")).unwrap();
+        assert_eq!(
+            fs::read(root.path().join("moved/game/module.wasm")).unwrap(),
+            RAW
+        );
     }
 }
