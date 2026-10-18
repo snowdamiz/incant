@@ -1,9 +1,10 @@
 # Native query stages inside ScriptTick
 
 This default-off diagnostic observes the existing TypeScript query path. It does
-not optimize it or change the 2 ms target. The scoped CPU qualification below
-passed; no full Core diagnostic run, measured optimization or performance result
-is claimed here.
+not optimize it or change the 2 ms target. Scoped CPU qualification and one
+subsequent same-source ordinary/query shipping pair passed exact full-Core
+gameplay and offline PCM parity. The instrumented query breakdown below is a
+diagnostic observation, not a measured optimization or performance-gate result.
 
 `diagnostic-script-queries` forwards from the native player through `incant_script`
 to `incant_profile`, and implies the existing ScriptTick phase observer. Ordinary
@@ -47,7 +48,7 @@ existing collection scope.
 Rows contain fixed arrays only. With this feature, both native row types must be
 at most 2,048 bytes and the existing 4,096-row collector is bounded to 8 MiB.
 Without it the original 1,024-byte/4 MiB ceiling remains. Snapshot/JSON allocations
-are additional. Future diagnostic execution must bound the final JSON to 32 MiB;
+are additional. The subsequent diagnostic execution bounded final JSON to 32 MiB;
 there is no per-tick JSON serialization or per-query allocation in these hooks.
 Counters use checked accumulation. Time is monotonic wall duration, not exclusive
 thread CPU cost; observer work remains included.
@@ -56,9 +57,9 @@ The outer report version remains diagnostic-only version 4. The nested schema is
 `1 + navigation + 2*budget + 4*queries`: existing feature combinations remain
 schemas 1–4; query combinations use 5–8. This preserves existing feature-off JSON.
 The old private analyzer rejects the new schema instead of silently accepting it.
-A subsequent explicit query-aware adapter must require the selected exact schema,
+The explicit query-aware private adapter requires the selected exact schema,
 category/region arrays, bounds and complete raw coverage; unknown schemas/features
-must refuse. Nothing here changes public exporter admission.
+refuse. Nothing here changes public exporter admission.
 
 ## CPU qualification
 
@@ -128,36 +129,127 @@ qualified producer `d6ef9bc4` byte-for-byte; newer main changes are outside thos
 paths. The integration replay also rechecks all 88 archived records, originals,
 five binaries and historical source identities without launching native code.
 
-## Proposed full Core diagnostic protocol
 
-After CPU qualification and separate resource review, extend the existing private
-Core attribution adapter with one explicit query mode; no public exporter or
-project capability gains diagnostic authority. Freeze and audit its exact target
-feature graph and compiler recipients before building. From one source identity,
-produce an ordinary summary-profile player and a query-diagnostic player with the
-same original 74 authored files, 10,000 scripted entities, closed ordinary physics
-recipe, Rust opt3/fat LTO/abort/one codegen unit and unchanged QuickJS C recipe.
-Keep source-free program/package and data identities explicit for both builds.
+## Completed same-source shipping observation
 
-Run the full 2,156-tick route once per player after source/build storage removal.
-Require identical complete gameplay observations, checkpoints/events and all
-13,798,400 bytes of 48 kHz stereo f32 PCM. Retain rejected/partial runs and stop on
-first failure; no retry, warmup removal, workload simplification or timing verdict.
-Use fixed 60-second player / 150-second combined bounds, 32 MiB per report and
-96 MiB combined outputs, plus the ordinary process ownership and storage guard.
-Final executable/plan bindings and any adjusted resource proposal precede launch.
+The private adapter at `ddf97dac` adds an explicit query mode while preserving
+older modes and public exporter admission. Producer `c81e82e2` joins the separately
+qualified process-cleanup fix from `8a705821`; its Rust/runtime/compiler recipe is
+unchanged from `ddf97dac`. The 4,887 source inputs, actual Node 22.23.3 executable,
+193 installed compiler-package files, Cargo target feature recipients and actual
+shipping code generation are bound. The query graph adds diagnostic features to
+exactly four target crates. Both players retain the original fast physics recipe,
+QuickJS bytecode, opt3/fat LTO/abort/one-codegen-unit settings, source-free packages
+and no runtime authoring dependencies.
 
-The query analyzer must correlate all rows to actual whole ticks and source
-slots, recompute coverage, and select the same slow whole frames before reporting
-stage totals. Reject incomplete rows, recursion, stage counts exceeding calls,
-unknown categories, nonfinite/overflowed values and mismatched features. Preserve
-all failures; do not silently discard invalid rows. Report non-Core `other` use
-explicitly before interpretation. Query call times belong to callbacks and stage
-times belong to calls. The remaining callback time still includes VM dispatch,
-argument setup, uninstrumented host work and observer overhead; it is not proven
-pure interpreter cost. No marginal-p95 subtraction or predicted saving follows.
+All **60 runtime input files** match the historical 74-file authored manifest.
+The other 14 are authoring journal/recovery-history files, not workload content.
+The normal empty-recovery epoch is used; no fake history or bypass was added.
+The full 10,000-scripted-entity Core workload is unchanged. Compiled bytecode,
+hardening bytes, source map, script symbols and all runtime package data match
+between the fresh ordinary and query builds.
 
-Only a distinct, substantial measured subpath would justify a later small change.
-That later change needs its own full win/held-out loss/restart gameplay and PCM
-parity and fixed balanced quiet shipping comparison, including PlayerFrame and
-memory. This diagnostic alone cannot adopt an optimization or pass the 2 ms gate.
+The first build attempt remains **failed**: exec session `18993` stopped after
+231.688855 seconds, before a package or player child existed. Sampled owned RSS
+8,620,343,296 bytes exceeded its 8 GiB cap. Immediate cleanup observation then
+reported `Owned PID/group remains`, masking the initiating resource error. Later
+fresh checks found every owned identity absent. The lifecycle repair preserves
+operation and cleanup errors separately and allows bounded post-cleanup absence
+observation without signalling retired IDs. No failed result was relabeled.
+
+Reviewed successor exec session `70032` passed both fresh builds, the ordinary one-tick offline
+startup, all package/compiler comparisons and cleanup in 573.056497 seconds.
+Its 12 GiB RSS allowance was the sole resource ceiling increase; actual peak was
+9,235,316,736 bytes. Both private build trees were removed; all 28 managed children
+exited zero and the supervisor plus child PID/groups were freshly absent. Original
+and successor charges total 804.745514 seconds, within the original 5,400-second
+aggregate. The copied ordinary/query players are `d35be725` / `24458b9e`.
+
+A separate quiet grant ran exactly ordinary then query, once each, at actual
+exec session `74590` (supervisor PID 49207). Both completed all **2,156 steps, eight observation checks,
+17 observed entities and every non-profile report field**, matching the historical
+ordinary result. Both complete **13,798,400-byte PCM** streams match the historical
+SHA-256 `ccabf2c68b6388ac554ac3efb5609ddf6b4a45d1a3f316891d5f344094e99ee3`.
+There were no retries, omitted frames or warmup removal. The 45-second child /
+120-second stage limits, 128 MiB output bound, 8 GiB RSS and 6 GiB free floor were
+retained. Actual stage time was 12.782800 seconds; all 18 managed metadata/player
+children and the supervisor were freshly absent. No window, GPU, device audio,
+browser, computer-use or capture API was invoked.
+
+The unchanged closeout helper carries the first failed build's 231.688855-second
+charge into its pair closeout, so that raw file's `cumulative` value is **not** the
+whole experiment total. The separate outer receipt explicitly records this
+limitation and the correct all-build-and-pair sum, **817.528314 seconds**. Raw
+records remain unchanged. Separately sampled monotonic accounting fields can
+include a small amount of receipt construction; they are resource accounting,
+not benchmark durations.
+
+### Inclusive attribution
+
+Machine: **Mac17,9 / Apple M5 Pro, 48 GiB, macOS 27.0.1 build 26A434, AC power**.
+The ordinary ScriptTick p95 histogram interval was **2.100001–2.110000 ms**;
+the instrumented interval was **2.140001–2.150000 ms**. One fixed-order pair does
+not isolate instrumentation overhead or establish repeatability, savings or the
+2 ms gate. The query report has all 2,156 valid successful rows, no open rows,
+query failures or recursion; its 1,288-byte row reserves 5,275,648 bytes at the
+4,096-row capacity, excluding final snapshots/JSON.
+
+The tail below is the same **108 slow whole-script frames**, selected before
+summing any query stage. Times are instrumented wall milliseconds, not exclusive
+CPU time. Stages are inside call; calls are inside callbacks. Never add a parent
+and its children.
+
+| Observation | All 2,156 frames | Same 108-frame tail |
+| --- | ---: | ---: |
+| Whole ScriptTick | 3,265.764458 | 272.544834 |
+| Both source callbacks | 2,507.986884 | 213.192085 |
+| Query call | 219.988450 | 87.753706 |
+| Query parse | 2.620122 | 0.218432 |
+| Query execute | 207.447155 | 86.605200 |
+| Query materialize | 4.641541 | 0.612250 |
+| Call residual | 5.279632 | 0.317824 |
+| Callback residual after query calls | 2,287.998434 | 125.438379 |
+
+All **12,911 queries** belong to gameplay source slot 0: 8,260 character-motion,
+2,066 trigger, 414 navigation, 2,156 locale and 15 localization queries. No `other`
+query was omitted; its count is zero. The stress callback in slot 1 makes no
+native queries and contributes 2,024.478553 ms overall / 105.261377 ms in the tail.
+Its residual is not proven interpreter-only time: VM dispatch, bridge work and
+observer bookkeeping remain included.
+
+Parsing plus materialization accounts for **0.222%** of total whole-tick time
+and **0.305%** of the same-frame tail. This run does not support pursuing query
+marshaling as a substantial residual-cost optimization. Native navigation
+execution dominates the query tail: 83.938711 ms, inside 84.458549 ms of navigation
+calls. This does not revive the already rejected navigation-cache or repeated
+start-scan experiments. Numeric preparation/validation remains separately visible
+at 428.217131 / 428.336958 ms overall; no new optimization follows from that fact.
+
+Next useful trigger: a specific callback/VM/typed-view validation implementation
+change, or a distinct concrete hypothesis supported by retained data. Reassess
+periodically during active development; do not repeat the unchanged PGO,
+navigation-cache, deadline-check or query-marshaling experiment. A candidate still
+needs its own full win/loss/restart gameplay and complete PCM controls and a fixed
+matched quiet shipping comparison. The 2 ms requirement remains unmet.
+
+### Portable replay and limits
+
+The [shipping packet](evidence/script-query-shipping/manifest.json) contains raw
+ordinary/query profiles and analyses, full gameplay anchor, plans, compiler/source
+identities, selected build logs, both outcomes and closure records. Its verifier
+recomputes the histogram, same-frame tail, query containment/totals and residuals
+without executing archived code or a player:
+
+```sh
+python3 -B docs/spikes/evidence/script-query-shipping/verify.py
+```
+
+`--originals` checks all archived bytes against external originals; `--binaries`
+checks both copied players; `--pcm` hashes the three complete external PCM streams;
+`--compiler-inputs` checks all 193 installed compiler files; `--source-root PATH`
+checks all 4,887 producing source inputs; `--build-logs` checks the three large
+external Cargo records. Missing or changed optional inputs fail explicitly.
+Default replay proves **recorded PCM identity**, not possession of omitted PCM
+bytes. Executables, debug bundles, large Cargo streams, actual compiler packages
+and PCM remain external; their identities are retained. This is data replay, not
+shipping reproduction or a fresh measurement. The earlier CPU packet is unchanged.
