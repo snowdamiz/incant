@@ -478,6 +478,7 @@ class ProbeContractTests(Fixture):
         bound = self.package / 'module.rs'
         plan = {'version': 1, 'scope': 'untrusted-rust-macos-isolation', 'source': 'fixture-source',
                 'output': str(self.root / 'new-output'), 'rustc': '/trusted/rustc', 'validator': '/trusted/cook',
+                'native_linker': '/trusted/clang', 'macos_sdk': '/trusted/MacOSX.sdk',
                 'bounds': {'seconds': 180, 'child_seconds': 90, 'scratch_bytes': 512 * build.MIB,
                            'log_bytes': 16 * build.MIB, 'stream_bytes': 4 * build.MIB,
                            'rss_bytes': 8 * 1024 * build.MIB, 'floor_bytes': 6 * 1024 * build.MIB},
