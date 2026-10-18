@@ -87,6 +87,17 @@ Skeleton and structural changes remain outside this admission rule.
 
 ## Current parallel qualification — 2026-10-18
 
+Checkpoint56 is frozen at candidate `41565147`, with exactly main416's tree.
+Its Windows credential job failed three tilemap tests that read the exclusively
+locked journal through an independent file handle. The
+[test-only correction](docs/spikes/tilemap-journal-portability.md) preserves exact
+journal assertions and verifies project/history/redo after release and reopen.
+All ten tilemap tests, scoped strict lint and all ten development checks pass on
+this Mac. The initial post-test audit failure is retained separately from the
+successful native tests and corrected data audit. Windows confirmation remains
+pending; release is held until a corrected candidate passes every required check.
+
+
 The [process-cleanup correction](docs/spikes/native-process-cleanup.md) preserves
 both the original operation error and any cleanup failure. It also waits for
 asynchronous descendant retirement without signalling reused identities. On this
