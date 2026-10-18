@@ -149,10 +149,14 @@ through PR406. Scoped behavior tests and strict lints pass; the observed long
 event frames still need causal attribution and matched shipping measurement.
 
 The default-off [native-query diagnostic](../spikes/script-query-attribution.md)
-now passes focused CPU behavior controls and strict diagnostic/ordinary lints.
-It separates parsing, native execution and result conversion while preserving
-query admission, rollback and bounded storage. Full Core attribution is still
-pending; these tests establish neither an optimization nor the 2 ms gate.
+passes focused CPU controls, strict lints and a same-source shipping comparison
+with exact full-Core gameplay and offline PCM parity. It separates parsing,
+native execution and result conversion while preserving query admission,
+rollback and bounded storage. Parsing and result conversion account for only
+0.305% of ScriptTick time in the same-frame tail of the instrumented run; this
+does not support query marshalling as the next optimization. The 2 ms gate remains
+unmet. A distinct callback, VM or typed-view cost hypothesis is needed before
+another measured experiment; this diagnostic is not a performance improvement.
 
 The real-mouse capture check is pending the director's availability and is not
 blocking these lanes. Broader editor, agent, content, export, multiplayer, game

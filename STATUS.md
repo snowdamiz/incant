@@ -87,20 +87,25 @@ Skeleton and structural changes remain outside this admission rule.
 
 ## Current parallel qualification — 2026-10-18
 
-Checkpoint56 is frozen at candidate `41565147`, with exactly main416's tree.
-Its Windows credential job failed three tilemap tests that read the exclusively
+Checkpoint57 is frozen at candidate `53ec74d2`, with exactly main421's tree
+(`527d280a`). Its comprehensive checks are running; release remains at the
+previously qualified checkpoint55. Checkpoint56 failed its Windows credential
+job on three tilemap tests that read the exclusively
 locked journal through an independent file handle. The
 [test-only correction](docs/spikes/tilemap-journal-portability.md) preserves exact
 journal assertions and verifies project/history/redo after release and reopen.
 All ten tilemap tests, scoped strict lint and all ten development checks pass on
 this Mac. The initial post-test audit failure is retained separately from the
-successful native tests and corrected data audit. Windows confirmation remains
-pending. The same checkpoint also found a constant out-of-bounds indexing lint
+successful native tests and corrected data audit. Checkpoint57's
+[credential-storage workflow](https://github.com/snowdamiz/incant/actions/runs/39106688468)
+now passes on Windows, macOS and Linux; the separate desktop workflow remains
+pending. The same failed checkpoint56 also found a constant out-of-bounds indexing lint
 in the empty embedded Wasm catalog on Linux, macOS and Windows. The
 [checked catalog split](docs/spikes/static-catalog-payload.md) passes both new
 local boundary controls and strict static-conformance lint, including the actual
 zero-byte generated catalog. Both original failure classes remain recorded;
-release is held until a corrected candidate passes every required check.
+release is held until the corrected checkpoint57 candidate passes every required
+check. Its head stays frozen while subsequent development continues on main.
 
 
 The [process-cleanup correction](docs/spikes/native-process-cleanup.md) preserves
