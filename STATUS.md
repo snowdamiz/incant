@@ -87,6 +87,22 @@ Skeleton and structural changes remain outside this admission rule.
 
 ## Current parallel qualification — 2026-10-18
 
+The explicit [untrusted Rust module build](docs/spikes/untrusted-rust-module-build.md)
+now has selected compiler/request and network-I/O qualification on this Mac.
+The worker captures bounded Rust source, compiles with the pinned SDK under a
+deny-default OS policy, validates through the normal Wasm cooker and publishes
+raw Wasm only after successful cleanup. Actual relative-module compilation,
+normal validation and atomic publication pass; unsupported build inputs,
+private-file inclusion and cancellation refuse. The separate trusted canary
+confirms TCP connect/bind and UDP bind/send denial, outside read/write/exec denial
+and a clean environment. Its original socket-creation criterion failed and stays
+recorded; the revised I/O checks do not claim that socket creation is forbidden.
+All ten local development checks pass, including 1,040 UI tests, and independent
+portable replay verifies the retained results and failure history. Ordinary
+project import/selection/history qualification is next. This experimental Mac
+backend fails closed elsewhere; no broader security, editor/agent integration,
+performance or cross-platform isolation acceptance follows.
+
 Checkpoint57 is frozen at candidate `53ec74d2`, with exactly main421's tree
 (`527d280a`). Its comprehensive checks are running; release remains at the
 previously qualified checkpoint55. Checkpoint56 failed its Windows credential
