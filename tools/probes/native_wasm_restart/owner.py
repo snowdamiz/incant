@@ -58,6 +58,21 @@ def process_rows():
     return [tuple(map(int, line.split())) for line in result.stdout.splitlines()]
 
 
+def confirm_group_absent(pid, timeout=5):
+    """Observe asynchronous SIGKILL/reaping completion; never signal a reaped ID.
+
+    The process owner has already killed the reserved group and reaped its
+    direct child. Descendants can still briefly appear in ps, including zombies.
+    Require their complete absence, retaining an explicit refusal if the OS has
+    not retired them. The polling allowance excludes the final process snapshot,
+    which has its own five-second timeout. A reused ID refuses without signalling.
+    """
+    deadline = time.monotonic() + timeout
+    while any(pid in (p, group) for p, group, _ in process_rows()):
+        require(time.monotonic() < deadline, 'Owned PID/group remains')
+        time.sleep(0.01)
+
+
 class Owner:
     def __init__(self, output, target, target_ceiling):
         self.output, self.target = Path(output), Path(target)
@@ -151,8 +166,7 @@ class Owner:
                 try:
                     super().stop()
                     self.receipt['exit'] = self.process.returncode
-                    rows = process_rows()
-                    require(not any(self.process.pid in (p, g) for p, g, _ in rows), 'Owned PID/group remains')
+                    confirm_group_absent(self.process.pid)
                     self.receipt['cleanup_confirmed'] = True
                 except BaseException as error:
                     self.receipt['cleanup_error'] = repr(error)
