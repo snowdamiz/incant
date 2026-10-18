@@ -59,3 +59,8 @@ That assertion now accepts the three supported gestures while preserving bounded
 gamepad-ID and unsupported-mouse-button refusals. A retained-router fixture was
 also corrected before its first execution. Production bytes remain those of
 `18aa6f43`; only test fixtures/expectations changed through the successful producer.
+
+The integrated source separately passed the ten local
+[development checks](evidence/native-desktop-touch-development.json), including
+generated SDK/bridge checks and jsdom UI tests. Hosted CI and hardware delivery
+remain separate.
