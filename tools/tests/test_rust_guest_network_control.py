@@ -79,6 +79,7 @@ class SetupTests(Fixture):
         self.address = '127.0.0.1'
         self.sockets = []
         self.commands = []
+        self.plan = {'native_linker': '/trusted/clang', 'macos_sdk': '/trusted/sdk'}
 
     def execute(self):
         outer = self
@@ -86,13 +87,15 @@ class SetupTests(Fixture):
         class Socket:
             def __init__(self, index):
                 self.index, self.closed, self.inheritable = index, False, True
+                self.family = outer.probe.socket.AF_INET
+                self.type = outer.probe.socket.SOCK_STREAM if index == 0 else outer.probe.socket.SOCK_DGRAM
                 outer.sockets.append(self)
 
             def set_inheritable(self, value): self.inheritable = value
             def get_inheritable(self): return self.inheritable
             def bind(self, address): outer.assertEqual(address, ('127.0.0.1', 0))
             def getsockname(self): return (outer.address, 42100 + self.index)
-            def getsockopt(self, *_): return 0
+            def getsockopt(self, *_): raise AssertionError('Unsupported optional inspection must not run')
             def settimeout(self, value): outer.assertEqual(value, 0.05)
             def close(self): self.closed = True
             def fileno(self): return -1 if self.closed else 42000 + self.index
@@ -124,7 +127,7 @@ class SetupTests(Fixture):
                 mock.patch.object(self.probe.service.native_process, 'Interactive') as child:
             try:
                 return self.probe.run_control(SimpleNamespace(run=run), self.tools, self.valid, self.output,
-                                              {'native_linker': '/trusted/clang', 'macos_sdk': '/trusted/sdk'})
+                                              self.plan)
             finally:
                 child.assert_not_called()
 
@@ -135,6 +138,49 @@ class SetupTests(Fixture):
         self.assertEqual((receipt['sink_datagrams'], receipt['endpoints_closed']), (0, True))
         self.assertFalse(receipt['tcp_listen_called'])
         self.assertEqual(len(self.commands), 2)
+
+    def prepare_reuse(self):
+        self.execute()  # Mock compilation, no native child or actual socket.
+        binary = self.output / 'sandbox-control'
+        binary.write_bytes(b'trusted native fixture')
+        binary.chmod(0o700)
+        receipt = self.output / 'compiled.json'
+        self.probe.service.write_json(receipt, {'argv': self.commands[0], 'returncode': 0, 'group_absent': True})
+        row = {'path': str(binary), 'bytes': binary.stat().st_size,
+               'sha256': self.probe.service.digest(binary.read_bytes()),
+               'source_sha256': self.probe.service.digest((self.probe.ROOT / 'tools/probes/rust-guest-sandbox-control.rs').read_bytes()),
+               'build_receipt': str(receipt)}
+        self.commands, self.sockets = [], []
+        self.plan['trusted_canary_reuse'] = row
+        return row
+
+    def test_exact_reuse_runs_only_the_bound_trusted_canary(self):
+        row = self.prepare_reuse()
+        self.output = self.root / 'reuse-output'
+        self.output.mkdir()
+        self.assertEqual(self.execute(), control())
+        self.assertEqual(len(self.commands), 1)
+        self.assertEqual(self.commands[0][3], row['path'])
+        self.assertTrue(all(endpoint.closed for endpoint in self.sockets))
+
+    def test_changed_canary_bytes_source_or_recipe_refuse_before_socket_setup(self):
+        original = self.prepare_reuse()
+        for name in ('bytes', 'source', 'recipe'):
+            self.output = self.root / ('reuse-refusal-' + name)
+            self.output.mkdir()
+            row = dict(original)
+            if name == 'bytes':
+                row['sha256'] = '0' * 64
+            elif name == 'source':
+                row['source_sha256'] = '0' * 64
+            else:
+                receipt = json.loads(Path(row['build_receipt']).read_text())
+                receipt['argv'][0] = '/wrong/compiler'
+                Path(row['build_receipt']).write_text(json.dumps(receipt))
+            self.plan['trusted_canary_reuse'] = row
+            with self.subTest(name=name), self.assertRaises(self.probe.Refused):
+                self.execute()
+            self.assertEqual((self.commands, self.sockets), ([], []))
 
     def test_empty_datagram_is_still_a_failure_and_all_endpoints_close(self):
         self.received = b''

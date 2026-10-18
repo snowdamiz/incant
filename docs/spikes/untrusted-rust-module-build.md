@@ -62,7 +62,7 @@ resource/cleanup error preservation and failure receipts without OS children.
 The two existing trusted SDK cache controls remain. None is native evidence.
 
 Source qualification on 2026-10-18: the initial 37 selected pure controls passed.
-All 46 selected pure controls passed after adding the network-I/O successor
+All 48 selected pure controls passed after adding the network-I/O successor
 protocol and mocked endpoint-ownership controls;
 its pure command is `python3 -m unittest tools.tests.test_rust_guest
 tools.tests.test_rust_guest_build tools.tests.test_rust_guest_network_control`.
@@ -155,3 +155,21 @@ relabeled as a new complete producer. Cumulative native time is 20.269418043
 seconds, leaving 159.730581957 of the original 180. All prior outputs/logs and
 resource charges remain retained. The revised native checks are unexecuted
 pending a separately reviewed grant; full backend isolation remains unqualified.
+
+
+The first revised canary-only attempt compiled the new trusted control under
+source `7c18d1d8`, then failed before sandbox execution: optional
+`getsockopt(SOL_SOCKET, SO_ACCEPTCONN)` returned ENOPROTOOPT (42). Both owned
+loopback endpoints closed, and all three observed PID/groups were absent.
+The compiled 602,400-byte canary remains retained with SHA-256
+`2fd5c90f31a9007259ac880eb6b41fd7da87a454bd6ad70214e639a2538ba1c6`.
+No revised network-I/O assertion ran or passed in that attempt.
+
+The controller replaces this optional inspection with direct AF_INET stream/
+datagram ownership recording; the trusted source makes no listen call. The
+successor may reuse only that exact compiled image, with current canary source
+hash, exact successful compilation argv and terminal receipt all verified.
+Changed bytes/source/recipe refuse before socket setup. No compiler, production
+policy or actual I/O-denial predicate changes. Native time is now cumulatively
+20.790128418 seconds, leaving 159.209871582 of the original account. The next
+canary-only execution remains unlaunched pending its exact review/grant.
