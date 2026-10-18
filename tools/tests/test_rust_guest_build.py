@@ -4,6 +4,8 @@ Mock compiler/validator outcomes exercise worker decisions, not sandbox safety.
 Actual compiler escape controls have a separate, explicitly managed probe.
 """
 from dataclasses import replace
+import ctypes
+import errno
 import io
 import importlib.util
 import json
@@ -145,11 +147,20 @@ class PolicyTests(Fixture):
         self.assertNotIn('(allow file-write* (subpath "/")', text)
         self.assertIn('(subpath "' + str(policy.run) + '")', text)
         self.assertIn('(literal "' + str(policy.linker) + '")', text)
+        for executable in (policy.rustc, policy.linker, policy.validator):
+            self.assertIn('(allow file-read* (literal "' + str(executable) + '"))', text)
         self.assertIn('(allow file-read* (literal "' + str(policy.validator) + '"))', text)
         self.assertNotIn('(subpath "' + str(policy.validator.parent) + '")', text)
         with mock.patch.object(sandbox.MacPolicy, 'backend', return_value=Path('/usr/bin/sandbox-exec')):
             with self.assertRaises(sandbox.Refused):
                 policy.command(self.root / 'policy', ['/bin/sh', '-c', 'anything'])
+
+    def test_canary_outside_read_trees_has_only_exact_executable_read(self):
+        policy = replace(self.policy(), rustc=self.root / 'outside/sandbox-control')
+        text = policy.text()
+        self.assertIn('(allow file-read* (literal "' + str(policy.rustc) + '"))', text)
+        self.assertIn('(allow file-read-metadata (literal "' + str(policy.rustc.parent) + '"))', text)
+        self.assertNotIn('(subpath "' + str(policy.rustc.parent) + '")', text)
 
     def test_profile_quoting_cannot_inject_a_rule(self):
         policy = replace(self.policy(), source=self.root / 'x") (allow default) ("')
@@ -175,6 +186,44 @@ class PolicyTests(Fixture):
                 mock.patch.object(sandbox, 'trusted_file', side_effect=FileNotFoundError):
             with self.assertRaisesRegex(sandbox.Unsupported, 'no unrestricted fallback'):
                 sandbox.MacPolicy.backend()
+
+
+class GroupSampleTests(unittest.TestCase):
+    def api(self, count=2, error=0):
+        class Function:
+            def __init__(self, call):
+                self.call = call
+
+            def __call__(self, *args):
+                return self.call(*args)
+
+        def list_pids(group, buffer, size):
+            self.assertEqual((group, size), (88, 1024))
+            buffer[0], buffer[1] = 10, 20
+            ctypes.set_errno(error)
+            return count
+
+        def info(pid, flavor, _arg, output, size):
+            self.assertEqual((flavor, size), (4, 96))
+            row = ctypes.cast(output, ctypes.POINTER(sandbox._TaskInfo)).contents
+            row.resident_size = pid * 100
+            return size
+        return SimpleNamespace(proc_listpgrppids=Function(list_pids), proc_pidinfo=Function(info))
+
+    def test_api_returns_pid_count_not_buffer_bytes(self):
+        with mock.patch.object(sandbox.ctypes, 'CDLL', return_value=self.api()), \
+                mock.patch.object(sandbox.sys, 'platform', 'darwin'), \
+                mock.patch.object(sandbox.os, 'getpgid', return_value=88):
+            self.assertEqual(sandbox.group_sample(88), [
+                {'pid': 10, 'pgid': 88, 'rss': 1000}, {'pid': 20, 'pgid': 88, 'rss': 2000}])
+
+    def test_group_overflow_or_inspection_error_refuses(self):
+        for count, error in ((256, 0), (-1, 0), (0, errno.EPERM)):
+            with self.subTest(count=count, errno=error), \
+                    mock.patch.object(sandbox.ctypes, 'CDLL', return_value=self.api(count, error)), \
+                    mock.patch.object(sandbox.sys, 'platform', 'darwin'):
+                with self.assertRaisesRegex(sandbox.Refused, 'inspect bounded owned group'):
+                    sandbox.group_sample(88)
 
 
 class PublicationTests(Fixture):
