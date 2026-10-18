@@ -1,0 +1,34 @@
+{
+  "format": "lifecycle-test-startup-manifest-v1",
+  "archive": "lifecycle-test-startup.json.gz",
+  "source": "0d1856640f48012b57853a4912e0cc642964f39b",
+  "packed_bytes": 31138,
+  "packed_sha256": "4848a4eb4014c9fc47585656102300c117317c7fe5870ff7b57eaf93a8acfe9b",
+  "expanded_bytes": 186547,
+  "expanded_sha256": "d00d02cfedebf11384c9946800a1c9c29f572455c9a2e34a44ed7d18765da727",
+  "record_count": 17,
+  "original_failed_suite": {
+    "path": "/Users/andreyyurlov/.codex/incant-resume-20261017/registered-rust-fast-001/output/001.stderr.log",
+    "sha256": "f16ea47a15eaf76aa3773af563109dd2efd770c98486d785f6757d28260a2aaa",
+    "actual_session": 77244,
+    "passed": false,
+    "tests": 738,
+    "failures": 4,
+    "errors": 1
+  },
+  "qualified": {
+    "actual_session": 39086,
+    "exit": 0,
+    "tests_per_module": [
+      6,
+      12,
+      15,
+      15
+    ],
+    "total_tests": 48,
+    "seconds": 12.90723725000862,
+    "owned_pid_identities_absent": 9,
+    "owned_groups_absent": 4
+  },
+  "scope": "Four test files only; bounded startup separated from short execution controls. No production timeout or lifecycle policy change; no engine/device/window/capture qualification."
+}
