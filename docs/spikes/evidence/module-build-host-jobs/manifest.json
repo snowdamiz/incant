@@ -1,0 +1,188 @@
+{
+  "format": "module-build-host-evidence-v1",
+  "scope": "macOS CPU host-job qualification; historical immutable candidates only, no install/source write/runtime/device/windows/GPU/capture claim",
+  "producer_service": "a0dd8eb71fc69b4458c572e36cf1d196942dddd7",
+  "producer_editor_and_schemas": "c9733e5ca9d608956c8957dcc9d216ecd80a034a",
+  "original_source": "9984d54b937ed9770164d9adbbf45ff33b6efe8c",
+  "archive": {
+    "file": "records.json.gz",
+    "bytes": 1150596,
+    "sha256": "4ae9a7f2f9d0f5b55e9384fd778c936632551384dc7c5f44732b8e78ff1224f4",
+    "raw_bytes": 7660934,
+    "raw_sha256": "7b401c8769882271c3f1a4ba2a24b1959b9b96cd48f41ee5af24d94889444df5",
+    "records": 152
+  },
+  "attempts": [
+    {
+      "id": 1,
+      "source": "9984d54b937ed9770164d9adbbf45ff33b6efe8c",
+      "passed": false,
+      "seconds": 62.41675799997756,
+      "steps": [
+        {
+          "name": "service-default",
+          "exit": 0
+        },
+        {
+          "name": "default-ignored-inventory",
+          "exit": 0
+        },
+        {
+          "name": "agent-adapter",
+          "exit": 101
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "source": "a0dd8eb71fc69b4458c572e36cf1d196942dddd7",
+      "passed": false,
+      "seconds": 269.0085507920012,
+      "steps": [
+        {
+          "name": "service-default",
+          "exit": 0
+        },
+        {
+          "name": "default-ignored-inventory",
+          "exit": 0
+        },
+        {
+          "name": "agent-adapter",
+          "exit": 0
+        },
+        {
+          "name": "feature-build",
+          "exit": 0
+        },
+        {
+          "name": "feature-ignored-inventory",
+          "exit": 0
+        },
+        {
+          "name": "actual-owner-and-worker",
+          "exit": 0
+        },
+        {
+          "name": "service-agent-strict",
+          "exit": 0
+        },
+        {
+          "name": "editor-strict",
+          "exit": 101
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "source": "c9733e5ca9d608956c8957dcc9d216ecd80a034a",
+      "passed": true,
+      "seconds": 171.76795204199152,
+      "steps": [
+        {
+          "name": "editor-strict",
+          "exit": 0
+        },
+        {
+          "name": "headless-build",
+          "exit": 0
+        },
+        {
+          "name": "schema-compare",
+          "exit": 0
+        }
+      ]
+    }
+  ],
+  "actual_terminals": [
+    [
+      81328,
+      1,
+      "017ee8"
+    ],
+    [
+      52495,
+      1,
+      "112b76"
+    ],
+    [
+      79787,
+      0,
+      "674b2e"
+    ]
+  ],
+  "episode_seconds_including_failures": 503.19326083397027,
+  "tests": {
+    "service": 13,
+    "agent": 2,
+    "actual_lifecycle_and_worker": 5,
+    "default_ignored_excludes_worker": true,
+    "explicit_feature_ignored_includes_worker": true
+  },
+  "actual_schema_match": true,
+  "external_artifacts": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/module-build-host-jobs-001/cpu-001/0-incant_module_build-dc7355f2970ddf84",
+      "bytes": 1572568,
+      "sha256": "6a53d3015cbdb830990bfa7b2248deb762d73f92b5a058261f26e9cbfd442dc1",
+      "attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/module-build-host-jobs-001/cpu-001/2-module_jobs-90d9dad3957d4a11",
+      "bytes": 22056000,
+      "sha256": "2c38bb8af4a0a0e0bb0a3ef1a60b4d8a5cddb80568bf0e2ccf5db843d8c190a4",
+      "attempt": 1
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/module-build-host-jobs-001/cpu-002/0-incant_module_build-dc7355f2970ddf84",
+      "bytes": 1593720,
+      "sha256": "9c0e84aa07c7e16c513b6e428035f386abdf38b324780c9c3ecf3f872e906549",
+      "attempt": 2
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/module-build-host-jobs-001/cpu-002/2-module_jobs-90d9dad3957d4a11",
+      "bytes": 22056320,
+      "sha256": "7cb837e761b7c8fa7f5adcfba94a8d105886587b6470b0e7fdec81108dd16b60",
+      "attempt": 2
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/module-build-host-jobs-001/cpu-002/3-incant_module_build-117b2de8621e8ecf",
+      "bytes": 1787944,
+      "sha256": "bfa3c9e06c0678d64d19abb811fbded1bed9cd12a8c0fdbce379f76a71d61b16",
+      "attempt": 2
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/module-build-host-jobs-001/cpu-003/1-incant_headless",
+      "bytes": 63697952,
+      "sha256": "5709e749e813eb3c39627de54baa0d589950d49501c416655202c5fcaf280ead",
+      "attempt": 3
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/module-build-host-jobs-001/cpu-002/jobs/01M585HNVRV89XBS1HYNSD0F95/module.wasm",
+      "bytes": 448,
+      "sha256": "d484d8c69920e3fab6c24aeaf9a189bf56eacac2e715af36e88824186d3ab037",
+      "attempt": 2,
+      "scope": "private noninstalled actual worker output"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/module-build-host-jobs-001/cpu-002/jobs/01M585HNVRV89XBS1HYNSD0F95/work/run/validated.wasm",
+      "bytes": 1085,
+      "sha256": "c9fb29b4323e25ff134621076ba1f3a23861462a5d6126a59819609c15178d21",
+      "attempt": 2,
+      "scope": "private noninstalled actual worker output"
+    }
+  ],
+  "final_target": {
+    "current_bytes": 13524672512,
+    "retained_peak_bytes": 13524672512,
+    "postcleanup_seconds": 5187.800573125952,
+    "including_deleted_history_seconds": 5646.805216708952
+  },
+  "limits": [
+    "Only macOS backend actually exercised; Windows held-root source path unexecuted here.",
+    "Actual direct process controls assert their group cleanup internally; outer receipts independently cover all recorded identities.",
+    "Standalone worker isolation corpus was not rerun because its policy is unchanged.",
+    "No compiled artifact or executable/profile payload is included; raw logs and source text are inert data."
+  ],
+  "verifier_sha256": "a50f7ffba350894c8c3d2d8aa163128b17daa2d9fc896bf3b5b326b87a643048"
+}
