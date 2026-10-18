@@ -56,6 +56,22 @@ impl Dir {
     pub fn identity(&self) -> io::Result<[u64; 2]> {
         identity(&self.file).map(|(volume, node)| [volume, node])
     }
+    pub fn names(&self, limit: usize) -> io::Result<Vec<String>> {
+        let mut names = Vec::new();
+        for entry in std::fs::read_dir(&self.path)? {
+            if names.len() == limit {
+                return Err(io::Error::other("package inventory bound"));
+            }
+            names.push(
+                entry?
+                    .file_name()
+                    .into_string()
+                    .map_err(|_| io::Error::other("package UTF-8 name"))?,
+            );
+        }
+        names.sort();
+        Ok(names)
+    }
     pub fn only_child(&self, expected: &str) -> io::Result<bool> {
         let mut entries = std::fs::read_dir(&self.path)?;
         let Some(entry) = entries.next() else {

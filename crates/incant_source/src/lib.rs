@@ -16,6 +16,8 @@ pub use binary::{
     BinaryEdit, BinaryPending, BinaryPublication, BinarySnapshot, BinaryVersion, MAX_WASM_BYTES,
     wasm_path,
 };
+mod rust_package;
+pub use rust_package::RustPackageSnapshot;
 mod project;
 mod tree;
 pub use project::{

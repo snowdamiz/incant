@@ -19,6 +19,26 @@ impl Dir {
     pub fn identity(&self) -> io::Result<[u64; 2]> {
         identity(&self.0).map(|(device, node)| [device, node])
     }
+    pub fn names(&self, limit: usize) -> io::Result<Vec<String>> {
+        let mut names = Vec::new();
+        for entry in fs::Dir::read_from(&self.0)? {
+            let entry = entry?;
+            let bytes = entry.file_name().to_bytes();
+            if bytes == b"." || bytes == b".." {
+                continue;
+            }
+            if names.len() == limit {
+                return Err(io::Error::other("package inventory bound"));
+            }
+            names.push(
+                std::str::from_utf8(bytes)
+                    .map_err(io::Error::other)?
+                    .to_owned(),
+            );
+        }
+        names.sort();
+        Ok(names)
+    }
     pub fn only_child(&self, expected: &str) -> io::Result<bool> {
         let mut found = false;
         for entry in fs::Dir::read_from(&self.0)? {

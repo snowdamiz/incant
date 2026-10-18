@@ -17,6 +17,9 @@ impl Dir {
     pub fn identity(&self) -> io::Result<[u64; 2]> {
         unavailable()
     }
+    pub fn names(&self, _: usize) -> io::Result<Vec<String>> {
+        unavailable()
+    }
     pub fn only_child(&self, _: &str) -> io::Result<bool> {
         unavailable()
     }
