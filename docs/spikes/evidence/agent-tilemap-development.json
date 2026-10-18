@@ -1,0 +1,211 @@
+{
+  "passed": true,
+  "base_source": "d4577e8ee8e91ab465d6cc4863bed25a5f97dd1c",
+  "qualified_patch_sha256": "6c24cf5e4d7885cac60a5489569714425be9f618bd1562f93637450f9540d0d9",
+  "actual_exec": 7896,
+  "seconds": 97.69308675004868,
+  "stages": [
+    {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.1633064589696005
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "seconds": 48.41462895902805
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 2.630402375012636
+    },
+    {
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.12379766697995365
+    },
+    {
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.11806737497681752
+    },
+    {
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.3701024170150049
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build",
+        "--workspace",
+        "editor/ui"
+      ],
+      "exit": 0,
+      "seconds": 4.512264958000742
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test",
+        "--workspace",
+        "editor/ui",
+        "--",
+        "--maxWorkers=2"
+      ],
+      "exit": 0,
+      "seconds": 40.91044025000883
+    },
+    {
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.3259255000157282
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.09133799996925518
+    }
+  ],
+  "wrapper_and_groups_absent": true,
+  "logs": [
+    {
+      "name": "000.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "000.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "001.stderr.log",
+      "sha256": "a35e14f628d62fb87fa60607bc0c022969d060c48cba56904dfb3b768c695728",
+      "bytes": 114556
+    },
+    {
+      "name": "001.stdout.log",
+      "sha256": "dfba1ded617fe19228d15f7a49a0e033edad13b869f18c7c5c673f291fde3f49",
+      "bytes": 7736
+    },
+    {
+      "name": "002.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "002.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "003.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "003.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "004.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "004.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "005.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "005.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "006.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "006.stdout.log",
+      "sha256": "837bc6e7fe3cbdd3e0472ab202ba84a56374b613f4e8d76ab1733737f8d142d6",
+      "bytes": 1551
+    },
+    {
+      "name": "007.stderr.log",
+      "sha256": "b39acf51b68a8940ef8dac9f92e07443c04b70348e5950a735cea5972bde77ce",
+      "bytes": 3600
+    },
+    {
+      "name": "007.stdout.log",
+      "sha256": "cee56d0d6e5fb3302cc40c6a2a4cf7aa6eb7aac53cc89ae833d8e80a3438877a",
+      "bytes": 524
+    },
+    {
+      "name": "008.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "008.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "009.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "009.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "retained_prior_failure": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-fast-001/result.json",
+  "fix": "Three readiness predicates wait for the first unbuffered heartbeat byte before announcing/signaling readiness; process-owner behavior/deadlines/cleanup assertions unchanged. Independently reviewed by profile_consumer_review with no findings."
+}

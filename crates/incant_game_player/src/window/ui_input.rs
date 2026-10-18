@@ -11,7 +11,9 @@ use tao::{
     event::{ElementState, WindowEvent},
 };
 
-#[derive(Default)]
+mod touch;
+
+#[derive(Clone, Default)]
 enum Left {
     #[default]
     Up,
@@ -30,6 +32,7 @@ pub struct UiInput {
     pointer_ready: bool,
     surface_retry: bool,
     ime: super::ime::Ime,
+    touches: touch::Contacts,
 }
 impl UiInput {
     pub fn new() -> Self {
@@ -42,6 +45,7 @@ impl UiInput {
             pointer_ready: true,
             surface_retry: false,
             ime: Default::default(),
+            touches: Default::default(),
         }
     }
     pub fn text_session(
@@ -130,6 +134,7 @@ impl UiInput {
         self.observed = None;
         self.position = None;
         self.pointer_ready = false;
+        self.touches.clear();
         if !matches!(self.left, Left::Up) {
             self.left = Left::Suppressed;
         }
@@ -142,10 +147,17 @@ impl UiInput {
         self.observed = None;
         self.position = None;
         self.left = Left::Up;
+        self.touches.clear();
     }
     /// A temporary surface acquisition timeout is not an OS focus loss.
-    pub fn defer_surface(&mut self) {
+    pub fn defer_surface(
+        &mut self,
+        ui: Option<&UiRuntime>,
+        physical: &mut PendingInput,
+    ) -> Result<(), Error> {
+        self.cancel_touches(ui, physical)?;
         self.surface_retry = true;
+        Ok(())
     }
     pub fn awaiting_surface(&self) -> bool {
         self.surface_retry
@@ -183,6 +195,7 @@ impl UiInput {
         ui: Option<&UiRuntime>,
         physical: &mut PendingInput,
     ) -> Result<(), Error> {
+        self.cancel_touches(ui, physical)?;
         self.receipts
             .retain(|e| !matches!(e, UiEvent::Pointer { .. } | UiEvent::CancelPointer { .. }));
         if matches!(self.left, Left::Gameplay) {
@@ -248,6 +261,7 @@ impl UiInput {
         physical: &mut PendingInput,
     ) -> Result<(), Error> {
         let token = ui.and_then(UiRuntime::pointer_token);
+        self.synchronize_touches(ui, physical, self.observed != token)?;
         if self.observed != token {
             self.cancel_left(ui, physical)?;
             self.observed = token;
@@ -310,6 +324,11 @@ impl UiInput {
                 return Ok(());
             }
             if self.hit(ui) {
+                // UiRuntime has one captured pointer, shared with touch.
+                if self.ui_touch_held() {
+                    self.left = Left::Suppressed;
+                    return Ok(());
+                }
                 let target = ui.and_then(UiRuntime::pointer_token).expect("hit layout");
                 self.push(
                     UiEvent::Pointer {
@@ -392,6 +411,9 @@ impl UiInput {
         event: &WindowEvent<'_>,
         scale: f64,
     ) -> Result<(), Error> {
+        if let WindowEvent::Touch(touch) = event {
+            return self.touch(ui, physical, touch, scale);
+        }
         self.synchronize(ui, physical)?;
         match event {
             WindowEvent::CursorMoved { position, .. } => {

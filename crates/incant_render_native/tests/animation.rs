@@ -37,8 +37,15 @@ fn mesh(n: u128, animation: Option<Arc<NativeAnimation>>) -> CookedSpatial {
     node
 }
 fn prepare() -> (tempfile::TempDir, CookedScene, Arc<NativeAnimation>) {
+    prepare_edited(|_, _| {})
+}
+fn prepare_edited(
+    edit: impl FnOnce(&Path, &mut serde_json::Value),
+) -> (tempfile::TempDir, CookedScene, Arc<NativeAnimation>) {
     let directory = tempfile::tempdir().unwrap();
-    fixture::fixture(directory.path());
+    let mut document = fixture::fixture(directory.path());
+    edit(directory.path(), &mut document);
+    fixture::write(directory.path(), &document);
     let model = incant_assets::cook_gltf(
         directory.path(),
         Path::new("model.gltf"),
@@ -458,3 +465,7 @@ mod ik;
 
 #[path = "animation/root_motion.rs"]
 mod root_motion;
+
+#[cfg(feature = "experimental-pose-interpolation")]
+#[path = "animation/interpolation.rs"]
+mod interpolation;

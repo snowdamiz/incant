@@ -45,6 +45,7 @@ fn public_import_select_reimport_undo_clear_and_journal_reopen() {
     let module = first.asset.id.clone();
     let program = Some(SceneProgram::Wasm {
         module: module.clone(),
+        instances: Default::default(),
     });
     let command = |program| Command::SetSceneProgram {
         scene_id: scene_id.clone(),
@@ -140,7 +141,8 @@ fn stale_malformed_oversized_and_mixed_inputs_leave_document_and_history_unchang
                 Command::SetSceneProgram {
                     scene_id: scene_id.clone(),
                     program: Some(SceneProgram::Wasm {
-                        module: first.asset.id
+                        module: first.asset.id,
+                        instances: Default::default()
                     })
                 },
                 Command::UpsertScript { script },

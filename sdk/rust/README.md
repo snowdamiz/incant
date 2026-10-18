@@ -37,6 +37,42 @@ Compile the standalone sample (install the pinned toolchain's wasm32 target firs
 python3 tools/rust_guest.py sdk/rust/samples/gameplay.rs /tmp/gameplay.wasm
 ```
 
+For source supplied by a project, use the separate explicit build service:
+
+```
+python3 tools/rust_guest.py --untrusted \
+  --source-root /absolute/project-source --entry module.rs \
+  --output /absolute/artifacts/new-module.wasm --work-dir /absolute/private/new-attempt \
+  --rustc /absolute/pinned-1.99.0-toolchain/bin/rustc \
+  --validator /absolute/qualified-engine/incant_wasm_cook
+```
+
+Compiler/validator and output/work roots are **trusted operator configuration**,
+not project capability fields. Both output and work directory must be new; use
+canonical paths without symlink ancestors (`/private/tmp`, rather than `/tmp`,
+on macOS). The source package admits only up to 32 UTF-8 `.rs` files, 64 KiB per
+file, 256 KiB total and eight path components. It refuses Cargo manifests,
+`build.rs`, links, native artifacts and other dependencies. A relative `mod`
+within that package is supported. The compiler receives only the vetted SDK,
+a fixed wasm32 recipe and a clean private environment. No project native code,
+Cargo build script or procedural macro dependency is executed.
+
+The initial backend uses Apple's **deprecated** `sandbox-exec` on macOS. Other
+platforms and unavailable/broken policies refuse; there is no bare-compiler
+fallback. The implementation and pure controls alone do not establish sandbox
+safety: [actual isolation qualification](../../docs/spikes/untrusted-rust-module-build.md)
+is still required. This service is not an App Sandbox or a cross-version
+security guarantee.
+
+The normal Wasm cook validator must accept the result before create-only
+publication. The published artifact is the original **untrusted raw Wasm**, not
+the validator's metered output or a trusted native descriptor. Import it using
+the ordinary public Wasm importer and `SetSceneProgram` transaction; this build
+service does not mutate the project or automatically attach code. Diagnostics
+and retained failure work are untrusted data. Deadline, storage and RSS limits
+are sampled; they are not hard OS memory/disk quotas. Source-free native export,
+shipping performance and physical-device delivery remain separate checks.
+
 Run the actual two-host suite with:
 
 ```
@@ -48,6 +84,25 @@ Wasm before wasm2c translation, links it into the native test executable, and ru
 it beside the actual Wasmtime development host. Shipped applications receive
 only trusted compiled native descriptors; they never compile or load guest Rust
 source, raw Wasm or cached native modules at runtime.
+
+## Copied input
+
+`tick.input(&mut scratch)` returns one accepted, borrowed `InputSnapshot`; use
+`INPUT_MAX_BYTES` initialized bytes for complete snapshots. It exposes named
+actions, keyboard/mouse edges, gamepad connections/values/sticks, active touches,
+ordered touch changes and tap/long-press/swipe/pinch gestures. Coordinates are
+logical pixels and device/contact IDs are `u32`, including their full range.
+`Gamepad::value` distinguishes an absent value from an explicitly reported zero.
+Focus loss releases held buttons and cancels contacts; a reused contact or
+reconnected gamepad starts without the old contact deltas or device values.
+
+[samples/input.rs](samples/input.rs) observes typed values using bounded,
+committed diagnostic lines. Its small conformance event sequence stays within
+normal log quotas; it is not a template for logging every device on every tick.
+The [input conformance scope](../../docs/spikes/native-wasm-input-conformance.md)
+separates the existing raw-frame evidence from the new actual Rust guest tests
+and their qualification status. Synthesized events do not prove hardware or
+native-window delivery.
 
 ## Simulation timers
 
@@ -436,6 +491,21 @@ numeric, structural and log changes; short reads never copy a partial frame.
 Queued commands never call an audio backend directly. See the real Rust
 [transport sample](samples/audio_transport.rs) and
 [scope/evidence](../../docs/spikes/native-wasm-audio.md).
+
+### Authored initial instances
+
+An ordinary scene `SetSceneProgram` may supply an `instances` map from existing
+owner ULIDs to immutable initial properties for its one Wasm module. Call
+`Tick::instances(scratch)` to obtain sorted owner IDs and nested read-only
+`InitialValue` views over a complete copied snapshot. Views borrow caller-owned
+scratch, never a host pointer. The shared property bounds and active owner
+membership are validated by the engine; same-ID respawn does not reattach a
+retired owner. Catalog changes refuse checkpoint restore. Module-only projects
+keep their previous behavior. See [the sample](samples/instances.rs) and
+[source scope and qualification limits](../../docs/spikes/native-wasm-instances.md).
+Focused actual Wasmtime/wasm2c parity, reload controls and one ordinary authored
+source-free export with retirement/checkpoint continuation passed. See the linked
+qualification limits; these are functional CPU results, not complete SDK parity.
 
 ### Explicit persistent state
 

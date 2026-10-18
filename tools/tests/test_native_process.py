@@ -34,7 +34,7 @@ grandchild = subprocess.Popen([sys.executable, '-c', sys.argv[3], str(root / 'al
                              stdout=output, stderr=output)
 (root / 'pids.json').write_text(json.dumps([os.getpid(), grandchild.pid]))
 limit = time.monotonic() + 10
-while not (root / 'alive').exists():
+while not (root / 'alive').exists() or (root / 'alive').stat().st_size == 0:
     if time.monotonic() > limit:
         raise RuntimeError('Grandchild did not start')
     time.sleep(0.005)
@@ -193,7 +193,7 @@ class NativeProcessTests(unittest.TestCase):
     def test_keyboard_interrupt_during_wait_cleans_actual_tree(self):
         def interrupt(*_):
             limit = time.monotonic() + 10
-            while not (self.root / 'alive').exists():
+            while not (self.root / 'alive').exists() or (self.root / 'alive').stat().st_size == 0:
                 if time.monotonic() > limit:
                     self.fail('Grandchild did not start')
                 time.sleep(0.005)
@@ -201,6 +201,80 @@ class NativeProcessTests(unittest.TestCase):
         with mock.patch.object(native_process, '_wait', side_effect=interrupt):
             with self.assertRaises(KeyboardInterrupt):
                 native_process.run(self.tree('running'), timeout=15)
+        self.assert_stopped()
+
+    def test_resource_refusal_survives_secondary_cleanup_refusal(self):
+        operation = ValueError('owned RSS budget exceeded')
+        cleanup = RuntimeError('cleanup observation refused')
+        tree_type = native_process._WindowsTree if os.name == 'nt' else native_process._PosixTree
+        original = tree_type.stop
+
+        def stop(tree):
+            original(tree)  # Real cleanup still happens before injecting the observer failure.
+            raise cleanup
+
+        def guard():
+            path = self.root / 'alive'
+            if path.exists() and path.stat().st_size:
+                raise operation
+
+        with mock.patch.object(tree_type, 'stop', stop):
+            with self.assertRaises(native_process.CleanupError) as caught:
+                native_process.run(self.tree('running'), timeout=10, cancel=guard)
+        self.assertIs(caught.exception.operation_error, operation)
+        self.assertIs(caught.exception.cleanup_error, cleanup)
+        self.assertIs(caught.exception.__cause__, operation)
+        self.assertIn('owned RSS budget exceeded', repr(caught.exception))
+        self.assertIn('cleanup observation refused', repr(caught.exception))
+        self.assert_stopped()
+
+    def test_interactive_timeout_survives_secondary_cleanup_refusal(self):
+        with native_process.Interactive(self.tree('running')) as child:
+            self.assertEqual(child.stdout.readline(), b'child ready\n')
+            original = child.tree.stop
+
+            def stop():
+                original()
+                raise RuntimeError('cleanup observation refused')
+
+            with mock.patch.object(child.tree, 'stop', stop):
+                with self.assertRaises(native_process.CleanupError) as caught:
+                    child.wait(timeout=0.01)
+            self.assertIsInstance(caught.exception.operation_error, subprocess.TimeoutExpired)
+            self.assertTrue(child.closed)
+        self.assert_stopped()
+
+    def test_interactive_caller_failure_survives_secondary_cleanup_refusal(self):
+        operation = KeyboardInterrupt('caller cancelled')
+        child = native_process.Interactive(self.tree('running'))
+        self.assertEqual(child.stdout.readline(), b'child ready\n')
+        original = child.tree.stop
+
+        def stop():
+            original()
+            raise RuntimeError('cleanup observation refused')
+
+        with mock.patch.object(child.tree, 'stop', stop):
+            with self.assertRaises(native_process.CleanupError) as caught:
+                with child:
+                    raise operation
+        self.assertIs(caught.exception.operation_error, operation)
+        self.assertTrue(child.closed)
+        self.assert_stopped()
+
+    def test_successful_operation_cleanup_failure_is_not_swallowed(self):
+        tree_type = native_process._WindowsTree if os.name == 'nt' else native_process._PosixTree
+        original = tree_type.stop
+        cleanup = RuntimeError('cleanup observation refused')
+
+        def stop(tree):
+            original(tree)
+            raise cleanup
+
+        with mock.patch.object(tree_type, 'stop', stop):
+            with self.assertRaises(RuntimeError) as caught:
+                native_process.run(self.tree('exit'), timeout=10)
+        self.assertIs(caught.exception, cleanup)
         self.assert_stopped()
 
     def test_reader_setup_failure_cleans_direct_child(self):

@@ -27,6 +27,11 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    InstancesLen,
+    ReadInstances {
+        ptr: i32,
+        capacity: i32,
+    },
     NextCoroutine {
         ptr: i32,
         capacity: i32,
@@ -254,6 +259,8 @@ pub enum Call {
 /// this state. No guest access or native pointer is retained by this type.
 #[derive(Default)]
 pub struct Capability {
+    instances: crate::instances::State,
+    instances_rejected: bool,
     coroutines: crate::coroutines::State,
     timers: crate::timers::State,
     haptics: crate::haptics::State,
@@ -308,6 +315,25 @@ pub struct Capability {
     physics: Option<crate::physics_queries::State>,
 }
 impl Capability {
+    pub fn instance_catalog(&self) -> Option<std::sync::Arc<crate::instances::Catalog>> {
+        self.instances.catalog()
+    }
+    pub fn configure_instances(
+        &mut self,
+        catalog: std::sync::Arc<crate::instances::Catalog>,
+    ) -> Result<(), Error> {
+        if self.active || self.failed || self.tick != 0 || self.identity.is_some() {
+            return Err(Error::Abi("instance catalog must precede startup"));
+        }
+        self.instances = crate::instances::State::configured(catalog);
+        Ok(())
+    }
+    pub fn bind_instances(&mut self, world: &NativeWorld) -> Result<(), Error> {
+        if self.active || self.failed || self.tick != 0 || self.identity.is_some() {
+            return Err(Error::Abi("instance binding must precede startup"));
+        }
+        self.instances.bind_initial(world)
+    }
     pub fn is_failed(&self) -> bool {
         self.failed
     }
@@ -315,11 +341,14 @@ impl Capability {
     pub fn replacement(&mut self) -> Self {
         // Direct trusted callers must not revive a failed or active persistent
         // transaction. Public host reload validates its fresh candidate first.
-        let failed = (self.persistent.is_some() || self.coroutines.enabled())
+        let failed = (self.persistent.is_some()
+            || self.coroutines.enabled()
+            || self.instances.catalog().is_some())
             && (self.failed || self.active || self.restart_committed);
         Self {
             failed,
             persistent: self.persistent.take(),
+            instances: std::mem::take(&mut self.instances),
             timers: self.timers.replacement(),
             coroutines: self.coroutines.replacement(),
             haptics: self.haptics.replacement(),
@@ -405,6 +434,11 @@ impl Capability {
         self.input.clear();
         self.epoch = self.epoch.checked_add(1).ok_or(Error::Limit("epoch"))?;
         self.chunks = world.with_numeric_columns(transaction::capture)?;
+        self.instances_rejected = false;
+        if let Err(error) = self.instances.begin(world) {
+            self.abort();
+            return Err(error);
+        }
         if let Err(error) =
             crate::flipbooks::encode(world, &mut self.flipbook_rows, &mut self.flipbooks)
         {
@@ -627,6 +661,10 @@ impl Capability {
             return Err(Error::Abi("rejected HUD transaction"));
         }
         self.hud.clear();
+        if self.instances_rejected {
+            self.abort();
+            return Err(Error::Abi("rejected instance snapshot"));
+        }
         if self.light_rejected {
             self.abort();
             return Err(Error::Abi("rejected light transaction"));
@@ -694,6 +732,7 @@ impl Capability {
             Ok(())
         });
         if result.is_ok() {
+            self.instances.prune(world);
             self.haptics.commit();
             self.timers.commit();
             self.coroutines.commit(|id| world.entity_identity(id));
@@ -771,6 +810,9 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        let instances_authorized = self.active
+            && self.epoch == epoch
+            && matches!(call, Call::InstancesLen | Call::ReadInstances { .. });
         let coroutine_authorized = self.active
             && self.epoch == epoch
             && matches!(
@@ -872,6 +914,9 @@ impl Capability {
                     | Call::SetLocale { .. }
             );
         let result = self.invoke_inner(memory, epoch, call);
+        if instances_authorized && result.is_err() {
+            self.instances_rejected = true;
+        }
         if coroutine_authorized && result.is_err() {
             self.coroutines.rejected = true;
         }
@@ -1013,6 +1058,20 @@ impl Capability {
                 .ok_or(Error::Limit("navigation query quota"))?;
         }
         match call {
+            Call::InstancesLen => return Ok(self.instances.frame().len() as i32),
+            Call::ReadInstances { ptr, capacity } => {
+                let len = self.instances.frame().len();
+                let capacity =
+                    usize::try_from(capacity).map_err(|_| Error::Abi("instance capacity"))?;
+                if capacity < len {
+                    return Err(Error::Abi("instance capacity"));
+                }
+                range(ptr, capacity, memory.len())?;
+                let target = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                memory[target].copy_from_slice(self.instances.frame());
+                return Ok(len as i32);
+            }
             Call::NextCoroutine { ptr, capacity } => {
                 let capacity =
                     usize::try_from(capacity).map_err(|_| Error::Abi("coroutine capacity"))?;

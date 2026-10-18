@@ -1,0 +1,387 @@
+{
+  "format": "incant-script-budget-source-reassessment",
+  "version": 1,
+  "observed_at": "2026-10-18T05:03:55.880843+00:00",
+  "source_root": "/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant",
+  "source_head": "d4577e8ee8e91ab465d6cc4863bed25a5f97dd1c",
+  "source_status": "",
+  "preserved_own_worktree": {
+    "root": "/Users/andreyyurlov/.codex/worktrees/render-cost-negative-040/incant",
+    "head": "f45a75b51f181f0049e87a262909e966d93fe5fc",
+    "branch": "codex/agent-tilemap-authoring",
+    "status": ""
+  },
+  "scope": "Bounded source/data-only periodic reassessment of the original 10,000-script TypeScript Core workload; no Wasm adapter, presentation, or runtime-policy changes.",
+  "result": "no_credible_distinct_optimization_candidate",
+  "script_2ms_target_met": false,
+  "proposed_source_edits": [],
+  "files": [
+    {
+      "path": "PLAN.md",
+      "bytes": 135340,
+      "sha256": "dc3a7369624c545bdedc28c53486679138fd546751e7b56916a622767ecb74a7"
+    },
+    {
+      "path": "STATUS.md",
+      "bytes": 323705,
+      "sha256": "6c27f2139473b8af6262f58ce1d4080089a53c82bb53f8d80a6f95476c08996c"
+    },
+    {
+      "path": "docs/gates/phase1-review.md",
+      "bytes": 16777,
+      "sha256": "edf626aebce7f83e5e342f1895f9d873a9719a22fce9c9507bd4a832ba528d49"
+    },
+    {
+      "path": "docs/spikes/quickjs-core-pgo.md",
+      "bytes": 11526,
+      "sha256": "a9f76a426f150174097294c1aad10cd1e588428a05c5a490ac82a44589297829"
+    },
+    {
+      "path": "docs/spikes/evidence/quickjs-core-pgo/manifest.json",
+      "bytes": 154291,
+      "sha256": "38a939995c1a701852f2fde27530e8f66a04a168f6dffccc1b3d353288f780a8"
+    },
+    {
+      "path": "docs/spikes/ordered-numeric-query.md",
+      "bytes": 9226,
+      "sha256": "4af3971287830963325c2501a3eb995ec2f09ec230d49c9a69ac169990696d44"
+    },
+    {
+      "path": "docs/spikes/core-script-attribution.md",
+      "bytes": 19764,
+      "sha256": "0b046d136eed3a7d2da41cf7fa97e9fb0674091596d0e9bba1b0bdde7185a0f0"
+    },
+    {
+      "path": "docs/spikes/navigation-search-cache-outcome.md",
+      "bytes": 8263,
+      "sha256": "754255e18fb27b6a1e1f72bcb3cc6dfe6ac345580857114252f39dcd17f3551c"
+    },
+    {
+      "path": "docs/spikes/navigation-start-attribution.md",
+      "bytes": 6892,
+      "sha256": "f011f0f73c66193a672b4f281dd03239cc1bc8fb7b830513f8e2f2ffda14b0c2"
+    },
+    {
+      "path": "docs/spikes/script-budget-check-attribution.md",
+      "bytes": 10521,
+      "sha256": "50779442c4dacc873aec07891ff6ec8adecf5724095cd4d494cadec06fc8c585"
+    },
+    {
+      "path": "docs/spikes/evidence/script-budget-reassessment-2026-10-15.json",
+      "bytes": 763,
+      "sha256": "614427e854bd27415a6211429065106521bddbe9fe3d5cc129a4b94b080309b0"
+    },
+    {
+      "path": "docs/spikes/quickjs-loan-capacity.md",
+      "bytes": 5159,
+      "sha256": "a9fe5f6905d9dad9e4d7398b900da412134d2a4524d5358bc9b671c8fb31ebf4"
+    },
+    {
+      "path": "samples/core/stress.ts",
+      "bytes": 3513,
+      "sha256": "7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a"
+    },
+    {
+      "path": "samples/core/gameplay.ts",
+      "bytes": 16574,
+      "sha256": "f471293cf6a3b6a355f0f2c8ec6406bf5f3942f438411121b2e63ae6e6f31095"
+    },
+    {
+      "path": "crates/incant_script/src/lib.rs",
+      "bytes": 42031,
+      "sha256": "cb84f6c4ddfe568b8409d061b09f2b8ce507263f3185bc21b5c7154bada48acf"
+    },
+    {
+      "path": "crates/incant_script/src/loan.rs",
+      "bytes": 10420,
+      "sha256": "5aca7cf70f2c174dec2b993f1736ff4b6e575eb0af2ad3fbeca9b3c10a117c86"
+    },
+    {
+      "path": "crates/incant_script/src/loan/scratch.rs",
+      "bytes": 3083,
+      "sha256": "7c08b23dcf95d614dc29c25212289d4ec13901090b6765219d653f22e419a8d1"
+    },
+    {
+      "path": "crates/incant_script/src/queries.rs",
+      "bytes": 14014,
+      "sha256": "9f6936d6a10502f76c0ae965b9577ded46ff2f18c964e3af5768fa872d85c92c"
+    },
+    {
+      "path": "crates/incant_script/src/session.rs",
+      "bytes": 7147,
+      "sha256": "67923d680748f09b50ce70b9a548fa53d1e379dd400ed6203d9d19c6d9ecafc6"
+    },
+    {
+      "path": "crates/incant_runtime/src/world.rs",
+      "bytes": 35503,
+      "sha256": "681843915dc9b2f3fee921b2f534862d091b5f5c3c60a86e06bfae6d327c25d2"
+    },
+    {
+      "path": "crates/incant_runtime/src/columns.rs",
+      "bytes": 12068,
+      "sha256": "cc58d02ea968d89d83d2ceaf92bdb1b6675cd7777635089781148565efae7fa5"
+    },
+    {
+      "path": "crates/incant_runtime/src/physics_queries.rs",
+      "bytes": 10030,
+      "sha256": "cff88b176b3a8a2b4bf1838127255d1cd160f9b2da9bd9e6a812d21350d61d27"
+    },
+    {
+      "path": "crates/incant_runtime/src/spatial_view.rs",
+      "bytes": 5682,
+      "sha256": "0ef2abf422419f8cf5e817dfeeda67350f8109dffb34e4f85159da3c8d2d4c27"
+    },
+    {
+      "path": "crates/incant_runtime/src/localization.rs",
+      "bytes": 4647,
+      "sha256": "fdbd95baaed96079a51966214fab6b3065b6de21155258f2423217674b6377da"
+    },
+    {
+      "path": "crates/incant_runtime/src/scene.rs",
+      "bytes": 21515,
+      "sha256": "6a214ecc17922f6097c2ce3d693c0be7ada42b6f9f568fcac578da8f89727a62"
+    },
+    {
+      "path": "crates/incant_physics_runtime/src/character.rs",
+      "bytes": 12889,
+      "sha256": "34b89d3e6fb432703627e8d2f8bbd569ee8ee08e62f3f599ef71ca5bf703f817"
+    },
+    {
+      "path": "crates/incant_physics_runtime/src/lib.rs",
+      "bytes": 19068,
+      "sha256": "2dc701bba77f493fa464eb09066b1946f3a63db8b210c6f61cef71240f4ae94d"
+    },
+    {
+      "path": "third_party/rquickjs-sys/quickjs/quickjs.c",
+      "bytes": 2146912,
+      "sha256": "d2230f99482f79501dd1ab67430433298116120f01eccfea66c220e9c890f0e2"
+    }
+  ],
+  "pgo_measurements_rehashed_against_portable_manifest": [
+    {
+      "arm": "O0",
+      "mode": "ordinary",
+      "route": "win",
+      "script_p95_ns": {
+        "lower": 2270001,
+        "upper": 2280000
+      },
+      "source_wall_mean_ns": [
+        {
+          "source_last_byte": 1,
+          "mean": 242755.0742115028
+        },
+        {
+          "source_last_byte": 2,
+          "mean": 980125.6396103896
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O0/measurement.json",
+        "bytes": 1392,
+        "sha256": "75b82bd228613bf0d57d4f22b5ffe28c36a709fc06adc61d266951630c314257"
+      }
+    },
+    {
+      "arm": "U0",
+      "mode": "use",
+      "route": "win",
+      "script_p95_ns": {
+        "lower": 2170001,
+        "upper": 2180000
+      },
+      "source_wall_mean_ns": [
+        {
+          "source_last_byte": 1,
+          "mean": 204991.48979591837
+        },
+        {
+          "source_last_byte": 2,
+          "mean": 960987.9304267161
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U0/measurement.json",
+        "bytes": 1387,
+        "sha256": "37c4afe8970b47ab0f9f972c99454b891673f5930b213d674992889c366be345"
+      }
+    },
+    {
+      "arm": "U1",
+      "mode": "use",
+      "route": "loss",
+      "script_p95_ns": {
+        "lower": 1830001,
+        "upper": 1840000
+      },
+      "source_wall_mean_ns": [
+        {
+          "source_last_byte": 1,
+          "mean": 151303.78555555554
+        },
+        {
+          "source_last_byte": 2,
+          "mean": 954004.3988888889
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U1/measurement.json",
+        "bytes": 1382,
+        "sha256": "c00e7fdc6cc8877a6b1a171388f3160493c1a73278029fc7a043ddb3ceb092d1"
+      }
+    },
+    {
+      "arm": "O1",
+      "mode": "ordinary",
+      "route": "loss",
+      "script_p95_ns": {
+        "lower": 1900001,
+        "upper": 1910000
+      },
+      "source_wall_mean_ns": [
+        {
+          "source_last_byte": 1,
+          "mean": 166833.6577777778
+        },
+        {
+          "source_last_byte": 2,
+          "mean": 982238.6433333333
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O1/measurement.json",
+        "bytes": 1387,
+        "sha256": "af28fbe90d445f2777d6cd635621289dea83e50a5a39b4c8a2f0aaed300eb64f"
+      }
+    },
+    {
+      "arm": "U2",
+      "mode": "use",
+      "route": "win",
+      "script_p95_ns": {
+        "lower": 2410001,
+        "upper": 2420000
+      },
+      "source_wall_mean_ns": [
+        {
+          "source_last_byte": 1,
+          "mean": 233175.22866419295
+        },
+        {
+          "source_last_byte": 2,
+          "mean": 997136.4582560296
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U2/measurement.json",
+        "bytes": 1387,
+        "sha256": "63ca32e1e6f0e7c0afb32233ccaac2e70861969d7da8ac02f21969855030527b"
+      }
+    },
+    {
+      "arm": "O2",
+      "mode": "ordinary",
+      "route": "win",
+      "script_p95_ns": {
+        "lower": 2230001,
+        "upper": 2240000
+      },
+      "source_wall_mean_ns": [
+        {
+          "source_last_byte": 1,
+          "mean": 244533.560296846
+        },
+        {
+          "source_last_byte": 2,
+          "mean": 969662.9044526902
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O2/measurement.json",
+        "bytes": 1392,
+        "sha256": "51ce9fc1c009e16f8aac5a48475680d1adaffa684b9d25b4e5c1b9d9f28395cb"
+      }
+    },
+    {
+      "arm": "O3",
+      "mode": "ordinary",
+      "route": "loss",
+      "script_p95_ns": {
+        "lower": 1920001,
+        "upper": 1930000
+      },
+      "source_wall_mean_ns": [
+        {
+          "source_last_byte": 1,
+          "mean": 171841.56444444443
+        },
+        {
+          "source_last_byte": 2,
+          "mean": 968181.8922222222
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/O3/measurement.json",
+        "bytes": 1387,
+        "sha256": "84e543f3b04b2a6942a1dafba33174f9f24cbe0240c11db23b94bf686e90a108"
+      }
+    },
+    {
+      "arm": "U3",
+      "mode": "use",
+      "route": "loss",
+      "script_p95_ns": {
+        "lower": 1880001,
+        "upper": 1890000
+      },
+      "source_wall_mean_ns": [
+        {
+          "source_last_byte": 1,
+          "mean": 152171.72222222222
+        },
+        {
+          "source_last_byte": 2,
+          "mean": 974313.3422222222
+        }
+      ],
+      "receipt": {
+        "path": "/Users/andreyyurlov/.codex/incant-evidence/quickjs-c-pgo-feasibility-001/core-timing-002/cases/U3/measurement.json",
+        "bytes": 1382,
+        "sha256": "fe382979111c8eda95109470342896adbe414a13f4707ec9be2c074460852875"
+      }
+    }
+  ],
+  "observations": [
+    "PGO remains mixed: the two use-mode win arms are 2.170001-2.180000 ms and 2.410001-2.420000 ms; their ordinary partners are 2.270001-2.280000 ms and 2.230001-2.240000 ms. No repeat of unchanged PGO is justified. Per-source means are not per-source p95s and cannot be subtracted from whole-tick p95.",
+    "Current stress.ts still hashes to the original 7285e9009633052ba86ee0996c87f58097eb47fdaf0a73df10f42597b0119f1a and performs all 9,999-row writes/checksum reads. Loan foreign views point at ECS storage; undo capture is a separate required native copy with reused capacity, not duplicate guest transfer.",
+    "Pinned QuickJS OP_get_array_el already uses js_get_fast_array_element for integer-index typed reads; its Float64Array case directly reads the double pointer. A generic typed-read optimization is not a new missing fast path. Typed-store/loop patches were already measured negative or mixed.",
+    "Possible repeated character-query snapshot construction is not supported on the ordinary stepped route: NativeSession::tick_with_ui steps the world before ScriptHost, PhysicsRuntime::step clears query_dirty, and character_motion borrows query_pipeline_with_filter when clean. The dirty-author-edit fallback is distinct; no evidence shows it dominating the current Core route.",
+    "with_numeric_physics moves the solver/navigation owners rather than cloning them; NativeLocalization clones Arcs, and spatial_view only checks usability/borrows the world. These are not hidden whole-world/catalog copies to eliminate.",
+    "Historical full-Core instrumented tail attribution places 78.19% of the same 108 tail frames inside inclusive callbacks. Numeric validation averages 195.481 us on those frames; ordered-query and matrix-basis changes have already failed matched adoption. The existing evidence does not separate callback interpreter work from individual native query/serialization cost.",
+    "Historical same-frame subtraction of all navigation still reranks to 2.171792 ms. Deadline checks average 4.34 us overall and 8.40 us on the retained tail. Neither repeating navigation-only work nor weakening deadline enforcement has a supported path to the unmet target."
+  ],
+  "recommendation": "Do not open another speculative optimization branch or repeat the rejected experiments from this revisit. The next useful trigger is new source-bound attribution of a distinct callback subpath on the unchanged current Core route; until then the 2 ms gate remains unmet and no saving is predicted.",
+  "conditional_measurement_design": {
+    "status": "not authorized, not implemented, not a claimed optimization candidate",
+    "purpose": "If a future CPU lane is allocated, distinguish QuickJS interpreter property/number/dispatch cost from native capability parse/execute/materialize cost before proposing a change. Retain current source/guest binaries and do not infer duration from PGO execution counts.",
+    "baseline_contract": "Use the ordinary source-free shipping recipe, exact C compiler/options, Rust opt3/fat-LTO/one-CGU/abort, actual closed physics feature graph, identical profile observer, original 74 authoring inputs and full 2,156-tick route. Treat any instrumented/sampled child as diagnostic only.",
+    "falsification_and_parity": "Require exact all-tick gameplay observations and complete 13,798,400-byte win PCM against the same-source ordinary control; retain failure/partial data. Include held-out loss and restart parity for any later implementation. A hypothesized hotspot must show a meaningful attributed cost in the same slow frames; counts or inclusive callback totals alone are insufficient.",
+    "later_matched_change_only_if_supported": "Freeze one small cause-specific implementation, run complete functional/PCM parity before a fixed balanced quiet shipping comparison, keep all samples and pair results, and report PlayerFrame/memory separately. No threshold adjustment, no pooled quantiles, no guarantee of 2 ms."
+  },
+  "limitations": [
+    "PGO measurement files were rehashed against their existing portable manifest; this pass did not rerun its full verifier or functional/native binaries.",
+    "Historical attribution and new PGO summaries are different source/instrumentation generations and are not pooled or treated as current per-subphase timing.",
+    "No CPU stack data was collected, so interpreting a dominant interpreter opcode or native capability as the next cause would be speculative."
+  ],
+  "execution": {
+    "repository_edits": 0,
+    "native_builds": 0,
+    "native_tests": 0,
+    "profiling_or_benchmarks": 0,
+    "target_access": 0,
+    "gpu": 0,
+    "native_windows": 0,
+    "computer_use_or_capture": 0,
+    "external_review_receipt_written": true
+  }
+}

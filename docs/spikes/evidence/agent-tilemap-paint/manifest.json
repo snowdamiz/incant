@@ -1,0 +1,247 @@
+{
+  "format": "agent-tilemap-evidence-v1",
+  "source": "8bcfa195573e6a695433096222add01a21deb849",
+  "base": "e8d753cc24167cbe0f093e7c6af9bb9c26955609",
+  "scope": "CPU agent/shared authoring qualification using in-process mock providers. No live provider, editor UI, GPU, window, capture or performance claim. Root generates schemas separately at integration.",
+  "records": [
+    {
+      "name": "0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-001/0.stderr.log",
+      "bytes": 4767,
+      "sha256": "dda67357f20f2957c075c60aebed941ea2181e6229364815d17b2477cbfdbf78"
+    },
+    {
+      "name": "0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-001/0.stdout.log",
+      "bytes": 438104,
+      "sha256": "c022f5cf1f123cf091f1a38a8f8b07492c8ff48738c1d375637ce290c3729071"
+    },
+    {
+      "name": "1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-001/1.stderr.log",
+      "bytes": 8033,
+      "sha256": "664a37bdc40ee365c60a85480e9e44154c7662b8a06a2f01a64ebd5686e93530"
+    },
+    {
+      "name": "1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-001/1.stdout.log",
+      "bytes": 408102,
+      "sha256": "61cdb4cb67eb56c48d44a294ac051956b81deef8e1ba5a084489cb9d0af1ff67"
+    },
+    {
+      "name": "authorization.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-packet-001/authorization.json",
+      "bytes": 479,
+      "sha256": "c6258a56d435c2951afce8fb6c98051215449df6441517a4d5e6d68671c8b7ef"
+    },
+    {
+      "name": "closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-001/closeout.json",
+      "bytes": 11890,
+      "sha256": "44f8de15335696845219d0d5e1e55123dedd0d604ad570b5eac66ec0e448e588"
+    },
+    {
+      "name": "closeout.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-packet-001/closeout.py",
+      "bytes": 3193,
+      "sha256": "eca3b5be67a2f3bad5919593a7f423e2426a083ebd6ca75a3553125733829444"
+    },
+    {
+      "name": "freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/source-001/freeze.json",
+      "bytes": 4028,
+      "sha256": "3122e5d7d322370bfd387a8dcbcfbba708786c87e4d63d65f84b594d9ad522aa"
+    },
+    {
+      "name": "plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-packet-001/plan.json",
+      "bytes": 11165,
+      "sha256": "da5b8fa7da6ff5cbaa6e0efab7b1a7c2c6f252a87f61bcb30a5deadff3a22ac5"
+    },
+    {
+      "name": "protected-release.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-001/protected-release.json",
+      "bytes": 2112,
+      "sha256": "ea3812b698396592ae799f6bf68167edcbf32cf798bc9d395176ec33138d2691"
+    },
+    {
+      "name": "result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-001/result.json",
+      "bytes": 143731,
+      "sha256": "0bf6e79390d3651a7a5f468b3d34e1f70952bbd207a495ce85ceaf6dcdf41b3f"
+    },
+    {
+      "name": "root-source-review.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/agent-tilemap-source-20261018.json",
+      "bytes": 1389,
+      "sha256": "0d35dca74b79cec63831e7fabfefa249fae4f4ea9a60d3679be34066c462c0d3"
+    },
+    {
+      "name": "run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-packet-001/run.py",
+      "bytes": 10830,
+      "sha256": "5cf0f32fbb66d1a525ba15d9b7ec2c6c89d78982d0bf554732d1039afb632687"
+    },
+    {
+      "name": "test-membership.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/source-001/test-membership.json",
+      "bytes": 3973,
+      "sha256": "edef1f0dcf574bda0e63d26ec62653ec10aa617862a5c254584a02836c2ee146"
+    }
+  ],
+  "archive": {
+    "file": "records.json.gz",
+    "bytes": 139809,
+    "sha256": "e8bfe54df3f1090b5e7660afbbf05ae56ac0c8c18979b909dbf02864c424cc82",
+    "uncompressed_bytes": 1402690
+  },
+  "tests": 33,
+  "new_tests": 10,
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-001/artifacts/0-assets-1c44d6bedc4dbb5e",
+      "bytes": 22256072,
+      "sha256": "4088d8d988526185baaee1cb9348442eb677f10876444603ce9ec5b21e9b68dc"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-001/artifacts/0-shared-6c40e1b3e96c3996",
+      "bytes": 22447720,
+      "sha256": "e54217d3133ac6914789fda49e577733a71ee0a542c816cc93c8036aaf660e7c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-001/artifacts/0-alpha_colliders-bee8144d3095f663",
+      "bytes": 22444512,
+      "sha256": "fdebc0d173e5838b105a4ac03f0e9c2f0f06d78521aa52b965a72221ada1f230"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-001/artifacts/0-tilemap_paint-076b47f072946fa6",
+      "bytes": 22553408,
+      "sha256": "30688072a641d1118a56c1c2c27fe9037d4eb6ae5a802845911016bd64bd99ea"
+    }
+  ],
+  "code_inputs": [
+    {
+      "path": "Cargo.lock",
+      "sha256": "1278eb66615deac92119e9c613e414b4c654f81a231b814972b5f0cbd2adcdce",
+      "bytes": 253604
+    },
+    {
+      "path": "Cargo.toml",
+      "sha256": "163606d4b9886c5d0f9bb6a4b67fca4823523b4024f17a689dc9bab719c314a7",
+      "bytes": 3956
+    },
+    {
+      "path": "crates/incant_agent/Cargo.toml",
+      "sha256": "48d9059020553633a521f6a680ddc89b9ed5b1fd2a48d9e9e94806843f27a21e",
+      "bytes": 1489
+    },
+    {
+      "path": "crates/incant_agent/src/access.rs",
+      "sha256": "23c751b94e1db08414c4bf9e9fe25f1db0b965650c2ec39032a898ddd7134102",
+      "bytes": 3385
+    },
+    {
+      "path": "crates/incant_agent/src/assets.rs",
+      "sha256": "cb22dd319befcac326221ccd5a47ddd5bb2bb686b91e608611b49fe199261cfb",
+      "bytes": 9040
+    },
+    {
+      "path": "crates/incant_agent/src/assets/tilemap.rs",
+      "sha256": "dcc850a59c6d5f7dd3e66e4521189a738ef669c1ea51142292cc01e4a69b82f0",
+      "bytes": 2745
+    },
+    {
+      "path": "crates/incant_agent/src/conversation.rs",
+      "sha256": "6313fed6dd0d29471eadb15aabf3b74bc7ff4e65155c737419121e51b7390615",
+      "bytes": 11437
+    },
+    {
+      "path": "crates/incant_agent/src/lib.rs",
+      "sha256": "28ef121ae0389ba4257fcde76bd9878d3aefc8c422a3654a2aa4fc1b5e137d57",
+      "bytes": 22607
+    },
+    {
+      "path": "crates/incant_agent/tests/tilemap/admission.rs",
+      "sha256": "a29fa5740b4425fa538c2a69ea1f48a6aaf2c587e15bf45664b6e3de41d72640",
+      "bytes": 4813
+    },
+    {
+      "path": "crates/incant_agent/tests/tilemap/authoring.rs",
+      "sha256": "f4e835b59e06f2212dff139893174bf3d3b5d9501e7e47e8a307b2bc6b92a789",
+      "bytes": 4988
+    },
+    {
+      "path": "crates/incant_agent/tests/tilemap/publication.rs",
+      "sha256": "0b653576c0bfd7ae506b790900b27c0cca6aa035147163fa73ceea0d1ed51997",
+      "bytes": 5284
+    },
+    {
+      "path": "crates/incant_agent/tests/tilemap/support.rs",
+      "sha256": "69a97fa41cef36b05c16e71bf4228b4b4c893fb35b71517fef6487821ba71ee6",
+      "bytes": 6376
+    },
+    {
+      "path": "crates/incant_agent/tests/tilemap/turns.rs",
+      "sha256": "5cd26ebfdfd0a79f38de505de2460c8f7db0daf0b7effbd70d10d9602e0ce62f",
+      "bytes": 5804
+    },
+    {
+      "path": "crates/incant_agent/tests/tilemap_paint.rs",
+      "sha256": "6ae59d1ef11faeca4d2d890cb0fafe586abfcac2fcaf6551a66f4527ccb40d04",
+      "bytes": 107
+    },
+    {
+      "path": "crates/incant_import/src/tilemap_paint.rs",
+      "sha256": "ed19a3919629cc605e2f796cb8b7e44df1ddb3c946ac63c1275a01499911aff7",
+      "bytes": 8248
+    },
+    {
+      "path": "crates/incant_import/src/tilemap_paint/brush.rs",
+      "sha256": "1c21d8f3a559caf9d699c1c116a5623f235b33ad06f18be9faa00833032caa51",
+      "bytes": 3652
+    },
+    {
+      "path": "rust-toolchain.toml",
+      "sha256": "c6e63d9832830b858d930007e4fd1fc3f4a3ca1d287483b08077b7f0267ca124",
+      "bytes": 100
+    },
+    {
+      "path": "crates/incant_agent/tests/alpha_colliders.rs",
+      "sha256": "580a84c4a0b29e1f17bbf177a49ad773fbe0f295655b0c3a74a7501eb0096981"
+    },
+    {
+      "path": "crates/incant_agent/tests/assets.rs",
+      "sha256": "bfdb3639adb2016434be50689673651498ce760da62111a3f6313e033bcadf05"
+    },
+    {
+      "path": "crates/incant_agent/tests/shared.rs",
+      "sha256": "f5e7fc1e37af6c21a8229f050bcd9f39c5da861a936634d3b54064aaecac6a49"
+    },
+    {
+      "path": "crates/incant_agent/tests/alpha/support.rs",
+      "sha256": "f41d4a98f65510de18d956795c912747da17d788d72b69951d1c26131c175fb7"
+    },
+    {
+      "path": "crates/incant_agent/tests/alpha/admission.rs",
+      "sha256": "97182b6cfdfa46a21d87d1da16a1907589631bf03a7aaaa491a5ba2f12e52d98"
+    },
+    {
+      "path": "crates/incant_agent/tests/alpha/publication.rs",
+      "sha256": "3245432f5a3ba64404b256a7fed58d7b6c7590424f26d6f8cac988d78cf45dcb"
+    },
+    {
+      "path": "crates/incant_agent/tests/alpha/turns.rs",
+      "sha256": "d9b54d2b9e193e131e3ad96eef3a6d39a0057a953f6d108c08ffd167d229546d"
+    },
+    {
+      "path": "crates/incant_agent/tests/alpha/authoring.rs",
+      "sha256": "fadec6a1d8bbdb957db2231d38bc14d9080e5eb05746183b0ea12a76cfd697ef"
+    }
+  ],
+  "external_source_manifest": {
+    "original": "/Users/andreyyurlov/.codex/incant-evidence/agent-tilemap-paint-001/cpu-packet-001/source.json",
+    "bytes": 3495413,
+    "sha256": "11849fdba6e9f6398f0956afd63dce9e0cebdd428f82c7783bf603a79587ccc3"
+  },
+  "external_limits": "Default replay checks packed raw records and 33 test names, not executable reruns. --originals requires external record files and the complete producing source manifest (23,455 paths); --binaries requires the four copied test executables; --source-root checks only listed implementation/test/support bytes, not historical docs. Prior target lineage/tools remain external, hash-bound in plan."
+}

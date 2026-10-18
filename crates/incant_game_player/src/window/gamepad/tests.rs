@@ -277,14 +277,20 @@ fn malformed_native_values_are_visible_and_unknown_controls_do_not_change_keyboa
     assert!(input.frame().keyboard.held.contains(&KeyCode::Space));
 }
 #[test]
-fn gamepad_bindings_are_accepted_only_for_bounded_player_ids_and_gestures_stay_unsupported() {
+fn native_bindings_accept_gestures_and_only_bounded_gamepad_ids() {
     let actions = |value| serde_json::from_value(value).unwrap();
     for id in [0, 15] {
         super::super::input::validate_actions(&actions(serde_json::json!({"move":{"kind":"axis2","bindings":[{"type":"gamepad_stick","id":id,"stick":"left"}]},"fire":{"kind":"button","bindings":[{"type":"gamepad_button","id":id,"button":"right_trigger"}]},"turn":{"kind":"axis1","bindings":[{"type":"gamepad_axis","id":id,"axis":"right_x"}]}}))).unwrap();
     }
+    for gesture in ["tap", "long_press", "swipe"] {
+        super::super::input::validate_actions(&actions(serde_json::json!({
+            "gesture": {"kind":"button","bindings":[{"type":"gesture","gesture":gesture}]}
+        })))
+        .unwrap();
+    }
     for binding in [
         serde_json::json!({"type":"gamepad_stick","id":16,"stick":"left"}),
-        serde_json::json!({"type":"gesture","gesture":"tap"}),
+        serde_json::json!({"type":"mouse_button","button":"back"}),
     ] {
         assert!(matches!(
             super::super::input::validate_actions(&actions(
@@ -324,7 +330,7 @@ fn restart_reannounces_real_adapter_topology_and_release_cannot_become_a_fresh_p
     assert!(fresh.frame().gamepads.contains_key(&0));
     assert!(fresh.frame().gamepads[&0].buttons.held.is_empty());
     let mut ui = super::super::ui_input::UiInput::new();
-    ui.defer_surface();
+    ui.defer_surface(None, &mut pending).unwrap();
     batch(
         &mut adapter,
         &mut pending,

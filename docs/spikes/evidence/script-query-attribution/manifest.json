@@ -1,0 +1,586 @@
+{
+  "format": "script-query-attribution-cpu-evidence-v1",
+  "base": "064b47278db30da67f7b522bbb1e615e6e1b49fb",
+  "sources": {
+    "001": "a8de928d974ac8d06c1c247a9701cf9b25af7872",
+    "002": "555498e3d203990767dbb3bf795e9c72825ff660",
+    "003": "d6ef9bc4b8c6b723d4b583eaced73c829c8e84a9"
+  },
+  "integration_source": "179eff781cbb35185a42582fc87f6c79f6641c19",
+  "scope": {
+    "default_off": true,
+    "actual_native_CPU": true,
+    "actual_Core_diagnostic": false,
+    "optimization_or_performance_acceptance": false,
+    "GPU_window_capture": false,
+    "test_names": 33,
+    "feature_qualified_controls": 36,
+    "test_executions": 42,
+    "new_controls": 13,
+    "preserved_failed_supervisor": 20459,
+    "successful_repair_supervisor": 93482,
+    "external_limits": "Executable bytes and full source inputs are external optional checks, not embedded reproductions. Archived runners are data and never executed."
+  },
+  "archive": {
+    "bytes": 1551473,
+    "sha256": "89702a1b6d076b9410479eaed20eed9fe4738b9595061dcfaf6a749223fca7d8",
+    "uncompressed_bytes": 7297642
+  },
+  "records": [
+    {
+      "name": "cpu-002/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/0.stderr.log",
+      "bytes": 460,
+      "sha256": "fb232e7cbe2736c903a896a73ef346c2002e0e8ee23934327d63929e8966decd"
+    },
+    {
+      "name": "cpu-002/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/0.stdout.log",
+      "bytes": 21463,
+      "sha256": "77dc8e73686924d1857d4cde9ec203e14147a3ab4b72dec7f723788f96551a76"
+    },
+    {
+      "name": "cpu-002/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/1.stderr.log",
+      "bytes": 312,
+      "sha256": "a312ffb824042906ba78674dd8760afcda9eb079bbd7ee08dcb8276d522e8ab0"
+    },
+    {
+      "name": "cpu-002/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/1.stdout.log",
+      "bytes": 19594,
+      "sha256": "d1c6d7472772678e8d0db4a1a3d02b52825395cca414342eda1e77d3a30bdd04"
+    },
+    {
+      "name": "cpu-002/2.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/2.stderr.log",
+      "bytes": 2090,
+      "sha256": "38691f5ffafad42748ea0d84dc6c3321db8f9433fe115987cfc3776ae5446696"
+    },
+    {
+      "name": "cpu-002/2.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/2.stdout.log",
+      "bytes": 210514,
+      "sha256": "98bb019a46fa61218ec817331a5bd62f6e160c1f9c83eb0a8e45e3c54a06b1d8"
+    },
+    {
+      "name": "cpu-002/3.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/3.stderr.log",
+      "bytes": 830,
+      "sha256": "e5c12e4243c62e476effa748cf2c59fb74c08e6e885844586dcecceadb59c9c5"
+    },
+    {
+      "name": "cpu-002/3.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/3.stdout.log",
+      "bytes": 207226,
+      "sha256": "dcdde8342b7f3cdaef975aae9ebf888e72da0cd3a63aebafb4427a097f4d2ec9"
+    },
+    {
+      "name": "cpu-002/4.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/4.stderr.log",
+      "bytes": 3319,
+      "sha256": "2a4deaba36d7e52e0d4be7ab65bb490a864873dd7341e8412e95c3e04a051155"
+    },
+    {
+      "name": "cpu-002/4.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/4.stdout.log",
+      "bytes": 434567,
+      "sha256": "b690b15446d1093cf2fe700f4db2289a3f7fcea94b03042d6d97cdbae5a934c7"
+    },
+    {
+      "name": "cpu-002/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/closeout.json",
+      "bytes": 5541,
+      "sha256": "c04f5ab2c61851a7e97c697fbc6b95aa393691d46707c4dea7d313aef4ed6502"
+    },
+    {
+      "name": "cpu-002/local-input-freshness.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/local-input-freshness.json",
+      "bytes": 467535,
+      "sha256": "e6080f0ef7ed3b6417dca1ce084f0a103c84e1cd1cc610776c7476bb2f68aee6"
+    },
+    {
+      "name": "cpu-002/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-002/plan.json",
+      "bytes": 15687,
+      "sha256": "add6cf5711ed772ebb9ab9fcf4afc6ffdb6b224f3a307072049ef4163f6eb283"
+    },
+    {
+      "name": "cpu-002/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/result.json",
+      "bytes": 215333,
+      "sha256": "7c48a28d1a97279e86ac0bee2bf424ba3e4237dc89c56269070686dacb56802b"
+    },
+    {
+      "name": "cpu-003/0.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-003/0.stderr.log",
+      "bytes": 309,
+      "sha256": "bc2339015f72335626822ff60b5d9170310c867bd613a654a82ee7bcfc247c40"
+    },
+    {
+      "name": "cpu-003/0.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-003/0.stdout.log",
+      "bytes": 207606,
+      "sha256": "8f6e912f241a5205d8eabc269241d2f09454c07a82ceb891cdfcab9474f690b3"
+    },
+    {
+      "name": "cpu-003/1.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-003/1.stderr.log",
+      "bytes": 183,
+      "sha256": "b6588bba4fdf4a6f194d9d0fddc00fa0d3989aee7ccab4025724c10cb056e95e"
+    },
+    {
+      "name": "cpu-003/1.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-003/1.stdout.log",
+      "bytes": 427054,
+      "sha256": "fa083f0e1c8d0905a35fdac96e730a4efb3810eeb7b623dfd381dc7a163c7092"
+    },
+    {
+      "name": "cpu-003/2.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-003/2.stderr.log",
+      "bytes": 1491,
+      "sha256": "e81de91f2b67bc532e6ee63f242721fb9933c4fd8300c4503432503b86b60206"
+    },
+    {
+      "name": "cpu-003/2.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-003/2.stdout.log",
+      "bytes": 424449,
+      "sha256": "f89653448474f1c639c79a4b64cee61b5cac608be85f9117063eb877ed595bac"
+    },
+    {
+      "name": "cpu-003/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-003/closeout.json",
+      "bytes": 1800,
+      "sha256": "d0a6d56e8b80dd01679023e9183ada930eae77f28ea5e93a287c625e6be3633e"
+    },
+    {
+      "name": "cpu-003/local-input-freshness.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-003/local-input-freshness.json",
+      "bytes": 608,
+      "sha256": "862ec9c81cac83e28fcb07cb5e0a1ee4d276c68c2a901735d55d22fdde7f1327"
+    },
+    {
+      "name": "cpu-003/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-003/plan.json",
+      "bytes": 10976,
+      "sha256": "f879c858e52c43e8cac3e9158ed78fe01936925f2d3301b4d6cef6db20ba4708"
+    },
+    {
+      "name": "cpu-003/protected-release.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-003/protected-release.json",
+      "bytes": 3593,
+      "sha256": "f6edc8112a56662aeeb441666965cbb8a411f52752455185bf7ffa2cde400bd3"
+    },
+    {
+      "name": "cpu-003/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-003/result.json",
+      "bytes": 265163,
+      "sha256": "a8215787fc91f6825d2828a33c921d0abc2aefcfa9f37b128ef84118e3792845"
+    },
+    {
+      "name": "cpu-packet-001/README.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-001/README.md",
+      "bytes": 2041,
+      "sha256": "5118b9e0f5e49f4861a0b2df7323aba1e5f5a7918e8f471797ae78bb8be090ac"
+    },
+    {
+      "name": "cpu-packet-001/freshness.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-001/freshness.json",
+      "bytes": 98900,
+      "sha256": "268883c2b1d3a62d8e7addbdfd2e34b3ff3f15627168f049368e9a6c7254060f"
+    },
+    {
+      "name": "cpu-packet-001/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-001/plan.json",
+      "bytes": 15687,
+      "sha256": "6d8f97e9db027c10c8d61f34369323f978c6df4b69efdcba7365e3e092b3bcdd"
+    },
+    {
+      "name": "cpu-packet-001/protected.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-001/protected.json",
+      "bytes": 2338,
+      "sha256": "e8f7dee48bebee6204592b20a6ed486b9f5d674c3eda7d625245084d603b8904"
+    },
+    {
+      "name": "cpu-packet-001/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-001/run.py",
+      "bytes": 12094,
+      "sha256": "65a63172cf8efb305aaf5dc3b041ad24bdfa325144d30c8c3914742cc1cb85b6"
+    },
+    {
+      "name": "cpu-packet-001/runner.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-001/runner.patch",
+      "bytes": 5715,
+      "sha256": "5df01cad8c377509e5ff29a0e6c83f289b9ce6c4856b7ab2c33914871dc4d0a9"
+    },
+    {
+      "name": "cpu-packet-001/source.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-001/source.json",
+      "bytes": 638643,
+      "sha256": "4cdfc6aeae35faae9438484f0a0bffc14dee92ae93e514b7d4d2db3cf97a2960"
+    },
+    {
+      "name": "cpu-packet-002/README.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-002/README.md",
+      "bytes": 2041,
+      "sha256": "5118b9e0f5e49f4861a0b2df7323aba1e5f5a7918e8f471797ae78bb8be090ac"
+    },
+    {
+      "name": "cpu-packet-002/freshness.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-002/freshness.json",
+      "bytes": 98900,
+      "sha256": "ae0b060ac3a3ce58d95cf19a7033dc6e12f11214df1cb27692caa9fe1d5c1697"
+    },
+    {
+      "name": "cpu-packet-002/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-002/plan.json",
+      "bytes": 15687,
+      "sha256": "add6cf5711ed772ebb9ab9fcf4afc6ffdb6b224f3a307072049ef4163f6eb283"
+    },
+    {
+      "name": "cpu-packet-002/protected.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-002/protected.json",
+      "bytes": 2338,
+      "sha256": "e8f7dee48bebee6204592b20a6ed486b9f5d674c3eda7d625245084d603b8904"
+    },
+    {
+      "name": "cpu-packet-002/pure-controls.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-002/pure-controls.json",
+      "bytes": 2056,
+      "sha256": "711f36743748655cbe2494255a66516a74f53f303d9378da88a2919886cf1313"
+    },
+    {
+      "name": "cpu-packet-002/root-cpu-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-002/root-cpu-grant.json",
+      "bytes": 706,
+      "sha256": "f776015bc16d963f03622888fedbb9e79a7ad8e1a7aa64dcf0eff756305b654b"
+    },
+    {
+      "name": "cpu-packet-002/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-002/run.py",
+      "bytes": 12094,
+      "sha256": "65a63172cf8efb305aaf5dc3b041ad24bdfa325144d30c8c3914742cc1cb85b6"
+    },
+    {
+      "name": "cpu-packet-002/runner.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-002/runner.patch",
+      "bytes": 5715,
+      "sha256": "5df01cad8c377509e5ff29a0e6c83f289b9ce6c4856b7ab2c33914871dc4d0a9"
+    },
+    {
+      "name": "cpu-packet-002/source.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-002/source.json",
+      "bytes": 638643,
+      "sha256": "2074009b04bea9cb33ae069c7e4f5796616da7392eeb6b985dfa9fa70b62d591"
+    },
+    {
+      "name": "cpu-packet-002/wrapper.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-002/wrapper.json",
+      "bytes": 30,
+      "sha256": "210f867bdb4de0f4b3393c6d9e82992e37c414c1f822fc649dcc0e598f2ffbde"
+    },
+    {
+      "name": "cpu-packet-003/README.md",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-003/README.md",
+      "bytes": 599,
+      "sha256": "9fb52b26878f6a2f3a3d718b3bbdf2041d4978e408f50c20c5224ecf8ef6618c"
+    },
+    {
+      "name": "cpu-packet-003/freshness.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-003/freshness.json",
+      "bytes": 353,
+      "sha256": "b6822c536d56516284268b1472121769985c2584ce1124f2d81e6d776fc0a09e"
+    },
+    {
+      "name": "cpu-packet-003/plan.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-003/plan.json",
+      "bytes": 10976,
+      "sha256": "f879c858e52c43e8cac3e9158ed78fe01936925f2d3301b4d6cef6db20ba4708"
+    },
+    {
+      "name": "cpu-packet-003/protected.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-003/protected.json",
+      "bytes": 3342,
+      "sha256": "1de92d4ec92f3a34d29134f7771d5ac1bcd7f5c34f3624f94348aac3e6cc53ad"
+    },
+    {
+      "name": "cpu-packet-003/root-cpu-grant.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-003/root-cpu-grant.json",
+      "bytes": 553,
+      "sha256": "d57b97f38e8a09f316fde0d8475e40c673227b144e1242f804945d9aa5dcf6c5"
+    },
+    {
+      "name": "cpu-packet-003/run.py",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-003/run.py",
+      "bytes": 12247,
+      "sha256": "c6447fbdbf012506b202b6a81787fafb8f336b84a0430d50f08733e2d5622005"
+    },
+    {
+      "name": "cpu-packet-003/runner.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-003/runner.patch",
+      "bytes": 2218,
+      "sha256": "42edf31db020d0951d6a1594ca6c35985c1840bfc5fd7d0f76092d49027ebfb7"
+    },
+    {
+      "name": "cpu-packet-003/source.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-003/source.json",
+      "bytes": 638643,
+      "sha256": "2a53ae2aa905bcb43f3733b1c817ed537010cd24724d3e393686a9660116092d"
+    },
+    {
+      "name": "cpu-packet-003/wrapper.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-packet-003/wrapper.json",
+      "bytes": 30,
+      "sha256": "5f23fcf5595cf36504fe4da246ec5c4e40f7cce1d089bd7eb681030ba3d2a0bf"
+    },
+    {
+      "name": "integration-fast/closeout.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/closeout.json",
+      "bytes": 558,
+      "sha256": "f8204cb32ce57b569ee88e5a09c2e69bbafb2494f86066f4aa9aa498e0cd3b76"
+    },
+    {
+      "name": "integration-fast/output/000.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/000.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/000.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/000.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/001.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/001.stderr.log",
+      "bytes": 114556,
+      "sha256": "dcbdd511c23c850dd4320f5264961473735dae5ea1a2e9bb21c6ffb7481c3968"
+    },
+    {
+      "name": "integration-fast/output/001.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/001.stdout.log",
+      "bytes": 7732,
+      "sha256": "4fb61d72073a8b06c97c30f5d0a292ecde7c730fb927020a667fa36d2a9275ce"
+    },
+    {
+      "name": "integration-fast/output/002.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/002.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/002.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/002.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/003.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/003.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/003.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/003.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/004.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/004.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/004.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/004.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/005.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/005.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/005.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/005.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/006.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/006.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/006.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/006.stdout.log",
+      "bytes": 1551,
+      "sha256": "01eb6bf6dd0ec2bd8a97e7982d6e4d323edd8a3263b7f426b0e6420f8d666c49"
+    },
+    {
+      "name": "integration-fast/output/007.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/007.stderr.log",
+      "bytes": 3600,
+      "sha256": "b39acf51b68a8940ef8dac9f92e07443c04b70348e5950a735cea5972bde77ce"
+    },
+    {
+      "name": "integration-fast/output/007.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/007.stdout.log",
+      "bytes": 524,
+      "sha256": "c7c4b3f68678b86ce9e5e862e1343a332cd5ecdb200bf75c34f0e0723bc71677"
+    },
+    {
+      "name": "integration-fast/output/008.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/008.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/008.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/008.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/009.stderr.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/009.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/009.stdout.log",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/009.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "integration-fast/output/owner.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/output/owner.json",
+      "bytes": 7917,
+      "sha256": "de4d05423e938b3187beda49bb83e9827926df8bc7d98c82fa685003175414a8"
+    },
+    {
+      "name": "integration-fast/result.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-fast-001/result.json",
+      "bytes": 3799,
+      "sha256": "44d3e9ed6a05a5f426a846174e9030a6dd0cf0dcdf0c346fe68f392896bab461"
+    },
+    {
+      "name": "reviews/native-script-query-attribution-source-20261018.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/native-script-query-attribution-source-20261018.json",
+      "bytes": 4936,
+      "sha256": "d050536b87c8dd878e89286611a33d06ebb70d899ec8e685ae7a743b97b951de"
+    },
+    {
+      "name": "reviews/script-query-attribution-cpu-source-20261018.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/script-query-attribution-cpu-source-20261018.json",
+      "bytes": 706,
+      "sha256": "f776015bc16d963f03622888fedbb9e79a7ad8e1a7aa64dcf0eff756305b654b"
+    },
+    {
+      "name": "reviews/script-query-attribution-native-20261018.json",
+      "original": "/Users/andreyyurlov/.codex/incant-reviews/script-query-attribution-native-20261018.json",
+      "bytes": 1498,
+      "sha256": "9862ea9ae1a84d4827e513dc92d509163555a94704bd11add25629ba6dc26e5e"
+    },
+    {
+      "name": "source-001/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/source-001/freeze.json",
+      "bytes": 2954,
+      "sha256": "2b45e2f5d0c93d9527efb118ad833c185c5d0f7590a7a0e088fa7b3f663b6de1"
+    },
+    {
+      "name": "source-001/source.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/source-001/source.patch",
+      "bytes": 59188,
+      "sha256": "f0cdeefc3ca716d4607048c00414e9c89abbad185ea978f8b7ee45a5f86dc887"
+    },
+    {
+      "name": "source-001/test-membership.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/source-001/test-membership.json",
+      "bytes": 3807,
+      "sha256": "1cf73b77c8ab5fb103a6663a407404c86ccfb1ba2f7b5463f18a7d38211bc2a7"
+    },
+    {
+      "name": "source-002/fixture.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/source-002/fixture.patch",
+      "bytes": 8965,
+      "sha256": "11b911d8816e8d8f18bbdbc2c3b6dc6f4f71d5cabd65f7e360fe48164a62c790"
+    },
+    {
+      "name": "source-002/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/source-002/freeze.json",
+      "bytes": 3184,
+      "sha256": "b4712a077fe532e688593475f6369350522ee96205e9503600026aeb8db15b08"
+    },
+    {
+      "name": "source-002/source.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/source-002/source.patch",
+      "bytes": 61059,
+      "sha256": "924de52ec3cbc6a858ee0d9e50093407d4bee3fb3936cea6a506399ff914341d"
+    },
+    {
+      "name": "source-002/test-membership.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/source-002/test-membership.json",
+      "bytes": 3807,
+      "sha256": "e8beea30d0e362fcc64aedbac4eb2aa2f7c30a654fc574cf6372228108ee83f9"
+    },
+    {
+      "name": "source-003/freeze.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/source-003/freeze.json",
+      "bytes": 3167,
+      "sha256": "6736372e6a17ed9c995e15a43ea836623c60e356800b06bd8ce0802b20d01bb5"
+    },
+    {
+      "name": "source-003/repair.patch",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/source-003/repair.patch",
+      "bytes": 2589,
+      "sha256": "071e3c4569d0bb903a869871942ed17f267878c6c7403b62fba325d6cd2b9a0a"
+    },
+    {
+      "name": "source-003/test-membership.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/source-003/test-membership.json",
+      "bytes": 3807,
+      "sha256": "636d208679ec8a7d8f79217abefcb07338f08cdd09ad7cb59c40ed9002379abf"
+    },
+    {
+      "name": "source-preflight-correction.json",
+      "original": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/source-preflight-correction.json",
+      "bytes": 669,
+      "sha256": "235422c2cae9dc51205a1a75853c6d08f56a3e1d4180f3647eaa0e8d1c7d6d07"
+    }
+  ],
+  "binaries": [
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/artifacts/0-incant_profile-fe84e53f6243cc7b",
+      "bytes": 1354176,
+      "sha256": "8235c20a8415a461a9569b68bbf48d15b5b2893bb16e2c4aa1352b655b426621"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/artifacts/1-incant_profile-b5780b57a94f2848",
+      "bytes": 1189472,
+      "sha256": "a93bd51613d02b7a933206c49947c3cab3da08080938bd88e1d16629fc992a0c"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/artifacts/2-incant_script-78a8f8f9384683f8",
+      "bytes": 20579984,
+      "sha256": "263d9499b7db20efa45bafd95d9f9750e939f4837c9bb54cd1fa3ed427f3fdc1"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-002/artifacts/3-incant_script-15b8fccdce174c47",
+      "bytes": 20408480,
+      "sha256": "9353795d963c2ce67a6a03a95e402e6f4af4a09029b52d98e1563f8bf12b694b"
+    },
+    {
+      "path": "/Users/andreyyurlov/.codex/incant-evidence/script-query-attribution-001/cpu-003/artifacts/0-incant_script-78a8f8f9384683f8",
+      "bytes": 20550176,
+      "sha256": "cc4f044898c392b2f055dee52e7e01c176af78c786c67f02e6a5ab60c1ffb05e"
+    }
+  ]
+}

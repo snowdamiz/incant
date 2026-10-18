@@ -32,7 +32,11 @@ fn diagnostic_navigation_observes_real_queries_without_changing_results() {
     let report = capture.report();
     let d = report.script_phase_diagnostic;
     assert!(d.complete);
-    assert_eq!(d.schema, 2);
+    assert_eq!(
+        d.schema,
+        2 + 2 * u32::from(cfg!(feature = "diagnostic-script-budget"))
+            + 4 * u32::from(cfg!(feature = "diagnostic-script-queries"))
+    );
     let row = &d.rows[0];
     assert_eq!(row.navigation.calls[0], 2);
     assert_eq!(row.navigation.failed[0], 1);

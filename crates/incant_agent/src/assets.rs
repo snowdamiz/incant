@@ -9,6 +9,8 @@ use std::{
     path::{Path, PathBuf},
     sync::atomic::{AtomicBool, Ordering},
 };
+mod alpha;
+mod tilemap;
 
 /// Filesystem capability bound to one project by the engine host, never by model
 /// arguments. No arbitrary reads, writes, network access or shell are exposed.
@@ -145,6 +147,8 @@ pub fn tools() -> Vec<Value> {
             "Cook 1–64 existing project-relative glTF/GLB/FBX/PNG/JPEG/EXR/WAV/OGG/TTF/OTF/WASM sources and commit one atomic undoable transaction. Omit texture_usage to preserve it on reimport. Requires approval under destructive/always modes. No URLs, absolute paths or parent traversal.",
             json!(schemars::schema_for!(ImportArgs)),
         ),
+        alpha::definition(),
+        tilemap::definition(),
     ]
 }
 
@@ -157,6 +161,8 @@ pub(crate) fn dispatch(
     cancel: &AtomicBool,
 ) -> Result<Value, AgentError> {
     match name {
+        "collider_from_alpha" => alpha::dispatch(access, files, args, actor, cancel),
+        "tilemap_paint" => tilemap::dispatch(access, files, args, actor, cancel),
         "asset_list" => access.with_bus(cancel, |bus| {
             let args: ListArgs = serde_json::from_value(args).map_err(error)?;
             if !(1..=100).contains(&args.limit) || args.filter.len() > 1024 {

@@ -93,6 +93,19 @@ impl Binding {
             pending: None,
         })
     }
+    #[cfg(feature = "experimental-pose-interpolation")]
+    pub fn validate_committed(&self, world: &NativeWorld) -> Result<(), UiError> {
+        let view = world
+            .ui_view()
+            .map_err(|_| UiError::Invalid("unusable native world"))?;
+        if view.identity() != &self.identity
+            || view.generation() != self.generation
+            || self.pending.is_some()
+        {
+            return Err(UiError::Stale);
+        }
+        Ok(())
+    }
     pub fn viewport(&self) -> [f32; 2] {
         self.viewport
     }

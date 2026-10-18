@@ -414,6 +414,35 @@ def coroutine_guests(rustc, inputs, guests, environment):
     return modules
 
 
+def input_guests(rustc, inputs, guests, environment):
+    """Typed copied-input observations and transactional actual-host controls."""
+    source = inputs / 'sdk-input.rs'
+    shutil.copy2(ROOT / 'sdk/rust/samples/input.rs', source)
+    failure = inputs / 'sdk-input-failure.rs'
+    shutil.copy2(ROOT / 'sdk/rust/fixtures/input_failure.rs', failure)
+    modules = []
+    for kind in (None, 'scratch', 'callback', 'stale'):
+        name = 'rust-input' + ('-' + kind if kind else '')
+        module = guests / (name + '.wasm')
+        rust_guest.compile(rustc, failure if kind else source, module, env=environment,
+                           cfg=['input_' + kind] if kind else ())
+        modules.append((name, module))
+    return modules
+
+
+def instance_guests(rustc, inputs, guests, environment):
+    source = inputs / 'sdk-instances.rs'
+    shutil.copy2(ROOT / 'sdk/rust/samples/instances.rs', source)
+    modules = []
+    for kind in (None, 'retire', 'scratch', 'callback', 'trap', 'stale'):
+        name = 'rust-instances' + ('-' + kind if kind else '')
+        module = guests / (name + '.wasm')
+        rust_guest.compile(rustc, source, module, env=environment,
+                           cfg=['instance_' + kind] if kind else ())
+        modules.append((name, module))
+    return modules
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('output', type=Path)
@@ -476,6 +505,7 @@ def main():
                 name='rust-sdk-'+kind; module_path=sdk_guests/(name+'.wasm')
                 rust_guest.compile(rustc,failure_source,module_path,env=environment,cfg=['sdk_'+kind.replace('-','_')])
                 modules.append((name,module_path))
+            modules.extend(input_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(localization_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(animation_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(crossfade_guests(rustc, inputs, sdk_guests, environment))
@@ -492,6 +522,7 @@ def main():
             modules.extend(haptic_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(timer_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(coroutine_guests(rustc, inputs, sdk_guests, environment))
+            modules.extend(instance_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(navigation_path_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(physics_guests(rustc, inputs, sdk_guests, environment))
             modules.extend(formatting_guests(rustc, inputs, sdk_guests, environment))

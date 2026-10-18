@@ -1,0 +1,10 @@
+{
+  "format": "tilemap-journal-portability-manifest-v1",
+  "source": "7f5130ded2a8394483d390c11704b612d0eb5d12",
+  "archive": "tilemap-journal-portability.json.gz",
+  "packed_bytes": 118047,
+  "packed_sha256": "6c8cafa0af51369109d4d8c8d6df1ae945b3372385093bb4878ecc95d3ada8c9",
+  "expanded_bytes": 962516,
+  "expanded_sha256": "5ab685e20c5ac0552d6a20feccf5a27df3967a5f550b1bdc657ce1f70192ca84",
+  "record_count": 39
+}

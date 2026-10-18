@@ -16,6 +16,8 @@ mod ime;
 mod input;
 #[cfg(test)]
 mod pacing_tests;
+#[cfg(feature = "native-pose-interpolation")]
+mod pose;
 #[cfg(all(feature = "native-presentations", target_os = "macos"))]
 mod presentations;
 mod probe;
@@ -29,7 +31,9 @@ mod ui_input;
 use crate::{bounded, embedded, session, startup};
 use incant_audio_runtime::{AudioManagerSettings, DeviceBackend};
 use incant_game_runtime::{GameSeed, HostedGameSession};
-use incant_render_game::{NativeRenderHost, NativeRenderSettings, RenderInputConsumer, UiSettings};
+#[cfg(not(feature = "native-pose-interpolation"))]
+use incant_render_game::NativeRenderHost;
+use incant_render_game::{NativeRenderSettings, RenderInputConsumer, UiSettings};
 use incant_render_gpu_host::{GpuRenderConsumer, GpuRenderSettings};
 use incant_runtime::{CookedScene, StableId};
 use std::{
@@ -44,7 +48,10 @@ use tao::{
     platform::run_return::EventLoopExtRunReturn,
     window::WindowBuilder,
 };
+#[cfg(not(feature = "native-pose-interpolation"))]
 type Game = HostedGameSession<DeviceBackend, NativeRenderHost<GpuRenderConsumer<SurfaceTargets>>>;
+#[cfg(feature = "native-pose-interpolation")]
+type Game = HostedGameSession<DeviceBackend, pose::Host>;
 #[derive(Debug, thiserror::Error)]
 pub enum Error {
     #[error(transparent)]
@@ -70,7 +77,7 @@ pub enum Error {
     #[error("native surface reservation invariant failed")]
     Reservation,
     #[error(
-        "this native window host supports keyboard, three-button mouse and gamepad IDs0..15 only"
+        "this native window host supports keyboard, three-button mouse, gamepad IDs0..15 and touch gestures"
     )]
     InputCapability,
     #[error("native gamepad backend initialization failed")]
@@ -89,6 +96,12 @@ pub enum Error {
     InputScale,
     #[error("native input event capacity exceeded")]
     InputCapacity,
+    #[error("native touch contact capacity exceeded")]
+    TouchCapacity,
+    #[error("native touch started twice without ending or cancellation")]
+    TouchSequence,
+    #[error("native touch identity counter exhausted")]
+    TouchIdentity,
     #[error("native UI receipt count or text byte capacity exceeded")]
     UiCapacity,
     #[error("native IME session counter exhausted")]
@@ -99,6 +112,8 @@ pub enum Error {
     UiUnsupported,
 }
 struct Options {
+    #[cfg(feature = "native-pose-interpolation")]
+    pose: bool,
     #[cfg(all(feature = "native-compilation", target_os = "macos"))]
     compilation: Option<(String, usize)>,
     #[cfg(all(feature = "native-presentations", target_os = "macos"))]
@@ -116,7 +131,7 @@ struct Options {
 }
 impl Options {
     fn parse(args: &[String]) -> session::Result<Self> {
-        const USAGE: &str = "expected --window SCENE AUDIO_CACHE CLIPS ACTIONS MODEL_CACHE TEXTURE_CACHE CAMERA_HEX [--font-cache FONT_CACHE] [--stop-after TICKS] [--input-recording FILE] [--observe PLAN] [--window-state-log FILE]";
+        const USAGE: &str = "expected --window SCENE AUDIO_CACHE CLIPS ACTIONS MODEL_CACHE TEXTURE_CACHE CAMERA_HEX [--font-cache FONT_CACHE] [--stop-after TICKS] [--input-recording FILE] [--observe PLAN] [--window-state-log FILE] [--pose-interpolation previous-current]";
         let probe = args.last().is_some_and(|arg| arg == "--lifecycle-probe");
         let args = if probe { &args[..args.len() - 1] } else { args };
         if args.len() < 7 {
@@ -133,6 +148,7 @@ impl Options {
             rest = tail;
         }
         let mut stop_after = None;
+        let mut pose = false;
         let mut recording = None;
         let mut observations = None;
         let mut state_log = None;
@@ -142,6 +158,12 @@ impl Options {
         let mut presentation_capacity = None;
         while let [flag, value, tail @ ..] = rest {
             match flag.as_str() {
+                "--pose-interpolation" if !pose && value == "previous-current" => {
+                    if !cfg!(feature = "native-pose-interpolation") {
+                        return Err("pose interpolation requires native-pose-interpolation".into());
+                    }
+                    pose = true;
+                }
                 "--stop-after" if stop_after.is_none() => {
                     let n = value.parse()?;
                     if !(1..=36000).contains(&n) {
@@ -208,6 +230,11 @@ impl Options {
                 return Err("compilation capture needs bounded --stop-after, --compilation-output and --compilation-capacity1..4096; no lifecycle probe".into());
             }
         }
+        if pose && (probe || stop_after.is_none()) {
+            return Err(
+                "pose interpolation requires bounded --stop-after and no lifecycle probe".into(),
+            );
+        }
         let hex = &args[6];
         if hex.len() != 32 || !hex.bytes().all(|b| b.is_ascii_hexdigit()) {
             return Err("CAMERA_HEX must contain exactly32 hexadecimal digits".into());
@@ -217,6 +244,8 @@ impl Options {
             *v = u8::from_str_radix(&hex[i * 2..i * 2 + 2], 16)?;
         }
         Ok(Self {
+            #[cfg(feature = "native-pose-interpolation")]
+            pose,
             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
             compilation: compilation_output.zip(compilation_capacity),
             #[cfg(all(feature = "native-presentations", target_os = "macos"))]
@@ -249,6 +278,15 @@ pub fn run(
 ) -> session::Result<serde_json::Value> {
     let options = Options::parse(args)?;
     let batch_latest = batch_mode.selected();
+    #[cfg(feature = "native-pose-interpolation")]
+    pose::validate_selection(
+        options.pose,
+        pacing.selected(),
+        wake_mode.selected(),
+        batch_latest,
+    )?;
+    #[cfg(feature = "native-pose-interpolation")]
+    let mut pose_driver = pose::Driver::new(options.pose);
     // Explicit selection refuses wrong scene/OS before creating diagnostic
     // outputs, a window, audio device or GPU. Ordinary startup order is retained.
     let admitted_scene = if pacing.selected() || wake_mode.selected() {
@@ -390,16 +428,29 @@ pub fn run(
         surface.install_capture(capture)?;
     }
     let seed = GameSeed::new(scene, script, actions, clips)?;
-    let render_settings = |targets, ui| NativeRenderSettings {
-        ui,
-        text: options.render.text.clone(),
-        model_cache: options.render.model_cache.clone(),
-        texture_cache: options.render.texture_cache.clone(),
-        camera: options.render.camera,
-        consumer: GpuRenderSettings {
-            renderer: Arc::clone(&renderer),
-            targets,
-        },
+    let render_settings = |targets, ui| {
+        let native = NativeRenderSettings {
+            ui,
+            text: options.render.text.clone(),
+            model_cache: options.render.model_cache.clone(),
+            texture_cache: options.render.texture_cache.clone(),
+            camera: options.render.camera,
+            consumer: GpuRenderSettings {
+                renderer: Arc::clone(&renderer),
+                targets,
+            },
+        };
+        #[cfg(feature = "native-pose-interpolation")]
+        {
+            pose::Settings {
+                native,
+                enabled: options.pose,
+            }
+        }
+        #[cfg(not(feature = "native-pose-interpolation"))]
+        {
+            native
+        }
     };
     #[cfg(all(feature = "native-compilation", target_os = "macos"))]
     let mut startup_compilation = compilation_scope!(Startup, 1, 0);
@@ -412,6 +463,18 @@ pub fn run(
     {
         compilations::commit(&mut startup_compilation);
         drop(startup_compilation);
+    }
+    macro_rules! refresh_host {
+        () => {{
+            #[cfg(feature = "native-pose-interpolation")]
+            {
+                pose_driver.refresh(&mut game)
+            }
+            #[cfg(not(feature = "native-pose-interpolation"))]
+            {
+                game.refresh_host()
+            }
+        }};
     }
     game.poll_device()?;
     if let Some(plan) = &mut observations {
@@ -429,7 +492,7 @@ pub fn run(
     let mut input = input::PendingInput::new();
     input.reset_focus(focused);
     let mut ui_input = ui_input::UiInput::new();
-    ui_input.defer_surface();
+    ui_input.defer_surface(game.host()?.ui(), &mut input)?;
     ui_input.synchronize(game.host()?.ui(), &mut input)?;
     if has_ui && let Some((serial, enabled)) = ui_input.text_session(game.host()?.ui(), false)? {
         window
@@ -509,6 +572,8 @@ pub fn run(
                         *exit = true;
                     }
                     WindowEvent::Resized(_) | WindowEvent::ScaleFactorChanged { .. } => {
+                        #[cfg(feature = "native-pose-interpolation")]
+                        pose_driver.interrupt();
                         #[cfg(all(feature = "native-display-link", target_os = "macos"))]
                         if let Some(wake) = &mut display_wake {
                             wake.boundary(Instant::now());
@@ -524,12 +589,16 @@ pub fn run(
                         if has_ui {
                             ui_input.layout_pending(game.host()?.ui(), &mut input)?;
                             ui_resize = true;
+                        } else {
+                            ui_input.cancel_touches(None, &mut input)?;
                         }
                         surface.invalidate();
                         redraw_pending = true;
                         observe_state!(state_log::Reason::Resize);
                     }
                     WindowEvent::Focused(value) => {
+                        #[cfg(feature = "native-pose-interpolation")]
+                        pose_driver.interrupt();
                         #[cfg(all(feature = "native-display-link", target_os = "macos"))]
                         if let Some(wake) = &mut display_wake {
                             wake.boundary(Instant::now());
@@ -549,6 +618,8 @@ pub fn run(
                             game.set_suspended(true)?;
                             suspended = true;
                             clock.reset(Instant::now());
+                            #[cfg(feature = "native-pose-interpolation")]
+                            pose_driver.interrupt();
                         }
                         focused = value;
                         input.reset_focus(value);
@@ -561,6 +632,8 @@ pub fn run(
                         });
                     }
                     WindowEvent::Suspended => {
+                        #[cfg(feature = "native-pose-interpolation")]
+                        pose_driver.interrupt();
                         #[cfg(all(feature = "native-display-link", target_os = "macos"))]
                         if let Some(wake) = &mut display_wake {
                             wake.boundary(Instant::now());
@@ -575,15 +648,15 @@ pub fn run(
                         cadence.interrupt();
                         gamepads.pause_haptics()?;
                         platform_suspended = true;
-                        if has_ui {
-                            input.reset_focus(false);
-                            ui_input.reset_focus();
-                            gamepads.discard_pending();
-                        }
+                        input.reset_focus(false);
+                        ui_input.reset_focus();
+                        gamepads.discard_pending();
                         surface.invalidate();
                         observe_state!(state_log::Reason::Suspended);
                     }
                     WindowEvent::Resumed => {
+                        #[cfg(feature = "native-pose-interpolation")]
+                        pose_driver.interrupt();
                         #[cfg(all(feature = "native-display-link", target_os = "macos"))]
                         if let Some(wake) = &mut display_wake {
                             wake.boundary(Instant::now());
@@ -603,7 +676,7 @@ pub fn run(
                         if replay.is_none() && ui_input.accepts_delivery(focused, suspended) =>
                     {
                         // InputEvent uses logical pixels; query this window's current scale per event.
-                        if has_ui {
+                        if has_ui || matches!(event, WindowEvent::Touch(_)) {
                             ui_input.window(
                                 game.host()?.ui(),
                                 &mut input,
@@ -669,9 +742,11 @@ pub fn run(
                                 gamepads.pause_haptics()?;
                                 game.set_suspended(true)?;
                                 suspended = true;
-                                ui_input.defer_surface();
+                                ui_input.defer_surface(game.host()?.ui(), &mut input)?;
                             }
                             clock.reset(now);
+                            #[cfg(feature = "native-pose-interpolation")]
+                            pose_driver.interrupt();
                             retry = now + Duration::from_millis(50);
                             return Ok(());
                         }
@@ -687,8 +762,10 @@ pub fn run(
                                 window.scale_factor(),
                                 &mut ui_input,
                                 &mut input,
+                                #[cfg(feature = "native-pose-interpolation")]
+                                &mut pose_driver,
                             )?;
-                            game.refresh_host()?;
+                            refresh_host!()?;
                             Ok(())
                         });
                         let consumed = surface.consumed();
@@ -737,6 +814,8 @@ pub fn run(
                             gamepads.discard_pending();
                         }
                         clock.reset(now);
+                        #[cfg(feature = "native-pose-interpolation")]
+                        pose_driver.interrupt();
                         // Background resize/redraw presents committed state once;
                         // it cannot unpause input, the VM, physics or audio.
                         if clock::claim_retry(&mut retry, now) && redraw_pending && presentable && {
@@ -769,9 +848,11 @@ pub fn run(
                                         window.scale_factor(),
                                         &mut ui_input,
                                         &mut input,
+                                        #[cfg(feature = "native-pose-interpolation")]
+                                        &mut pose_driver,
                                     )?;
                                 }
-                                game.refresh_host()?;
+                                refresh_host!()?;
                                 Ok(())
                             });
                             let consumed = surface.consumed();
@@ -809,12 +890,14 @@ pub fn run(
                             } {
                                 retry = now + Duration::from_millis(50);
                                 clock.reset(now);
+                                #[cfg(feature = "native-pose-interpolation")]
+                                pose_driver.interrupt();
                                 return Ok(());
                             }
                             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
                             let mut refresh_compilation =
                                 compilation_scope!(Background, generation, host_steps);
-                            let result = crate::profile::presentation(|| game.refresh_host());
+                            let result = crate::profile::presentation(|| refresh_host!());
                             let consumed = surface.consumed();
                             surface.cancel();
                             result?;
@@ -830,13 +913,22 @@ pub fn run(
                             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
                             compilations::commit(&mut refresh_compilation);
                             clock.reset(now);
+                            #[cfg(feature = "native-pose-interpolation")]
+                            pose_driver.interrupt();
                             return Ok(());
                         }
                         #[cfg(all(feature = "native-presentations", target_os = "macos"))]
                         let schedule_deadline = (!suspended).then(|| clock.deadline());
-                        #[cfg(all(feature = "native-presentations", target_os = "macos"))]
+                        #[cfg(any(
+                            feature = "native-pose-interpolation",
+                            all(feature = "native-presentations", target_os = "macos")
+                        ))]
                         let dropped_before = clock.dropped;
                         let due = if suspended { 1 } else { clock.due(now) };
+                        #[cfg(feature = "native-pose-interpolation")]
+                        if clock.dropped != dropped_before {
+                            pose_driver.interrupt();
+                        }
                         // A display callback is a render opportunity even when
                         // no fixed simulation step is due. Keep the committed pose
                         // and queued input; this is not pose interpolation.
@@ -856,19 +948,22 @@ pub fn run(
                                 game.set_suspended(true)?;
                                 suspended = true;
                                 if has_ui {
-                                    ui_input.defer_surface();
+                                    ui_input.defer_surface(game.host()?.ui(), &mut input)?;
                                 } else {
                                     input.reset_focus(focused);
+                                    ui_input.reset_focus();
                                     gamepads.discard_pending();
                                 }
                                 clock.reset(now);
+                                #[cfg(feature = "native-pose-interpolation")]
+                                pose_driver.interrupt();
                                 retry = now + Duration::from_millis(50);
                                 return Ok(());
                             }
                             #[cfg(all(feature = "native-compilation", target_os = "macos"))]
                             let mut idle_compilation =
                                 compilation_scope!(Background, generation, host_steps);
-                            let result = crate::profile::presentation(|| game.refresh_host());
+                            let result = crate::profile::presentation(|| refresh_host!());
                             let consumed = surface.consumed();
                             surface.cancel();
                             result?;
@@ -938,13 +1033,16 @@ pub fn run(
                                     game.set_suspended(true)?;
                                     suspended = true;
                                     if has_ui {
-                                        ui_input.defer_surface();
+                                        ui_input.defer_surface(game.host()?.ui(), &mut input)?;
                                     } else {
                                         input.reset_focus(focused);
+                                        ui_input.reset_focus();
                                         gamepads.discard_pending();
                                     }
                                 }
                                 clock.reset(now);
+                                #[cfg(feature = "native-pose-interpolation")]
+                                pose_driver.interrupt();
                                 retry = now + Duration::from_millis(50);
                                 break;
                             }
@@ -956,12 +1054,16 @@ pub fn run(
                                     window.scale_factor(),
                                     &mut ui_input,
                                     &mut input,
+                                    #[cfg(feature = "native-pose-interpolation")]
+                                    &mut pose_driver,
                                 )?;
                             }
                             if suspended {
                                 game.set_suspended(false)?;
                                 suspended = false;
                                 clock.reset(now);
+                                #[cfg(feature = "native-pose-interpolation")]
+                                pose_driver.interrupt();
                                 ui_input.resume(&mut input, focused);
                                 gamepads.synchronize(&mut input)?;
                             }
@@ -981,19 +1083,43 @@ pub fn run(
                                 && _tick_index + 1 < due
                                 && !options.stop_after.is_some_and(|n| host_steps + 1 >= n);
                             surface.admission_only(defer)?;
+                            #[cfg(feature = "native-pose-interpolation")]
+                            let mut pose_restart = false;
                             crate::profile::frame(|| -> session::Result<()> {
-                                let result = if has_ui {
-                                    game.tick_with_ui(
-                                        events,
-                                        if replay.is_some() {
-                                            &[]
-                                        } else {
-                                            ui_input.receipts()
-                                        },
-                                    )
-                                } else {
-                                    game.tick(events)
-                                };
+                                let result = (|| -> session::Result<()> {
+                                    if has_ui {
+                                        game.tick_with_ui(
+                                            events,
+                                            if replay.is_some() {
+                                                &[]
+                                            } else {
+                                                ui_input.receipts()
+                                            },
+                                        )?;
+                                    } else {
+                                        game.tick(events)?;
+                                    }
+                                    #[cfg(feature = "native-pose-interpolation")]
+                                    if pose_driver.enabled() {
+                                        // Inspect the accepted request once, before drawing the old
+                                        // session's final exact pose. No tick/input/audio advances here.
+                                        pose_restart = game.take_session_request()?.is_some();
+                                        let terminal = pose_restart
+                                            || options
+                                                .stop_after
+                                                .is_some_and(|n| host_steps + 1 >= n);
+                                        pose_driver.display(
+                                            &mut game,
+                                            pose::fraction(
+                                                clock.fraction(),
+                                                _tick_index,
+                                                due,
+                                                terminal,
+                                            ),
+                                        )?;
+                                    }
+                                    Ok(())
+                                })();
                                 let consumed = surface.consumed();
                                 if result.is_err() || !defer {
                                     surface.cancel(); // release on retryable input failure too
@@ -1024,12 +1150,19 @@ pub fn run(
                             if let Some(plan) = &mut observations {
                                 plan.observe_at(host_steps, game.world()?, game.input()?)?;
                             }
+                            #[cfg(feature = "native-pose-interpolation")]
+                            let restart = if pose_driver.enabled() {
+                                pose_restart
+                            } else {
+                                game.take_session_request()?.is_some()
+                            };
+                            #[cfg(not(feature = "native-pose-interpolation"))]
                             let restart = game.take_session_request()?.is_some();
                             // A restart can shorten a batch after admission. Display
                             // the accepted old generation before destroying its owner.
                             if defer && restart {
                                 surface.admission_only(false)?;
-                                let result = crate::profile::presentation(|| game.refresh_host());
+                                let result = crate::profile::presentation(|| refresh_host!());
                                 let consumed = surface.consumed();
                                 surface.cancel();
                                 result?;
@@ -1122,6 +1255,8 @@ pub fn run(
                                 redraw_pending = true;
                                 ui_resize = false;
                                 clock.reset(now);
+                                #[cfg(feature = "native-pose-interpolation")]
+                                pose_driver.interrupt();
                             }
                             if !restart {
                                 gamepads.haptics(&haptics)?;
@@ -1195,7 +1330,7 @@ pub fn run(
         if let Some(probe) = &probe {
             probe.validate()?;
         }
-        let mut report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":game.host()?.consumer().accepted_frames(),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"discarded_stale_text_events":ui_input.stale_text_events(),"lifecycle_probe":probe.as_ref().map(|p|p.report())});
+        let mut report = serde_json::json!({"mode":"native-window","tick":game.world()?.tick(),"accepted_frames":accepted_frames(game.host()?),"presentation_refreshes":presentation_refreshes,"adapter":renderer.adapter_name,"backend":format!("{:?}",renderer.adapter.get_info().backend),"on_screen":true,"dropped_wall_ticks":clock.dropped.to_string(),"surface_reconfigurations":surface.reconfigurations,"surface_recreations":surface.recreations,"surface_skipped":surface.skipped,"discarded_stale_text_events":ui_input.stale_text_events(),"lifecycle_probe":probe.as_ref().map(|p|p.report())});
         if pacing.selected() {
             report["native_pacing"] = serde_json::json!({
                 "mode":"metal-minimum-duration60",
@@ -1223,6 +1358,10 @@ pub fn run(
         #[cfg(feature = "profile")]
         cadence.append(&mut report);
         report["host_steps"] = host_steps.into();
+        #[cfg(feature = "native-pose-interpolation")]
+        if pose_driver.enabled() {
+            report["pose_interpolation"] = pose_driver.report();
+        }
         report["audio_device"] = serde_json::json!({
             "scope":"current-session-owner",
             "diagnostics":game.device_audio_diagnostics()?,
@@ -1242,7 +1381,7 @@ pub fn run(
                 "simulation_tick":game.world()?.tick(),"accepted_frames":gameplay_presentations+presentation_refreshes});
         }
         if let Some(ui) = game.host()?.ui_input() {
-            let stats = game.host()?.consumer().ui_stats();
+            let stats = ui_stats(game.host()?);
             let uploads = renderer.ui_uploads();
             report["ui"] = serde_json::json!({
                 "viewport":ui.viewport,"scale_factor":window.scale_factor(),
@@ -1278,6 +1417,25 @@ pub fn run(
     }
     #[cfg(not(all(feature = "native-presentations", target_os = "macos")))]
     result
+}
+
+#[cfg(feature = "native-pose-interpolation")]
+fn accepted_frames(host: &pose::Host) -> u64 {
+    host.accepted_frames()
+}
+#[cfg(not(feature = "native-pose-interpolation"))]
+fn accepted_frames(host: &NativeRenderHost<GpuRenderConsumer<SurfaceTargets>>) -> u64 {
+    host.consumer().accepted_frames()
+}
+#[cfg(feature = "native-pose-interpolation")]
+fn ui_stats(host: &pose::Host) -> Option<incant_render::UiStats> {
+    host.ui_stats()
+}
+#[cfg(not(feature = "native-pose-interpolation"))]
+fn ui_stats(
+    host: &NativeRenderHost<GpuRenderConsumer<SurfaceTargets>>,
+) -> Option<incant_render::UiStats> {
+    host.consumer().ui_stats()
 }
 
 // Retain the exact existing reservation result and ordering; the optional log
@@ -1340,6 +1498,7 @@ fn fit_ui(
     scale: f64,
     ui_input: &mut ui_input::UiInput,
     input: &mut input::PendingInput,
+    #[cfg(feature = "native-pose-interpolation")] pose: &mut pose::Driver,
 ) -> session::Result<u64> {
     let wanted = logical_viewport(surface.reserved_size()?, scale)?;
     if game
@@ -1351,6 +1510,8 @@ fn fit_ui(
     }
     ui_input.layout_pending(game.host()?.ui(), input)?;
     game.resize_ui(wanted)?;
+    #[cfg(feature = "native-pose-interpolation")]
+    pose.interrupt();
     ui_input.invalidate_pointer(game.host()?.ui(), input)?;
     Ok(1)
 }
@@ -1358,6 +1519,34 @@ fn fit_ui(
 #[cfg(test)]
 mod tests {
     use super::Options;
+    #[test]
+    fn pose_selection_is_explicit_bounded_and_feature_gated() {
+        let plain = Options::parse(&args(&[])).unwrap();
+        #[cfg(feature = "native-pose-interpolation")]
+        assert!(!plain.pose);
+        let _ = plain;
+        let valid = Options::parse(&args(&[
+            "--stop-after",
+            "2156",
+            "--pose-interpolation",
+            "previous-current",
+        ]));
+        assert_eq!(valid.is_ok(), cfg!(feature = "native-pose-interpolation"));
+        for tail in [
+            vec!["--pose-interpolation", "previous-current"],
+            vec!["--stop-after", "2", "--pose-interpolation", "extrapolate"],
+            vec![
+                "--stop-after",
+                "2",
+                "--pose-interpolation",
+                "previous-current",
+                "--pose-interpolation",
+                "previous-current",
+            ],
+        ] {
+            assert!(Options::parse(&args(&tail)).is_err());
+        }
+    }
     fn args(tail: &[&str]) -> Vec<String> {
         [
             "scene",

@@ -1,0 +1,225 @@
+{
+  "source": "1f4508e2fb2cf365dd93f3fa4274102c10d9dcb9",
+  "passed": true,
+  "wrapper_pid": 4216,
+  "stages": [
+    {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.5476881669601426
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "seconds": 45.185522333020344
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 2.5943237919709645
+    },
+    {
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.36830004199873656
+    },
+    {
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.36669250001432374
+    },
+    {
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.5728084580041468
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build",
+        "--workspace",
+        "editor/ui"
+      ],
+      "exit": 0,
+      "seconds": 4.089170874969568
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test",
+        "--workspace",
+        "editor/ui",
+        "--",
+        "--maxWorkers=2"
+      ],
+      "exit": 0,
+      "seconds": 32.8739695000113
+    },
+    {
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.5920840830076486
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.38803491700673476
+    }
+  ],
+  "seconds": 88.60482608299935,
+  "groups": [
+    {
+      "pid": 4240,
+      "argv": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 4243,
+      "argv": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 5358,
+      "argv": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 5404,
+      "argv": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 5407,
+      "argv": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 5412,
+      "argv": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 5415,
+      "argv": [
+        "npm",
+        "run",
+        "build",
+        "--workspace",
+        "editor/ui"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 5443,
+      "argv": [
+        "npm",
+        "run",
+        "test",
+        "--workspace",
+        "editor/ui",
+        "--",
+        "--maxWorkers=2"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 5960,
+      "argv": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    },
+    {
+      "pid": 5970,
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cleanup_confirmed": true,
+      "exit": 0
+    }
+  ],
+  "peaks": {
+    "target": 15323258880,
+    "scratch": 8044544,
+    "output": 33718272,
+    "rss": 1449639936
+  },
+  "actual_exec": 50619,
+  "actual_exit": 0,
+  "processes_freshly_absent": true,
+  "verified_at": "2026-10-18T04:52:09.109546+00:00",
+  "scope": "Local development checks; no native window or screen capture"
+}

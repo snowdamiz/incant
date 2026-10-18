@@ -6,6 +6,8 @@ use crate::{
     ScriptError, budget, diagnostics,
     query_values::{self, Kind, Request, ResultData},
 };
+#[cfg(feature = "diagnostic-script-queries")]
+use incant_profile::diagnostic::queries::{Call, Capability, Stage};
 use incant_runtime::NativeQueries;
 use rquickjs::{Ctx, Exception, Function, Object, Value, function::Rest};
 use std::{
@@ -111,6 +113,22 @@ impl TickQueries {
             let deadline = Arc::clone(&self.deadline);
             let function =
                 Function::new(ctx.clone(), move |ctx: Ctx<'js>, args: Rest<Value<'js>>| {
+                    #[cfg(feature = "diagnostic-script-queries")]
+                    let observation = Call::start(match kind {
+                        Kind::Character => Capability::Character,
+                        Kind::Triggers => Capability::Triggers,
+                        Kind::Navigation => Capability::Navigation,
+                        Kind::Locale => Capability::Locale,
+                        Kind::Localize => Capability::Localize,
+                        Kind::Ray
+                        | Kind::Ray2D
+                        | Kind::Triggers2D
+                        | Kind::Grid
+                        | Kind::Steering
+                        | Kind::Number
+                        | Kind::Date
+                        | Kind::Report => Capability::Other,
+                    });
                     let localized = matches!(
                         kind,
                         Kind::Localize | Kind::Locale | Kind::Number | Kind::Date | Kind::Report
@@ -148,17 +166,21 @@ impl TickQueries {
                     if let Some(message) = rejection {
                         return Err(Exception::throw_type(&ctx, message));
                     }
-                    let request =
-                        match query_values::parse(kind, &ctx, &args.0, queries.scene_id(), dt) {
-                            Ok(request) => request,
-                            Err(error) => {
-                                state
-                                    .borrow_mut()
-                                    .failure
-                                    .get_or_insert(ScriptError::QueryInput);
-                                return Err(error);
-                            }
-                        };
+                    #[cfg(feature = "diagnostic-script-queries")]
+                    let parse = observation.stage(Stage::Parse);
+                    let request = query_values::parse(kind, &ctx, &args.0, queries.scene_id(), dt);
+                    #[cfg(feature = "diagnostic-script-queries")]
+                    parse.finish(request.is_ok());
+                    let request = match request {
+                        Ok(request) => request,
+                        Err(error) => {
+                            state
+                                .borrow_mut()
+                                .failure
+                                .get_or_insert(ScriptError::QueryInput);
+                            return Err(error);
+                        }
+                    };
                     // A recursive getter may have exhausted/failed this tick while parsing.
                     if state.borrow().failure.is_some() {
                         return Err(Exception::throw_type(
@@ -223,7 +245,9 @@ impl TickQueries {
                         ));
                     }
                     // No JS runs while a solver/cache is borrowed. Results are owned.
-                    let result = match match request {
+                    #[cfg(feature = "diagnostic-script-queries")]
+                    let execute = observation.stage(Stage::Execute);
+                    let result = match request {
                         Request::Localize(request) => {
                             queries.localize(&request).map(ResultData::Localized)
                         }
@@ -257,7 +281,10 @@ impl TickQueries {
                             .compute_character_motion(&request, dt)
                             .map(ResultData::Character),
                         Request::Triggers => queries.trigger_events().map(ResultData::Triggers),
-                    } {
+                    };
+                    #[cfg(feature = "diagnostic-script-queries")]
+                    execute.finish(result.is_ok());
+                    let result = match result {
                         Ok(result) => result,
                         Err(error) => {
                             state
@@ -288,8 +315,17 @@ impl TickQueries {
                         }
                         state.output_bytes += bytes;
                     }
-                    match query_values::materialize(&ctx, result) {
-                        Ok(result) => Ok(result),
+                    #[cfg(feature = "diagnostic-script-queries")]
+                    let materialize = observation.stage(Stage::Materialize);
+                    let result = query_values::materialize(&ctx, result);
+                    #[cfg(feature = "diagnostic-script-queries")]
+                    materialize.finish(result.is_ok());
+                    match result {
+                        Ok(result) => {
+                            #[cfg(feature = "diagnostic-script-queries")]
+                            observation.finish(true);
+                            Ok(result)
+                        }
                         Err(error) => {
                             let failure = if matches!(error, rquickjs::Error::Allocation) {
                                 ScriptError::MemoryAllocation
@@ -297,6 +333,8 @@ impl TickQueries {
                                 ScriptError::Execution
                             };
                             state.borrow_mut().failure.get_or_insert(failure);
+                            #[cfg(feature = "diagnostic-script-queries")]
+                            observation.finish(false);
                             Err(error)
                         }
                     }
