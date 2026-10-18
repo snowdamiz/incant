@@ -4,6 +4,7 @@ import hashlib
 import json
 from pathlib import Path
 import shlex
+import struct
 import subprocess
 import sys
 import tempfile
@@ -60,6 +61,36 @@ class Protocol(unittest.TestCase):
                 tokens = ['LC_ALL=C', str(self.compiler), *args, '-o', str(out / (unit + '.o')), '-c', str(source)]
                 lines.append('[rquickjs-sys 0.14.0] running: ' + shlex.join(tokens))
         return '\n'.join(lines)
+
+    def runtime_fixture(self):
+        if hasattr(self, '_runtime_fixture'):
+            return self._runtime_fixture
+        runtime = self.root / 'libclang_rt.profile_osx.a'
+        runtime.write_bytes(b'bound synthetic archive; never executed')
+        payload = runtime.read_bytes()
+        header = struct.pack('<8I', 0xfeedfacf, 0x100000c, 0, 1, 4, 280, 0, 0)
+        segment = struct.pack('<II16sQQQQiiII', 0x19, 152, bytes(16), 0, len(payload),
+                              312, len(payload), 7, 7, 1, 0)
+        section = struct.pack('<16s16sQQIIIIIIII', b'.bundled_lib', b'__DWARF', 0,
+                              len(payload), 312, 0, 0, 0, 0, 0, 0, 0)
+        other = b''.join(struct.pack('<II', command, size) + bytes(size - 8)
+                         for command, size in ((0x32, 24), (0x2, 24), (0xb, 80)))
+        blob = header + segment + section + other + payload
+        blob += bytes(-len(blob) % 16)
+        directory = self.target / p.TARGET / 'shipping/deps'
+        directory.mkdir(parents=True)
+        owner = directory / 'librquickjs_sys-0123456789abcdef.rlib'
+        name = b'libclang_rt.profile_osx.a\0\0\0\0'
+        member = name + blob
+        ar_header = (f'#1/{len(name)}'.ljust(16) + '0'.ljust(12) + '0'.ljust(6)
+                     + '0'.ljust(6) + '644'.ljust(8) + str(len(member)).ljust(10) + '`\n').encode()
+        owner.write_bytes(b'!<arch>\n' + ar_header + member + (b'\n' if len(member) % 2 else b''))
+        messages = [{'reason':'compiler-artifact',
+            'package_id':'path+'+(self.root/'third_party/rquickjs-sys').as_uri()+'#0.14.0',
+            'target':{'name':'rquickjs_sys','kind':['lib']},
+            'features':['diagnostic-quickjs-generate'], 'filenames':[str(owner)]}]
+        self._runtime_fixture = p.file_identity(runtime), messages, owner
+        return self._runtime_fixture
 
     def test_actual_role_parser_requires_both_complete_ordered_four_TU_recipes(self):
         self.assertEqual(len(p.c_commands(self.commands(), self.target, self.vendor)), 8)
@@ -119,16 +150,19 @@ class Protocol(unittest.TestCase):
             with self.assertRaises(ValueError): p.covered_names(bad)
 
     def test_actual_final_link_requires_owned_output_and_training_only_runtime(self):
-        runtime = '/pinned/libclang_rt.profile_osx.a'
+        runtime, messages, owner = self.runtime_fixture()
+        temporary = owner.parent / 'rustcABC123'
         for mode in p.MODES:
             tokens = [str(self.compiler), '-o', str(self.target / 'binary')]
-            tokens += ['-Wl,-force_load', '-Wl,'+runtime] if mode == 'generate' else ['-Wl,-dead_strip']
+            tokens += ([str(temporary/owner.name), '-Wl,-force_load', '-Wl,'+str(temporary/Path(runtime['path']).name)]
+                       if mode == 'generate' else ['-Wl,-dead_strip'])
             raw = shlex.join(tokens)
-            p.final_link(raw, mode, runtime, compiler=str(self.compiler), target=self.target)
+            options = dict(compiler=str(self.compiler), target=self.target, artifacts=messages, root=self.root)
+            p.final_link(raw, mode, runtime, **options)
             for bad in [raw.replace(str(self.target / 'binary'), '/foreign/binary'), raw + '\n' + raw,
-                        raw + (' -Wl,-dead_strip' if mode == 'generate' else ' -Wl,'+runtime)]:
+                        raw + (' -Wl,-dead_strip' if mode == 'generate' else ' -Wl,'+runtime['path'])]:
                 with self.assertRaises(ValueError):
-                    p.final_link(bad, mode, runtime, compiler=str(self.compiler), target=self.target)
+                    p.final_link(bad, mode, runtime, **options)
 
     def link_wrapper(self, mode='ordinary'):
         self.compiler.chmod(0o700)
@@ -140,13 +174,16 @@ class Protocol(unittest.TestCase):
         prefix = ['env', '-u', 'IPHONEOS_DEPLOYMENT_TARGET', '-u', 'TVOS_DEPLOYMENT_TARGET',
                   '-u', 'XROS_DEPLOYMENT_TARGET', *[k+'='+v for k, v in environment.items()]]
         arguments = ['cc', '-o', str(self.target / 'binary')]
-        arguments += (['-Wl,-force_load', '-Wl,/pinned/libclang_rt.profile_osx.a'] if mode == 'generate'
-                      else ['-Wl,-dead_strip'])
+        runtime, _, owner = self.runtime_fixture()
+        temporary = owner.parent / 'rustcABC123'
+        arguments += ([str(temporary/owner.name), '-Wl,-force_load', '-Wl,'+str(temporary/Path(runtime['path']).name)]
+                      if mode == 'generate' else ['-Wl,-dead_strip'])
         return prefix, arguments, environment
 
     def admit_link(self, tokens, environment, mode='ordinary'):
-        return p.final_link(shlex.join(tokens), mode, '/pinned/libclang_rt.profile_osx.a',
-                            compiler=str(self.compiler), target=self.target, environment=environment)
+        runtime, messages, _ = self.runtime_fixture()
+        return p.final_link(shlex.join(tokens), mode, runtime, compiler=str(self.compiler),
+                            target=self.target, environment=environment, artifacts=messages, root=self.root)
 
     def test_rustc_env_wrapper_uses_exact_reported_path_not_ambient_lookup(self):
         for mode in p.MODES:
@@ -209,12 +246,13 @@ class Protocol(unittest.TestCase):
         (self.root / 'cc').unlink(); (self.root / 'cc').symlink_to(self.compiler)
         for mode in p.MODES:
             prefix, arguments, environment = self.link_wrapper(mode)
+            runtime = self.runtime_fixture()[0]['path']
             for changed in [prefix + [v for v in arguments if v != '-Wl,-dead_strip'] if mode != 'generate'
                             else prefix + [v for v in arguments if v != '-Wl,-force_load'],
                             prefix + arguments + ['-Wl,-dead_strip'],
                             prefix + [v.replace(str(self.target / 'binary'), '/foreign/binary') for v in arguments],
-                            prefix + arguments + ['-Wl,/pinned/libclang_rt.profile_osx.a'] if mode != 'generate'
-                            else prefix + [v for v in arguments if v != '-Wl,/pinned/libclang_rt.profile_osx.a']]:
+                            prefix + arguments + ['-Wl,'+runtime] if mode != 'generate'
+                            else prefix + [v for v in arguments if 'clang_rt.profile' not in v]]:
                 with self.subTest(mode=mode), self.assertRaises(ValueError):
                     self.admit_link(changed, environment, mode)
 

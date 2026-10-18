@@ -11,6 +11,7 @@ import shlex
 import shutil
 
 from native_package import read, require
+from quickjs_pgo_archive import runtime_archive
 
 TARGET = 'aarch64-apple-darwin'
 MODES = ('ordinary', 'generate', 'use')
@@ -231,7 +232,7 @@ def artifact_features(messages, mode, target, root):
     return [found[k] for k in sorted(found)]
 
 
-def final_link(raw, mode, runtime, *, compiler, target, environment=None):
+def final_link(raw, mode, runtime, *, compiler, target, environment=None, artifacts=None, root=None):
     """Admit the actual rustc command, including its closed macOS env prefix.
 
     This parses recorded evidence; it never executes the command. Resolve a
@@ -286,10 +287,27 @@ def final_link(raw, mode, runtime, *, compiler, target, environment=None):
     require(output.is_absolute() and output.is_relative_to(Path(target)), 'Owned actual final output')
     args = [part for v in arguments for part in (v[4:].split(',') if v.startswith('-Wl,') else [v])]
     require(args.count('-dead_strip') == (0 if mode == 'generate' else 1), 'Training-only dead-code retention')
-    require((str(runtime) in args) == (mode == 'generate'), 'Training-only runtime archive')
-    require(mode != 'generate' or '-force_load' in args, 'Training profile runtime force load')
+    profile = [v for v in args if 'clang_rt.profile' in v]
+    archive = None
+    if mode == 'generate':
+        archive = runtime_archive(artifacts, runtime, target, root, TARGET)
+        require(args.count('-force_load') == 1 and len(profile) == 1, 'Unique training runtime force load')
+        index = args.index('-force_load')
+        require(index + 1 < len(args) and args[index + 1] == profile[0], 'Training runtime force-load operand')
+        extracted = Path(profile[0])
+        directory = Path(target) / TARGET / 'shipping/deps'
+        require(extracted.parent.parent == directory and extracted.name == Path(runtime['path']).name
+                and re.fullmatch(r'rustc[A-Za-z0-9]{6}', extracted.parent.name),
+                'Owned rustc runtime extraction path')
+        linked = [v for v in args if Path(v).name == Path(archive['runtime_rlib']['path']).name]
+        require(linked == [str(extracted.parent / Path(archive['runtime_rlib']['path']).name)],
+                'Extracted runtime archive must share its exact Cargo rlib owner')
+        archive['force_load_operand'] = str(extracted)
+    else:
+        require(not profile, 'Training-only runtime archive')
     return {'dead_strip': mode != 'generate', 'profile_runtime': mode == 'generate',
-            'driver': compiler, 'env_wrapper': wrapped, 'raw_sha256': hashlib.sha256(raw.encode()).hexdigest()}
+            'driver': compiler, 'env_wrapper': wrapped, 'raw_sha256': hashlib.sha256(raw.encode()).hexdigest(),
+            'bundled_runtime': archive}
 
 
 def instrumentation(mode, symbols, sections):

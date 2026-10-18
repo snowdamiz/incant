@@ -296,8 +296,9 @@ def prepare(request_path, output, scratch, *, seconds=5400, cancel=lambda: None)
                 producer = json.loads(read(directory / 'project-build.json', 4 * 1024**2))
                 report['pgo_roles'] = role_receipts(messages, session.path, descriptors[mode], directory, producer)
             link = read(directory / 'link-args.txt', 1024**2).decode()
-            report['actual_final_link'] = protocol.final_link(link, mode, spec['tools']['profile_runtime']['path'],
-                compiler=spec['tools']['compiler']['path'], target=session.path, environment=link_environment)
+            report['actual_final_link'] = protocol.final_link(link, mode, spec['tools']['profile_runtime'],
+                compiler=spec['tools']['compiler']['path'], target=session.path, environment=link_environment,
+                artifacts=messages, root=ROOT)
             symbols = run_tool([llvm / 'llvm-nm', '--defined-only', player], directory, 'actual-symbols', 30, check)
             sections = run_tool([llvm / 'llvm-readobj', '--sections', player], directory, 'actual-sections', 30, check)
             report['instrumentation'] = protocol.instrumentation(mode, symbols, sections)
