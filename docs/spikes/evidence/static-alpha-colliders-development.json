@@ -1,0 +1,123 @@
+{
+  "source": "a1fa41e19edca4e9cfc4a125d76010b1a3ecc51b",
+  "qualified_native_source": "94fc63b9cb5d8aaf4e1b0ff9e1a6e2ac2fecffd2",
+  "import_and_headless_byte_identical_to_native_source": true,
+  "actual_exec_session": 48516,
+  "actual_exit": 0,
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.6648712500464171
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "seconds": 53.15462583297631
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 5.90484433301026
+    },
+    {
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.7374681669753045
+    },
+    {
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.6490706659969874
+    },
+    {
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.8382278750068508
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build",
+        "--workspace",
+        "editor/ui"
+      ],
+      "exit": 0,
+      "seconds": 6.070285041001625
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test",
+        "--workspace",
+        "editor/ui",
+        "--",
+        "--maxWorkers=2"
+      ],
+      "exit": 0,
+      "seconds": 38.26906779099954
+    },
+    {
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.6379375000251457
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.438367584021762
+    }
+  ],
+  "seconds": 108.3919907080126,
+  "fresh_wrapper_and_owned_groups_absent": true,
+  "result_sha256": "7c2d3bd0ab4f486f3f728b18e2ec99369d0d2169710af52209cfccf501a8ce3c",
+  "qualification": "Local terminal development checks only; jsdom frontend tests. Separate native receipts qualify48 import+2CLI+23agent tests and strict lints; fresh headless schema comparison passes. Hosted development check pending.",
+  "integrated_agent_source": "caff2acdf80fc8d42157b595a8d29a3d7218cb57",
+  "integration_head_before_documentation": "8746c46d4c966cc92303847b5604a6724fdaa57a",
+  "post_agent_addition": "Pinned Rust1.99 cargo fmt --all --check and git diff --check passed at actual86707. An earlier absolute cargo invocation could not find cargo-fmt on PATH and is retained; adding the pinned toolchain directory fixed the environment. Tool/frontend inputs were unchanged from the ten-command run.",
+  "post_schema_correction": {
+    "commands": [
+      "node tools/generate_sdk.mjs --check",
+      "node tools/build_bridge.mjs --check",
+      "python3 tools/generate_conventions.py --check",
+      "git diff --check"
+    ],
+    "all_exit_zero": true,
+    "scope": "Only generated agent registry and qualification documentation changed after native validation; full fresh-schema and pinned formatting results are in alpha-colliders-schema.json."
+  }
+}
