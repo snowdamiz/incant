@@ -44,6 +44,7 @@ fn every_component_and_non_enum_string_slot_has_an_audited_reference_class() {
         "PrefabLink",
         "EngineCompatibility",
         "SpriteAtlas",
+        "RustModuleSource", // Registered source metadata is not an entity component.
     ] {
         assert!(schemas.remove(metadata).is_some());
     }
