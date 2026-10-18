@@ -1160,8 +1160,8 @@
       "sha256": "84fda08870e88422b971e34a020551ad53d2e829ac1daf946b08ec7682ec9ef6"
     },
     "tools/probes/native_wasm_checkpoint/oracle.py": {
-      "bytes": 7764,
-      "sha256": "1805f6cf1915548c3298d0911034b9f94029a3978628959398e62b021f0ab167"
+      "bytes": 9848,
+      "sha256": "41c4c5d091b1afbbb4c01354544a471cdc039a6435124487fc00da88e926bb76"
     },
     "tools/probes/native_wasm_checkpoint/portable.py": {
       "bytes": 11975,

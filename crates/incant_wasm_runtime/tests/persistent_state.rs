@@ -191,11 +191,11 @@ fn snapshot_corruption_and_extreme_watermark_refuse_without_partial_restore() {
         assert_eq!(candidate.persistent_checkpoint(&world).unwrap(), before);
     }
     let mut max = snapshot.encode();
-    max[64..72].copy_from_slice(&i64::MAX.to_le_bytes());
+    max[72..80].copy_from_slice(&i64::MAX.to_le_bytes());
     assert!(PersistentSnapshot::decode(&max, snapshot.declaration()).is_err());
     for (offset, replacement) in [(12, 0), (16, 2), (48, 1)] {
         let mut bad = snapshot.encode();
-        bad[offset] = replacement;
+        bad[offset + 8] = replacement;
         assert!(PersistentSnapshot::decode(&bad, snapshot.declaration()).is_err());
     }
     let mut extra = snapshot.encode();

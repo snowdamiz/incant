@@ -19,6 +19,7 @@ pub use animation_pose_v5::{
     PoseInterpolation,
 };
 pub mod audio;
+pub mod coroutines;
 pub mod light;
 pub use audio::{
     AudioBus, AudioCommand, AudioControl, AudioDeclaration, AudioDeclarations, AudioListener,
@@ -28,7 +29,10 @@ pub use incant_wasm_abi::LIGHT_MAX_COMMAND_BYTES;
 pub use incant_wasm_abi::{AUDIO_MAX_BYTES, AUDIO_MAX_COMMAND_BYTES};
 pub use light::{LightCommand, LightControl};
 pub mod flipbook;
+pub mod haptics;
 pub mod hud;
+pub use haptics::{HapticEffect, HapticTarget, HapticTargets};
+pub use incant_wasm_abi::{HAPTIC_MAX_BYTES, HAPTIC_MAX_REQUESTS};
 pub mod input;
 pub use hud::{HudControl, HudEvent, HudEventKind, HudRole, HudSnapshot, HudText, HudWidget};
 pub mod localization;
@@ -57,6 +61,7 @@ pub use animation_pose::{
 };
 pub use flipbook::{FlipbookSnapshot, Playback};
 pub use incant_wasm_abi::{ActionKind, GamepadButton, Key, LogLevel, MouseButton, TouchPhase};
+pub use incant_wasm_abi::{TIMER_MAX_BYTES, timers::Snapshot as TimerSnapshot};
 pub use input::InputSnapshot;
 pub use tick::{Chunk, Tick};
 

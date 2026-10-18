@@ -1,0 +1,311 @@
+{
+  "schema": 1,
+  "source": "ec642789f61f7f0342f028b6db5ea18a694231f4",
+  "platform": "macOS-27.0.1-arm64-arm-64bit-Mach-O",
+  "profile": "ci, functional only",
+  "packets": [
+    {
+      "name": "localization-report-cpu-001",
+      "source": "ec642789f61f7f0342f028b6db5ea18a694231f4",
+      "plan_sha256": "299ce96069b4411f6ead4f8b3be5b988fc52a6bbba6b30ae195422641a91e049",
+      "runner_sha256": "c20d9133c6cf88a63993cbd05041383a682dabb0ed9d34ba5298c92444d66807",
+      "result_sha256": "74f07f3076798fe26d0f55e5ae4b76ce7d639c9845787f5a2f646470b7c14272",
+      "closeout_sha256": "54c91c2ac632b9fe7d7d27c3eebca5b43ae5650ccc961a1bd7d979de20b05ceb",
+      "actual_tool_session": 34632,
+      "actual_terminal_exit": 0,
+      "owner_count": 3,
+      "all_owned_absent": true,
+      "source_unchanged": true,
+      "seconds": 17.30715887498809,
+      "stages": [
+        {
+          "argv": [
+            "cargo",
+            "test",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--no-default-features",
+            "--message-format=json",
+            "-p",
+            "incant_wasm_abi",
+            "-p",
+            "incant_wasm_runtime",
+            "--test",
+            "localization_report",
+            "--test",
+            "localization",
+            "--test",
+            "formatting"
+          ],
+          "exit": 0,
+          "seconds": 8.647556165989954,
+          "summaries": [
+            "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+            "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+            "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s",
+            "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+            "test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s",
+            "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s"
+          ]
+        },
+        {
+          "argv": [
+            "cargo",
+            "clippy",
+            "--profile",
+            "ci",
+            "--locked",
+            "--offline",
+            "-j2",
+            "--no-default-features",
+            "--message-format=json",
+            "-p",
+            "incant_wasm_abi",
+            "-p",
+            "incant-module",
+            "-p",
+            "incant_wasm_runtime",
+            "--lib",
+            "--tests",
+            "--",
+            "-D",
+            "warnings"
+          ],
+          "exit": 0,
+          "seconds": 4.722097416990437,
+          "summaries": []
+        }
+      ],
+      "artifact_hashes": []
+    },
+    {
+      "name": "localization-report-guests-001",
+      "source": "ec642789f61f7f0342f028b6db5ea18a694231f4",
+      "plan_sha256": "0d7991420b5aa7067db6d0b6636e9f7c0d228db2287f5487f5d38fe1e28884a0",
+      "runner_sha256": "17049e9fa696091e6e25aacfa04b68d01af103d306de07b9b254478deea48cd8",
+      "result_sha256": "f79b7a3cc9491a2c3abf49aa37fef10c62326bbd45278fd46ddba1dbf480694c",
+      "closeout_sha256": "8899963602ad6b80eaa310d34a57042a30a237ffec6af6ebf8a6de650e63d851",
+      "actual_tool_session": 77944,
+      "actual_terminal_exit": 0,
+      "owner_count": 31,
+      "all_owned_absent": true,
+      "source_unchanged": true,
+      "seconds": 108.71204766700976,
+      "stages": [
+        {
+          "name": "fresh-normal-cooker",
+          "seconds": 3.058945041964762,
+          "test_summaries": []
+        },
+        {
+          "name": "actual-localization-report-guests",
+          "seconds": 74.27436604199465,
+          "test_summaries": [
+            "test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s",
+            "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s"
+          ]
+        },
+        {
+          "name": "strict-development-report-lint",
+          "passed": true
+        }
+      ],
+      "artifact_hashes": [
+        {
+          "bytes": 3491184,
+          "sha256": "b9db4c4ec16002cec1b8dbe54fde32413c4b5f4161ba1581e8b5dc0161e6cab0"
+        },
+        {
+          "bytes": 21076424,
+          "sha256": "417a0cfe8a0290f7eb81f4e71e62127e6e1a7d63b681794acf411d396f53d8a8"
+        },
+        {
+          "bytes": 28055224,
+          "sha256": "750c3e038b79ac75925a4d47e418a3ec4a5f123340a9abeefa6ead22723a7212"
+        }
+      ]
+    }
+  ],
+  "guest_producer": {
+    "prepared_manifest_sha256": "9db74f2cbbff8e8cc7ce39bffb1c561bbdeb99eac36315fbf52812e9906dbd12",
+    "sdk_provenance_sha256": "1db02a1f769eb37c7535fb7e307d8167ee61b9e8dc30ae8e8dab81152bbf89ff",
+    "names": [
+      "rust-localization-report",
+      "rust-localization-report-offset",
+      "rust-localization-report-limit",
+      "rust-localization-report-capacity",
+      "rust-localization-report-quota",
+      "rust-localization-report-callback"
+    ],
+    "modules": [
+      {
+        "coroutines": [],
+        "persistent_state": null,
+        "name": "rust-localization-report",
+        "prefix": "m0",
+        "input_sha256": "e7aba897274608463ea1b122253163ea56598e5cab413f3fe6bc39e992e156ab",
+        "prepared_sha256": "89c68f58db34e4683f3d505422dc68ca944886630fdce32be0ed150624f495db"
+      },
+      {
+        "coroutines": [],
+        "persistent_state": null,
+        "name": "rust-localization-report-offset",
+        "prefix": "m1",
+        "input_sha256": "df5596cf7771cce0fc5f55399889e95608608de7002064e1988de2946053aec8",
+        "prepared_sha256": "82abee90600e120e2441d6fd00b31d4727cebc37abe9b8efea906d971d07d72a"
+      },
+      {
+        "coroutines": [],
+        "persistent_state": null,
+        "name": "rust-localization-report-limit",
+        "prefix": "m2",
+        "input_sha256": "02572e4207e2eb586162560e86e0b374852d99b5d607c2af941ba3120bcdae68",
+        "prepared_sha256": "056791cd0c34ef176bed6a2745cad3df8d62195545a9eb419c08259da1cfe165"
+      },
+      {
+        "coroutines": [],
+        "persistent_state": null,
+        "name": "rust-localization-report-capacity",
+        "prefix": "m3",
+        "input_sha256": "3c4be85155622840ea61bf81d44818ceaa957424fd44d39f0eabd9afa7d0129f",
+        "prepared_sha256": "898cda133870b4cd7b0a8179354b9a739249f8daf92d8abdc57f9274a946c28f"
+      },
+      {
+        "coroutines": [],
+        "persistent_state": null,
+        "name": "rust-localization-report-quota",
+        "prefix": "m4",
+        "input_sha256": "51517450828c66d684357abf8fecda29d5afc3de4d4494073bfae0584aec2cf1",
+        "prepared_sha256": "5995d092dd011a4554ad63d137fa0407b754aaf402ea4fea3f75c6ac39b5a1ef"
+      },
+      {
+        "coroutines": [],
+        "persistent_state": null,
+        "name": "rust-localization-report-callback",
+        "prefix": "m5",
+        "input_sha256": "914f33a38672d0df364668d7c392e67cfde0ea773ecf836d6893ab97d22439f2",
+        "prepared_sha256": "ec5a54267dc56e6e5da1185a98abcc9101ed5849efabd3d507886a7c7a4692ee"
+      }
+    ]
+  },
+  "review": {
+    "scope": "ABI, host transaction/quotas, SDK, actual guest controls",
+    "receipt_sha256": "7d1b182f5e0fdc81216e8f5ab2133e2dbe2cdd7a87b0674b926aad2630b4b32f",
+    "findings": []
+  },
+  "limitations": [
+    "Local Mac qualification only; CI profile is not shipping-performance evidence.",
+    "No authored fresh shipping export for this query.",
+    "Complete SDK parity and Phase1 gates remain open."
+  ],
+  "local_development_checks": {
+    "source": "b7dd4d27ddccbf901e1e9af84c8dcc5dc6b587f1",
+    "all_ten_passed": true,
+    "actual_session": 13170,
+    "actual_terminal_exit": 0,
+    "seconds": 75.88413062499603,
+    "commands": [
+      {
+        "command": [
+          "python3",
+          "tools/generate_conventions.py",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 1.0336715410230681
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "test:tools"
+        ],
+        "exit": 0,
+        "seconds": 49.28239520796342
+      },
+      {
+        "command": [
+          "cargo",
+          "fmt",
+          "--all",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 2.773408541979734
+      },
+      {
+        "command": [
+          "node",
+          "tools/build_bridge.mjs",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.40889179200166836
+      },
+      {
+        "command": [
+          "node",
+          "tools/generate_sdk.mjs",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.4339391669491306
+      },
+      {
+        "command": [
+          "node_modules/.bin/tsc",
+          "-p",
+          "sdk/ts/tsconfig.json"
+        ],
+        "exit": 0,
+        "seconds": 0.6650150829809718
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "build",
+          "--workspace",
+          "editor/ui"
+        ],
+        "exit": 0,
+        "seconds": 5.377098666969687
+      },
+      {
+        "command": [
+          "npm",
+          "run",
+          "test",
+          "--workspace",
+          "editor/ui"
+        ],
+        "exit": 0,
+        "seconds": 14.596820083039347
+      },
+      {
+        "command": [
+          "python3",
+          "tools/generate_wasm_sdk.py",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.7611360420123674
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit": 0,
+        "seconds": 0.44223124999552965
+      }
+    ],
+    "result_sha256": "66ee6d4dfd01784ceb677763580dfab0950ecd3d10130c9c83b52322eac5a0a2",
+    "closeout_sha256": "3e67fb8c722c6193c65dd7ae3976f56314a35e97229809cb482179ac4e9c9169",
+    "all_wrapper_and_groups_absent": true
+  }
+}

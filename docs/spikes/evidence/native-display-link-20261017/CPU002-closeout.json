@@ -1,0 +1,37 @@
+{
+  "tool_session": 28578,
+  "actual_terminal_exit": 0,
+  "fresh_utc": "2026-10-17T20:24:58.922125+00:00",
+  "result_sha256": "9de8384a3e6e75a7303563d8118d4f7bdbdf916b95f800bbc9072d747283bcbf",
+  "all_observed_identities": [
+    19576,
+    19687,
+    19697,
+    19698,
+    19715,
+    19716,
+    19757,
+    19764,
+    19781,
+    19879,
+    19891,
+    19893,
+    19911,
+    19912,
+    19916,
+    19926,
+    19932,
+    19933,
+    19934,
+    19939,
+    19942
+  ],
+  "groups": [
+    19687,
+    19879,
+    19891
+  ],
+  "fresh_absence": true,
+  "artifact_sha256": "9d55aee43fe787e8c59b87cc509466e57a57bc9579d08541e985bb2745fbf915",
+  "source": "559ada1079db5dfee13b59ae4f69e7b0b2ffe574"
+}

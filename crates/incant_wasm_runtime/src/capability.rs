@@ -27,6 +27,32 @@ const _: () = {
 /// Trusted host adapter operation; all integer arguments are guest offsets/indices.
 #[derive(Clone, Copy)]
 pub enum Call {
+    NextCoroutine {
+        ptr: i32,
+        capacity: i32,
+    },
+    CommandCoroutine {
+        ptr: i32,
+        len: i32,
+    },
+    TimerLen,
+    ReadTimers {
+        ptr: i32,
+        capacity: i32,
+    },
+    CommandTimer {
+        ptr: i32,
+        len: i32,
+    },
+    HapticLen,
+    ReadHaptics {
+        ptr: i32,
+        capacity: i32,
+    },
+    CommandHaptics {
+        ptr: i32,
+        len: i32,
+    },
     ReadPersistent {
         ptr: i32,
         offset: i32,
@@ -162,6 +188,10 @@ pub enum Call {
         ptr: i32,
     },
     Locale,
+    LocalizationReport {
+        offset: i32,
+        limit: i32,
+    },
     Format {
         ptr: i32,
         len: i32,
@@ -224,6 +254,9 @@ pub enum Call {
 /// this state. No guest access or native pointer is retained by this type.
 #[derive(Default)]
 pub struct Capability {
+    coroutines: crate::coroutines::State,
+    timers: crate::timers::State,
+    haptics: crate::haptics::State,
     persistent: Option<crate::persistent::PersistentState>,
     persistent_rejected: bool,
     restart_enabled: bool,
@@ -282,11 +315,14 @@ impl Capability {
     pub fn replacement(&mut self) -> Self {
         // Direct trusted callers must not revive a failed or active persistent
         // transaction. Public host reload validates its fresh candidate first.
-        let failed =
-            self.persistent.is_some() && (self.failed || self.active || self.restart_committed);
+        let failed = (self.persistent.is_some() || self.coroutines.enabled())
+            && (self.failed || self.active || self.restart_committed);
         Self {
             failed,
             persistent: self.persistent.take(),
+            timers: self.timers.replacement(),
+            coroutines: self.coroutines.replacement(),
+            haptics: self.haptics.replacement(),
             epoch: self.epoch,
             restart_enabled: self.restart_enabled,
             identity: self.identity.clone(),
@@ -311,6 +347,30 @@ impl Capability {
         }
         Ok(std::mem::take(&mut self.restart_committed))
     }
+    /// Trusted current device authority, never derived from input or save data.
+    pub fn set_haptic_capabilities(
+        &mut self,
+        value: incant_input::haptics::HapticCapabilities,
+    ) -> Result<(), Error> {
+        self.haptics_ready()?;
+        self.haptics.set(value)
+    }
+    pub fn haptics_ready(&self) -> Result<(), Error> {
+        if self.failed || self.active {
+            return Err(Error::Failed);
+        }
+        self.haptics.ready()
+    }
+    /// Defer drain until the complete composed host/audio transaction accepts.
+    pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests, Error> {
+        if self.failed || self.active {
+            return Err(Error::Failed);
+        }
+        Ok(self.haptics.take())
+    }
+    pub fn clear_haptics(&mut self) {
+        self.haptics.clear();
+    }
     pub fn logs(&self) -> Result<&crate::NativeLogs, Error> {
         if self.failed {
             Err(Error::Failed)
@@ -327,9 +387,7 @@ impl Capability {
         dt: f64,
         ui: &incant_input::UiSnapshot,
     ) -> Result<i64, Error> {
-        if self.failed {
-            return Err(Error::Failed);
-        }
+        self.haptics_ready()?;
         if !dt.is_finite() || dt <= 0. || dt > 1. {
             return Err(Error::Abi("invalid dt"));
         }
@@ -354,6 +412,18 @@ impl Capability {
             return Err(error);
         }
         self.commands.clear();
+        self.haptics.begin();
+        if let Err(error) = self.timers.begin(self.tick + 1, dt) {
+            self.abort();
+            return Err(error);
+        }
+        if let Err(error) = self
+            .coroutines
+            .begin(self.tick + 1, |id| world.entity_identity(id))
+        {
+            self.abort();
+            return Err(error);
+        }
         self.restart_calls = 0;
         self.restart_rejected = false;
         self.persistent_rejected = false;
@@ -477,6 +547,9 @@ impl Capability {
             .ok_or(Error::Abi("missing physics state"))
     }
     pub fn abort(&mut self) {
+        self.timers.abort();
+        self.coroutines.abort();
+        self.haptics.abort();
         if let Some(state) = &mut self.persistent {
             state.abort();
         }
@@ -514,6 +587,18 @@ impl Capability {
     pub fn finish(&mut self, world: &mut NativeWorld) -> Result<(), Error> {
         if !self.active {
             return Err(Error::Abi("inactive ECS transaction"));
+        }
+        if !self.coroutines.ready() {
+            self.abort();
+            return Err(Error::Abi("unfinished or rejected coroutine transaction"));
+        }
+        if self.timers.rejected {
+            self.abort();
+            return Err(Error::Abi("rejected timer transaction"));
+        }
+        if self.haptics.rejected {
+            self.abort();
+            return Err(Error::Abi("rejected haptic transaction"));
         }
         if self.restart_rejected {
             self.abort();
@@ -590,6 +675,13 @@ impl Capability {
             self.abort();
             return Err(Error::Abi("different commit world"));
         }
+        if let Err(error) = self
+            .coroutines
+            .bind_new_owners(|id| world.entity_identity(id))
+        {
+            self.abort();
+            return Err(error);
+        }
         let result =
             world.with_numeric_columns(|columns| transaction::commit(columns, &self.chunks));
         self.chunks.clear();
@@ -602,6 +694,9 @@ impl Capability {
             Ok(())
         });
         if result.is_ok() {
+            self.haptics.commit();
+            self.timers.commit();
+            self.coroutines.commit(|id| world.entity_identity(id));
             if let Some(state) = &mut self.persistent {
                 state.commit();
             }
@@ -610,6 +705,9 @@ impl Capability {
             self.logs.commit(self.tick, self.tick_logs.take());
             self.failed = false;
         } else {
+            self.timers.abort();
+            self.coroutines.abort();
+            self.haptics.abort();
             if let Some(state) = &mut self.persistent {
                 state.abort();
             }
@@ -636,7 +734,7 @@ impl Capability {
         Ok(())
     }
     fn command(&mut self, command: StructuralCommand) -> Result<(), Error> {
-        if self.commands.len() + self.restart_calls >= limits::COMMANDS {
+        if self.commands.len() + self.restart_calls + self.haptics.len() >= limits::COMMANDS {
             return Err(Error::Limit("structural command quota"));
         }
         self.commands.push(command)?;
@@ -673,6 +771,24 @@ impl Capability {
     /// Synchronous import; memory contains initialized guest bytes only and is
     /// borrowed for this call. No world observation/publication occurs here.
     pub fn invoke(&mut self, memory: &mut [u8], epoch: i64, call: Call) -> Result<i32, Error> {
+        let coroutine_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::NextCoroutine { .. } | Call::CommandCoroutine { .. }
+            );
+        let timer_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::TimerLen | Call::ReadTimers { .. } | Call::CommandTimer { .. }
+            );
+        let haptic_authorized = self.active
+            && self.epoch == epoch
+            && matches!(
+                call,
+                Call::HapticLen | Call::ReadHaptics { .. } | Call::CommandHaptics { .. }
+            );
         let persistent_authorized = self.active
             && self.epoch == epoch
             && matches!(
@@ -749,12 +865,22 @@ impl Capability {
             && matches!(
                 call,
                 Call::Locale
+                    | Call::LocalizationReport { .. }
                     | Call::Format { .. }
                     | Call::Localize { .. }
                     | Call::ReadLocalized { .. }
                     | Call::SetLocale { .. }
             );
         let result = self.invoke_inner(memory, epoch, call);
+        if coroutine_authorized && result.is_err() {
+            self.coroutines.rejected = true;
+        }
+        if timer_authorized && result.is_err() {
+            self.timers.rejected = true;
+        }
+        if haptic_authorized && result.is_err() {
+            self.haptics.rejected = true;
+        }
         if persistent_authorized && result.is_err() {
             self.persistent_rejected = true;
         }
@@ -861,9 +987,10 @@ impl Capability {
             ));
         }
         let units = match call {
-            Call::Locale | Call::Format { .. } | Call::Localize { .. } => {
-                incant_wasm_abi::LOCALIZATION_QUERY_UNITS
-            }
+            Call::Locale
+            | Call::Format { .. }
+            | Call::Localize { .. }
+            | Call::LocalizationReport { .. } => incant_wasm_abi::LOCALIZATION_QUERY_UNITS,
             Call::Steer { .. }
             | Call::FindPath { .. }
             | Call::FindGridPath { .. }
@@ -886,6 +1013,80 @@ impl Capability {
                 .ok_or(Error::Limit("navigation query quota"))?;
         }
         match call {
+            Call::NextCoroutine { ptr, capacity } => {
+                let capacity =
+                    usize::try_from(capacity).map_err(|_| Error::Abi("coroutine capacity"))?;
+                if capacity > incant_wasm_abi::COROUTINE_MAX_BYTES {
+                    return Err(Error::Limit("coroutine frame capacity"));
+                }
+                let region = range(ptr, capacity, memory.len())?;
+                self.transfer(capacity)?;
+                return Ok(self.coroutines.next(&mut memory[region])? as i32);
+            }
+            Call::CommandCoroutine { ptr, len } => {
+                let len = usize::try_from(len).map_err(|_| Error::Abi("coroutine frame length"))?;
+                if len > incant_wasm_abi::COROUTINE_MAX_BYTES {
+                    return Err(Error::Limit("coroutine frame length"));
+                }
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                let chunks = &self.chunks;
+                self.coroutines.command(&memory[region], |id| {
+                    chunks.iter().any(|c| c.ids.contains(&id))
+                })?;
+            }
+            Call::TimerLen => return Ok(self.timers.snapshot_len() as i32),
+            Call::ReadTimers { ptr, capacity } => {
+                let len = self.timers.snapshot_len();
+                if usize::try_from(capacity).ok().is_none_or(|n| n < len) {
+                    return Err(Error::Abi("timer snapshot capacity"));
+                }
+                self.transfer(len)?;
+                let region = range(ptr, len, memory.len())?;
+                self.timers.snapshot(&mut memory[region])?;
+                return Ok(len as i32);
+            }
+            Call::CommandTimer { ptr, len } => {
+                if len != incant_wasm_abi::TimerCommand::SIZE as i32 {
+                    return Err(Error::Abi("timer command framing"));
+                }
+                let bytes = self.read::<{ incant_wasm_abi::TimerCommand::SIZE }>(memory, ptr)?;
+                let row = incant_wasm_abi::TimerCommand::decode(&bytes)
+                    .ok_or(Error::Abi("timer command"))?;
+                self.timers.command(row)?;
+                return Ok(0);
+            }
+            Call::HapticLen | Call::ReadHaptics { .. } => {
+                let len = self.haptics.snapshot_len();
+                if let Call::ReadHaptics { ptr, capacity } = call {
+                    let capacity = usize::try_from(capacity)
+                        .ok()
+                        .filter(|&n| n >= len)
+                        .ok_or(Error::Abi("haptic destination capacity"))?;
+                    range(ptr, capacity, memory.len())?;
+                    let region = range(ptr, len, memory.len())?;
+                    self.transfer(len)?;
+                    self.haptics.snapshot(&mut memory[region]);
+                }
+                return Ok(len as i32);
+            }
+            Call::CommandHaptics { ptr, len } => {
+                let len = usize::try_from(len)
+                    .ok()
+                    .filter(|n| {
+                        (incant_wasm_abi::HapticCommandHeader::SIZE
+                            ..=incant_wasm_abi::HAPTIC_MAX_COMMAND_BYTES)
+                            .contains(n)
+                    })
+                    .ok_or(Error::Abi("haptic command length"))?;
+                let region = range(ptr, len, memory.len())?;
+                self.transfer(len)?;
+                let commands = incant_wasm_abi::haptics::Commands::parse(&memory[region])
+                    .map_err(|_| Error::Abi("haptic command values"))?;
+                let used = self.commands.len() + self.restart_calls + self.haptics.len();
+                self.haptics.queue(commands, limits::COMMANDS - used)?;
+                return Ok(0);
+            }
             Call::ReadPersistent { ptr, offset, len }
             | Call::WritePersistent { ptr, offset, len } => {
                 let len =
@@ -907,7 +1108,8 @@ impl Capability {
                 if !self.restart_enabled {
                     return Err(Error::Abi("host does not accept session restart requests"));
                 }
-                if self.commands.len() + self.restart_calls >= limits::COMMANDS {
+                if self.commands.len() + self.restart_calls + self.haptics.len() >= limits::COMMANDS
+                {
                     return Err(Error::Limit("structural command quota"));
                 }
                 self.restart_calls += 1;
@@ -1381,6 +1583,15 @@ impl Capability {
                 self.command(StructuralCommand::ControlAnimation { entity, control })?;
             }
             Call::Locale => return self.locale_state()?.locale(),
+            Call::LocalizationReport { offset, limit } => {
+                let request = incant_localization::LocalizationReportRequest {
+                    offset: u32::try_from(offset)
+                        .map_err(|_| Error::Abi("localization report offset"))?,
+                    limit: u32::try_from(limit)
+                        .map_err(|_| Error::Abi("localization report limit"))?,
+                };
+                return self.locale_state()?.report(request);
+            }
             Call::Format { ptr, len } => {
                 let len =
                     usize::try_from(len).map_err(|_| Error::Abi("localization byte length"))?;

@@ -20,15 +20,50 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
+def timer_state(tick, coroutine=False):
+    """Independent closed-form schedule for this fixed timer-driven fixture."""
+    rows = [("future", 17, 101)]
+    if not coroutine and tick < 20:
+        rows.append(("gain", 11, 9 if tick < 9 else 20))
+    rows += [(name, 0, due) for name, due in (("stop", 26), ("restart", 29), ("upgain", 34))
+             if not coroutine and tick < due]
+    elapsed = 0.
+    for _ in range(tick):
+        elapsed += 1. / 60.
+    value = b'INCTMS01' + struct.pack('<QdII', tick, elapsed, len(rows), 80)
+    for name, interval, due in sorted(rows):
+        value += name.encode().ljust(64, b'\0') + struct.pack('<IIQ', len(name), interval, due)
+    return value
+
+
+def coroutine_state(tick):
+    """Explicit closed-form saved frame; independent of guest callback execution."""
+    stage, due = next((stage, due) for stage, due in enumerate((2, 9, 20, 26, 29, 34, 134)) if tick < due)
+    header = b'INCCOR01' + struct.pack('<6I', 4, 0, 11, 5, 1, 8)
+    header += b'audio-route'.ljust(64, b'\0') + b'audio'.ljust(64, b'\0') + (2).to_bytes(16, 'big')
+    return b'INCCTS01' + struct.pack('<IIQ', 1, 0, due) + bytes([24])*32 + header + struct.pack('<Q', stage)
+
+
 def checkpoint(data, tick):
     require(128 <= len(data) <= 1024 * 1024, 'Small fixed checkpoint bound')
     require(data[:8] == b'INCSES01' and data[8:16] == struct.pack('<II', 7, 1), 'Ordinary Wasm v7')
     require(data[96:128] == hashlib.sha256(data[:96] + data[128:]).digest(), 'Checkpoint digest')
     lengths = struct.unpack_from('<4I', data, 80)
-    require(sum(lengths) + 128 == len(data) and lengths[1] == 96
-            and lengths[2] == 0 and lengths[3] > 0, 'Exact state/no UI/active audio sections')
+    require(sum(lengths) + 128 == len(data) and lengths[2] == 0 and lengths[3] > 0,
+            'Exact state/no UI/active audio sections')
     start = 128 + lengths[0]
     payload = data[start:start + lengths[1]]
+    coroutine = payload.startswith(b'INCWPS03')
+    current = payload.startswith(b'INCWPS02')
+    if coroutine:
+        timers = timer_state(tick, coroutine=True)
+        expected = struct.pack('<I', len(timers)) + timers + coroutine_state(tick)
+        require(payload[104:] == expected, 'Exact pending coroutine frame, owner, deadline, schema and timer')
+        payload = payload[8:104]
+    elif current:
+        require(payload[104:] == timer_state(tick), 'Exact pending timer schedule and simulation clock')
+        payload = payload[8:104]
+    require(len(payload) == 96, 'Exact declared state size')
     require(payload[:16] == b'INCWST01' + struct.pack('<II', 1, 24)
             and payload[16:48] == SCHEMA and payload[48:56] == bytes(8), 'Opted-in state declaration')
     saved_tick, watermark = struct.unpack_from('<Qq', payload, 56)
@@ -44,13 +79,18 @@ def mutate_checkpoint(data, kind):
         content[-1] ^= 1
         return bytes(content)
     start = 128 + struct.unpack_from('<I', content, 80)[0]
+    coroutine = content[start:start + 8] == b'INCWPS03'
+    current = content[start:start + 8] == b'INCWPS02'
+    state_start = start + (8 if current or coroutine else 0)
     if kind == 'program':
         content[16] ^= 1
     elif kind == 'schema':
-        content[start + 16] ^= 1
+        content[state_start + 16] ^= 1
     elif kind == 'clock':
         # Keep <= watermark so the specific world/state pairing check is reached.
-        struct.pack_into('<Q', content, start + 56, SPLIT - 1)
+        struct.pack_into('<Q', content, state_start + 56, SPLIT - 1)
+        if current or coroutine:
+            struct.pack_into('<Q', content, start + 112 + (4 if coroutine else 0), SPLIT - 1)
     else:
         raise ValueError('Unknown fixed checkpoint mutation')
     content[96:128] = hashlib.sha256(content[:96] + content[128:]).digest()

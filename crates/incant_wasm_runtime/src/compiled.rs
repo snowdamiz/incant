@@ -27,6 +27,7 @@ pub struct ModuleExports {
     update: Update,
     free: Free,
     persistent: Option<crate::persistent::PersistentProgram>,
+    coroutines: &'static [incant_wasm_abi::coroutines::Routine],
 }
 impl ModuleExports {
     /// # Safety
@@ -44,6 +45,7 @@ impl ModuleExports {
             update,
             free,
             persistent: None,
+            coroutines: &[],
         }
     }
     /// # Safety
@@ -61,7 +63,16 @@ impl ModuleExports {
             update,
             free,
             persistent: Some(program),
+            coroutines: &[],
         }
+    }
+    /// The trusted generated linker copies declarations from the validated module.
+    pub const fn with_coroutines(
+        mut self,
+        routines: &'static [incant_wasm_abi::coroutines::Routine],
+    ) -> Self {
+        self.coroutines = routines;
+        self
     }
     pub const fn persistent_program(&self) -> Option<crate::persistent::PersistentProgram> {
         self.persistent
@@ -88,7 +99,8 @@ pub struct StaticModule {
 impl StaticModule {
     pub fn new(exports: ModuleExports) -> Result<Self, StaticError> {
         let mut capability =
-            Capability::with_persistence(exports.persistent.map(|p| p.declaration));
+            Capability::with_persistence(exports.persistent.map(|p| p.declaration))
+                .with_coroutines(exports.coroutines.to_vec())?;
         let mut context = Context {
             capability: &mut capability,
             error: None,
@@ -159,6 +171,21 @@ impl StaticModule {
     }
     pub fn enable_restart_requests(&mut self) -> Result<(), StaticError> {
         Ok(self.capability.enable_restart_requests()?)
+    }
+    pub fn set_haptic_capabilities(
+        &mut self,
+        value: incant_input::haptics::HapticCapabilities,
+    ) -> Result<(), StaticError> {
+        Ok(self.capability.set_haptic_capabilities(value)?)
+    }
+    pub fn haptics_ready(&self) -> Result<(), StaticError> {
+        Ok(self.capability.haptics_ready()?)
+    }
+    pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests, StaticError> {
+        Ok(self.capability.take_haptics()?)
+    }
+    pub fn clear_haptics(&mut self) {
+        self.capability.clear_haptics();
     }
     /// Script acceptance only; defer consumption until composed acceptance.
     pub fn take_restart_request(&mut self) -> Result<bool, StaticError> {

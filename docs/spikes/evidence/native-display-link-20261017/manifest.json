@@ -1,0 +1,369 @@
+{
+  "format": "incant-native-display-link-diagnostic-evidence-v1",
+  "source": "35f67313eba66c1de2089c6db1b56c4f657e4852",
+  "recorded_utc": "2026-10-17T20:48:47.221956+00:00",
+  "outcome": "negative for pacing adoption; ordinary default unchanged",
+  "performance_gate_passed": false,
+  "appearance_acceptance": false,
+  "failed_attempt_preserved": "display-link60-001",
+  "no_filters_or_bridged_gameplay_boundaries": true,
+  "quantum_classification": "Observed callback intervals within0.5ms of multiples of8.333ms; not a display hardware/FPS claim. All2,155 intervals retained.",
+  "comparison_limitations": [
+    "One ordinary run and one separately reviewed selected successor, same exactshippingplayer/package. First selectedrun interrupted; no causal randomized estimate.",
+    "RustInstant and MetalpresentedTime have different epochs; only separately anchored elapsed spans compared, not absolute queue depth/input latency.",
+    "Selected healthWaitUntil differsfromtimerdeadline; legacytimerattribution false retained. No percallback-to-step mapping.",
+    "Device audio counters are not a livePCM recording or glitchfree audio proof.",
+    "No shader-stall, script2ms, visual-quality or phase acceptance."
+  ],
+  "metrics": {
+    "ordinary-001": {
+      "gameplay_presentations": 2156,
+      "positive_contiguous_intervals": 2155,
+      "span_ms": 35899.99441662803,
+      "mean_interval_ms": 16.658930123725305,
+      "p95_interval_ms": 16.666750016156584,
+      "min_ms": 8.33325000712648,
+      "max_ms": 25.00008331844583,
+      "short_lt12ms": 11,
+      "long_gt21ms": 9,
+      "long_then_short": 8,
+      "120Hz_quanta_half_ms_tolerance": {
+        "1": 11,
+        "2": 2135,
+        "3": 9,
+        "4": 0
+      },
+      "acquisition_p95_ms": 0.029416,
+      "host_finished_p95_ms": 4.356042,
+      "dropped": {
+        "valid_batches_sum": 0,
+        "valid_batches": 2156,
+        "invalid_batches": 0
+      },
+      "host_span_ms": 35899.460125,
+      "anchored_display_minus_host_span_ms": 0.5342916280351346,
+      "schedule_due_counts": {
+        "1": 2156,
+        "2": 0,
+        "3": 0,
+        "4": 0
+      },
+      "native_wake": null
+    },
+    "display-link60-002": {
+      "gameplay_presentations": 2156,
+      "positive_contiguous_intervals": 2155,
+      "span_ms": 35916.67445830535,
+      "mean_interval_ms": 16.666670282276264,
+      "p95_interval_ms": 25.000041641760617,
+      "min_ms": 8.333208330441266,
+      "max_ms": 33.33341667894274,
+      "short_lt12ms": 330,
+      "long_gt21ms": 276,
+      "long_then_short": 33,
+      "120Hz_quanta_half_ms_tolerance": {
+        "1": 330,
+        "2": 1549,
+        "3": 222,
+        "4": 54
+      },
+      "acquisition_p95_ms": 0.029959,
+      "host_finished_p95_ms": 4.236916,
+      "dropped": {
+        "valid_batches_sum": 0,
+        "valid_batches": 1887,
+        "invalid_batches": 0
+      },
+      "host_span_ms": 35921.469125,
+      "anchored_display_minus_host_span_ms": -4.7946666946518235,
+      "schedule_due_counts": {
+        "1": 1618,
+        "2": 269,
+        "3": 0,
+        "4": 0
+      },
+      "native_wake": {
+        "active_pulses": 2158,
+        "callback_arrival_span_ns": "35952398709",
+        "callbacks": 2158,
+        "coalesced": 0,
+        "consumed": 2158,
+        "diagnostic_only": true,
+        "first_target_seconds": 400094.17805995845,
+        "future_target_used_for_simulation": false,
+        "last_reported_duration_seconds": 0.008333333333333335,
+        "last_target_seconds": 400130.13461520843,
+        "mode": "view-display-link60",
+        "performance_gate_passed": false,
+        "requested_hz": 60,
+        "simulation_clock": "unchanged-rational-wall-clock"
+      }
+    }
+  },
+  "records": [
+    {
+      "file": "shipping-result.json",
+      "bytes": 31524,
+      "sha256": "43f9c0d649008e5b85e0b2ca4834d52ada0260eb7593addf10cb99f279b043fa",
+      "original_sha256": "43f9c0d649008e5b85e0b2ca4834d52ada0260eb7593addf10cb99f279b043fa",
+      "original_bytes": 31524,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/shipping-001/metadata/result.json"
+    },
+    {
+      "file": "shipping-report.json",
+      "bytes": 35056,
+      "sha256": "be4a1404a9f139cd365f07a04349b2e2c52e57e6a657cc2c271ebc42c96a57bd",
+      "original_sha256": "be4a1404a9f139cd365f07a04349b2e2c52e57e6a657cc2c271ebc42c96a57bd",
+      "original_bytes": 35056,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/shipping-001/package/diagnostic-build.json"
+    },
+    {
+      "file": "shipping-closeout.json",
+      "bytes": 1714,
+      "sha256": "cb4335a5e23a62b3c1bf0d4227af65fce06fd48589d4cc0888464cdaebdd8e3c",
+      "original_sha256": "cb4335a5e23a62b3c1bf0d4227af65fce06fd48589d4cc0888464cdaebdd8e3c",
+      "original_bytes": 1714,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/shipping-001/metadata/root-terminal-closeout.json"
+    },
+    {
+      "file": "CPU-full-route-result.json",
+      "bytes": 1196,
+      "sha256": "4482a74268ded74c7001984d22b34c1e214d827ef55279f75436190a198ea621",
+      "original_sha256": "4482a74268ded74c7001984d22b34c1e214d827ef55279f75436190a198ea621",
+      "original_bytes": 1196,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/functional-001/result.json"
+    },
+    {
+      "file": "CPU-full-route-closeout.json",
+      "bytes": 274,
+      "sha256": "8cff8cc79f1f1638e53a8132d3d975aff748589c356aee74d34d0a87e317fe5f",
+      "original_sha256": "8cff8cc79f1f1638e53a8132d3d975aff748589c356aee74d34d0a87e317fe5f",
+      "original_bytes": 274,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/functional-001/root-terminal-closeout.json"
+    },
+    {
+      "file": "ordinary-001-result.json",
+      "bytes": 2911,
+      "sha256": "f4ff3c0eeef7de16629d9a6616f431d15626a51693d96463432a79d091596717",
+      "original_sha256": "f4ff3c0eeef7de16629d9a6616f431d15626a51693d96463432a79d091596717",
+      "original_bytes": 2911,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-ordinary-001/result.json"
+    },
+    {
+      "file": "ordinary-001-child-result.json",
+      "bytes": 5583,
+      "sha256": "ee44aff0c2274789e2aa5df4a093a24247e60deaf98ea2738d7b1d22056cdf9d",
+      "original_sha256": "ee44aff0c2274789e2aa5df4a093a24247e60deaf98ea2738d7b1d22056cdf9d",
+      "original_bytes": 5583,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-ordinary-001/child-result.json"
+    },
+    {
+      "file": "ordinary-001-root-terminal-closeout.json",
+      "bytes": 141,
+      "sha256": "3b52fb46bf5397cf086f1f0a56070f84c261b611c4c8d411cd05a96cf670b79f",
+      "original_sha256": "3b52fb46bf5397cf086f1f0a56070f84c261b611c4c8d411cd05a96cf670b79f",
+      "original_bytes": 141,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-ordinary-001/root-terminal-closeout.json"
+    },
+    {
+      "file": "ordinary-001-window-state.jsonl",
+      "bytes": 20797,
+      "sha256": "b9e4bb89eeef186c42045bcffd018edaa0080239d53b66169e5ab871cd5a0e33",
+      "original_sha256": "b9e4bb89eeef186c42045bcffd018edaa0080239d53b66169e5ab871cd5a0e33",
+      "original_bytes": 20797,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-ordinary-001/window-state.jsonl"
+    },
+    {
+      "file": "ordinary-001-presentations.json.gz",
+      "bytes": 182620,
+      "sha256": "873df63500ed4684d01dea564e943369b40acbc10fed8146fe32ce219595610f",
+      "original_sha256": "09b4d140584d685e5d8dfcf4c0f19a06be37799662a0519c7f50633ba8037353",
+      "original_bytes": 1811933,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-ordinary-001/presentations.json"
+    },
+    {
+      "file": "ordinary-001-stdout.json.gz",
+      "bytes": 6177,
+      "sha256": "edd55ae0b30895565ed66c7658903fdd833059eb87a497bbc06d519ce2b13a98",
+      "original_sha256": "bf15c351a1438c06973c8c411ef6bbaa96ccad2844c0cb282bbc9790ba30d25b",
+      "original_bytes": 576565,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-ordinary-001/stdout.json"
+    },
+    {
+      "file": "ordinary-001-compilations.json.gz",
+      "bytes": 2489,
+      "sha256": "45b6f5f4e8679db077fd80beca53df27c6158cefefabfe3c108edba94a748e19",
+      "original_sha256": "90202436e09d31e05071be140fafd793e2dbcf1e380ffb8e9dcb34faa428ccf4",
+      "original_bytes": 25637,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-ordinary-001/compilations.json"
+    },
+    {
+      "file": "display-link60-001-result.json",
+      "bytes": 2702,
+      "sha256": "4bd7aef8784f94262edb7c8c3021112ab55d5f6ad98dffd65cee02f90e9fea4c",
+      "original_sha256": "4bd7aef8784f94262edb7c8c3021112ab55d5f6ad98dffd65cee02f90e9fea4c",
+      "original_bytes": 2702,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-001/result.json"
+    },
+    {
+      "file": "display-link60-001-child-result.json",
+      "bytes": 14039,
+      "sha256": "f38f544520c2bc1058a8495a20a849939d58d0367a56116516f821e10651d5a4",
+      "original_sha256": "f38f544520c2bc1058a8495a20a849939d58d0367a56116516f821e10651d5a4",
+      "original_bytes": 14039,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-001/child-result.json"
+    },
+    {
+      "file": "display-link60-001-root-terminal-closeout.json",
+      "bytes": 321,
+      "sha256": "09f20435fa110164c9e25f9053ae919f0fdd918cc4826872d6a09b5860cc6483",
+      "original_sha256": "09f20435fa110164c9e25f9053ae919f0fdd918cc4826872d6a09b5860cc6483",
+      "original_bytes": 321,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-001/root-terminal-closeout.json"
+    },
+    {
+      "file": "display-link60-001-window-state.jsonl",
+      "bytes": 66811,
+      "sha256": "1f7259e949f124d37b3a3fff6be2853376a4411b17dc798e03e13920d22fce08",
+      "original_sha256": "1f7259e949f124d37b3a3fff6be2853376a4411b17dc798e03e13920d22fce08",
+      "original_bytes": 66811,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-001/window-state.jsonl"
+    },
+    {
+      "file": "display-link60-002-result.json",
+      "bytes": 2919,
+      "sha256": "5791c1a983cd8f7aac0c684d683573a29416182d59480da7b987b082216c7a09",
+      "original_sha256": "5791c1a983cd8f7aac0c684d683573a29416182d59480da7b987b082216c7a09",
+      "original_bytes": 2919,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-002/result.json"
+    },
+    {
+      "file": "display-link60-002-child-result.json",
+      "bytes": 5534,
+      "sha256": "e34915640af4a7c812d7f783463f4a9a1879a4b3eb89ec4e537603b88e5f01a8",
+      "original_sha256": "e34915640af4a7c812d7f783463f4a9a1879a4b3eb89ec4e537603b88e5f01a8",
+      "original_bytes": 5534,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-002/child-result.json"
+    },
+    {
+      "file": "display-link60-002-root-terminal-closeout.json",
+      "bytes": 173,
+      "sha256": "b88e47ecaf0105fa191a3e6a6597a97bde160ae40a61bd3bb7016758e53fd409",
+      "original_sha256": "b88e47ecaf0105fa191a3e6a6597a97bde160ae40a61bd3bb7016758e53fd409",
+      "original_bytes": 173,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-002/root-terminal-closeout.json"
+    },
+    {
+      "file": "display-link60-002-window-state.jsonl",
+      "bytes": 20796,
+      "sha256": "ee087df4eeea20cdd94ca61d77eb3411461583aabd8e6bb5293e9c52cc8a11fe",
+      "original_sha256": "ee087df4eeea20cdd94ca61d77eb3411461583aabd8e6bb5293e9c52cc8a11fe",
+      "original_bytes": 20796,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-002/window-state.jsonl"
+    },
+    {
+      "file": "display-link60-002-presentations.json.gz",
+      "bytes": 183552,
+      "sha256": "92a60c9a80f3d54568b33979fef4d2129a00a2a4f3d345f6a28554a86b591c57",
+      "original_sha256": "a62d791a7d69d5f61d9845ed11fc2268999acc363eb9a382dbc8085242f4d724",
+      "original_bytes": 1799010,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-002/presentations.json"
+    },
+    {
+      "file": "display-link60-002-stdout.json.gz",
+      "bytes": 6659,
+      "sha256": "421a2fad1889980fae0226d7754d8196f20aea014c7e8f87cacf2057c4bc03d8",
+      "original_sha256": "566912d8c74e7295ae3ca6f1df2a6ee06ac8f7a8ce0ca13106bfcacc95c79acb",
+      "original_bytes": 577006,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-002/stdout.json"
+    },
+    {
+      "file": "display-link60-002-compilations.json.gz",
+      "bytes": 2358,
+      "sha256": "ac73d5a0fec0a45af2ee0685732457217304e3eac1449db531c4c8206362a303",
+      "original_sha256": "91eb36ed31727bc6743346dfba474f10cfa85bc80abeb2f4b237d3861ad422f8",
+      "original_bytes": 25450,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/window-display-link60-002/compilations.json"
+    },
+    {
+      "file": "native-displaylink-source-independent-002-20261017.json",
+      "bytes": 4553,
+      "sha256": "a979b7fb2a5c3c9b62392e5ef3982f3feb82b6bfae91dbae214d95ca957dea51",
+      "original_sha256": "a979b7fb2a5c3c9b62392e5ef3982f3feb82b6bfae91dbae214d95ca957dea51",
+      "original_bytes": 4553,
+      "source_path": "/Users/andreyyurlov/.codex/incant-reviews/native-displaylink-source-independent-002-20261017.json"
+    },
+    {
+      "file": "native-displaylink-shipping-source-20261017.json",
+      "bytes": 2526,
+      "sha256": "1bc0ea35179c7a0853d3ded0232d939e128c592101d0474baa88c9380ca4bc3c",
+      "original_sha256": "1bc0ea35179c7a0853d3ded0232d939e128c592101d0474baa88c9380ca4bc3c",
+      "original_bytes": 2526,
+      "source_path": "/Users/andreyyurlov/.codex/incant-reviews/native-displaylink-shipping-source-20261017.json"
+    },
+    {
+      "file": "native-displaylink-replay-source-002-20261017.json",
+      "bytes": 1892,
+      "sha256": "c46d1d10c023591f9ac40b0eb582bf7212dad4169f02d0762f890780df500ff2",
+      "original_sha256": "c46d1d10c023591f9ac40b0eb582bf7212dad4169f02d0762f890780df500ff2",
+      "original_bytes": 1892,
+      "source_path": "/Users/andreyyurlov/.codex/incant-reviews/native-displaylink-replay-source-002-20261017.json"
+    },
+    {
+      "file": "native-displaylink-replay-followup-002-20261017.json",
+      "bytes": 1256,
+      "sha256": "92b77fd6148e96650e8f213b4a8ea18e51ffdfb9c755cb87a51c736109bc63a4",
+      "original_sha256": "92b77fd6148e96650e8f213b4a8ea18e51ffdfb9c755cb87a51c736109bc63a4",
+      "original_bytes": 1256,
+      "source_path": "/Users/andreyyurlov/.codex/incant-reviews/native-displaylink-replay-followup-002-20261017.json"
+    },
+    {
+      "file": "native-displaylink-pair-independent-20261017.json",
+      "bytes": 4777,
+      "sha256": "7e8cac8d583ccb9bcb1a18403c900cc4e2e63822a394ba77a4ad94accc32e173",
+      "original_sha256": "7e8cac8d583ccb9bcb1a18403c900cc4e2e63822a394ba77a4ad94accc32e173",
+      "original_bytes": 4777,
+      "source_path": "/Users/andreyyurlov/.codex/incant-reviews/native-displaylink-pair-independent-20261017.json"
+    },
+    {
+      "file": "CPU002-result.json",
+      "bytes": 2395,
+      "sha256": "9de8384a3e6e75a7303563d8118d4f7bdbdf916b95f800bbc9072d747283bcbf",
+      "original_sha256": "9de8384a3e6e75a7303563d8118d4f7bdbdf916b95f800bbc9072d747283bcbf",
+      "original_bytes": 2395,
+      "source_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-displaylink-cpu-002/result.json"
+    },
+    {
+      "file": "CPU002-closeout.json",
+      "bytes": 682,
+      "sha256": "d2da024354fb56904c96428d519e09efccf4b9ffb8d219d7d8dddd30cae63797",
+      "original_sha256": "d2da024354fb56904c96428d519e09efccf4b9ffb8d219d7d8dddd30cae63797",
+      "original_bytes": 682,
+      "source_path": "/Users/andreyyurlov/.codex/incant-resume-20261017/native-displaylink-cpu-002/terminal-closeout.json"
+    },
+    {
+      "file": "local-development-checks-node24.json",
+      "bytes": 1328,
+      "sha256": "e476cd7b3998665cabda15bfe56c60cc0fe3fb1f4c47079a2ed7daf54fe895b5",
+      "original_sha256": "e476cd7b3998665cabda15bfe56c60cc0fe3fb1f4c47079a2ed7daf54fe895b5",
+      "original_bytes": 1328,
+      "source_path": "/Users/andreyyurlov/.codex/incant-evidence/native-displaylink-wake-001/development-checks-002/results.json"
+    }
+  ],
+  "local_development_runtime": "Node24.21.0; hosted requiredcheck uses pinned22.23.3. Shippingcook used22.23.3.",
+  "actual_host": {
+    "model": "Mac17,9",
+    "processor": "Apple M5 Pro",
+    "os": "macOS27.0.1",
+    "build": "26A434",
+    "native_surface_physical": [
+      1280,
+      960
+    ],
+    "ui_viewport": [
+      640,
+      480
+    ],
+    "scale_factor": 2
+  }
+}

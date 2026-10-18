@@ -19,6 +19,8 @@ pub enum ModuleError {
     Runtime(#[from] RuntimeError),
     #[error(transparent)]
     Query(#[from] incant_runtime::QueryError),
+    #[error(transparent)]
+    Haptics(#[from] incant_input::haptics::HapticError),
     #[error("development module failed; construct or reload a new instance")]
     Failed,
 }
@@ -41,6 +43,9 @@ impl DevModuleHost {
     /// wall-time or total-process-memory deadline.
     pub fn new(bytes: &[u8]) -> Result<Self, ModuleError> {
         let declaration = bounds::preflight(bytes)?;
+        let catalog =
+            incant_wasm_abi::coroutines::catalog_in_module(bytes).map_err(ModuleError::Abi)?;
+        let coroutines = catalog.map(|c| c.routines().collect()).unwrap_or_default();
         let mut config = Config::new();
         config
             .consume_fuel(true)
@@ -83,7 +88,8 @@ impl DevModuleHost {
             &engine,
             State {
                 limits,
-                capability: Capability::with_persistence(declaration),
+                capability: Capability::with_persistence(declaration)
+                    .with_coroutines(coroutines)?,
             },
         );
         store.limiter(|state| &mut state.limits);
@@ -137,6 +143,25 @@ impl DevModuleHost {
     }
     pub fn enable_restart_requests(&mut self) -> Result<(), ModuleError> {
         Ok(self.store.data_mut().capability.enable_restart_requests()?)
+    }
+    pub fn set_haptic_capabilities(
+        &mut self,
+        value: incant_input::haptics::HapticCapabilities,
+    ) -> Result<(), ModuleError> {
+        Ok(self
+            .store
+            .data_mut()
+            .capability
+            .set_haptic_capabilities(value)?)
+    }
+    pub fn haptics_ready(&self) -> Result<(), ModuleError> {
+        Ok(self.store.data().capability.haptics_ready()?)
+    }
+    pub fn take_haptics(&mut self) -> Result<incant_input::haptics::HapticRequests, ModuleError> {
+        Ok(self.store.data_mut().capability.take_haptics()?)
+    }
+    pub fn clear_haptics(&mut self) {
+        self.store.data_mut().capability.clear_haptics();
     }
     /// Script acceptance only; defer consumption until composed acceptance.
     pub fn take_restart_request(&mut self) -> Result<bool, ModuleError> {
@@ -208,6 +233,7 @@ impl From<BoundaryError> for ModuleError {
             BoundaryError::Runtime(error) => Self::Runtime(error),
             BoundaryError::Failed => Self::Failed,
             BoundaryError::Query(error) => Self::Query(error),
+            BoundaryError::Haptics(error) => Self::Haptics(error),
         }
     }
 }

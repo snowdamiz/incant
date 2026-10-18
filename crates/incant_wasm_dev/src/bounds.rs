@@ -8,6 +8,8 @@ pub fn preflight(
 ) -> Result<Option<incant_wasm_abi::persistent::Declaration>, ModuleError> {
     let declaration =
         incant_wasm_abi::persistent::declaration_in_module(bytes).map_err(ModuleError::Abi)?;
+    let coroutines =
+        incant_wasm_abi::coroutines::catalog_in_module(bytes).map_err(ModuleError::Abi)?;
     if bytes.len() > 1024 * 1024 || bytes.get(..8) != Some(b"\0asm\x01\0\0\0") {
         return Err(ModuleError::Abi("expected core Wasm binary, at most 1 MiB"));
     }
@@ -30,6 +32,10 @@ pub fn preflight(
             Payload::ImportSection(s) => {
                 for (count, import) in s.into_imports().enumerate() {
                     let import = import.map_err(|_| ModuleError::Abi("import"))?;
+                    if import.module == incant_wasm_abi::coroutines::SECTION && coroutines.is_none()
+                    {
+                        return Err(ModuleError::Abi("coroutine imports require catalog"));
+                    }
                     if import.module == incant_wasm_abi::persistent::SECTION
                         && declaration.is_none()
                     {

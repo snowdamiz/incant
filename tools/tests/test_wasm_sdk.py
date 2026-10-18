@@ -25,10 +25,42 @@ class RegistryTests(unittest.TestCase):
     def test_persistent_state_is_additive_and_explicitly_copied(self):
         import hashlib
         self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:64], sort_keys=True).encode()).hexdigest(), '00bb2bfea44e6659a86e2fdc49d8c4fa3207507e35014ebbb8d73b226a1d6159')
-        self.assertEqual([(f['namespace'], f['name'], f['opcode']) for f in self.data['functions'][64:]], [('incant_state_v1', 'read', 64), ('incant_state_v1', 'write', 65)])
-        for row in self.data['functions'][64:]:
+        self.assertEqual([(f['namespace'], f['name'], f['opcode']) for f in self.data['functions'][64:66]], [('incant_state_v1', 'read', 64), ('incant_state_v1', 'write', 65)])
+        for row in self.data['functions'][64:66]:
             self.assertEqual(row['params'], [['epoch', 'i64'], ['ptr', 'i32'], ['offset', 'i32'], ['len', 'i32']])
             self.assertEqual(row['result'], 'i32')
+
+    def test_haptics_append_without_changing_the_66_published_imports(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:66], sort_keys=True).encode()).hexdigest(), '94c6248bee7dd64cbc59ab84ac71bbe1999286d37f29a6573190bcdd92290a8d')
+        self.assertEqual([(f['namespace'], f['name'], f['opcode']) for f in self.data['functions'][66:69]], [('incant_haptics_v1', 'snapshot_len', 66), ('incant_haptics_v1', 'read_snapshot', 67), ('incant_haptics_v1', 'command', 68)])
+        self.assertEqual(self.data['namespaces']['incant_haptics_v1'], 'haptics')
+        self.assertEqual([self.data['constants'][n] for n in ('HAPTIC_MAX_TARGETS', 'HAPTIC_MAX_REQUESTS', 'HAPTIC_MAX_DURATION_MS')], [17, 32, 5000])
+        size = lambda name: sum(generator.SIZES[t]*(n[0] if n else 1) for _,t,*n in self.data['records'][name])
+        self.assertEqual([size(n) for n in ('HapticHeader', 'HapticTarget', 'HapticCommandHeader', 'HapticCommand')], [16, 12, 16, 40])
+        self.assertIn('pub mod haptics;', generator.outputs()['crates/incant_wasm_abi/src/lib.rs'])
+
+    def test_timers_preserve_all_69_prior_imports_and_use_copied_frames(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:69],sort_keys=True).encode()).hexdigest(), '561a3a7060f262758393755ae0c518e86af29c6e5e4fcb642a9ce5af1a70e5ac')
+        self.assertEqual([(f['namespace'],f['name'],f['opcode']) for f in self.data['functions'][69:72]], [('incant_timers_v1','snapshot_len',69),('incant_timers_v1','read_snapshot',70),('incant_timers_v1','command',71)])
+        self.assertEqual(self.data['constants']['TIMER_MAX_TIMERS'],128)
+        self.assertEqual(self.data['constants']['TIMER_MAX_ACTIONS'],256)
+
+    def test_coroutines_preserve_72_imports_and_copy_bounded_task_frames(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:72],sort_keys=True).encode()).hexdigest(), '8b34eec7f4051208d85fc66e1d896e340c4bf78d27be4ff4264707133164ae86')
+        self.assertEqual([(f['namespace'],f['name'],f['opcode']) for f in self.data['functions'][72:74]], [('incant_coroutines_v1','next',72),('incant_coroutines_v1','command',73)])
+        self.assertEqual(self.data['constants']['COROUTINE_MAX_TASKS'],128)
+        self.assertEqual(self.data['constants']['COROUTINE_FRAME_BYTES'],16384)
+
+    def test_localization_report_preserves_all_74_imports_and_bounded_pagination(self):
+        import hashlib
+        self.assertEqual(hashlib.sha256(json.dumps(self.data['functions'][:74],sort_keys=True).encode()).hexdigest(), 'ee28552d93f31fa1c4aaa3a91e0a1d1e4c611544d5ef46c58a90c3e7e821adad')
+        self.assertEqual(self.data['functions'][74], {'namespace':'incant_localization_v1','name':'report','params':[['epoch','i64'],['offset','i32'],['limit','i32']],'result':'i32','opcode':74,'call':'Call::LocalizationReport { offset, limit }'})
+        self.assertEqual(self.data['constants']['LOCALIZATION_MAX_REPORT_TOTAL'],4096)
+        self.assertEqual(self.data['constants']['LOCALIZATION_MAX_REPORT_ROWS'],128)
+        self.assertEqual(self.data['constants']['LOCALIZATION_MAX_RESULT_BYTES'],66560)
 
     def test_all_committed_host_guest_and_c_artifacts_are_exact(self):
         for name,text in generator.outputs().items():self.assertEqual((ROOT/name).read_text(),text,name)
