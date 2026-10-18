@@ -1,0 +1,733 @@
+{
+  "schema": 1,
+  "scope": "Default-off static-pose CPU and actual Metal correctness; no window, timing or adoption",
+  "cpu_source": "ba5d497d02605d1e4870ebd80d22763b317d8b5a",
+  "gpu_source": "331219f8dfd22e68d3300222eb69c56898c0639d",
+  "cpu_tests": 111,
+  "gpu_tests": 3,
+  "gpu_artifact_sha256": "1e104ee3386ec89aba95a4b8654199fef6a406422f983cdae8ff5762f3fed709",
+  "artifacts": {
+    "native-pose-cpu-001/plan.json": {
+      "file": "native-pose-cpu-001/plan.json.gz",
+      "bytes": 1386,
+      "sha256": "d2cd7752362fae354ab52f02a7343a455792256897d3933c3b5f98844f95ecf8",
+      "gzip_bytes": 538,
+      "gzip_sha256": "f568d48bf9750b98e86a5dd44c45c98f74de8d1e4424991cb8cf19dc25f4ee1e"
+    },
+    "native-pose-cpu-001/result.json": {
+      "file": "native-pose-cpu-001/result.json.gz",
+      "bytes": 63765,
+      "sha256": "ea0b8ed0fdd089cc971e43c2d2479b750a6fecd4fbec1bbfbc95560e157781bc",
+      "gzip_bytes": 3419,
+      "gzip_sha256": "a89c84a05892e4f9610ceb82ac607f92855863714d1b8cd6f0a3a2d4c909e292"
+    },
+    "native-pose-cpu-001/closeout.json": {
+      "file": "native-pose-cpu-001/closeout.json.gz",
+      "bytes": 667,
+      "sha256": "a97f6e6acc9cd02ac94cacba0615be436bdfe89d7a25cb7ffc1e38ff76379096",
+      "gzip_bytes": 367,
+      "gzip_sha256": "6b5e958aad7109b1a4442046af7171d04615f90c193fccbb5ab8c42486a2c657"
+    },
+    "native-pose-cpu-001/run.py": {
+      "file": "native-pose-cpu-001/run.py.gz",
+      "bytes": 2854,
+      "sha256": "2e1c3935ce460878add40dc7788d10f3b5ac98bc22d6392ba07d058880b83368",
+      "gzip_bytes": 1403,
+      "gzip_sha256": "61803930755aae105afa2b05223cf337cdb457956b4b0188bfbeaff211ab81c2"
+    },
+    "native-pose-cpu-001/output/000.stderr.log": {
+      "file": "native-pose-cpu-001/output/000.stderr.log.gz",
+      "bytes": 3873,
+      "sha256": "f68e89876483fd08c8f50d1ddcaa6afb136c6619123802dc05ec600c751e39f7",
+      "gzip_bytes": 746,
+      "gzip_sha256": "03bea2b5169b9dcbb9d4b01b400a11d4939f00b34f8af5c6ab4cd0c89756cc2a"
+    },
+    "native-pose-cpu-001/output/000.stdout.log": {
+      "file": "native-pose-cpu-001/output/000.stdout.log.gz",
+      "bytes": 304534,
+      "sha256": "1c3bf9d32204b10037288e6e210ecfa644dcd9db34b17e1552ae0bab15987761",
+      "gzip_bytes": 21913,
+      "gzip_sha256": "b60b442d5957e76d750e67e9fac1c11ba4828c44c2c2d8989a1206146ac4d164"
+    },
+    "native-pose-cpu-001/output/001.stderr.log": {
+      "file": "native-pose-cpu-001/output/001.stderr.log.gz",
+      "bytes": 2433,
+      "sha256": "13f813cff983a820719ed7edea93c83774663b48738431dcb984bfc74b97143f",
+      "gzip_bytes": 478,
+      "gzip_sha256": "2ce68a3d852d42313bb5edbc96e00beb99429c59e4a3c780f70a342bfbdde83f"
+    },
+    "native-pose-cpu-001/output/001.stdout.log": {
+      "file": "native-pose-cpu-001/output/001.stdout.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "native-pose-cpu-002/plan.json": {
+      "file": "native-pose-cpu-002/plan.json.gz",
+      "bytes": 1971,
+      "sha256": "f942a7da61b43883a099f8860d1368b2dbee50820323e22643e3c82ac2965241",
+      "gzip_bytes": 585,
+      "gzip_sha256": "327ada6ae8d88f4fed15bb172b49ef24e54741e3683fb1e9c400fb317e3781fe"
+    },
+    "native-pose-cpu-002/result.json": {
+      "file": "native-pose-cpu-002/result.json.gz",
+      "bytes": 2205,
+      "sha256": "3ff985517acaf8223281c33f190fe08870bdac034df95f183b7e3916d44134d6",
+      "gzip_bytes": 620,
+      "gzip_sha256": "9196f07fec02b3e68c1f88c6557400ba30895e725aecd1ad0a4791938c7dd1ea"
+    },
+    "native-pose-cpu-002/closeout.json": {
+      "file": "native-pose-cpu-002/closeout.json.gz",
+      "bytes": 151,
+      "sha256": "cf87016e4807d3e214c90c151d264df3727995634c5b7f0e28016a6d2ef85dd2",
+      "gzip_bytes": 135,
+      "gzip_sha256": "b844d51bf58d853268d056d5dc35b9b12f5bd3763eba60f8d0f39e506bd0e13e"
+    },
+    "native-pose-cpu-002/run.py": {
+      "file": "native-pose-cpu-002/run.py.gz",
+      "bytes": 2854,
+      "sha256": "2e1c3935ce460878add40dc7788d10f3b5ac98bc22d6392ba07d058880b83368",
+      "gzip_bytes": 1403,
+      "gzip_sha256": "61803930755aae105afa2b05223cf337cdb457956b4b0188bfbeaff211ab81c2"
+    },
+    "native-pose-cpu-002/output/000.stderr.log": {
+      "file": "native-pose-cpu-002/output/000.stderr.log.gz",
+      "bytes": 1986,
+      "sha256": "cae1285f9996372427e698c9929e37f16ffde514b10d805732755cc13383bcd7",
+      "gzip_bytes": 346,
+      "gzip_sha256": "b3595ca8add97fadd5bcf5e74a0523c207c107df01665fef11ff65310e3c7710"
+    },
+    "native-pose-cpu-002/output/000.stdout.log": {
+      "file": "native-pose-cpu-002/output/000.stdout.log.gz",
+      "bytes": 308128,
+      "sha256": "9c6addb7985b7d7e56455257cdcba4bc254688bc6443b8cd7c7634d362e5493b",
+      "gzip_bytes": 20996,
+      "gzip_sha256": "ae3ce232c3fb2e58d396d9fd835605114113e9f4433ac953ca3f49b9f72a8549"
+    },
+    "native-pose-cpu-003/plan.json": {
+      "file": "native-pose-cpu-003/plan.json.gz",
+      "bytes": 1990,
+      "sha256": "7e4f6d1de67c33885ecac770a8dcd280d43f347cd8c6b6b1b49257b249caa15f",
+      "gzip_bytes": 604,
+      "gzip_sha256": "635faab4ed8ffcf33716ed42fa004a1e24999dbb43098387b9d0978b62975bd5"
+    },
+    "native-pose-cpu-003/result.json": {
+      "file": "native-pose-cpu-003/result.json.gz",
+      "bytes": 2207,
+      "sha256": "5df1e123613da8d7e805067d7c497c2bee56c3d289c8e6eaff3f7ab2cb621fdd",
+      "gzip_bytes": 619,
+      "gzip_sha256": "7632ba29f2ef83e0eee7a3ce22ef1d80c5496659abaa5a294a2470916cfd2f3f"
+    },
+    "native-pose-cpu-003/closeout.json": {
+      "file": "native-pose-cpu-003/closeout.json.gz",
+      "bytes": 151,
+      "sha256": "be4450eeefcf9c14c93d50eb8245f3e5f42547253d2244b8a25e373370df321b",
+      "gzip_bytes": 136,
+      "gzip_sha256": "dcef8574a27a2008e7db5dd4566bb9ba443a2981e8bb04bebe5bb59c6496b9d7"
+    },
+    "native-pose-cpu-003/run.py": {
+      "file": "native-pose-cpu-003/run.py.gz",
+      "bytes": 2854,
+      "sha256": "2e1c3935ce460878add40dc7788d10f3b5ac98bc22d6392ba07d058880b83368",
+      "gzip_bytes": 1403,
+      "gzip_sha256": "61803930755aae105afa2b05223cf337cdb457956b4b0188bfbeaff211ab81c2"
+    },
+    "native-pose-cpu-003/output/000.stderr.log": {
+      "file": "native-pose-cpu-003/output/000.stderr.log.gz",
+      "bytes": 673,
+      "sha256": "97782a6866f717140a24df67a2bbb119c343db0c70ed6bf039338fcde1ae6269",
+      "gzip_bytes": 321,
+      "gzip_sha256": "c1b266c8db0be5c48f39854f679e1cfbeaccd1d719349afb0d5e1a8445cbe242"
+    },
+    "native-pose-cpu-003/output/000.stdout.log": {
+      "file": "native-pose-cpu-003/output/000.stdout.log.gz",
+      "bytes": 319162,
+      "sha256": "346ea6c7fdd08c2a74a0dcd07874fb0beb3e7a5e3a11a955360418c88c125234",
+      "gzip_bytes": 21629,
+      "gzip_sha256": "8909f82d5cf10f61ab336c81f02f0ba088be2a602bc3be12c195e61cfe99c2c0"
+    },
+    "native-pose-cpu-004/plan.json": {
+      "file": "native-pose-cpu-004/plan.json.gz",
+      "bytes": 1985,
+      "sha256": "df01cc0069cbd1c40aa21a22cb7b605ebc821b934a0dc64f786354da2fb68f6f",
+      "gzip_bytes": 594,
+      "gzip_sha256": "1b3106bb717c1cd790a4e1579085f2b66cedca05db854b6c05b0d788ef48e3cf"
+    },
+    "native-pose-cpu-004/result.json": {
+      "file": "native-pose-cpu-004/result.json.gz",
+      "bytes": 2203,
+      "sha256": "cb3ea371423070b55df1f6df5d1baffd80e30f43db025307d0aa2fcf2e7491fc",
+      "gzip_bytes": 613,
+      "gzip_sha256": "e1f625063c310c9ddfb0cf57e108bf1cdb5800816f0c18074a7de4cbff11a561"
+    },
+    "native-pose-cpu-004/closeout.json": {
+      "file": "native-pose-cpu-004/closeout.json.gz",
+      "bytes": 151,
+      "sha256": "07f0b0d579a3cd77d7f87f4937c7d099dffc129545774312503fa970a259502a",
+      "gzip_bytes": 135,
+      "gzip_sha256": "ad0091304bc90f61bf48222891ccaf92a062a58ceb7a1cb77876ce165c5f6624"
+    },
+    "native-pose-cpu-004/run.py": {
+      "file": "native-pose-cpu-004/run.py.gz",
+      "bytes": 2854,
+      "sha256": "2e1c3935ce460878add40dc7788d10f3b5ac98bc22d6392ba07d058880b83368",
+      "gzip_bytes": 1403,
+      "gzip_sha256": "61803930755aae105afa2b05223cf337cdb457956b4b0188bfbeaff211ab81c2"
+    },
+    "native-pose-cpu-004/output/000.stderr.log": {
+      "file": "native-pose-cpu-004/output/000.stderr.log.gz",
+      "bytes": 531,
+      "sha256": "4ecd2339c690ec01a38ad08982c053121b63afbad2605a74344cc62a12de890d",
+      "gzip_bytes": 309,
+      "gzip_sha256": "a9bfc1164f45a3397504cdffd3e547a2325d108d375ab1b28e742850b06a526f"
+    },
+    "native-pose-cpu-004/output/000.stdout.log": {
+      "file": "native-pose-cpu-004/output/000.stdout.log.gz",
+      "bytes": 318658,
+      "sha256": "040124bd6967e058e2a74ce37c68a9c21bde42f9d825eda27d027070a907c23b",
+      "gzip_bytes": 21463,
+      "gzip_sha256": "89f2844787491d7a23e370dd7562e81f865cc8375ae51a3e4b0b843862bf97fa"
+    },
+    "native-pose-cpu-005/plan.json": {
+      "file": "native-pose-cpu-005/plan.json.gz",
+      "bytes": 2021,
+      "sha256": "6acd87d3cdc350ca1ffec091ce548be96444cedfd6aae4474e5ed0450cb58f92",
+      "gzip_bytes": 613,
+      "gzip_sha256": "2491c8ff128c52c4dbe04ba4de0309155e9d2038f58c4cf3847ac11ba077c1a4"
+    },
+    "native-pose-cpu-005/result.json": {
+      "file": "native-pose-cpu-005/result.json.gz",
+      "bytes": 83667,
+      "sha256": "99f618b14fceaf41326be790cab0860755ad8c6744f244a95ce2fd5a8056c6de",
+      "gzip_bytes": 4155,
+      "gzip_sha256": "398c1a0e8946c9b2716525ae14f53fb1f31d40fb15f82696c35185cf1d694d52"
+    },
+    "native-pose-cpu-005/closeout.json": {
+      "file": "native-pose-cpu-005/closeout.json.gz",
+      "bytes": 173,
+      "sha256": "b101e01f5f96d821b1d6b1ee933434bf63d71ed67e009eb150123276b2d66664",
+      "gzip_bytes": 140,
+      "gzip_sha256": "00408586edcecee57b9de383b59ae26b9ad57931b66112b7296d280e9d26d10a"
+    },
+    "native-pose-cpu-005/run.py": {
+      "file": "native-pose-cpu-005/run.py.gz",
+      "bytes": 2854,
+      "sha256": "2e1c3935ce460878add40dc7788d10f3b5ac98bc22d6392ba07d058880b83368",
+      "gzip_bytes": 1403,
+      "gzip_sha256": "61803930755aae105afa2b05223cf337cdb457956b4b0188bfbeaff211ab81c2"
+    },
+    "native-pose-cpu-005/output/000.stderr.log": {
+      "file": "native-pose-cpu-005/output/000.stderr.log.gz",
+      "bytes": 2530,
+      "sha256": "1c9f389beae245ed5cfb7907b547bad702c9f35d14c5a34554cfb4565b7269dc",
+      "gzip_bytes": 643,
+      "gzip_sha256": "c83aaede55fdae5a35928b798202f5f81aa4191a5aabf1a7c10f751c911cc765"
+    },
+    "native-pose-cpu-005/output/000.stdout.log": {
+      "file": "native-pose-cpu-005/output/000.stdout.log.gz",
+      "bytes": 328616,
+      "sha256": "d701dcee3824e0658f78985cfab7e16e5f99861d1a3e8724400d3ecca55724be",
+      "gzip_bytes": 24286,
+      "gzip_sha256": "028f3817503fc006cadbb09e9c31e2bbab4cd58c2bd228abb7043ed09be6435b"
+    },
+    "native-pose-cpu-005/output/001.stderr.log": {
+      "file": "native-pose-cpu-005/output/001.stderr.log.gz",
+      "bytes": 742,
+      "sha256": "8d09fa3253b86d59bdfb7122bba06024951b9bb3968681fd475c7a5ea2ce28fd",
+      "gzip_bytes": 218,
+      "gzip_sha256": "0ee95e137b14dca1bd9340e55d9f2f030926750a7160850b3bf2ea2eac3ceb7a"
+    },
+    "native-pose-cpu-005/output/001.stdout.log": {
+      "file": "native-pose-cpu-005/output/001.stdout.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "native-pose-cpu-005/output/002.stderr.log": {
+      "file": "native-pose-cpu-005/output/002.stderr.log.gz",
+      "bytes": 593,
+      "sha256": "799e2a66d20fd3c3dd92541dd8242ad3117128ccd91e4e9c9d0774511c7e867a",
+      "gzip_bytes": 203,
+      "gzip_sha256": "44fadf84dfb009498a7c5476ccee22f9ff0bea2f5328f44113bd32c535bce3f8"
+    },
+    "native-pose-cpu-005/output/002.stdout.log": {
+      "file": "native-pose-cpu-005/output/002.stdout.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "native-pose-cpu-006/plan.json": {
+      "file": "native-pose-cpu-006/plan.json.gz",
+      "bytes": 1386,
+      "sha256": "77d74c7ef0dfbd53df019f1f81e93015d484a6faccc7aacd3d2db4fc7cf585dd",
+      "gzip_bytes": 534,
+      "gzip_sha256": "1a8df69f21a68d4048b8299deddbc85d7686b8c9106c268c665f427ada66801a"
+    },
+    "native-pose-cpu-006/result.json": {
+      "file": "native-pose-cpu-006/result.json.gz",
+      "bytes": 1950,
+      "sha256": "93ca2a5009ae2cb3f4e646ec4c4e74a624dbcda00d0235bea206a91e462fb8f5",
+      "gzip_bytes": 610,
+      "gzip_sha256": "36d93c530ec1eb52b58779e9248173b047950d25c9939b666af52d3ba7782168"
+    },
+    "native-pose-cpu-006/closeout.json": {
+      "file": "native-pose-cpu-006/closeout.json.gz",
+      "bytes": 151,
+      "sha256": "0206ed47f4a53bcbe7ee380bb2f24f9a5d47477b7ed2f9c2c19fe320c239fee1",
+      "gzip_bytes": 134,
+      "gzip_sha256": "64e5c5aef4282c1a1bc37f54921a40ed9847a7c178cd807201fd9cdedabfebf7"
+    },
+    "native-pose-cpu-006/run.py": {
+      "file": "native-pose-cpu-006/run.py.gz",
+      "bytes": 2854,
+      "sha256": "2e1c3935ce460878add40dc7788d10f3b5ac98bc22d6392ba07d058880b83368",
+      "gzip_bytes": 1403,
+      "gzip_sha256": "61803930755aae105afa2b05223cf337cdb457956b4b0188bfbeaff211ab81c2"
+    },
+    "native-pose-cpu-006/output/000.stderr.log": {
+      "file": "native-pose-cpu-006/output/000.stderr.log.gz",
+      "bytes": 651,
+      "sha256": "6c5ed161e62f14c61834c341bffbc87886307a6311f7babea1997f5ce898de66",
+      "gzip_bytes": 211,
+      "gzip_sha256": "cc4cd9a7a482fb831f8ec59b689bed27586b266b6d3017652f194398547d0012"
+    },
+    "native-pose-cpu-006/output/000.stdout.log": {
+      "file": "native-pose-cpu-006/output/000.stdout.log.gz",
+      "bytes": 345847,
+      "sha256": "03574b9e9de14fb288a34aa2f205bdc05b0eb8311caf7bed8c0d700236ee513a",
+      "gzip_bytes": 24448,
+      "gzip_sha256": "59e6323aa864fcf09854f1eab48c084b47dab0441b561905fc791758e7da7a98"
+    },
+    "native-pose-cpu-007/plan.json": {
+      "file": "native-pose-cpu-007/plan.json.gz",
+      "bytes": 1402,
+      "sha256": "4ccad5ea9996e9ee15ee010a7119ea9d8b6f0bccd5c2a4acaf6b28029d18ea06",
+      "gzip_bytes": 537,
+      "gzip_sha256": "88eb95a1b084f091a5ed52639fcef031f1fb5509877b305c4b436a3b55a54024"
+    },
+    "native-pose-cpu-007/result.json": {
+      "file": "native-pose-cpu-007/result.json.gz",
+      "bytes": 62901,
+      "sha256": "96adee6f92d30dc3b7d82265f5590cfec5c9457d85bf156cf7203c4ff0e86516",
+      "gzip_bytes": 3458,
+      "gzip_sha256": "54877210d4aaeef3616839a538e82e6935866dbf4609d40579d37cdacb8ff430"
+    },
+    "native-pose-cpu-007/closeout.json": {
+      "file": "native-pose-cpu-007/closeout.json.gz",
+      "bytes": 162,
+      "sha256": "9ffb95953e256de3da602fd17c1f22fbc1da065343d48d2f8ddc6847b82ac759",
+      "gzip_bytes": 137,
+      "gzip_sha256": "b4ed849cc65c6139c59eba110ecfcc952a8f3abc256a183435b0e1690e4fe087"
+    },
+    "native-pose-cpu-007/run.py": {
+      "file": "native-pose-cpu-007/run.py.gz",
+      "bytes": 2854,
+      "sha256": "2e1c3935ce460878add40dc7788d10f3b5ac98bc22d6392ba07d058880b83368",
+      "gzip_bytes": 1403,
+      "gzip_sha256": "61803930755aae105afa2b05223cf337cdb457956b4b0188bfbeaff211ab81c2"
+    },
+    "native-pose-cpu-007/output/000.stderr.log": {
+      "file": "native-pose-cpu-007/output/000.stderr.log.gz",
+      "bytes": 202,
+      "sha256": "ea78b0c5879a7629b77c0113e9fc2c7405f79fabe0752c9fb41aecc001c5110a",
+      "gzip_bytes": 171,
+      "gzip_sha256": "f6e3f454ac15c4a7003f673c1e6d6360c688a1673b8dd649f3429ff3b3bf1965"
+    },
+    "native-pose-cpu-007/output/000.stdout.log": {
+      "file": "native-pose-cpu-007/output/000.stdout.log.gz",
+      "bytes": 339026,
+      "sha256": "2f408da6dc9566e4198ea6a3ebfd0534d623b15fad078c2cff8c218d0b9d099e",
+      "gzip_bytes": 22876,
+      "gzip_sha256": "83bc230b8ed68c361b24f567615a11ed8995c0c33aae3f684515bec7720d7fec"
+    },
+    "native-pose-cpu-007/output/001.stderr.log": {
+      "file": "native-pose-cpu-007/output/001.stderr.log.gz",
+      "bytes": 480,
+      "sha256": "4b4e40ecc9266acf059848280fbe56e366ec56b0d602d8dd358c901b58dfe1f8",
+      "gzip_bytes": 191,
+      "gzip_sha256": "52df3f47198e66639b6e3a7f32f33a512e8b66fcdcdb662d423faf140a657ee3"
+    },
+    "native-pose-cpu-007/output/001.stdout.log": {
+      "file": "native-pose-cpu-007/output/001.stdout.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "native-pose-cpu-008/plan.json": {
+      "file": "native-pose-cpu-008/plan.json.gz",
+      "bytes": 1532,
+      "sha256": "c83718d6ab33538cf592c7b7ee4a235ad1721dec99aec67ebc554693b7b21f07",
+      "gzip_bytes": 578,
+      "gzip_sha256": "eab609a0bdd22e24d6325ad705a20c32ca82844433f84a448063abe9a5922026"
+    },
+    "native-pose-cpu-008/result.json": {
+      "file": "native-pose-cpu-008/result.json.gz",
+      "bytes": 2050,
+      "sha256": "975b1407cb23159209ec35d727a90a1da36947a12182a463d0aee67850cb641e",
+      "gzip_bytes": 614,
+      "gzip_sha256": "dd2f668e7da485535bfa22b616e9e703ad910f274ce2e23fa51f205cc000bc9b"
+    },
+    "native-pose-cpu-008/closeout.json": {
+      "file": "native-pose-cpu-008/closeout.json.gz",
+      "bytes": 318,
+      "sha256": "f169cebd66458187fc9407c55b9f24c57063d6d9c1113208e1327b6bce14c50e",
+      "gzip_bytes": 239,
+      "gzip_sha256": "6ca028edc62604f25d5125bdcf74282055b2909b5500aadf470dee050f229c94"
+    },
+    "native-pose-cpu-008/run.py": {
+      "file": "native-pose-cpu-008/run.py.gz",
+      "bytes": 2854,
+      "sha256": "2e1c3935ce460878add40dc7788d10f3b5ac98bc22d6392ba07d058880b83368",
+      "gzip_bytes": 1403,
+      "gzip_sha256": "61803930755aae105afa2b05223cf337cdb457956b4b0188bfbeaff211ab81c2"
+    },
+    "native-pose-cpu-008/output/000.stderr.log": {
+      "file": "native-pose-cpu-008/output/000.stderr.log.gz",
+      "bytes": 917,
+      "sha256": "375ff4d3982a885b74aa27c6a8db3d886b00651fc6fd467a0112d89d3acb4fb6",
+      "gzip_bytes": 465,
+      "gzip_sha256": "aef9dc0424b4e49a37afc1d60cecf09899db12948e54783a890d653889aadbe9"
+    },
+    "native-pose-cpu-008/output/000.stdout.log": {
+      "file": "native-pose-cpu-008/output/000.stdout.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "native-pose-cpu-009/plan.json": {
+      "file": "native-pose-cpu-009/plan.json.gz",
+      "bytes": 1451,
+      "sha256": "e5a71a4c7d780af5c107c944714cf6159143da4b848b211cadb1c58517547a3c",
+      "gzip_bytes": 568,
+      "gzip_sha256": "f4fb7a4c377ac74e1a26bf130ff86cd6909df076492e0885a724e0446f0a845d"
+    },
+    "native-pose-cpu-009/result.json": {
+      "file": "native-pose-cpu-009/result.json.gz",
+      "bytes": 62901,
+      "sha256": "2dc50fcc7dc1a3b4ff6d38bfdc66b8c5f27d463d24445a2167574fad09b1b79a",
+      "gzip_bytes": 3463,
+      "gzip_sha256": "40f3eaa48d561813a9c7f6c713e8cb7aa9b0cef27e08e0b56af41eba6ed928e4"
+    },
+    "native-pose-cpu-009/closeout.json": {
+      "file": "native-pose-cpu-009/closeout.json.gz",
+      "bytes": 163,
+      "sha256": "cc27968ec35b208b8377d2e00a7052a576b6d84edac0d609e33d57f92740091b",
+      "gzip_bytes": 137,
+      "gzip_sha256": "5178baea6da5268c9bf070e2f730071c81d7af01dc6c26bd101aa60911876be9"
+    },
+    "native-pose-cpu-009/run.py": {
+      "file": "native-pose-cpu-009/run.py.gz",
+      "bytes": 2854,
+      "sha256": "2e1c3935ce460878add40dc7788d10f3b5ac98bc22d6392ba07d058880b83368",
+      "gzip_bytes": 1403,
+      "gzip_sha256": "61803930755aae105afa2b05223cf337cdb457956b4b0188bfbeaff211ab81c2"
+    },
+    "native-pose-cpu-009/output/000.stderr.log": {
+      "file": "native-pose-cpu-009/output/000.stderr.log.gz",
+      "bytes": 202,
+      "sha256": "a93837eeb05bf7bd89c0c8f002f6ad414503af6c8f8c3200853310e325ddc164",
+      "gzip_bytes": 171,
+      "gzip_sha256": "5a57a678b0c074d5be75591952ad676f58846e0f6aa97fc2663201a1922eb96c"
+    },
+    "native-pose-cpu-009/output/000.stdout.log": {
+      "file": "native-pose-cpu-009/output/000.stdout.log.gz",
+      "bytes": 339026,
+      "sha256": "031a7ae27673075725bb8a60ffbd4dcc3865520c5b0fd4139e5695c78311901e",
+      "gzip_bytes": 22888,
+      "gzip_sha256": "9ca388b65a28f912cd904f87596de49a6cb0477ee778f699627bb419c5258918"
+    },
+    "native-pose-cpu-009/output/001.stderr.log": {
+      "file": "native-pose-cpu-009/output/001.stderr.log.gz",
+      "bytes": 202,
+      "sha256": "8e9510044cb0c88d4f3323cdaa94a2ce290756eb58efa90ebe5b4502bc30e551",
+      "gzip_bytes": 168,
+      "gzip_sha256": "bf246a41a712618f0bf9dd01f0a5d467a1edfff3ee013f101baf3aa724f166ed"
+    },
+    "native-pose-cpu-009/output/001.stdout.log": {
+      "file": "native-pose-cpu-009/output/001.stdout.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "native-pose-gpu-001/plan.json": {
+      "file": "native-pose-gpu-001/plan.json.gz",
+      "bytes": 794,
+      "sha256": "1b5e4f89ac6f22d17c835f21bfb9bc73abb092214c51f05bba61af2d24b828d6",
+      "gzip_bytes": 490,
+      "gzip_sha256": "e336243d1a28d57ed2da3aef6f6a874f3866945245ec58caf282aedac179df13"
+    },
+    "native-pose-gpu-001/result.json": {
+      "file": "native-pose-gpu-001/result.json.gz",
+      "bytes": 1162,
+      "sha256": "199b1bd055c76443a6a44939f8ec3d8298e67662cead12a2434a879ea168804e",
+      "gzip_bytes": 483,
+      "gzip_sha256": "9c5e17bbca085867e7eaffe0ec757dad8ea4a8f30ea29a32065ab935628ed6f7"
+    },
+    "native-pose-gpu-001/closeout.json": {
+      "file": "native-pose-gpu-001/closeout.json.gz",
+      "bytes": 397,
+      "sha256": "a55a55b233f932097f2b8f07f88a60ad5b650507e13c4c1ca443cb6d87cc3cc3",
+      "gzip_bytes": 283,
+      "gzip_sha256": "866311c12b488f937ee8fa7dddee0029f59e741735f03f9bff20d3cb85a3c33e"
+    },
+    "native-pose-gpu-001/run.py": {
+      "file": "native-pose-gpu-001/run.py.gz",
+      "bytes": 2854,
+      "sha256": "2e1c3935ce460878add40dc7788d10f3b5ac98bc22d6392ba07d058880b83368",
+      "gzip_bytes": 1403,
+      "gzip_sha256": "61803930755aae105afa2b05223cf337cdb457956b4b0188bfbeaff211ab81c2"
+    },
+    "native-pose-gpu-001/output/000.stderr.log": {
+      "file": "native-pose-gpu-001/output/000.stderr.log.gz",
+      "bytes": 478,
+      "sha256": "a066a7ccc9a55715f8a35b824c61329d88a41b9d13e87ee2194226aada4a1e88",
+      "gzip_bytes": 316,
+      "gzip_sha256": "9077629dfe74b1cfcfd1c1596c29325aed0fcb89684cb22a59a69f78b43ef1e1"
+    },
+    "native-pose-gpu-001/output/000.stdout.log": {
+      "file": "native-pose-gpu-001/output/000.stdout.log.gz",
+      "bytes": 491,
+      "sha256": "1ce0ace9f51d2d6c34e53daa21f5d91fde609a985c3d9c107b629583f4aaf993",
+      "gzip_bytes": 267,
+      "gzip_sha256": "f03b502251d60632171353f2ae9355e63a78ac9e226f85ffc0870cf855ea74bb"
+    },
+    "native-pose-gpu-002/plan.json": {
+      "file": "native-pose-gpu-002/plan.json.gz",
+      "bytes": 883,
+      "sha256": "b58c39f36e104c60408cf24fb9c08aa4eb3c13ba5f8ffd2afdf5619c38d6502a",
+      "gzip_bytes": 552,
+      "gzip_sha256": "8c487a31e16ec75d9878da840fd61ebcbe95f4b0903dfaf78d6d7fdc76ef5960"
+    },
+    "native-pose-gpu-002/result.json": {
+      "file": "native-pose-gpu-002/result.json.gz",
+      "bytes": 1071,
+      "sha256": "dbe7115d572afc0455809df04ab214c93e28ce8aa1fa64ad0fd85bb92aebde15",
+      "gzip_bytes": 479,
+      "gzip_sha256": "7a95973c21d583c0edd4cc7cdc3a59de5aeb26be3c9fc1765e8919fe7266f508"
+    },
+    "native-pose-gpu-002/closeout.json": {
+      "file": "native-pose-gpu-002/closeout.json.gz",
+      "bytes": 151,
+      "sha256": "b7a034dc60d61998ecee734b139a8f8c1056a1da6199a069da8f5f232a9ee6af",
+      "gzip_bytes": 134,
+      "gzip_sha256": "3040ea25080cbf89844a0f24478f96025b402c903446c0642a7147507af561b3"
+    },
+    "native-pose-gpu-002/run.py": {
+      "file": "native-pose-gpu-002/run.py.gz",
+      "bytes": 3033,
+      "sha256": "15de40d3afafca30c240bbb313acbb33ab344352b94071c9e5d33c40eddf91b9",
+      "gzip_bytes": 1437,
+      "gzip_sha256": "758648455fab87ae6eea6aa4d5d496d856af3a3734c19156ae4580c5b318b3dd"
+    },
+    "native-pose-gpu-002/output/000.stderr.log": {
+      "file": "native-pose-gpu-002/output/000.stderr.log.gz",
+      "bytes": 248,
+      "sha256": "53dc830bb6d5480e9d83fc9b45a25aeb0692856d52a71dfbd70c4d449077a5cf",
+      "gzip_bytes": 214,
+      "gzip_sha256": "bfea56d1299b2b289dfb18e0e326927d021f532ae9197b1cd0efb1d5614f2412"
+    },
+    "native-pose-gpu-002/output/000.stdout.log": {
+      "file": "native-pose-gpu-002/output/000.stdout.log.gz",
+      "bytes": 379,
+      "sha256": "67f02f9278c1583c6f85714ed6df58c5e17845fad636df0ac34934f71bddcf9d",
+      "gzip_bytes": 238,
+      "gzip_sha256": "ffcbcd8ed45ec810e25d12902b2cde5970ff9eb175e3428ae9a4a294c1f3b35a"
+    },
+    "reviews/native-pose-host-5047aae1-independent-20261017.json": {
+      "file": "reviews/native-pose-host-5047aae1-independent-20261017.json.gz",
+      "bytes": 6377,
+      "sha256": "6a959a36a24f6b2387594cb54d71008fc0e3cfcb4c346b158b7868e9120c1635",
+      "gzip_bytes": 2716,
+      "gzip_sha256": "a372e3dff991e5845f854ad6dc9233fc4c95b9dadb595a8899fce0e2c061da20"
+    },
+    "reviews/native-pose-host-70946f4e-independent-20261017.json": {
+      "file": "reviews/native-pose-host-70946f4e-independent-20261017.json.gz",
+      "bytes": 1701,
+      "sha256": "f23dbb8e07ac4a48d21fe41984278381ccae3cdf3ef7fa5adc4152502e61ed2a",
+      "gzip_bytes": 973,
+      "gzip_sha256": "a9b4c4f6c9a51a9ed2dec3a2b1d33bc46a5cec324ad74d6880df9eaecd88f44d"
+    },
+    "reviews/native-pose-interpolation-e3b1d0ce-independent-20261017.json": {
+      "file": "reviews/native-pose-interpolation-e3b1d0ce-independent-20261017.json.gz",
+      "bytes": 4264,
+      "sha256": "553d7c521291d8dbc9e1f9b9bae8dc8c2c7caaf680803ce52f8b4673a049fec2",
+      "gzip_bytes": 2078,
+      "gzip_sha256": "b427766e255dd1c03a57d984fa41514118ff627fc25c216db7e162c8f39518f9"
+    },
+    "fast-checks/result.json": {
+      "file": "fast-checks/result.json.gz",
+      "bytes": 3720,
+      "sha256": "0bdf439376b1ce54b6b769e1d1529e256cd67a90da8808eec932ad304e18817d",
+      "gzip_bytes": 668,
+      "gzip_sha256": "75d03e9dd5235e96bee4f8eae1021d37f382dcd4cb10355c72c74f23e1ec4633"
+    },
+    "fast-checks/steps.json": {
+      "file": "fast-checks/steps.json.gz",
+      "bytes": 666,
+      "sha256": "4cceb96579d07dbce6fead5ce78b23c6861656d7fed071ff386c9b2c08843746",
+      "gzip_bytes": 226,
+      "gzip_sha256": "a87b350e8081f226d57375888fef72c98a461fa86fa42c0e3eb5dcd14d468531"
+    },
+    "fast-checks/closeout.json": {
+      "file": "fast-checks/closeout.json.gz",
+      "bytes": 223,
+      "sha256": "ed9cdfe2b517bf8d6774491d1a00922f8f74c533116eb1823ebc1081e80c86f8",
+      "gzip_bytes": 143,
+      "gzip_sha256": "e6f3eb3d5add4d22d03b36dfc04dc8c5984f044ec44a505bdf3ebd85c7201a8a"
+    },
+    "fast-checks/output/000.stderr.log": {
+      "file": "fast-checks/output/000.stderr.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/004.stdout.log": {
+      "file": "fast-checks/output/004.stdout.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/009.stdout.log": {
+      "file": "fast-checks/output/009.stdout.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/008.stderr.log": {
+      "file": "fast-checks/output/008.stderr.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/001.stdout.log": {
+      "file": "fast-checks/output/001.stdout.log.gz",
+      "bytes": 7740,
+      "sha256": "833778c087100fc9ac1089a1042ac778abae57ae5379f148e166f3199a66e90d",
+      "gzip_bytes": 2162,
+      "gzip_sha256": "3a53163de32c94d41a25bdb7aa908bd95376f0ab668601d49ac6c932e5021d13"
+    },
+    "fast-checks/output/005.stderr.log": {
+      "file": "fast-checks/output/005.stderr.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/002.stderr.log": {
+      "file": "fast-checks/output/002.stderr.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/006.stdout.log": {
+      "file": "fast-checks/output/006.stdout.log.gz",
+      "bytes": 1551,
+      "sha256": "7452a5581a6b5ecb252e956754ef42a4e379b87d8c7785fe3621564a633263b5",
+      "gzip_bytes": 570,
+      "gzip_sha256": "2169832604950eff4b4a7b2f26037c729717172c27028a1142761da97cfd72d0"
+    },
+    "fast-checks/output/003.stdout.log": {
+      "file": "fast-checks/output/003.stdout.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/007.stderr.log": {
+      "file": "fast-checks/output/007.stderr.log.gz",
+      "bytes": 3600,
+      "sha256": "b39acf51b68a8940ef8dac9f92e07443c04b70348e5950a735cea5972bde77ce",
+      "gzip_bytes": 135,
+      "gzip_sha256": "2793e08b0908b79cf496148dc56eb918be1d04e54a79209531ca88ca7ad442bc"
+    },
+    "fast-checks/output/009.stderr.log": {
+      "file": "fast-checks/output/009.stderr.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/004.stderr.log": {
+      "file": "fast-checks/output/004.stderr.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/000.stdout.log": {
+      "file": "fast-checks/output/000.stdout.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/005.stdout.log": {
+      "file": "fast-checks/output/005.stdout.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/001.stderr.log": {
+      "file": "fast-checks/output/001.stderr.log.gz",
+      "bytes": 111536,
+      "sha256": "a72a16df9b294a4c02182c73b894d42fa2cae03f3cd77f00efe156d2b825ef64",
+      "gzip_bytes": 18563,
+      "gzip_sha256": "ab133b1501f0c5c4314f040ecfdc5aa421062a84b2737ccb254a5b3bc1262546"
+    },
+    "fast-checks/output/008.stdout.log": {
+      "file": "fast-checks/output/008.stdout.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/006.stderr.log": {
+      "file": "fast-checks/output/006.stderr.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/002.stdout.log": {
+      "file": "fast-checks/output/002.stdout.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "fast-checks/output/007.stdout.log": {
+      "file": "fast-checks/output/007.stdout.log.gz",
+      "bytes": 608,
+      "sha256": "f40b49f4b13aa8a881dc63baff9cd3f855ecb619510caa2defdbc3a9230993d7",
+      "gzip_bytes": 403,
+      "gzip_sha256": "9db38ec445a57d2a4a33bdd2d2a885a6b8339048eead42969b2c2b4df85ce74d"
+    },
+    "fast-checks/output/003.stderr.log": {
+      "file": "fast-checks/output/003.stderr.log.gz",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gzip_bytes": 20,
+      "gzip_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64"
+    },
+    "reviews/native-pose-delta-331219f8-independent-20261018.json": {
+      "file": "reviews/native-pose-delta-331219f8-independent-20261018.json.gz",
+      "bytes": 3415,
+      "sha256": "61cef9621f2bffbdd53f92eb13a37456fb284f34d1e272302139c04a47cf26cd",
+      "gzip_bytes": 1587,
+      "gzip_sha256": "43913fd1967d5644f10c66f1de4d057e0e768ffaea2ce78a313f7c5723fcd818"
+    }
+  },
+  "ten_development_checks": "passed at2905f051; later changes evidence-only"
+}

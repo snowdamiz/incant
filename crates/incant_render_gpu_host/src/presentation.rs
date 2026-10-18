@@ -11,6 +11,22 @@ pub enum PresentationMode {
     AdmitOnly,
 }
 
+pub(crate) fn validate_policy<P: TargetProvider>(
+    live: &Live<P>,
+) -> Result<(), GpuHostError<P::Error>> {
+    #[cfg(feature = "native-metalfx")]
+    if live.metalfx.is_some() {
+        return Err(GpuHostError::BatchPolicy);
+    }
+    if live.resolution_config.is_some()
+        || live.motion_epoch.is_some()
+        || live.targets.motion_epoch().is_some()
+    {
+        return Err(GpuHostError::BatchPolicy);
+    }
+    Ok(())
+}
+
 impl<P: TargetProvider> GpuRenderConsumer<P> {
     pub(crate) fn admit_without_presenting(
         &self,
@@ -22,16 +38,7 @@ impl<P: TargetProvider> GpuRenderConsumer<P> {
     ) -> Result<(), GpuHostError<P::Error>> {
         // History-enabled policies need their own batch qualification. Refuse
         // rather than silently changing their presentation-based provenance.
-        #[cfg(feature = "native-metalfx")]
-        if live.metalfx.is_some() {
-            return Err(GpuHostError::BatchPolicy);
-        }
-        if live.resolution_config.is_some()
-            || live.motion_epoch.is_some()
-            || live.targets.motion_epoch().is_some()
-        {
-            return Err(GpuHostError::BatchPolicy);
-        }
+        validate_policy(live)?;
         let replacement = if kind == UpdateKind::Rebuilt {
             Some(
                 self.renderer

@@ -63,8 +63,42 @@ wrapper/child process-group absence are confirmed.
 
 The first failed PCM assertion, earlier lint failure and resource-preflight
 refusal remain retained alongside their corrections. They do not become passing
-attempts. The subsequent quiet comparison remains pending. No scheduling policy
-is adopted, and no performance, continuous-display or appearance gate passes.
+attempts. No scheduling policy is adopted, and no performance, continuous-display
+or appearance gate passes.
+
+## Quiet same-player comparison
+
+The director-approved follow-up completes all three 2,156-step arms without
+focus loss or zero gameplay timestamps. Every arm uses the exact shipping player,
+package, surface and hardware above, with other native builds and GPU work paused.
+All wrapper/player groups are absent after their actual terminal results.
+
+| Mode | Actual presentation interval p95 | Intervals over 20 ms |
+| --- | ---: | ---: |
+| Ordinary | 16.666750 ms | 9 |
+| Display-link wake only | 16.666750 ms | 24 |
+| Display-link plus latest batch | 25.000000 ms | 193 |
+
+The independent saved-data analysis includes every adjacent valid presentation,
+including committed-redraw/gameplay transitions: 2,155 intervals per arm. The
+initial drawable has a zero reported timestamp in each arm and breaks continuity.
+The latest-batch arm's strict original receipt remains **failed**: its capture
+omits wake metadata on 239 committed redraws, and its analyzer also requires the
+initial drawable to have a timestamp that both ordinary controls lack. This is an
+instrumentation failure, not evidence that those 239 pulses were actually reused.
+
+The negative cadence result does not depend on accepting that failed receipt.
+Of its 193 long intervals, 186 end at a two-tick gameplay batch; 153 follow a
+committed redraw. The source loop can wake just before a simulation deadline,
+redraw the old state, then execute two ticks on the next display callback.
+Acquisition in those 153 transitions has a 0.0224 ms median, while gameplay body
+work has a 6.062 ms median. These observations motivate testing independently
+scheduled rational simulation deadlines, with display callbacks only controlling
+draws. They do not prove that proposed implementation improves pacing. Unrelated
+clock epochs are never subtracted, and no role transitions are filtered away.
+
+[Quiet raw records and independent analysis](evidence/native-batched-quiet-20261018/manifest.json)
+retain the failed receipt unchanged alongside both passing controls.
 
 [Portable receipts, reviews and compressed raw window records](evidence/native-batched-presentation-20261017/manifest.json)
 retain original lengths and SHA-256 identities; every archive round-trip matches.

@@ -6,6 +6,8 @@ mod animation;
 mod binding;
 mod tilemap;
 pub use tilemap::TilemapAtlasBinding;
+#[cfg(feature = "experimental-pose-interpolation")]
+pub mod interpolation;
 mod model_refresh;
 mod texture_refresh;
 mod update;

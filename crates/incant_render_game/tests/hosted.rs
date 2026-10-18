@@ -2,6 +2,9 @@
 mod material_recording;
 #[path = "../../incant_assets_runtime/tests/support/mod.rs"]
 mod pcm;
+#[cfg(feature = "experimental-pose-interpolation")]
+#[path = "pose/hosted.rs"]
+mod pose_host;
 #[path = "../../incant_runtime/tests/support/scene_format.rs"]
 mod scene_format;
 use incant_audio_runtime::{ClipBinding, SourceState};

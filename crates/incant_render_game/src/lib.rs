@@ -1,6 +1,8 @@
 //! Mandatory native spatial hosting, composed with input/VM/physics/audio ticks.
 //! The default consumer exposes CPU input only; it does not submit a GPU frame.
 mod material_recording;
+#[cfg(feature = "experimental-pose-interpolation")]
+pub mod pose;
 mod recorded_ui;
 mod texture_refresh;
 mod ui;

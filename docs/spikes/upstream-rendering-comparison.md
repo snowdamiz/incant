@@ -23,8 +23,20 @@ record the exact upstream commits, paths and downloaded content hashes.
 
 The [batched-presentation diagnostic](native-batched-presentation.md) preserves
 the complete Core gameplay report and offline PCM. Its first ordinary native
-timing arm loses focus twice, so a clean three-arm comparison remains pending.
-The earlier display-link-only comparison was negative; it is not overwritten.
+timing arm loses focus twice and remains failed. The subsequent quiet three-arm
+comparison completes without focus loss: ordinary and display-link-only interval
+p95 are 16.667 ms, while latest-batch reaches 25 ms. Its strict capture receipt
+also fails on omitted idle-wake metadata and an initial-timestamp assumption;
+independent saved-data analysis retains that failure and includes all role
+transitions. Most long intervals end at two-tick batches. The next scheduling
+hypothesis gives simulation its own rational deadline instead of waiting for
+display callbacks. The earlier display-link-only comparison is not overwritten.
+
+The [local-pose interpolation adapter](native-pose-interpolation.md) now separately
+passes scoped CPU and actual Metal correctness tests. It retains fixed simulation
+states and interpolates a temporary render hierarchy, with explicit continuity
+resets and one fixed step of visual latency. Window integration, animated/UI
+support and matched shipping-performance qualification remain open.
 
 The separate, unmerged GPU color reconstruction candidate at `18aa76bb` uses
 current-sample reconstruction, filtered history, color-space variance clipping
@@ -41,13 +53,23 @@ mandatory current support and zero current color/alpha bounds erase history.
 Earlier full images still fail visual review; they are not excused by the edge
 metric.
 
-The next scoped hypothesis carries observed coverage for at most one eight-phase
+The subsequent scoped hypothesis carries observed coverage for at most one eight-phase
 cycle only when accepted and candidate camera, geometry, placement, materials and
 actual packed lights are unchanged. It must improve full-cycle alpha-area error,
 not merely leave nonzero pixels. Movement, removal, camera changes, occlusion,
 lighting changes, cuts and failed preparations must not preserve stale coverage.
-This conservative experiment does not solve moving sparse geometry. Its outcome
-is pending; a general moving solution requires additional visibility evidence.
+This conservative experiment fails its area-error criterion: it retains thin
+geometry but worsens slanted-edge error by 1.26%, introducing 148 changed pixels
+whose analytic geometry coverage is zero. Its raw input planes remain identical.
+The failed output remains retained and the candidate is not adopted.
+
+The next test isolates visibility instead of changing color reconstruction:
+output-resolution four-sample owner, depth and prior-motion observations, with
+hardware sample positions calibrated rather than assumed. CPU shader/oracle
+controls and strict lint pass; actual Metal results remain pending. Four samples
+still cannot guarantee arbitrary thin geometry, and the additional memory and
+render cost must be measured before considering integration. FSR2 thin-feature
+locks help identify possible history support but do not prove current visibility.
 
 No experiment changes ordinary exports or establishes the rendered Core 60 fps,
 ScriptTick 2 ms, appearance or phase gates. The source comparison replaces blind

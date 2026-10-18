@@ -7,6 +7,7 @@ publish.workspace = true
 
 [features]
 default = ["physics-deterministic"]
+experimental-pose-interpolation = []
 
 # Select one physics kernel for the entire process, including build/test hosts.
 physics-deterministic = [
@@ -22,6 +23,7 @@ physics-fast-simd8 = [
 
 [dependencies]
 incant_runtime.workspace = true
+incant_types.workspace = true
 incant_text.workspace = true
 incant_render_data.workspace = true
 incant_assets_runtime = { workspace = true, features = ["visual", "font"] }
@@ -31,7 +33,6 @@ incant_2d.workspace = true
 ulid.workspace = true
 
 [dev-dependencies]
-incant_types.workspace = true
 incant_doc.workspace = true
 png = "0.18"
 incant_assets = { path = "../incant_assets", default-features = false }
