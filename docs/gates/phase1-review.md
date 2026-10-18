@@ -31,11 +31,20 @@ scheduler batch. The ordinary policy stays unchanged.
 The subsequent [upstream comparison](../spikes/upstream-rendering-comparison.md)
 uses pinned Godot, Bevy, Filament and FSR2 implementations to define new experiments.
 The [batched presentation route](../spikes/native-batched-presentation.md) has
-local CPU/Metal correctness and fresh shipping gameplay/audio parity; its first
-ordinary native arm is focus-interrupted, so the matched timing result remains
-open. GPU color reconstruction improves the small analytic edge metric but still
-loses thin geometry and has no full visual acceptance. These results narrow the
-remaining problems without changing any exit requirement.
+local CPU/Metal correctness and fresh shipping gameplay/audio parity. The later
+quiet three-arm comparison completes without focus loss but rejects latest-batch
+timing: presented-interval p95 is 25 ms versus ordinary's 16.667 ms. Its strict
+selected-arm capture receipt also fails because committed-redraw wake metadata
+is incomplete; independent analysis preserves that failure and includes all
+display roles. A separate simulation-deadline diagnostic has CPU qualification,
+with shipping/window measurements pending. The default-off
+[pose-interpolation adapter and composed host](../spikes/native-pose-interpolation.md)
+are merged through PR403 with CPU and actual Metal correctness; they are not yet
+integrated into the native window. GPU color reconstruction improves the small
+analytic edge metric but still loses thin geometry and has no full visual
+acceptance. Its output-resolution visibility probe now isolates 48 inconsistent
+owner/depth samples for further diagnosis. These results narrow the remaining
+problems without changing any exit requirement.
 
 | Exit requirement | Recorded evidence | Remaining qualification |
 | --- | --- | --- |
@@ -112,11 +121,14 @@ no navigation optimization or new shipping performance result is adopted.
 
 A separate [QuickJS C profile-guided compilation experiment](../spikes/quickjs-c-pgo-feasibility.md)
 now passes standalone behavior and strict invalid-profile refusal checks. It
-establishes compiler feasibility only. The first ordinary Core shipping build completed, then its verifier rejected
-rustc's environment wrapper. That attempt remains failed; a strict parser
-correction now passes saved-data replay and portable controls. Core training,
-matched shipping measurements and gameplay/audio parity remain unperformed; the 2 ms
-requirement is still unmet and ordinary builds are unchanged.
+establishes compiler feasibility only. Subsequent Core shipping attempts preserve
+their compilation and verifier failures. The latest completes ordinary/generation
+builds and proves the bundled compiler-runtime archive bytes, then fails an
+incorrect post-strip requirement for local symbol names. Saved binary inspection
+shows the profiling sections and executable code are unchanged; the audit is
+being corrected without relaxing ordinary/use absence checks. Core training,
+matched shipping measurements and gameplay/audio parity remain unperformed; the
+2 ms requirement is still unmet and ordinary builds are unchanged.
 
 The real-mouse capture check is pending the director's availability and is not
 blocking these lanes. Broader editor, agent, content, export, multiplayer, game

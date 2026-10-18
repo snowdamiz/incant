@@ -2,14 +2,14 @@
 
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) is promoted: all
 23 required contexts and eight exact-head workflows passed on the main391 tree,
-and release `73fed959` has the identical tested tree. Later main393–402 changes
+and release `73fed959` has the identical tested tree. Later main393–403 changes
 remain outside that release baseline. Checkpoint53 failed the Wasm timer-fixture
 lookup on all three desktop platforms; its other seven workflows passed.
 The [narrow correction](docs/spikes/ci-timer-fixture-layout.md) is merged through
 PR400 after review and fast checks, with actual local static/development reload
 checks in CI's directory layout. Checkpoint54 now reuses PR399, frozen at candidate
 `5dbac494` with exactly main401's tree; six of eight workflows have passed,
-with general and Wasm validation still running. Main402 is outside this candidate.
+with general and Wasm validation still running. Main402–403 are outside this candidate.
 Retained failed experiments remain failed. No distribution or phase gate is approved.
 
 The current phase remains **Phase 1: Core engine**. The
@@ -23,7 +23,7 @@ incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) contains the tested
 main391 tree after all 23 required contexts and eight candidate workflows passed.
-Later main393–402 changes remain outside that release baseline. Rendering quality and full rendered-game
+Later main393–403 changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -149,9 +149,12 @@ However, thin geometry still disappears on six of eight jitter phases and the
 full images fail visual review. The bounded static-history coverage experiment
 also fails: thin coverage survives, but slanted-edge area error worsens by 1.26%
 with 148 halo pixels outside analytic geometry. An output-resolution four-sample
-visibility-only experiment now passes shader/oracle CPU controls and strict lint;
-actual Metal execution is pending. Moving sparse geometry and full appearance/cost
-qualification remain open.
+visibility-only experiment passes shader/oracle CPU controls and strict lint,
+but its actual Metal run fails at 48 occluded samples: depth and motion describe
+the nearer occluder while the owner ID describes the hidden strip. The saved
+records do not establish a driver defect. A bounded draw-order/sample-frequency
+discriminator is being prepared without changing the geometric oracle. Moving
+sparse geometry and full appearance/cost qualification remain open.
 
 The Godot-informed [batched native presentation diagnostic](docs/spikes/native-batched-presentation.md)
 is merged through PR402. It passes 196 CPU controls, strict lints
@@ -166,15 +169,18 @@ display-link-only presentation p95 are 16.667 ms; latest-batch is 25 ms, with
 strict capture receipt because committed-redraw wake metadata is omitted and
 the initial timestamp is treated inconsistently. Independent saved-data analysis
 keeps that failure and includes all display roles. A separate default-off
-simulation-deadline implementation is in source review. Ordinary exports retain
+simulation-deadline implementation passes source review, 202 selected and 151
+ordinary CPU controls, and both strict lints after a mechanical lint correction.
+Its shipping/native-window qualification is pending. Ordinary exports retain
 their prior behavior.
 
 The [native pose-interpolation adapter and composed host](docs/spikes/native-pose-interpolation.md)
-are locally qualified with 111 CPU controls, strict lints and three actual Metal
+are merged through PR403 after independent review and exact-head development
+checks, with 111 CPU controls, strict lints and three actual Metal
 controls. Endpoint/midpoint pixels match independent reference renders;
 gameplay, input, complete PCM and haptics remain unchanged. Continuity resets,
 bounded history and terminal failure handling are explicit. This default-off
-static-mesh/camera/light scope is not yet merged; native-window integration,
+static-mesh/camera/light scope retains its explicit one-step visual latency; native-window integration,
 animated/UI support and shipping display/latency measurements remain open.
 
 Native Wasm haptics is merged through PR393 after review and successful fast
@@ -223,8 +229,12 @@ remain failed. The next fresh producer completes ordinary/generation builds but
 its verifier wrongly requires the original compiler-runtime archive path: rustc
 has bundled the exact pinned bytes into its dependency archive. The bounded
 archive parser correction passes 35 controls and saved-output replay without
-weakening byte/role/link requirements. The corrected fresh ordinary/generate/use
-producer is running; no Core training or performance result is claimed yet.
+weakening byte/role/link requirements. The next producer passes ordinary and
+generation compilation and the archive checks, then its post-strip verifier
+incorrectly requires local instrumentation symbol names removed by `strip -x`.
+Saved Mach-O comparison confirms the instrumentation sections and executable
+code remain intact. The failure is retained; stage-specific audit correction is
+in progress. No Core training or performance result is claimed yet.
 The next useful trigger is a newly qualified
 ordinary/generate/use producer with exact gameplay/audio parity, then
 a separately scheduled matched timing run. Last reassessment: 2026-10-17.
