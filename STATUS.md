@@ -1,8 +1,8 @@
 # Implementation status
 
-[Checkpoint55 (PR408)](docs/spikes/release-checkpoint-55.md) is promoted after all
-23 required contexts and eight frozen-head workflows succeeded. Release `2d96f461`
-has exactly the tested main407 (`c504668e`) tree. Main409 and later changes remain
+[Checkpoint58 (PR418)](docs/spikes/release-checkpoint-58.md) is promoted after all
+23 required contexts and eight frozen-head workflows succeeded. Release `ae58b0bb`
+has exactly the tested main425 (`da7b7414`) tree. Main426 and later changes remain
 outside this baseline; no distribution or phase gate is approved.
 
 [Release checkpoint54](docs/spikes/release-checkpoint-54.md) is promoted: all
@@ -25,8 +25,8 @@ now also verifies winning HUD pixels, Arabic health direction, CJK glyphs and
 normal/narrow pseudo layouts in retained offscreen Metal frames. Earlier
 incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
-[Release checkpoint55](docs/spikes/release-checkpoint-55.md) contains the tested
-main407 tree after all 23 required contexts and eight candidate workflows passed.
+[Release checkpoint58](docs/spikes/release-checkpoint-58.md) contains the tested
+main425 tree after all 23 required contexts and eight candidate workflows passed.
 Later main changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
@@ -122,10 +122,17 @@ independent source and evidence review. All ten integrated development checks no
 pass, including 1,041 UI tests. The first run's five process-lifecycle failures
 remain retained; the reviewed test-only startup synchronization passes 48 focused
 controls while preserving cleanup/output assertions and production deadlines.
-First-package directory creation and registered-ID tool adapters are entering
-combined qualification. Candidate installation has passed source review after
+The source foundation is merged through PR427. First-package directory creation
+and registered-ID tool adapters now pass combined CPU qualification: 129 parent
+controls, strict lint and actual schema/SDK generation. Four preexisting manual
+diagnostics remain ignored; 21 crash-child outcomes are asserted separately by
+their recovery parent. All ten integrated development checks pass, including
+1,041 UI tests. This locally verified slice is awaiting main integration.
+The next milestone is the complete create/edit/build/install/rebuild/reopen
+workflow through the real compiler; its separate bounded CPU run is underway.
+Candidate installation has passed source review after
 fixing a final sibling-source check gap and the derived-output conflict that would
-prevent rebuilding after installation; its native execution remains pending.
+prevent rebuilding after installation; no native installation result is yet claimed.
 No compiler shell or arbitrary path authority is exposed to the agent.
 
 Checkpoint57 tested candidate `53ec74d2`, with exactly main421's tree
@@ -153,10 +160,10 @@ while the original timeout's underlying cause remains unresolved.
 All checkpoint57 workflows have now finished; the Windows desktop
 failure prevents promotion, while the other seven workflows passed. The
 failed candidate remains historical. PR425 is merged after its local controls
-and exact-head development checks passed. Checkpoint58 now freezes candidate
-`53820888` with exactly main425 (`da7b7414`) tree `86013476`; all eight comprehensive
-workflows have started. Release remains at the previously qualified checkpoint55
-until every required exact-head context succeeds. The separate corrected Windows
+and exact-head development checks passed. Checkpoint58 subsequently passed all
+23 required contexts and eight comprehensive workflows on frozen candidate
+`53820888`, exactly main425 (`da7b7414`) tree `86013476`. Release `ae58b0bb`
+now has that identical tested tree. The separate corrected Windows
 diagnostic succeeded on exact source `70a54db1`; it does not replace the complete
 release checks or establish a general runtime improvement.
 Checkpoint56 failed its Windows credential
@@ -174,8 +181,8 @@ in the empty embedded Wasm catalog on Linux, macOS and Windows. The
 local boundary controls and strict static-conformance lint, including the actual
 zero-byte generated catalog. Both original failure classes remain recorded;
 the failed checkpoint57 remains historical. These corrections are now included
-in frozen checkpoint58; release stays held until every required check passes,
-while subsequent development continues on main.
+in promoted checkpoint58, which passed every required check. Subsequent
+module-authoring development continues on main outside that tested baseline.
 
 
 The [process-cleanup correction](docs/spikes/native-process-cleanup.md) preserves

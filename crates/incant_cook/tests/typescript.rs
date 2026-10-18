@@ -32,6 +32,7 @@ fn interrupted_source_transaction_refuses_before_opening_the_source_graph() {
     let operation = new_id();
     let edit = incant_source::SourceEdit {
         kind: incant_source::SourceKind::TypeScript,
+        created_tree: None,
         script_id: source,
         path: "main.ts".into(),
         before: Some(before.into()),

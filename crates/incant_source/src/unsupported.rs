@@ -14,6 +14,12 @@ impl Dir {
     pub fn duplicate(&self) -> io::Result<Self> {
         unavailable()
     }
+    pub fn identity(&self) -> io::Result<[u64; 2]> {
+        unavailable()
+    }
+    pub fn only_child(&self, _: &str) -> io::Result<bool> {
+        unavailable()
+    }
     pub fn child(&self, _: &str) -> io::Result<Self> {
         unavailable()
     }

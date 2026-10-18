@@ -1,9 +1,9 @@
 # Registered Rust source authoring
 
 This source foundation adds stable registered Rust entry IDs and shared atomic
-source editing. It is not the complete `module.read/write/build` agent workflow:
-the dedicated tool adapters, source-ID-to-build resolver, checked candidate
-installation and transactional first-package creation remain follow-on work.
+source editing. The additive registered-ID tool adapters and source-to-build
+resolver are described in [registered-module-tools.md](registered-module-tools.md);
+checked candidate installation remains separate work.
 No new compiler, shell, runtime authoring dependency or module selection is added.
 The foundation is CPU-qualified as described below. That qualification does not
 complete the eventual source-author/build/apply workflow.
@@ -35,45 +35,81 @@ TypeScript and is omitted for TypeScript records. Rust records explicitly use
 stable source ID. Old journal records do not gain a required field or a new
 version. Old binaries fail closed on new Rust records.
 
-The initial scope edits files in an **existing nested package directory**. Paths
+The first-package implementation also creates the first nested package
+through the same registration and source-write transaction. Paths
 must be project-relative, ASCII, at most 1,024 bytes, at most eight components,
 and at most 128 bytes per component. Components begin with an ASCII letter,
 digit or underscore and otherwise contain letters, digits, `_`, `-` or `.`.
 Rust entries end in lowercase `.rs`; hidden names, traversal, Windows device and
 trailing-dot/space aliases, `build.rs`, symlinks and hardlinked source files are
 refused. Root-level `main.rs` is explicitly refused: the current worker package
-snapshot must not include unrelated project-root JSON/assets. A future adapter
-can resolve `movement/main.rs` as package `movement`, entry `main.rs`, or
+snapshot must not include unrelated project-root JSON/assets. The registered build
+adapter resolves `movement/main.rs` as package `movement`, entry `main.rs`, or
 `movement/src/lib.rs` as package `movement`, entry `src/lib.rs`, without accepting
 the project root. The package still has to satisfy the worker's complete source
 snapshot and Rust-only recipe; registering a path does not certify that package.
 
 Reads and writes admit at most 64 KiB of Rust UTF-8 bytes. TypeScript keeps its
-existing 256 KiB bound and path admission. Missing parent directories are refused
-and never created by `SourceStore`; no recursive deletion or move is added.
+existing 256 KiB bound and path admission, including missing-parent refusal.
+Missing Rust parents are observed as `SourceVersion::Missing`; a checked Rust
+write can publish their bounded, privately staged subtree. No recursive deletion
+is added.
 Removing registration or changing its path leaves previous bytes intact. Empty
 text is an authored source value, not file deletion. External edits cause stale
 write/Undo/Redo refusal rather than being overwritten.
 
-Transactional creation of the first package remains required follow-on work,
-including ownership and reversible cleanup of directories; it is not permanently
-excluded from the intended workflow. The current foundation can create a new
-source file only beneath an already admitted existing package directory.
+The directory transaction stages at most seven missing directories and one
+64 KiB source in `.incant-source-transactions`. Existing ancestors are never
+owned or removed. An optional `SourceEdit.created_tree` records a fresh token,
+the first missing relative component and exact directory identities; a separate
+create-only receipt binds those identities to this root/journal. The field is
+omitted for existing-parent edits and all TypeScript edits, preserving historical
+wire bytes. No tool argument can supply an ownership record.
+
+After durable Prepare, one no-replace rename publishes the complete subtree.
+Unix uses the existing descriptor-relative `renameat_with(NOREPLACE)`; Windows
+uses the existing pinned no-reparse parents and `MoveFileExW` without replacement
+or cross-volume copy. Unsupported operations fail rather than falling back to a
+check-then-overwrite rename. The same primitive moves the subtree into retained
+transaction storage on Undo and back on Redo. Nothing recursively deletes an
+owned tree, including after an abandoned redo history.
+
+Before and after movement, bounded inspection requires each recorded directory
+identity, exactly one expected child per directory and exact regular-file bytes.
+Foreign entries, replaced directories, symlinks, hardlinks or destination races
+refuse. An ambiguous race after movement preserves the displaced subtree and
+pending marker for recovery; foreign content may then reside in retained state
+and is never deleted automatically. Partial private stages before a durable
+marker remain inert. Reopen validates the ownership receipt alongside the existing
+journal before rollback or repeated Undo/Redo. This is not a new guarantee against
+arbitrary external writers racing after the final observation.
+
+Ownership binds the canonical journal path and exact root/directory identities.
+Copying or moving a project does not transfer first-package Undo/Redo authority;
+these operations fail closed rather than silently rebinding receipts. Same-path
+reopen remains supported. The focused move/reopen/refusal/return control passed
+in the combined CPU qualification.
 
 Compatibility review covers serde/CRDT materialization, global ID and path alias
 validation, save/reopen, legacy journal decoding and generic destructive `doc_patch`
 approval. The UI's existing approval-description renderer identifies the new
 operations without implying build authority or file deletion. Fresh schemas and
 TypeScript declarations were generated through the ordinary headless schema
-export and SDK generator, then checked against the published files. The four
-existing package-based module-build tool descriptors remain byte-equivalent.
+export and SDK generator, then checked against the published files. The foundation retained the four existing package-based module-build tool
+descriptors byte-equivalently. The separately qualified registered-tool successor
+adds its descriptors and two documented legacy-description clarifications.
 
 Authored controls cover legacy canonical/wire bytes, typed schema admission,
 registration/write order, exact provenance, external CAS conflicts, mixed-write
 refusal with no published prefix, source bounds/links, metadata-only removal,
 save/reopen and real subprocess recovery at every existing durable boundary for
-apply, Undo and Redo. The subprocess fixtures are self-contained and need no
-external project, compiler, device, window or account.
+apply, Undo and Redo, including the new first-package creation controls. Additional
+controls cover an empty saved project, preexisting ancestors, no-replace collisions,
+same-content directory replacement, foreign additions and ownership metadata
+tampering. The subprocess fixtures are self-contained and need no external
+project, compiler, device, window or account. The foundation qualification below
+retains its original source scope; the first-package and tool-adapter qualification
+is separate and recorded below.
 
 ## CPU qualification, 2026-10-18
 
@@ -160,3 +196,15 @@ The [integration record](evidence/registered-rust-integration.json) binds exact
 commands, source, terminal result and retained raw streams. Documentation added
 after this producer does not change its tested source identity. These development
 checks do not establish rendered performance or a phase gate.
+
+## First-package and registered-tool qualification
+
+Combined source `1152e5e6` passed 129 selected parent controls, strict all-target
+lint and fresh headless/schema/SDK checks. This includes all eight source-store
+subtree controls, five package integrations (including relocation refusal and
+package Undo/Redo), registered tool first-package creation and the recovery
+parent's assertions for 21 actual crash children. Four unrelated process
+diagnostics remain ignored. See the [qualification and limits](registered-module-tools.md)
+and [portable raw receipts](evidence/registered-module-tools/manifest.json).
+The source foundation's earlier producer and failures remain distinct; this
+success does not replace them or claim a runtime, rendering or performance gate.
