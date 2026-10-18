@@ -1,0 +1,98 @@
+   Compiling incant_ui v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_ui)
+    Finished `ci` profile [optimized] target(s) in 4.78s
+     Running unittests src/lib.rs (/private/tmp/incant-wasm-persistent-20261017-target/ci/deps/incant_ui-80599e25b1f65787)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/checkpoint.rs (/private/tmp/incant-wasm-persistent-20261017-target/ci/deps/checkpoint-069f0ac1e347b7fd)
+
+running 14 tests
+test active_composition_is_refused_without_implicit_commit_or_cancel ... ok
+test changed_membership_parent_or_kind_is_refused ... ok
+test checksummed_malformed_fields_are_refused_before_publication ... ok
+test empty_owner_and_button_focus_round_trip_without_inventing_text ... ok
+test encoding_is_canonical_across_storage_order_native_incarnation_and_viewport ... ok
+test every_truncation_and_single_byte_corruption_is_refused ... ok
+test failed_layout_restore_preserves_existing_owner_and_its_receipts ... ok
+test invalid_grapheme_selection_is_refused_even_at_utf8_scalar_boundary ... ok
+test notifications_pointer_capture_and_physical_held_state_are_not_replayed ... ok
+test old_text_pointer_and_prepared_layout_receipts_cannot_address_loaded_owner ... ok
+test round_trip_preserves_committed_multilingual_text_selection_and_focus ... ok
+test saved_focus_must_still_be_present_enabled_and_visible ... ok
+test unaccepted_candidate_does_not_leak_into_snapshot ... ok
+test combined_restored_edit_and_authored_label_text_is_bounded ... ok
+
+test result: ok. 14 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/focus.rs (/private/tmp/incant-wasm-persistent-20261017-target/ci/deps/focus-6acf67665db2e990)
+
+running 8 tests
+test composition_commit_selection_and_rejected_batch_are_transactional ... ok
+test failed_measure_and_dropped_candidate_do_not_publish_text_or_actions ... ok
+test logical_keyboard_and_directional_gamepad_focus_activate_once ... ok
+test malformed_stale_packet_is_refused_before_any_focus_change ... ok
+test pointer_focus_never_submits_text_but_explicit_activation_does ... ok
+test pointer_release_needs_same_capture_and_current_displayed_layout ... ok
+test stale_ime_never_cancels_global_focus_loss_or_targets_new_owner ... ok
+test full_navigation_packet_uses_canonical_order_with_shuffled_widget_storage ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/fonts.rs (/private/tmp/incant-wasm-persistent-20261017-target/ci/deps/fonts-af2077c6926fd636)
+
+running 7 tests
+test actual_packaged_multilingual_fonts_measure_layout_and_composed_buffer ... ok
+test missing_invalid_or_duplicate_packaged_fonts_refuse_before_layout ... ok
+test only_labels_get_prepared_halos_and_the_rule_is_part_of_the_paint ... ok
+test combined_glyph_limit_refuses_before_candidate_atlas_rasterization ... ok
+test rebind::compatible_rebind_retains_shaper_and_matches_fresh_multilingual_layouts ... ok
+test rebind::new_font_chain_is_a_candidate_and_refusal_preserves_accepted_shaper ... ok
+test retained_paint_refuses_exhaustion_and_never_rebinds_old_atlas_handles ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/layout.rs (/private/tmp/incant-wasm-persistent-20261017-target/ci/deps/layout-ff911f39c2433631)
+
+running 5 tests
+test actual_flex_growth_padding_gap_and_viewport_resize ... ok
+test failed_measure_or_bad_viewport_preserves_accepted_layout ... ok
+test final_hierarchy_validation_refuses_removed_reparented_or_cyclic_links ... ok
+test stale_candidate_and_wrong_owner_never_replace_live_layout ... ok
+test wrap_order_and_clipping_are_independent_of_entity_insertion ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/reconcile.rs (/private/tmp/incant-wasm-persistent-20261017-target/ci/deps/reconcile-6ba337bf29aaa11e)
+
+running 3 tests
+test rejected_final_tree_or_stale_candidate_cannot_publish_and_blur_revokes_pointer_delivery ... ok
+test replacement_and_explicit_content_change_reset_values_and_focus_safely ... ok
+test same_tick_edits_survive_reparent_but_old_composition_and_pointer_receipts_expire ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/routing.rs (/private/tmp/incant-wasm-persistent-20261017-target/ci/deps/routing-c3d5b97f74f844b4)
+
+running 8 tests
+test gamepad_navigation_threshold_and_activation_are_ui_only_and_validate_devices ... ok
+test dropped_stale_and_over_limit_candidates_do_not_publish_text_or_raw_edges ... ok
+test gamepad_ownership_clears_on_disconnect_and_global_blur_including_analog_values ... ok
+test gamepad_transfer_neutralizes_gameplay_and_survives_ui_removal_without_false_press ... ok
+test keyboard_focus_captures_pairs_releases_prior_gameplay_and_never_invents_text ... ok
+test noninteractive_hud_never_acquires_gamepad_or_tab_controls ... ok
+test stale_receipts_do_not_swallow_blur_and_bad_packets_preserve_router_state ... ok
+test unchanged_maximum_hud_reuses_layout_and_accepts_full_physical_burst_without_measurement ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/visual.rs (/private/tmp/incant-wasm-persistent-20261017-target/ci/deps/visual-eb9d45663fdf8bce)
+
+running 3 tests
+test pointer_capture_is_visible_until_release_and_stale_candidates_refuse ... ok
+test candidate_visual_state_is_the_prepared_frame_not_the_accepted_one ... ok
+test structural_replacement_exposes_its_own_widgets ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

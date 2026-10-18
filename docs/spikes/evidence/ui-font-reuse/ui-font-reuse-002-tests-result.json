@@ -1,0 +1,57 @@
+{
+  "commands": [
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "--config",
+        "profile.ci.package.incant_render.opt-level=2",
+        "--config",
+        "profile.ci.package.sha2.opt-level=3",
+        "test",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_ui",
+        "--tests"
+      ],
+      "exit": 0
+    },
+    {
+      "argv": [
+        "/Users/andreyyurlov/.rustup/toolchains/1.99.0-aarch64-apple-darwin/bin/cargo",
+        "--config",
+        "profile.ci.package.incant_render.opt-level=2",
+        "--config",
+        "profile.ci.package.sha2.opt-level=3",
+        "test",
+        "--profile",
+        "ci",
+        "--locked",
+        "--offline",
+        "-j2",
+        "-p",
+        "incant_render_game",
+        "--test",
+        "ui"
+      ],
+      "exit": 0
+    }
+  ],
+  "error": null,
+  "seconds": 71.58175270899665,
+  "owned": [
+    {
+      "pid": 13163,
+      "pid_absent": true,
+      "group_absent": true
+    },
+    {
+      "pid": 13242,
+      "pid_absent": true,
+      "group_absent": true
+    }
+  ]
+}

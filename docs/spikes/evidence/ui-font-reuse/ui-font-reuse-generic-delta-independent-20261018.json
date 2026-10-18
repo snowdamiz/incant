@@ -1,0 +1,45 @@
+{
+  "schema": 1,
+  "reviewed_at_utc": "2026-10-18T02:42:10.957784+00:00",
+  "reviewer": "astra/runtime_review",
+  "prior_review": {
+    "path": "/Users/andreyyurlov/.codex/incant-reviews/ui-font-reuse-independent-source-20261018.json",
+    "bytes": 3854,
+    "sha256": "70938b9ea7b15823da4ded85302e12734642bcb404f9caee729415229221df73"
+  },
+  "head": "0063b97c03045e285e128fed76d72f82bca4095d",
+  "files": [
+    {
+      "path": "crates/incant_ui/src/fonts.rs",
+      "bytes": 8799,
+      "sha256": "13eb6f37559f5984fca8f3c88240ff02e88cf27861ebc2deb90b6d6ce062dff8",
+      "prior_sha256": "13eb6f37559f5984fca8f3c88240ff02e88cf27861ebc2deb90b6d6ce062dff8"
+    },
+    {
+      "path": "crates/incant_ui/tests/fonts.rs",
+      "bytes": 9994,
+      "sha256": "46b544ececea43137a8f867da43f7cf4bf7b6cbb1f0bd6cd9dfcb18d7929b4e7",
+      "prior_sha256": "46b544ececea43137a8f867da43f7cf4bf7b6cbb1f0bd6cd9dfcb18d7929b4e7"
+    },
+    {
+      "path": "crates/incant_ui/tests/fonts/rebind.rs",
+      "bytes": 3191,
+      "sha256": "c2429069c427ae5720eb2c3b64582a50db678ded1fe77c63060b903a5d686145",
+      "prior_sha256": "b48b11b23ff252ec4291f8b7db403cdd84fdebc63d215b4c0b10ad70711f18b6"
+    },
+    {
+      "path": "crates/incant_render_game/src/ui.rs",
+      "bytes": 11045,
+      "sha256": "16d685686e90389c0f9e4d7ee842550e9525860d35d098664712274b03eacb06",
+      "prior_sha256": "ddfd4f33903eb98fec2a47a6b544a707f93250c7ccc1483b3af6660b1ece267c"
+    }
+  ],
+  "findings": [],
+  "assessment": [
+    "Test helper now returns UiText<StableId>, matching Widget.node.kind text ID type instead of default authoring Id; no fixture content or observable assertion changed.",
+    "Other test edits only wrap method-call expressions. Render-game State::Refresh reconciliation call is formatted across different lines with the same self.runtime, pending/widgets/candidate_fonts inputs and propagation.",
+    "Production UiFonts implementation and repaired test module declaration remain byte-identical to the prior reviewed receipt.",
+    "Prior no-blocker production review stands. No source edit, native build, tests, GPU or window was executed by this reviewer. STATUS excluded."
+  ],
+  "recommendation": "No blocking delta finding; CPU compilation/tests/lint remain owned by root and are not inferred from this source review."
+}

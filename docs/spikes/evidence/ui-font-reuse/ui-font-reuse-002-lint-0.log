@@ -1,0 +1,39 @@
+    Checking ulid v1.2.1
+    Checking rustybuzz v0.14.1
+    Checking incant_2d v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_2d)
+    Checking incant_nav v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_nav)
+    Checking cosmic-text v0.14.2 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/cosmic-text)
+    Checking incant_localization v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_localization)
+    Checking incant_text v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_text)
+    Checking parry3d v0.31.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/parry3d)
+    Checking parry2d v0.31.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/parry2d)
+    Checking rapier2d v0.36.0 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/rapier2d)
+    Checking rapier3d v0.36.0 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/rapier3d)
+    Checking incant_physics_2d_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_physics_2d_runtime)
+    Checking symphonia-core v0.6.1
+    Checking incant_physics_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_physics_runtime)
+    Checking incant_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_runtime)
+    Checking incant_assets_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_assets_runtime)
+    Checking symphonia-metadata v0.6.1
+    Checking rquickjs-sys v0.14.0 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/rquickjs-sys)
+    Checking kira v0.12.5 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/kira)
+    Checking incant_ui v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_ui)
+    Checking rquickjs-core v0.14.0 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/third_party/rquickjs-core)
+    Checking symphonia-common v0.6.1
+   Compiling incant_script v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_script)
+   Compiling incant_render_data v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render_data)
+    Checking rquickjs v0.14.0
+    Checking incant_audio_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_audio_runtime)
+    Checking exr v1.74.2
+    Checking symphonia-format-riff v0.6.1
+    Checking symphonia-codec-vorbis v0.6.1
+    Checking symphonia-format-ogg v0.6.1
+    Checking symphonia-codec-pcm v0.6.1
+    Checking incant_doc v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_doc)
+    Checking symphonia v0.6.0
+    Checking image v0.25.10
+    Checking incant_render_native v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render_native)
+    Checking incant_game_runtime v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_game_runtime)
+    Checking incant_assets v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_assets)
+    Checking incant_render_game v0.0.1 (/Users/andreyyurlov/.codex/worktrees/physics-failure-isolation/incant/crates/incant_render_game)
+    Finished `ci` profile [optimized] target(s) in 8.75s
