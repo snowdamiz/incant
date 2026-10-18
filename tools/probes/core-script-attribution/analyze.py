@@ -15,8 +15,8 @@ def vector(value, size, name, maximum=2**64 - 1):
     return value
 
 
-def analyze(report, expected_sources, navigation=False, budget=False):
-    require(not (navigation and budget), 'Combined private diagnostic is not admitted')
+def analyze(report, expected_sources, navigation=False, budget=False, queries=False):
+    require(sum((navigation, budget, queries)) <= 1, 'Combined private diagnostic is not admitted')
     p = report['profile']
     require(type(p['version']) is int and p['version'] == 4, 'Only diagnostic v4 is admitted')
     require(report['tick'] == TICKS and p['completed_frames'] == TICKS and p['failed_frames'] == 0
@@ -33,15 +33,17 @@ def analyze(report, expected_sources, navigation=False, budget=False):
                        ('allocation_count', 'sampled_peak_allocation_count')]:
         require(integer(heap[peak], peak) >= integer(heap['latest'][name], name), 'Invalid heap peak')
     d = p['script_phase_diagnostic']
-    require(integer(d['schema'], 'diagnostic schema') == (3 if budget else 2 if navigation else 1) and d['diagnostic_only'] is True
+    require(integer(d['schema'], 'diagnostic schema') == (5 if queries else 3 if budget else 2 if navigation else 1) and d['diagnostic_only'] is True
             and d['eligible_for_performance_gate'] is False and d['complete'] is True,
             'Incomplete or non-diagnostic attribution')
-    require(d['max_rows'] == 4096 and 0 < integer(d['raw_row_bytes'], 'row size') <= 1024
+    require(d['max_rows'] == 4096 and 0 < integer(d['raw_row_bytes'], 'row size') <= (2048 if queries else 1024)
             and d['raw_storage_bound_bytes'] == 4096 * d['raw_row_bytes']
             and d['attempted'] == TICKS and d['open'] == 0,
             'Storage/attempt contract differs')
     require(d['regions'] == REGIONS and d['numeric_regions'] == NUMERIC, 'Unknown phase schema')
     require(('budget_check_regions' in d) == budget, 'Requested budget mode differs from report')
+    require(('query_capabilities' in d) == queries and ('query_regions' in d) == queries,
+            'Requested query mode differs from report')
     rows = d['rows']
     require(isinstance(rows, list) and len(rows) == TICKS, 'Missing correlated frames')
     sources = p['scripts']
@@ -53,6 +55,7 @@ def analyze(report, expected_sources, navigation=False, budget=False):
     whole = []
     for i, row in enumerate(rows, 1):
         require(('budget_checks' in row) == budget, 'Requested budget mode differs from row')
+        require(('queries' in row) == queries, 'Requested query mode differs from row')
         require(integer(row['frame'], 'frame') == integer(row['ordinal'], 'ordinal') == i and row['valid'] is True
                 and row['success'] is True and row['unwound'] is False
                 and integer(row['whole_tick_calls'], 'tick calls') == 1, 'Invalid/missing/reordered row')
@@ -129,4 +132,7 @@ def analyze(report, expected_sources, navigation=False, budget=False):
     if budget:
         from budget_analysis import analyze_budget
         result['budget_checks'] = analyze_budget(d, result['same_frame_tail']['frames'])
+    if queries:
+        from query_analysis import analyze_queries
+        result['queries'] = analyze_queries(d, slots, result['same_frame_tail']['frames'])
     return result
