@@ -1,6 +1,7 @@
 //! Versioned copied localization frames. No allocation, JSON or native pointers.
 use crate::*;
 use core::str;
+pub mod report;
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Error {
     Bounds,

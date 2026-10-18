@@ -100,6 +100,46 @@ class CheckpointOracleTests(unittest.TestCase):
         self.assertEqual([r['tick'] for r in suffix['frames']], [3, 4, 5, 8, 16, 18, 19, 21])
         self.assertEqual(fixture.recording(0, 13)['frames'][-1]['tick'], 7)
 
+    def test_coroutine_checkpoint_requires_pending_owned_frame_and_layout(self):
+        for tick, stage, due in ((13, 2, 20), (40, 6, 134)):
+            old = saved(tick)
+            start = 128 + struct.unpack_from('<I', old, 80)[0]
+            elapsed = 0.
+            for _ in range(tick):
+                elapsed += 1. / 60.
+            timers = (b'INCTMS01' + struct.pack('<QdII', tick, elapsed, 1, 80)
+                      + b'future'.ljust(64, b'\0') + struct.pack('<IIQ', 6, 17, 101))
+            header = (b'INCCOR01' + struct.pack('<6I', 4, 0, 11, 5, 1, 8)
+                      + b'audio-route'.ljust(64, b'\0') + b'audio'.ljust(64, b'\0')
+                      + bytes(15) + b'\x02')
+            tasks = (b'INCCTS01' + struct.pack('<IIQ', 1, 0, due) + bytes([24]) * 32
+                     + header + struct.pack('<Q', stage))
+            payload = b'INCWPS03' + old[start:start + 96] + struct.pack('<I', len(timers)) + timers + tasks
+
+            def envelope(value):
+                data = bytearray(old[:start] + value + old[start + 96:])
+                struct.pack_into('<I', data, 84, len(value))
+                data[96:128] = hashlib.sha256(data[:96] + data[128:]).digest()
+                return bytes(data)
+
+            good = envelope(payload)
+            oracle.checkpoint(good, tick)
+            task_start = 108 + len(timers)
+            # Coherently rehashed changes to count, reserved bytes, deadline,
+            # schema, task header, names, owner and saved frame must still fail.
+            for relative in (8, 12, 16, 24, 56, 64, 68, 72, 76, 80, 84, 88, 152, 216, 231, 232):
+                changed = bytearray(payload); changed[task_start + relative] ^= 1
+                with self.assertRaisesRegex(ValueError, 'Exact pending coroutine'):
+                    oracle.checkpoint(envelope(changed), tick)
+            for count in (1, 8, len(tasks)):
+                with self.assertRaises(ValueError):
+                    oracle.checkpoint(envelope(payload[:-count]), tick)
+            for kind in ('schema', 'clock'):
+                bad = oracle.mutate_checkpoint(good, kind)
+                self.assertEqual(bad[96:128], hashlib.sha256(bad[:96] + bad[128:]).digest())
+                with self.assertRaises(ValueError):
+                    oracle.checkpoint(bad, tick)
+
     def test_coherent_state_schema_clock_and_program_mutations(self):
         value = saved(13)
         for kind in oracle.REFUSALS:

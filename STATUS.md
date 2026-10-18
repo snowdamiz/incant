@@ -2,8 +2,12 @@
 
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) is promoted: all
 23 required contexts and eight exact-head workflows passed on the main391 tree,
-and release `73fed959` has the identical tested tree. Later main393–396 changes
-remain outside that release baseline. Retained
+and release `73fed959` has the identical tested tree. Later main393–400 changes
+remain outside that release baseline. Checkpoint53 (PR399) is frozen on main397;
+its macOS Wasm job failed a [timer-fixture lookup](docs/spikes/ci-timer-fixture-layout.md).
+The narrow correction is merged through PR400 after review and fast checks; it
+passes actual local static/development reload checks in CI's directory layout.
+Hosted checkpoint revalidation remains pending. Retained
 failed experiments remain failed. No distribution or phase gate is approved.
 
 The current phase remains **Phase 1: Core engine**. The
@@ -17,7 +21,7 @@ incomplete native-window attempts remain historical; these samples do not
 establish continuous motion, window presentation or FPS.
 [Release checkpoint52](docs/spikes/release-checkpoint-52.md) contains the tested
 main391 tree after all 23 required contexts and eight candidate workflows passed.
-Later main393–396 changes remain outside that release baseline. Rendering quality and full rendered-game
+Later main393–400 changes remain outside that release baseline. Rendering quality and full rendered-game
 performance remain open. The reported jagged editor cube now has explicit 4x
 geometry antialiasing, verified in the actual Mac editor and isolated Metal
 controls. This fixes the ordinary viewport route; low-resolution reconstruction
@@ -77,12 +81,29 @@ Skeleton and structural changes remain outside this admission rule.
 
 ## Current parallel qualification — 2026-10-17
 
+Rust/Wasm gameplay now has a bounded prepared localization coverage report,
+matching the existing TypeScript committed-snapshot behavior. Pages include
+canonical table/key, requested/resolved locale and missing kind; callback quotas
+and atomic refusal remain shared with other localization queries. The
+[scoped qualification](docs/spikes/native-wasm-localization-report.md) passes
+27 native controls, six actual Wasmtime/wasm2c guests, strict lints, independent
+review and all ten local development checks. This feature is locally qualified;
+a fresh authored shipping export for this query and complete SDK parity remain open.
+
 Native Wasm cooperative coroutines now pass local ABI/runtime, actual Wasmtime
 and wasm2c guest parity, saved continuation, reload and refusal checks. An
 independent source review and strict lints pass. The first actual-host build
 failed because generated routine metadata lacked static storage; its failure
-is retained and the corrected producer passes. This scoped change is awaiting
-integration. Normal authored shipping export and complete SDK parity remain open.
+is retained and the corrected producer passes. The scoped contract is merged through
+PR397 after exact-head development checks; main `406a93e3` has the tested tree.
+The [authored shipping proof](docs/spikes/native-wasm-coroutines-export.md) now
+passes four fresh-player runs and six specific refusals at source `4eeca4c6`.
+The owned routine's pending frame, schema, owner, deadline and coexisting timer
+survive save/load exactly, with matching gameplay and complete audible PCM.
+All 555 observed processes/groups are absent after actual terminal success.
+This proof is merged through PR398 after independent review and exact-head
+development-checks success; main `cd03cdd5` has the tested tree. Complete SDK
+parity remains open.
 See [contract and qualification](docs/spikes/native-wasm-coroutines.md).
 
 
@@ -117,12 +138,20 @@ a separate data-only correction passes without rerunning GPU work or relabeling
 that failure. This establishes a narrow repeat result, not its cause. Source,
 texture and compiled-shader observations are the next investigation. The complete
 motion sequence, appearance and cost remain unqualified. No experimental
-renderer is adopted.
+renderer is adopted. Following the director's 2026-10-17 request, further native
+E049 retries are held. Pinned Bevy, Godot, Filament and FSR2 source comparison
+now informs a default-off GPU-only color reconstruction candidate, with filtered
+history, current-sample reconstruction and depth/motion rejection. Its first
+compile failed three current-API accesses; the narrow correction now compiles
+and passes 34 unique CPU controls and strict lint. The first tiny actual GPU
+shader control passes; the full four-way image comparison and visual review remain
+pending. Existing failures, visual requirements and measured route costs remain
+unchanged; the candidate is not adopted.
 
 Native Wasm haptics is merged through PR393 after review and successful fast
 checks. Physical vibration and an authored shipping haptics proof remain open.
 Release checkpoint52 (PR392) is promoted after all 23 requirements and eight
-workflows passed; later main393–396 is outside that baseline. No distribution or
+workflows passed; later main393–400 is outside that baseline. No distribution or
 phase gate is approved.
 
 Native Wasm timers are merged through PR395 after independent review and fast
@@ -147,8 +176,16 @@ build passes, but generation stops on duplicate Serde build-dependency aliases.
 The canonical dependency fix passes all three Cargo metadata graphs. Its first
 prerequisite runner then expects a second build script after Cargo has stopped
 on the intended missing-profile refusal; this remains a failed harness attempt.
-The revised prerequisite is queued behind renderer CPU checks. No training or
-performance result is claimed. The next useful trigger is a newly qualified
+The corrected prerequisite now passes both production missing-descriptor
+refusals, nine ordinary controls and strict lint. A fresh ordinary/generate/use
+shipping feasibility attempt failed before training because the diagnostic
+changed the compiler invocation and therefore its ordered C flags. It also
+forced the cooker's ordinary O0 recipe to O3. Strict validation correctly refused
+the mismatch. The retained failure cost 517.927 seconds. A source correction
+preserves natural compiler spelling and separate cooker/runtime recipes, with
+PGO explicitly scoped to runtime C; actual two-role admission qualification is
+pending. No training or performance result is claimed.
+The next useful trigger is a newly qualified
 ordinary/generate/use producer with exact gameplay/audio parity, then
 a separately scheduled matched timing run. Last reassessment: 2026-10-17.
 The 2 ms ScriptTick target remains unmet; other work continues.
