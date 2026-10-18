@@ -1,0 +1,18 @@
+{
+  "format": "native-wasm-input-manifest-v1",
+  "archive": "native-wasm-input.json.gz",
+  "packed_bytes": 351542,
+  "packed_sha256": "5fae42320efb4b53f230cfff122dd872d3e07489d6a457bdb19dcc33b132954b",
+  "expanded_bytes": 2141782,
+  "expanded_sha256": "7796396c6fe3249dd225f52c67a20afc0345ae90de5dfd70fdb0664ae5529fde",
+  "record_count": 48,
+  "native_source": "0d672757b8fb1c7108116097341d64470aee8b83",
+  "fast_source": "865ee031d198a41218f1a262dccd7c13da7f8358",
+  "scope": "eight selected CPU tests and two scoped strict lints; no hardware/window/full-parity gate",
+  "limits": {
+    "manifest_bytes": 65536,
+    "packed_bytes": 524288,
+    "expanded_bytes": 4194304,
+    "records": 64
+  }
+}
