@@ -29,8 +29,10 @@ runtime, UI or filesystem authority. Rules remain one-shot operation inputs:
 only their frame family connects, and future edits do not automatically reuse
 them. GUI painting and general Phase 2 editor completion remain unqualified.
 
-Ten focused CPU controls are authored in `incant_agent/tests/tilemap_paint.rs`
-and its modules. They cover source-free cooked atlas use, equality to shared
+Ten focused CPU controls in `incant_agent/tests/tilemap_paint.rs`
+and its modules passed on producing source
+`8bcfa195573e6a695433096222add01a21deb849`. They cover source-free cooked
+atlas use, equality to shared
 prepared commands, actual simultaneous neighbor results, unrelated layer
 preservation, actor/entity provenance, durable Undo/Redo/save/reopen, no-op
 provider receipts and Redo/journal preservation, strict schema/refusals,
@@ -38,9 +40,32 @@ foreign-terrain refusal, absent/wrong host, normal approval modes, denial,
 cancellation, approval-time edits and final publication after concurrent edits
 or project replacement (including same-ID/revision replacement).
 
-These new controls are not executed yet. Proposed qualification is the new
-`tilemap_paint` suite plus the existing `alpha_colliders`, `assets` and `shared`
-agent suites, followed by strict all-target agent Clippy. The generated
-`schemas/agent-tools.json` update is deliberately reserved for root integration
-with the concurrent Wasm tool changes and must be generated/checked before
-publication. No native window, GPU, computer-use or capture is part of this slice.
+The same CPU qualification passed the existing `alpha_colliders` (9), `assets`
+(3) and `shared` (11) suites: 33 tests total, zero failed or ignored. Strict
+all-target agent Clippy also passed. This used Rust 1.99.0 arm64, the `ci`
+profile, locked/offline dependencies, two Cargo/Rayon workers, renderer opt-level
+2 and SHA-2 opt-level 3. Test/build and lint stages took 88.100318 and 26.492354
+seconds; these are qualification costs, not runtime performance measurements.
+
+Actual execution session `86975` exited zero. Four test executables were copied and
+rehashed; the final receipt checked all 66 observed owned PID/group identities
+absent. The private target's prior five external artifacts and 1133.056417
+seconds of native qualification cost remain retained. Final allocated/retained
+peak was 7,328,120,832 bytes beneath the unchanged 12 GiB cap; cumulative cost
+became 1252.914890 seconds. No cache/fingerprint deletion, retry or assertion
+repair occurred. The source review preceded execution and reported no finding.
+
+The [compact evidence](evidence/agent-tilemap-paint/manifest.json) retains raw
+test/lint logs, the producing source freeze, exact plan/runner, terminal cleanup,
+and the independent root review. Run its data-only verifier with
+`python3 docs/spikes/evidence/agent-tilemap-paint/verify.py`.
+`--originals` additionally checks external records and the full 23,455-file
+producing manifest; `--binaries` rehashes the four external copied executables;
+`--source-root PATH` checks the listed implementation/test/support bytes. The
+archive contains no binaries and does not rerun native code.
+
+The generated `schemas/agent-tools.json` update remains reserved for root's
+combined Wasm integration and must be generated/checked before publication.
+This packet proves CPU authoring/agent-loop behavior with in-process mock
+providers. It does not establish live provider, editor UI, GPU, window or capture
+behavior. No runtime or public-shipping dependency change is introduced.
