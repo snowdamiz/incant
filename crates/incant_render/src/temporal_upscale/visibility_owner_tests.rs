@@ -80,11 +80,19 @@ fn output_visibility_owner_slot_two_arm_capture() {
     let root = std::path::PathBuf::from(std::env::var_os("INCANT_VISIBILITY_SLOT_OUTPUT").unwrap());
     capture(&root, Capture::Slots);
 }
+#[test]
+#[ignore = "coordinated offscreen numerical owner dependency diagnostic; no desktop capture"]
+fn output_visibility_owner_dependency_two_arm_capture() {
+    let root =
+        std::path::PathBuf::from(std::env::var_os("INCANT_VISIBILITY_DEPENDENCY_OUTPUT").unwrap());
+    capture(&root, Capture::Dependency);
+}
 #[derive(Clone, Copy, PartialEq, Eq)]
 enum Capture {
     Owner,
     Storage,
     Slots,
+    Dependency,
 }
 fn capture(root: &std::path::Path, mode: Capture) {
     let storage_probe = mode != Capture::Owner;
@@ -114,6 +122,10 @@ fn capture(root: &std::path::Path, mode: Capture) {
             ("rgba-forward", false, false, Storage::Rgba),
             ("rgba-swapped", false, false, Storage::Slots),
         ],
+        Capture::Dependency => vec![
+            ("rgba-forward", false, false, Storage::Rgba),
+            ("rgba-sample-x", false, false, Storage::SampleX),
+        ],
     };
     let frame_count = 11 * arms.len();
     for (arm_index, (name, explicit, reverse, storage)) in arms.into_iter().enumerate() {
@@ -136,6 +148,8 @@ fn capture(root: &std::path::Path, mode: Capture) {
                 "validity_decoding":"explicit arm clears only low two bits before f32 reconstruction; original arm unmodified",
                 "geometry_tie_distance_pixels":1e-5,"position_epsilon_pixels":2e-5,"depth_motion_epsilon":2e-6,
                 "storage_probe":storage_probe,"slot_probe":mode == Capture::Slots,
+                "dependency_probe":mode == Capture::Dependency,
+                "sample_companion":"rgba-sample-x only: ownerXY unchanged, ownerZW holds exact f32 sample_position.x low/high16; uncovered RGBA remains zero",
                 "storage_record":"Original storage:48-byte semantic record; all other storage:80 bytes = same48-byte prefix + raw motionZW4xu32 + raw ownerRGBA4xu32",
                 "redundant_packing":"finite positive-sign depth[0,1]; validity+0/+1 in depth sign bit; full owner in original validity lanes; invalid inputs yield NaN refusal",
                 "no_new_color_resolver":true,"capture_completion_is_acceptance":false})).unwrap());
@@ -337,12 +351,18 @@ fn storage_packing_errors(raw: &[StorageRecord], storage: Storage) -> Vec<usize>
             };
             let decoded = o[0] | (o[1] << 16);
             let owner_range = o.into_iter().all(|x| x <= 65535);
+            let spare_lanes = match storage {
+                Storage::SampleX if s.position_depth[2] == 1. => o == [0; 4],
+                Storage::SampleX => (o[2] | (o[3] << 16)) == s.position_depth[0].to_bits(),
+                Storage::Rgba | Storage::Slots => o[2..] == [0, 0],
+                _ => true,
+            };
             let good = v.into_iter().all(|x| x <= 65535)
                 && owner_range
                 && s.owner == [decoded, o[0], o[1], v[2]]
                 && s.motion[2].to_bits() == bits[0]
                 && s.motion[3].to_bits() == bits[1]
-                && (!matches!(storage, Storage::Rgba | Storage::Slots) || o[2..] == [0, 0]);
+                && spare_lanes;
             (!good).then_some(i)
         })
         .collect()
@@ -372,4 +392,34 @@ fn visibility_storage_raw_records_preserve_distinct_owners_and_refuse_corruption
     assert_eq!(storage_packing_errors(&[r], Storage::Redundant), [0]);
     r.raw_owner[0] = 2;
     assert_eq!(storage_packing_errors(&[r], Storage::Rgba), [0]);
+}
+
+#[test]
+fn visibility_dependency_companion_checks_position_bits_and_uncovered_zero() {
+    let x = 6.625f32;
+    let mut r = StorageRecord {
+        sample: Sample {
+            motion: [0.; 4],
+            position_depth: [x, 44.875, 0.1783567, 3.],
+            owner: [0x80000002, 2, 32768, 0],
+        },
+        raw_motion_zw: [0; 4],
+        raw_owner: [2, 32768, x.to_bits() & 65535, x.to_bits() >> 16],
+    };
+    assert!(storage_packing_errors(&[r], Storage::SampleX).is_empty());
+    assert_eq!(storage_packing_errors(&[r], Storage::Rgba), [0]);
+    r.raw_owner[2] ^= 1;
+    assert_eq!(storage_packing_errors(&[r], Storage::SampleX), [0]);
+    r.raw_owner[2] ^= 1;
+    r.sample.position_depth[0] = x + 0.125;
+    assert_eq!(storage_packing_errors(&[r], Storage::SampleX), [0]);
+    r.sample.position_depth = [0., 0., 1., 3.];
+    r.sample.owner = [0; 4];
+    r.raw_owner = [0; 4];
+    assert!(storage_packing_errors(&[r], Storage::SampleX).is_empty());
+    r.raw_owner[3] = x.to_bits() >> 16;
+    assert_eq!(storage_packing_errors(&[r], Storage::SampleX), [0]);
+    r.raw_owner = [1, 0, 0, 0];
+    r.sample.owner = [1, 1, 0, 0];
+    assert_eq!(storage_packing_errors(&[r], Storage::SampleX), [0]);
 }

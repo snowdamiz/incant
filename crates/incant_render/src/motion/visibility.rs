@@ -113,7 +113,7 @@ impl Probe {
         let usage = wgpu::TextureUsages::RENDER_ATTACHMENT | wgpu::TextureUsages::TEXTURE_BINDING;
         let storage = diagnostic.as_ref().map_or(Storage::Original, |a| a.storage);
         let mut formats = FORMATS;
-        if matches!(storage, Storage::Rgba | Storage::Slots) {
+        if matches!(storage, Storage::Rgba | Storage::Slots | Storage::SampleX) {
             formats[2] = wgpu::TextureFormat::Rgba16Uint;
         }
         for f in formats

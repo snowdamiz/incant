@@ -7,6 +7,7 @@ pub(crate) enum Storage {
     Redundant,
     Rgba,
     Slots,
+    SampleX,
 }
 impl Storage {
     pub fn name(self) -> &'static str {
@@ -15,6 +16,7 @@ impl Storage {
             Self::Redundant => "redundant-forward",
             Self::Rgba => "rgba-forward",
             Self::Slots => "rgba-swapped",
+            Self::SampleX => "rgba-sample-x",
         }
     }
     /// Semantic reader bindings -> physical render attachment slots.
@@ -54,6 +56,13 @@ pub(super) fn source(storage: Storage) -> String {
             "vec4u(in.owner&65535u,in.owner>>16u,0u,0u)",
         ),
         Storage::Slots => swap_locations(source(Storage::Rgba), "owner:vec4u"),
+        Storage::SampleX => replace(
+            source(Storage::Rgba),
+            "vec4u(in.owner&65535u,in.owner>>16u,0u,0u)",
+            // Only the spare lanes change: exact low/high bits of the existing
+            // sample-qualified X input, with original owner halves untouched.
+            "vec4u(in.owner&65535u,in.owner>>16u,pack(in.sample_position).xy)",
+        ),
     }
 }
 fn swap_locations(text: String, owner: &str) -> String {
@@ -77,7 +86,7 @@ fn redundant(v:vec2f,owner:u32)->vec4u {
 "#;
 pub(super) fn calibration(storage: Storage) -> String {
     let text = format!("{}\n{}", super::CALIBRATION, super::PACK);
-    if matches!(storage, Storage::Rgba | Storage::Slots) {
+    if matches!(storage, Storage::Rgba | Storage::Slots | Storage::SampleX) {
         let text = replace(
             replace(text, "sample_id:vec2u", "sample_id:vec4u"),
             "vec2u(i+1u,0u)",
@@ -121,6 +130,7 @@ fn visibility_storage_variants_validate_and_lossless_fixture_packing_refuses_inv
         Storage::Redundant,
         Storage::Rgba,
         Storage::Slots,
+        Storage::SampleX,
     ] {
         let mut texts = vec![source(storage), calibration(storage)];
         if storage != Storage::Original {
@@ -164,7 +174,7 @@ fn visibility_storage_variants_validate_and_lossless_fixture_packing_refuses_inv
 
 #[test]
 fn visibility_slot_mapping_matches_compiled_fragment_interfaces() {
-    for storage in [Storage::Rgba, Storage::Slots] {
+    for storage in [Storage::Rgba, Storage::Slots, Storage::SampleX] {
         let mapping = storage.readback_slots();
         let mut sorted = mapping;
         sorted.sort_unstable();
