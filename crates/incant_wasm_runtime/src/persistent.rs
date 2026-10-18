@@ -105,7 +105,8 @@ impl PersistentSnapshot {
                 return Err(Error::Abi("instance snapshot nested format"));
             }
             let membership = &rest[4 + len..];
-            incant_wasm_abi::instances::checkpoint(membership)
+            // Validation is eager; the receiving host consumes the owner view.
+            let _ = incant_wasm_abi::instances::checkpoint(membership)
                 .map_err(|_| Error::Abi("instance snapshot membership"))?;
             let mut snapshot = Self::decode(old, declaration)?;
             snapshot.instances = Some(membership.into());
