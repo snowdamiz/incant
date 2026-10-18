@@ -269,6 +269,7 @@ impl OpenedProject {
             || p.edit.validate().is_err()
             || named(&p.operation, "backup").is_err()
             || store.pending()?.is_some()
+            || store.binary_pending()?.is_some()
         {
             return Err(SourceError::RecoveryRequired);
         }

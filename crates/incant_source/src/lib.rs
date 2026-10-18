@@ -11,6 +11,11 @@ mod platform;
 #[path = "unsupported.rs"]
 mod platform;
 use platform::Dir;
+mod binary;
+pub use binary::{
+    BinaryEdit, BinaryPending, BinaryPublication, BinarySnapshot, BinaryVersion, MAX_WASM_BYTES,
+    wasm_path,
+};
 mod project;
 mod tree;
 pub use project::{
@@ -263,7 +268,7 @@ pub fn check_recovery(root: &Path) -> Result<SourceEpoch, SourceError> {
         return Ok(SourceEpoch(String::new()));
     };
     let check = || {
-        for name in ["pending", "project.pending"] {
+        for name in ["pending", "project.pending", "binary.pending"] {
             if !matches!(optional_read(&state, name, 0), Ok(None)) {
                 return Err(SourceError::RecoveryRequired);
             }
@@ -397,6 +402,7 @@ impl SourceStore {
     }
     pub fn ensure_ready(&self) -> Result<(), SourceError> {
         if self.pending()?.is_some()
+            || self.binary_pending()?.is_some()
             || !matches!(optional_read(&self.state, "project.pending", 0), Ok(None))
         {
             return Err(SourceError::RecoveryRequired);
@@ -559,6 +565,8 @@ impl SourceStore {
     }
 }
 
+#[cfg(test)]
+mod binary_tests;
 #[cfg(test)]
 mod tests;
 #[cfg(test)]
