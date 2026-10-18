@@ -1,0 +1,10 @@
+{
+  "format": "native-process-cleanup-manifest-v1",
+  "archive": "native-process-cleanup.json.gz",
+  "source": "8a705821e51676d8f17529280aa022ed0b82928d",
+  "packed_bytes": 28436,
+  "packed_sha256": "2c24268a74ddadb3d03624a57d4eb8a6f9e26bce7d5d3e571bc990b1df220ee4",
+  "expanded_bytes": 165734,
+  "expanded_sha256": "72436199c578541ca2240590c63d4ae1b3e5615c57661fad947547cc7f304c94",
+  "record_count": 28
+}
