@@ -10,6 +10,7 @@ use std::{
     sync::atomic::{AtomicBool, Ordering},
 };
 mod alpha;
+mod tilemap;
 
 /// Filesystem capability bound to one project by the engine host, never by model
 /// arguments. No arbitrary reads, writes, network access or shell are exposed.
@@ -147,6 +148,7 @@ pub fn tools() -> Vec<Value> {
             json!(schemars::schema_for!(ImportArgs)),
         ),
         alpha::definition(),
+        tilemap::definition(),
     ]
 }
 
@@ -160,6 +162,7 @@ pub(crate) fn dispatch(
 ) -> Result<Value, AgentError> {
     match name {
         "collider_from_alpha" => alpha::dispatch(access, files, args, actor, cancel),
+        "tilemap_paint" => tilemap::dispatch(access, files, args, actor, cancel),
         "asset_list" => access.with_bus(cancel, |bus| {
             let args: ListArgs = serde_json::from_value(args).map_err(error)?;
             if !(1..=100).contains(&args.limit) || args.filter.len() > 1024 {

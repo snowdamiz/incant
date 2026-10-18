@@ -259,16 +259,18 @@ fn dispatch_cancellable(
         "play_run" | "play_state_query" | "profiler_read" => {
             play::dispatch(access, perception, name, args, cancel)
         }
-        "asset_list" | "asset_inspect" | "asset_import" | "collider_from_alpha" => {
-            assets::dispatch(
-                access,
-                perception.project_files(),
-                name,
-                args,
-                actor,
-                cancel,
-            )
-        }
+        "asset_list"
+        | "asset_inspect"
+        | "asset_import"
+        | "collider_from_alpha"
+        | "tilemap_paint" => assets::dispatch(
+            access,
+            perception.project_files(),
+            name,
+            args,
+            actor,
+            cancel,
+        ),
         "doc_query" => access.with_bus(cancel, |bus| {
             let args: QueryArgs = decode(args)?;
             let project = json!(bus.project());
@@ -424,7 +426,9 @@ impl Agent {
         }
         if perception.project_files().is_none() {
             tools.retain(|tool| {
-                tool["name"] != "asset_import" && tool["name"] != "collider_from_alpha"
+                tool["name"] != "asset_import"
+                    && tool["name"] != "collider_from_alpha"
+                    && tool["name"] != "tilemap_paint"
             });
         }
         if !perception.native_play_available()
@@ -538,6 +542,7 @@ impl Agent {
                                 "doc_patch"
                                     | "asset_import"
                                     | "collider_from_alpha"
+                                    | "tilemap_paint"
                                     | "script_write"
                             ));
                     if ask && !approve(name, &arguments) {
