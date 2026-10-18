@@ -51,6 +51,34 @@ fn recorded(script: &mut ScriptHost, world: &mut NativeWorld) -> (Result<(), Scr
     let result = incant_profile::frame(|| script.tick(world, 1. / 60.));
     (result, capture.report().script_phase_diagnostic)
 }
+// These scenes own physics; legacy save_bytes deliberately refuses them. Check
+// the actual public component/solver observations, then advance both worlds to
+// expose a leaked queued command or damaged retained physics owner.
+fn assert_worlds_equal(observed: &NativeWorld, control: &NativeWorld) {
+    assert_eq!(observed.tick(), control.tick());
+    assert_eq!(observed.snapshot(), control.snapshot());
+    assert_eq!(observed.physics_events(), control.physics_events());
+    assert_eq!(
+        observed.localization().settings(),
+        control.localization().settings()
+    );
+    for entity in observed.snapshot() {
+        assert_eq!(
+            observed.physics_state(entity.id),
+            control.physics_state(entity.id)
+        );
+        assert_eq!(
+            observed.physics_configuration(entity.id),
+            control.physics_configuration(entity.id)
+        );
+    }
+}
+fn assert_same_after_next_step(observed: &mut NativeWorld, control: &mut NativeWorld) {
+    assert_worlds_equal(observed, control);
+    observed.step().unwrap();
+    control.step().unwrap();
+    assert_worlds_equal(observed, control);
+}
 #[test]
 fn query_diagnostic_records_real_core_capabilities_without_changing_owned_results() {
     let body = r#"
@@ -67,10 +95,7 @@ fn query_diagnostic_records_real_core_capabilities_without_changing_owned_result
     let mut observed = NativeWorld::new(scene());
     let (result, report) = recorded(&mut host(body), &mut observed);
     result.unwrap();
-    assert_eq!(
-        observed.save_bytes().unwrap(),
-        control.save_bytes().unwrap()
-    );
+    assert_same_after_next_step(&mut observed, &mut control);
     assert!(report.complete && report.rows[0].success && report.rows[0].valid);
     let q = &report.rows[0].queries;
     for (cap, n) in [
@@ -97,7 +122,7 @@ fn query_diagnostic_preserves_parse_native_and_materialization_failure_atomicity
         (3, "physics.triggerEvents()"),
     ] {
         let mut world = NativeWorld::new(scene());
-        let before = world.save_bytes().unwrap();
+        let mut control = NativeWorld::new(scene());
         let mut script = host(&format!(
             "chunks[0].transforms[0]=42;commands.setVelocity(entity,[2,0,0]);try{{{expression}}}catch{{}}"
         ));
@@ -106,7 +131,7 @@ fn query_diagnostic_preserves_parse_native_and_materialization_failure_atomicity
         }
         let (result, report) = recorded(&mut script, &mut world);
         assert!(result.is_err());
-        assert_eq!(world.save_bytes().unwrap(), before);
+        assert_same_after_next_step(&mut world, &mut control);
         assert!(!report.complete && !report.rows[0].success);
         let cap = if stage == 2 {
             Capability::Character
@@ -125,7 +150,7 @@ fn query_diagnostic_preserves_parse_native_and_materialization_failure_atomicity
 #[test]
 fn query_diagnostic_counts_recursive_getters_without_changing_their_behavior() {
     let mut world = NativeWorld::new(scene());
-    let before = world.save_bytes().unwrap();
+    let mut control = NativeWorld::new(scene());
     let (result, report) = recorded(
         &mut host(
             r#"
@@ -137,7 +162,7 @@ fn query_diagnostic_counts_recursive_getters_without_changing_their_behavior() {
         &mut world,
     );
     result.unwrap();
-    assert_eq!(world.save_bytes().unwrap(), before);
+    assert_same_after_next_step(&mut world, &mut control);
     assert!(!report.complete && report.rows[0].success && !report.rows[0].valid);
     assert_eq!(
         report.rows[0].queries.recursive_calls[Capability::Locale as usize],
@@ -155,7 +180,7 @@ fn query_diagnostic_counts_recursive_getters_without_changing_their_behavior() {
 #[test]
 fn query_diagnostic_keeps_admission_refusals_and_guest_call_limits_exact() {
     let mut world = NativeWorld::new(scene());
-    let before = world.save_bytes().unwrap();
+    let mut control = NativeWorld::new(scene());
     let (result, report) = recorded(
         &mut host(
             "chunks[0].transforms[0]=42;for(let i=0;i<65;i++){try{localization.locale()}catch{}}",
@@ -163,7 +188,7 @@ fn query_diagnostic_keeps_admission_refusals_and_guest_call_limits_exact() {
         &mut world,
     );
     assert!(matches!(result, Err(ScriptError::InputLimit)));
-    assert_eq!(world.save_bytes().unwrap(), before);
+    assert_same_after_next_step(&mut world, &mut control);
     let q = &report.rows[0].queries;
     assert_eq!(q.calls[Capability::Locale as usize], [65, 64, 64, 64]);
     assert_eq!(q.failed[Capability::Locale as usize], [1, 0, 0, 0]);
@@ -171,7 +196,7 @@ fn query_diagnostic_keeps_admission_refusals_and_guest_call_limits_exact() {
 #[test]
 fn query_diagnostic_observes_expired_capability_without_reactivating_it() {
     let mut world = NativeWorld::new(scene());
-    let before = world.save_bytes().unwrap();
+    let mut control = NativeWorld::new(scene());
     let mut script = host(
         "if(globalThis.oldLocale){let refused=false;try{oldLocale()}catch{refused=true;}if(!refused)throw Error('expired');}globalThis.oldLocale=localization.locale;if(localization.locale().locale!=='en')throw Error('current');",
     );
@@ -180,7 +205,7 @@ fn query_diagnostic_observes_expired_capability_without_reactivating_it() {
     script.tick(&mut world, 1. / 60.).unwrap();
     let (result, report) = recorded(&mut script, &mut world);
     result.unwrap();
-    assert_eq!(world.save_bytes().unwrap(), before);
+    assert_same_after_next_step(&mut world, &mut control);
     assert!(report.complete && report.rows[0].valid);
     let q = &report.rows[0].queries;
     assert_eq!(q.calls[Capability::Locale as usize], [2, 1, 1, 1]);
@@ -189,7 +214,10 @@ fn query_diagnostic_observes_expired_capability_without_reactivating_it() {
 #[test]
 fn query_diagnostic_records_native_path_hit_and_null_as_successful_queries() {
     let mut world = NativeWorld::new(navigation::scene());
-    let before = world.save_bytes().unwrap();
+    let mut control = NativeWorld::new(navigation::scene());
+    let expected = control
+        .navigation_path(navigation::id(1), &navigation::path())
+        .unwrap();
     let (result, report) = recorded(
         &mut host(
             r#"
@@ -202,8 +230,22 @@ fn query_diagnostic_records_native_path_hit_and_null_as_successful_queries() {
         &mut world,
     );
     result.unwrap();
-    assert_eq!(world.save_bytes().unwrap(), before);
     assert!(report.complete);
+    assert_eq!(
+        world
+            .navigation_path(navigation::id(1), &navigation::path())
+            .unwrap(),
+        expected
+    );
+    assert_same_after_next_step(&mut world, &mut control);
+    assert_eq!(
+        world
+            .navigation_path(navigation::id(1), &navigation::path())
+            .unwrap(),
+        control
+            .navigation_path(navigation::id(1), &navigation::path())
+            .unwrap()
+    );
     assert_eq!(
         report.rows[0].queries.calls[Capability::Navigation as usize],
         [2; 4]
