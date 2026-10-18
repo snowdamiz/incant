@@ -1,0 +1,109 @@
+{
+  "source": "c0695e9e41288600cfe63d0a94b30ca7c3d81337",
+  "actual_exec": 95127,
+  "actual_exit": 0,
+  "checks": [
+    {
+      "command": [
+        "python3",
+        "tools/generate_conventions.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 1.3748634579824284
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test:tools"
+      ],
+      "exit": 0,
+      "seconds": 45.65771004202543
+    },
+    {
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 2.4159919579979032
+    },
+    {
+      "command": [
+        "node",
+        "tools/build_bridge.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.38214608299313113
+    },
+    {
+      "command": [
+        "node",
+        "tools/generate_sdk.mjs",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.39902404200984165
+    },
+    {
+      "command": [
+        "node_modules/.bin/tsc",
+        "-p",
+        "sdk/ts/tsconfig.json"
+      ],
+      "exit": 0,
+      "seconds": 0.6331705409684218
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "build",
+        "--workspace",
+        "editor/ui"
+      ],
+      "exit": 0,
+      "seconds": 4.534651416994166
+    },
+    {
+      "command": [
+        "npm",
+        "run",
+        "test",
+        "--workspace",
+        "editor/ui",
+        "--",
+        "--maxWorkers=2"
+      ],
+      "exit": 0,
+      "seconds": 32.97863120801048
+    },
+    {
+      "command": [
+        "python3",
+        "tools/generate_wasm_sdk.py",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.5644335830002092
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "exit": 0,
+      "seconds": 0.3951978330151178
+    }
+  ],
+  "seconds": 89.36398670799099,
+  "fresh_wrapper_and_owned_groups_absent": true,
+  "result_sha256": "75141c6288771d427e647c28167903d3369cbeb87fde0e0827b218d6fb3fa17f",
+  "scope": "Local terminal checks; frontend tests use jsdom. Separate native tilemap tests/lint remain pending. No window or screen capture.",
+  "review_helper_correction": "First read-only review assumed groups were integer IDs; actual records have pid fields. It stopped before writes, corrected review passed."
+}
