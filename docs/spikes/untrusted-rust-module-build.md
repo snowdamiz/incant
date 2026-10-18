@@ -1,8 +1,9 @@
 # Explicit untrusted Rust module build
 
 Source implementation for PLAN 6.3's module-build isolation milestone. Native
-sandbox qualification is pending. No compiler, sandbox or escape-control process
-has run for this change; pure controls do not establish actual isolation.
+sandbox qualification remains pending. Actual compiler/request controls have run;
+the full isolation episode failed its original socket-creation criterion. Pure
+controls and individual passing cases do not establish complete isolation.
 
 The existing `tools/rust_guest.py::compile` remains a trusted repository-guest
 helper. Its SDK cache keys, fixed library recipes and argv order are preserved.
@@ -22,8 +23,8 @@ the isolation boundary.
 
 Pinned Rust 1.99.0 compiles a `wasm32-unknown-unknown` cdylib with only the vetted
 ABI/SDK closure. The SDK itself builds from engine-owned sources outside the
-untrusted write scope. The Mac policy denies by default, network/socket creation
-and arbitrary exec; it grants read access to the pinned toolchain, vetted SDK,
+untrusted write scope. The Mac policy denies by default, requests `network*` and
+`system-socket` denial, and restricts arbitrary exec; it grants read access to the pinned toolchain, vetted SDK,
 snapshot and public OS loader libraries. Writes are confined to a private run
 tree. It admits only the exact rustc/rust-lld/cook executables. The cooker's file
 read/mmap exception is an exact file, not its enclosing directory. HOME/TMPDIR
@@ -60,8 +61,11 @@ compiler/validator refusals, cancellation, collision, publication replacement,
 resource/cleanup error preservation and failure receipts without OS children.
 The two existing trusted SDK cache controls remain. None is native evidence.
 
-Source qualification on 2026-10-18: all 37 selected pure controls passed with
-`python3 -m unittest tools.tests.test_rust_guest tools.tests.test_rust_guest_build`.
+Source qualification on 2026-10-18: the initial 37 selected pure controls passed.
+All 46 selected pure controls passed after adding the network-I/O successor
+protocol and mocked endpoint-ownership controls;
+its pure command is `python3 -m unittest tools.tests.test_rust_guest
+tools.tests.test_rust_guest_build tools.tests.test_rust_guest_network_control`.
 This includes the exact historical SDK argv/cache digest control. Python syntax,
 the trusted OS canary's Rust formatting, generated conventions and `git diff
 --check` also passed. No compiled result is attributed to these checks.
@@ -70,16 +74,17 @@ The proposed actual route is `tools/probes/rust-guest-sandbox.py --plan PLAN
 --grant ROOT_GRANT`. Its finite episode includes an actual relative-module SDK
 compile and normal cook; Cargo/build-script/proc-macro and private-include
 refusals; unknown-import cook refusal; compiler cancellation; and one trusted
-native OS canary testing private read/write, unrelated exec and socket creation
-denial. The canary only creates a socket; it never listens/connects. Its policy
-substitutes exactly its reviewed executable for rustc and records that difference.
+native OS canary testing private read/write, unrelated exec and network-I/O
+denial. The revised canary uses only owned IPv4 loopback endpoints, no DNS or
+external address, and never listens. Its policy substitutes exactly its reviewed
+executable for rustc and records that difference.
 The production compiler include control also tests the real compiler policy.
 
 Proposed initial bounds are 180 seconds aggregate, 90 seconds per child, one
 active compiler, Rayon 1, 512 MiB private retained scratch, 16 MiB diagnostic
 streams combined/4 MiB each, 1 MiB raw Wasm, sampled 8 GiB RSS and a 6 GiB disk
-floor. No shared Cargo target, network access, windows, GPU, capture, audio device
-or performance measurement is required. Retained partials and every failure
+floor. No shared Cargo target, external network traffic, windows, GPU, capture,
+audio device or performance measurement is required. Retained partials and every failure
 count against those bounds. Native qualification needs separate review/grant.
 
 The first actual episode used source `dcc9fc5c` and ended at sandbox startup:
@@ -104,5 +109,49 @@ only**, permitting the directory open/listing while descendant files continue
 to require their own rules. It does not import the system profile or admit
 additional Cryptex trees, descendant reads, writes or executable mappings. This
 is a source-backed startup hypothesis, not a proven cause or isolation result.
-A separately bounded cfg-only preflight is proposed before another full suite;
-it remains unexecuted pending review, within the 178.313076958 seconds left.
+The separately bounded cfg-only preflight succeeded under source `a6051dc0`;
+this qualified startup only. The later full suite preserved an E0428 fixture
+callback collision and an oversized ordinary-Wasm proc-macro fixture, then
+corrected those fixtures without changing production admission or the raw cap.
+
+
+Under source `717c6ecb`, actual session 43261 exited 1 after 10.893011084 seconds.
+All eight request cases met their exact expectations: relative SDK compile,
+normal validator and raw publication succeeded; Cargo/build-script admission,
+private include, actual procedural macro, missing macro dependency, unknown
+WASI import and cancellation refused without publishing failed children. The
+trusted canary denied outside reads/writes and unrelated exec, with a clean
+environment, but `socket(AF_INET, SOCK_STREAM, 0)` succeeded. It immediately
+closed that socket without bind/listen/connect/send. The original creation-denial
+criterion and failed result remain preserved. All 40 observed PID/groups were
+independently absent; all 878 input bindings and source remained unchanged.
+
+The **explicit successor criterion revision** is network-I/O denial, not socket
+object denial. [Apple's published XNU socket policy hooks](https://github.com/apple-oss-distributions/xnu/blob/xnu-12377.1.9/security/mac_socket.c)
+separate create/bind/connect/listen/send. [The syscall paths](https://github.com/apple-oss-distributions/xnu/blob/xnu-12377.1.9/bsd/kern/uipc_syscalls.c)
+check bind/connect/listen/send before their operations. These public hooks do not
+publish the current private Seatbelt mapping and are not proved identical to the
+installed kernel. [Apple's App Sandbox guidance](https://developer.apple.com/documentation/xcode/configuring-the-macos-app-sandbox)
+describes network client/server access in terms of outgoing connections and
+listening. Installed `system.sb:291–294` filters `system-socket` to AF_SYSTEM and
+AF_ROUTE, while `com.apple.smbd.sb:33–38` separately admits bind/inbound/outbound.
+Those observations explain why creation alone is insufficient evidence; they do
+not prove any unexecuted operation is denied by this policy.
+
+The successor requires **each** actual TCP connect, TCP bind, UDP bind and UDP
+send-to to return -1 with EPERM or EACCES. Refused connection, timeout, invalid
+argument, unavailable route, success or another error cannot satisfy it. Socket
+creation is reported separately. The parent holds one non-listening TCP loopback
+reservation and one UDP loopback sink on fresh ephemeral ports, with descriptors
+non-inheritable; the child uses only 127.0.0.1. No datagram, even empty, may reach
+the sink during its bounded 50 ms read. Every owned descriptor closes on success,
+allocation failure or child/receipt error. Listen, IPv6 and Unix-domain behavior
+are not separately tested or claimed. Production policy remains unchanged.
+
+This canary-only follow-up needs one new trusted compile because its source
+changed. The eight passing request observations stay bound to their original
+failed full episode and unchanged service/SDK/request bytes; they are not
+relabeled as a new complete producer. Cumulative native time is 20.269418043
+seconds, leaving 159.730581957 of the original 180. All prior outputs/logs and
+resource charges remain retained. The revised native checks are unexecuted
+pending a separately reviewed grant; full backend isolation remains unqualified.
