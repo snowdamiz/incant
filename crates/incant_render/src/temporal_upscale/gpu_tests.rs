@@ -256,8 +256,8 @@ fn actual_current_depth_and_history_support_refusals_remain_finite() {
     );
     assert_eq!(results[6], [0.; 4]);
     assert!(results[15][3] > 0. && results[15][3] < 1.);
-    for i in 16..=20 {
-        assert_eq!(results[i], [0.; 4], "static carry refusal {i}");
+    for (i, result) in results.iter().enumerate().take(21).skip(16) {
+        assert_eq!(*result, [0.; 4], "static carry refusal {i}");
     }
     assert_eq!(
         results[9], results[11],
