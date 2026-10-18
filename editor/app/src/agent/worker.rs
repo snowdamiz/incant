@@ -64,11 +64,23 @@ struct Scope {
 /// host may contain !Send QuickJS state; it never appears in a channel payload.
 #[derive(Default)]
 pub(super) struct State {
+    module_jobs: Option<Arc<incant_module_build::Service>>,
     scope: Option<Scope>,
     host: Option<Box<dyn EngineHost>>,
     context: Context,
 }
 impl State {
+    pub(super) fn module_jobs(&mut self, jobs: Arc<incant_module_build::Service>) {
+        if self
+            .module_jobs
+            .as_ref()
+            .is_none_or(|old| !Arc::ptr_eq(old, &jobs))
+        {
+            self.host = None;
+            self.scope = None;
+            self.module_jobs = Some(jobs);
+        }
+    }
     #[cfg(test)]
     pub(super) fn run_with(
         &mut self,
@@ -120,7 +132,11 @@ impl State {
                 self.host = None;
                 self.scope = None;
                 self.context = Context::default();
-                self.host = Some(host(&bus, root.clone())?);
+                self.host = Some(host_with_module_jobs(
+                    &bus,
+                    root.clone(),
+                    self.module_jobs.clone(),
+                )?);
                 self.scope = Some(Scope {
                     selection: selection.clone(),
                     bus: bus.clone(),
@@ -198,9 +214,17 @@ impl Provider for BoundProvider<'_> {
     }
 }
 
+#[cfg(test)]
 pub(super) fn host(
     bus: &Mutex<crate::project::LoadState>,
     root: Option<PathBuf>,
+) -> Result<Box<dyn EngineHost>, AgentError> {
+    host_with_module_jobs(bus, root, None)
+}
+fn host_with_module_jobs(
+    bus: &Mutex<crate::project::LoadState>,
+    root: Option<PathBuf>,
+    jobs: Option<Arc<incant_module_build::Service>>,
 ) -> Result<Box<dyn EngineHost>, AgentError> {
     let Some(root) = root else {
         return Ok(Box::new(incant_agent_native::GpuPerception::new(None)));
@@ -215,7 +239,12 @@ pub(super) fn host(
     let native = incant_agent_native::Host::new(root.clone(), viewport, || {
         incant_script::CompiledScript::compile("exports.default={update(){}};")
     });
-    Ok(Box::new(ProjectHost::new(&project, &root, native)?))
+    let host = ProjectHost::new(&project, &root, native)?;
+    Ok(Box::new(if let Some(jobs) = jobs {
+        host.with_module_jobs(jobs)
+    } else {
+        host
+    }))
 }
 
 fn execute(

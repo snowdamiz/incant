@@ -331,7 +331,7 @@ def retire_publication(output, expected):
         os.close(directory)
 
 
-def build(request, tools, *, limits=Limits(), cancel=lambda: False):
+def build(request, tools, *, limits=Limits(), cancel=lambda: False, owner_factory=None):
     """Shared worker entry point. Caller supplies trusted Tools, never project JSON.
 
     Retain the create-only work directory on every terminal outcome. The success
@@ -348,7 +348,9 @@ def build(request, tools, *, limits=Limits(), cancel=lambda: False):
             'Source, work and publication paths must be disjoint')
     require(not cancel(), 'Build cancelled before setup')
     work.mkdir(mode=0o700)  # Caller cannot adopt an existing partial attempt.
-    owner = Owner(work, limits, cancel)
+    # Only an engine-owned adapter can inject a child executor. The standalone
+    # CLI never accepts an executor or process recipe from request/project data.
+    owner = (Owner if owner_factory is None else owner_factory)(work, limits, cancel)
     receipt = {'version': 1, 'status': 'failed', 'artifact_trust': 'untrusted-data',
                'backend': 'macos-sandbox-exec-deprecated', 'source': [], 'calls': owner.calls}
     published = None
