@@ -1,0 +1,11 @@
+{
+  "original_branch": "codex/integrate-core-authored-main182",
+  "original_head": "f8cc8d87c778f0c0c9a805575c3cfaafa8758b15",
+  "bundle": "incant-core-main182.bundle",
+  "sha256": "8e56708dd062eb16cfeba38166ba05882482c0a2afb2a03560121db9326445c7",
+  "prerequisites": [
+    "32482b67abcdeaf463ac1b6f4418e6ff99c8aaef",
+    "35347a61ccb153b57ad38fc0dcae05b89ea6daee"
+  ],
+  "reason": "GitHub rejected original Git history because artifacts.json.gz is larger than 100 MiB. Exact commits are retained in this incremental Git bundle via Git LFS; original branch/history are unchanged."
+}
